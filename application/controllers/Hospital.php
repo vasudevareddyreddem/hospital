@@ -498,6 +498,39 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function deletes()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$hospital_id=$this->uri->segment(3);
+					if($hospital_id!=''){
+						$deletdata=array(
+							'hos_undo'=>1,
+							'hos_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$deletedata= $this->Hospital_model->update_hospital_details(base64_decode($hospital_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Hospital successfully removed.");
+								redirect('hospital');
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital');
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function emps(){
 		
 		

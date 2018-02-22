@@ -28,7 +28,8 @@ class Hospital_model extends CI_Model
 	}
 	public function get_hospital_list_details(){
 		$this->db->select('hospital.hos_id,hospital.hos_con_number,hospital.hos_bas_name,hospital.hos_status,hospital.hos_curent_login')->from('hospital');		
-        return $this->db->get()->result_array();
+        $this->db->where('hos_undo',0);
+		return $this->db->get()->result_array();
 	}
 
 }

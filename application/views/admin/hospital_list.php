@@ -44,11 +44,11 @@
                                                                     <i class="fa fa-edit"></i>EDit </a>
                                                             </li>
                                                             <li>
-                                                                <a href="javascript:;">
+                                                                <a href="<?php echo base_url('hospital/deletes/'.base64_encode($list['hos_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             <li>
-                                                                <a href="javascript:;">
+                                                                <a href="<?php echo base_url('hospital/status/'.base64_encode($list['hos_id'])); ?>">
                                                                     <i class="fa fa-save"></i> Chat </a>
                                                             </li>
                                                             
