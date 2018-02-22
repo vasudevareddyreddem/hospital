@@ -635,9 +635,79 @@ class Hospital extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('hospital/resource');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['resource_list']=$this->Hospital_model->get_resources_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					$this->load->view('hospital/resource',$data);
 					$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function resourcepost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);
+					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
+								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('hospital/resouce');
+								}else{
+									$admindetails=$this->session->userdata('userdetails');
+									$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+									//echo '<pre>';print_r($statusdata);exit;
+									$admindetails=array(
+									'role_id'=>$post['designation'],
+									'a_name'=>'Resource',
+									'a_email_id'=>$post['resource_email'],
+									'a_password'=>md5($post['resource_cinformpaswword']),
+									'a_org_password'=>$post['resource_cinformpaswword'],
+									'a_mobile'=>$post['resource_mobile'],
+									'a_status'=>1,
+									'a_create_at'=>date('Y-m-d H:i:s')
+									);
+									$addresourcedmin = $this->Admin_model->save_admin($admindetails);
+									$resourcedata=array(
+									'a_id'=>$addresourcedmin,
+									'role_id'=>$post['designation'],
+									'hos_id'=>$hos_ids['hos_id'],
+									'resource_name'=>$post['resource_name'],
+									'resource_mobile'=>$post['resource_mobile'],
+									'resource_add1'=>$post['resource_add1'],
+									'resource_add2'=>$post['resource_add2'],
+									'resource_city'=>$post['resource_city'],
+									'resource_state'=>$post['resource_state'],
+									'resource_other_details'=>$post['resource_other_details'],
+									'resource_contatnumber'=>$post['resource_contatnumber'],
+									'resource_email'=>$post['resource_email'],
+									'r_status'=>1,
+									'r_create_by'=>$hos_ids['a_id'],
+									'r_created_at'=>date('Y-m-d H:i:s')
+									);
+									//echo '<pre>';print_r($onedata);exit;
+									$saveresource =$this->Hospital_model->save_resource($resourcedata);
+									if(count($saveresource)>0){
+										$this->session->set_flashdata('success',"Resource are successfully created");
+										redirect('hospital/resouce');
+									}else{
+										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+										redirect('hospital/resouce');
+									}
+								}
+								
+							}else{
+								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
+								redirect('hospital/resouce');
+							}
+					
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');

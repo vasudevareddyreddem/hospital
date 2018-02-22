@@ -13,6 +13,16 @@
             </ol>
          </div>
       </div>
+	   <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
       <div class="row">
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
@@ -27,7 +37,7 @@
                <div class="tab-content">
                   <div class="tab-pane active" id="home">
                      <div class="row">
-					  <form action="" method="post">
+					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource">
                         <div class="col-md-12 ">
                            <div class="container">
 						  
@@ -61,6 +71,32 @@
 										<label> Other Details</label>
 										<input class="form-control" id="resource_other_details" name="resource_other_details" type="text" placeholder="Other Details">
 									</div>
+									 <div class="col-sm-5">
+									<label> Resource Contact Number</label>
+										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Resource Contact Number">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Designation</label>
+									<select class="form-control" id="designation" name="designation">
+										<option value="">Select</option>
+										<option value="3">Receptionist</option>
+										<option value="4">Pharmacy</option>
+										<option value="5">lab coordinator</option>
+										<option value="6">Doctor</option>
+									</select>
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Email ID</label>
+										<input class="form-control" id="resource_email" name="resource_email" type="text" placeholder="Resource Email ID">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Password</label>
+										<input class="form-control" id="resource_password" name="resource_password" type="password" placeholder="Password">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Confirm Password</label>
+										<input class="form-control" id="resource_cinformpaswword" name="resource_cinformpaswword" type="password" placeholder="Confirm Password">
+									</div>
                               </div>
                            </div>
                            <div class="clearfix">&nbsp;</div>
@@ -75,13 +111,12 @@
                      <div class="container">
                         <div class="row">
                             <div class="card-body ">
-								<?php if(count($hospital_list)>0){ ?>
+								<?php if(count($resource_list)>0){ ?>
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>HIN</th>
 												<th>Name</th>
-                                                <th>Contact </th>
+                                                <th>Contact Number </th>
                                                 <th>Patient Intake</th>
                                                 <th>Onine Status</th>
                                                 <th>Status</th>
@@ -89,7 +124,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($hospital_list as $list){ ?>
+										<?php foreach($resource_list as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['hos_id']); ?></td>
                                                 <td><?php echo htmlentities($list['hos_bas_name']); ?></td>
@@ -129,6 +164,8 @@
                                             
                                         </tbody>
                                     </table>
+								<?php }else{ ?>
+								<div>No data Available</div>
 								<?php } ?>
                                 </div>
                         </div>
@@ -142,3 +179,144 @@
       </div>
    </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#addresource').bootstrapValidator({
+        
+        fields: {
+            
+            resource_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			 resource_mobile: {
+                validators: {
+					notEmpty: {
+						message: 'landline Number is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,14}$/,
+					message:'landline Number must be 10 to 14 digits'
+					}
+				
+				}
+            },resource_contatnumber: {
+              validators: {
+					notEmpty: {
+						message: 'Contact Number is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,14}$/,
+					message:'Contact Number must be 10 to 14 digits'
+					}
+				
+				}
+            },designation: {
+              validators: {
+					notEmpty: {
+						message: 'Select a Designation'
+					}
+				
+				}
+            },resource_email: {
+                validators: {
+					notEmpty: {
+						message: 'Email is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+					message: 'Please enter a valid email address. For example johndoe@domain.com.'
+					}
+				}
+            },
+			resource_password: {
+                validators: {
+					notEmpty: {
+						message: 'Password is required'
+					},
+					stringLength: {
+                        min: 6,
+                        message: 'Password  must be at least 6 characters'
+                    },
+					regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
+					message: 'Password wont allow <>[]'
+					}
+				}
+            },
+           
+            resource_cinformpaswword: {
+					 validators: {
+						 notEmpty: {
+						message: 'Confirm Password is required'
+					},
+					identical: {
+						field: 'resource_password',
+						message: 'password and confirm Password do not match'
+					}
+					}
+				},
+			resource_add1: {
+                 validators: {
+					notEmpty: {
+						message: 'Address1 is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address1 wont allow <> [] = % '
+					}
+                }
+            },resource_add2: {
+                 validators: {
+					notEmpty: {
+						message: 'Address1 is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address1 wont allow <> [] = % '
+					}
+                }
+            },
+			 resource_city: {
+                 validators: {
+					notEmpty: {
+						message: 'City is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'City can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            }, resource_state: {
+                  validators: {
+					notEmpty: {
+						message: 'State is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'State can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            },
+			 resource_other_details: {
+                  validators: {
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address1 wont allow <> [] = % '
+					}
+                }
+            }
+            }
+        })
+     
+});
+</script>
