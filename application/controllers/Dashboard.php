@@ -34,7 +34,8 @@ class Dashboard extends CI_Controller {
 				$this->load->view('admin/dashboard');
 				$this->load->view('html/footer');
 			}else if($admindetails['role_id']==2){
-				
+				$this->load->view('hospital/dashboard');
+				$this->load->view('html/footer');
 			}else{
 			}
 		}else{

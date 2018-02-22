@@ -25,7 +25,7 @@
 	                                </div>
 	                            </div>
 	                        </li>
-							
+						<?php if($userdetails['role_id']==1){ ?>	
 	                        <li class="nav-item start ">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
@@ -80,6 +80,34 @@
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+						<?php }else if($userdetails['role_id']==2){ ?>
+						 <li class="nav-item start ">
+	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
+	                        </li> 
+						  <li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Hospital</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('profile'); ?>" class="nav-link "> <span class="title">Hospital Details</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="#" class="nav-link "> <span class="title">Lab / Treatment </span>
+	                                    </a>
+	                                </li>
+	                                
+	                            </ul>
+	                        </li> 
+						<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>

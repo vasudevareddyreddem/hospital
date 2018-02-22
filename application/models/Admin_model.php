@@ -8,6 +8,10 @@ class Admin_model extends CI_Model
 		parent::__construct();
 		$this->load->database("default");
 	}
+	public function save_admin($data){
+		$this->db->insert('admin', $data);
+		return $insert_id = $this->db->insert_id();
+	}
 	public function login_details($data){
 		$sql = "SELECT * FROM admin WHERE (a_email_id ='".$data['email']."' AND a_password='".$data['password']."' AND a_status=1) OR (a_username ='".$data['email']."' AND a_password='".$data['password']."' AND a_status=1)";
 		return $this->db->query($sql)->row_array();	

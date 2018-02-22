@@ -1,17 +1,27 @@
 <div class="page-content-wrapper">
 <div class="page-content">
    <div class="page-bar">
-      <div class="page-title-breadcrumb">
+	<div class="page-title-breadcrumb">
          <div class=" pull-left">
             <div class="page-title">Edit <?php echo isset($hospital_details['hos_bas_name'])?$hospital_details['hos_bas_name']:''; ?> Details</div>
          </div>
-         <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
-            </li>
-            <li><a class="parent-item" href="<?php echo base_url('hospital'); ?>">Hospital List</a>&nbsp;<i class="fa fa-angle-right"></i>
-            </li>
-            <li class="active">Edit Hospital</li>
-         </ol>
+		<?php if($userdetails['role_id']==1){ ?>
+			 <ol class="breadcrumb page-breadcrumb pull-right">
+				<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+				</li>
+				<li><a class="parent-item" href="<?php echo base_url('hospital'); ?>">Hospital List</a>&nbsp;<i class="fa fa-angle-right"></i>
+				</li>
+				<li class="active">Edit Hospital</li>
+			 </ol>
+		<?php }else if($userdetails['role_id']==2){  ?>
+			<ol class="breadcrumb page-breadcrumb pull-right">
+				<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+				</li>
+				<li><a class="parent-item" href="<?php echo base_url('profile'); ?>">Profile</a>&nbsp;<i class="fa fa-angle-right"></i>
+				</li>
+				<li class="active">Edit  Profile</li>
+			 </ol>
+		<?php } ?>
       </div>
    </div>
    <div class="row">

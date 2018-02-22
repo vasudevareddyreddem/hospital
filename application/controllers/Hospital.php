@@ -82,6 +82,12 @@ class Hospital extends CI_Controller {
 										'hos_email_id'=>$post['hos_email_id'],
 										'hos_updated_at'=>date('Y-m-d H:i:s')
 										);
+								$onedata1=array(
+										'a_mobile'=>$post['hos_con_number'],
+										'a_email_id'=>$post['hos_email_id'],
+										'a_updated_at'=>date('Y-m-d H:i:s')
+										);
+								$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$onedata1);
 								$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
 								if(count($stepone)>0){
 									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
@@ -97,11 +103,18 @@ class Hospital extends CI_Controller {
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
 								}else{
+									$hospital_id= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
 									$onedata=array(
 									'hos_con_number'=>$post['hos_con_number'],
 									'hos_email_id'=>$post['hos_email_id'],
 									'hos_updated_at'=>date('Y-m-d H:i:s')
 									);
+									$onedata1=array(
+										'a_mobile'=>$post['hos_con_number'],
+										'a_email_id'=>$post['hos_email_id'],
+										'a_updated_at'=>date('Y-m-d H:i:s')
+										);
+									$this->Hospital_model->update_adminhospital_details($hospital_id['a_id'],$onedata1);
 									$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
 									if(count($stepone)>0){
 									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
@@ -122,15 +135,27 @@ class Hospital extends CI_Controller {
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/add/'.base64_encode(1));
 								}else{
+									
+									$admindetails=array(
+									'role_id'=>2,
+									'a_name'=>'Hospital Admin',
+									'a_email_id'=>$post['hos_email_id'],
+									'a_password'=>md5($post['hos_confirmpassword']),
+									'a_org_password'=>$post['hos_confirmpassword'],
+									'a_mobile'=>$post['hos_con_number'],
+									'a_status'=>1,
+									'a_create_at'=>date('Y-m-d H:i:s')
+									);
+									$addhospitaladmin= $this->Admin_model->save_admin($admindetails);
 									$onedata=array(
+									'a_id'=>$addhospitaladmin,
 									'hos_con_number'=>$post['hos_con_number'],
 									'hos_email_id'=>$post['hos_email_id'],
-									'hos_password'=>md5($post['hos_confirmpassword']),
-									'hos_org_password'=>$post['hos_confirmpassword'],
 									'hos_status'=>1,
 									'hos_created'=>date('Y-m-d H:i:s'),
 									'hos_updated_at'=>date('Y-m-d H:i:s')
 									);
+									//echo '<pre>';print_r($onedata);exit;
 									$stepone= $this->Hospital_model->save_hospital_step_one($onedata);
 									if(count($stepone)>0){
 										$this->session->set_flashdata('success',"Hospital Credentials are successfully created");
@@ -352,11 +377,14 @@ class Hospital extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-			if($admindetails['role_id']=1){
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']==1 || $admindetails['role_id']==2){
 					$data['tab']=base64_decode($this->uri->segment(4));
 					$data['hospital_id']=$this->uri->segment(3);
 					$hospital_id=base64_decode($this->uri->segment(3));
 					$data['hospital_details']= $this->Hospital_model->get_hospital_details($hospital_id);
+					$admindetails=$this->session->userdata('userdetails');
+					$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/edithospital',$data);
 					$this->load->view('html/footer');
@@ -392,12 +420,11 @@ class Hospital extends CI_Controller {
 	}
 	public function editpost(){
 		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=1){
-					
+		{		$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==1 || $admindetails['role_id']==2){
 					$post=$this->input->post();
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
-						if($hospital_details['hos_email_id']!=$post['hos_email_id']){
+						if($hospital_details['hos_email_id']!= $post['hos_email_id']){
 							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
@@ -488,22 +515,28 @@ class Hospital extends CI_Controller {
 							//echo '<pre>';print_r($editdata);exit;
 							$editdetails= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$editdata);
 							if(count($editdetails)>0){
-								if($post['tab_id']==2){
-									$this->session->set_flashdata('success',"Hospital Credentials details are successfully Updated");
-									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
-								}elseif($post['tab_id']==3){
-									$this->session->set_flashdata('success',"Hospital Representative details are successfully Updated");
-									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
-								}else if($post['tab_id']==4){
-									$this->session->set_flashdata('success',"Hospital Basic Details are successfully Updated");
-									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
-								}else if($post['tab_id']==5){
-									$this->session->set_flashdata('success'," Hospital Financial Details  are successfully Updated");
-										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));	
-								}else if($post['tab_id']==6){
-									$this->session->set_flashdata('success'," Hospital Other Details are successfully Updated");
-									redirect('hospital');
-								}
+									$this->session->set_flashdata('success',"Hospital Details are successfully Saved");
+									if($post['tab_id']==2){
+										$this->session->set_flashdata('success',"Hospital Credentials details are successfully Updated");
+										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+									}elseif($post['tab_id']==3){
+										$this->session->set_flashdata('success',"Hospital Representative details are successfully Updated");
+										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+									}else if($post['tab_id']==4){
+										$this->session->set_flashdata('success',"Hospital Basic Details are successfully Updated");
+										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+									}else if($post['tab_id']==5){
+										$this->session->set_flashdata('success'," Hospital Financial Details  are successfully Updated");
+											redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));	
+									}else if($post['tab_id']==6){
+										$this->session->set_flashdata('success'," Hospital Other Details are successfully Updated");
+											if($admindetails['role_id']==2){
+												redirect('profile');
+											}else {
+												redirect('hospital');
+											}
+									}
+							
 								
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

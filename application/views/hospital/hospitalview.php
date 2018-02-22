@@ -3,50 +3,24 @@
 <div class="page-content-wrapper">
                 <div class="page-content" >
 						<div class="page-bar">
-			  <div class="page-title-breadcrumb">
-				 <div class=" pull-left">
-					<div class="page-title">View Hospital Details</div>
-				 </div>
-				 <?php if($userdetails['role_id']==1){ ?>
-				 <ol class="breadcrumb page-breadcrumb pull-right">
-					<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
-					</li>
-					<li><a class="parent-item" href="<?php echo base_url('hospital'); ?>">Hospital List</a>&nbsp;<i class="fa fa-angle-right"></i>
-					</li>
-					<li class="active"><?php echo isset($hospital_details['hos_bas_name'])?$hospital_details['hos_bas_name']:''; ?></li>
-				 </ol>
-				 	<?php }else if($userdetails['role_id']==2){  ?>
-					<ol class="breadcrumb page-breadcrumb pull-right">
-						<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
-						</li>
-						<li class="active">Profile</li>
-					</ol>
-				<?php } ?>
-			  </div>
-		   </div>
-		     <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
+						  <div class="page-title-breadcrumb">
+							 <div class=" pull-left">
+								<div class="page-title">View Hospital</div>
+							 </div>
+							 <ol class="breadcrumb page-breadcrumb pull-right">
+								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+								</li>
+								<li class="active">View Profile</li>
+							 </ol>
+						  </div>
+						</div>
 					 <div class="row" style="margin-top:50px;">
                        
                         <div class="col-md-12 col-sm-12">
                             <div class="card  card-topline-yellow">
                                 <div class="card-head">
                                     <header>View</header>
-									<?php if($userdetails['role_id']==1){ ?>
-									<a  href="<?php echo base_url('hospital'); ?>">Back</a>&nbsp; | &nbsp; 
 									<a  href="<?php echo base_url('hospital/edit/'.base64_encode($hospital_details['hos_id'])); ?>">Edit</a>
-									<?php }else{ ?>
-									<a  href="<?php echo base_url('hospital/edit/'.base64_encode($hospital_details['hos_id'])); ?>">Edit</a>
-
-									<?php } ?>
                                 </div>
                                 <div class="card-body ">
 											 <div class="col-sm-12">
