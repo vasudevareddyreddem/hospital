@@ -104,6 +104,10 @@
 	                                    <a href="#" class="nav-link "> <span class="title">Lab / Treatment </span>
 	                                    </a>
 	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/resouce'); ?>" class="nav-link "> <span class="title">Add Resource </span>
+	                                    </a>
+	                                </li>
 	                                
 	                            </ul>
 	                        </li> 
