@@ -115,10 +115,11 @@
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
                                             <tr>
+												<th>Role</th>
 												<th>Name</th>
+												<th>Email Address</th>
                                                 <th>Contact Number </th>
-                                                <th>Patient Intake</th>
-                                                <th>Onine Status</th>
+                                                <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -126,12 +127,12 @@
                                         <tbody>
 										<?php foreach($resource_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['hos_id']); ?></td>
-                                                <td><?php echo htmlentities($list['hos_bas_name']); ?></td>
-                                                <td><?php echo htmlentities($list['hos_con_number']); ?></td>
-                                                <td>10</td>
-												<td><?php if($list['hos_curent_login']==1){ echo "Online";}else{ echo "Offline"; } ?></td>
-												<td><?php if($list['hos_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
+                                                <td><?php echo htmlentities($list['role_id']); ?></td>
+                                                <td><?php echo htmlentities($list['resource_name']); ?></td>
+                                                <td><?php echo htmlentities($list['resource_email']); ?></td>
+                                                <td><?php echo htmlentities($list['resource_contatnumber']); ?></td>
+                                                <td><?php echo htmlentities($list['r_created_at']); ?></td>
+												<td><?php if($list['r_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
                                                     <div class="btn-group">
                                                         <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -139,21 +140,14 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/edit/'.base64_encode($list['hos_id'])); ?>">
+                                                                <a href="">
                                                                     <i class="fa fa-edit"></i>EDit </a>
                                                             </li>
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/deletes/'.base64_encode($list['hos_id'])); ?>">
+                                                                <a href="">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/view/'.base64_encode($list['hos_id'])); ?>">
-                                                                    <i class="fa fa-save"></i> View</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/status/'.base64_encode($list['hos_id']).'/'.base64_encode($list['hos_status'])); ?>">
-                                                                    <i class="fa fa-save"></i> <?php if($list['hos_status']==1){ echo "Active";}else{  echo "Deactive";}?>  </a>
-                                                            </li>
+                                                            
                                                             
                                                         </ul>
                                                     </div>
