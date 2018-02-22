@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">View Hospital</div>
+               <div class="page-title">Rources List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">View Profile</li>
+               <li class="active">Rources</li>
             </ol>
          </div>
       </div>
@@ -27,66 +27,48 @@
                <div class="tab-content">
                   <div class="tab-pane active" id="home">
                      <div class="row">
+					  <form action="" method="post">
                         <div class="col-md-12 ">
                            <div class="container">
+						  
                               <div class="row">
-                                 <div class="col-md-6">
-                                    <label>Type of Medicine?</label>									
-                                    <select class="form-control  ">
-                                       <option >Generic </option>
-                                       <option >Brand</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <label>Search for Medicine</label>									
-                                    <select class="form-control  select2">
-                                       <option value="AK">example-1  &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
-                                       <option value="HI">example-1 &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
-                                       <option value="HI">3example-1  &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
-                                       <option value="HI">4example-1  &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
-                                       <option value="HI">5example-1</option>
-                                       <option value="HI">6example-1</option>
-                                       <option value="HI">66example-1</option>
-                                       <option value="HI">7example-1</option>
-                                       <option value="HI">88example-1</option>
-                                       <option value="HI">99example-1</option>
-                                       <option value="HI">9254example-1</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <label>Substitute allowed or not allowed?</label>									
-                                    <select class="form-control  ">
-                                       <option >Yes </option>
-                                       <option >No</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <label>Condition</label>									
-                                    <select class="form-control  ">
-                                       <option >Chronic  </option>
-                                       <option >PRN</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <label>Dosage</label>									
-                                    <select class="form-control  ">
-                                       <option >Select Dosage </option>
-                                       <option >600 g  </option>
-                                       <option >350 g</option>
-                                       <option >150 g</option>
-                                       <option >250 g</option>
-                                       <option >550 g</option>
-                                       <option >650 g</option>
-                                    </select>
-                                 </div>
+                                 <div class="col-sm-5">
+									<label> Name</label>
+										<input class="form-control" id="resource_name" name="resource_name" type="text" placeholder="Name">
+									</div>
+									<div class="col-sm-5">
+									<label> Mobile Number</label>
+										<input class="form-control" id="resource_mobile" name="resource_mobile" type="text" placeholder=" Mobile Number">
+									</div>
+									<div class="col-md-5">
+										<label> Address1</label>
+											<textarea type="textarea" id="resource_add1" name="resource_add1" class="form-control"  placeholder="Address1" ></textarea>
+									</div>
+									<div class="col-md-5">
+										<label> Address2</label>
+											<textarea type="textarea" id="resource_add2" name="resource_add2" class="form-control"  placeholder="Address2" ></textarea>
+									</div>
+									
+									<div class="col-sm-5">
+									<label> City</label>
+										<input class="form-control" id="resource_city" name="resource_city" type="text" placeholder="City">
+									</div>
+									<div class="col-sm-5">
+										<label> State</label>
+										<input class="form-control" id="resource_state" name="resource_state" type="text" placeholder="State">
+									</div>
+									<div class="col-sm-10">
+										<label> Other Details</label>
+										<input class="form-control" id="resource_other_details" name="resource_other_details" type="text" placeholder="Other Details">
+									</div>
                               </div>
                            </div>
                            <div class="clearfix">&nbsp;</div>
-                           <button class="btn btn-sm btn-warning" type="button">Clear</button>
-                           <button class="btn btn-sm btn-info" type="button">View Prescription</button>
-                           <button class="btn btn-sm btn-success" type="button">Add Prescription</button>
-                           <div class="clearfix">&nbsp;</div>
+						   <div class="col-sm-10">
+                           <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Resource</button>
+                           </div><div class="clearfix">&nbsp;</div>
                         </div>
+						</form>
                      </div>
                   </div>
                   <div class="tab-pane" id="about">
