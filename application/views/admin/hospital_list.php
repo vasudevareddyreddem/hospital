@@ -1,6 +1,18 @@
 <div class="page-content-wrapper">
                 <div class="page-content">
-                    
+                    <div class="page-bar">
+			  <div class="page-title-breadcrumb">
+				 <div class=" pull-left">
+					<div class="page-title">Hospital List</div>
+				 </div>
+				 <ol class="breadcrumb page-breadcrumb pull-right">
+					<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+					</li>
+					<li><a class="parent-item active" >Hospital List</a>&nbsp;</i>
+					</li>
+				 </ol>
+			  </div>
+		   </div>
 					<div class="row">
                        <div class="col-md-12">
                             <div class="card card-topline-aqua">
@@ -54,6 +66,10 @@
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/deletes/'.base64_encode($list['hos_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="<?php echo base_url('hospital/view/'.base64_encode($list['hos_id'])); ?>">
+                                                                    <i class="fa fa-save"></i> View</a>
                                                             </li>
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/status/'.base64_encode($list['hos_id']).'/'.base64_encode($list['hos_status'])); ?>">

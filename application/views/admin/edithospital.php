@@ -6,11 +6,11 @@
             <div class="page-title">Edit <?php echo isset($hospital_details['hos_bas_name'])?$hospital_details['hos_bas_name']:''; ?> Details</div>
          </div>
          <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+            <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
             </li>
-            <li><a class="parent-item" href="#">Doctors</a>&nbsp;<i class="fa fa-angle-right"></i>
+            <li><a class="parent-item" href="<?php echo base_url('hospital'); ?>">Hospital List</a>&nbsp;<i class="fa fa-angle-right"></i>
             </li>
-            <li class="active">Add Doctor</li>
+            <li class="active">Edit Hospital</li>
          </ol>
       </div>
    </div>
