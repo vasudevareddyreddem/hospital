@@ -376,8 +376,12 @@ class Hospital extends CI_Controller {
 					
 					$post=$this->input->post();
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
-						if(){
-							
+						if($hospital_details['hos_email_id']!=$post['hos_email_id']){
+							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('hospital/edit/'.$post['hospital_id']);
+								}
 						}
 						if(isset($_FILES['hos_bas_document']['name']) && $_FILES['hos_bas_document']['name']!=''){
 							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));

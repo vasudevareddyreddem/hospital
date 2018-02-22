@@ -756,9 +756,6 @@ $(document).ready(function() {
             },
 			 kyc_file1: {
                 validators: {
-					notEmpty: {
-						message: 'File is required'
-					},
 					regexp: {
 					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
 					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
