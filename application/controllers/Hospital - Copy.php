@@ -27,12 +27,22 @@ class Hospital extends CI_Controller {
 		}
 	public function index()
 	{	
-		if(!$this->session->userdata('userdetails'))
+		
+		if($this->session->userdata('userdetails'))
 		{
-			$this->load->view('admin/login');
+				if($admindetails['role_id']=1){
+					$data['hospital_list']= $this->Hospital_model->get_hospital_list_details();
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('admin/hospital_list',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
-			redirect('dashboard');
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
 		}
 	}
 	public function add()
@@ -51,7 +61,7 @@ class Hospital extends CI_Controller {
 				$this->load->view('html/footer');
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -62,43 +72,87 @@ class Hospital extends CI_Controller {
 				if($admindetails['role_id']=1){
 					
 					$post=$this->input->post();
+
 					//echo '<pre>';print_r($post);exit;
-					if(md5($post['hos_password'])==md5($post['hos_confirmpassword'])){
-						$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
-						if(count($emailcheck)>0){
-							$this->session->set_flashdata('error','Email id already exists.please use another Email id');
-							redirect('hospital/add/'.base64_encode(1));
+					if(isset($post['hospital_id']) && $post['hospital_id']!=''){
+						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
+						if($hospital_details['hos_email_id']==$post['hos_email_id']){
+								$onedata=array(
+										'hos_con_number'=>$post['hos_con_number'],
+										'hos_email_id'=>$post['hos_email_id'],
+										'hos_updated_at'=>date('Y-m-d H:i:s')
+										);
+								$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
+								if(count($stepone)>0){
+									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
+									redirect('hospital/add/'.base64_encode(2).'/'.$post['hospital_id']);
+								}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
+								}
 						}else{
-							$onedata=array(
-							'hos_con_number'=>$post['hos_con_number'],
-							'hos_email_id'=>$post['hos_email_id'],
-							'hos_password'=>md5($post['hos_confirmpassword']),
-							'hos_org_password'=>$post['hos_confirmpassword'],
-							'hos_status'=>1,
-							'hos_created'=>date('Y-m-d H:i:s'),
-							'hos_updated_at'=>date('Y-m-d H:i:s')
-							);
-							$stepone= $this->Hospital_model->save_hospital_step_one($onedata);
-							if(count($stepone)>0){
-								$this->session->set_flashdata('success',"Hospital Credentials are successfully created");
-								redirect('hospital/add/'.base64_encode(2).'/'.base64_encode($stepone));
-							}else{
-								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-								redirect('hospital/add/'.base64_encode(1));
-							}
+							
+								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
+								}else{
+									$onedata=array(
+									'hos_con_number'=>$post['hos_con_number'],
+									'hos_email_id'=>$post['hos_email_id'],
+									'hos_updated_at'=>date('Y-m-d H:i:s')
+									);
+									$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
+									if(count($stepone)>0){
+									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
+									redirect('hospital/add/'.base64_encode(2).'/'.$post['hospital_id']);
+									}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
+									}
+								}
+							
 						}
+
 						
 					}else{
-						$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
-						redirect('hospital/add/'.base64_encode(1));
+							if(md5($post['hos_password'])==md5($post['hos_confirmpassword'])){
+								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('hospital/add/'.base64_encode(1));
+								}else{
+									$onedata=array(
+									'hos_con_number'=>$post['hos_con_number'],
+									'hos_email_id'=>$post['hos_email_id'],
+									'hos_password'=>md5($post['hos_confirmpassword']),
+									'hos_org_password'=>$post['hos_confirmpassword'],
+									'hos_status'=>1,
+									'hos_created'=>date('Y-m-d H:i:s'),
+									'hos_updated_at'=>date('Y-m-d H:i:s')
+									);
+									$stepone= $this->Hospital_model->save_hospital_step_one($onedata);
+									if(count($stepone)>0){
+										$this->session->set_flashdata('success',"Hospital Credentials are successfully created");
+										redirect('hospital/add/'.base64_encode(2).'/'.base64_encode($stepone));
+									}else{
+										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+										redirect('hospital/add/'.base64_encode(1));
+									}
+								}
+								
+							}else{
+								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
+								redirect('hospital/add/'.base64_encode(1));
+							}
 					}
 				}else{
-					$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
-					redirect('hospital/add/'.base64_encode(1));
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
 				}
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+		 $this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -139,7 +193,7 @@ class Hospital extends CI_Controller {
 				}
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -187,7 +241,7 @@ class Hospital extends CI_Controller {
 				}
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -230,7 +284,7 @@ class Hospital extends CI_Controller {
 				}
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}public function addpostfive()
@@ -290,7 +344,7 @@ class Hospital extends CI_Controller {
 				}
 			
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
