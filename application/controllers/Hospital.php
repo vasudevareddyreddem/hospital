@@ -375,8 +375,10 @@ class Hospital extends CI_Controller {
 				if($admindetails['role_id']=1){
 					
 					$post=$this->input->post();
-					echo '<pre>';print_r($post);
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
+						if(){
+							
+						}
 						if(isset($_FILES['hos_bas_document']['name']) && $_FILES['hos_bas_document']['name']!=''){
 							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
 							unlink("assets/hospital_basic_documents/".$hospital_details['hos_bas_document']);
@@ -419,7 +421,7 @@ class Hospital extends CI_Controller {
 						}else{
 							$file3=$hospital_details['kyc_file3'];
 						}
-					$editdata=array(
+						$editdata=array(
 							'hos_con_number'=>isset($post['hos_con_number'])?$post['hos_con_number']:$hospital_details['hos_con_number'],
 							'hos_email_id'=>isset($post['hos_email_id'])?$post['hos_email_id']:$hospital_details['hos_email_id'],
 							'hos_representative'=>isset($post['hos_representative'])?$post['hos_representative']:$hospital_details['hos_representative'],
@@ -458,14 +460,29 @@ class Hospital extends CI_Controller {
 							'kyc_file3'=>$file3,
 							'hos_updated_at'=>date('Y-m-d H:i:s')
 							);
-							echo '<pre>';print_r($editdata);exit;
+							//echo '<pre>';print_r($editdata);exit;
 							$editdetails= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$editdata);
 							if(count($editdetails)>0){
-								$this->session->set_flashdata('success',"Hospital Details are successfully Saved");
-								redirect('hospital');
+								if($post['tab_id']==2){
+									$this->session->set_flashdata('success',"Hospital Credentials details are successfully Updated");
+									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+								}elseif($post['tab_id']==3){
+									$this->session->set_flashdata('success',"Hospital Representative details are successfully Updated");
+									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+								}else if($post['tab_id']==4){
+									$this->session->set_flashdata('success',"Hospital Basic Details are successfully Updated");
+									redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
+								}else if($post['tab_id']==5){
+									$this->session->set_flashdata('success'," Hospital Financial Details  are successfully Updated");
+										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));	
+								}else if($post['tab_id']==6){
+									$this->session->set_flashdata('success'," Hospital Other Details are successfully Updated");
+									redirect('hospital');
+								}
+								
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-								redirect('hospital/add/'.base64_encode(5).'/'.$post['hospital_id']);
+								redirect('hospital/add/'.base64_encode($post['backtab_id']).'/'.$post['hospital_id']);
 							}
 				}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
