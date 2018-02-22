@@ -57,7 +57,8 @@
 								); ?>
 								<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 							      <input type="hidden" id="hospital_id" name="hospital_id" value="<?php echo isset($hospital_id)?$hospital_id:'' ?>">
-							      <input type="hidden" id="tab_id" name="tab_id" value="1">
+							      <input type="hidden" id="tab_id" name="tab_id" value="2">
+							      <input type="hidden" id="backtab_id" name="backtab_id" value="1">
               
 					<div class="row">
                         <div class="form-group col-md-6">
@@ -92,8 +93,8 @@
 								); ?>
 								<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 								<input type="hidden" id="hospital_id" name="hospital_id" value="<?php echo $hospital_id; ?>">
-							      <input type="hidden" id="tab_id" name="tab_id" value="2">
-					 <div class="row">
+								  <input type="hidden" id="tab_id" name="tab_id" value="3">
+							      <input type="hidden" id="backtab_id" name="backtab_id" value="2">					 <div class="row">
                         <div class="form-group col-md-6">
                            <label for="email">Name of the Representative</label>
                            <input type="text" id="hos_representative" name="hos_representative" value="<?php echo isset($hospital_details['hos_representative'])?$hospital_details['hos_representative']:''; ?>" class="form-control" id="email" placeholder="Enter Name" >
@@ -178,7 +179,8 @@
 								); ?>
 								<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 								<input type="hidden" id="hospital_id" name="hospital_id" value="<?php echo $hospital_id; ?>">
-							      <input type="hidden" id="tab_id" name="tab_id" value="3">
+							      <input type="hidden" id="tab_id" name="tab_id" value="4">
+							      <input type="hidden" id="backtab_id" name="backtab_id" value="3">	
 
 					 <div class="row">
                         <div class="form-group col-md-6">
@@ -261,7 +263,8 @@
 								); ?>
 								<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 								<input type="hidden" id="hospital_id" name="hospital_id" value="<?php echo $hospital_id; ?>">
-							      <input type="hidden" id="tab_id" name="tab_id" value="4">
+							      <input type="hidden" id="tab_id" name="tab_id" value="5">
+							      <input type="hidden" id="backtab_id" name="backtab_id" value="4">	
   
 					 <div class="row">
                         <div class="form-group col-md-6">
@@ -310,7 +313,8 @@
 								); ?>
 								<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 								<input type="hidden" id="hospital_id" name="hospital_id" value="<?php echo $hospital_id; ?>">
-							      <input type="hidden" id="tab_id" name="tab_id" value="5">
+							    <input type="hidden" id="tab_id" name="tab_id" value="6">
+							     <input type="hidden" id="backtab_id" name="backtab_id" value="5">	
     
 					 <div class="row">
                         <div class="form-group col-md-6">
