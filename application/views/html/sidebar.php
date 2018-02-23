@@ -101,7 +101,7 @@
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="#" class="nav-link "> <span class="title">Lab / Treatment </span>
+	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Lab / Treatment </span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">

@@ -227,8 +227,8 @@
                                         <i class="icon-user"></i> Profile </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <i class="icon-settings"></i> Settings
+                                    <a href="<?php echo base_url('dashboard/changepassword'); ?>">
+                                        <i class="icon-settings"></i> Change Password
                                     </a>
                                 </li>
                                 <li>
