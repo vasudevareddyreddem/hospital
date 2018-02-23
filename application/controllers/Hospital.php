@@ -1102,6 +1102,82 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function treatmentdelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$treatment_id=$this->uri->segment(3);
+					if($treatment_id!=''){
+						$deletdata=array(
+							't_status'=>2,
+							't_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$deletedata= $this->Hospital_model->update_treatment_details(base64_decode($treatment_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Treatment successfully removed.");
+								redirect('hospital/addtreatment/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/addtreatment/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/addtreatment/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function treatmentstatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$treament_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($treament_id!=''){
+						$stusdetails=array(
+							't_status'=>$statu,
+							't_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Hospital_model->update_treatment_details(base64_decode($treament_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Treatment successfully Deactivate.");
+								}else{
+									$this->session->set_flashdata('success',"Treatment successfully Activate.");
+								}
+									redirect('hospital/addtreatment/'.base64_encode(1));;
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/addtreatment/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/addtreatment/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function emps(){
 		
 		

@@ -81,6 +81,10 @@ class Hospital_model extends CI_Model
 		$this->db->where('treament.t_status !=',2);
 		return $this->db->get()->result_array();
 	}
+	public function update_treatment_details($t_id,$data){
+		$this->db->where('t_id',$t_id);
+    	return $this->db->update("treament",$data);
+	}
 	/*treatment*/
 
 }

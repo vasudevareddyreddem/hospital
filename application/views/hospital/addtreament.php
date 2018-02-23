@@ -81,19 +81,15 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['t_id']).'/'.base64_encode($list['t_status'])); ?>">
+                                                                <a href="<?php echo base_url('hospital/treatmentstatus/'.base64_encode($list['t_id']).'/'.base64_encode($list['t_status'])); ?>">
                                                                     <i class="fa fa-edit"></i><?php if($list['t_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															<li>
-                                                                <a href="<?php echo base_url('hospital/resourceview/'.base64_encode($list['t_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>View</a>
-                                                            </li> 
-															<li>
-                                                                <a href="<?php echo base_url('hospital/resourceedit/'.base64_encode($list['t_id'])); ?>">
+                                                                <a href="<?php echo base_url('hospital/treatmenteedit/'.base64_encode($list['t_id'])); ?>">
                                                                     <i class="fa fa-edit"></i>Edit</a>
                                                             </li>
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['t_id'])); ?>">
+                                                                <a href="<?php echo base_url('hospital/treatmentdelete/'.base64_encode($list['t_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
