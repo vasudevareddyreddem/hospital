@@ -657,13 +657,26 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=2){
 					$post=$this->input->post();
-					echo '<pre>';print_r($post);exit;
+					echo '<pre>';print_r($_FILES);exit;
 					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/resouce');
 								}else{
+									if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+									$temp = explode(".", $_FILES["resource_photo"]["name"]);
+									$photo =round(microtime(true)) . '.' . end($temp);
+									move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/resourse_doc/" . $photo);
+									}else{
+									$photo='';
+									}if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+									$temp = explode(".", $_FILES["resource_photo"]["name"]);
+									$photo =round(microtime(true)) . '.' . end($temp);
+									move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/resourse_doc/" . $photo);
+									}else{
+									$photo='';
+									}
 									$admindetails=$this->session->userdata('userdetails');
 									$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 									//echo '<pre>';print_r($statusdata);exit;
@@ -692,7 +705,7 @@ class Hospital extends CI_Controller {
 									'resource_other_details'=>$post['resource_other_details'],
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
-									'resource_photo'=>$resource_photo,
+									'resource_photo'=>$photo,
 									'resource_document'=>$resource_document,
 									'resource_bank_holdername'=>$post['resource_bank_holdername'],
 									'resource_bank_accno'=>$post['resource_bank_accno'],

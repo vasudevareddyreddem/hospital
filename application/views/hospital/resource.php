@@ -37,7 +37,7 @@
                <div class="tab-content">
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"" id="home">
                      <div class="row">
-					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource">
+					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource" enctype="multipart/form-data">
                         <div class="col-md-12 ">
                            <div class="container">
 						  
