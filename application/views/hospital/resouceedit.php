@@ -8,7 +8,7 @@
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
-               </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resouce/'.base64_encode(1)); ?>">Resourse List</a>&nbsp;<i class="fa fa-angle-right"></i>
+               </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resource/'.base64_encode(1)); ?>">Resourse List</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
                <li class="active">Edit Resourse</li>
             </ol>
@@ -31,7 +31,7 @@
                <div class="tab-content">
 			   <div class="">
                      <div class="row">
-					  <form action="<?php echo base_url('hospital/resourceditepost'); ?>" method="post" id="addresource" name="addresource">
+					  <form action="<?php echo base_url('hospital/resourceditepost'); ?>" method="post" id="addresource" name="addresource" enctype="multipart/form-data">
                         <div class="col-md-12 ">
                            
 						  		<input  type="hidden" class="form-control" id="resource_id" name="resource_id" value="<?php echo isset($resouse_detail['r_id'])?$resouse_detail['r_id']:''; ?>">
@@ -65,7 +65,7 @@
 									</div>
 									<div class="col-md-6">
 										<label> Zipcode</label>
-										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" value="<?php echo isset($resouse_detail['resource_zipcode'])?$resouse_detail['resource_zipcode']:''; ?>"  placeholder="Zipcode">
+										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="<?php echo isset($resouse_detail['resource_zipcode'])?$resouse_detail['resource_zipcode']:''; ?>" type="text" placeholder="State">
 									</div>
 									<div class="col-md-6">
 										<label> Other Details</label>
@@ -133,7 +133,6 @@
    </div>
 </div>
 <script>
-
 $(document).ready(function() {
     $('#addresource').bootstrapValidator({
         
@@ -153,11 +152,11 @@ $(document).ready(function() {
 			 resource_mobile: {
                 validators: {
 					notEmpty: {
-						message: 'Mobile Number is required'
+						message: 'landline Number is required'
 					},
 					regexp: {
-					regexp:  /^[0-9]{10}$/,
-					message:'Mobile Number must be 10 digits'
+					regexp:  /^[0-9]{10,14}$/,
+					message:'landline Number must be 10 to 14 digits'
 					}
 				
 				}
@@ -260,7 +259,77 @@ $(document).ready(function() {
 					}
 				
 				}
-            },
+            },resource_zipcode: {
+                  validators: {
+					notEmpty: {
+						message: 'Zipcode is required'
+					},
+					stringLength: {
+                        max: 6,
+                        message: 'Zipcode  must be less than 10 characters'
+                    },
+					regexp: {
+					// regexp: /^[0-9A-Za-z ]{5,10}$/,
+					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
+					message: 'Zipcode is not valid, Should be like 32216.'
+					}
+				}
+            },resource_photo: {
+                   validators: {
+					 regexp: {
+					regexp: /\.(jpe?g|png|gif)$/i,
+					message: 'Uploaded file is not a valid image. Only JPG, PNG and GIF files are allowed'
+					}
+				}
+            },resource_document: {
+                   validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+            },resource_bank_holdername: {
+                 validators: {
+					notEmpty: {
+						message: 'Bank Holder Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Bank Holder Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },resource_bank_accno: {
+                validators: 
+						{
+						notEmpty: { message: 'Bank Account is required'
+					    },
+						regexp:{
+					     regexp:  /^[0-9]{9,16}$/,
+					     message:'Bank Account  must be 9 to 16 digits'
+					    }
+					}
+				},
+				resource_ifsc_code: {
+                validators: {
+					notEmpty: {
+						message: 'IFSC Code is required'
+					},
+					regexp: {
+					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
+					 message: 'IFSC Code must be alphanumaric'
+					}
+				}
+				},
+				resource_other_document: {
+                validators: {
+					validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+				}
+				},
 			 resource_other_details: {
                   validators: {
                     regexp: {

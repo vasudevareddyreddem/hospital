@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Rources List</div>
+               <div class="page-title">Treatment List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Rources</li>
+               <li class="active">Treatment List</li>
             </ol>
          </div>
       </div>
@@ -27,9 +27,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resources</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Treatment </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Resources List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Treatment  List</a>
                   </li>
                </ul>
             </header>
@@ -37,104 +37,21 @@
                <div class="tab-content">
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
-                     <div class="row">
+                     
 					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource" enctype="multipart/form-data">
-                        <div class="col-md-12 ">
-                           
-						  
-                              <div class="row">
-                                 <div class="col-md-6">
+							<div class="row">
+								<div class="col-md-6">
 									<label> Name</label>
-										<input class="form-control" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
-									</div>
-									<div class="col-md-6">
-									<label> Mobile Number</label>
-										<input class="form-control" id="resource_mobile" name="resource_mobile" value="" type="text" placeholder=" Mobile Number">
-									</div>
-									<div class="col-md-6">
-										<label> Address1</label>
-											<textarea type="textarea" id="resource_add1" name="resource_add1" value="" class="form-control"  placeholder="Address1" ></textarea>
-									</div>
-										<div class="col-md-6">
-										<label> Address2</label>
-											<textarea type="textarea" id="resource_add2" name="resource_add2" value="" class="form-control"  placeholder="Address2" ></textarea>
-									</div>
-									
-									<div class="col-md-6">
-									<label> City</label>
-										<input class="form-control" id="resource_city" name="resource_city" value="" type="text" placeholder="City">
-									</div>
-										<div class="col-md-6">
-										<label> State</label>
-										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
-									</div>
-									<div class="col-md-6">
-										<label> Zipcode</label>
-										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Zipcode">
-									</div>
-										<div class="col-md-6">
-										<label> Other Details</label>
-										<input class="form-control" id="resource_other_details" name="resource_other_details" value="" type="text" placeholder="Other Details">
-									</div>
-									 	<div class="col-md-6">
-									<label> Resource Contact Number</label>
-										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Resource Contact Number">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Designation</label>
-									<select class="form-control" id="designation" name="designation">
-										<option value="">Select</option>
-										<option value="3">Receptionist</option>
-										<option value="4">Pharmacy</option>
-										<option value="5">lab coordinator</option>
-										<option value="6">Doctor</option>
-									</select>
-									</div>
-									<div class="col-md-6">
-									<label> Resource Email ID</label>
-										<input class="form-control" id="resource_email" name="resource_email" type="text" placeholder="Resource Email ID">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Password</label>
-										<input class="form-control" id="resource_password" name="resource_password" type="password" placeholder="Password">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Confirm Password</label>
-										<input class="form-control" id="resource_cinformpaswword" name="resource_cinformpaswword" type="password" placeholder="Confirm Password">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Photo</label>
-										<input class="form-control" id="resource_photo" name="resource_photo" type="file" placeholder="Resource Photo">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Document</label>
-										<input class="form-control" id="resource_document" name="resource_document" type="file" placeholder="Resource Document">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Bank Holder Name</label>
-										<input class="form-control" id="resource_bank_holdername" name="resource_bank_holdername" type="text" placeholder="Resource Bank Holder Name">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Bank Acc Number</label>
-										<input class="form-control" id="resource_bank_accno" name="resource_bank_accno" type="text" placeholder="Resource Bank Acc Number">
-									</div>
-										<div class="col-md-6">
-									<label> Resource Bank IFSC Code</label>
-										<input class="form-control" id="resource_ifsc_code" name="resource_ifsc_code" type="text" placeholder="Resource Bank IFSC Code">
-									</div>
-									
-										<div class="col-md-6">
-									<label> Resource Upload Any document</label>
-										<input class="form-control" id="resource_other_document" name="resource_other_document" type="file" placeholder="Resource Photo">
-									</div>
-                              </div>
-                           </div>
-                           <div class="clearfix">&nbsp;</div>
-						   <div class="col-sm-10">
-                           <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Resource</button>
-                           </div><div class="clearfix">&nbsp;</div>
-                        </div>
-						</form>
+								<input class="form-control" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
+								</div>
+								<div class="col-md-2">
+								<label>&nbsp;</label>
+								<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Treatment</button>
+								</div>	
+							</div>
+							</form>
+						
+					
                      </div>
                   </div>
                   <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">

@@ -629,7 +629,7 @@ class Hospital extends CI_Controller {
 		}
 	}
 	
-	public function resouce()
+	public function resource()
 	{
 		if($this->session->userdata('userdetails'))
 		{
@@ -662,7 +662,7 @@ class Hospital extends CI_Controller {
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
-									redirect('hospital/resouce');
+									redirect('hospital/resource');
 								}else{
 									if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 									$temp = explode(".", $_FILES["resource_photo"]["name"]);
@@ -725,16 +725,16 @@ class Hospital extends CI_Controller {
 									$saveresource =$this->Hospital_model->save_resource($resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource are successfully created");
-										redirect('hospital/resouce/'.base64_encode(1));
+										redirect('hospital/resource/'.base64_encode(1));
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-										redirect('hospital/resouce');
+										redirect('hospital/resource');
 									}
 								}
 								
 							}else{
 								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
-								redirect('hospital/resouce');
+								redirect('hospital/resource');
 							}
 					
 			}else{
@@ -770,14 +770,14 @@ class Hospital extends CI_Controller {
 								}else{
 									$this->session->set_flashdata('success',"Resource successfully Activate.");
 								}
-								redirect('hospital/resouce/'.base64_encode(1));
+								redirect('hospital/resource/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('hospital/resouce/'.base64_encode(1));
+									redirect('hospital/resource/'.base64_encode(1));
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('hospital/resouce/'.base64_encode(1));
+						redirect('hospital/resource/'.base64_encode(1));
 					}
 					
 			}else{
@@ -803,14 +803,14 @@ class Hospital extends CI_Controller {
 							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"Hospital successfully removed.");
-								redirect('hospital/resouce/'.base64_encode(1));
+								redirect('hospital/resource/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('hospital/resouce/'.base64_encode(1));
+									redirect('hospital/resource/'.base64_encode(1));
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('hospital/resouce/'.base64_encode(1));
+						redirect('hospital/resource/'.base64_encode(1));
 					}
 					
 			}else{
@@ -845,7 +845,7 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	public function resourseedit()
+	public function resourceedit()
 	{
 		if($this->session->userdata('userdetails'))
 		{
@@ -878,7 +878,7 @@ class Hospital extends CI_Controller {
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
-									redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
+									redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 								}else{
 															if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 												unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
@@ -937,17 +937,18 @@ class Hospital extends CI_Controller {
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
-										redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
+										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-										redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
+										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 									}
 								}
 								
 					}else{
-						
-								if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
-								unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
+						if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+								if($resouse_detail['resource_photo']!=''){
+									unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
+								}
 								$temp = explode(".", $_FILES["resource_photo"]["name"]);
 								$photo =round(microtime(true)) . '.' . end($temp);
 								move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/adminprofilepic/" . $photo);
@@ -955,20 +956,24 @@ class Hospital extends CI_Controller {
 								$photo=$resouse_detail['resource_photo'];
 							}
 							if(isset($_FILES['resource_document']['name']) && $_FILES['resource_document']['name']!=''){
+								if($resouse_detail['resource_document']!=''){
 								unlink("assets/resourse_doc/".$resouse_detail['resource_document']);
+								}
 								$temp = explode(".", $_FILES["resource_document"]["name"]);
-								$resource_document ='1'.round(microtime(true)) . '.' . end($temp);
-								move_uploaded_file($_FILES['resource_document']['tmp_name'], "assets/resourse_doc/" . $resource_document);
+								$resource_doc ='1'.round(microtime(true)) . '.' . end($temp);
+								move_uploaded_file($_FILES['resource_document']['tmp_name'], "assets/resourse_doc/" . $resource_doc);
 							}else{
-								$resource_document=$resouse_detail['resource_document'];
+								$resource_doc=$resouse_detail['resource_document'];
 							}
 							if(isset($_FILES['resource_other_document']['name']) && $_FILES['resource_other_document']['name']!=''){
+								if($resouse_detail['resource_other_document']!=''){
 								unlink("assets/resourse_doc/".$resouse_detail['resource_other_document']);
-								$temp = explode(".", $_FILES["resource_document"]["name"]);
-								$resource_other_document =round(microtime(true)) . '.' . end($temp);
-								move_uploaded_file($_FILES['resource_other_document']['tmp_name'], "assets/resourse_doc/" . $resource_other_document);
+								}
+								$temp = explode(".", $_FILES["resource_other_document"]["name"]);
+								$resource_other_docu =round(microtime(true)) . '.' . end($temp);
+								move_uploaded_file($_FILES['resource_other_document']['tmp_name'], "assets/resourse_doc/" . $resource_other_docu);
 							}else{
-								$resource_other_document=$resouse_detail['resource_other_document'];
+								$resource_other_docu=$resouse_detail['resource_other_document'];
 							}
 						$admin_details=array(
 									'role_id'=>$post['designation'],
@@ -989,27 +994,67 @@ class Hospital extends CI_Controller {
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
 									'resource_photo'=>$photo,
-									'resource_document'=>$resource_document,
+									'resource_document'=>$resource_doc,
 									'resource_bank_holdername'=>$post['resource_bank_holdername'],
 									'resource_bank_accno'=>$post['resource_bank_accno'],
 									'resource_ifsc_code'=>$post['resource_ifsc_code'],
-									'resource_other_document'=>$resource_other_document,
+									'resource_other_document'=>$resource_other_docu,
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
-									//echo '<pre>';print_r($resourcedata);
+									//echo '<pre>';print_r($resourcedata);exit;
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
-										redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
+										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-										redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
+										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 									}
 					}
 								
 						
 					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function resourceview()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$resourseId = base64_decode($this->uri->segment(3));
+				$data['resouse_detail']= $this->Hospital_model->get_resourse_details($resourseId);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('hospital/resouceview',$data);
+				$this->load->view('html/footer');
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addtreatment()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$resourseId = base64_decode($this->uri->segment(3));
+				$data['resouse_detail']= $this->Hospital_model->get_resourse_details($resourseId);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('hospital/addtreament',$data);
+				$this->load->view('html/footer');
+				
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
