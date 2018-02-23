@@ -628,12 +628,14 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	
 	public function resouce()
 	{
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
+					$data['tab']=base64_decode($this->uri->segment(3));
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$data['resource_list']=$this->Hospital_model->get_resources_list($hos_ids['a_id'],$hos_ids['hos_id']);
@@ -734,21 +736,54 @@ class Hospital extends CI_Controller {
 							'r_status'=>$statu,
 							'r_updated_at'=>date('Y-m-d H:i:s')
 							);
-							$statusdata= $this->Hospital_model->update_hospital_details(base64_decode($hospital_id),$stusdetails);
+							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Hospital successfully Deactivate.");
+								$this->session->set_flashdata('success',"Resource successfully Deactivate.");
 								}else{
-									$this->session->set_flashdata('success',"Hospital successfully Activate.");
+									$this->session->set_flashdata('success',"Resource successfully Activate.");
 								}
-								redirect('hospital');
+								redirect('hospital/resouce/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('hospital');
+									redirect('hospital/resouce/'.base64_encode(1));
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('hospital');
+						redirect('hospital/resouce/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function resourcedelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$resourse_id=$this->uri->segment(3);
+					if($resourse_id!=''){
+						$deletdata=array(
+							'r_undo'=>2,
+							'r_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Hospital successfully removed.");
+								redirect('hospital/resouce/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/resouce/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/resouce/'.base64_encode(1));
 					}
 					
 			}else{

@@ -27,15 +27,15 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Resources</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resources</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab">Resources List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Resources List</a>
                   </li>
                </ul>
             </header>
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane active" id="home">
+                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"" id="home">
                      <div class="row">
 					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource">
                         <div class="col-md-12 ">
@@ -107,7 +107,7 @@
 						</form>
                      </div>
                   </div>
-                  <div class="tab-pane" id="about">
+                  <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
                      <div class="container">
                         <div class="row">
                             <div class="card-body col-md-12">
@@ -127,7 +127,7 @@
                                         <tbody>
 										<?php foreach($resource_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['role_id']); ?></td>
+                                                <td><?php echo htmlentities($list['r_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_email']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_contatnumber']); ?></td>
@@ -144,7 +144,7 @@
                                                                     <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li>
                                                             <li>
-                                                                <a href="">
+                                                                <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['r_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
