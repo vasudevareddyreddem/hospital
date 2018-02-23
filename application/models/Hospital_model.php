@@ -81,6 +81,15 @@ class Hospital_model extends CI_Model
 		$this->db->where('treament.t_status !=',2);
 		return $this->db->get()->result_array();
 	}
+	public function get_doctors_list($a_id,$hos_id){
+		$this->db->select('Resource_list.r_id,Resource_list.resource_name')->from('Resource_list');		
+		$this->db->where('Resource_list.r_create_by',$a_id);
+		$this->db->where('Resource_list.hos_id',$hos_id);
+		$this->db->where('Resource_list.r_status !=',2);
+		$this->db->where('Resource_list.r_status',1);
+		$this->db->where('Resource_list.role_id',6);
+		return $this->db->get()->result_array();
+	}
 	public function update_treatment_details($t_id,$data){
 		$this->db->where('t_id',$t_id);
     	return $this->db->update("treament",$data);

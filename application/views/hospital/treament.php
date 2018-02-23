@@ -34,7 +34,22 @@
                                  <form role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-                                       <input class="form-control" type="text" id="treatment_name" name="treatment_name" placeholder="Treatment Name">	&nbsp; <select  class="form-control" id="assign_doctor" name="assign_doctor"><option>testing </option></select>
+									   <select  class="form-control" id="treatment_name" name="treatment_name">
+									   <?php if(count($treatment_list)>0){ ?>
+									   <option value="">Select</option>
+									   <?php foreach($treatment_list as $list){ ?>
+									   <option value="<?php echo $list['t_name']; ?>"><?php echo $list['t_name']; ?> </option>
+									   <?php } ?>
+									   <?php } ?>
+									   </select>&nbsp;
+									   <select  class="form-control" id="assign_doctor" name="assign_doctor">
+									   <?php if(count($doctors_list)>0){ ?>
+									   <option value="">Select</option>
+									   <?php foreach($doctors_list as $list){ ?>
+									   <option value="<?php echo $list['r_id']; ?>"><?php echo $list['resource_name']; ?> </option>
+									   <?php } ?>
+									   <?php } ?>
+									   </select>
                                        <span class="input-group-btn">
                                        <button class="btn btn-success btn-add" type="button">
                                        <span class="glyphicon glyphicon-plus">+</span>

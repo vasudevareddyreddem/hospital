@@ -832,7 +832,8 @@ class Hospital extends CI_Controller {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['resource_list']=$this->Hospital_model->get_resources_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					$data['treatment_list']=$this->Hospital_model->get_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					$data['doctors_list']=$this->Hospital_model->get_doctors_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('hospital/treament',$data);
 					$this->load->view('html/footer');
