@@ -67,6 +67,10 @@
 										<label> State</label>
 										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
 									</div>
+									<div class="col-sm-5">
+										<label> State</label>
+										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Zipcode">
+									</div>
 									<div class="col-sm-10">
 										<label> Other Details</label>
 										<input class="form-control" id="resource_other_details" name="resource_other_details" value="" type="text" placeholder="Other Details">
@@ -96,6 +100,31 @@
 									<div class="col-sm-5">
 									<label> Resource Confirm Password</label>
 										<input class="form-control" id="resource_cinformpaswword" name="resource_cinformpaswword" type="password" placeholder="Confirm Password">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Photo</label>
+										<input class="form-control" id="resource_photo" name="resource_photo" type="file" placeholder="Resource Photo">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Document</label>
+										<input class="form-control" id="resource_document" name="resource_document" type="file" placeholder="Resource Document">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Bank Holder Name</label>
+										<input class="form-control" id="resource_bank_holdername" name="resource_bank_holdername" type="text" placeholder="Resource Bank Holder Name">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Bank Acc Number</label>
+										<input class="form-control" id="resource_bank_accno" name="resource_bank_accno" type="text" placeholder="Resource Bank Acc Number">
+									</div>
+									<div class="col-sm-5">
+									<label> Resource Bank IFSC Code</label>
+										<input class="form-control" id="resource_ifsc_code" name="resource_ifsc_code" type="text" placeholder="Resource Bank IFSC Code">
+									</div>
+									
+									<div class="col-sm-5">
+									<label> Resource Upload Any document</label>
+										<input class="form-control" id="resource_other_document" name="resource_other_document" type="file" placeholder="Resource Photo">
 									</div>
                               </div>
                            </div>
@@ -179,32 +208,6 @@
    </div>
 </div>
 <script>
-function resourseedit(val){
-	 
-	if(val!=''){
-		jQuery.ajax({
-					url: "<?php echo site_url('hospital/resourseedit');?>",
-					type: 'post',
-					data: {
-						resourseId: val,
-					},
-					dataType: 'json',
-					success: function (data) {
-						 $("#resource_name1").val("Dolly Duck");
-						$('#resource_name1').val(data.resource_name);
-						$('#resource_mobile1').val(data.resource_mobile);
-						$('#resource_add11').val(data.resource_add1);
-						$('#resource_add21').val(data.resource_add2);
-						$('#resource_city1').val(data.resource_city);
-						$('#resource_state1').val(data.resource_state);
-						$('#resource_other_details1').val(data.resource_other_details);
-						$('#designation1').val(data.designation);
-						$('#resource_email1').val(data.resource_email);
-						
-					}
-				});
-	}
- }
 $(document).ready(function() {
     $('#addresource').bootstrapValidator({
         
@@ -331,7 +334,77 @@ $(document).ready(function() {
 					}
 				
 				}
-            },
+            },resource_zipcode: {
+                  validators: {
+					notEmpty: {
+						message: 'Zipcode is required'
+					},
+					stringLength: {
+                        max: 6,
+                        message: 'Zipcode  must be less than 10 characters'
+                    },
+					regexp: {
+					// regexp: /^[0-9A-Za-z ]{5,10}$/,
+					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
+					message: 'Zipcode is not valid, Should be like 32216.'
+					}
+				}
+            },resource_photo: {
+                   validators: {
+					 regexp: {
+					regexp: /\.(jpe?g|png|gif)$/i,
+					message: 'Uploaded file is not a valid image. Only JPG, PNG and GIF files are allowed'
+					}
+				}
+            },resource_document: {
+                   validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+            },resource_bank_holdername: {
+                 validators: {
+					notEmpty: {
+						message: 'Bank Holder Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Bank Holder Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },resource_bank_accno: {
+                validators: 
+						{
+						notEmpty: { message: 'Bank Account is required'
+					    },
+						regexp:{
+					     regexp:  /^[0-9]{9,16}$/,
+					     message:'Bank Account  must be 9 to 16 digits'
+					    }
+					}
+				},
+				resource_ifsc_code: {
+                validators: {
+					notEmpty: {
+						message: 'IFSC Code is required'
+					},
+					regexp: {
+					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
+					 message: 'IFSC Code must be alphanumaric'
+					}
+				}
+				},
+				resource_other_document: {
+                validators: {
+					validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+				}
+				},
 			 resource_other_details: {
                   validators: {
                     regexp: {
