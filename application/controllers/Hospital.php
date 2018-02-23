@@ -717,6 +717,49 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function resourcestatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$resourse_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($resourse_id!=''){
+						$stusdetails=array(
+							'r_status'=>$statu,
+							'r_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Hospital_model->update_hospital_details(base64_decode($hospital_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Hospital successfully Deactivate.");
+								}else{
+									$this->session->set_flashdata('success',"Hospital successfully Activate.");
+								}
+								redirect('hospital');
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital');
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function emps(){
 		
 		

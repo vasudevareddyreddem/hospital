@@ -110,7 +110,7 @@
                   <div class="tab-pane" id="about">
                      <div class="container">
                         <div class="row">
-                            <div class="card-body ">
+                            <div class="card-body col-md-12">
 								<?php if(count($resource_list)>0){ ?>
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
@@ -140,8 +140,8 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="">
-                                                                    <i class="fa fa-edit"></i>EDit </a>
+                                                                <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
+                                                                    <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li>
                                                             <li>
                                                                 <a href="">
