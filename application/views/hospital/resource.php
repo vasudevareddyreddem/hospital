@@ -44,32 +44,32 @@
                               <div class="row">
                                  <div class="col-sm-5">
 									<label> Name</label>
-										<input class="form-control" id="resource_name" name="resource_name" type="text" placeholder="Name">
+										<input class="form-control" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
 									</div>
 									<div class="col-sm-5">
 									<label> Mobile Number</label>
-										<input class="form-control" id="resource_mobile" name="resource_mobile" type="text" placeholder=" Mobile Number">
+										<input class="form-control" id="resource_mobile" name="resource_mobile" value="" type="text" placeholder=" Mobile Number">
 									</div>
 									<div class="col-md-5">
 										<label> Address1</label>
-											<textarea type="textarea" id="resource_add1" name="resource_add1" class="form-control"  placeholder="Address1" ></textarea>
+											<textarea type="textarea" id="resource_add1" name="resource_add1" value="" class="form-control"  placeholder="Address1" ></textarea>
 									</div>
 									<div class="col-md-5">
 										<label> Address2</label>
-											<textarea type="textarea" id="resource_add2" name="resource_add2" class="form-control"  placeholder="Address2" ></textarea>
+											<textarea type="textarea" id="resource_add2" name="resource_add2" value="" class="form-control"  placeholder="Address2" ></textarea>
 									</div>
 									
 									<div class="col-sm-5">
 									<label> City</label>
-										<input class="form-control" id="resource_city" name="resource_city" type="text" placeholder="City">
+										<input class="form-control" id="resource_city" name="resource_city" value="" type="text" placeholder="City">
 									</div>
 									<div class="col-sm-5">
 										<label> State</label>
-										<input class="form-control" id="resource_state" name="resource_state" type="text" placeholder="State">
+										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
 									</div>
 									<div class="col-sm-10">
 										<label> Other Details</label>
-										<input class="form-control" id="resource_other_details" name="resource_other_details" type="text" placeholder="Other Details">
+										<input class="form-control" id="resource_other_details" name="resource_other_details" value="" type="text" placeholder="Other Details">
 									</div>
 									 <div class="col-sm-5">
 									<label> Resource Contact Number</label>
@@ -142,6 +142,10 @@
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
                                                                     <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                            </li> 
+															<li>
+                                                                <a href="<?php echo base_url('hospital/resourseedit/'.base64_encode($list['r_id'])); ?>">
+                                                                    <i class="fa fa-edit"></i>Edit</a>
                                                             </li>
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['r_id'])); ?>">
@@ -161,6 +165,7 @@
 								<?php }else{ ?>
 								<div>No data Available</div>
 								<?php } ?>
+								
                                 </div>
                         </div>
                        
@@ -174,6 +179,32 @@
    </div>
 </div>
 <script>
+function resourseedit(val){
+	 
+	if(val!=''){
+		jQuery.ajax({
+					url: "<?php echo site_url('hospital/resourseedit');?>",
+					type: 'post',
+					data: {
+						resourseId: val,
+					},
+					dataType: 'json',
+					success: function (data) {
+						 $("#resource_name1").val("Dolly Duck");
+						$('#resource_name1').val(data.resource_name);
+						$('#resource_mobile1').val(data.resource_mobile);
+						$('#resource_add11').val(data.resource_add1);
+						$('#resource_add21').val(data.resource_add2);
+						$('#resource_city1').val(data.resource_city);
+						$('#resource_state1').val(data.resource_state);
+						$('#resource_other_details1').val(data.resource_other_details);
+						$('#designation1').val(data.designation);
+						$('#resource_email1').val(data.resource_email);
+						
+					}
+				});
+	}
+ }
 $(document).ready(function() {
     $('#addresource').bootstrapValidator({
         

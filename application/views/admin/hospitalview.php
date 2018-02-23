@@ -67,7 +67,7 @@
 														 <strong>Hospital Email Id</strong>
 														 </div>
 														<div class=" col-sm-6">
-														  <?php echo isset($hospital_details['hos_con_number'])?$hospital_details['hos_con_number']:''; ?>
+														  <?php echo isset($hospital_details['hos_email_id'])?$hospital_details['hos_email_id']:''; ?>
 														 </div>
 													 </div>
 													</div>
