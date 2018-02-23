@@ -13,131 +13,160 @@
             </ol>
          </div>
       </div>
-	   <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-      <div class="row">
-         <div class="panel tab-border card-topline-green">
-            <header class="panel-heading panel-heading-gray custom-tab ">
-               <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resources</a>
-                  </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Resources List</a>
-                  </li>
-               </ul>
-            </header>
-            <div class="panel-body">
-               <div class="tab-content">
-                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"" id="home">
-                     <div class="row">
-					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource">
-                        <div class="col-md-12 ">
-                           <div class="container">
-								<div class="control-group" id="fields">
+							<div class="panel tab-border card-topline-green">
+										<header class="panel-heading panel-heading-gray custom-tab ">
+											<ul class="nav nav-tabs">
+												<li class="nav-item"><a href="#home" data-toggle="tab" class="active">Medication</a>
+												</li>
+												<li class="nav-item"><a href="#about" data-toggle="tab">Investigation</a>
+												</li>
+											</ul>
+										</header>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="home">
+                                           <div class="row">	
+											   <div class="col-md-12 ">	
+													
+													<div class="container">
+									<div class="control-group" id="fields">
 										<label class="control-label" for="field1"><strong>Comments</strong></label>
 										<div class="controls"> 
+											<form role="form" autocomplete="off">
 												<div class="entry input-group ">
-													<textarea type="textarea" class="form-control"  placeholder="Enter Address" ></textarea>
+													<input class="form-control" type="text" placeholder="filedone"> &nbsp;
+													<input class="form-control" type="text" placeholder="filedone">	&nbsp; <input class="form-control" type="text" placeholder="filedone">
+													
 													<span class="input-group-btn">
 														<button class="btn btn-success btn-add" type="button">
 															<span class="glyphicon glyphicon-plus">+</span>
 														</button>
 													</span>
 												</div>
-										
+											</form>
 										<br>
 									   
 										</div>
 									</div>
-							
-                           </div>
-                           <div class="clearfix">&nbsp;</div>
-						   <div class="col-sm-10">
-                           <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Resource</button>
-                           </div><div class="clearfix">&nbsp;</div>
-                        </div>
-						</form>
-                     </div>
-                  </div>
-                  <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
-                     <div class="container">
-                        <div class="row">
-                            <div class="card-body col-md-12">
-								<?php if(count($resource_list)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
-                                        <thead>
-                                            <tr>
-												<th>Role</th>
-												<th>Name</th>
-												<th>Email Address</th>
-                                                <th>Contact Number </th>
-                                                <th>Create date</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-										<?php foreach($resource_list as $list){ ?>
-                                            <tr>
-                                                <td><?php echo htmlentities($list['r_name']); ?></td>
-                                                <td><?php echo htmlentities($list['resource_name']); ?></td>
-                                                <td><?php echo htmlentities($list['resource_email']); ?></td>
-                                                <td><?php echo htmlentities($list['resource_contatnumber']); ?></td>
-                                                <td><?php echo htmlentities($list['r_created_at']); ?></td>
-												<td><?php if($list['r_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-                                                <td class="valigntop">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
-                                                                    <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
-                                                            </li> 
-															<li>
-                                                                <a href="<?php echo base_url('hospital/resourseedit/'.base64_encode($list['r_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>Edit</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['r_id'])); ?>">
-                                                                    <i class="fa fa-trash-o"></i>Delete</a>
-                                                            </li>
-                                                            
-                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-										<?php } ?>
+									</div>
+														<div class="clearfix">&nbsp;</div>
+															<button class="btn btn-sm btn-warning" type="button">Clear</button>
+															<button class="btn btn-sm btn-info" type="button">View Prescription</button>
+															<button class="btn btn-sm btn-success" type="button">Add Prescription</button>
+														<div class="clearfix">&nbsp;</div>
+													</div>
+													</div>
+													</div>
+													
 											
-                                            
-                                        </tbody>
-                                    </table>
-								<?php }else{ ?>
-								<div>No data Available</div>
-								<?php } ?>
-								
+                                        <div class="tab-pane" id="about">
+
+													
+													<div class="container">
+													<div class="row">
+													<div class="col-md-6">
+														<label>Investigation type</label>									
+														<select class="form-control  ">
+															<option >Select</option>
+															<option >lab  </option>
+															<option >Radiology</option>
+														</select>
+													</div>
+												<div class="form-group col-md-6">
+											  <label for="email">Search</label><br>
+												<button data-toggle="modal" data-target="#searchmodal" class="btn btn-sm btn-warning">Search</button>
+											
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="email">Hospital Representative Contact Number</label>
+											  
+											 <div class="row">
+											 
+											 <div class="col-md-12 row">
+											 <div class="col-md-4">
+											 <select class="form-control">
+												<option>Text code	</option>
+												<option>+91</option>
+												<option>+91</option>
+												<option>+91</option>
+												<option>+91</option>
+											 </select>
+											 </div>
+											 <div class="col-md-8">
+												<input type="text" class="form-control"  placeholder="Enter text name" >
+											 </div>
+											</div>
+											</div>
+											</div>
+													<div class="col-md-6">
+														<label>Frequency</label>									
+														<input type="text" class="form-control"  placeholder="Enter text Frequency" >
+													</div>
+													<div class="col-md-6">
+														<label>Priority</label>									
+														<select class="form-control  ">
+															<option >Select Priority </option>
+															<option >Low</option>
+															<option >Medium </option>
+															<option >High</option>
+															
+														</select>
+													</div>
+													
+														<div class="col-md-6">
+														<label> From</label>
+															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+																<input class="form-control"  type="text" value="">
+																
+																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+															</div>
+															<input class ="form-control" type="hidden" id="dtp_input2" value="" />
+														</div>	
+														<div class="col-md-6">
+														<label> To</label>
+															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+																<input class="form-control"  type="text" value="">
+																
+																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+															</div>
+															<input class ="form-control" type="hidden" id="dtp_input2" value="" />
+														</div>	
+														<div class="col-md-6">
+															<label>  Associate diagnosis</label>
+															<input class="form-control" type="text" placeholder="Enter  Associate diagnosis">
+														
+														</div>
+														<div class="col-md-6">
+															<label>  Associate problems</label>
+															<input class="form-control" type="text" placeholder="Enter  Associate diagnosis">
+														
+														</div>
+														
+														
+													
+													
+                                        </div>
+										<br/>
+										
+										<button class="btn btn-sm btn-warning" type="button">Clear</button>
+															<button class="btn btn-sm btn-info" type="button">View Investigation</button>
+															<button class="btn btn-sm btn-success" type="button">Add Investigation</button>
+                                    </div>
+                             
+				                    
+				               
+				               
+				              
+				            </div>
+				        </div>
+			
+                                    
                                 </div>
-                        </div>
-                       
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="clearfix">&nbsp;</div>
-         </div>
-      </div>
+								<div class="clearfix">&nbsp;</div>
+												
+                            </div>
    </div>
 </div>
-<script>
 <script>
 			$(function() {
   $(".expand").on( "click", function() {
