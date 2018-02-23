@@ -69,5 +69,18 @@ class Hospital_model extends CI_Model
 		$this->db->where('r_id',$r_id);
 		return $this->db->get()->row_array();
 	}
+	/*treatment*/
+	public function save_treatment($data){
+		$this->db->insert('treament', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_treatment_list($a_id,$hos_id){
+		$this->db->select('treament.t_id,treament.t_name,treament.t_status,treament.t_create_at')->from('treament');		
+		$this->db->where('treament.t_create_by',$a_id);
+		$this->db->where('treament.hos_id',$hos_id);
+		$this->db->where('treament.t_status !=',2);
+		return $this->db->get()->result_array();
+	}
+	/*treatment*/
 
 }

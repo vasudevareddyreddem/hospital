@@ -1049,11 +1049,49 @@ class Hospital extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 			if($admindetails['role_id']=2){
-				$resourseId = base64_decode($this->uri->segment(3));
-				$data['resouse_detail']= $this->Hospital_model->get_resourse_details($resourseId);
+				$data['tab']=base64_decode($this->uri->segment(3));
+				$admindetails=$this->session->userdata('userdetails');
+				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['treatment_list'] =$this->Hospital_model->get_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('hospital/addtreament',$data);
 				$this->load->view('html/footer');
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function treatmentpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				//echo '<pre>';print_r($post);exit;
+				$treatment_details=array(
+					'hos_id'=>$hos_ids['hos_id'],
+					't_name'=>$post['treatment_name'],
+					't_status'=>1,
+					't_create_at'=>date('Y-m-d H:i:s'),
+					't_create_by'=>$hos_ids['a_id']
+					);
+					//echo '<pre>';print_r($treatment_details);exit;
+				$treatment = $this->Hospital_model->save_treatment($treatment_details);
+				if(count($treatment)>0){
+					$this->session->set_flashdata('success',"Treatment are successfully added");
+					redirect('hospital/addtreatment/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/addtreatment');
+				}
+									
 				
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
