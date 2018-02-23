@@ -23,7 +23,7 @@
 				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
 				</div>
 			<?php endif; ?>
-      <div class="row">
+   
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
@@ -35,11 +35,12 @@
             </header>
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"" id="home">
+                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
+				  <div class="container">
                      <div class="row">
 					  <form action="<?php echo base_url('hospital/resourcepost'); ?>" method="post" id="addresource" name="addresource" enctype="multipart/form-data">
                         <div class="col-md-12 ">
-                           <div class="container">
+                           
 						  
                               <div class="row">
                                  <div class="col-sm-5">
@@ -203,7 +204,7 @@
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>
-         </div>
+       
       </div>
    </div>
 </div>
