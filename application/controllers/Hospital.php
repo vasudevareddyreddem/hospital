@@ -871,6 +871,8 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=2){
 					$post=$this->input->post();
+					$resouse_detail= $this->Hospital_model->get_resourse_details($post['resource_id']);
+					
 					$resouse_email= $this->Hospital_model->get_resourse_details($post['resource_id']);
 					if($resouse_email['resource_email'] !=$post['resource_email']){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
@@ -878,6 +880,30 @@ class Hospital extends CI_Controller {
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/resourseedit/'.base64_encode($post['resource_id']));
 								}else{
+															if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+												unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
+												$temp = explode(".", $_FILES["resource_photo"]["name"]);
+												$photo =round(microtime(true)) . '.' . end($temp);
+												move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/adminprofilepic/" . $photo);
+											}else{
+												$photo=$resouse_detail['resource_photo'];
+											}
+											if(isset($_FILES['resource_document']['name']) && $_FILES['resource_document']['name']!=''){
+												unlink("assets/resourse_doc/".$resouse_detail['resource_document']);
+												$temp = explode(".", $_FILES["resource_document"]["name"]);
+												$resource_document ='1'.round(microtime(true)) . '.' . end($temp);
+												move_uploaded_file($_FILES['resource_document']['tmp_name'], "assets/resourse_doc/" . $resource_document);
+											}else{
+												$resource_document=$resouse_detail['resource_document'];
+											}
+											if(isset($_FILES['resource_other_document']['name']) && $_FILES['resource_other_document']['name']!=''){
+												unlink("assets/resourse_doc/".$resouse_detail['resource_other_document']);
+												$temp = explode(".", $_FILES["resource_document"]["name"]);
+												$resource_other_document =round(microtime(true)) . '.' . end($temp);
+												move_uploaded_file($_FILES['resource_other_document']['tmp_name'], "assets/resourse_doc/" . $resource_other_document);
+											}else{
+												$resource_other_document=$resouse_detail['resource_other_document'];
+											}
 									$admindetails=$this->session->userdata('userdetails');
 									$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 									//echo '<pre>';print_r($statusdata);exit;
@@ -895,9 +921,16 @@ class Hospital extends CI_Controller {
 									'resource_add2'=>$post['resource_add2'],
 									'resource_city'=>$post['resource_city'],
 									'resource_state'=>$post['resource_state'],
+									'resource_zipcode'=>$post['resource_zipcode'],
 									'resource_other_details'=>$post['resource_other_details'],
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
+									'resource_photo'=>$photo,
+									'resource_document'=>$resource_document,
+									'resource_bank_holdername'=>$post['resource_bank_holdername'],
+									'resource_bank_accno'=>$post['resource_bank_accno'],
+									'resource_ifsc_code'=>$post['resource_ifsc_code'],
+									'resource_other_document'=>$resource_other_document,
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
 									//echo '<pre>';print_r($onedata);exit;
@@ -912,6 +945,31 @@ class Hospital extends CI_Controller {
 								}
 								
 					}else{
+						
+								if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+								unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
+								$temp = explode(".", $_FILES["resource_photo"]["name"]);
+								$photo =round(microtime(true)) . '.' . end($temp);
+								move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/adminprofilepic/" . $photo);
+							}else{
+								$photo=$resouse_detail['resource_photo'];
+							}
+							if(isset($_FILES['resource_document']['name']) && $_FILES['resource_document']['name']!=''){
+								unlink("assets/resourse_doc/".$resouse_detail['resource_document']);
+								$temp = explode(".", $_FILES["resource_document"]["name"]);
+								$resource_document ='1'.round(microtime(true)) . '.' . end($temp);
+								move_uploaded_file($_FILES['resource_document']['tmp_name'], "assets/resourse_doc/" . $resource_document);
+							}else{
+								$resource_document=$resouse_detail['resource_document'];
+							}
+							if(isset($_FILES['resource_other_document']['name']) && $_FILES['resource_other_document']['name']!=''){
+								unlink("assets/resourse_doc/".$resouse_detail['resource_other_document']);
+								$temp = explode(".", $_FILES["resource_document"]["name"]);
+								$resource_other_document =round(microtime(true)) . '.' . end($temp);
+								move_uploaded_file($_FILES['resource_other_document']['tmp_name'], "assets/resourse_doc/" . $resource_other_document);
+							}else{
+								$resource_other_document=$resouse_detail['resource_other_document'];
+							}
 						$admin_details=array(
 									'role_id'=>$post['designation'],
 									'a_email_id'=>$post['resource_email'],
@@ -926,9 +984,16 @@ class Hospital extends CI_Controller {
 									'resource_add2'=>$post['resource_add2'],
 									'resource_city'=>$post['resource_city'],
 									'resource_state'=>$post['resource_state'],
+									'resource_zipcode'=>$post['resource_zipcode'],
 									'resource_other_details'=>$post['resource_other_details'],
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
+									'resource_photo'=>$photo,
+									'resource_document'=>$resource_document,
+									'resource_bank_holdername'=>$post['resource_bank_holdername'],
+									'resource_bank_accno'=>$post['resource_bank_accno'],
+									'resource_ifsc_code'=>$post['resource_ifsc_code'],
+									'resource_other_document'=>$resource_other_document,
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
 									//echo '<pre>';print_r($resourcedata);

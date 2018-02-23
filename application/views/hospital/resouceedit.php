@@ -29,48 +29,53 @@
            
             <div class="panel-body">
                <div class="tab-content">
+			   <div class="">
                      <div class="row">
 					  <form action="<?php echo base_url('hospital/resourceditepost'); ?>" method="post" id="addresource" name="addresource">
                         <div class="col-md-12 ">
-                           <div class="container">
+                           
 						  		<input  type="hidden" class="form-control" id="resource_id" name="resource_id" value="<?php echo isset($resouse_detail['r_id'])?$resouse_detail['r_id']:''; ?>">
 						  		<input  type="hidden" class="form-control" id="admin_id" name="admin_id" value="<?php echo isset($resouse_detail['a_id'])?$resouse_detail['a_id']:''; ?>">
 
                               <div class="row">
-                                 <div class="col-sm-5">
+                               <div class="col-md-6">
 									<label> Name</label>
 										<input class="form-control" id="resource_name" name="resource_name" value="<?php echo isset($resouse_detail['resource_name'])?$resouse_detail['resource_name']:''; ?>" type="text" placeholder="Name">
 									</div>
-									<div class="col-sm-5">
+									<div class="col-md-6">
 									<label> Mobile Number</label>
 										<input class="form-control" id="resource_mobile" name="resource_mobile" value="<?php echo isset($resouse_detail['resource_mobile'])?$resouse_detail['resource_mobile']:''; ?>" type="text" placeholder=" Mobile Number">
 									</div>
-									<div class="col-md-5">
+									<div class="col-md-6">
 										<label> Address1</label>
 											<textarea type="textarea" id="resource_add1" name="resource_add1"  class="form-control"  placeholder="Address1" ><?php echo isset($resouse_detail['resource_add1'])?$resouse_detail['resource_add1']:''; ?></textarea>
 									</div>
-									<div class="col-md-5">
+									<div class="col-md-6">
 										<label> Address2</label>
 											<textarea type="textarea" id="resource_add2" name="resource_add2"  class="form-control"  placeholder="Address2" ><?php echo isset($resouse_detail['resource_add2'])?$resouse_detail['resource_add2']:''; ?></textarea>
 									</div>
 									
-									<div class="col-sm-5">
+									<div class="col-md-6">
 									<label> City</label>
 										<input class="form-control" id="resource_city" name="resource_city" value="<?php echo isset($resouse_detail['resource_city'])?$resouse_detail['resource_city']:''; ?>" type="text" placeholder="City">
 									</div>
-									<div class="col-sm-5">
+									<div class="col-md-6">
 										<label> State</label>
 										<input class="form-control" id="resource_state" name="resource_state" value="<?php echo isset($resouse_detail['resource_state'])?$resouse_detail['resource_state']:''; ?>" type="text" placeholder="State">
 									</div>
-									<div class="col-sm-5">
+									<div class="col-md-6">
+										<label> Zipcode</label>
+										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" value="<?php echo isset($resouse_detail['resource_zipcode'])?$resouse_detail['resource_zipcode']:''; ?>"  placeholder="Zipcode">
+									</div>
+									<div class="col-md-6">
 										<label> Other Details</label>
 										<input class="form-control" id="resource_other_details" name="resource_other_details" value="<?php echo isset($resouse_detail['resource_other_details'])?$resouse_detail['resource_other_details']:''; ?>" type="text" placeholder="Other Details">
 									</div>
-									 <div class="col-sm-5">
+									 <div class="col-md-6">
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" value="<?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>" placeholder="Resource Contact Number">
 									</div>
-									<div class="col-sm-5">
+									<div class="col-md-6">
 									<label> Resource Designation</label>
 									<select class="form-control" id="designation" name="designation">
 										<option value="">Select</option>
@@ -81,9 +86,34 @@
 										
 									</select>
 									</div>
-									<div class="col-sm-5">
+									<div class="col-md-6">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" value="<?php echo isset($resouse_detail['resource_email'])?$resouse_detail['resource_email']:''; ?>" type="text" placeholder="Resource Email ID">
+									</div>
+										<div class="col-md-6">
+									<label> Resource Photo</label>
+										<input class="form-control" id="resource_photo" name="resource_photo" type="file"  placeholder="Resource Photo">
+									</div>
+										<div class="col-md-6">
+									<label> Resource Document</label>
+										<input class="form-control" id="resource_document" name="resource_document" type="file" placeholder="Resource Document">
+									</div>
+										<div class="col-md-6">
+									<label> Resource Bank Holder Name</label>
+										<input class="form-control" id="resource_bank_holdername" name="resource_bank_holdername" type="text" value="<?php echo isset($resouse_detail['resource_bank_holdername'])?$resouse_detail['resource_bank_holdername']:''; ?>"  placeholder="Resource Bank Holder Name">
+									</div>
+										<div class="col-md-6">
+									<label> Resource Bank Acc Number</label>
+										<input class="form-control" id="resource_bank_accno" name="resource_bank_accno" type="text" value="<?php echo isset($resouse_detail['resource_bank_accno'])?$resouse_detail['resource_bank_accno']:''; ?>"  placeholder="Resource Bank Acc Number">
+									</div>
+										<div class="col-md-6">
+									<label> Resource Bank IFSC Code</label>
+										<input class="form-control" id="resource_ifsc_code" name="resource_ifsc_code" type="text" value="<?php echo isset($resouse_detail['resource_ifsc_code'])?$resouse_detail['resource_ifsc_code']:''; ?>"   placeholder="Resource Bank IFSC Code">
+									</div>
+									
+										<div class="col-md-6">
+									<label> Resource Upload Any document</label>
+										<input class="form-control" id="resource_other_document" name="resource_other_document" type="file"  placeholder="Resource Photo">
 									</div>
                               </div>
                            </div>
