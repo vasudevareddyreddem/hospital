@@ -657,7 +657,7 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=2){
 					$post=$this->input->post();
-					//echo '<pre>';print_r($post);
+					echo '<pre>';print_r($post);exit;
 					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){

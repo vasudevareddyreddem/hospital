@@ -68,10 +68,10 @@
 										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
 									</div>
 									<div class="col-sm-5">
-										<label> State</label>
+										<label> Zipcode</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Zipcode">
 									</div>
-									<div class="col-sm-10">
+									<div class="col-sm-5">
 										<label> Other Details</label>
 										<input class="form-control" id="resource_other_details" name="resource_other_details" value="" type="text" placeholder="Other Details">
 									</div>
