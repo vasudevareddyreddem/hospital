@@ -657,7 +657,7 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=2){
 					$post=$this->input->post();
-					echo '<pre>';print_r($_FILES);exit;
+					//echo '<pre>';print_r($_FILES);exit;
 					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
@@ -667,15 +667,21 @@ class Hospital extends CI_Controller {
 									if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 									$temp = explode(".", $_FILES["resource_photo"]["name"]);
 									$photo =round(microtime(true)) . '.' . end($temp);
-									move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/resourse_doc/" . $photo);
+									move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/adminprofilepic/" . $photo);
 									}else{
 									$photo='';
-									}if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
-									$temp = explode(".", $_FILES["resource_photo"]["name"]);
-									$photo =round(microtime(true)) . '.' . end($temp);
-									move_uploaded_file($_FILES['resource_photo']['tmp_name'], "assets/resourse_doc/" . $photo);
+									}if(isset($_FILES['resource_document']['name']) && $_FILES['resource_document']['name']!=''){
+									$temp = explode(".", $_FILES["resource_document"]["name"]);
+									$resource_document ='1'.round(microtime(true)) . '.' . end($temp);
+									move_uploaded_file($_FILES['resource_document']['tmp_name'], "assets/resourse_doc/" . $resource_document);
 									}else{
-									$photo='';
+									$resource_document='';
+									}if(isset($_FILES['resource_other_document']['name']) && $_FILES['resource_other_document']['name']!=''){
+									$temp = explode(".", $_FILES["resource_document"]["name"]);
+									$resource_other_document =round(microtime(true)) . '.' . end($temp);
+									move_uploaded_file($_FILES['resource_other_document']['tmp_name'], "assets/resourse_doc/" . $resource_other_document);
+									}else{
+									$resource_other_document='';
 									}
 									$admindetails=$this->session->userdata('userdetails');
 									$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
