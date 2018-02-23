@@ -84,10 +84,8 @@
                                                                 <a href="<?php echo base_url('hospital/treatmentstatus/'.base64_encode($list['t_id']).'/'.base64_encode($list['t_status'])); ?>">
                                                                     <i class="fa fa-edit"></i><?php if($list['t_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
-															<li>
-                                                                <a href="<?php echo base_url('hospital/treatmenteedit/'.base64_encode($list['t_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>Edit</a>
-                                                            </li>
+															
+															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['t_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/treatmentdelete/'.base64_encode($list['t_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
@@ -98,6 +96,34 @@
                                                     </div>
                                                 </td>
                                             </tr>
+											<div class="modal fade" id="foldersmallModalmove<?php echo $list['t_id']; ?>" tabindex="-1" role="dialog">
+										   <div class="modal-dialog modal-sm" role="document">
+											  <div class="modal-content">
+												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('hospital/treatmenteditpost'); ?>" method="post">
+													<?php $csrf = array(
+													   'name' => $this->security->get_csrf_token_name(),
+													   'hash' => $this->security->get_csrf_hash()
+													   ); ?>
+													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
+													<input type="hidden" name="treamentid" id="treamentid" value="<?php echo $list['t_id']; ?>" >
+													<div class="modal-header">
+														<h4 class="modal-title" id="smallModalLabel">Treament Rename</h4>
+													</div>
+													<div class="modal-body">
+														<div class="form-group">
+														<div class="form-line">
+														<input type="text" id="treatment_name" name="treatment_name" class="form-control" value="<?php echo htmlentities($list['t_name']);?>" />
+														</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="submit" class="btn btn-link waves-effect">Update </button>
+														<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+													</div>
+												 </form>
+											  </div>
+										   </div>
+										</div>
 										<?php } ?>
 											
                                             

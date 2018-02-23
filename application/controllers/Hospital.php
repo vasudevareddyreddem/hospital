@@ -1101,6 +1101,35 @@ class Hospital extends CI_Controller {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
+	}public function treatmenteditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+				$edittreatment_details=array(
+					't_name'=>$post['treatment_name'],
+					't_updated_at'=>date('Y-m-d H:i:s'),
+					);
+					//echo '<pre>';print_r($treatment_details);exit;
+				$editdata= $this->Hospital_model->update_treatment_details($post['treamentid'],$edittreatment_details);
+				if(count($editdata)>0){
+					$this->session->set_flashdata('success',"Treatment are successfully Updated");
+					redirect('hospital/addtreatment/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/addtreatment');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
 	}
 	public function treatmentdelete()
 	{
@@ -1178,30 +1207,7 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	public function emps(){
-		
-		
-		/*test*/
-		$this->zend->load('Zend/Barcode');
-		//generate barcode
-		
-		/*test*/
-		
-		$filename = $this->security->sanitize_filename($this->input->post('name'), TRUE);
-		$data=array('d_name'=>$filename);
-		$logindatasave = $this->Doctor_model->save_doctors($data);
-		
-		
-		
-		$file = Zend_Barcode::draw('code128', 'image', array('text' => $logindatasave), array());
-		$code = time().$logindatasave;
-		 $store_image1 = imagepng($file, $this->config->item('documentroot')."assets/barcodes/{$code}.png");
-			
-		$this->Doctor_model->update_doctors_details($logindatasave,$code);
-		//echo '<pre>';print_r($test);
-		
-		
-	}
+	
 	
 	
 	
