@@ -125,7 +125,7 @@
 														 <strong>Resource Designation</strong>
 														 </div>
 														<div class=" col-sm-6">
-														  <?php echo isset($resouse_detail['role_id'])?$resouse_detail['role_id']:''; ?>
+														 <?php if($resouse_detail['role_id']==3){ echo "Receptionist";}else if($resouse_detail['role_id']==4){ echo "Pharmacy";}else if($resouse_detail['role_id']==5){ echo "lab coordinator";}else if($resouse_detail['role_id']==6){ echo "Doctor";} ?>
 														 </div>
 													 </div>
 													</div><div class="col-md-6">

@@ -135,7 +135,7 @@
                               </div>
                            </div>
                            <div class="clearfix">&nbsp;</div>
-						   <div class="col-sm-10">
+						   <div class="col-sm-12">
                            <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Update Resource</button>
                            </div><div class="clearfix">&nbsp;</div>
                         </div>
