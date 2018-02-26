@@ -129,12 +129,16 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function get_all_lab_details_list($a_id,$hos_id){
-		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
-		$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
-		$this->db->where('treatmentwise_doctors.t_d_create_by',$a_id);
-		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
-		$this->db->where('treatmentwise_doctors.t_d_status !=',2);
+		$this->db->select('lab_detailes.l_id,lab_detailes.l_code,lab_detailes.l_name,lab_detailes.l_status,resource_list.resource_name')->from('lab_detailes');		
+		$this->db->join('resource_list', 'resource_list.r_id = lab_detailes.l_assistent_id', 'left');
+		$this->db->where('lab_detailes.l_create_by',$a_id);
+		$this->db->where('lab_detailes.hos_id',$hos_id);
+		$this->db->where('lab_detailes.l_status !=',2);
 		return $this->db->get()->result_array();
+	}
+	public function update_lab_details($l_id,$data){
+		$this->db->where('l_id',$l_id);
+    	return $this->db->update("lab_detailes",$data);
 	}
 	/*lab details*/
 

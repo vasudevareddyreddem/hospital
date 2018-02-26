@@ -89,12 +89,13 @@
                                         <tbody>
 										<?php foreach($labdetails_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['t_d_name']); ?></td>
+                                                <td><?php echo htmlentities($list['l_name']); ?></td>
+                                                <td><?php echo htmlentities($list['l_code']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
-												<td><?php if($list['t_d_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-                                                <td><a href="<?php echo base_url('hospital/addtreatmentstatus/'.base64_encode($list['t_d_id']).'/'.base64_encode($list['t_d_status'])); ?>">
-                                                                   <?php if($list['t_d_status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
-												<a href="<?php echo base_url('hospital/addtreatmentdeletes/'.base64_encode($list['t_d_id'])); ?>">Delete</a>
+												<td><?php if($list['l_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
+                                                <td><a href="<?php echo base_url('hospital/labdetailsstatus/'.base64_encode($list['l_id']).'/'.base64_encode($list['l_status'])); ?>">
+                                                                   <?php if($list['l_status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
+												<a href="<?php echo base_url('hospital/labdetailsdeletes/'.base64_encode($list['l_id'])); ?>">Delete</a>
                                                     
                                                           
                                                 </td>

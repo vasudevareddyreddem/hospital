@@ -1,4 +1,6 @@
+<?php include('header.php'); ?>
 
+<?php include('sidebar.php'); ?>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -24,33 +26,13 @@
                                 </div>
                                 <div class="card-body ">
 									<div class="row">
-										<div class="form-group col-md-3 card">
-									
-											<h3>Hospitals</h3>
-											<input class="form-control" id="myInput" type="text" placeholder="Search..">
-											<br>
-											<table class="table  ">
-											<tbody id="myTable">
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-												 <tr><td><a href="">Public Hospitals</a></td></tr>
-											
-												 
-												
-											</tbody>
-											</table>  
+										<div class=" col-md-2 ">
+												&nbsp;
 										</div>
-										<div class="col-md-9 chat-help">
+										<div class="col-md-8 chat-help">
 											<div class="panel ">
 												<div class="panel-heading bg-indigo">
-													<span class="glyphicon glyphicon-comment"></span> Hospital Name
+													<span class="glyphicon glyphicon-comment"></span> Software Support
 													<div class="btn-group pull-right">
 														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
 															<span class="fa fa-angle-down"> </span>
@@ -160,3 +142,4 @@ $(document).ready(function(){
   });
 });
 </script>
+<?php include('footer.php'); ?>

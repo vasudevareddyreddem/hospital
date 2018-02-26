@@ -16,6 +16,13 @@ class Admin extends CI_Controller {
 		$this->load->library('zend');
 		$this->load->model('Admin_model');
 		$this->load->library('zend');
+		if($this->session->userdata('userdetails'))
+			{
+			$admindetails=$this->session->userdata('userdetails');
+			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
+			$this->load->view('html/header',$data);
+			$this->load->view('html/sidebar',$data);
+			}
 		
 		}
 	public function index()
@@ -43,6 +50,38 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('loginerror',"Invalid Email Address or Password!");
 				redirect('admin');
 			}
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function chat()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$this->load->view('admin/softwaresupport');
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function gropchat()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$this->load->view('admin/hospitalchat');
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}public function announcement()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$this->load->view('admin/announcement');
+				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');

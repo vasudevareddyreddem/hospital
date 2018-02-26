@@ -1,4 +1,3 @@
-<?php include('header.php'); ?>
 <style>
 .dat-help .col-md-6{
 	       -webkit-box-flex: 0;
@@ -8,7 +7,6 @@
     max-width: 80%;
 }
 </style>
-<?php include('sidebar.php'); ?>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -154,4 +152,3 @@
 });
 
 	</script>
-<?php include('footer.php'); ?>

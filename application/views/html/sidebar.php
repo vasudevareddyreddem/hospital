@@ -57,26 +57,25 @@
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                         <ul class="sub-menu">
+	                            <ul class="sub-menu">
 	                                <li class="nav-item  ">
-	                                    <a href="hospitalchat.php" class="nav-link "> <span class="title">Hospitals</span>
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Resources </span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="groupchat.php" class="nav-link "> <span class="title">Group of Hospitals</span>
-	                                    </a>
-	                                </li> 
-									<li class="nav-item ">
-	                                    <a href="softwaresupport.php" class="nav-link "> <span class="title">Software Support</span>
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
 	                                    </a>
 	                                </li>
-	                                
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/chat'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    </a>
+	                                </li>
 	                            </ul>
 	                        </li>
 	                       
 							
 							<li class="nav-item  ">
-	                            <a  href="release_annou.php" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
@@ -117,6 +116,42 @@
 	                                    </a>
 	                                </li>
 	                                
+	                            </ul>
+	                        </li> 
+							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Chat</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Resources </span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/chat'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Release </span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <span class="title">Announcements to own hospital </span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <span class="title">Notifications to own hospital</span>
+	                                    </a>
+	                                </li>
 	                            </ul>
 	                        </li> 
 						<?php } ?>

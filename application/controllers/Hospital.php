@@ -1413,6 +1413,82 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function labdetailsstatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$lab_id=$this->uri->segment(3);
+					$status =base64_decode($this->uri->segment(4));
+					if($status ==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($lab_id!=''){
+						$stusdetails=array(
+							'l_status'=>$statu,
+							'l_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Hospital_model->update_lab_details(base64_decode($lab_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Lab Assistent successfully Deactivate.");
+								}else{
+									$this->session->set_flashdata('success',"Lab Assistent successfully Activate.");
+								}
+									redirect('hospital/labdetails/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/labdetails/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/labdetails/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function labdetailsdeletes()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$lab_id=$this->uri->segment(3);
+					if($lab_id!=''){
+						$deletdata=array(
+							'l_status'=>2,
+							'l_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$deletedata= $this->Hospital_model->update_lab_details(base64_decode($lab_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Lab Assistent successfully removed.");
+								redirect('hospital/labdetails/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('hospital/labdetails/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/labdetails/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	
