@@ -58,7 +58,11 @@ class Hospital_model extends CI_Model
 		$this->db->where('Resource_list.r_status !=',2);
 		return $this->db->get()->result_array();
 	}
-	
+	public function get_resourse_data($r_id){
+		$this->db->select('*')->from('resource_list');		
+		$this->db->where('a_id',$r_id);
+		return $this->db->get()->row_array();
+	}
 	/*resource*/
 	public function update_resourse_details($hos_id,$data){
 		$this->db->where('r_id',$hos_id);
@@ -141,5 +145,7 @@ class Hospital_model extends CI_Model
     	return $this->db->update("lab_detailes",$data);
 	}
 	/*lab details*/
+	
+	
 
 }

@@ -32,12 +32,13 @@ class Dashboard extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']==1){
 				$this->load->view('admin/dashboard');
-				$this->load->view('html/footer');
 			}else if($admindetails['role_id']==2){
 				$this->load->view('hospital/dashboard');
-				$this->load->view('html/footer');
-			}else{
+			}else if($admindetails['role_id']==3 || $admindetails['role_id']==4 || $admindetails['role_id']==5 || $admindetails['role_id']==6){
+				$this->load->view('hospital/resourcedashboard');
 			}
+			$this->load->view('html/footer');
+
 		}else{
 			$this->session->set_flashdata('loginerror','Please login to continue');
 			redirect('admin');

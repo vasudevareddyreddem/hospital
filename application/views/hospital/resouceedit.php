@@ -1,4 +1,4 @@
-<?php //echo '<pre>';print_r($resouse_detail);exit; ?>
+<?php //echo '<pre>';print_r($userdetails);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -6,12 +6,21 @@
             <div class=" pull-left">
                <div class="page-title">Edit Resourse Details</div>
             </div>
+		<?php if($userdetails['role_id']==2){ ?>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resource/'.base64_encode(1)); ?>">Resourse List</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
                <li class="active">Edit Resourse</li>
             </ol>
+		<?php }else if($userdetails['role_id']==3 ||$userdetails['role_id']==4 ||$userdetails['role_id']==5 ||$userdetails['role_id']==6){ ?>
+			<ol class="breadcrumb page-breadcrumb pull-right">
+               <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+               </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('profile'); ?>">profile</a>&nbsp;<i class="fa fa-angle-right"></i>
+               </li>
+               <li class="active">Edit  profile</li>
+            </ol>
+		<?php } ?>
          </div>
       </div>
 	   <?php if($this->session->flashdata('success')): ?>

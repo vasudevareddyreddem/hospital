@@ -37,11 +37,14 @@ class Profile extends CI_Controller {
 				}else if($admindetails['role_id']==2){
 					$data['hospital_details']= $this->Hospital_model->get_hospital_detailsfor_profile($admindetails['a_id']);
 					$this->load->view('admin/hospitalview',$data);
-					$this->load->view('html/footer');
-				}else{
-					
-				}
+				}else if($admindetails['role_id']==3 || $admindetails['role_id']==4 || $admindetails['role_id']==5 || $admindetails['role_id']==6){
+					$data['resouse_detail']= $this->Hospital_model->get_resourse_data($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/resourceprofile',$data);
 				
+				}
+				$this->load->view('html/footer');
+
 			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
