@@ -101,15 +101,19 @@
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Lab / Treatment </span>
-	                                    </a>
-	                                </li>
-	                                <li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/addtreatment'); ?>" class="nav-link "> <span class="title">Add Treatment </span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resource </span>
+	                                    </a>
+	                                </li>
+									<li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Lab / Treatment </span>
+	                                    </a>
+	                                </li>
+									<li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/labdetails'); ?>" class="nav-link "> <span class="title"> Lab Details </span>
 	                                    </a>
 	                                </li>
 	                                

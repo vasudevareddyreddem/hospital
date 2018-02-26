@@ -1335,6 +1335,84 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function labdetails()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['labassistents_list']=$this->Hospital_model->get_labassistents_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					$data['labdetails_list']=$this->Hospital_model->get_all_lab_details_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/labdetails',$data);
+					$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function tabdetailspost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$labdetails_list=array_combine($post['lab_code'],$post['lab_name']);
+				if(count($labdetails_list)>0){
+						//echo '<pre>';print_r($treamts_list);
+						$c=0;foreach($labdetails_list as $key=>$list){
+							$li[$c]['code']=$key;
+							$li[$c]['name']=$list;
+							$li[$c]['lab_assistent']=$post['lab_assistent'][$c];
+							
+						$c++;}
+						
+						foreach($li as $l){
+							$addlab_details=array(
+							'hos_id'=>$hos_ids['hos_id'],
+							'l_code'=>$l['code'],
+							'l_name'=>$l['name'],
+							'l_assistent_id'=>$l['lab_assistent'],
+							'l_status'=>1,
+							'l_create_at'=>date('Y-m-d H:i:s'),
+							'l_updated_at'=>date('Y-m-d H:i:s'),
+							'l_create_by'=>$hos_ids['a_id']
+							);
+							//echo '<pre>';print_r($addtreatment_details);
+							$labdetails = $this->Hospital_model->save_addlabdetails($addlab_details);
+						}
+						
+						if(count($labdetails)>0){
+							$this->session->set_flashdata('success',"Lab Details are successfully added");
+							redirect('hospital/labdetails/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('hospital/labdetails');
+						}
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/labdetails');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	

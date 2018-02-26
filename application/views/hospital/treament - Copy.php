@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Lab Details</div>
+               <div class="page-title">Treatments List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Lab Details</li>
+               <li class="active">Treatments List</li>
             </ol>
          </div>
       </div>
@@ -26,9 +26,9 @@
       <div class="panel tab-border card-topline-green">
          <header class="panel-heading panel-heading-gray custom-tab ">
             <ul class="nav nav-tabs">
-               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Lab Details </a>
+               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Treatments </a>
                </li>
-               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Lab Details List</a>
+               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Investigation</a>
                </li>
             </ul>
          </header>
@@ -39,17 +39,23 @@
                      <div class="col-md-12 ">
                         <div class="container">
                            <div class="control-group" id="fields">
-                              <label class="control-label" for="field1"><strong>Lab Details</strong></label>
+                              <label class="control-label" for="field1"><strong>Treatment Details</strong></label>
                               <div class="controls">
-                                 <form action="<?php echo base_url('hospital/tabdetailspost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
+                                 <form action="<?php echo base_url('hospital/treatmenaddtpost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-									   <input class="form-control" id="lab_code" name="lab_code[]" placeholder="Lab Code">&nbsp;
-									   <input class="form-control" id="lab_name" name="lab_name[]" placeholder="Lab Name">&nbsp;
-									    <select  class="form-control" id="lab_assistent" name="lab_assistent[]">
-									   <?php if(count($labassistents_list)>0){ ?>
-									   <option value="">Assign Lab Assistant</option>
-									   <?php foreach($labassistents_list as $list){ ?>
+									   <select  class="form-control" id="treatment_name" name="treatment_name[]">
+									   <?php if(count($treatment_list)>0){ ?>
+									   <option value="">Select</option>
+									   <?php foreach($treatment_list as $list){ ?>
+									   <option value="<?php echo $list['t_name']; ?>"><?php echo $list['t_name']; ?> </option>
+									   <?php } ?>
+									   <?php } ?>
+									   </select>&nbsp;
+									   <select  class="form-control" id="assign_doctor" name="assign_doctor[]">
+									   <?php if(count($doctors_list)>0){ ?>
+									   <option value="">Select</option>
+									   <?php foreach($doctors_list as $list){ ?>
 									   <option value="<?php echo $list['r_id']; ?>"><?php echo $list['resource_name']; ?> </option>
 									   <?php } ?>
 									   <?php } ?>
@@ -64,7 +70,7 @@
                                  <br>
 								 									
                               </div>
-							  <button type="submit" class="btn btn-sm btn-success">Add Lab details</button>
+							  <button type="submit" class="btn btn-sm btn-success">Add Prescription</button>
 
 								 </form>
                            </div>
@@ -75,19 +81,18 @@
                </div>
                <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
                   <div class="container">
-					<?php if(count($labdetails_list)>0){ ?>
+					<?php if(count($hospital_treatment_list)>0){ ?>
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Lab Name</th>
-												<th>Lab Code</th>
-												<th>Lab Assistent</th>
+												<th>Treatment Name</th>
+												<th>Doctor Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($labdetails_list as $list){ ?>
+										<?php foreach($hospital_treatment_list as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['t_d_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>

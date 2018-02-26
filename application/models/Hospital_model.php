@@ -114,5 +114,28 @@ class Hospital_model extends CI_Model
 	}
 	
 	/*add treament*/
+	/*lab details*/
+	public function get_labassistents_list($a_id,$hos_id){
+		$this->db->select('Resource_list.r_id,Resource_list.resource_name')->from('Resource_list');		
+		$this->db->where('Resource_list.r_create_by',$a_id);
+		$this->db->where('Resource_list.hos_id',$hos_id);
+		$this->db->where('Resource_list.r_status !=',2);
+		$this->db->where('Resource_list.r_status',1);
+		$this->db->where('Resource_list.role_id',5);
+		return $this->db->get()->result_array();
+	}
+	public function save_addlabdetails($data){
+		$this->db->insert('lab_detailes', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_all_lab_details_list($a_id,$hos_id){
+		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
+		$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->where('treatmentwise_doctors.t_d_create_by',$a_id);
+		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
+		$this->db->where('treatmentwise_doctors.t_d_status !=',2);
+		return $this->db->get()->result_array();
+	}
+	/*lab details*/
 
 }
