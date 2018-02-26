@@ -95,5 +95,20 @@ class Hospital_model extends CI_Model
     	return $this->db->update("treament",$data);
 	}
 	/*treatment*/
+	/*add treament*/
+		public function save_addtreatment($data){
+		$this->db->insert('treatmentwise_doctors', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+		public function get_all_doctor_treatment_list($a_id,$hos_id){
+		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status')->from('treatmentwise_doctors');		
+		$this->db->where('treatmentwise_doctors.r_create_by',$a_id);
+		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
+		$this->db->where('treatmentwise_doctors.r_status !=',2);
+		$this->db->where('treatmentwise_doctors.r_status',1);
+		$this->db->where('treatmentwise_doctors.role_id',6);
+		return $this->db->get()->result_array();
+	}
+	/*add treament*/
 
 }

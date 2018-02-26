@@ -13,28 +13,38 @@
             </ol>
          </div>
       </div>
+	   <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+				<?php endif; ?>
       <div class="panel tab-border card-topline-green">
          <header class="panel-heading panel-heading-gray custom-tab ">
             <ul class="nav nav-tabs">
-               <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Treatments </a>
+               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Treatments </a>
                </li>
-               <li class="nav-item"><a href="#about" data-toggle="tab">Investigation</a>
+               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Investigation</a>
                </li>
             </ul>
          </header>
          <div class="panel-body">
             <div class="tab-content">
-               <div class="tab-pane active" id="home">
+               <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
                   <div class="row">
                      <div class="col-md-12 ">
                         <div class="container">
                            <div class="control-group" id="fields">
                               <label class="control-label" for="field1"><strong>Treatment Details</strong></label>
                               <div class="controls">
-                                 <form role="form" autocomplete="off">
+                                 <form action="<?php echo base_url('hospital/treatmenaddtpost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-									   <select  class="form-control" id="treatment_name" name="treatment_name">
+									   <select  class="form-control" id="treatment_name" name="treatment_name[]">
 									   <?php if(count($treatment_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($treatment_list as $list){ ?>
@@ -42,7 +52,7 @@
 									   <?php } ?>
 									   <?php } ?>
 									   </select>&nbsp;
-									   <select  class="form-control" id="assign_doctor" name="assign_doctor">
+									   <select  class="form-control" id="assign_doctor" name="assign_doctor[]">
 									   <?php if(count($doctors_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($doctors_list as $list){ ?>
@@ -56,20 +66,20 @@
                                        </button>
                                        </span>
                                     </div>
-                                 </form>
+                                 
                                  <br>
+								 									
                               </div>
+							  <button type="submit" class="btn btn-sm btn-success">Add Prescription</button>
+
+								 </form>
                            </div>
                         </div>
-                        <div class="clearfix">&nbsp;</div>
-                        <button class="btn btn-sm btn-warning" type="button">Clear</button>
-                        <button class="btn btn-sm btn-info" type="button">View Prescription</button>
-                        <button class="btn btn-sm btn-success" type="button">Add Prescription</button>
                         <div class="clearfix">&nbsp;</div>
                      </div>
                   </div>
                </div>
-               <div class="tab-pane" id="about">
+               <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="about">
                   <div class="container">
                   </div>
                </div>
@@ -80,6 +90,7 @@
    </div>
 </div>
 <script>
+
    $(function() {
    $(".expand").on( "click", function() {
     // $(this).next().slideToggle(200);

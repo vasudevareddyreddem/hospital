@@ -832,9 +832,10 @@ class Hospital extends CI_Controller {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['treatment_list']=$this->Hospital_model->get_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
-					$data['doctors_list']=$this->Hospital_model->get_doctors_list($hos_ids['a_id'],$hos_ids['hos_id']);
-					//echo '<pre>';print_r($data);exit;
+					//$data['treatment_list']=$this->Hospital_model->get_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					//$data['doctors_list']=$this->Hospital_model->get_doctors_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					$data['hospital_treatment_list']=$this->Hospital_model->get_all_doctor_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					echo '<pre>';print_r($data);exit;
 					$this->load->view('hospital/treament',$data);
 					$this->load->view('html/footer');
 			}else{
@@ -1199,6 +1200,54 @@ class Hospital extends CI_Controller {
 						redirect('hospital/addtreatment/'.base64_encode(1));
 					}
 					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}public function treatmenaddtpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				//echo '<pre>';print_r($post);
+				$treamts_list=array_combine($post['treatment_name'],$post['assign_doctor']);
+				if(count($treamts_list)>0){
+				
+						//echo '<pre>';print_r($treamts_list);
+						foreach($treamts_list as $key=>$list){
+							//echo '<pre>';print_r($key);exit;
+							$addtreatment_details=array(
+							'hos_id'=>$hos_ids['hos_id'],
+							't_d_doc_id'=>$list,
+							't_d_name'=>$key,
+							't_d_status'=>1,
+							't_d_create_at'=>date('Y-m-d H:i:s'),
+							't_d_updated_at'=>date('Y-m-d H:i:s'),
+							't_d_create_by'=>$hos_ids['a_id']
+							);
+							//echo '<pre>';print_r($addtreatment_details);
+						$treatment = $this->Hospital_model->save_addtreatment($addtreatment_details);
+						}
+						if(count($treatment)>0){
+							$this->session->set_flashdata('success',"Treatment are successfully added");
+							redirect('hospital/treatment/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('hospital/treatment');
+						}
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/treatment');
+				}
+									
+				
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
