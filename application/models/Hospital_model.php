@@ -100,15 +100,19 @@ class Hospital_model extends CI_Model
 		$this->db->insert('treatmentwise_doctors', $data);
 		return $insert_id = $this->db->insert_id();
 	}
-		public function get_all_doctor_treatment_list($a_id,$hos_id){
-		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status')->from('treatmentwise_doctors');		
-		$this->db->where('treatmentwise_doctors.r_create_by',$a_id);
+	public function get_all_doctor_treatment_list($a_id,$hos_id){
+		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
+		$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->where('treatmentwise_doctors.t_d_create_by',$a_id);
 		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
-		$this->db->where('treatmentwise_doctors.r_status !=',2);
-		$this->db->where('treatmentwise_doctors.r_status',1);
-		$this->db->where('treatmentwise_doctors.role_id',6);
+		$this->db->where('treatmentwise_doctors.t_d_status !=',2);
 		return $this->db->get()->result_array();
 	}
+	public function update_addtreatment_details($t_d_id,$data){
+		$this->db->where('t_d_id',$t_d_id);
+    	return $this->db->update("treatmentwise_doctors",$data);
+	}
+	
 	/*add treament*/
 
 }

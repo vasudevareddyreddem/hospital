@@ -79,8 +79,37 @@
                      </div>
                   </div>
                </div>
-               <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="about">
+               <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
                   <div class="container">
+					<?php if(count($hospital_treatment_list)>0){ ?>
+                                    <table id="saveStage" class="display" style="width:100%;">
+                                        <thead>
+                                            <tr>
+												<th>Treatment Name</th>
+												<th>Doctor Name</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										<?php foreach($hospital_treatment_list as $list){ ?>
+                                            <tr>
+                                                <td><?php echo htmlentities($list['t_d_name']); ?></td>
+                                                <td><?php echo htmlentities($list['resource_name']); ?></td>
+												<td><?php if($list['t_d_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
+                                                <td><a href="<?php echo base_url('hospital/addtreatmentstatus/'.base64_encode($list['t_d_id']).'/'.base64_encode($list['t_d_status'])); ?>">
+                                                                   <?php if($list['t_d_status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
+												<a href="<?php echo base_url('hospital/addtreatmentdeletes/'.base64_encode($list['t_d_id'])); ?>">Delete</a>
+                                                    
+                                                          
+                                                </td>
+                                            </tr>
+										<?php } ?>
+											
+                                            
+                                        </tbody>
+                                    </table>
+								<?php } ?>
                   </div>
                </div>
             </div>
