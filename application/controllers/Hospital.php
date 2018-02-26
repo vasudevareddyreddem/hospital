@@ -871,8 +871,8 @@ class Hospital extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-			if($admindetails['role_id']=2){
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$resouse_detail= $this->Hospital_model->get_resourse_details($post['resource_id']);
 					
 					$resouse_email= $this->Hospital_model->get_resourse_details($post['resource_id']);
@@ -939,7 +939,11 @@ class Hospital extends CI_Controller {
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
+										if($admindetails['role_id']==2){
 										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
+										}else{
+											redirect('profile');
+										}
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
@@ -1008,7 +1012,11 @@ class Hospital extends CI_Controller {
 									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
+										if($admindetails['role_id']==2){
 										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
+										}else{
+											redirect('profile');
+										}
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
@@ -1017,10 +1025,7 @@ class Hospital extends CI_Controller {
 								
 						
 					
-			}else{
-					$this->session->set_flashdata('error',"You have no permission to access");
-					redirect('dashboard');
-			}
+			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

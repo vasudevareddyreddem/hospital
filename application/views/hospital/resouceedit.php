@@ -3,17 +3,21 @@
    <div class="page-content" >
       <div class="page-bar">
          <div class="page-title-breadcrumb">
-            <div class=" pull-left">
+           
+		<?php if($userdetails['role_id']==2){ ?>
+		 <div class=" pull-left">
                <div class="page-title">Edit Resourse Details</div>
             </div>
-		<?php if($userdetails['role_id']==2){ ?>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resource/'.base64_encode(1)); ?>">Resourse List</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
                <li class="active">Edit Resourse</li>
             </ol>
-		<?php }else if($userdetails['role_id']==3 ||$userdetails['role_id']==4 ||$userdetails['role_id']==5 ||$userdetails['role_id']==6){ ?>
+		<?php }elseif($userdetails['role_id']==3 ||$userdetails['role_id']==4 || $userdetails['role_id']==5 || $userdetails['role_id']==6){ ?>
+			 <div class=" pull-left">
+               <div class="page-title">Edit Profile Details</div>
+            </div>
 			<ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li> <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('profile'); ?>">profile</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -84,6 +88,7 @@
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" value="<?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>" placeholder="Resource Contact Number">
 									</div>
+									<?php if($userdetails['role_id']==2){ ?>
 									<div class="col-md-6">
 									<label> Resource Designation</label>
 									<select class="form-control" id="designation" name="designation">
@@ -95,6 +100,9 @@
 										
 									</select>
 									</div>
+									<?php }else{ ?>
+										<input type="hidden" id="designation" name="designation" value="<?php echo $resouse_detail['role_id']; ?>">
+									<?php }	 ?>	
 									<div class="col-md-6">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" value="<?php echo isset($resouse_detail['resource_email'])?$resouse_detail['resource_email']:''; ?>" type="text" placeholder="Resource Email ID">
