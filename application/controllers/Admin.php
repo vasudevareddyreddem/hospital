@@ -80,6 +80,8 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
+				$data['hospital_list']=$this->Admin_model->get_ll_Hospital_details();
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement');
 				$this->load->view('html/footer');
 		}else{

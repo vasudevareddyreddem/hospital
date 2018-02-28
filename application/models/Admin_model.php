@@ -39,6 +39,11 @@ class Admin_model extends CI_Model
 		$this->db->where('a_status', 1);
         return $this->db->get()->row_array();	
 	}
+	public function get_ll_Hospital_details(){
+		$this->db->select('hospital.hos_id,hospital.hos_bas_name')->from('hospital');		
+		$this->db->where('hos_status !=', 2);
+        return $this->db->get()->result_array();	
+	}
 
 
 }

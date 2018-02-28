@@ -1,10 +1,9 @@
+  <link href=" //cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
 <style>
-.dat-help .col-md-6{
-	       -webkit-box-flex: 0;
-    -webkit-flex: 0 0 50%;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 80%;
+
+table.dataTable.select tbody tr,
+table.dataTable thead th:first-child {
+  cursor: pointer;
 }
 </style>
 <div class="page-content-wrapper">
@@ -42,16 +41,44 @@
 											  <br>
 											  <h3>Announcements</h3>
 											 <textarea type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
-												<table id="example" class="display select " cellspacing="0" width="100%">
-												<thead>
-													  <tr>
-														 <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
-														 <th>Select All</th>
-														 
-													  </tr>
-												   </thead>
-												 
-												</table>	
+												<div class="card-body ">
+                                    <table id="saveStage" class="display" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                 <th><input name="select_all" value="1" type="checkbox"></th>
+                                                <th>HIN</th>
+												
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th></th>
+                                                <td>xxxxx Hospital</td>
+                                                
+                                            </tr>
+											<tr>
+                                                 <th></th>
+                                                <td>xxxxx Hospital</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                 <th></th>
+                                                <td>xxxxx Hospital</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                                  <th></th>
+                                                <td>xxxxx Hospital</td>
+                                                
+                                            </tr>
+											<tr>
+                                                 <th></th>
+                                                <td>xxxxx Hospital</td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>	
                                          </div>
 											 
 											  <div class="col-md-8 chat-help">
@@ -83,72 +110,142 @@
                 </div>
             </div>
 			<script>
-	$(document).ready(function (){   
+	//
+// Updates "Select all" control in a data table
+//
+function updateDataTableSelectAllCtrl(table){
+   var $table             = table.table().node();
+   var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
+   var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
+   var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+
+   // If none of the checkboxes are checked
+   if($chkbox_checked.length === 0){
+      chkbox_select_all.checked = false;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If all of the checkboxes are checked
+   } else if ($chkbox_checked.length === $chkbox_all.length){
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If some of the checkboxes are checked
+   } else {
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = true;
+      }
+   }
+}
+
+$(document).ready(function (){
+   // Array holding selected row IDs
+   var rows_selected = [];
    var table = $('#example').DataTable({
-      'ajax': 'https://api.myjson.com/bins/1us28',  
+      'ajax': {
+         'url': '/lab/articles/jquery-datatables-checkboxes/ids-arrays.txt'
+      },
       'columnDefs': [{
          'targets': 0,
-         'searchable':false,
-         'orderable':false,
+         'searchable': false,
+         'orderable': false,
+         'width': '1%',
          'className': 'dt-body-center',
          'render': function (data, type, full, meta){
-             return '<input type="checkbox" name="id[]" value="' 
-                + $('<div/>').text(data).html() + '">';
+             return '<input type="checkbox">';
          }
       }],
-      'order': [1, 'asc']
-   });
+      'order': [[1, 'asc']],
+      'rowCallback': function(row, data, dataIndex){
+         // Get row ID
+         var rowId = data[0];
 
-   // Handle click on "Select all" control
-   $('#example-select-all').on('click', function(){
-      // Check/uncheck all checkboxes in the table
-      var rows = table.rows({ 'search': 'applied' }).nodes();
-      $('input[type="checkbox"]', rows).prop('checked', this.checked);
-   });
-
-   // Handle click on checkbox to set state of "Select all" control
-   $('#example tbody').on('change', 'input[type="checkbox"]', function(){
-      // If checkbox is not checked
-      if(!this.checked){
-         var el = $('#example-select-all').get(0);
-         // If "Select all" control is checked and has 'indeterminate' property
-         if(el && el.checked && ('indeterminate' in el)){
-            // Set visual state of "Select all" control 
-            // as 'indeterminate'
-            el.indeterminate = true;
+         // If row ID is in the list of selected row IDs
+         if($.inArray(rowId, rows_selected) !== -1){
+            $(row).find('input[type="checkbox"]').prop('checked', true);
+            $(row).addClass('selected');
          }
       }
    });
-    
+
+   // Handle click on checkbox
+   $('#example tbody').on('click', 'input[type="checkbox"]', function(e){
+      var $row = $(this).closest('tr');
+
+      // Get row data
+      var data = table.row($row).data();
+
+      // Get row ID
+      var rowId = data[0];
+
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle click on table cells with checkboxes
+   $('#example').on('click', 'tbody td, thead th:first-child', function(e){
+      $(this).parent().find('input[type="checkbox"]').trigger('click');
+   });
+
+   // Handle click on "Select all" control
+   $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+      if(this.checked){
+         $('#example tbody input[type="checkbox"]:not(:checked)').trigger('click');
+      } else {
+         $('#example tbody input[type="checkbox"]:checked').trigger('click');
+      }
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle table draw event
+   table.on('draw', function(){
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+   });
+
+   // Handle form submission event
    $('#frm-example').on('submit', function(e){
       var form = this;
 
-      // Iterate over all checkboxes in the table
-      table.$('input[type="checkbox"]').each(function(){
-         // If checkbox doesn't exist in DOM
-         if(!$.contains(document, this)){
-            // If checkbox is checked
-            if(this.checked){
-               // Create a hidden element 
-               $(form).append(
-                  $('<input>')
-                     .attr('type', 'hidden')
-                     .attr('name', this.name)
-                     .val(this.value)
-               );
-            }
-         } 
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
       });
-
-      // FOR TESTING ONLY
-      
-      // Output form data to a console
-      $('#example-console').text($(form).serialize()); 
-      console.log("Form submission", $(form).serialize()); 
-       
-      // Prevent actual form submission
-      e.preventDefault();
    });
+
 });
 
 	</script>
