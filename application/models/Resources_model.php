@@ -37,6 +37,11 @@ class Resources_model extends CI_Model
 		$this->db->where('pid',$pid);
         return $this->db->get()->row_array();
 	}
+	public function get_paitent_document($pid){
+		$this->db->select('patients_list_1.patient_identifier')->from('patients_list_1');		
+		$this->db->where('pid',$pid);
+        return $this->db->get()->row_array();
+	}
 	/*lab details*/
 	
 	
