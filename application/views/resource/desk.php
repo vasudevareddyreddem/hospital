@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Rources List</div>
+               <div class="page-title">Front Desk</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Rources</li>
+               <li class="active">Front Desk</li>
             </ol>
          </div>
       </div>
@@ -18,9 +18,9 @@
                             <div class="panel tab-border card-topline-yellow">
                                 <header class="panel-heading panel-heading-gray custom-tab ">
                                     <ul class="nav nav-tabs">
-                                        <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Home</a>
+                                        <li class="nav-item"><a href="#home" data-toggle="tab" class="active">New-Registration</a>
                                         </li>
-                                        <li class="nav-item"><a href="#about" data-toggle="tab">About</a>
+                                        <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule-Registration</a>
                                         </li>
                                     </ul>
                                 </header>
@@ -34,86 +34,143 @@
 			<div class="col-md-3 col-sm-3 col-xs-3">
 				<ul class="nav nav-tabs tabs-left">
 					<li class="nav-item">
-						<a href="#tab_6_1" data-toggle="tab" class="active"> Home </a>
+						<a href="#tab_6_1" data-toggle="tab" class="<?php if(isset($tab) && $tab==1){ echo "active";}?>"> Basic Details </a>
 					</li>
-					<li class="nav-item">
-						<a href="#tab_6_2" data-toggle="tab"> Profile </a>
+					<li class="nav-item <?php if($tab==2){ echo "active";}?>">
+						<a href="#tab_6_2" data-toggle="tab" > Demographic </a>
 					</li>
 					
 					<li class="nav-item">
-						<a href="#tab_6_1" data-toggle="tab"> Settings </a>
+						<a href="#tab_6_3" data-toggle="tab"> Settings </a>
 					</li>
 					<li class="nav-item">
-						<a href="#tab_6_1" data-toggle="tab"> More </a>
+						<a href="#tab_6_4" data-toggle="tab"> More </a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-9">
 				<div class="tab-content">
-					<div class="tab-pane active" id="tab_6_1">
-						 <form class=" pad30 form-horizontal" action=" " method="post"  id="contact_form">
-                                        <div class="row">
+					<div class="tab-pane <?php if(isset($tab) && $tab==1){ echo "active";}?>" id="tab_6_1">
+						 <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
+                                        <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+										<div class="row">
 											 <div class="form-group col-md-6">
-											  <label >first Name</label>
-											  <input type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter Name" >
+											  <label for="email">Registration Type </label>
+												<select id="registrationtype" name="registrationtype" class="form-control" >
+													<option value="">Select</option>
+													<option value="New" <?php if($patient_detailes['registrationtype']=='New'){ echo "Selected"; } ?>>New</option>
+													<option value="Emergency" <?php if($patient_detailes['registrationtype']=='Emergency'){ echo "Selected"; } ?>>Emergency</option>
+													<option value="Temporary" <?php if($patient_detailes['registrationtype']=='Temporary'){ echo "Selected"; } ?>>Temporary</option>
+												</select>
 											</div>
 											<div class="form-group col-md-6">
-											  <label >Last Name</label>
-											  <input type="text" class="form-control"  name="last_name" id="last_name" placeholder="Enter Name" >
-											 
+											  <label for="email">Patient category</label>
+												<select id="patient_category" name="patient_category" class="form-control" >
+													<option value="">Select</option>
+													<option value="VIP" <?php if($patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
+													<option value="Pay Patient" <?php if($patient_detailes['patient_category']=='Pay Patient'){ echo "Selected"; } ?>>pay patient</option>
+													<option value="Staff" <?php if($patient_detailes['patient_category']=='Staff'){ echo "Selected"; } ?>>Staff</option>
+													<option value="Staff dependent" <?php if($patient_detailes['patient_category']=='Staff dependent'){ echo "Selected"; } ?>>Staff dependent</option>
+													<option value="Insurance" <?php if($patient_detailes['patient_category']=='Insurance'){ echo "Selected"; } ?>>Insurance</option>
+													<option value="Corporate" <?php if($patient_detailes['patient_category']=='Corporate'){ echo "Selected"; } ?>>Corporate</option>
+													<option value="Sponsor" <?php if($patient_detailes['patient_category']=='Sponsor'){ echo "Selected"; } ?>>Sponsor</option>
+													<option value="International cash" <?php if($patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
+												</select>
 											</div>
-<div class="form-group col-md-6">
-	<label class="">Date Picking</label>
-	<div class="input-group date form_date " data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-		<input class="form-control" size="16" type="text" value="">
-		<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-	</div>
-</div>
 											<div class="form-group col-md-6">
-											  <label for="email">Email</label>
-											  <input type="email" class="form-control"  placeholder="Enter email" >
+											  <label for="Name">Name</label>
+											  <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
 											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Mobile Number</label>
+											  <input type="text" class="form-control" id="mobile"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Email</label>
+											  <input type="email" class="form-control" id="email"  name="email" placeholder="Enter Email" value="<?php echo isset($patient_detailes['email'])?$patient_detailes['email']:''; ?>">
+											</div>
+											
+											<div class="form-group col-md-6">
+												<label class="">Date of Birth</label>
+												<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+													<input class="form-control" size="16" type="text" id="dob" name="dob" value="<?php echo isset($patient_detailes['dob'])?$patient_detailes['dob']:''; ?>">
+													<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Age</label>
+											  <input type="text" class="form-control" id="age"  name="age" placeholder="Enter Age" value="<?php echo isset($patient_detailes['age'])?$patient_detailes['age']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Blood Group</label>
+											  <input type="text" class="form-control" id="bloodgroup"  name="bloodgroup" placeholder="Enter Blood Group" value="<?php echo isset($patient_detailes['bloodgroup'])?$patient_detailes['bloodgroup']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Martial status</label>
+												<select id="martial_status" name="martial_status" class="form-control" >
+													<option value="">Select</option>
+													<option value="Single" <?php if($patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
+													<option value="Married" <?php if($patient_detailes['martial_status']=='Married'){ echo "Selected"; } ?>>Married</option>
+													<option value="Other"<?php if($patient_detailes['martial_status']=='Other'){ echo "Selected"; } ?>>Other</option>
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="text">National ID</label>
+											  <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Adhar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
+											</div>
+											
 											
 										
 										
 											<div class="form-group col-md-6">
-											  <label for="email">National ID</label>
-											  <input type="text" class="form-control"  placeholder="Adhar Id" >
+											  <label for="email"> Perment Address</label>
+											  <textarea type="textarea" id="perment_address" name="perment_address" name="" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
 											</div>
 											
-											
-										
-										
 											<div class="form-group col-md-6">
-											  <label for="email">Address1</label>
-											  <textarea type="textarea" class="form-control"  placeholder="Enter Address" ></textarea>
-											</div>
-											<div class="form-group col-md-6">
-											  <label for="email">Address2</label>
-											  <textarea type="textarea" class="form-control"  placeholder="Enter Address" ></textarea>
-											</div>
-											<div class="form-group col-md-6">
-											  <label for="email">Address3</label>
+											  <label for="email">Nationality</label>
 											  
 											 <div class="row">
-											 <div class="col-md-6">
-												<input type="text" class="form-control"  placeholder="Enter Zip Code" >
+												<div class="col-md-3 row">
+												<input type="text" id="p_c_name"name="p_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['p_c_name'])?$patient_detailes['p_c_name']:''; ?>">
+											 
+												</div>
+												<div class="col-md-3">
+												<input type="text" id="p_s_name" name="p_s_name"  class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['p_s_name'])?$patient_detailes['p_s_name']:''; ?>">
 											 </div>
-											 <div class="col-md-6 row">
-												<input type="text" class="form-control"  placeholder="Enter City" >
+											 <div class="col-md-3">
+												<input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Zip Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
+											 </div>
+											 
+											
+												<div class="col-md-3 row">
+												<input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>" >
 											 
 											</div>
 											</div>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="email">temp Address</label>
+											  <textarea type="textarea" id="temp_address" name="temp_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['temp_address'])?$patient_detailes['temp_address']:''; ?></textarea>
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="email">Nationality</label>
 											  
 											 <div class="row">
-											 <div class="col-md-6">
-												<input type="text" class="form-control"  placeholder=" Enter State" >
+											
+											 <div class="col-md-3 row">
+												<input type="text" id="t_c_name"name="t_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['t_c_name'])?$patient_detailes['t_c_name']:''; ?>">
+											 
+											</div>
+											<div class="col-md-3 row">
+												<input type="text" id="t_s_name"name="t_s_name" class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['t_s_name'])?$patient_detailes['t_s_name']:''; ?>">
+											 
+											</div>
+											 <div class="col-md-3">
+												<input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Zip Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
 											 </div>
-											 <div class="col-md-6 row">
-												<input type="text" class="form-control"  placeholder="Enter Country" >
+											<div class="col-md-3 row">
+												<input type="text" id="t_country_name" name="t_country_name" class="form-control" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>"  placeholder="Country" >
 											 
 											</div>
 											</div>
@@ -123,8 +180,20 @@
 										<button class="btn btn-praimry " type="submit">Submit</button>
                                     </form>
 					</div>
-					<div class="tab-pane fade" id="tab_6_2">
-						<p>Doming conclusionemque sed ex, invenire ocurreret dissentiet his no. Ius cu novum assueverit, eam ex dolor molestiae theophrastus. Ex sed alii dolorum, et vis impetus expetendis dissentiunt. Vim ad soluta admodum tibique, inermis salutandi at mei, mutat nominati eos id. Id aeque iudico sit, eros adolescens est te.</p>
+					<div class="tab-pane <?php if(isset($tab) && $tab==2){ echo "active";}?>" id="tab_6_2">
+						 <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/demographic'); ?> " method="post"  id="demographic">
+								<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+								<div class="row">
+											<div class="form-group col-md-6">
+											  <label for="Name">Religion</label>
+											  <input type="text" class="form-control" id="religion"  name="religion"  value="<?php echo isset($patient_detailes['religion'])?$patient_detailes['religion']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Caste</label>
+											  <input type="text" class="form-control" id="caste"  name="caste"  value="<?php echo isset($patient_detailes['caste'])?$patient_detailes['caste']:''; ?>">
+											</div>
+								</div>
+						</form>
 					</div>
 					<div class="tab-pane fade" id="tab_6_3">
 						<p>Most of its text is made up from sections 1.10.32–3 of Cicero's De finibus bonorum et malorum (On the Boundaries of Goods and Evils; finibus may also be translated as purposes).</p>
@@ -256,100 +325,226 @@
 </div>
 <script>
 	$(document).ready(function() {
-    $('#contact_form').bootstrapValidator({
+    $('#basic_details').bootstrapValidator({
         
         fields: {
-            first_name: {
+            registrationtype: {
                 validators: {
-                        stringLength: {
-                        min: 2,
-                    },
-                        notEmpty: {
-                        message: 'Please supply your first name'
+                      notEmpty: {
+                        message: 'Please select Registration Type '
                     }
                 }
             },
-             last_name: {
+			patient_category: {
                 validators: {
-                     stringLength: {
-                        min: 2,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your last name'
+                      notEmpty: {
+                        message: 'Please select Patient category '
                     }
                 }
+            },
+             name: {
+                 validators: {
+					notEmpty: {
+						message: 'Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Name can only consist of alphanumaric, space and dot'
+					}
+				}
             },
             email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your email address'
-                    },
-                    emailAddress: {
-                        message: 'Please supply a valid email address'
+               validators: {
+					notEmpty: {
+						message: 'Email is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+					message: 'Please enter a valid email address. For example johndoe@domain.com.'
+					}
+				}
+            },
+            mobile: {
+                 validators: {
+					notEmpty: {
+						message: 'Mobile Number is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,14}$/,
+					message:'Mobile Number must be 10 to 14 digits'
+					}
+				
+				}
+            },
+			age: {
+                 validators: {
+					notEmpty: {
+						message: 'Age is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{2}$/,
+					message:'Mobile Number must be 10 to 14 digits'
+					}
+				
+				}
+            },
+			bloodgroup: {
+                 validators: {
+					notEmpty: {
+						message: 'Blood group is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Blood group can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			martial_status: {
+                 validators: {
+					 notEmpty: {
+                        message: 'Please select Martial status'
                     }
+				
+				}
+            },
+            nationali_id: {
+                 validators: {
+					notEmpty: {
+						message: 'National ID is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,16}$/,
+					message:'National ID must be 10 to 14 digits'
+					}
+				
+				}
+            }, 
+			perment_address: {
+                validators: {
+					notEmpty: {
+						message: 'Address is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address wont allow <> [] = % '
+					}
                 }
             },
-            phone: {
+            p_c_name: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please supply your phone number'
+					notEmpty: {
+						message: 'City is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'City can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            },
+            p_country_name: {
+                validators: {
+					notEmpty: {
+						message: 'Country is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Country can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            },
+			p_s_name: {
+                validators: {
+					notEmpty: {
+						message: 'State is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'State can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            },
+            p_zipcode: {
+                 validators: {
+					notEmpty: {
+						message: 'Zipcode is required'
+					},
+					stringLength: {
+                        max: 6,
+                        message: 'Zipcode  must be less than 10 characters'
                     },
-                    phone: {
-                        country: 'US',
-                        message: 'Please supply a vaild phone number with area code'
-                    }
+					regexp: {
+					// regexp: /^[0-9A-Za-z ]{5,10}$/,
+					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
+					message: 'Zipcode is not valid, Should be like 32216.'
+					}
+				}
+            },
+			temp_address: {
+                validators: {
+					notEmpty: {
+						message: 'Address is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address wont allow <> [] = % '
+					}
                 }
             },
-            address: {
+			t_c_name: {
                 validators: {
-                     stringLength: {
-                        min: 8,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your street address'
-                    }
-                }
+					notEmpty: {
+						message: 'City is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'City can only consist of alphanumaric, space and dot'
+					}
+				
+				}
             },
-            city: {
+			t_s_name: {
                 validators: {
-                     stringLength: {
-                        min: 4,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your city'
-                    }
-                }
+					notEmpty: {
+						message: 'State is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'State can only consist of alphanumaric, space and dot'
+					}
+				
+				}
             },
-            state: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your state'
-                    }
-                }
-            },
-            zip: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your zip code'
+			t_zipcode: {
+              validators: {
+					notEmpty: {
+						message: 'Zipcode is required'
+					},
+					stringLength: {
+                        max: 6,
+                        message: 'Zipcode  must be less than 10 characters'
                     },
-                    zipCode: {
-                        country: 'US',
-                        message: 'Please supply a vaild zip code'
-                    }
-                }
+					regexp: {
+					// regexp: /^[0-9A-Za-z ]{5,10}$/,
+					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
+					message: 'Zipcode is not valid, Should be like 32216.'
+					}
+				}
             },
-            comment: {
+			t_country_name: {
                 validators: {
-                      stringLength: {
-                        min: 10,
-                        max: 200,
-                        message:'Please enter at least 10 characters and no more than 200'
-                    },
-                    notEmpty: {
-                        message: 'Please supply a description of your project'
-                    }
-                    }
-                }
+					notEmpty: {
+						message: 'Country is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Country can only consist of alphanumaric, space and dot'
+					}
+				
+				}
+            }
             }
         })
      
