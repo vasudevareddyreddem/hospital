@@ -192,6 +192,69 @@
 											  <label for="Name">Caste</label>
 											  <input type="text" class="form-control" id="caste"  name="caste"  value="<?php echo isset($patient_detailes['caste'])?$patient_detailes['caste']:''; ?>">
 											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Mothers maiden name</label>
+											  <input type="text" class="form-control" id="mothername"  name="mothername"  value="<?php echo isset($patient_detailes['mothername'])?$patient_detailes['mothername']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Language</label>
+												<select id="language" name="language" class="form-control" >
+													<option value="">Select</option>
+													<option value="Telugu" <?php if($patient_detailes['language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if($patient_detailes['language']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if($patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Primary language</label>
+												<select id="primarylanguage" name="primarylanguage" class="form-control" >
+													<option value="">Select</option>
+													<option value="Telugu" <?php if($patient_detailes['primarylanguage']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if($patient_detailes['primarylanguage']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if($patient_detailes['primarylanguage']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Preferred language</label>
+												<select id="preferred_language" name="preferred_language" class="form-control" >
+													<option value="">Select</option>
+													<option value="Telugu" <?php if($patient_detailes['preferred_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if($patient_detailes['preferred_language']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if($patient_detailes['preferred_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Occupation</label>
+											  <input type="text" class="form-control" id="occupation"  name="occupation"  value="<?php echo isset($patient_detailes['occupation'])?$patient_detailes['occupation']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Education</label>
+											  <input type="text" class="form-control" id="education"  name="education"  value="<?php echo isset($patient_detailes['education'])?$patient_detailes['education']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Birth place</label>
+											  <input type="text" class="form-control" id="birth_place"  name="birth_place"  value="<?php echo isset($patient_detailes['birth_place'])?$patient_detailes['birth_place']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Work phone</label>
+											  <input type="text" class="form-control" id="work_phone"  name="work_phone"  value="<?php echo isset($patient_detailes['work_phone'])?$patient_detailes['work_phone']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Home phone</label>
+											  <input type="text" class="form-control" id="home_phone"  name="home_phone"  value="<?php echo isset($patient_detailes['home_phone'])?$patient_detailes['home_phone']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Senior citizen proof?</label>
+												<select id="citizen_proof" name="citizen_proof" class="form-control" >
+													<option value="">Select</option>
+													<option value="Yes" <?php if($patient_detailes['citizen_proof']=='Yes'){ echo "Selected"; } ?>>Yes</option>
+													<option value="No" <?php if($patient_detailes['citizen_proof']=='No'){ echo "Selected"; } ?>>No</option>
+												</select>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="Name">Patient identifier</label>
+											  <input type="file" class="form-control" id="patient_identifier"  name="patient_identifier"  value="">
+											</div>
 								</div>
 						</form>
 					</div>
@@ -325,6 +388,146 @@
 </div>
 <script>
 	$(document).ready(function() {
+    $('#demographic').bootstrapValidator({
+        
+        fields: {
+          
+             religion: {
+                 validators: {
+					notEmpty: {
+						message: 'Religion is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Religion can only consist of alphanumaric, space and dot'
+					}
+				}
+            },caste: {
+                 validators: {
+					notEmpty: {
+						message: 'Caste is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Caste can only consist of alphanumaric, space and dot'
+					}
+				}
+            },mothername: {
+                 validators: {
+					notEmpty: {
+						message: 'Mother name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Mother name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+            language: {
+               validators: {
+					notEmpty: {
+						message: 'Language is required'
+					}
+				}
+            },primarylanguage: {
+               validators: {
+					notEmpty: {
+						message: 'Primary Language is required'
+					}
+				}
+            },preferred_language: {
+               validators: {
+					notEmpty: {
+						message: 'Preferred Language is required'
+					}
+				}
+            },
+            occupation: {
+                validators: {
+					notEmpty: {
+						message: 'Occupation is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Occupation  can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			education: {
+                validators: {
+					notEmpty: {
+						message: 'Education is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Education  can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			birth_place: {
+                validators: {
+					notEmpty: {
+						message: 'Birth place is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Birth place  can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			work_phone: {
+                validators: {
+					notEmpty: {
+						message: 'Work phone is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,14}$/,
+					message:'Work Phone must be 10 to 14 digits'
+					}
+				}
+            },home_phone: {
+                validators: {
+					notEmpty: {
+						message: 'Home phone is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10,14}$/,
+					message:'Home Phone must be 10 to 14 digits'
+					}
+				}
+            },
+			
+			bloodgroup: {
+                 validators: {
+					notEmpty: {
+						message: 'Blood group is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Blood group can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			citizen_proof: {
+                 validators: {
+					 notEmpty: {
+                        message: 'Please select Senior citizen proof'
+                    }
+				
+				}
+            },
+            patient_identifier: {
+                 validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls|png|jpeg|jpg)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf,png,jpeg,jpg files are allowed'
+					}
+            }
+            }
+        })
+     
+});
+$(document).ready(function() {
     $('#basic_details').bootstrapValidator({
         
         fields: {
