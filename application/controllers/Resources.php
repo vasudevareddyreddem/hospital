@@ -38,7 +38,7 @@ class Resources extends CI_Controller {
 						$data['pid']= base64_decode($this->uri->segment(3));
 					}else{
 						$data['patient_detailes']=array();
-						$data['tab']='';
+						$data['tab']=1;
 						 $data['pid']='';
 					}
 					
