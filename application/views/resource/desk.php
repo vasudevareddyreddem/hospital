@@ -124,7 +124,7 @@
 										
 											<div class="form-group col-md-6">
 											  <label for="email"> Perment Address</label>
-											  <textarea type="textarea" id="perment_address" name="perment_address" name="" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
+											  <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
 											</div>
 											
 											<div class="form-group col-md-6">
@@ -132,7 +132,7 @@
 											  
 											 <div class="row">
 												<div class="col-md-3 row">
-												<input type="text" id="p_c_name"name="p_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['p_c_name'])?$patient_detailes['p_c_name']:''; ?>">
+												<input type="text" id="p_c_name" name="p_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['p_c_name'])?$patient_detailes['p_c_name']:''; ?>">
 											 
 												</div>
 												<div class="col-md-3">
@@ -159,11 +159,11 @@
 											 <div class="row">
 											
 											 <div class="col-md-3 row">
-												<input type="text" id="t_c_name"name="t_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['t_c_name'])?$patient_detailes['t_c_name']:''; ?>">
+												<input type="text" id="t_c_name" name="t_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['t_c_name'])?$patient_detailes['t_c_name']:''; ?>">
 											 
 											</div>
 											<div class="col-md-3 row">
-												<input type="text" id="t_s_name"name="t_s_name" class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['t_s_name'])?$patient_detailes['t_s_name']:''; ?>">
+												<input type="text" id="t_s_name" name="t_s_name" class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['t_s_name'])?$patient_detailes['t_s_name']:''; ?>">
 											 
 											</div>
 											 <div class="col-md-3">
@@ -181,7 +181,7 @@
                                     </form>
 					</div>
 					<div class="tab-pane <?php if(isset($tab) && $tab==2){ echo "active";}?>" id="tab_6_2">
-						 <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/demographic'); ?> " method="post"  id="demographic">
+						 <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/demographic'); ?> " method="post"  id="demographic" name="demographic">
 								<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
 								<div class="row">
 											<div class="form-group col-md-6">
@@ -256,6 +256,8 @@
 											  <input type="file" class="form-control" id="patient_identifier"  name="patient_identifier"  value="">
 											</div>
 								</div>
+							<button class="btn btn-praimry " type="submit">Submit</button>
+
 						</form>
 					</div>
 					<div class="tab-pane fade" id="tab_6_3">
