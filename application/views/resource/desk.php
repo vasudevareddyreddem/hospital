@@ -478,6 +478,12 @@
 							<button class="btn btn-praimry " type="submit">Submit</button>
 						</form>
 						</div>
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>
 					
                                         <div class="tab-pane" id="about">
                                             <div class="card card-topline-red">
