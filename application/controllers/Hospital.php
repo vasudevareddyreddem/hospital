@@ -1382,18 +1382,20 @@ class Hospital extends CI_Controller {
 						$c++;}
 						
 						foreach($li as $l){
-							$addlab_details=array(
-							'hos_id'=>$hos_ids['hos_id'],
-							'l_code'=>$l['code'],
-							'l_name'=>$l['name'],
-							'l_assistent_id'=>$l['lab_assistent'],
-							'l_status'=>1,
-							'l_create_at'=>date('Y-m-d H:i:s'),
-							'l_updated_at'=>date('Y-m-d H:i:s'),
-							'l_create_by'=>$hos_ids['a_id']
-							);
-							//echo '<pre>';print_r($addtreatment_details);
-							$labdetails = $this->Hospital_model->save_addlabdetails($addlab_details);
+							if($l['code']!='' && $l['name']!='' && $l['lab_assistent']!=''){
+								$addlab_details=array(
+								'hos_id'=>$hos_ids['hos_id'],
+								'l_code'=>$l['code'],
+								'l_name'=>$l['name'],
+								'l_assistent_id'=>$l['lab_assistent'],
+								'l_status'=>1,
+								'l_create_at'=>date('Y-m-d H:i:s'),
+								'l_updated_at'=>date('Y-m-d H:i:s'),
+								'l_create_by'=>$hos_ids['a_id']
+								);
+								//echo '<pre>';print_r($addtreatment_details);
+								$labdetails = $this->Hospital_model->save_addlabdetails($addlab_details);
+							}
 						}
 						
 						if(count($labdetails)>0){

@@ -154,6 +154,45 @@
 	                                </li>
 	                            </ul>
 	                        </li> 
+						<?php } else if($userdetails['role_id']==3){ ?>
+						 <li class="nav-item start ">
+	                            <a href="<?php echo base_url('resources/desk');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Front desk</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
+	                        </li>  
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Patient Registration Database </span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
+	                        </li> 
+							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Chat</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Resources </span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/chat'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
 						<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>

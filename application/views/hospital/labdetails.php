@@ -41,7 +41,7 @@
                            <div class="control-group" id="fields">
                               <label class="control-label" for="field1"><strong>Lab Details</strong></label>
                               <div class="controls">
-                                 <form action="<?php echo base_url('hospital/tabdetailspost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
+                                 <form action="<?php echo base_url('hospital/tabdetailspost'); ?>" method="POST" id="labdetailsform" name="labdetailsform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
 									   <input class="form-control" id="lab_code" name="lab_code[]" placeholder="Lab Code">&nbsp;
@@ -115,7 +115,43 @@
    </div>
 </div>
 <script>
-
+$(document).ready(function() {
+    $('#labdetailsform1').bootstrapValidator({
+        
+        fields: {
+            
+            'lab_code[]': {
+                 validators: {
+					notEmpty: {
+						message: 'Lab Code is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Lab Code can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			 'lab_name[]': {
+                validators: {
+					notEmpty: {
+						message: 'Lab Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Lab Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },'lab_assistent[]': {
+                 validators: {
+					notEmpty: {
+						message: 'Lab Assistent is required'
+					}
+				}
+            }
+            }
+        })
+     
+});
    $(function() {
    $(".expand").on( "click", function() {
     // $(this).next().slideToggle(200);
