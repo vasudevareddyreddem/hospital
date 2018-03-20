@@ -489,36 +489,59 @@
 						</div>
 						
 						<div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_8">
-						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
+						<div class="col-md-12">
+							 <div class="panel tab-border card-topline-green">
+							  <header class="panel-heading panel-heading-gray custom-tab ">
+							   <ul class="nav nav-tabs">
+								<li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==''){ echo "active";}?>" href="#subtab1" data-toggle="tab" >Visit info</a>
+								</li>
+								<li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==2){ echo "active";}?>" href="#subtab2" data-toggle="tab">Order</a>
+								</li>
+								<li class="nav-item"><a class="<?php if(isset($subtab) && $subtab==3){ echo "active";}?>" href="#subtab3" data-toggle="tab">Bills</a>
+								</li>
+								<li class="nav-item"><a class=" <?php if(isset($subtab) && $subtab==4){ echo "active";}?>" href="#subtab4" data-toggle="tab">payer auth</a>
+								</li>
+							   </ul>
+							  </header>
+							  <div class="panel-body">
+							   <div class="tab-content">
+								<div class="tab-pane <?php if(isset($subtab) && $subtab==''){ echo "active";}?>" id="subtab1">
+							<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/economicdetails'); ?> " method="post"  id="economicdetails">
 							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
 							<div class="row">
-								<div class="form-group col-md-6">
-								  <label for="Name">Living dependency</label>
-								  <input type="text" class="form-control" id="dependency"  name="dependency"  value="<?php echo isset($patient_detailes['dependency'])?$patient_detailes['dependency']:''; ?>">
-								</div>
-								<div class="form-group col-md-6">
-								  <label for="Name">Living arrangement</label>
-								  <input type="text" class="form-control" id="arrangement"  name="arrangement"  value="<?php echo isset($patient_detailes['arrangement'])?$patient_detailes['arrangement']:''; ?>">
-								</div>
-								<div class="form-group col-md-6">
-								  <label for="Name">Income group</label>
-								  <input type="text" class="form-control" id="incomegroup"  name="incomegroup"  value="<?php echo isset($patient_detailes['incomegroup'])?$patient_detailes['incomegroup']:''; ?>">
-								</div>
-								<div class="form-group col-md-6">
-								  <label for="Name">Description</label>
-								  <input type="text" class="form-control" id="description"  name="description"  value="<?php echo isset($patient_detailes['description'])?$patient_detailes['description']:''; ?>">
-								</div>
-								<div class="form-group col-md-6">
-								  <label for="Name">Confidential?</label>
-								  <input type="text" class="form-control" id="confidential"  name="confidential"  value="<?php echo isset($patient_detailes['confidential'])?$patient_detailes['confidential']:''; ?>">
-								</div>
-								<div class="form-group col-md-6">
-								  <label for="Name">Student?</label>
-								  <input type="text" class="form-control" id="student"  name="student"  value="<?php echo isset($patient_detailes['student'])?$patient_detailes['student']:''; ?>">
-								</div>
-							</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Visit Number</label>
+											  <input type="text" class="form-control" id="visit_no"  name="visit_no" placeholder="Enter Email" value="<?php echo isset($patient_detailes['visit_no'])?$patient_detailes['visit_no']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="email"> Visit description</label>
+											  <textarea type="textarea" id="visit_desc" name="visit_desc" class="form-control"  placeholder=" Visit description" ><?php echo isset($patient_detailes['visit_desc'])?$patient_detailes['visit_desc']:''; ?></textarea>
+											</div>
+											
+											<div class="form-group col-md-6">
+												<label class="">Date of visit</label>
+												<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+													<input class="form-control" size="16" type="text" id="date_of_visit" name="date_of_visit" value="<?php echo isset($patient_detailes['date_of_visit'])?$patient_detailes['date_of_visit']:''; ?>">
+													<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+												</div>
+											</div>
+												</div>
 							<button class="btn btn-praimry " type="submit">Submit</button>
 						</form>
+								</div>
+								<div class="tab-pane <?php if(isset($subtab) && $subtab==2){ echo "active";}?>" id="subtab2">
+								 <p>second</p>
+								</div>
+								<div class="tab-pane <?php if(isset($subtab) && $subtab==3){ echo "active";}?>" id="subtab3">
+								 <p>third</p>
+								</div>
+								<div class="tab-pane <?php if(isset($subtab) && $subtab==4){ echo "active";}?>" id="subtab4">
+								 <p>fourth</p>
+								</div>
+							   </div>
+							  </div>
+							 </div>
+							</div>
 						</div>
 						
 						<div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_9">

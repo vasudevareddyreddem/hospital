@@ -39,6 +39,8 @@ class Resources extends CI_Controller {
 						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
 						$data['tab']= base64_decode($this->uri->segment(4));
 						$data['pid']= base64_decode($this->uri->segment(3));
+						$data['subtab']=base64_decode($this->uri->segment(5));
+					
 					}else{
 						$data['patient_detailes']=array();
 						$data['tab']=1;
