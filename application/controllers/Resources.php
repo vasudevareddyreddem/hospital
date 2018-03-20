@@ -30,7 +30,10 @@ class Resources extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=3){
-					//$data['hospital_list']= $this->Hospital_model->get_hospital_list_details();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patients_list']= $this->Resources_model->get_all_patients_lists($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit; 
 					$patient_id= base64_decode($this->uri->segment(3));
 					if(isset($patient_id) && $patient_id!=''){
 						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);

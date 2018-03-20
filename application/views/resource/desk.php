@@ -55,6 +55,15 @@
 					<li class="nav-item  <?php if( isset($tab) && $tab==7){ echo "active";}?>">
 						<a href="#tab_6_7" data-toggle="tab"> Socio- economic details </a>
 					</li>
+					<li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
+						<a href="#tab_6_8" data-toggle="tab"> Billing </a>
+					</li>
+					<li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
+						<a href="#tab_6_9" data-toggle="tab"> Vitals </a>
+					</li>
+					<li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
+						<a href="#tab_6_10" data-toggle="tab"> Billing </a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-md-9 col-sm-9 col-xs-9">
@@ -478,6 +487,63 @@
 							<button class="btn btn-praimry " type="submit">Submit</button>
 						</form>
 						</div>
+						
+						<div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_8">
+						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
+							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+							<div class="row">
+								<div class="form-group col-md-6">
+								  <label for="Name">Living dependency</label>
+								  <input type="text" class="form-control" id="dependency"  name="dependency"  value="<?php echo isset($patient_detailes['dependency'])?$patient_detailes['dependency']:''; ?>">
+								</div>
+								<div class="form-group col-md-6">
+								  <label for="Name">Living arrangement</label>
+								  <input type="text" class="form-control" id="arrangement"  name="arrangement"  value="<?php echo isset($patient_detailes['arrangement'])?$patient_detailes['arrangement']:''; ?>">
+								</div>
+								<div class="form-group col-md-6">
+								  <label for="Name">Income group</label>
+								  <input type="text" class="form-control" id="incomegroup"  name="incomegroup"  value="<?php echo isset($patient_detailes['incomegroup'])?$patient_detailes['incomegroup']:''; ?>">
+								</div>
+								<div class="form-group col-md-6">
+								  <label for="Name">Description</label>
+								  <input type="text" class="form-control" id="description"  name="description"  value="<?php echo isset($patient_detailes['description'])?$patient_detailes['description']:''; ?>">
+								</div>
+								<div class="form-group col-md-6">
+								  <label for="Name">Confidential?</label>
+								  <input type="text" class="form-control" id="confidential"  name="confidential"  value="<?php echo isset($patient_detailes['confidential'])?$patient_detailes['confidential']:''; ?>">
+								</div>
+								<div class="form-group col-md-6">
+								  <label for="Name">Student?</label>
+								  <input type="text" class="form-control" id="student"  name="student"  value="<?php echo isset($patient_detailes['student'])?$patient_detailes['student']:''; ?>">
+								</div>
+							</div>
+							<button class="btn btn-praimry " type="submit">Submit</button>
+						</form>
+						</div>
+						
+						<div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_9">
+						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
+							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+							<div class="row">
+								Step 9
+							</div>
+							<button class="btn btn-praimry " type="submit">Submit</button>
+						</form>
+						</div>
+						
+						
+						<div class="tab-pane <?php if(isset($tab) && $tab==10){ echo "active";}?>" id="tab_6_10">
+						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
+							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+							<div class="row">
+								step 10
+							</div>
+							<button class="btn btn-praimry " type="submit">Submit</button>
+						</form>
+						</div>
+						
+						
+						<!-- end-->
 						</div>
 						</div>
 						</div>
@@ -488,7 +554,7 @@
                                         <div class="tab-pane" id="about">
                                             <div class="card card-topline-red">
 	<div class="card-head">
-		<header>MANAGED TABLE</header>
+		<header>Patients List</header>
 		<div class="tools">
 			<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
 			<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -496,27 +562,33 @@
 		</div>
 	</div>
 	<div class="card-body ">
+	<?php if(isset($patients_list) && count($patients_list)>0){ ?>
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>
 				<tr>
-					<th> Username </th>
-					<th> Email </th>
-					<th> Status </th>
-					<th> Joined </th>
-					<th> Actions </th>
+					<th> Patient Id </th>
+					<th> Name </th>
+					<th> Type </th>
+					<th> category </th>
+					<th> Age </th>
+					<th> Mobile </th>
+					<th> Action </th>
 				</tr>
 			</thead>
 			<tbody>
+			<?php foreach($patients_list as $list){ ?>
 				<tr class="odd gradeX">
 					
-					<td> shuxer </td>
+					<td> <?php echo $list['pid']; ?> </td>
 					<td>
-						<a href="mailto:shuxer@gmail.com"> shuxer@gmail.com </a>
+						<?php echo $list['name']; ?>
 					</td>
 					<td>
-						<span class="label label-sm label-success"> Approved </span>
+						<?php echo $list['registrationtype']; ?>
 					</td>
-					<td> 12 Jan 2012 </td>
+					<td><?php echo $list['patient_category']; ?> </td>
+					<td><?php echo $list['age']; ?> </td>
+					<td><?php echo $list['mobile']; ?> </td>
 					<td class="valigntop">
 						<div class="btn-group">
 							<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -524,70 +596,27 @@
 							</button>
 							<ul class="dropdown-menu pull-left" role="menu">
 								<li>
-									<a href="javascript:;">
-										<i class="icon-docs"></i> New Post </a>
+									<a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1)); ?>">
+										<i class="icon-docs"></i> Edit </a>
 								</li>
 								<li>
-									<a href="javascript:;">
-										<i class="icon-tag"></i> New Comment </a>
+									<a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8)); ?>">
+										<i class="icon-docs"></i> Billing </a>
 								</li>
-								<li>
-									<a href="javascript:;">
-										<i class="icon-user"></i> New User </a>
-								</li>
-								<li class="divider"> </li>
-								<li>
-									<a href="javascript:;">
-										<i class="icon-flag"></i> Comments
-										<span class="badge badge-success">4</span>
-									</a>
-								</li>
+								
+								
 							</ul>
 						</div>
 					</td>
 				</tr>
 				
-				<tr class="odd gradeX">
-					<td> restest </td>
-					<td>
-						<a href="mailto:userwow@gmail.com"> test@gmail.com </a>
-					</td>
-					<td>
-						<span class="label label-sm label-success"> Approved </span>
-					</td>
-					<td> 12.12.2011 </td>
-					<td class="valigntop">
-						<div class="btn-group">
-							<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-								<i class="fa fa-angle-down"></i>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="javascript:;">
-										<i class="icon-docs"></i> New Post </a>
-								</li>
-								<li>
-									<a href="javascript:;">
-										<i class="icon-tag"></i> New Comment </a>
-								</li>
-								<li>
-									<a href="javascript:;">
-										<i class="icon-user"></i> New User </a>
-								</li>
-								<li class="divider"> </li>
-								<li>
-									<a href="javascript:;">
-										<i class="icon-flag"></i> Comments
-										<span class="badge badge-success">4</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</td>
-				</tr>
+			<?php } ?>
 				
 			</tbody>
 		</table>
+	<?php }else{ ?>
+	<div>No data available</div>
+	<?php } ?>
 	</div>
 </div>
                                         </div>
