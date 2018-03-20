@@ -39,14 +39,18 @@ class Resources extends CI_Controller {
 						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
 						$data['tab']= base64_decode($this->uri->segment(4));
 						$data['pid']= base64_decode($this->uri->segment(3));
-						$data['subtab']=base64_decode($this->uri->segment(5));
-					
+						$data['subtab']=base64_decode($this->uri->segment(6));
+						$billing_id=base64_decode($this->uri->segment(5));
+						if($billing_id!=''){
+							$data['billing_detailes']= $this->Resources_model->get_billing_details($billing_id);
+						}else{
+							$data['billing_detailes']=array();
+						}
 					}else{
 						$data['patient_detailes']=array();
 						$data['tab']=1;
 						 $data['pid']='';
 					}
-					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/desk',$data);
 					$this->load->view('html/footer');
@@ -362,6 +366,42 @@ class Resources extends CI_Controller {
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Socio- economic details successfully Updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}public function visitinfo()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$billing=array(
+					'p_id'=>isset($post['pid'])?$post['pid']:'',
+					'visit_no'=>isset($post['visit_no'])?$post['visit_no']:'',
+					'visit_desc'=>isset($post['visit_desc'])?$post['visit_desc']:'',
+					'date_of_visit'=>isset($post['date_of_visit'])?$post['date_of_visit']:'',
+					'department'=>isset($post['department'])?$post['department']:'',
+					'docotr_name'=>isset($post['docotr_name'])?$post['docotr_name']:'',
+					'no_of_visits'=>isset($post['no_of_visits'])?$post['no_of_visits']:'',
+					'last_visiting_date'=>isset($post['last_visiting_date'])?$post['last_visiting_date']:'',
+					'create_at'=>date('Y-m-d H:i:s'),
+					);
+					//echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->update_all_patient_billing_details($billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Billing details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($update).'/'.base64_encode(2));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));

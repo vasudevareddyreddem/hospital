@@ -506,22 +506,41 @@
 							  <div class="panel-body">
 							   <div class="tab-content">
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==''){ echo "active";}?>" id="subtab1">
-							<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/economicdetails'); ?> " method="post"  id="economicdetails">
+							<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/visitinfo'); ?> " method="post"  id="visitinfo">
 							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
 							<div class="row">
 											<div class="form-group col-md-6">
 											  <label for="mobile">Visit Number</label>
-											  <input type="text" class="form-control" id="visit_no"  name="visit_no" placeholder="Enter Email" value="<?php echo isset($patient_detailes['visit_no'])?$patient_detailes['visit_no']:''; ?>">
+											  <input type="text" class="form-control" id="visit_no"  name="visit_no" placeholder="Enter Email" value="<?php echo isset($billing_detailes['visit_no'])?$billing_detailes['visit_no']:''; ?>">
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="email"> Visit description</label>
-											  <textarea type="textarea" id="visit_desc" name="visit_desc" class="form-control"  placeholder=" Visit description" ><?php echo isset($patient_detailes['visit_desc'])?$patient_detailes['visit_desc']:''; ?></textarea>
+											  <textarea type="textarea" id="visit_desc" name="visit_desc" class="form-control"  placeholder=" Visit description" ><?php echo isset($billing_detailes['visit_desc'])?$billing_detailes['visit_desc']:''; ?></textarea>
 											</div>
 											
 											<div class="form-group col-md-6">
 												<label class="">Date of visit</label>
 												<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-													<input class="form-control" size="16" type="text" id="date_of_visit" name="date_of_visit" value="<?php echo isset($patient_detailes['date_of_visit'])?$patient_detailes['date_of_visit']:''; ?>">
+													<input class="form-control" size="16" type="text" id="date_of_visit" name="date_of_visit" value="<?php echo isset($billing_detailes['date_of_visit'])?$billing_detailes['date_of_visit']:''; ?>">
+													<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+												</div>
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Department</label>
+											  <input type="text" class="form-control" id="department"  name="department" placeholder="Enter Email" value="<?php echo isset($billing_detailes['department'])?$billing_detailes['department']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">Doctor</label>
+											  <input type="text" class="form-control" id="docotr_name"  name="docotr_name" placeholder="Enter Doctor Name" value="<?php echo isset($billing_detailes['docotr_name'])?$billing_detailes['docotr_name']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+											  <label for="mobile">No- of visits</label>
+											  <input type="text" class="form-control" id="no_of_visits"  name="no_of_visits" placeholder="Enter No of visits" value="<?php echo isset($billing_detailes['no_of_visits'])?$billing_detailes['no_of_visits']:''; ?>">
+											</div>
+											<div class="form-group col-md-6">
+												<label class="">Last visit date</label>
+												<div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+													<input class="form-control" size="16" type="text" id="last_visiting_date" name="last_visiting_date" value="<?php echo isset($billing_detailes['last_visiting_date'])?$billing_detailes['last_visiting_date']:''; ?>">
 													<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 												</div>
 											</div>
@@ -530,7 +549,49 @@
 						</form>
 								</div>
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==2){ echo "active";}?>" id="subtab2">
-								 <p>second</p>
+										<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/orderinfo'); ?> " method="post"  id="orderinfo">
+											<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											<div class="row">
+															<div class="form-group col-md-6">
+															  <label for="mobile">Service type</label>
+															  <input type="text" class="form-control" id="service_type"  name="service_type" placeholder="Enter Service type" value="<?php echo isset($billing_detailes['service_type'])?$billing_detailes['service_type']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Service</label>
+															  <input type="text" class="form-control" id="service"  name="service" placeholder="Enter Service" value="<?php echo isset($billing_detailes['service'])?$billing_detailes['service']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Visit type</label>
+															  <input type="text" class="form-control" id="visit_type"  name="visit_type" placeholder="Enter Visit type" value="<?php echo isset($billing_detailes['visit_type'])?$billing_detailes['visit_type']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Doctor</label>
+															  <input type="text" class="form-control" id="doctor"  name="doctor" placeholder="Enter doctor" value="<?php echo isset($billing_detailes['doctor'])?$billing_detailes['doctor']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Payer</label>
+															  <input type="text" class="form-control" id="payer"  name="payer" placeholder="Enter Payer" value="<?php echo isset($billing_detailes['payer'])?$billing_detailes['payer']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Price</label>
+															  <input type="text" class="form-control" id="price"  name="price" placeholder="Enter Price" value="<?php echo isset($billing_detailes['price'])?$billing_detailes['price']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Qty</label>
+															  <input type="text" class="form-control" id="qty"  name="qty" placeholder="Enter Qty" value="<?php echo isset($billing_detailes['qty'])?$billing_detailes['qty']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Amount</label>
+															  <input type="text" class="form-control" id="amount"  name="amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['amount'])?$billing_detailes['amount']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Bill</label>
+															  <input type="text" class="form-control" id="bill"  name="bill" placeholder="Enter Bill" value="<?php echo isset($billing_detailes['bill'])?$billing_detailes['bill']:''; ?>">
+															</div>
+															
+																</div>
+											<button class="btn btn-praimry " type="submit">Submit</button>
+										</form>
 								</div>
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==3){ echo "active";}?>" id="subtab3">
 								 <p>third</p>
@@ -655,6 +716,79 @@
 </div>
 <script>
 	$(document).ready(function() {
+ 
+    $('#visitinfo').bootstrapValidator({
+		fields: {
+          
+             visit_no: {
+                 validators: {
+					notEmpty: {
+						message: 'Visit Number is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Visit Number can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			department: {
+                 validators: {
+					notEmpty: {
+						message: 'Department is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Department can only consist of alphanumaric, space and dot'
+					}
+				}
+            },docotr_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Doctor is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Doctor can only consist of alphanumaric, space and dot'
+					}
+				}
+            },no_of_visits: {
+                 validators: {
+					notEmpty: {
+						message: 'No- of visits is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'No- of visits can only consist of alphanumaric, space and dot'
+					}
+				}
+            },visit_desc: {
+                  validators: {
+					notEmpty: {
+						message: 'Visit description is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Visit description wont allow <> [] = % '
+					}
+                }
+            },
+           payer_address: {
+                validators: {
+					notEmpty: {
+						message: 'Address is required'
+					},
+                    regexp: {
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:'Address wont allow <> [] = % '
+					}
+                }
+            }
+			}
+		
+	})
+     
+});
+$(document).ready(function() {
  
     $('#payer').bootstrapValidator({
 		fields: {

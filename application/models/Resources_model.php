@@ -48,7 +48,18 @@ class Resources_model extends CI_Model
 		$this->db->where('pid',$pid);
         return $this->db->get()->row_array();
 	}
-	/*lab details*/
+	
+	/*patient billing details*/
+	public function update_all_patient_billing_details($data){
+		$this->db->insert('patient_billing', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_billing_details($b_id){
+		$this->db->select('*')->from('patient_billing');		
+		$this->db->where('b_id',$b_id);
+        return $this->db->get()->row_array();
+	}
+	/*patient billing details*/
 	
 	
 
