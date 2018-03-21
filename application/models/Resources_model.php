@@ -31,10 +31,7 @@ class Resources_model extends CI_Model
 		$this->db->insert('patients_list_1', $data);
 		return $insert_id = $this->db->insert_id();
 	}
-	public function save_patient_details($data){
-		$this->db->insert('patient_details_2', $data);
-		return $insert_id = $this->db->insert_id();
-	}
+	
 	public function update_patient_details($p_id,$barcode){
 		$sql1="UPDATE patients_list_1 SET barcode ='".$barcode."' WHERE pid = '".$p_id."'";
        	return $this->db->query($sql1);

@@ -140,7 +140,6 @@ class Resources extends CI_Controller {
 								'pid'=>$addtab,
 								'create_at'=>date('Y-m-d H:i:s')
 								);
-								$this->Resources_model->save_patient_details($dta);
 								$this->zend->load('Zend/Barcode');
 								$file = Zend_Barcode::draw('code128', 'image', array('text' => $addtab), array());
 								$code = time().$addtab.'.png';
