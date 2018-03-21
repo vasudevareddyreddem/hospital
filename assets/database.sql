@@ -129,11 +129,154 @@ CREATE TABLE `lab_detailes` (
   `l_updated_at` datetime DEFAULT NULL,
   `l_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `lab_detailes` */
 
 insert  into `lab_detailes`(`l_id`,`hos_id`,`l_code`,`l_name`,`l_assistent_id`,`l_status`,`l_create_at`,`l_updated_at`,`l_create_by`) values (1,9,'12345','test1',5,1,'2018-02-26 12:31:35','2018-02-26 12:42:13',3),(2,9,'67890','test2',13,1,'2018-02-26 12:31:35','2018-02-26 12:31:35',3);
+
+/*Table structure for table `patient_billing` */
+
+DROP TABLE IF EXISTS `patient_billing`;
+
+CREATE TABLE `patient_billing` (
+  `b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `p_id` int(11) DEFAULT NULL,
+  `visit_no` varchar(250) DEFAULT NULL,
+  `visit_desc` varchar(250) DEFAULT NULL,
+  `date_of_visit` varchar(250) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `docotr_name` varchar(250) DEFAULT NULL,
+  `no_of_visits` varchar(250) DEFAULT NULL,
+  `last_visiting_date` varchar(250) DEFAULT NULL,
+  `service_type` varchar(250) DEFAULT NULL,
+  `service` varchar(250) DEFAULT NULL,
+  `visit_type` varchar(250) DEFAULT NULL,
+  `doctor` varchar(250) DEFAULT NULL,
+  `payer` varchar(250) DEFAULT NULL,
+  `price` varchar(250) DEFAULT NULL,
+  `qty` varchar(250) DEFAULT NULL,
+  `amount` varchar(250) DEFAULT NULL,
+  `bill` varchar(250) DEFAULT NULL,
+  `patient_payer_deposit_amount` varchar(250) DEFAULT NULL,
+  `payment_mode` varchar(250) DEFAULT NULL,
+  `bill_amount` varchar(250) DEFAULT NULL,
+  `received_form` varchar(250) DEFAULT NULL,
+  `completed` int(11) DEFAULT '0',
+  `create_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`b_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `patient_billing` */
+
+insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`completed`,`create_at`,`updated_at`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:43:59',NULL),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:45:31',NULL),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:52:04',NULL),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy',1,'2018-03-21 10:34:22','2018-03-21 12:40:05');
+
+/*Table structure for table `patient_details_2` */
+
+DROP TABLE IF EXISTS `patient_details_2`;
+
+CREATE TABLE `patient_details_2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL,
+  `hos_id` int(11) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `patient_details_2` */
+
+insert  into `patient_details_2`(`id`,`pid`,`hos_id`,`create_at`) values (2,8,NULL,'2018-03-19 15:23:38');
+
+/*Table structure for table `patients_list_1` */
+
+DROP TABLE IF EXISTS `patients_list_1`;
+
+CREATE TABLE `patients_list_1` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `registrationtype` varchar(250) DEFAULT NULL,
+  `patient_category` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `age` varchar(250) DEFAULT NULL,
+  `bloodgroup` varchar(250) DEFAULT NULL,
+  `martial_status` varchar(250) DEFAULT NULL,
+  `nationali_id` varchar(250) DEFAULT NULL,
+  `perment_address` varchar(250) DEFAULT NULL,
+  `p_c_name` varchar(250) DEFAULT NULL,
+  `p_s_name` varchar(250) DEFAULT NULL,
+  `p_zipcode` varchar(250) DEFAULT NULL,
+  `p_country_name` varchar(250) DEFAULT NULL,
+  `temp_address` varchar(250) DEFAULT NULL,
+  `t_c_name` varchar(250) DEFAULT NULL,
+  `t_s_name` varchar(250) DEFAULT NULL,
+  `t_zipcode` varchar(250) DEFAULT NULL,
+  `t_country_name` varchar(250) DEFAULT NULL,
+  `religion` varchar(250) DEFAULT NULL,
+  `caste` varchar(250) DEFAULT NULL,
+  `mothername` varchar(250) DEFAULT NULL,
+  `language` varchar(250) DEFAULT NULL,
+  `primarylanguage` varchar(250) DEFAULT NULL,
+  `preferred_language` varchar(250) DEFAULT NULL,
+  `occupation` varchar(250) DEFAULT NULL,
+  `education` varchar(250) DEFAULT NULL,
+  `birth_place` varchar(250) DEFAULT NULL,
+  `work_phone` varchar(250) DEFAULT NULL,
+  `home_phone` varchar(250) DEFAULT NULL,
+  `citizen_proof` varchar(250) DEFAULT NULL,
+  `patient_identifier` varchar(250) DEFAULT NULL,
+  `relation` varchar(250) DEFAULT NULL,
+  `first_name` varchar(250) DEFAULT NULL,
+  `middel_name` varchar(250) DEFAULT NULL,
+  `last_name` varchar(250) DEFAULT NULL,
+  `next_address1` varchar(250) DEFAULT NULL,
+  `next_address2` varchar(250) DEFAULT NULL,
+  `next_pincode` varchar(250) DEFAULT NULL,
+  `next_city` varchar(250) DEFAULT NULL,
+  `next_state` varchar(250) DEFAULT NULL,
+  `next_country` varchar(250) DEFAULT NULL,
+  `next_email` varchar(250) DEFAULT NULL,
+  `next_mobile` varchar(250) DEFAULT NULL,
+  `next_occupation` varchar(250) DEFAULT NULL,
+  `referred` varchar(250) DEFAULT NULL,
+  `internal_external` varchar(250) DEFAULT NULL,
+  `search_doctor` varchar(250) DEFAULT NULL,
+  `relationship` varchar(250) DEFAULT NULL,
+  `g_first_name` varchar(250) DEFAULT NULL,
+  `g_middel_name` varchar(250) DEFAULT NULL,
+  `g_last_name` varchar(250) DEFAULT NULL,
+  `gender` varchar(250) DEFAULT NULL,
+  `nationality` varchar(250) DEFAULT NULL,
+  `g_language` varchar(250) DEFAULT NULL,
+  `living` varchar(250) DEFAULT NULL,
+  `g_address1` varchar(250) DEFAULT NULL,
+  `g_address2` varchar(250) DEFAULT NULL,
+  `g_pincode` varchar(250) DEFAULT NULL,
+  `g_city` varchar(250) DEFAULT NULL,
+  `g_state` varchar(250) DEFAULT NULL,
+  `g_country` varchar(250) DEFAULT NULL,
+  `payer_name` varchar(250) DEFAULT NULL,
+  `payer_mobile` varchar(250) DEFAULT NULL,
+  `payer_address` varchar(250) DEFAULT NULL,
+  `dependency` varchar(250) DEFAULT NULL,
+  `arrangement` varchar(250) DEFAULT NULL,
+  `incomegroup` varchar(250) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `confidential` varchar(250) DEFAULT NULL,
+  `student` varchar(250) DEFAULT NULL,
+  `barcode` varchar(250) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+/*Data for the table `patients_list_1` */
+
+insert  into `patients_list_1`(`pid`,`hos_id`,`registrationtype`,`patient_category`,`name`,`mobile`,`email`,`dob`,`age`,`bloodgroup`,`martial_status`,`nationali_id`,`perment_address`,`p_c_name`,`p_s_name`,`p_zipcode`,`p_country_name`,`temp_address`,`t_c_name`,`t_s_name`,`t_zipcode`,`t_country_name`,`religion`,`caste`,`mothername`,`language`,`primarylanguage`,`preferred_language`,`occupation`,`education`,`birth_place`,`work_phone`,`home_phone`,`citizen_proof`,`patient_identifier`,`relation`,`first_name`,`middel_name`,`last_name`,`next_address1`,`next_address2`,`next_pincode`,`next_city`,`next_state`,`next_country`,`next_email`,`next_mobile`,`next_occupation`,`referred`,`internal_external`,`search_doctor`,`relationship`,`g_first_name`,`g_middel_name`,`g_last_name`,`gender`,`nationality`,`g_language`,`living`,`g_address1`,`g_address2`,`g_pincode`,`g_city`,`g_state`,`g_country`,`payer_name`,`payer_mobile`,`payer_address`,`dependency`,`arrangement`,`incomegroup`,`description`,`confidential`,`student`,`barcode`,`create_at`,`create_by`,`updated_at`) values (8,9,'New','Staff','testtttt','85000050944','vasu@gmail.com','2018-03-19','27','o','Single','123456789014444','kothappli','mydukur','ap','516172','india','kukatpalli village','hyd','ts','50007','india','hj','oc','lakshmi','English','English','Telugu','job','btech','kothappli','8500050944','8019345212','Yes','','Relation','vasu','deve','reddy','test','test','516172','hyd',' ts','india','vasu@gmail.com','8500050944','job','vasu','internal','somethig','Relationship','First name','Last name','Last name','Female','Nationality','Telugu','Living dependency','XGFD','FGFD','516172','CITY','TS','FHF','jhgh','85222000212','ghjghjfgh','ytutyu','yutyu','ytutyu','yturtyu','yturtyu','ytuytu','15214532188.png','2018-03-20 10:50:54',6,'2018-03-21 10:33:55');
 
 /*Table structure for table `resource_list` */
 
@@ -219,7 +362,7 @@ CREATE TABLE `treatmentwise_doctors` (
   `t_d_updated_at` datetime DEFAULT NULL,
   `t_d_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_d_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `treatmentwise_doctors` */
 
