@@ -834,6 +834,7 @@ class Hospital extends CI_Controller {
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$data['treatment_list']=$this->Hospital_model->get_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					$data['doctors_list']=$this->Hospital_model->get_doctors_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					//echo $this->db->last_query();exit;
 					$data['hospital_treatment_list']=$this->Hospital_model->get_all_doctor_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('hospital/treament',$data);
@@ -1238,7 +1239,7 @@ class Hospital extends CI_Controller {
 							't_d_updated_at'=>date('Y-m-d H:i:s'),
 							't_d_create_by'=>$hos_ids['a_id']
 							);
-							//echo '<pre>';print_r($addtreatment_details);
+							//echo '<pre>';print_r($addtreatment_details);exit;
 						$treatment = $this->Hospital_model->save_addtreatment($addtreatment_details);
 						}
 						if(count($treatment)>0){

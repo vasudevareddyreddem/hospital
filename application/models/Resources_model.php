@@ -9,6 +9,11 @@ class Resources_model extends CI_Model
 		$this->load->database("default");
 	}
 	
+	public function get_all_patients_database($hos_id){
+		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category,patients_list_1.dob,patients_list_1.nationali_id,patients_list_1.create_at')->from('patients_list_1');		
+		$this->db->where('patients_list_1.hos_id', $hos_id);
+        return $this->db->get()->result_array();	
+	}
 	public function get_all_patients_lists($hos_id){
 		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category')->from('patients_list_1');		
 		$this->db->where('patients_list_1.hos_id', $hos_id);
@@ -57,6 +62,19 @@ class Resources_model extends CI_Model
 	public function update_patient_billing_details($bid,$data){
 		$this->db->where('b_id',$bid);
     	return $this->db->update("patient_billing",$data);
+	}
+	public function get_hospital_deportments($hop_id){
+		$this->db->select('treament.t_id,treament.t_name')->from('treament');		
+		$this->db->where('hos_id',$hop_id);
+		$this->db->where('t_status',1);
+        return $this->db->get()->result_array();
+	}
+	public function get_doctors_list($dep_id){
+		$this->db->select('resource_list.resource_name,resource_list.current_status,treatmentwise_doctors.t_d_doc_id,treatmentwise_doctors.t_d_name')->from('treatmentwise_doctors');		
+		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->where('treatmentwise_doctors.t_d_name',$dep_id);
+		$this->db->where('resource_list.r_status',1);
+        return $this->db->get()->result_array();
 	}
 	public function get_billing_details($p_id,$b_id){
 		$this->db->select('patient_billing.*,patients_list_1.name,patients_list_1.mobile,patients_list_1.barcode')->from('patient_billing');

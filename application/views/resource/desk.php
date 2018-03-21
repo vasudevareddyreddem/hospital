@@ -62,7 +62,7 @@
 						<a href="#tab_6_9" data-toggle="tab"> Vitals </a>
 					</li>
 					<li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
-						<a href="#tab_6_10" data-toggle="tab"> Billing </a>
+						<a href="#tab_6_10" data-toggle="tab"> Assign  </a>
 					</li>
 				</ul>
 			</div>
@@ -642,7 +642,7 @@
 															
 											</div>
 											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(3)); ?>" class="btn btn-praimry ">Back</a>
-											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(9)); ?>" class="btn btn-praimry ">Next</a>
+											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(9).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry ">Next</a>
 										</form>
 								</div>
 							   </div>
@@ -652,10 +652,58 @@
 						</div>
 						
 						<div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_9">
-						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
+						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
 							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-							<div class="row">
-								Step 9
+							<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+
+							<div class="row table-responsive" >
+			<table class="table table-striped table-bordered table-hover table-checkable order-column">
+			<thead>
+				<tr>
+					<th> Vitals </th>
+					<th class="text-center" colspan="2"> Values  </th>
+					<th class="text-center" colspan="2"> Others  </th>
+					<th> Notes  </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Blood Press </th>
+					<td>Actuals</td>
+					<td>Range</td>
+					<th>Blood pressure site</th>
+					<td>Positioning</td>
+					<td></td>
+				
+				</tr>
+				<tr>
+					<th>Temperature </th>
+					<td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($billing_detailes['tep_actuals'])?$billing_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
+					<td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($billing_detailes['tep_range'])?$billing_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
+					<th>Temperature site</th>
+					<td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($billing_detailes['temp_site_positioning'])?$billing_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
+					<td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($billing_detailes['notes'])?$billing_detailes['notes']:''; ?>" placeholder="Notes"> </td>
+				</tr>
+				<tr>
+					<th> Pulse rate</th>
+					<td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($billing_detailes['pulse_actuals'])?$billing_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
+					<td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($billing_detailes['pulse_range'])?$billing_detailes['pulse_range']:''; ?>" placeholder="Range"> 
+					</td>
+					<th> Pulse rate sight  </th>
+					<td>
+					<div class="row">					
+					<input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($billing_detailes['pulse_rate_rhythm'])?$billing_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
+					
+					<input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($billing_detailes['pulse_rate_vol'])?$billing_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
+					</div>
+					</td>
+					<td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($billing_detailes['notes1'])?$billing_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
+				</tr>
+					
+				
+			</tbody>
+		</table>
+		
 							</div>
 							<button class="btn btn-praimry " type="submit">Submit</button>
 						</form>
@@ -664,11 +712,31 @@
 						
 						<div class="tab-pane <?php if(isset($tab) && $tab==10){ echo "active";}?>" id="tab_6_10">
 						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
-							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-							<div class="row">
-								step 10
+									<input type="hidden" id="patientid" name="patientid" value="<?php echo isset($pid)?$pid:''; ?>">
+								<input type="hidden" id="billing_id" name="billing_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+								<div class="row">
+								<div class="form-group col-md-6">
+											  <label for="email">Doctor  Department</label>
+												<select id="department_name" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
+													<option value="">Select</option>
+													<?php foreach($departments_list as $lis){ ?>
+														<option value="<?php echo $lis['t_id']; ?>"><?php echo $lis['t_name']; ?></option>
+													<?php } ?>
+												</select>
+								</div>
+								<div class="form-group col-md-6">
+											  <label for="email">Doctor name</label>
+												<select id="department_doctors" name="department_doctors" class="form-control" >
+													<option value="">Select Doctor</option>
+												</select>
+								</div>
+								<div class="form-group col-md-6">
+											  <label for="email">&nbsp;</label>
+											<a href="javascript:void(0);" onclick="assign_doctore();" class="btn btn-praimry " >Assign</a>
+											<a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry">Print</a>
+								</div>
 							</div>
-							<button class="btn btn-praimry " type="submit">Submit</button>
+							<a href="<?php echo base_url('resources/desk');?>" class="btn btn-praimry " >Completed</a>
 						</form>
 						</div>
 						
@@ -761,6 +829,115 @@
    </div>
 </div>
 <script>
+function assign_doctore(){
+	var pid=$('#patientid').val();
+	var bid=$('#billing_id').val();
+	var dep=$('#department_name').val();
+	var doctid=$('#department_doctors').val();
+	jQuery.ajax({
+				url: "<?php echo base_url('resources/assign_doctor');?>",
+					data: {
+						patient_id: pid,
+						billing_id: bid,
+						depart_id: dep,
+						doct_id: doctid,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+						
+						//console.log(data);return false;
+					}
+				
+				});
+	
+	
+}
+function get_doctor_list(id){
+				jQuery.ajax({
+					url: "<?php echo base_url('resources/get_doctors_list');?>",
+					data: {
+						dep_id: id,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+						$('#department_doctors').empty();
+						$('#department_doctors').append("<option>select</option>");
+						for(i=0; i<data.list.length; i++) {
+							$('#department_doctors').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
+                      
+						}
+						//console.log(data);return false;
+					}
+				
+				});
+	
+}
+	$(document).ready(function() {
+ 
+    $('#vitals').bootstrapValidator({
+		fields: {
+			tep_actuals: {
+                 validators: {
+					notEmpty: {
+						message: 'Actualsis required'
+					}
+				}
+            },tep_range: {
+                 validators: {
+					notEmpty: {
+						message: 'Range is required'
+					}
+				}
+            },temp_site_positioning: {
+                 validators: {
+					notEmpty: {
+						message: 'Positioning is required'
+					}
+				}
+            },notes: {
+                 validators: {
+					notEmpty: {
+						message: 'Notes is required'
+					}
+				}
+            },pulse_actuals: {
+                 validators: {
+					notEmpty: {
+						message: 'Actuals is required'
+					}
+				}
+            },pulse_range: {
+                 validators: {
+					notEmpty: {
+						message: 'Range is required'
+					}
+				}
+            },pulse_rate_rhythm: {
+                 validators: {
+					notEmpty: {
+						message: 'Rhythm is required'
+					}
+				}
+            },pulse_rate_vol: {
+                 validators: {
+					notEmpty: {
+						message: 'Vol is required'
+					}
+				}
+            },notes1: {
+                 validators: {
+					notEmpty: {
+						message: 'Notes is required'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});
 	$(document).ready(function() {
  
     $('#bills').bootstrapValidator({

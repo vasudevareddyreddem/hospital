@@ -59,7 +59,7 @@
                         <div class="row">
                             <div class="card-body col-md-12">
 								<?php if(count($treatment_list)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
+                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
 												<th>Name</th>
