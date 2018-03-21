@@ -40,9 +40,10 @@ class Resources extends CI_Controller {
 						$data['tab']= base64_decode($this->uri->segment(4));
 						$data['pid']= base64_decode($this->uri->segment(3));
 						$data['subtab']=base64_decode($this->uri->segment(6));
+						$data['bill_id']=base64_decode($this->uri->segment(5));
 						$billing_id=base64_decode($this->uri->segment(5));
 						if($billing_id!=''){
-							$data['billing_detailes']= $this->Resources_model->get_billing_details($billing_id);
+							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
 						}else{
 							$data['billing_detailes']=array();
 						}
@@ -406,6 +407,114 @@ class Resources extends CI_Controller {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));
 						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}public function orderinfo()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$billing=array(
+					'service_type'=>isset($post['service_type'])?$post['service_type']:'',
+					'service'=>isset($post['service'])?$post['service']:'',
+					'visit_type'=>isset($post['visit_type'])?$post['visit_type']:'',
+					'doctor'=>isset($post['doctor'])?$post['doctor']:'',
+					'payer'=>isset($post['payer'])?$post['payer']:'',
+					'price'=>isset($post['price'])?$post['price']:'',
+					'qty'=>isset($post['qty'])?$post['qty']:'',
+					'amount'=>isset($post['amount'])?$post['amount']:'',
+					'bill'=>isset($post['bill'])?$post['bill']:'',
+					'updated_at'=>date('Y-m-d H:i:s'),
+					);
+					//echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Order details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($post['b_id']).'/'.base64_encode(3));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($post['b_id']).'/'.base64_encode(2));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function bills()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$billing=array(
+					'patient_payer_deposit_amount'=>isset($post['patient_payer_deposit_amount'])?$post['patient_payer_deposit_amount']:'',
+					'payment_mode'=>isset($post['payment_mode'])?$post['payment_mode']:'',
+					'bill_amount'=>isset($post['bill_amount'])?$post['bill_amount']:'',
+					'received_form'=>isset($post['received_form'])?$post['received_form']:'',
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'completed'=>1
+					);
+					//echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Bill details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($post['b_id']).'/'.base64_encode(4));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($post['b_id']).'/'.base64_encode(3));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function genrate_bill()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$pid=base64_decode($this->uri->segment(3));
+					$bid=base64_decode($this->uri->segment(4));
+					$admindetails=$this->session->userdata('userdetails');
+					$data['details']=$this->Resources_model->get_billing_details($pid,$bid);
+					//echo '<pre>';print_r($data);exit;
+					$path = rtrim(FCPATH,"/");
+					$file_name = $data['details']['p_id'].'_'.$data['details']['b_id'].'.pdf';                
+					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view
+					$pdfFilePath = $path."assets/patient_bills/".$file_name;
+					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$html = $this->load->view('resource/bill', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
+					$this->load->library('pdf');
+					$pdf = $this->pdf->load();
+					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$pdf->SetDisplayMode('fullpage');
+					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->WriteHTML($html); // write the HTML into the PDF
+					$pdf->Output($pdfFilePath, 'F');
+					redirect("assets/patient_bills/".$file_name);
+					//redirect('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bid).'/'.base64_encode(4));
+
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

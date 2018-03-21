@@ -545,12 +545,13 @@
 												</div>
 											</div>
 												</div>
-							<button class="btn btn-praimry " type="submit">Submit</button>
+							<button class="btn btn-praimry " type="submit">Next</button>
 						</form>
 								</div>
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==2){ echo "active";}?>" id="subtab2">
 										<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/orderinfo'); ?> " method="post"  id="orderinfo">
 											<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
 											<div class="row">
 															<div class="form-group col-md-6">
 															  <label for="mobile">Service type</label>
@@ -590,14 +591,59 @@
 															</div>
 															
 																</div>
-											<button class="btn btn-praimry " type="submit">Submit</button>
+											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8)); ?>" class="btn btn-praimry ">Back</a>
+											<button class="btn btn-praimry " type="submit">Next</button>
 										</form>
 								</div>
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==3){ echo "active";}?>" id="subtab3">
-								 <p>third</p>
+								 <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="bills">
+											<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+											<div class="row">
+															<div class="form-group col-md-6">
+															  <label for="mobile">Patient amount / payer amount / deposit</label>
+															  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Patient amount / payer amount / deposit" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Payment mode</label>
+															  <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Amount</label>
+															  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+															</div>
+															<div class="form-group col-md-6">
+															  <label for="mobile">Received from</label>
+															  <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
+															</div>
+
+															
+																</div>
+															<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
+
+											<button class="btn btn-praimry " type="submit">Next</button>
+										</form>
 								</div>
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==4){ echo "active";}?>" id="subtab4">
-								 <p>fourth</p>
+								  <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="bills">
+											<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+											<div class="row">
+													<div class="form-group col-md-6">
+													  <label for="mobile">Sign with payer</label>
+													  <input type="text" class="form-control" id="sign_with_payer"  name="sign_with_payer" placeholder="Enter Sign with payer" >
+													</div>
+													<div class="form-group col-md-6">
+														<label for="mobile">&nbsp;&nbsp;&nbsp;</label>
+														<a target="_blank" href="<?php echo base_url('resources/genrate_bill/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry form-control">Generate bill</a>
+													</div>
+													
+
+															
+											</div>
+											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(3)); ?>" class="btn btn-praimry ">Back</a>
+											<a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(9)); ?>" class="btn btn-praimry ">Next</a>
+										</form>
 								</div>
 							   </div>
 							  </div>
@@ -716,6 +762,160 @@
 </div>
 <script>
 	$(document).ready(function() {
+ 
+    $('#bills').bootstrapValidator({
+		fields: {
+          
+             patient_payer_deposit_amount: {
+                 validators: {
+					notEmpty: {
+						message: 'Patient amount / payer amount / deposit is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Patient amount / payer amount / deposit can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			payment_mode: {
+                 validators: {
+					notEmpty: {
+						message: 'Payment mode is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Payment mode can only consist of alphanumaric, space and dot'
+					}
+				}
+            },bill_amount: {
+                 validators: {
+					notEmpty: {
+						message: 'Amount is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Amount can only consist of alphanumaric, space and dot'
+					}
+				}
+            },received_form: {
+                 validators: {
+					notEmpty: {
+						message: 'Received from is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Received from can only consist of alphanumaric, space and dot'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});	
+$(document).ready(function() {
+ 
+    $('#orderinfo').bootstrapValidator({
+		fields: {
+          
+             service_type: {
+                 validators: {
+					notEmpty: {
+						message: 'Service type is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Service type can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			service: {
+                 validators: {
+					notEmpty: {
+						message: 'Service is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Service can only consist of alphanumaric, space and dot'
+					}
+				}
+            },visit_type: {
+                 validators: {
+					notEmpty: {
+						message: 'Visit type is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Visit type can only consist of alphanumaric, space and dot'
+					}
+				}
+            },doctor: {
+                 validators: {
+					notEmpty: {
+						message: 'Doctor is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Doctor can only consist of alphanumaric, space and dot'
+					}
+				}
+            },payer: {
+                 validators: {
+					notEmpty: {
+						message: 'Payer is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Payer can only consist of alphanumaric, space and dot'
+					}
+				}
+            },price: {
+                  validators: {
+					notEmpty: {
+						message: 'price is required'
+					},
+                    regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'price can only consist of alphanumaric, space and dot'
+					}
+                }
+            },qty: {
+                  validators: {
+					notEmpty: {
+						message: 'Qty is required'
+					},
+                    regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Qty can only consist of alphanumaric, space and dot'
+					}
+                }
+            },amount: {
+                  validators: {
+					notEmpty: {
+						message: 'Amount is required'
+					},
+                    regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Amount can only consist of alphanumaric, space and dot'
+					}
+                }
+            },
+           bill: {
+                validators: {
+					notEmpty: {
+						message: 'Bill is required'
+					},
+                    regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'BIll can only consist of alphanumaric, space and dot'
+					}
+                }
+            }
+			}
+		
+	})
+     
+});	$(document).ready(function() {
  
     $('#visitinfo').bootstrapValidator({
 		fields: {
