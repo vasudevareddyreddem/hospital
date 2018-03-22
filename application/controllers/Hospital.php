@@ -431,6 +431,15 @@ class Hospital extends CI_Controller {
 									redirect('hospital/edit/'.$post['hospital_id']);
 								}
 						}
+						if(isset($_FILES['hos_bas_logo']['name']) && $_FILES['hos_bas_logo']['name']!=''){
+							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
+							unlink("assets/hospital_logos/".$hospital_details['hos_bas_logo']);
+							$temp = explode(".", $_FILES["hos_bas_logo"]["name"]);
+							$hos_bas_logo = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['hos_bas_logo']['tmp_name'], "assets/hospital_logos/" . $hos_bas_logo);
+						}else{
+							$hos_bas_logo=$hospital_details['hos_bas_logo'];
+						}
 						if(isset($_FILES['hos_bas_document']['name']) && $_FILES['hos_bas_document']['name']!=''){
 							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
 							unlink("assets/hospital_basic_documents/".$hospital_details['hos_bas_document']);
@@ -499,6 +508,7 @@ class Hospital extends CI_Controller {
 							'hos_bas_state'=>isset($post['hos_bas_state'])?$post['hos_bas_state']:$hospital_details['hos_bas_state'],
 							'hos_bas_country'=>isset($post['hos_bas_country'])?$post['hos_bas_country']:$hospital_details['hos_bas_country'],
 							'hos_bas_document'=>$hos_bas_document,
+							'hos_bas_logo'=>$hos_bas_logo,
 							'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:$hospital_details['bank_holder_name'],
 							'bank_acc_no'=>isset($post['bank_acc_no'])?$post['bank_acc_no']:$hospital_details['bank_acc_no'],
 							'bank_name'=>isset($post['bank_name'])?$post['bank_name']:$hospital_details['bank_name'],

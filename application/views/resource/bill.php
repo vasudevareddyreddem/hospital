@@ -42,7 +42,9 @@ header {
 }
 
 #logo img {
-  height: 70px;
+  height: auto;
+  width:150px;
+  
 }
 
 #company {
@@ -100,17 +102,24 @@ table, th, td {
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img src="logo.png">
+        <img style="width:150px;height:auto;" src="<?php echo base_url('assets/hospital_logos/'.$details['hos_bas_logo']); ?>">
       </div>
       <div id="company">
-        <h2 class="name">Company Name</h2>
-        <div>455 Foggy Heights, AZ 85004, US</div>
-        <div>(602) 519-0450</div>
-        <div><a href="mailto:company@example.com">company@example.com</a></div>
+        <h2 class="name"><?php echo isset($details['hos_bas_name'])?$details['hos_bas_name']:''; ?></h2>
+        <div>
+		<?php echo isset($details['hos_bas_add1'])?$details['hos_bas_add1']:''; ?>,
+		<?php echo isset($details['hos_bas_add2'])?$details['hos_bas_add2']:''; ?>,
+		<?php echo isset($details['hos_bas_city'])?$details['hos_bas_city']:''; ?>,
+		<?php echo isset($details['hos_bas_state'])?$details['hos_bas_state']:''; ?>,
+		<?php echo isset($details['hos_bas_country'])?$details['hos_bas_country']:''; ?>,
+		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>
+		</div>
+        <div>(<?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
+        <div><a href="mailto:company@example.com"><?php echo isset($details['hos_bas_email'])?$details['hos_bas_email']:''; ?></a></div>
       </div>
       </div>
     </header>
-    <main>
+ 
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Paient info</th>
@@ -118,15 +127,22 @@ table, th, td {
 	  </tr>
 	
 	  <tr>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
+		<td><strong>Name:</strong> <span><?php echo isset($details['name'])?$details['name']:''; ?></span></td>
+		<td><strong>Mobile:</strong> <span><?php echo isset($details['mobile'])?$details['mobile']:''; ?></span></td>
+		<td><strong>Blood group:</strong> <span><?php echo isset($details['bloodgroup'])?$details['bloodgroup']:''; ?></span></td>
+		<td><strong>Martial status:</strong> <span><?php echo isset($details['martial_status'])?$details['martial_status']:''; ?></span></td>
 	  </tr>
 	    <tr>
-		<td colspan="2"><strong>Address:</strong> <span>Use this tool as test data for an automated system </span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
+		<td><strong>DOB:</strong> <span><?php echo isset($details['dob'])?$details['dob']:''; ?></span></td>
+		<td><strong>Age:</strong> <span><?php echo isset($details['age'])?$details['age']:''; ?></span></td>
+		<td colspan="2"><strong>Address:</strong> <span>
+		<?php echo isset($details['perment_address'])?$details['perment_address'].',':''; ?>
+		<?php echo isset($details['p_c_name'])?$details['p_c_name'].',':''; ?>
+		<?php echo isset($details['p_s_name'])?$details['p_s_name'].',':''; ?>
+		<?php echo isset($details['p_country_name'])?$details['p_country_name'].',':''; ?>
+		<?php echo isset($details['p_zipcode'])?$details['p_zipcode'].',':''; ?>
+		</span></td>
+	
 		
 	  </tr>   
 	  <tr>
@@ -135,13 +151,66 @@ table, th, td {
 		
 		
 	  </tr> 
+	  <tr style="background:#ddd;line-height:40px">
+		<th colspan="4">Visit Info</th>
+		
+	  </tr>
+	   <tr>
+		<td><strong>Visit Number:</strong> <span><?php echo isset($details['visit_no'])?$details['visit_no']:''; ?></span></td>
+		<td><strong>Visit description:</strong> <span><?php echo isset($details['visit_desc'])?$details['visit_desc']:''; ?></span></td>
+		<td><strong>Date of visit:</strong> <span><?php echo isset($details['date_of_visit'])?$details['date_of_visit']:''; ?></span></td>
+		<td><strong>Department:</strong> <span><?php echo isset($details['department'])?$details['department']:''; ?></span></td>
+	  </tr>
+	  <tr>
+		<td><strong>Doctor:</strong> <span><?php echo isset($details['docotr_name'])?$details['docotr_name']:''; ?></span></td>
+		<td><strong>No- of visits:</strong> <span><?php echo isset($details['no_of_visits'])?$details['no_of_visits']:''; ?></span></td>
+		<td><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
+		<td></td>
+	  </tr>
+	  <tr style="background:#ddd;line-height:40px">
+		<th colspan="4">Order Info</th>
+		
+	  </tr>
+	  <tr>
+		<td><strong>Service type:</strong> <span><?php echo isset($details['service_type'])?$details['service_type']:''; ?></span></td>
+		<td><strong>Service:</strong> <span><?php echo isset($details['service'])?$details['service']:''; ?></span></td>
+		<td><strong>Visit type:</strong> <span><?php echo isset($details['visit_type'])?$details['visit_type']:''; ?></span></td>
+		<td><strong>Doctor:</strong> <span><?php echo isset($details['doctor'])?$details['doctor']:''; ?></span></td>
+	  </tr>
+	  <tr>
+		<td><strong>Payer:</strong> <span><?php echo isset($details['payer'])?$details['payer']:''; ?></span></td>
+		<td><strong>Price:</strong> <span><?php echo isset($details['price'])?$details['price']:''; ?></span></td>
+		<td><strong>Qty:</strong> <span><?php echo isset($details['qty'])?$details['qty']:''; ?></span></td>
+		<td><strong>Amount:</strong> <span><?php echo isset($details['amount'])?$details['amount']:''; ?></span></td>
+	  </tr>
+	  <tr>
+		<td colspan="4"><strong>Bill:</strong> <span><?php echo isset($details['bill'])?$details['bill']:''; ?></span></td>
+		</tr>
+		<tr style="background:#ddd;line-height:40px">
+		<th colspan="4">Bill Info</th>
+		
+	  </tr>
+	  <tr>
+		<td><strong>Patient amount / payer amount / deposit:</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
+		<td><strong>Payment mode:</strong> <span><?php echo isset($details['payment_mode'])?$details['payment_mode']:''; ?></span></td>
+		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
+		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
+	  </tr>
+	  <tr style="background:#ddd;line-height:40px">
+		<th colspan="4">Payer Auth Info</th>
+		
+	  </tr>
+	   <tr>
+		<td colspan="4"><strong>Sign with payer:</strong> <span></span></td>
+	  </tr>
 	  
 	</table>
-    
-      
    
+<<<<<<< HEAD
       
     </main>
   
+=======
+>>>>>>> 5b61b383503239b6fe57c665bf41be3d85d6e5e1
   </body>
 </html>
