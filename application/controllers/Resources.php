@@ -26,13 +26,13 @@ class Resources extends CI_Controller {
 		}
 	public function desk()
 	{	
-		
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=3){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['patients_list']= $this->Resources_model->get_all_patients_lists($userdetails['hos_id']);
+					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit; 
 					$patient_id= base64_decode($this->uri->segment(3));
 					if(isset($patient_id) && $patient_id!=''){
@@ -51,9 +51,31 @@ class Resources extends CI_Controller {
 						$data['patient_detailes']=array();
 						$data['tab']=1;
 						 $data['pid']='';
+						 $data['bill_id']='';
 					}
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/desk',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function patient_databse()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patients_list']= $this->Resources_model->get_all_patients_database($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/patient_database',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -118,7 +140,6 @@ class Resources extends CI_Controller {
 								'pid'=>$addtab,
 								'create_at'=>date('Y-m-d H:i:s')
 								);
-								$this->Resources_model->save_patient_details($dta);
 								$this->zend->load('Zend/Barcode');
 								$file = Zend_Barcode::draw('code128', 'image', array('text' => $addtab), array());
 								$code = time().$addtab.'.png';
@@ -466,8 +487,7 @@ class Resources extends CI_Controller {
 					'payment_mode'=>isset($post['payment_mode'])?$post['payment_mode']:'',
 					'bill_amount'=>isset($post['bill_amount'])?$post['bill_amount']:'',
 					'received_form'=>isset($post['received_form'])?$post['received_form']:'',
-					'updated_at'=>date('Y-m-d H:i:s'),
-					'completed'=>1
+					'updated_at'=>date('Y-m-d H:i:s')
 					);
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
@@ -524,7 +544,112 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	
+	public function print_patient_details()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$pid=base64_decode($this->uri->segment(3));
+					$bid=base64_decode($this->uri->segment(4));
+					$admindetails=$this->session->userdata('userdetails');
+					$data['details']=$this->Resources_model->get_billing_details($pid,$bid);
+					//echo '<pre>';print_r($data);exit;
+					$path = rtrim(FCPATH,"/");
+					$file_name = $data['details']['p_id'].'_'.$data['details']['b_id'].'.pdf';                
+					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view
+					$pdfFilePath = $path."assets/patient_bills/".$file_name;
+					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$html = $this->load->view('resource/bill', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
+					$this->load->library('pdf');
+					$pdf = $this->pdf->load();
+					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$pdf->SetDisplayMode('fullpage');
+					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->WriteHTML($html); // write the HTML into the PDF
+					$pdf->Output($pdfFilePath, 'F');
+					redirect("assets/patient_bills/".$file_name);
+					//redirect('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bid).'/'.base64_encode(4));
+
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function vitals()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					echo '<pre>';print_r($post);
+					$billing=array(
+					 'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
+					 'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
+					 'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
+					 'notes'=>isset($post['notes'])?$post['notes']:'',
+					 'pulse_actuals'=>isset($post['pulse_actuals'])?$post['pulse_actuals']:'',
+					 'pulse_range'=>isset($post['pulse_range'])?$post['pulse_range']:'',
+					 'pulse_rate_rhythm'=>isset($post['pulse_rate_rhythm'])?$post['pulse_rate_rhythm']:'',
+					 'pulse_rate_vol'=>isset($post['pulse_rate_vol'])?$post['pulse_rate_vol']:'',
+					 'notes1'=>isset($post['notes1'])?$post['notes1']:'',
+					 'updated_at'=>date('Y-m-d H:i:s')
+					);
+					//echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Vitals details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function get_doctors_list(){
+		$post=$this->input->post();
+		$details=$this->Resources_model->get_doctors_list($post['dep_id']);
+		if(count($details) > 0)
+				{
+				$data['msg']=1;
+				$data['list']=$details;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
+	}
+	public function assign_doctor(){
+		$post=$this->input->post();
+		$billing=array(
+		'treatment_id'=>$post['depart_id'],
+		'doct_id'=>$post['doct_id'],
+		'completed'=>1
+		);
+		$update=$this->Resources_model->update_patient_billing_details($post['billing_id'],$billing);
+
+		if(count($update) > 0)
+				{
+				$data['msg']=1;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
+	}
 	
 	
 	

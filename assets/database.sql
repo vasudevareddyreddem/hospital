@@ -34,11 +34,11 @@ CREATE TABLE `admin` (
   `a_create_at` datetime DEFAULT NULL,
   `a_updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`a_id`,`role_id`,`a_email_id`,`a_username`,`a_password`,`a_org_password`,`a_name`,`a_mobile`,`a_profile_pic`,`a_status`,`a_create_at`,`a_updated_at`) values (1,1,'admin@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Admin','8500050944',NULL,1,'2018-02-21 11:15:43',NULL),(3,2,'vasu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456',NULL,'8500050944',NULL,1,'2018-02-22 15:26:03','2018-02-23 13:11:20'),(4,3,'rec@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','9874563211',NULL,1,'2018-02-22 19:01:23',NULL),(5,3,'rec1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','6745674674',NULL,1,'2018-02-22 19:03:01','2018-02-23 12:37:24'),(6,3,'rec2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','9874563211',NULL,1,'2018-02-22 19:05:59','2018-02-23 16:31:46'),(7,4,'phr1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:38:14',NULL),(8,5,'lab@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:40:59',NULL),(9,6,'doc@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:45:32',NULL),(10,2,'bayapu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Hospital Admin','8500226782',NULL,1,'2018-02-23 12:46:16',NULL),(11,3,'bayph1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:49:59',NULL),(12,6,'doc2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 13:13:08',NULL),(13,6,'doc3@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 13:13:48',NULL),(15,3,'phrtytry1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 15:07:33','2018-02-23 16:24:56'),(16,6,'doctor6@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','6745674674',NULL,1,'2018-02-26 11:17:08','2018-02-26 17:32:01'),(17,5,'labassistent@gmail.com',NULL,'fcea920f7412b5da7be0cf42b8c93759','1234567','Resource','8500050944',NULL,1,'2018-02-26 12:12:35','2018-02-26 16:32:21');
+insert  into `admin`(`a_id`,`role_id`,`a_email_id`,`a_username`,`a_password`,`a_org_password`,`a_name`,`a_mobile`,`a_profile_pic`,`a_status`,`a_create_at`,`a_updated_at`) values (1,1,'admin@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Admin','8500050944',NULL,1,'2018-02-21 11:15:43',NULL),(3,2,'vasu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456',NULL,'8500050944',NULL,1,'2018-02-22 15:26:03','2018-02-23 13:11:20'),(4,3,'rec@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','9874563211',NULL,1,'2018-02-22 19:01:23',NULL),(5,3,'rec1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','6745674674',NULL,1,'2018-02-22 19:03:01','2018-02-23 12:37:24'),(6,3,'rec2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Receptionist','9874563211',NULL,1,'2018-02-22 19:05:59','2018-02-23 16:31:46'),(7,4,'phr1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:38:14',NULL),(8,5,'lab@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:40:59',NULL),(9,6,'doc@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:45:32',NULL),(10,2,'bayapu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Hospital Admin','8500226782',NULL,1,'2018-02-23 12:46:16',NULL),(11,3,'bayph1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 12:49:59',NULL),(12,6,'doc2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 13:13:08',NULL),(13,6,'doc3@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 13:13:48',NULL),(15,3,'phrtytry1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','9874563211',NULL,1,'2018-02-23 15:07:33','2018-02-23 16:24:56'),(16,6,'doctor6@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','6745674674',NULL,1,'2018-02-26 11:17:08','2018-02-26 17:32:01'),(17,5,'labassistent@gmail.com',NULL,'fcea920f7412b5da7be0cf42b8c93759','1234567','Resource','8500050944',NULL,1,'2018-02-26 12:12:35','2018-02-26 16:32:21'),(18,6,'vasu1234567@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','1234567896',NULL,1,'2018-03-21 14:56:55',NULL),(19,6,'vasu1234fgfh567@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','1234567896',NULL,1,'2018-03-21 14:57:48',NULL),(20,6,'vasu1234567ghfg@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Resource','1234567896',NULL,1,'2018-03-21 14:58:20',NULL);
 
 /*Table structure for table `customers` */
 
@@ -162,31 +162,27 @@ CREATE TABLE `patient_billing` (
   `payment_mode` varchar(250) DEFAULT NULL,
   `bill_amount` varchar(250) DEFAULT NULL,
   `received_form` varchar(250) DEFAULT NULL,
+  `tep_actuals` varchar(250) DEFAULT NULL,
+  `tep_range` varchar(250) DEFAULT NULL,
+  `temp_site_positioning` varchar(250) DEFAULT NULL,
+  `notes` varchar(250) DEFAULT NULL,
+  `pulse_actuals` varchar(250) DEFAULT NULL,
+  `pulse_range` varchar(250) DEFAULT NULL,
+  `pulse_rate_rhythm` varchar(250) DEFAULT NULL,
+  `pulse_rate_vol` varchar(250) DEFAULT NULL,
+  `notes1` varchar(250) DEFAULT NULL,
+  `treatment_id` varchar(250) DEFAULT NULL,
+  `doct_id` varchar(250) DEFAULT NULL,
   `completed` int(11) DEFAULT '0',
   `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `doctor_status` int(11) DEFAULT '0',
   PRIMARY KEY (`b_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_billing` */
 
-insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`completed`,`create_at`,`updated_at`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:43:59',NULL),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:45:31',NULL),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:52:04',NULL),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy',1,'2018-03-21 10:34:22','2018-03-21 12:40:05');
-
-/*Table structure for table `patient_details_2` */
-
-DROP TABLE IF EXISTS `patient_details_2`;
-
-CREATE TABLE `patient_details_2` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) DEFAULT NULL,
-  `hos_id` int(11) DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
-/*Data for the table `patient_details_2` */
-
-insert  into `patient_details_2`(`id`,`pid`,`hos_id`,`create_at`) values (2,8,NULL,'2018-03-19 15:23:38');
+insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`tep_actuals`,`tep_range`,`temp_site_positioning`,`notes`,`pulse_actuals`,`pulse_range`,`pulse_rate_rhythm`,`pulse_rate_vol`,`notes1`,`treatment_id`,`doct_id`,`completed`,`create_at`,`updated_at`,`doctor_status`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:43:59',NULL,0),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:45:31',NULL,0),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-03-20 18:52:04',NULL,0),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy','1','2','3','4','5','6','7','8','9','1','15',1,'2018-03-21 10:34:22','2018-03-21 15:54:33',0);
 
 /*Table structure for table `patients_list_1` */
 
@@ -307,12 +303,13 @@ CREATE TABLE `resource_list` (
   `r_created_at` datetime DEFAULT NULL,
   `r_updated_at` datetime DEFAULT NULL,
   `r_create_by` int(11) DEFAULT NULL,
+  `current_status` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 /*Data for the table `resource_list` */
 
-insert  into `resource_list`(`r_id`,`a_id`,`role_id`,`hos_id`,`resource_name`,`resource_mobile`,`resource_add1`,`resource_add2`,`resource_city`,`resource_state`,`resource_zipcode`,`resource_other_details`,`resource_contatnumber`,`resource_email`,`resource_photo`,`resource_document`,`resource_bank_holdername`,`resource_bank_accno`,`resource_ifsc_code`,`resource_other_document`,`r_status`,`r_created_at`,`r_updated_at`,`r_create_by`) values (1,4,3,9,'res1',NULL,NULL,'fghd','hyd','ts',NULL,'fnjhdf','8527418527','rec@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,2,'2018-02-22 19:01:23','2018-02-23 10:42:37',3),(2,5,3,9,'res2','6745674674','hjfghj','jgfhj','fgfdg','ts',NULL,'fnjhdf','8527418527','rec1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,2,'2018-02-23 12:37:24','2018-02-23 15:44:33',3),(3,6,3,9,'res3','9874563211','uyi','yuopyo','fgfdg','ts','516172','fnjhdf','8527418527','rec2@gmail.com',NULL,NULL,'vasudevareddy','32472655713','SBIN0002671',NULL,2,'2018-02-23 16:31:46','2018-02-23 16:33:53',3),(4,7,4,9,'pharamcy','9874563211','pharamcy','pharamcy','hyd','ta',NULL,'fnjhdf','8527418527','phr1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:38:14',NULL,3),(5,8,5,9,'lab ass','9874563211','gfgd','ghfgdhfgh','kadapa','ap',NULL,'ntg','8500050944','lab@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:40:59',NULL,3),(6,9,6,9,'doctor','9874563211','dfdg','fgdfg','fgfdg','ts',NULL,'fnjhdf','8527418527','doc@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-02-23 12:45:32','2018-02-23 16:32:47',3),(7,11,3,10,'bayares2','9874563211','ytuytu','tyuu','fgfdg','ts',NULL,'fnjhdf','8527418527','bayph1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:49:59',NULL,10),(8,12,6,9,'doc2','9874563211','fggj','jghj','hjfgj','hjfghj',NULL,'hjfgh','8527418527','doc2@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 13:13:08',NULL,3),(9,13,6,9,'doc3','9874563211','add','add3','hyd','ts',NULL,'ntg','8500050944','doc3@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-02-23 13:13:48','2018-02-23 16:30:24',3),(11,15,3,9,'pharamcy','9874563211','tyrt','ytyt','fgfdg','ts','516172','fnjhdf','8527418527','phrtytry1@gmail.com','1519382821.jpg','11519382633.xlsx','vasudevareddy','32472655713','SBIN0002671','1519382733.docx',1,'2018-02-23 16:24:56',NULL,3),(12,16,6,9,'doctor6','6745674674','test','test4','fgfdg','ts','516172','fnjhdf','8527418527','doctor6@gmail.com','1519645893.jpg','11519624028.docx','vasudevareddy','32473655712','SBIN0002671','1519645871.docx',1,'2018-02-26 17:32:01',NULL,3),(13,17,5,9,'lab assistent','8500050944','kothapalli','testing','hyd','ap','516172','tg','8500050944','labassistent@gmail.com','1519627355.jpg','','vasudevareddy','32472655713','SBIN0002671','',1,'2018-02-26 12:12:35',NULL,3);
+insert  into `resource_list`(`r_id`,`a_id`,`role_id`,`hos_id`,`resource_name`,`resource_mobile`,`resource_add1`,`resource_add2`,`resource_city`,`resource_state`,`resource_zipcode`,`resource_other_details`,`resource_contatnumber`,`resource_email`,`resource_photo`,`resource_document`,`resource_bank_holdername`,`resource_bank_accno`,`resource_ifsc_code`,`resource_other_document`,`r_status`,`r_created_at`,`r_updated_at`,`r_create_by`,`current_status`) values (1,4,3,9,'res1',NULL,NULL,'fghd','hyd','ts',NULL,'fnjhdf','8527418527','rec@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,2,'2018-02-22 19:01:23','2018-02-23 10:42:37',3,NULL),(2,5,3,9,'res2','6745674674','hjfghj','jgfhj','fgfdg','ts',NULL,'fnjhdf','8527418527','rec1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,2,'2018-02-23 12:37:24','2018-02-23 15:44:33',3,NULL),(3,6,3,9,'res3','9874563211','uyi','yuopyo','fgfdg','ts','516172','fnjhdf','8527418527','rec2@gmail.com',NULL,NULL,'vasudevareddy','32472655713','SBIN0002671',NULL,2,'2018-02-23 16:31:46','2018-02-23 16:33:53',3,NULL),(4,7,4,9,'pharamcy','9874563211','pharamcy','pharamcy','hyd','ta',NULL,'fnjhdf','8527418527','phr1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:38:14',NULL,3,NULL),(5,8,5,9,'lab ass','9874563211','gfgd','ghfgdhfgh','kadapa','ap',NULL,'ntg','8500050944','lab@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:40:59',NULL,3,NULL),(6,9,6,9,'doctor','9874563211','dfdg','fgdfg','fgfdg','ts',NULL,'fnjhdf','8527418527','doc@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-02-23 12:45:32','2018-02-23 16:32:47',3,NULL),(7,11,3,10,'bayares2','9874563211','ytuytu','tyuu','fgfdg','ts',NULL,'fnjhdf','8527418527','bayph1@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 12:49:59',NULL,10,NULL),(8,12,6,9,'doc2','9874563211','fggj','jghj','hjfgj','hjfghj',NULL,'hjfgh','8527418527','doc2@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-02-23 13:13:08',NULL,3,NULL),(9,13,6,9,'doc0','9874563211','add','add3','hyd','ts',NULL,'ntg','8500050944','doc3@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-02-23 13:13:48','2018-02-23 16:30:24',3,NULL),(11,15,3,9,'pharamcy','9874563211','tyrt','ytyt','fgfdg','ts','516172','fnjhdf','8527418527','phrtytry1@gmail.com','1519382821.jpg','11519382633.xlsx','vasudevareddy','32472655713','SBIN0002671','1519382733.docx',1,'2018-02-23 16:24:56',NULL,3,NULL),(12,16,6,9,'doctor6','6745674674','test','test4','fgfdg','ts','516172','fnjhdf','8527418527','doctor6@gmail.com','1519645893.jpg','11519624028.docx','vasudevareddy','32473655712','SBIN0002671','1519645871.docx',1,'2018-02-26 17:32:01',NULL,3,NULL),(13,17,5,9,'lab assistent','8500050944','kothapalli','testing','hyd','ap','516172','tg','8500050944','labassistent@gmail.com','1519627355.jpg','','vasudevareddy','32472655713','SBIN0002671','',1,'2018-02-26 12:12:35',NULL,3,NULL),(14,18,6,9,'doct1','1234567896','fg','gfdg','fdfgh','gfhfg','12345','ghfgh','6456756767','vasu1234567@gmail.com','','','vasudevareddy','1236547896','SBIN0002672','',1,'2018-03-21 14:56:55',NULL,3,NULL),(15,19,6,9,'doct4','1234567896','uiyu','uui','u','gfhfg','12345','ghfgh','146355676577','vasu1234fgfh567@gmail.com','','','vasudevareddy','1236547896','SBIN0002672','',1,'2018-03-21 14:57:48',NULL,3,NULL),(16,20,6,9,'doct3','1234567896','dgdf','gdfg','fdfgh','gfhfg','12345','ghfgh','6456756767','vasu1234567ghfg@gmail.com','','','vasudevareddy','1236547896','SBIN0002672','',1,'2018-03-21 14:58:20',NULL,3,NULL);
 
 /*Table structure for table `roles` */
 
@@ -362,11 +359,11 @@ CREATE TABLE `treatmentwise_doctors` (
   `t_d_updated_at` datetime DEFAULT NULL,
   `t_d_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_d_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `treatmentwise_doctors` */
 
-insert  into `treatmentwise_doctors`(`t_d_id`,`hos_id`,`t_d_doc_id`,`t_d_name`,`t_d_status`,`t_d_create_at`,`t_d_updated_at`,`t_d_create_by`) values (1,9,8,'test166',0,'2018-02-26 11:15:52','2018-02-26 11:47:57',3),(2,9,8,'anglogyi',0,'2018-02-26 11:15:52','2018-02-26 11:47:59',3),(3,9,12,'test166',0,'2018-02-26 11:17:22','2018-02-26 11:45:15',3),(4,9,8,'anglogyi',0,'2018-02-26 11:19:51','2018-02-26 11:45:17',3);
+insert  into `treatmentwise_doctors`(`t_d_id`,`hos_id`,`t_d_doc_id`,`t_d_name`,`t_d_status`,`t_d_create_at`,`t_d_updated_at`,`t_d_create_by`) values (19,9,12,'1',1,'2018-03-21 16:40:51','2018-03-21 16:40:51',3),(20,9,18,'2',1,'2018-03-21 16:45:38','2018-03-21 16:45:38',3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

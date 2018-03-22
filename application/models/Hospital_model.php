@@ -80,13 +80,15 @@ class Hospital_model extends CI_Model
 	}
 	public function get_treatment_list($a_id,$hos_id){
 		$this->db->select('treament.t_id,treament.t_name,treament.t_status,treament.t_create_at')->from('treament');		
+		//$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
+
 		$this->db->where('treament.t_create_by',$a_id);
 		$this->db->where('treament.hos_id',$hos_id);
 		$this->db->where('treament.t_status !=',2);
 		return $this->db->get()->result_array();
 	}
 	public function get_doctors_list($a_id,$hos_id){
-		$this->db->select('Resource_list.r_id,Resource_list.resource_name')->from('Resource_list');		
+		$this->db->select('Resource_list.a_id,Resource_list.resource_name')->from('Resource_list');		
 		$this->db->where('Resource_list.r_create_by',$a_id);
 		$this->db->where('Resource_list.hos_id',$hos_id);
 		$this->db->where('Resource_list.r_status !=',2);
@@ -105,8 +107,9 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function get_all_doctor_treatment_list($a_id,$hos_id){
-		$this->db->select('treatmentwise_doctors.t_d_id,treatmentwise_doctors.t_d_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
-		$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->select('treatmentwise_doctors.t_d_id,treament.t_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
+		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->join('treament', 'treament.t_id = treatmentwise_doctors.t_d_name', 'left');
 		$this->db->where('treatmentwise_doctors.t_d_create_by',$a_id);
 		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
 		$this->db->where('treatmentwise_doctors.t_d_status !=',2);

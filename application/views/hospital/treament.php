@@ -48,7 +48,7 @@
 									   <?php if(count($treatment_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($treatment_list as $list){ ?>
-									   <option value="<?php echo $list['t_name']; ?>"><?php echo $list['t_name']; ?> </option>
+									   <option value="<?php echo $list['t_id']; ?>"><?php echo $list['t_name']; ?> </option>
 									   <?php } ?>
 									   <?php } ?>
 									   </select>&nbsp;
@@ -56,7 +56,7 @@
 									   <?php if(count($doctors_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($doctors_list as $list){ ?>
-									   <option value="<?php echo $list['r_id']; ?>"><?php echo $list['resource_name']; ?> </option>
+									   <option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?> </option>
 									   <?php } ?>
 									   <?php } ?>
 									   </select>
@@ -82,7 +82,7 @@
                <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
                   <div class="container">
 					<?php if(count($hospital_treatment_list)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
+                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
 												<th>Treatment Name</th>
@@ -94,7 +94,7 @@
                                         <tbody>
 										<?php foreach($hospital_treatment_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['t_d_name']); ?></td>
+                                                <td><?php echo htmlentities($list['t_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
 												<td><?php if($list['t_d_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td><a href="<?php echo base_url('hospital/addtreatmentstatus/'.base64_encode($list['t_d_id']).'/'.base64_encode($list['t_d_status'])); ?>">
