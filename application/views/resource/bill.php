@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  <head>
+    <meta charset="utf-8">
+    <title>Example 2</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
   <style>
 	@font-face {
   font-family: SourceSansPro;
@@ -206,11 +210,5 @@ table, th, td {
 	  
 	</table>
    
-<<<<<<< HEAD
-      
-    </main>
-  
-=======
->>>>>>> 5b61b383503239b6fe57c665bf41be3d85d6e5e1
   </body>
 </html>
