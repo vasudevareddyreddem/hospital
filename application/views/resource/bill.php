@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Example 2</title>
-    <link rel="stylesheet" href="style.css" media="all" />
-  </head>
+
   <style>
 	@font-face {
   font-family: SourceSansPro;
@@ -146,8 +142,6 @@ table, th, td {
    
       
     </main>
-    <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
-    </footer>
+  
   </body>
 </html>
