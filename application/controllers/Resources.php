@@ -560,7 +560,7 @@ class Resources extends CI_Controller {
 					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view
 					$pdfFilePath = $path."assets/patient_bills/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
-					$html = $this->load->view('resource/bill', $data, true); // render the view into HTML
+					$html = $this->load->view('resource/patient_details', $data, true); // render the view into HTML
 					//echo '<pre>';print_r($html);exit;
 					$this->load->library('pdf');
 					$pdf = $this->pdf->load();
