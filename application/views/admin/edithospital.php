@@ -249,6 +249,12 @@
                               <input type="file" id="hos_bas_document" name="hos_bas_document"class="default">
                            </div>
                         </div>
+						<div class="form-group col-md-6">
+                           <label for="email">Hospital Logo</label>
+                           <div class="compose-editor">
+                              <input type="file" id="hos_bas_logo" name="hos_bas_logo"class="default">
+                           </div>
+                        </div>
                      </div>
                      <div class="form-actions">
                         <div class="row">
@@ -681,6 +687,13 @@ $(document).ready(function() {
 					regexp: {
 					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
 					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+            },hos_bas_logo: {
+                validators: {
+					regexp: {
+					regexp: "(.*?)\.(png|jpg|jpeg)$",
+					message: 'Uploaded file is not a valid. Only png,jpg,jpeg files are allowed'
 					}
 				}
             }

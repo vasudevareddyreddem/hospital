@@ -272,6 +272,16 @@
 														  <?php } ?>
 														 </div>
 													 </div>
+													 <div class="row">												  
+														 <div class=" col-sm-6">
+														 <strong>Logo</strong>
+														 </div>
+														<div class=" col-sm-6">
+														  <?php if($hospital_details['hos_bas_logo']!=''){ ?>
+														  <img width="50px" height="50px" src="<?php echo base_url('assets/hospital_logos/'.$hospital_details['hos_bas_logo']); ?>">
+														  <?php } ?>
+														 </div>
+													 </div>
 													</div>
 													<div class="col-md-6">
 													<div class="row">												  
