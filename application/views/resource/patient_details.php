@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><?php echo isset($page_title)?$page_title:''; ?></title>
-    <link rel="stylesheet" href="style.css" media="all" />
+    <title>bill</title>
   </head>
   <style>
 	@font-face {
@@ -40,21 +39,6 @@ header {
   border-bottom: 1px solid #AAAAAA;
 }
 
-#logo {
-  float: left;
-  margin-top: 8px;
-}
-
-#logo img {
-  height: auto;
-  width:150px;
-  
-}
-
-#company {
-  float: right;
-  text-align: right;
-}
 
 
 #details {
@@ -105,10 +89,11 @@ table, th, td {
 	</style>
   <body>
     <header class="clearfix">
-      <div id="logo">
-        <img style="width:150px;height:auto;" src="<?php echo base_url('assets/hospital_logos/'.$details['hos_bas_logo']); ?>">
+      
+      <div  style="float:left;width:200px">
+        <img style="width:auto;height:100px;" src="<?php echo base_url('assets/hospital_logos/'.$details['hos_bas_logo']); ?>">
       </div>
-      <div id="company">
+      <div style="float:right;width:200px">
         <h2 class="name"><?php echo isset($details['hos_bas_name'])?$details['hos_bas_name']:''; ?></h2>
         <div>
 		<?php echo isset($details['hos_bas_add1'])?$details['hos_bas_add1']:''; ?>,
@@ -118,11 +103,12 @@ table, th, td {
 		<?php echo isset($details['hos_bas_country'])?$details['hos_bas_country']:''; ?>,
 		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>
 		</div>
-        <div>(<?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
+        <div><?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
         <div><a href="mailto:company@example.com"><?php echo isset($details['hos_bas_email'])?$details['hos_bas_email']:''; ?></a></div>
       </div>
-      </div>
+      
     </header>
+	
  
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
@@ -149,7 +135,12 @@ table, th, td {
 	
 		
 	  </tr>   
-	 
+	  <tr>
+		<td colspan="3"><strong>Address:</strong> <span>Use this tool as test data for an automated system </span></td>
+		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
+		
+		
+	  </tr> 
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Visit Info</th>
 		
@@ -163,7 +154,8 @@ table, th, td {
 	  <tr>
 		<td><strong>Doctor:</strong> <span><?php echo isset($details['docotr_name'])?$details['docotr_name']:''; ?></span></td>
 		<td><strong>No- of visits:</strong> <span><?php echo isset($details['no_of_visits'])?$details['no_of_visits']:''; ?></span></td>
-		<td colspan="2"><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
+		<td><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
+		<td></td>
 	  </tr>
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Order Info</th>
@@ -197,15 +189,43 @@ table, th, td {
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Vitals</th>
 		
-	  </tr>
-	  <tr>
-		<td><strong>Temperature :</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
-		<td><strong>Payment mode:</strong> <span><?php echo isset($details['payment_mode'])?$details['payment_mode']:''; ?></span></td>
-		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
-		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
-	  </tr>
-	  
 	</table>
+	<table style="width:100%">
+	  <tr style="line-height:40px">
+		<th >Vitals</th>
+		<th colspan="2" style="text-align:center">Values</th>
+		<th colspan="2" style="text-align:center">Others</th>
+		<th >Notes</th>
+		
+		
+	  </tr>
+	  <tr style="line-height:40px">
+		<th>Blood Press</th>
+		<td>Actuals</td>
+		<td>Range</td>
+		<th>Blood pressure site</th>
+		<td colspan="2" style="text-align:center">Positioning</td>
+		
+	  </tr> 
+	  <tr style="line-height:40px">
+		<th>Temperature</th>
+		<td><?php echo isset($details['tep_actuals'])?$details['tep_actuals']:''; ?></td>
+		<td><?php echo isset($details['tep_range'])?$details['tep_range']:''; ?></td>
+		<th>Temperature site</th>
+		<td><?php echo isset($details['temp_site_positioning'])?$details['temp_site_positioning']:''; ?></td>
+		<td><?php echo isset($details['notes'])?$details['notes']:''; ?></td>
+	  </tr>
+	  <tr style="line-height:40px">
+		<th>Pulse rate</th>
+		<td><?php echo isset($details['pulse_actuals'])?$details['pulse_actuals']:''; ?></td>
+		<td><?php echo isset($details['pulse_range'])?$details['pulse_range']:''; ?></td>
+		<th>Pulse rate sight</th>
+		<td colspan="2" style="text-align:center">
+		<span>fdffsdfsdf</span> &nbsp;  &nbsp;<span>fdffsdfsdf</span> &nbsp; &nbsp; <span>fdffsdfsdf</span>
+		</td>
+		
+	  </tr>
+	 </table>
    
   </body>
 </html>

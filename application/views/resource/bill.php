@@ -109,43 +109,6 @@ table, th, td {
       
     </header>
 	<table style="width:100%">
-	  <tr style="line-height:40px">
-		<th >Vitals</th>
-		<th colspan="2" style="text-align:center">Values</th>
-		<th colspan="2" style="text-align:center">Others</th>
-		<th >Notes</th>
-		
-		
-	  </tr>
-	  <tr style="line-height:40px">
-		<th>Blood Press</th>
-		<td>Actuals</td>
-		<td>Range</td>
-		<th>Blood pressure site</th>
-		<td colspan="2" style="text-align:center">Positioning</td>
-		
-	  </tr> 
-	  <tr style="line-height:40px">
-		<th>Temperature</th>
-		<td>Actuals</td>
-		<td>Range</td>
-		<th>Temperature site</th>
-		<td>25</td>
-		<td>34</td>
-	  </tr>
-	  <tr style="line-height:40px">
-		<th>Pulse rate</th>
-		<td>5</td>
-		<td>25</td>
-		<th>Pulse rate sight</th>
-		<td colspan="2" style="text-align:center">
-		<span>fdffsdfsdf</span> &nbsp;  &nbsp;<span>fdffsdfsdf</span> &nbsp; &nbsp; <span>fdffsdfsdf</span>
-		</td>
-		
-	  </tr>
-	 </table>
- 
-	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Paient info</th>
 		
