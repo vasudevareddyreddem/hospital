@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 2</title>
+    <title><?php echo isset($page_title)?$page_title:''; ?></title>
     <link rel="stylesheet" href="style.css" media="all" />
   </head>
   <style>
@@ -149,12 +149,7 @@ table, th, td {
 	
 		
 	  </tr>   
-	  <tr>
-		<td colspan="3"><strong>Address:</strong> <span>Use this tool as test data for an automated system </span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		
-		
-	  </tr> 
+	 
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Visit Info</th>
 		
@@ -168,8 +163,7 @@ table, th, td {
 	  <tr>
 		<td><strong>Doctor:</strong> <span><?php echo isset($details['docotr_name'])?$details['docotr_name']:''; ?></span></td>
 		<td><strong>No- of visits:</strong> <span><?php echo isset($details['no_of_visits'])?$details['no_of_visits']:''; ?></span></td>
-		<td><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
-		<td></td>
+		<td colspan="2"><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
 	  </tr>
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Order Info</th>
@@ -201,11 +195,14 @@ table, th, td {
 		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
 	  </tr>
 	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Payer Auth Info</th>
+		<th colspan="4">Vitals</th>
 		
 	  </tr>
-	   <tr>
-		<td colspan="4"><strong>Sign with payer:</strong> <span></span></td>
+	  <tr>
+		<td><strong>Temperature :</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
+		<td><strong>Payment mode:</strong> <span><?php echo isset($details['payment_mode'])?$details['payment_mode']:''; ?></span></td>
+		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
+		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
 	  </tr>
 	  
 	</table>
