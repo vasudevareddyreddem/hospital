@@ -828,6 +828,7 @@
    
    </div>
 </div>
+<div id="sucessmsg" style="display:none;"></div>
 <script>
 function assign_doctore(){
 	var pid=$('#patientid').val();
@@ -845,13 +846,14 @@ function assign_doctore(){
 					dataType: 'json',
 					type: 'POST',
 					success: function (data) {
-						
-						//console.log(data);return false;
+						$('#sucessmsg').show();
+						if(data.msg==1){
+							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Doctor and Treatment Successfully Assigned<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}else{
+							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}
 					}
-				
 				});
-	
-	
 }
 function get_doctor_list(id){
 				jQuery.ajax({

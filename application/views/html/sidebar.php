@@ -202,6 +202,40 @@
 	                                </li>
 	                            </ul>
 	                        </li>
+						<?php } else if($userdetails['role_id']==4){ ?>
+						  <li class="nav-item start ">
+	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li> 
+							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">dashboard</i>
+	                                <span class="title">Prescription </span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="#" class="nav-link "> <span class="title">Receive  </span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="#" class="nav-link "> <span class="title">Billing</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+						 <li class="nav-item start ">
+	                            <a href="<?php echo base_url('medicine');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Upload medicine</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+														
 						<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>

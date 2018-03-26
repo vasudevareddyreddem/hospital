@@ -108,8 +108,6 @@ table, th, td {
       </div>
       
     </header>
-	
- 
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Paient info</th>
@@ -186,60 +184,15 @@ table, th, td {
 		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
 		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
 	  </tr>
-	
-		
-	</table>
-	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="6">Vitals</th>
-		</tr>
-	  <tr style="line-height:40px">
-		<th >Vitals</th>
-		<th colspan="2" style="text-align:center">Values</th>
-		<th colspan="2" style="text-align:center">Others</th>
-		<th >Notes</th>
-		
+		<th colspan="4">Payer Auth Info</th>
 		
 	  </tr>
-	  <tr style="line-height:40px">
-		<th>Blood Press</th>
-		<td>Actuals</td>
-		<td>Range</td>
-		<th>Blood pressure site</th>
-		<td >Positioning</td>
-			<td>&nbsp;</td>
-		
-	  </tr> 
-	  <tr style="line-height:40px">
-		<th>Temperature</th>
-		<td><?php echo isset($details['tep_actuals'])?$details['tep_actuals']:''; ?></td>
-		<td><?php echo isset($details['tep_range'])?$details['tep_range']:''; ?></td>
-		<th>Temperature site</th>
-		<td><?php echo isset($details['temp_site_positioning'])?$details['temp_site_positioning']:''; ?></td>
-		<td><?php echo isset($details['notes'])?$details['notes']:''; ?></td>
+	   <tr>
+		<td colspan="4"><strong>Sign with payer:</strong> <span></span></td>
 	  </tr>
-	  <tr style="line-height:40px">
-		<th>Pulse rate</th>
-		<td><?php echo isset($details['pulse_actuals'])?$details['pulse_actuals']:''; ?></td>
-		<td><?php echo isset($details['pulse_range'])?$details['pulse_range']:''; ?></td>
-		<th>Pulse rate sight</th>
-		<td >
-		<span><?php echo isset($details['pulse_rate_rhythm'])?$details['pulse_rate_rhythm']:''; ?></span> &nbsp;  &nbsp;
-		<span><?php echo isset($details['pulse_rate_vol'])?$details['pulse_rate_vol']:''; ?></span> &nbsp; &nbsp; 
-		</td>
-		<td><?php echo isset($details['notes1'])?$details['notes1']:''; ?></td>
-		
-	  </tr>
-	 </table>
-	 <table style="width:100%">
-	 <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Doctor Name and Treatment</th>
-		</tr>
-		<tr>
-		<td colspan="2"><strong>Doctor Name:</strong> <span><?php echo isset($details['t_name'])?$details['t_name']:''; ?></span></td>
-		<td colspan="2"><strong>Treatment Name:</strong> <span><?php echo isset($details['resource_name'])?$details['resource_name']:''; ?></span></td>
-	  </tr>
-	   </table>
+	  
+	</table>
    
   </body>
 </html>

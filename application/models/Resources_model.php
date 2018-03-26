@@ -74,9 +74,11 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_billing_details($p_id,$b_id){
-		$this->db->select('patient_billing.*,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,hospital.hos_bas_logo,hospital.hos_email_id,hospital.hos_con_number,hospital.hos_bas_email,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_zipcode,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_country,hospital.hos_bas_name,hospital.hos_bas_contact')->from('patient_billing');
+		$this->db->select('patient_billing.*,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,hospital.hos_bas_logo,hospital.hos_email_id,hospital.hos_con_number,hospital.hos_bas_email,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_zipcode,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_country,hospital.hos_bas_name,hospital.hos_bas_contact,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
+		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
 		$this->db->where('p_id',$p_id);
 		$this->db->where('b_id',$b_id);
         return $this->db->get()->row_array();

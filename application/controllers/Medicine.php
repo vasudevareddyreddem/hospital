@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Resources extends CI_Controller {
+class Medicine extends CI_Controller {
 
 	public function __construct() 
 	{
@@ -24,37 +24,16 @@ class Resources extends CI_Controller {
 			$this->load->view('html/sidebar',$data);
 			}
 		}
-	public function desk()
+	public function index()
 	{	
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=3){
+				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['patients_list']= $this->Resources_model->get_all_patients_lists($userdetails['hos_id']);
-					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
-					//echo '<pre>';print_r($data);exit; 
-					$patient_id= base64_decode($this->uri->segment(3));
-					if(isset($patient_id) && $patient_id!=''){
-						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
-						$data['tab']= base64_decode($this->uri->segment(4));
-						$data['pid']= base64_decode($this->uri->segment(3));
-						$data['subtab']=base64_decode($this->uri->segment(6));
-						$data['bill_id']=base64_decode($this->uri->segment(5));
-						$billing_id=base64_decode($this->uri->segment(5));
-						if($billing_id!=''){
-							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
-						}else{
-							$data['billing_detailes']=array();
-						}
-					}else{
-						$data['patient_detailes']=array();
-						$data['tab']=1;
-						 $data['pid']='';
-						 $data['bill_id']='';
-					}
+					
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('resource/desk',$data);
+					$this->load->view('resource/medicine');
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
