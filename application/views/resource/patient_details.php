@@ -204,7 +204,8 @@ table, th, td {
 		<td>Actuals</td>
 		<td>Range</td>
 		<th>Blood pressure site</th>
-		<td colspan="2" style="text-align:center">Positioning</td>
+		<td >Positioning</td>
+			<td>&nbsp;</td>
 		
 	  </tr> 
 	  <tr style="line-height:40px">
@@ -220,9 +221,10 @@ table, th, td {
 		<td><?php echo isset($details['pulse_actuals'])?$details['pulse_actuals']:''; ?></td>
 		<td><?php echo isset($details['pulse_range'])?$details['pulse_range']:''; ?></td>
 		<th>Pulse rate sight</th>
-		<td colspan="2" style="text-align:center">
-		<span>fdffsdfsdf</span> &nbsp;  &nbsp;<span>fdffsdfsdf</span> &nbsp; &nbsp; <span>fdffsdfsdf</span>
+		<td >
+		<span>fdffsdfsdf</span> &nbsp;  &nbsp;<span>fdffsdfsdf</span> &nbsp; &nbsp; 
 		</td>
+		<td>fdffsdfsdf</td>
 		
 	  </tr>
 	 </table>
