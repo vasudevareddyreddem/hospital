@@ -1,6 +1,7 @@
 
     <!-- start js include path -->
     <script src="<?php echo base_url(); ?>assets/vendor/plugins/jquery.min.js" ></script>
+    <script src="<?php echo base_url(); ?>assets/vendor/plugins/autoComplete.js" ></script>
     <script src="<?php echo base_url(); ?>assets/vendor/plugins/tether/js/tether.min.js" ></script>
     <script src="<?php echo base_url(); ?>assets/vendor/plugins/jquery.blockui.min.js" ></script>
 	<script src="<?php echo base_url(); ?>assets/vendor/plugins/jquery.slimscroll.js"></script>
