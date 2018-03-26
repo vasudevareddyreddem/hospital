@@ -67,19 +67,15 @@
 														<ul class="dropdown-menu slidedown">
 															<li><a href="#"><span class="glyphicon glyphicon-refresh">
 															</span>Refresh</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-ok-sign">
-															</span>Available</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-remove">
-															</span>Busy</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-time"></span>
-																Away</a></li>
+														
+															
 															<li class="divider"></li>
 															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
 																Sign Out</a></li>
 														</ul>
 													</div>
 												</div>
-												<div class="panel-body">
+												<div class="panel-body" style="height:300px;overflow-y: scroll;">
 													<ul class="chat">
 													<?php if(isset($chat_list) && count($chat_list)>0){ ?>
 													<?php foreach($chat_list as $list){ ?>

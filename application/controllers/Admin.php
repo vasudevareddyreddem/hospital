@@ -61,6 +61,7 @@ class Admin extends CI_Controller {
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$data['chat_list']=$this->Admin_model->getget_team_message_list();
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/softwaresupport',$data);
 				$this->load->view('html/footer');
 		}else{
