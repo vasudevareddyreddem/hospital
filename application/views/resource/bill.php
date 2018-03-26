@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 2</title>
-    <link rel="stylesheet" href="style.css" media="all" />
+    <title>bill</title>
   </head>
   <style>
 	@font-face {
@@ -40,21 +39,6 @@ header {
   border-bottom: 1px solid #AAAAAA;
 }
 
-#logo {
-  float: left;
-  margin-top: 8px;
-}
-
-#logo img {
-  height: auto;
-  width:150px;
-  
-}
-
-#company {
-  float: right;
-  text-align: right;
-}
 
 
 #details {
@@ -105,10 +89,11 @@ table, th, td {
 	</style>
   <body>
     <header class="clearfix">
-      <div id="logo">
-        <img style="width:150px;height:auto;" src="<?php echo base_url('assets/hospital_logos/'.$details['hos_bas_logo']); ?>">
+      
+      <div  style="float:left;width:200px">
+        <img style="width:auto;height:100px;" src="<?php echo base_url('assets/hospital_logos/'.$details['hos_bas_logo']); ?>">
       </div>
-      <div id="company">
+      <div style="float:right;width:200px">
         <h2 class="name"><?php echo isset($details['hos_bas_name'])?$details['hos_bas_name']:''; ?></h2>
         <div>
 		<?php echo isset($details['hos_bas_add1'])?$details['hos_bas_add1']:''; ?>,
@@ -118,11 +103,47 @@ table, th, td {
 		<?php echo isset($details['hos_bas_country'])?$details['hos_bas_country']:''; ?>,
 		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>
 		</div>
-        <div>(<?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
+        <div><?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
         <div><a href="mailto:company@example.com"><?php echo isset($details['hos_bas_email'])?$details['hos_bas_email']:''; ?></a></div>
       </div>
-      </div>
+      
     </header>
+	<table style="width:100%">
+	  <tr style="line-height:40px">
+		<th >Vitals</th>
+		<th colspan="2" style="text-align:center">Values</th>
+		<th colspan="2" style="text-align:center">Others</th>
+		<th >Notes</th>
+		
+		
+	  </tr>
+	  <tr style="line-height:40px">
+		<th>Blood Press</th>
+		<td>Actuals</td>
+		<td>Range</td>
+		<th>Blood pressure site</th>
+		<td colspan="2" style="text-align:center">Positioning</td>
+		
+	  </tr> 
+	  <tr style="line-height:40px">
+		<th>Temperature</th>
+		<td>Actuals</td>
+		<td>Range</td>
+		<th>Temperature site</th>
+		<td>25</td>
+		<td>34</td>
+	  </tr>
+	  <tr style="line-height:40px">
+		<th>Pulse rate</th>
+		<td>5</td>
+		<td>25</td>
+		<th>Pulse rate sight</th>
+		<td colspan="2" style="text-align:center">
+		<span>fdffsdfsdf</span> &nbsp;  &nbsp;<span>fdffsdfsdf</span> &nbsp; &nbsp; <span>fdffsdfsdf</span>
+		</td>
+		
+	  </tr>
+	 </table>
  
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
