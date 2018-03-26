@@ -1,0 +1,150 @@
+
+<div class="page-content-wrapper">
+                <div class="page-content">
+                    <div class="page-bar">
+                        <div class="page-title-breadcrumb">
+                            <div class=" pull-left">
+                                <div class="page-title">Support</div>
+                            </div>
+                            <ol class="breadcrumb page-breadcrumb pull-right">
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                </li>
+                                <li class="active">Support</li>
+                            </ol>
+                        </div>
+                    </div>
+                   <!-- start widget -->
+	                  
+					
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card  card-topline-yellow">
+                                <div class="card-head">
+                                    <header>Chat</header>
+                                </div>
+                                <div class="card-body ">
+									<div class="row">
+										<div class=" col-md-2 ">
+												&nbsp;
+										</div>
+										<div class="col-md-8 chat-help">
+											<div class="panel ">
+												<div class="panel-heading bg-indigo">
+													<span class="glyphicon glyphicon-comment"></span> Software Support
+													<div class="btn-group pull-right">
+														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+															<span class="fa fa-angle-down"> </span>
+														</button>
+														<ul class="dropdown-menu slidedown">
+															<li><a href="#"><span class="glyphicon glyphicon-refresh">
+															</span>Refresh</a></li>
+															<li class="divider"></li>
+															<li><a href="<?php echo base_url('dashboard/logout'); ?>"><span class="glyphicon glyphicon-off"></span>
+																Sign Out</a></li>
+														</ul>
+													</div>
+												</div>
+												<div class="panel-body">
+													<ul class="chat">
+													<?php if(isset($chat_list) && count($chat_list)>0){ ?>
+													<?php foreach($chat_list as $list){ ?>
+													
+														<?php if($list['type']=='Replayed'){ ?>
+														<li class="left clearfix"><span class="chat-img pull-left">
+															<?php if($list['replayedpic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																	<strong class="primary-font"><?php echo isset($list['replayedname'])?$list['replayedname']:''; ?></strong> <small class="pull-right text-muted">
+																		<span class="glyphicon glyphicon-time"></span>
+																		<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																		?>
+																	</small>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php }else{ ?>
+														<li class="right clearfix"><span class="chat-img pull-right">
+														<?php if($list['replaypic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																<?php 
+																
+																$checkTime = strtotime($list['create_at']);
+	
+																?>
+																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>
+																	<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																	?>
+																	</small>
+																	<strong class="pull-right primary-font"><?php echo isset($list['replayname'])?$list['replayname']:''; ?></strong>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php } ?>
+														
+														
+													<?php } ?>
+													<?php } ?>
+													</ul>
+												</div>
+												<form action="<?php echo base_url('chat/softwareteam'); ?>" method="post" enctype="multipart/form-data">
+													<div class="panel-footer"><br>
+														<div class="input-group input-chat-des">
+															
+															<input  type="hidden" name="replaying" id="replaying" value="1" />
+															<input  type="hidden" name="a_id" id="a_id" value="<?php echo isset($chat_list[0]['user_id'])?$chat_list[0]['user_id']:'' ; ?>" >
+															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..."  required>
+															<input  type="file" name="image" id="image" class="form-control input-sm" />
+															<span class="input-group-btn">
+																<button class="btn btn-warning btn-sm" id="btn-chat">
+																	Send</button>
+															</span>
+														
+														</div>
+													</div>
+												</form>
+											</div>
+								</div>
+									</div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end admited patient list -->
+                </div>
+            </div>
+			<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

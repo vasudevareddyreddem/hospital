@@ -588,7 +588,7 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=3){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					echo '<pre>';print_r($post);
+					//echo '<pre>';print_r($post);
 					$billing=array(
 					 'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
 					 'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',

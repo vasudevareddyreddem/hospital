@@ -44,6 +44,22 @@ class Admin_model extends CI_Model
 		$this->db->where('hos_status !=', 2);
         return $this->db->get()->result_array();	
 	}
+	public function getget_team_message_list(){
+		$this->db->select('team_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
+		$this->db->join('resource_list as sentname', 'sentname.a_id = team_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = team_chating.replay_user_id', 'left');
+		$this->db->group_by('team_chating.user_id');
+		$this->db->order_by('team_chating.updated_by');
+        return $this->db->get()->result_array();	
+	}
+	public function getget_team_replay_message_list($user_id){
+		$this->db->select('team_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
+		$this->db->join('resource_list as sentname', 'sentname.a_id = team_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = team_chating.replay_user_id', 'left');
+		$this->db->where('team_chating.user_id',$user_id);
+		$this->db->order_by('team_chating.updated_by');
+        return $this->db->get()->result_array();	
+	}
 
 
 }
