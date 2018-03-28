@@ -22,6 +22,8 @@
 			
 		</div>
 		<div class="card-body ">
+						<form action="<?php echo base_url('medicine/addpost'); ?>" method="post">
+
 		<div class="table-responsive">
 			
 			<table class="table table-bordered table-hover" id="tab_logic">
@@ -37,7 +39,6 @@
 						<th>Other</th>
 					</tr>
 				</thead>
-				<form action="<?php echo base_url('medicine/addpost'); ?>" method="post">
 				<tbody>
 					<tr id='addr0'>
 						
@@ -52,17 +53,18 @@
 						<td><input id="qty" name="qty[]" type="text" class="form-control"></td>
 						<td><input id="sgst" name="sgst[]" type="text" class="form-control"></td>
 						<td><input id="cgst" name="cgst[]" type="text" class="form-control"></td>
-						<td><input id="others" name="others[]" type="text" class="form-control"></td>
+						<td><input id="other" name="other[]" type="text" class="form-control"></td>
 						
 					</tr>
                     <tr id='addr1'></tr>
 				</tbody>
 				<button type="submit">submit</button>
-				</form>
+			
 			</table>
 			<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 			
 			</div>
+				</form>
 		</div>
 	</div>
 </div>

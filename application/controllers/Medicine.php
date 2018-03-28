@@ -46,10 +46,26 @@ class Medicine extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function addpost(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					echo '<pre>';print_r($post);exit;
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function search(){
 		$post=$this->input->post();
 		$details=$this->medicine_model->get_search_post($post['searchdata']);
-		//echo $this->db->last_query();exit;
+		//	echo $this->db->last_query();exit;
 		if(count($details) > 0)
 				{
 				$data['msg']=1;
