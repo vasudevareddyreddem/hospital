@@ -57,6 +57,7 @@
 					</tr>
                     <tr id='addr1'></tr>
 				</tbody>
+				<button type="submit">submit</button>
 				</form>
 			</table>
 			<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
