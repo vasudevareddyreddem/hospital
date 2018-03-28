@@ -23,38 +23,7 @@
 		</div>
 		<div class="card-body ">
 		<div class="table-responsive">
-			<!--<table class="table table-striped custom-table table-hover"  id="myTable">
-				<thead>
-					<tr>
-						<th> S.NO</th>
-						<th>HSN</th>
-						<th>Other Code</th>
-						<th>Medicine Name</th>
-						<th>QTY</th>
-						<th>SGST</th>
-						<th>CGST</th>
-						<th>Other</th>
-					</tr>
-				</thead>
-				<tbody>
-				  <tr id="row0">
-           
-						<td>1</td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-						<td>
-							 <form onsubmit="$('#hero-demo').blur();return false;" class="pure-form">
-								<input id="" autofocus type="text" name="q" placeholder="medicine name ..." Class="form-control hero-demo">
-							</form>
-						</td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-           
-        </tr>
-				</tbody>
-			</table>-->
+			
 			<table class="table table-bordered table-hover" id="tab_logic">
 					<thead>
 					<tr>
@@ -68,25 +37,27 @@
 						<th>Other</th>
 					</tr>
 				</thead>
+				<form action="<?php echo base_url('medicine/addpost'); ?>" method="post">
 				<tbody>
 					<tr id='addr0'>
 						
 						<td>1</td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
+						<td><input id="hsn" name="hsn[]" type="text" class="form-control"></td>
+						<td><input id="othercode" name="othercode[]" type="text" class="form-control"></td>
 						<td>
-							 <form onsubmit="$('#hero-demo').blur();return false;" class="pure-form">
-								<input id="" autofocus type="text" name="q" placeholder="medicine name ..." Class="form-control hero-demo">
-							</form>
+							<input id="medicines0" autofocus type="text" onkeyup="autopouplated(this.value,'0')" name="medicine[]" placeholder="medicine name ..." Class="form-control hero-demo">
+								<ul class="text-left mar-t10 pad-l-r" id="searchresult">
+								</ul>
 						</td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
-						<td><input type="text" class="form-control"></td>
+						<td><input id="qty" name="qty[]" type="text" class="form-control"></td>
+						<td><input id="sgst" name="sgst[]" type="text" class="form-control"></td>
+						<td><input id="cgst" name="cgst[]" type="text" class="form-control"></td>
+						<td><input id="others" name="others[]" type="text" class="form-control"></td>
 						
 					</tr>
                     <tr id='addr1'></tr>
 				</tbody>
+				</form>
 			</table>
 			<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 			
@@ -103,7 +74,7 @@
     $(document).ready(function(){
       var i=1;
      $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder=''  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Medicine name'  class='form-control input-md '></td><td><input  name='mobile"+i+"' type='text' placeholder=''  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder=''  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder=''  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder=''  class='form-control input-md'></td>");
+      $('#addr'+i).html('<td>'+ (i+1) +'</td><td><input name="hsn[]" type="text"  class="form-control input-md"  /> </td><td><input  name="othercode[]" type="text" class="form-control input-md"></td><td><input  name="medicine[]" id="medicines"'+i+' onkeyup="autopouplated(this.value,'+i+')" type="text" class="form-control input-md hero-demo"></td><td><input  name="qty[]" type="text" class="form-control input-md"></td><td><input  name="sgst[]" type="text" class="form-control input-md"></td><td><input  name="cgst[]" type="text" class="form-control input-md"></td><td><input  name="other[]" type="text"  class="form-control input-md"></td>');
 
       $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 
@@ -114,51 +85,30 @@
 		 i--;
 		 }
 	 });
+	 
+	
 
 });
- </script>
- <script>
-        $(function(){
-            $('.hero-demo').autoComplete({
-                minChars: 1,
-                source: function(term, suggest){
-                    term = term.toLowerCase();
-                    var choices = ['ActionScript', 'AppleScript', 'Asp', 'Assembly', 'BASIC', 'Batch', 'C', 'C++', 'CSS', 'Clojure', 'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'HTML', 'Java', 'JavaScript', 'Lisp', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'Scheme', 'SQL', 'TeX', 'XML'];
-                    var suggestions = [];
-                    for (i=0;i<choices.length;i++)
-                        if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
-                    suggest(suggestions);
-                }
-            });
-            $('#advanced-demo').autoComplete({
-                minChars: 0,
-                source: function(term, suggest){
-                    term = term.toLowerCase();
-                    var choices = [['Australia', 'au'], ['Austria', 'at'], ['Brasil', 'br'], ['Bulgaria', 'bg'], ['Canada', 'ca'], ['China', 'cn'], ['Czech Republic', 'cz'], ['Denmark', 'dk'], ['Finland', 'fi'], ['France', 'fr'], ['Germany', 'de'], ['Hungary', 'hu'], ['India', 'in'], ['Italy', 'it'], ['Japan', 'ja'], ['Netherlands', 'nl'], ['Norway', 'no'], ['Portugal', 'pt'], ['Romania', 'ro'], ['Russia', 'ru'], ['Spain', 'es'], ['Swiss', 'ch'], ['Turkey', 'tr'], ['USA', 'us']];
-                    var suggestions = [];
-                    for (i=0;i<choices.length;i++)
-                        if (~(choices[i][0]+' '+choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
-                    suggest(suggestions);
-                },
-                renderItem: function (item, search){
-                    search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                    var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                    return '<div class="autocomplete-suggestion" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"><img src="img/'+item[1]+'.png"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
-                },
-                onSelect: function(e, term, item){
-                    console.log('Item "'+item.data('langname')+' ('+item.data('lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter or tab' : 'mouse click')+'.');
-                    $('#advanced-demo').val(item.data('langname')+' ('+item.data('lang')+')');
-                }
-            });
-        });
 
-        if (~window.location.href.indexOf('http')) {
-            (function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();
-            (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=114593902037957";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-            $('#github_social').html('\
-                <iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=jQuery-autoComplete&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
-                <iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=jQuery-autoComplete&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
-            ');
-        }
-    </script>
+	
+	
+	function autopouplated(val ,id){
+		jQuery.ajax({
+					url: "<?php echo base_url('medicine/search');?>",
+					data: {
+						searchdata: val,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+						$('#searchresult').empty();
+						for(i=0; i<data.text.length; i++) {
+						$('#searchresult').append(data.text[i].medicine_name);                      
+                      
+					}
+				 }
+				});
+		
+	}	
+	 
+ </script>
