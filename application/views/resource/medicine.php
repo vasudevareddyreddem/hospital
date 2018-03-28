@@ -41,14 +41,18 @@
 				</thead>
 				<tbody>
 					<tr id='addr0'>
-						
 						<td>1</td>
 						<td><input id="hsn" name="hsn[]" type="text" class="form-control"></td>
 						<td><input id="othercode" name="othercode[]" type="text" class="form-control"></td>
 						<td>
-							<input id="medicines0" autofocus type="text" onkeyup="autopouplated(this.value,'0')" name="medicine[]" placeholder="medicine name ..." Class="form-control hero-demo">
-								<ul class="text-left mar-t10 pad-l-r" id="searchresult">
-								</ul>
+							  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+						
+						  <ul class="list-group" id="myList" style="position:absolute">
+							<li class="list-group-item" id="searchresult"></li>
+							
+						  </ul> 
+								<!--<ul class="text-left mar-t10 pad-l-r" >
+								</ul>-->
 						</td>
 						<td><input id="qty" name="qty[]" type="text" class="form-control"></td>
 						<td><input id="sgst" name="sgst[]" type="text" class="form-control"></td>
@@ -115,3 +119,13 @@
 	}	
 	 
  </script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
