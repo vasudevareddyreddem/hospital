@@ -235,6 +235,14 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('medicine/lists');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Medicine List</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
 							  <li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
