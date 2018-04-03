@@ -103,6 +103,17 @@ class Resources_model extends CI_Model
 		$this->db->where('patients_list_1.pid',$pid);
         return $this->db->get()->row_array();
 	}
+	public function get_billing_vitals_details($p_id){
+		$this->db->select('*')->from('patient_vitals_list');
+		$this->db->where('patient_vitals_list.p_id',$p_id);
+		//$this->db->where('patient_vitals_list.b_id',$b_id);
+		$this->db->order_by('patient_vitals_list.id',"DESC");
+        return $this->db->get()->row_array();
+	}
+	public function saving_patient_vital_details($data){
+		$this->db->insert('patient_vitals_list', $data);
+		return $insert_id = $this->db->insert_id();
+	}
 
 	
 	

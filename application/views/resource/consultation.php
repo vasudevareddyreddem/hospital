@@ -559,11 +559,12 @@
                                 <header>List</header>
                             </div>
                             <div class="card-body ">
+							<form action="<?php echo base_url('resources/addvitals'); ?>"  method="post">
                                 <div class="row">
                                     <div class="col-md-4 ">
                                         <div class="col-md-12">
                                             <label>Assessment</label>
-                                            <select class="form-control  ">
+                                            <select class="form-control" id="assessment_type" name="assessment_type">
 												<option >Infection </option>
 												<option >Diabetes</option>
 												<option >Cough & Cold</option>
@@ -572,7 +573,7 @@
                                         </div> <br>
                                         <div class="col-md-12">
 
-                                            <select class="form-control  ">
+                                            <select class="form-control" id="vitaltype" name="vitaltype">
 												<option >Chief complaint</option>
 												<option >Vitals</option>
 												<option >Allergies</option>
@@ -598,30 +599,46 @@
                                         <div class="table-scrollable">
                                             <table class="table table-bordered">
                                                 <thead>
-                                                    <tr>
-                                                        <th> Vitals</th>
-                                                        <th colspan="2"> Values </th>
-                                                        <th colspan="2"> Others </th>
-                                                        <th> Notes </th>
-                                                    </tr>
+													<tr>
+														<th> Vitals </th>
+														<th class="text-center" colspan="2"> Values  </th>
+														<th class="text-center" colspan="2"> Others  </th>
+														<th> Notes  </th>
+													</tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td> Blood Press</td>
-                                                        <td> Actuals </td>
-                                                        <td> Range </td>
-                                                        <td> Blood pressure site</td>
-                                                        <td>Positioning </td>
-                                                        <td> </td>
-                                                    </tr>
+														<th>Blood Press </th>
+														<td>Actuals</td>
+														<td>Range</td>
+														<th>Blood pressure site</th>
+														<td>Positioning</td>
+														<td></td>
+													
+													</tr>
                                                     <tr>
-                                                        <td>Temperature </td>
-                                                        <td> F </td>
-                                                        <td> C </td>
-                                                        <td> makr124 </td>
-                                                        <td> Temperature site </td>
-                                                        <td> </td>
-                                                    </tr>
+														<th>Temperature </th>
+														<td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="" placeholder="Actuals"> </td>
+														<td> <input type="text" id="tep_range" name="tep_range" value="" placeholder="Range"> </td>
+														<th>Temperature site</th>
+														<td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="" placeholder="Positioning "> </td>
+														<td> <input type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes"> </td>
+													</tr>
+													<tr>
+														<th> Pulse rate</th>
+														<td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="" placeholder="Actuals"> </td>
+														<td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="" placeholder="Range"> 
+														</td>
+														<th> Pulse rate sight  </th>
+														<td>
+														<div class="row">					
+														<input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="" placeholder="Rhythm  ">
+														
+														<input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="" placeholder="Vol ">
+														</div>
+														</td>
+														<td> <input type="text" class="form-control" id="notes1" name="notes1" value="" placeholder="Notes"> </td>
+													</tr>
 
                                                 </tbody>
                                             </table>
@@ -633,6 +650,7 @@
 										
 </button>
                                     </div>
+									</form>
                                 </div>
                             </div>
                         </div>

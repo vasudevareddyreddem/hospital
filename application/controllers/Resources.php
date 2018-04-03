@@ -44,8 +44,10 @@ class Resources extends CI_Controller {
 						$billing_id=base64_decode($this->uri->segment(5));
 						if($billing_id!=''){
 							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
+							$data['vitals_detailes']= $this->Resources_model->get_billing_vitals_details($data['pid']);
 						}else{
 							$data['billing_detailes']=array();
+							$data['vitals_detailes']=array();
 						}
 					}else{
 						$data['patient_detailes']=array();
@@ -595,21 +597,25 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);
-					$billing=array(
-					 'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
-					 'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
-					 'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
-					 'notes'=>isset($post['notes'])?$post['notes']:'',
-					 'pulse_actuals'=>isset($post['pulse_actuals'])?$post['pulse_actuals']:'',
-					 'pulse_range'=>isset($post['pulse_range'])?$post['pulse_range']:'',
-					 'pulse_rate_rhythm'=>isset($post['pulse_rate_rhythm'])?$post['pulse_rate_rhythm']:'',
-					 'pulse_rate_vol'=>isset($post['pulse_rate_vol'])?$post['pulse_rate_vol']:'',
-					 'notes1'=>isset($post['notes1'])?$post['notes1']:'',
-					 'updated_at'=>date('Y-m-d H:i:s')
-					);
+					$updating=array(
+						'p_id'=>isset($post['pid'])?$post['pid']:'',
+						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
+						'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
+						'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
+						'notes'=>isset($post['notes'])?$post['notes']:'',
+						'pulse_actuals'=>isset($post['pulse_actuals'])?$post['pulse_actuals']:'',
+						'pulse_range'=>isset($post['pulse_range'])?$post['pulse_range']:'',
+						'pulse_rate_rhythm'=>isset($post['pulse_rate_rhythm'])?$post['pulse_rate_rhythm']:'',
+						'pulse_rate_vol'=>isset($post['pulse_rate_vol'])?$post['pulse_rate_vol']:'',
+						'notes1'=>isset($post['notes1'])?$post['notes1']:'',
+						'create_at'=>date('Y-m-d H:i:s'),
+						'date'=>date('Y-m-d')
+						);
 					//echo '<pre>';print_r($billing);exit;
-						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
+						$update=$this->Resources_model->saving_patient_vital_details($updating);
 						if(count($update)>0){
+							
 							$this->session->set_flashdata('success',"Vitals details successfully Updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
 						}else{
@@ -685,6 +691,11 @@ class Resources extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					$patient_id=base64_decode($this->uri->segment(3));
+					if($patient_id==''){
+						$this->session->set_flashdata('error',"you don't have permission to access");
+						redirect('dashboard');
+					}
+					$data['patient_id']=isset($patient_id)?$patient_id:'';
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['worksheet']=$this->Resources_model->get_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
@@ -693,6 +704,47 @@ class Resources extends CI_Controller {
 					$this->load->view('resource/consultation',$data);
 					$this->load->view('html/footer');
 					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addvitals()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$billing=array(
+						'p_id'=>isset($post['pid'])?$post['pid']:'',
+						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
+						'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
+						'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
+						'notes'=>isset($post['notes'])?$post['notes']:'',
+						'pulse_actuals'=>isset($post['pulse_actuals'])?$post['pulse_actuals']:'',
+						'pulse_range'=>isset($post['pulse_range'])?$post['pulse_range']:'',
+						'pulse_rate_rhythm'=>isset($post['pulse_rate_rhythm'])?$post['pulse_rate_rhythm']:'',
+						'pulse_rate_vol'=>isset($post['pulse_rate_vol'])?$post['pulse_rate_vol']:'',
+						'notes1'=>isset($post['notes1'])?$post['notes1']:'',
+						'create_at'=>date('Y-m-d H:i:s'),
+						'date'=>date('Y-m-d')
+					);
+					echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->saving_patient_vital_details($billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Vitals successfully Added.");
+							redirect('resources/consultation/'.base64_encode($post['pid']));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/consultation/'.base64_encode($post['pid']));
+						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
