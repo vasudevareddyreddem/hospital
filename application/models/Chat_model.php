@@ -14,6 +14,10 @@ class Chat_model extends CI_Model
 		$this->db->insert('team_chating', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	public function adding_hospital_admin_chating($data){
+		$this->db->insert('team_chating', $data);
+		return $insert_id = $this->db->insert_id();
+	}
 	
 	
 	

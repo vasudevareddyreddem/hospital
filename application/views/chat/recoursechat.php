@@ -52,7 +52,106 @@
                </div>
                <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="admin">
                   <div class="container">
-						hospital admin
+						<div class="panel ">
+												<div class="panel-heading bg-indigo">
+													<span class="glyphicon glyphicon-comment"></span> Hospital Admin Support
+													<div class="btn-group pull-right">
+														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+															<span class="fa fa-angle-down"> </span>
+														</button>
+														<ul class="dropdown-menu slidedown">
+															<li><a href="#"><span class="glyphicon glyphicon-refresh">
+															</span>Refresh</a></li>
+														
+															
+															<li class="divider"></li>
+															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
+																Sign Out</a></li>
+														</ul>
+													</div>
+												</div>
+												<div class="panel-body" style="height:300px;overflow-y: scroll;">
+													<ul class="chat">
+													<?php if(isset($chat_list) && count($chat_list)>0){ ?>
+													<?php foreach($chat_list as $list){ ?>
+													
+														<?php if($list['type']=='Replayed'){ ?>
+														<li class="left clearfix"><span class="chat-img pull-left">
+															<?php if($list['replayedpic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																	<strong class="primary-font"><?php echo isset($list['replayedname'])?$list['replayedname']:''; ?></strong> <small class="pull-right text-muted">
+																		<span class="glyphicon glyphicon-time"></span>
+																		<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																		?>
+																	</small>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php }else{ ?>
+														<li class="right clearfix"><span class="chat-img pull-right">
+														<?php if($list['replaypic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																<?php 
+																
+																$checkTime = strtotime($list['create_at']);
+	
+																?>
+																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>
+																	<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																	?>
+																	</small>
+																	<strong class="pull-right primary-font"><?php echo isset($list['replayname'])?$list['replayname']:''; ?></strong>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php } ?>
+														
+														
+													<?php } ?>
+													<?php } ?>
+													</ul>
+												</div>
+												<form action="<?php echo base_url('chat/hospitaladmin'); ?>" method="post" enctype="multipart/form-data">
+													<div class="panel-footer"><br>
+														<div class="input-group input-chat-des">
+															
+															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															<input  type="file" name="image" id="image" class="form-control input-sm" />
+															<span class="input-group-btn">
+																<button class="btn btn-warning btn-sm" id="btn-chat">
+																	Send</button>
+															</span>
+														
+														</div>
+													</div>
+												</form>
+											</div>
                   </div>
                </div>
 			   <div class="tab-pane <?php if(isset($tab) && $tab ==2){ echo "active"; } ?>" id="team">

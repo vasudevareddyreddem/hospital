@@ -86,23 +86,23 @@
 											  <label for="email">Registration Type </label>
 												<select id="registrationtype" name="registrationtype" class="form-control" >
 													<option value="">Select</option>
-													<option value="New" <?php if($patient_detailes['registrationtype']=='New'){ echo "Selected"; } ?>>New</option>
-													<option value="Emergency" <?php if($patient_detailes['registrationtype']=='Emergency'){ echo "Selected"; } ?>>Emergency</option>
-													<option value="Temporary" <?php if($patient_detailes['registrationtype']=='Temporary'){ echo "Selected"; } ?>>Temporary</option>
+													<option value="New" <?php if(isset($patient_detailes['registrationtype']) && $patient_detailes['registrationtype']=='New'){ echo "Selected"; } ?>>New</option>
+													<option value="Emergency" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Emergency'){ echo "Selected"; } ?>>Emergency</option>
+													<option value="Temporary" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Temporary'){ echo "Selected"; } ?>>Temporary</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="email">Patient category</label>
 												<select id="patient_category" name="patient_category" class="form-control" >
 													<option value="">Select</option>
-													<option value="VIP" <?php if($patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
-													<option value="Pay Patient" <?php if($patient_detailes['patient_category']=='Pay Patient'){ echo "Selected"; } ?>>pay patient</option>
-													<option value="Staff" <?php if($patient_detailes['patient_category']=='Staff'){ echo "Selected"; } ?>>Staff</option>
-													<option value="Staff dependent" <?php if($patient_detailes['patient_category']=='Staff dependent'){ echo "Selected"; } ?>>Staff dependent</option>
-													<option value="Insurance" <?php if($patient_detailes['patient_category']=='Insurance'){ echo "Selected"; } ?>>Insurance</option>
-													<option value="Corporate" <?php if($patient_detailes['patient_category']=='Corporate'){ echo "Selected"; } ?>>Corporate</option>
-													<option value="Sponsor" <?php if($patient_detailes['patient_category']=='Sponsor'){ echo "Selected"; } ?>>Sponsor</option>
-													<option value="International cash" <?php if($patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
+													<option value="VIP" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
+													<option value="Pay Patient" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Pay Patient'){ echo "Selected"; } ?>>pay patient</option>
+													<option value="Staff" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff'){ echo "Selected"; } ?>>Staff</option>
+													<option value="Staff dependent" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff dependent'){ echo "Selected"; } ?>>Staff dependent</option>
+													<option value="Insurance" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Insurance'){ echo "Selected"; } ?>>Insurance</option>
+													<option value="Corporate" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Corporate'){ echo "Selected"; } ?>>Corporate</option>
+													<option value="Sponsor" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Sponsor'){ echo "Selected"; } ?>>Sponsor</option>
+													<option value="International cash" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -137,9 +137,9 @@
 											  <label for="mobile">Martial status</label>
 												<select id="martial_status" name="martial_status" class="form-control" >
 													<option value="">Select</option>
-													<option value="Single" <?php if($patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
-													<option value="Married" <?php if($patient_detailes['martial_status']=='Married'){ echo "Selected"; } ?>>Married</option>
-													<option value="Other"<?php if($patient_detailes['martial_status']=='Other'){ echo "Selected"; } ?>>Other</option>
+													<option value="Single" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
+													<option value="Married" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Married'){ echo "Selected"; } ?>>Married</option>
+													<option value="Other"<?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Other'){ echo "Selected"; } ?>>Other</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -228,27 +228,27 @@
 											  <label for="mobile">Language</label>
 												<select id="language" name="language" class="form-control" >
 													<option value="">Select</option>
-													<option value="Telugu" <?php if($patient_detailes['language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-													<option value="English" <?php if($patient_detailes['language']=='English'){ echo "Selected"; } ?>>English</option>
-													<option value="Hindi"<?php if($patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+													<option value="Telugu" <?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="mobile">Primary language</label>
 												<select id="primarylanguage" name="primarylanguage" class="form-control" >
 													<option value="">Select</option>
-													<option value="Telugu" <?php if($patient_detailes['primarylanguage']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-													<option value="English" <?php if($patient_detailes['primarylanguage']=='English'){ echo "Selected"; } ?>>English</option>
-													<option value="Hindi"<?php if($patient_detailes['primarylanguage']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+													<option value="Telugu" <?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="mobile">Preferred language</label>
 												<select id="preferred_language" name="preferred_language" class="form-control" >
 													<option value="">Select</option>
-													<option value="Telugu" <?php if($patient_detailes['preferred_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-													<option value="English" <?php if($patient_detailes['preferred_language']=='English'){ echo "Selected"; } ?>>English</option>
-													<option value="Hindi"<?php if($patient_detailes['preferred_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+													<option value="Telugu" <?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -275,8 +275,8 @@
 											  <label for="mobile">Senior citizen proof?</label>
 												<select id="citizen_proof" name="citizen_proof" class="form-control" >
 													<option value="">Select</option>
-													<option value="Yes" <?php if($patient_detailes['citizen_proof']=='Yes'){ echo "Selected"; } ?>>Yes</option>
-													<option value="No" <?php if($patient_detailes['citizen_proof']=='No'){ echo "Selected"; } ?>>No</option>
+													<option value="Yes" <?php if(isset($patient_detailes['citizen_proof']) &&  $patient_detailes['citizen_proof']=='Yes'){ echo "Selected"; } ?>>Yes</option>
+													<option value="No" <?php if(isset($patient_detailes['citizen_proof']) &&  $patient_detailes['citizen_proof']=='No'){ echo "Selected"; } ?>>No</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -394,9 +394,9 @@
 											  <label for="mobile">Gender</label>
 												<select id="gender" name="gender" class="form-control" >
 													<option value="">Select</option>
-													<option value="Male" <?php if($patient_detailes['gender']=='Male'){ echo "Selected"; } ?>>Male</option>
-													<option value="Female" <?php if($patient_detailes['gender']=='Female'){ echo "Selected"; } ?>>Female</option>
-													<option value="Other" <?php if($patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
+													<option value="Male" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Male'){ echo "Selected"; } ?>>Male</option>
+													<option value="Female" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Female'){ echo "Selected"; } ?>>Female</option>
+													<option value="Other" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -407,9 +407,9 @@
 											  <label for="mobile">Language</label>
 												<select id="g_language" name="g_language" class="form-control" >
 													<option value="">Select</option>
-													<option value="Telugu" <?php if($patient_detailes['g_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-													<option value="English" <?php if($patient_detailes['g_language']=='English'){ echo "Selected"; } ?>>English</option>
-													<option value="Hindi"<?php if($patient_detailes['g_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
+													<option value="Telugu" <?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
+													<option value="English" <?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='English'){ echo "Selected"; } ?>>English</option>
+													<option value="Hindi"<?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
 												</select>
 											</div>
 											<div class="form-group col-md-6">
@@ -518,6 +518,7 @@
 								<div class="tab-pane <?php if(isset($subtab) && $subtab==''){ echo "active";}?>" id="subtab1">
 							<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/visitinfo'); ?> " method="post"  id="visitinfo">
 							<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+							<input type="hidden" id="bill_id" name="bill_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
 							<div class="row">
 											<div class="form-group col-md-6">
 											  <label for="mobile">Visit Number</label>
@@ -808,7 +809,7 @@
 										<i class="icon-docs"></i> Edit </a>
 								</li>
 								<li>
-									<a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8)); ?>">
+									<a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8).'/'.base64_encode('reschedule')); ?>">
 										<i class="icon-docs"></i> Billing </a>
 								</li>
 								

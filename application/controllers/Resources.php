@@ -408,6 +408,11 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
+					if($post['bill_id']=='reschedule'){
+						$bill_type=$post['bill_id'];
+					}else{
+						$bill_type='new';
+					}
 					$billing=array(
 					'p_id'=>isset($post['pid'])?$post['pid']:'',
 					'visit_no'=>isset($post['visit_no'])?$post['visit_no']:'',
@@ -418,6 +423,7 @@ class Resources extends CI_Controller {
 					'no_of_visits'=>isset($post['no_of_visits'])?$post['no_of_visits']:'',
 					'last_visiting_date'=>isset($post['last_visiting_date'])?$post['last_visiting_date']:'',
 					'create_at'=>date('Y-m-d H:i:s'),
+					'type'=>isset($bill_type)?$bill_type:'new'
 					);
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_all_patient_billing_details($billing);
@@ -649,6 +655,52 @@ class Resources extends CI_Controller {
 					$data['msg']=2;
 					echo json_encode($data);exit;
 				}
+	}
+	public function worksheet()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					$data['worksheet']=$this->Resources_model->get_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/worksheet',$data);
+					$this->load->view('html/footer');
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function consultation()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$patient_id=base64_decode($this->uri->segment(3));
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['worksheet']=$this->Resources_model->get_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
+					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/consultation',$data);
+					$this->load->view('html/footer');
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
 	}
 	
 	
