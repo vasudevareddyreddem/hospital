@@ -17,6 +17,16 @@
 	margin-top:50px;
 }
 </style>
+ <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
 			<div class="page-content-wrapper">
                 <div class="page-content">
                     
@@ -117,53 +127,46 @@
 								   </div>
 									
 								</div>
-								<div class="row clearfix">            
+								<div class="row clearfix"> 
+								<?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
+								<?php $cnt=0;foreach($encounters_list as $list){ ?>
+									<?php if($cnt<=3){ ?>								
 									<div class="col-md-3 col-sm-3 col-xs-12">
 										<div class="card card-topline-purple">
 											<div class="card-head">
-												<header>Surgery</header>
+												<header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
 											</div>
-											<div class="card-body ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</div>
+											<div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
+											<div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
+											<div>Notes: <?php echo isset($list['notes'])?$list['notes']:''; ?></div>
+											<div> Pulse rate : <?php echo isset($list['pulse_actuals'])?$list['pulse_actuals']:''; ?> : <?php echo isset($list['pulse_range'])?$list['pulse_range']:''; ?></div>
+											<div> Pulse rate sight : <?php echo isset($list['pulse_rate_rhythm'])?$list['pulse_rate_rhythm']:''; ?> : <?php echo isset($list['pulse_rate_vol'])?$list['pulse_rate_vol']:''; ?></div>
+											<div>Notes: <?php echo isset($list['notes1'])?$list['notes1']:''; ?></div>
+
 										</div>
 									</div>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<div class="card card-topline-purple">
-											<div class="card-head">
-												<header>Surgery</header>
-											</div>
-											<div class="card-body ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</div>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<div class="card card-topline-purple">
-											<div class="card-head">
-												<header>Surgery</header>
-											</div>
-											<div class="card-body ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</div>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-12">
-										<div class="card card-topline-purple">
-											<div class="card-head">
-												<header>Surgery</header>
-											</div>
-											<div class="card-body ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</div>
-										</div>
-									</div>
+									<?php } ?>
+								<?php $cnt++;} ?>
+								
+									<?php } ?>
 									<div class="clearfix">&nbsp;</div>
 									<div class="container">
 									<div class="control-group" id="fields">
 										<label class="control-label" for="field1"><strong>Comments</strong></label>
 										<div class="controls"> 
-											<form role="form" autocomplete="off">
+											<form role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
+											<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+
 												<div class="entry input-group ">
-													<textarea type="textarea" class="form-control"  placeholder="Enter Address" ></textarea>
+													<textarea type="textarea" class="form-control" name="comments[]" id="comments"  placeholder="Enter Comments" ></textarea>
 													<span class="input-group-btn">
 														<button class="btn btn-success btn-add" type="button">
 															<span class="glyphicon glyphicon-plus">+</span>
 														</button>
 													</span>
 												</div>
+												<button type="submit" >Sent</button>
+
 											</form>
 										<br>
 									   
@@ -187,21 +190,23 @@
                                 <div class="panel-body">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home">
-                                           <div class="row">	
+										<form action="<?php echo base_url('resources/medicine'); ?>" method="post" >
+                                           <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+											<div class="row">	
 											   <div class="col-md-12 ">	
 													
 													<div class="container">
 													<div class="row">
 													<div class="col-md-6">
 														<label>Type of Medicine?</label>									
-														<select class="form-control  ">
+														<select class="form-control" id="type_of_medicine" name="type_of_medicine">
 															<option >Generic </option>
 															<option >Brand</option>
 														</select>
 													</div>
 													<div class="col-md-6">
 														<label>Search for Medicine</label>									
-														<select class="form-control  select2">
+														<select class="form-control  select2" id="medicine_name" name="medicine_name">
 															<option value="AK">example-1  &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
 															<option value="HI">example-1 &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
 															<option value="HI">3example-1  &nbsp; &nbsp;<span class="label label-rouded label-menu">(10 sheets)</span></option>
@@ -218,21 +223,21 @@
 													
 													<div class="col-md-6">
 														<label>Substitute allowed or not allowed?</label>									
-														<select class="form-control  ">
+														<select class="form-control" name="substitute_name" id="substitute_name">
 															<option >Yes </option>
 															<option >No</option>
 														</select>
 													</div>
 													<div class="col-md-6">
 														<label>Condition</label>									
-														<select class="form-control  ">
+														<select class="form-control" id="condition" name="condition">
 															<option >Chronic  </option>
 															<option >PRN</option>
 														</select>
 													</div>
 													<div class="col-md-6">
 														<label>Dosage</label>									
-														<select class="form-control  ">
+														<select class="form-control" id="dosage" name="dosage">
 															<option >Select Dosage </option>
 															<option >600 g  </option>
 															<option >350 g</option>
@@ -247,14 +252,14 @@
 														<div class="row">
 														<div class="col-md-4">
 														<label>Route</label>
-															<select class="form-control  ">
+															<select class="form-control" id="route" name="route">
 																<option >Select Route </option>
 																<option >Mouth</option>
 															</select>
 														</div>
 														<div class="col-md-8">
 														<label> Frequency </label>
-															<select class="form-control  ">
+															<select class="form-control" name="frequency" id="frequency">
 																	<option >Single Dose</option>
 																	<option >Once Per Day</option>
 																	<option >Twice Per Day</option>
@@ -277,13 +282,12 @@
 														</div>
 														<div class="col-md-6">
 														<label> Directions</label>
-															<textarea type="textarea" class="form-control"  placeholder="Enter Directions" ></textarea>
+															<textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
 														</div>
 														<div class="col-md-6">
 														<label> From</label>
 															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-																<input class="form-control"  type="text" value="">
-																
+																<input class="form-control" name="formdate" id="formdate" type="text" value="">
 																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 															</div>
 															<input class ="form-control" type="hidden" id="dtp_input2" value="" />
@@ -291,8 +295,7 @@
 														<div class="col-md-6">
 														<label> To</label>
 															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-																<input class="form-control"  type="text" value="">
-																
+																<input class="form-control" name="todate" id="todate"  type="text" value="">
 																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 															</div>
 															<input class ="form-control" type="hidden" id="dtp_input2" value="" />
@@ -301,11 +304,11 @@
 														<div class="row">
 														<div class="col-md-6">
 														<label> Qty</label>
-															<input class="form-control" type="text" placeholder="enter Qty">
+															<input class="form-control" name="qty" id="qty" type="text" placeholder="enter Qty">
 														</div>
 														<div class="col-md-6">
 														<label> Units</label>
-															<select class="form-control  ">
+															<select class="form-control" name="units" id="units">
 																	<option >Select Units</option>
 																	<option >no</option>
 																	<option >tablet</option>
@@ -331,19 +334,22 @@
 														</div>
 														<div class="col-md-6">
 														<label> Comment</label>
-														<textarea type="textarea" class="form-control"  placeholder="Enter Comment" ></textarea>
+														<textarea type="textarea" name="comments" id="comments" class="form-control"  placeholder="Enter Comment" ></textarea>
 
 														</div>
 														</div>
 														
 														</div>
 														<div class="clearfix">&nbsp;</div>
-															<button class="btn btn-sm btn-warning" type="button">Clear</button>
-															<button class="btn btn-sm btn-info" type="button">View Prescription</button>
-															<button class="btn btn-sm btn-success" type="button">Add Prescription</button>
+														<button class="btn btn-sm btn-success" type="submit">Add Prescription</button>
+														<?php if(isset($patient_medicine_list) && count($patient_medicine_list)>0){?>
+														<a class="btn btn-sm btn-info" data-toggle="modal" data-target="#prescriptionmodel"  type="button">View Prescription</a>
+														<?php } ?>
 														<div class="clearfix">&nbsp;</div>
 													</div>
 													</div>
+													
+													</form>
 													</div>
 													
 											
@@ -403,7 +409,7 @@
 													
 														<div class="col-md-6">
 														<label> From</label>
-															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+															<div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
 																<input class="form-control"  type="text" value="">
 																
 																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -412,7 +418,7 @@
 														</div>	
 														<div class="col-md-6">
 														<label> To</label>
-															<div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+															<div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
 																<input class="form-control"  type="text" value="">
 																
 																<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -479,7 +485,7 @@
 		<div class="modal-body">
 			<div class="container">
 			<div class="row">
-				<div class="card card-topline-red">
+				<div class="card card-topline-red col-md-12">
                                 <div class="card-head">
                                     <header>List</header>
                                   
@@ -488,35 +494,55 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-3 col-xs-3">
                                             <ul class="nav nav-tabs tabs-left">
-                                                <li class="nav-item">
-                                                    <a href="#tab_6_1" data-toggle="tab" class="active"> SURGERY </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#tab_6_2" data-toggle="tab"> SURGERY-1 </a>
-                                                </li>
-                                              
-                                                <li class="nav-item">
-                                                    <a href="#tab_6_3" data-toggle="tab"> SURGERY-2 </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#tab_6_4" data-toggle="tab"> More </a>
-                                                </li>
+											<?php $c=0;foreach($encounters_list as $lists){ ?>
+                                                
+													<?php if($c==0){?>
+													<li class="nav-item">
+                                                    <a href="#tab_6_<?php echo $lists['id']; ?>" class="active" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?></a>
+													</li>
+													<?php }else{ ?>
+													<li class="nav-item">
+                                                    <a href="#tab_6_<?php echo $lists['id']; ?>" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?></a>
+													</li>
+													<?php } ?>
+												
+											<?php $c++;} ?>
                                             </ul>
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="tab_6_1">
-                                                    <p>Lorem ipsum dolor sit amet, sumo impetus ea sit, ut pri mucius eruditi dolorum. Wisi liberavisse theophrastus mea cu, id enim elit erroribus nec. Et ridens fuisset volumus mel. Te duo prompta lucilius suavitate, viderer ocurreret ea ius.</p>
-                                                </div>
-                                                <div class="tab-pane fade" id="tab_6_2">
-                                                    <p>Doming conclusionemque sed ex, invenire ocurreret dissentiet his no. Ius cu novum assueverit, eam ex dolor molestiae theophrastus. Ex sed alii dolorum, et vis impetus expetendis dissentiunt. Vim ad soluta admodum tibique, inermis salutandi at mei, mutat nominati eos id. Id aeque iudico sit, eros adolescens est te.</p>
-                                                </div>
-                                                <div class="tab-pane fade" id="tab_6_3">
-                                                    <p>Most of its text is made up from sections 1.10.32–3 of Cicero's De finibus bonorum et malorum (On the Boundaries of Goods and Evils; finibus may also be translated as purposes).</p>
-                                                </div>
-                                                <div class="tab-pane fade" id="tab_6_4">
-                                                    <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
-                                                </div>
+											<?php $cn=0;foreach($encounters_list as $list){ ?>
+											<?php if($cn==0){ ?>
+                                                <div class="tab-pane active" id="tab_6_<?php echo $list['id']; ?>">
+                                                    <p>
+														<div class="card-head">
+														<header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
+														</div>
+														<div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
+														<div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
+														<div>Notes: <?php echo isset($list['notes'])?$list['notes']:''; ?></div>
+														<div> Pulse rate : <?php echo isset($list['pulse_actuals'])?$list['pulse_actuals']:''; ?> : <?php echo isset($list['pulse_range'])?$list['pulse_range']:''; ?></div>
+														<div> Pulse rate sight : <?php echo isset($list['pulse_rate_rhythm'])?$list['pulse_rate_rhythm']:''; ?> : <?php echo isset($list['pulse_rate_vol'])?$list['pulse_rate_vol']:''; ?></div>
+														<div>Notes: <?php echo isset($list['notes1'])?$list['notes1']:''; ?></div>
+													</p>
+												</div>
+											<?php }else{ ?>
+												<div class="tab-pane " id="tab_6_<?php echo $list['id']; ?>">
+                                                    <p>
+														<div class="card-head">
+														<header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
+														</div>
+														<div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
+														<div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
+														<div>Notes: <?php echo isset($list['notes'])?$list['notes']:''; ?></div>
+														<div> Pulse rate : <?php echo isset($list['pulse_actuals'])?$list['pulse_actuals']:''; ?> : <?php echo isset($list['pulse_range'])?$list['pulse_range']:''; ?></div>
+														<div> Pulse rate sight : <?php echo isset($list['pulse_rate_rhythm'])?$list['pulse_rate_rhythm']:''; ?> : <?php echo isset($list['pulse_rate_vol'])?$list['pulse_rate_vol']:''; ?></div>
+														<div>Notes: <?php echo isset($list['notes1'])?$list['notes1']:''; ?></div>
+													</p>
+												</div>
+											<?php } ?>
+												
+											<?php $cn++;} ?>
                                             </div>
                                         </div>
                                     </div>
@@ -560,34 +586,35 @@
                             </div>
                             <div class="card-body ">
 							<form action="<?php echo base_url('resources/addvitals'); ?>"  method="post">
+							<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                                 <div class="row">
                                     <div class="col-md-4 ">
                                         <div class="col-md-12">
                                             <label>Assessment</label>
-                                            <select class="form-control" id="assessment_type" name="assessment_type">
-												<option >Infection </option>
-												<option >Diabetes</option>
-												<option >Cough & Cold</option>
-												<option >New</option>
+                                            <select class="form-control" id="assessment_type" name="assessment_type" required>
+												<option value="Infection" >Infection </option>
+												<option value="Diabetes" >Diabetes</option>
+												<option value="Cough & Cold" >Cough & Cold</option>
+												<option value="New" >New</option>
 											</select>
                                         </div> <br>
                                         <div class="col-md-12">
 
-                                            <select class="form-control" id="vitaltype" name="vitaltype">
-												<option >Chief complaint</option>
-												<option >Vitals</option>
-												<option >Allergies</option>
-												<option >Personal history</option>
-												<option >Medical history</option>
-												<option >Surgical history</option>
-												<option >Personal history</option>
-												<option >Physical examination</option>
-												<option >Review of systems</option>
-												<option >Diagnosis</option>
-												<option >Prescription</option>
-												<option >Advice</option>
-												<option >Referral</option>
-												<option >Surgery request</option>
+                                            <select class="form-control" id="vitaltype" name="vitaltype" required>
+												<option value="Chief complaint" >Chief complaint</option>
+												<option value="Vitals">Vitals</option>
+												<option value="Allergies">Allergies</option>
+												<option value="Personal history">Personal history</option>
+												<option value="Medical history">Medical history</option>
+												<option value="Surgical history">Surgical history</option>
+												<option value="Personal history">Personal history</option>
+												<option value="Physical examination">Physical examination</option>
+												<option value="Review of systems">Review of systems</option>
+												<option value="Diagnosis">Diagnosis</option>
+												<option value="Prescription">Prescription</option>
+												<option value="Advice">Advice</option>
+												<option value="Referral">Referral</option>
+												<option value="Surgery request">Surgery request</option>
 											</select>
                                         </div>
 
@@ -618,23 +645,23 @@
 													</tr>
                                                     <tr>
 														<th>Temperature </th>
-														<td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="" placeholder="Actuals"> </td>
-														<td> <input type="text" id="tep_range" name="tep_range" value="" placeholder="Range"> </td>
+														<td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="" placeholder="Actuals" required> </td>
+														<td> <input type="text" id="tep_range" name="tep_range" value="" placeholder="Range" required> </td>
 														<th>Temperature site</th>
-														<td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="" placeholder="Positioning "> </td>
+														<td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="" placeholder="Positioning " required> </td>
 														<td> <input type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes"> </td>
 													</tr>
 													<tr>
 														<th> Pulse rate</th>
-														<td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="" placeholder="Actuals"> </td>
-														<td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="" placeholder="Range"> 
+														<td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="" placeholder="Actuals" required> </td>
+														<td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="" placeholder="Range" required> 
 														</td>
 														<th> Pulse rate sight  </th>
 														<td>
 														<div class="row">					
-														<input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="" placeholder="Rhythm  ">
+														<input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="" placeholder="Rhythm" required>
 														
-														<input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="" placeholder="Vol ">
+														<input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="" placeholder="Vol" required>
 														</div>
 														</td>
 														<td> <input type="text" class="form-control" id="notes1" name="notes1" value="" placeholder="Notes"> </td>
@@ -673,6 +700,58 @@
             </div>
         </div>
     </div>
+	<!--view preciption modal-->
+	<div class="modal fade" id="prescriptionmodel" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+	<div class="modal-header bg-indigo">
+		<h5 class="modal-title" id="lineModalLabel">Prescription</h5>
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+
+	</div>
+	<div class="modal-body">
+		<div class="">
+			<div class="">
+				<div class=" card card-topline-red">
+					<div class="card-head">
+						<header>Prescription List</header>
+					</div>
+					<div class="card-body ">
+						<div class="col-md-12 ">
+								<div class="table-scrollable">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Type of Medicine?</th>
+												<th>Search for Medicine</th>
+												<th>Dosage </th>
+												<th>Condition</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+										<?php foreach($patient_medicine_list as $list){ ?>
+											<tr id="medicine_id_<?php echo $list['m_id']; ?>">
+												<td><?php echo $list['type_of_medicine']; ?></td>
+												<td><?php echo $list['medicine_name']; ?></td>
+												<td><?php echo $list['dosage']; ?> </td>
+												<td><?php echo $list['condition']; ?></td>
+												<td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" >Remove</span></td>
+											</tr> 
+										<?php }?>											
+										</tbody>
+									</table>
+								</div>
+							 </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	 </div>
+</div>
+</div>
+	<!--view preciption modal-->
 	<!--search modal-->
 	<div class="modal fade" id="searchmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -800,7 +879,25 @@
         </div>
     </div>
 <script>
-			$(function() {
+function removemedicine(id){
+	if(id!=''){
+		 jQuery.ajax({
+					url: "<?php echo site_url('resources/removemedicine');?>",
+					data: {
+						medicine_id: id,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+					if(data.msg==1){
+						jQuery('#medicine_id_'+id).hide();
+					}
+				 }
+				});
+			}
+	
+}
+	$(function() {
   $(".expand").on( "click", function() {
     // $(this).next().slideToggle(200);
     $expand = $(this).find(">:first-child");

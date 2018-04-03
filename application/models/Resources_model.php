@@ -110,9 +110,33 @@ class Resources_model extends CI_Model
 		$this->db->order_by('patient_vitals_list.id',"DESC");
         return $this->db->get()->row_array();
 	}
+	public function get_vitals_list($p_id){
+		$this->db->select('*')->from('patient_vitals_list');
+		$this->db->where('patient_vitals_list.p_id',$p_id);
+		$this->db->order_by('patient_vitals_list.id',"DESC");
+        return $this->db->get()->result_array();
+	}
 	public function saving_patient_vital_details($data){
 		$this->db->insert('patient_vitals_list', $data);
 		return $insert_id = $this->db->insert_id();
+	}
+	public function saving_patient_vital_comments($data){
+		$this->db->insert('vital_comments', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function saving_patient_medicine($data){
+		$this->db->insert('patient_medicine_list', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_patient_medicine_details_list($p_id,$date){
+		$this->db->select('*')->from('patient_medicine_list');
+		$this->db->where('patient_medicine_list.p_id',$p_id);
+		$this->db->where('patient_medicine_list.date',$date);
+        return $this->db->get()->result_array();
+	}
+	function remove_attachment($id){
+		$sql1="DELETE FROM patient_medicine_list WHERE m_id = '".$id."'";
+		return $this->db->query($sql1);
 	}
 
 	

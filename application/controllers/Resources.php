@@ -698,9 +698,10 @@ class Resources extends CI_Controller {
 					$data['patient_id']=isset($patient_id)?$patient_id:'';
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['worksheet']=$this->Resources_model->get_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
+					$data['encounters_list']=$this->Resources_model->get_vitals_list($patient_id);
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
-					//echo '<pre>';print_r($data);exit;
+					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,date('y-m-d'));
+					//echo '<pre>';print_r($data['patient_medicine_list']);exit;
 					$this->load->view('resource/consultation',$data);
 					$this->load->view('html/footer');
 					
@@ -724,6 +725,8 @@ class Resources extends CI_Controller {
 					$billing=array(
 						'p_id'=>isset($post['pid'])?$post['pid']:'',
 						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'assessment_type'=>isset($post['assessment_type'])?$post['assessment_type']:'',
+						'vitaltype'=>isset($post['vitaltype'])?$post['vitaltype']:'',
 						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
 						'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
 						'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
@@ -736,7 +739,7 @@ class Resources extends CI_Controller {
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d')
 					);
-					echo '<pre>';print_r($billing);exit;
+					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($billing);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Vitals successfully Added.");
@@ -745,6 +748,107 @@ class Resources extends CI_Controller {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/consultation/'.base64_encode($post['pid']));
 						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function vitalscomment()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($admindetails);exit;
+					foreach($post['comments'] as $lists){
+						$billing=array(
+							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'comments'=>$lists,
+							'created_at'=>date('Y-m-d H:i:s'),
+							'create_by'=>$admindetails['a_id']
+						);
+					$update=$this->Resources_model->saving_patient_vital_comments($billing);
+
+					}
+				
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Vitals Commets successfully Added.");
+							redirect('resources/consultation/'.base64_encode($post['pid']));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/consultation/'.base64_encode($post['pid']));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function medicine(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+						$addmedicine=array(
+							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
+							'medicine_name'=>isset($post['medicine_name'])?$post['medicine_name']:'',
+							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
+							'condition'=>isset($post['condition'])?$post['condition']:'',
+							'dosage'=>isset($post['dosage'])?$post['dosage']:'',
+							'route'=>isset($post['route'])?$post['route']:'',
+							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
+							'directions'=>isset($post['directions'])?$post['directions']:'',
+							'formdate'=>isset($post['formdate'])?$post['formdate']:'',
+							'todate'=>isset($post['todate'])?$post['todate']:'',
+							'qty'=>isset($post['qty'])?$post['qty']:'',
+							'units'=>isset($post['units'])?$post['units']:'',
+							'comments'=>isset($post['comments'])?$post['comments']:'',
+							'create_at'=>date('Y-m-d H:i:s'),
+							'date'=>date('Y-m-d'),
+							'create_by'=>$admindetails['a_id']
+						);
+					$medicine=$this->Resources_model->saving_patient_medicine($addmedicine);
+					if(count($medicine)>0){
+							$this->session->set_flashdata('success',"Medicine successfully Added.");
+							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function removemedicine(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+			
+					$removedattch=$this->Resources_model->remove_attachment($post['medicine_id']);
+					if(count($removedattch) > 0)
+					{
+					$data['msg']=1;
+					echo json_encode($data);exit;	
+					}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
