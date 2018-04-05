@@ -1389,6 +1389,7 @@ class Hospital extends CI_Controller {
 							$li[$c]['code']=$key;
 							$li[$c]['name']=$list;
 							$li[$c]['lab_assistent']=$post['lab_assistent'][$c];
+							$li[$c]['investigation']=$post['investigation'][$c];
 							
 						$c++;}
 						
@@ -1399,6 +1400,7 @@ class Hospital extends CI_Controller {
 								'l_code'=>$l['code'],
 								'l_name'=>$l['name'],
 								'l_assistent_id'=>$l['lab_assistent'],
+								'l_investigation'=>$l['investigation'],
 								'l_status'=>1,
 								'l_create_at'=>date('Y-m-d H:i:s'),
 								'l_updated_at'=>date('Y-m-d H:i:s'),

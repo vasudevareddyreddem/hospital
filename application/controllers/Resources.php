@@ -685,6 +685,30 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function referrals()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					$data['worksheet']=$this->Resources_model->get_doctor_refrrals_list($userdetails['hos_id'],$userdetails['a_id']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/referrals',$data);
+					$this->load->view('html/footer');
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function consultation()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -696,12 +720,15 @@ class Resources extends CI_Controller {
 						redirect('dashboard');
 					}
 					$data['patient_id']=isset($patient_id)?$patient_id:'';
+					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['encounters_list']=$this->Resources_model->get_vitals_list($patient_id);
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
 					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,date('y-m-d'));
-					//echo '<pre>';print_r($data['patient_medicine_list']);exit;
+					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
+					$data['doctors_list']=$this->Resources_model->get_hospital_doctors_list($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/consultation',$data);
 					$this->load->view('html/footer');
 					
@@ -835,6 +862,45 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function investigation(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+						$addmedicine=array(
+							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'investigation_type'=>isset($post['investigation_type'])?$post['investigation_type']:'',
+							'countrycode'=>isset($post['countrycode'])?$post['countrycode']:'',
+							'contact_number'=>isset($post['contact_number'])?$post['contact_number']:'',
+							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
+							'priority'=>isset($post['priority'])?$post['priority']:'',
+							'investigation_formdate'=>isset($post['investigation_formdate'])?$post['investigation_formdate']:'',
+							'investigation_todate'=>isset($post['investigation_todate'])?$post['investigation_todate']:'',
+							'associate_diagnosis'=>isset($post['associate_diagnosis'])?$post['associate_diagnosis']:'',
+							'associate_problems'=>isset($post['associate_problems'])?$post['associate_problems']:'',
+							'create_at'=>date('Y-m-d H:i:s'),
+							'date'=>date('Y-m-d'),
+							'create_by'=>$admindetails['a_id']
+						);
+					$investigation=$this->Resources_model->saving_patient_investigation($addmedicine);
+					if(count($investigation)>0){
+							$this->session->set_flashdata('success',"Investigation successfully Added.");
+							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-3');
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function removemedicine(){
 		if($this->session->userdata('userdetails'))
 		{
@@ -853,6 +919,107 @@ class Resources extends CI_Controller {
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function investigationsearch(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=6){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo '<pre>';print_r($post);exit;
+					$details=$this->Resources_model->get_investigation_list($userdetails['hos_id'],$post['searchdata']);
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['text']=$details;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function testsearch(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=6){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($post['labassistentid']);
+					//echo '<pre>';print_r($post);exit;
+					$details=$this->Resources_model->get_test_list($userdetails['hos_id'],$post['labassistentid']);
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['text']=$details;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function selected_test(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$post=$this->input->post();
+			foreach($post['ids'] as $lists){
+					$test_list=array(
+						'p_id'=>isset($post['patinet_id'])?$post['patinet_id']:'',
+						'test_id'=>$lists,
+						'create_at'=>date('Y-m-d H:i:s'),
+						'date'=>date('Y-m-d'),
+						'create_by'=>$admindetails['a_id'],
+						'status'=>1
+						);
+				$addtest=$this->Resources_model->add_addpatient_test($test_list);
+				}
+				$testcount=$this->Resources_model->get_patient_test_count($post['patinet_id'],date('Y-m-d'));
+
+				if(count($addtest) > 0)
+				{
+				$data['msg']=1;
+				$data['count']=count($testcount);
+				echo json_encode($data);exit;	
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function patient_completed(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$post=$this->input->post();
+			$complete=array(
+			'doctor_status'=>1,
+			'assign_doctor_by'=>isset($post['assign_another_doctor'])?$admindetails['a_id']:'',
+			'assign_doctor_to'=>isset($post['assign_another_doctor'])?$post['assign_another_doctor']:''
+			);
+			$completed=$this->Resources_model->update_all_billing_compelted_details($post['pid'],$post['billing_id'],$complete);
+			if(count($completed)>0){
+						$this->session->set_flashdata('success',"Patient successfully completed.");
+						redirect('resources/worksheet');
+			}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('resources/consultation/'.base64_encode($post['pid']).''/''.base64_encode($post['billing_id']).'#step-3');
+			}
+			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

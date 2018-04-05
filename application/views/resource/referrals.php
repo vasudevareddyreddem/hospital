@@ -3,12 +3,12 @@
                     <div class="page-bar">
 			  <div class="page-title-breadcrumb">
 				 <div class=" pull-left">
-					<div class="page-title">Worksheet</div>
+					<div class="page-title">Referrals</div>
 				 </div>
 				 <ol class="breadcrumb page-breadcrumb pull-right">
 					<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
 					</li>
-					<li><a class="parent-item active" >Worksheet List</a>&nbsp;</i>
+					<li><a class="parent-item active" >Referrals List</a>&nbsp;</i>
 					</li>
 				 </ol>
 			  </div>
@@ -27,7 +27,7 @@
 										</div>
 									<?php endif; ?>
                                 <div class="card-head">
-                                     <header>My worksheet</header>
+                                     <header>My Referrals</header>
                                
                                 </div>
                                 <div class="card-body ">
@@ -41,6 +41,7 @@
                                                 <th>Patient Name </th>
                                                 <th>Age/Sex</th>
                                                 <th>Visit Type</th>
+                                                <th>Referred By</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -54,6 +55,7 @@
                                                 <td><?php echo htmlentities($list['name']); ?></td>
                                                 
 												<td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>
+												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
                                                 <td>

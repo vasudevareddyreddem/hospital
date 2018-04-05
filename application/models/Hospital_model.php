@@ -136,7 +136,7 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function get_all_lab_details_list($a_id,$hos_id){
-		$this->db->select('lab_detailes.l_id,lab_detailes.l_code,lab_detailes.l_name,lab_detailes.l_status,resource_list.resource_name')->from('lab_detailes');		
+		$this->db->select('lab_detailes.l_id,lab_detailes.l_investigation,lab_detailes.l_code,lab_detailes.l_name,lab_detailes.l_status,resource_list.resource_name')->from('lab_detailes');		
 		$this->db->join('resource_list', 'resource_list.r_id = lab_detailes.l_assistent_id', 'left');
 		$this->db->where('lab_detailes.l_create_by',$a_id);
 		$this->db->where('lab_detailes.hos_id',$hos_id);

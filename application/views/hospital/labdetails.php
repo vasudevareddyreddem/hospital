@@ -44,6 +44,11 @@
                                  <form action="<?php echo base_url('hospital/tabdetailspost'); ?>" method="POST" id="labdetailsform" name="labdetailsform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
+									     <select  class="form-control" id="investigation" name="investigation[]">
+									   <option value="">Select Investigation </option>
+									   <option value="Lab">Lab</option>
+									   <option value="Radiology">Radiology</option>
+									   </select>
 									   <input class="form-control" id="lab_code" name="lab_code[]" placeholder="Lab Code">&nbsp;
 									   <input class="form-control" id="lab_name" name="lab_name[]" placeholder="Lab Name">&nbsp;
 									    <select  class="form-control" id="lab_assistent" name="lab_assistent[]">
@@ -79,6 +84,7 @@
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
+												<th>Investigation </th>
 												<th>Lab Name</th>
 												<th>Lab Code</th>
 												<th>Lab Assistent</th>
@@ -89,6 +95,7 @@
                                         <tbody>
 										<?php foreach($labdetails_list as $list){ ?>
                                             <tr>
+                                                <td><?php echo htmlentities($list['l_investigation']); ?></td>
                                                 <td><?php echo htmlentities($list['l_name']); ?></td>
                                                 <td><?php echo htmlentities($list['l_code']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>

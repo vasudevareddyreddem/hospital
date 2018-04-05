@@ -269,7 +269,7 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Appointments</span>
 	                                <span class="selected"></span>
@@ -277,7 +277,7 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('resources/referrals');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Referrals </span>
 	                                <span class="selected"></span>
