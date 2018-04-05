@@ -56,7 +56,7 @@
                                                 
 												<td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
-												<td><?php echo htmlentities($list['visit_type']); ?></td>
+												<td><?php echo htmlentities($list['assignbydoctor']); ?></td>
 												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
                                                 <td>
                                                   <button class="btn btn-xs bg-success no-margin" type="button">Call</button>
