@@ -69,15 +69,37 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function resourceschat()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$data['chat_list']=$this->Admin_model->getget_resourse_message_list();
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('admin/resourcesupport',$data);
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	public function chatinglist()
 	{
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$user_id=base64_decode($this->uri->segment(3));
+				$type_id=base64_decode($this->uri->segment(4));
+				if($type_id==2){
+				$data['chat_list']=$this->Admin_model->getget_resourse_replay_message_list($user_id);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('admin/replyresourschat',$data);
+				}else{
 				$data['chat_list']=$this->Admin_model->getget_team_replay_message_list($user_id);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/replyteamchat',$data);
+				}
+				
 				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");

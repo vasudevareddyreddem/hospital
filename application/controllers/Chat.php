@@ -16,6 +16,7 @@ class Chat extends CI_Controller {
 		$this->load->library('zend');
 		$this->load->model('Admin_model');
 		$this->load->model('Chat_model');
+		$this->load->model('Resources_model');
 		$this->load->library('zend');
 			if($this->session->userdata('userdetails'))
 			{
@@ -32,7 +33,13 @@ class Chat extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
-					$data['chat_list']=$this->Admin_model->getget_team_replay_message_list($admindetails['a_id']);
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo '<pre>';print_r($userdetails);exit;
+					$data['chat_list']=$this->Chat_model->getget_team_replay_message_list($admindetails['a_id']);
+					$data['resources_list']=$this->Chat_model->get_resource_list($userdetails['hos_id']);
+					$data['resources_chating']=$this->Chat_model->get_resource_chating_list($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$data['hospitaladmin_chat_list']=$this->Chat_model->getget_hospitaladmin_replay_message_list($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('chat/recoursechat',$data);
 					$this->load->view('html/footer');
@@ -40,6 +47,67 @@ class Chat extends CI_Controller {
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function resourcechat()
+	{	
+		
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			//echo '<pre>';print_r($admindetails);
+			$post=$this->input->post();
+			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+				$temp = explode(".", $_FILES["image"]["name"]);
+				$img = round(microtime(true)) . '.' . end($temp);
+				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
+			}else{
+				$img='';
+			}
+			if(isset($post['replaying']) && $post['replaying']==1){
+				$replaying=$admindetails['a_id'];
+				$user_id=$post['a_id'];
+				$type="Replayed";
+			}else{
+				$replaying='';
+				$user_id=$admindetails['a_id'];
+				$type="Replay";
+			}
+			$msg=array(
+			'user_id'=>$user_id,	
+			'comment'=>$post['comment'],
+			'to'=>$post['resource_name'],
+			'replay_user_id'=>$replaying,
+			'image'=>$img,
+			'type'=>$type,
+			'create_at'=>date('Y-m-d H:i:s'),
+			'updated_by'=>date('Y-m-d H:i:s')
+			);
+			
+			//echo '<pre>';print_r($msg);exit;
+			$comments=$this->Chat_model->adding_resource_chating($msg);
+			if(count($comments)>0){
+					$this->session->set_flashdata('success',"Message send successfully.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
+					}else{
+						redirect('chat');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
+					}else{
+						redirect('chat/index/'.base64_encode(2));
+					}
+					
+			}
+
 			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
@@ -113,7 +181,7 @@ class Chat extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
-			echo '<pre>';print_r($admindetails);exit;
+			//echo '<pre>';print_r($admindetails);
 			$post=$this->input->post();
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
 				$temp = explode(".", $_FILES["image"]["name"]);
@@ -147,7 +215,7 @@ class Chat extends CI_Controller {
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message send successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
-						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
+						redirect('admin/chatinglist/'.base64_encode($post['a_id']).'/'.base64_encode(2));
 					}else{
 						redirect('chat/index/'.base64_encode(1));
 					}

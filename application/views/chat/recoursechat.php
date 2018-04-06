@@ -41,8 +41,116 @@
                   <div class="row">
                      <div class="col-md-12 ">
                         <div class="container">
+						<div class="panel ">
+												<div class="panel-heading bg-indigo">
+													<span class="glyphicon glyphicon-comment"></span> Resources chat list
+													<div class="btn-group pull-right">
+														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+															<span class="fa fa-angle-down"> </span>
+														</button>
+														<ul class="dropdown-menu slidedown">
+															<li><a href="#"><span class="glyphicon glyphicon-refresh">
+															</span>Refresh</a></li>
+														
+															
+															<li class="divider"></li>
+															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
+																Sign Out</a></li>
+														</ul>
+													</div>
+												</div>
+												<div class="panel-body" style="height:300px;overflow-y: scroll;">
+													<ul class="chat">
+													<?php if(isset($resources_chating) && count($resources_chating)>0){ ?>
+													<?php foreach($resources_chating as $list){ ?>
+													
+														<?php
+															$admindetails=$this->session->userdata('userdetails');
+														if($list['user_id']==$admindetails['a_id']){ ?>
+														<li class="left clearfix"><span class="chat-img pull-left">
+															<?php if($list['senderpic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['senderpic']); ?>" alt="<?php echo isset($list['sendername'])?$list['replayedname']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																	<strong class="primary-font"><?php echo isset($list['sendername'])?$list['sendername']:''; ?></strong> <small class="pull-right text-muted">
+																		<span class="glyphicon glyphicon-time"></span>
+																		<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																		?>
+																	</small>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php }else{ ?>
+														<li class="right clearfix"><span class="chat-img pull-right">
+														<?php if($list['resourcepic']!=''){ ?>
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['resourcepic']); ?>" alt="<?php echo isset($list['resourcename'])?$list['resourcename']:''; ?>" class="img-circle" />
+														<?php }else{ ?>
+															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+
+														<?php } ?>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																<?php 
+																
+																$checkTime = strtotime($list['create_at']);
+	
+																?>
+																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>
+																	<?php 
+																		$date = $list['create_at']; 
+																		echo date('Y-m-d h:i:s a ', strtotime($date));
+																	?>
+																	</small>
+																	<strong class="pull-right primary-font"><?php echo isset($list['sendername'])?$list['sendername']:''; ?></strong>
+																</div>
+																<p><?php echo isset($list['comment'])?$list['comment']:''; ?></p>
+																<?php if(isset($list['image']) && $list['image']!=''){ ?>
+																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
+																<?php } ?>
+															</div>
+														</li>
+														<?php } ?>
+														
+														
+													<?php } ?>
+													<?php } ?>
+													</ul>
+												</div>
+												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/resourcechat'); ?>" method="post" enctype="multipart/form-data">
+													<div class="panel-footer"><br>
+														<div class="input-group input-chat-des">
+															
+															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															<input  type="file" name="image" id="image" class="form-control col-md-3" />
+															<select class="form-control col-md-3" name="resource_name" id="resource_name">
+															<option value="">Select</option>
+															<?php foreach($resources_list as $list){ ?>
+															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>
+															<?php } ?>
+															</select>
+															<span class="input-group-btn">
+																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
+																	Send</button>
+															</span>
+														
+														</div>
+													</div>
+												</form>
+											</div>
                               
-									  resource admin
+									 
                                     
                           
                         </div>
@@ -72,8 +180,8 @@
 												</div>
 												<div class="panel-body" style="height:300px;overflow-y: scroll;">
 													<ul class="chat">
-													<?php if(isset($chat_list) && count($chat_list)>0){ ?>
-													<?php foreach($chat_list as $list){ ?>
+													<?php if(isset($hospitaladmin_chat_list) && count($hospitaladmin_chat_list)>0){ ?>
+													<?php foreach($hospitaladmin_chat_list as $list){ ?>
 													
 														<?php if($list['type']=='Replayed'){ ?>
 														<li class="left clearfix"><span class="chat-img pull-left">
@@ -265,6 +373,37 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+ 
+    $('#resourcechat').bootstrapValidator({
+		fields: {
+          
+             comment: {
+                 validators: {
+					notEmpty: {
+						message: 'Comment is required'
+					}
+				}
+            },
+			image: {
+                 validators: {
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls|png|jpg|jpeg|gif|Png)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,png,jpg,gif,Png,pdf files are allowed'
+					}
+				}
+            },resource_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Resource is required'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});
 
    $(function() {
    $(".expand").on( "click", function() {
