@@ -71,7 +71,7 @@
 															<?php if($list['senderpic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['senderpic']); ?>" alt="<?php echo isset($list['sendername'])?$list['replayedname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b>BA</b></span>
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -94,9 +94,9 @@
 														<?php }else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">
 														<?php if($list['resourcepic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['resourcepic']); ?>" alt="<?php echo isset($list['resourcename'])?$list['resourcename']:''; ?>" class="img-circle" />
+															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['resourcepic']); ?>" alt="<?php echo isset($list['sendername'])?$list['sendername']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<span class="bg-success" style="padding:15px;border-radius:50%" ><b>BA</b></span>
+															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -168,7 +168,7 @@
 															<span class="fa fa-angle-down"> </span>
 														</button>
 														<ul class="dropdown-menu slidedown">
-															<li><a href="#"><span class="glyphicon glyphicon-refresh">
+															<li><a href="<?php echo base_url('chat'); ?>"><span class="glyphicon glyphicon-refresh">
 															</span>Refresh</a></li>
 														
 															
@@ -188,7 +188,7 @@
 															<?php if($list['replayedpic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -213,7 +213,7 @@
 														<?php if($list['replaypic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -272,7 +272,7 @@
 															<span class="fa fa-angle-down"> </span>
 														</button>
 														<ul class="dropdown-menu slidedown">
-															<li><a href="#"><span class="glyphicon glyphicon-refresh">
+															<li><a href="<?php echo base_url('chat'); ?>"><span class="glyphicon glyphicon-refresh">
 															</span>Refresh</a></li>
 														
 															
@@ -292,7 +292,7 @@
 															<?php if($list['replayedpic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -317,7 +317,7 @@
 														<?php if($list['replaypic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>

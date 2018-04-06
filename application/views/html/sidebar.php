@@ -201,22 +201,15 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">dashboard</i>
-	                                <span class="title">Prescription </span>  <span class="selected"></span>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('users');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Prescription</span>
+	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                            <ul class="sub-menu">
-	                                <li class="nav-item  ">
-	                                    <a href="#" class="nav-link "> <span class="title">Receive  </span>
-	                                    </a>
-	                                </li>
-	                                <li class="nav-item ">
-	                                    <a href="#" class="nav-link "> <span class="title">Billing</span>
-	                                    </a>
-	                                </li>
-	                            </ul>
-	                        </li>
+	                        </li> 
+							
 						 <li class="nav-item start ">
 	                            <a href="<?php echo base_url('medicine');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
@@ -242,14 +235,7 @@
 	                            </a>
 	                        </li> 
 						<?php } else if($userdetails['role_id']==6){ ?>	
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Dashboard</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li>
+							
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>

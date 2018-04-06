@@ -1008,8 +1008,10 @@ class Resources extends CI_Controller {
 			$post=$this->input->post();
 			$complete=array(
 			'doctor_status'=>1,
+			'completed_type'=>isset($post['type'])?$post['type']:'',
 			'assign_doctor_by'=>isset($post['assign_another_doctor'])?$admindetails['a_id']:'',
-			'assign_doctor_to'=>isset($post['assign_another_doctor'])?$post['assign_another_doctor']:''
+			'assign_doctor_to'=>isset($post['assign_another_doctor'])?$post['assign_another_doctor']:'',
+			'create_by'=>$admindetails['a_id']
 			);
 			$completed=$this->Resources_model->update_all_billing_compelted_details($post['pid'],$post['billing_id'],$complete);
 			if(count($completed)>0){

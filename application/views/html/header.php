@@ -43,7 +43,7 @@
             <div class="page-header-inner ">
                 <!-- logo start -->
                 <div class="page-logo">
-                    <a href="dashboard.php">
+                    <a href="<?php echo base_url('dashboard'); ?>">
                     
                     <span class="logo-default" ><img class="img-responsive" src="<?php echo base_url(); ?>assets/vendor/img/logo.png" alt="logo"> </span> </a>
                 </div>

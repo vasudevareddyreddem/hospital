@@ -38,8 +38,9 @@ class Chat extends CI_Controller {
 					$data['chat_list']=$this->Chat_model->getget_team_replay_message_list($admindetails['a_id']);
 					$data['resources_list']=$this->Chat_model->get_resource_list($userdetails['hos_id']);
 					$data['resources_chating']=$this->Chat_model->get_resource_chating_list($admindetails['a_id']);
-					//echo '<pre>';print_r($data);exit;
-					$data['hospitaladmin_chat_list']=$this->Chat_model->getget_hospitaladmin_replay_message_list($admindetails['a_id']);
+					$data['hospitaladmin_chat_list']=$this->Chat_model->get_hospitaladmin_replay_message_list($admindetails['a_id']);
+										//echo '<pre>';print_r($data);exit;
+
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('chat/recoursechat',$data);
 					$this->load->view('html/footer');

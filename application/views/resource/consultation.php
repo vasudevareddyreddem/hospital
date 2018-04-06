@@ -144,10 +144,10 @@
                   <div class="control-group" id="fields">
                      <label class="control-label" for="field1"><strong>Comments</strong></label>
                      <div class="controls">
-                        <form role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
+                        <form id="vitalscomment" name="vitalscomment" role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                            <div class="entry input-group ">
-                              <textarea type="textarea" class="form-control" name="comments[]" id="comments"  placeholder="Enter Comments" ></textarea>
+                              <textarea type="textarea" class="form-control" name="comments[]" id="comments[]"  placeholder="Enter Comments" required></textarea>
                               <span class="input-group-btn">
                               <button class="btn btn-success btn-add" type="button">
                               <span class="glyphicon glyphicon-plus">+</span>
@@ -175,7 +175,7 @@
                <div class="panel-body">
                   <div class="tab-content">
                      <div class="tab-pane active" id="home">
-                        <form action="<?php echo base_url('resources/medicine'); ?>" method="post" >
+                        <form id="add_medicines" name="add_medicines" action="<?php echo base_url('resources/medicine'); ?>" method="post" >
                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                            <div class="row">
                               <div class="col-md-12 ">
@@ -184,8 +184,9 @@
                                        <div class="col-md-6">
                                           <label>Type of Medicine?</label>									
                                           <select class="form-control" id="type_of_medicine" name="type_of_medicine">
-                                             <option >Generic </option>
-                                             <option >Brand</option>
+                                             <option value="">Select </option>
+                                             <option value="Generic">Generic </option>
+                                             <option value="Brand">Brand</option>
                                           </select>
                                        </div>
                                        <div class="col-md-6">
@@ -200,27 +201,29 @@
                                        <div class="col-md-6">
                                           <label>Substitute allowed or not allowed?</label>									
                                           <select class="form-control" name="substitute_name" id="substitute_name">
-                                             <option >Yes </option>
-                                             <option >No</option>
+                                             <option value="" >Select </option>
+                                             <option value="Yes" >Yes </option>
+                                             <option value="No" >No</option>
                                           </select>
                                        </div>
                                        <div class="col-md-6">
                                           <label>Condition</label>									
                                           <select class="form-control" id="condition" name="condition">
-                                             <option >Chronic  </option>
-                                             <option >PRN</option>
+                                             <option value="" >Select  </option>
+                                             <option value="Chronic" >Chronic  </option>
+                                             <option value="PRN" >PRN</option>
                                           </select>
                                        </div>
                                        <div class="col-md-6">
                                           <label>Dosage</label>									
                                           <select class="form-control" id="dosage" name="dosage">
-                                             <option >Select Dosage </option>
-                                             <option >600 g  </option>
-                                             <option >350 g</option>
-                                             <option >150 g</option>
-                                             <option >250 g</option>
-                                             <option >550 g</option>
-                                             <option >650 g</option>
+                                             <option value="" >Select Dosage </option>
+                                             <option value="600 g">600 g </option>
+                                             <option value="350 g">350 g</option>
+                                             <option value="150 g">150 g</option>
+                                             <option value="250 g">250 g</option>
+                                             <option value="550 g">550 g</option>
+                                             <option value="650 g">650 g</option>
                                           </select>
                                        </div>
                                        <div class="col-md-6">
@@ -228,28 +231,29 @@
                                              <div class="col-md-4">
                                                 <label>Route</label>
                                                 <select class="form-control" id="route" name="route">
-                                                   <option >Select Route </option>
-                                                   <option >Mouth</option>
+                                                   <option value="" >Select Route </option>
+                                                   <option value="Mouth" >Mouth</option>
                                                 </select>
                                              </div>
                                              <div class="col-md-8">
                                                 <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
-                                                   <option >Single Dose</option>
-                                                   <option >Once Per Day</option>
-                                                   <option >Twice Per Day</option>
-                                                   <option >Thrice Per Day</option>
-                                                   <option >Four Times Per Day</option>
-                                                   <option >Five Times Per Day</option>
-                                                   <option >Every Morning</option>
-                                                   <option >At Bedtime</option>
-                                                   <option >Every Other Day</option>
-                                                   <option >Every Three Days</option>
-                                                   <option >Every Two Hours</option>
-                                                   <option >Every Two Hours While Awake</option>
-                                                   <option >Every Three Hours</option>
-                                                   <option >Every Three Hours While Awake</option>
-                                                   <option >Write Your Own</option>
+                                                   <option value="" >Select</option>
+                                                   <option value="Single Dose" >Single Dose</option>
+                                                   <option value="Once Per Day" >Once Per Day</option>
+                                                   <option value="Twice Per Day" >Twice Per Day</option>
+                                                   <option value="Thrice Per Day" >Thrice Per Day</option>
+                                                   <option value="Four Times Per Day" >Four Times Per Day</option>
+                                                   <option value="Five Times Per Day" >Five Times Per Day</option>
+                                                   <option value="Every Morning" >Every Morning</option>
+                                                   <option value="At Bedtime" >At Bedtime</option>
+                                                   <option value="Every Other Day" >Every Other Day</option>
+                                                   <option value="Every Three Days" >Every Three Days</option>
+                                                   <option value="Every Two Hours" >Every Two Hours</option>
+                                                   <option value="Every Two Hours While Awake" >Every Two Hours While Awake</option>
+                                                   <option value="Every Three Hours" >Every Three Hours</option>
+                                                   <option value="Every Three Hours While Awake" >Every Three Hours While Awake</option>
+                                                   <option value="Write Your Own" >Write Your Own</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -283,24 +287,24 @@
                                              <div class="col-md-6">
                                                 <label> Units</label>
                                                 <select class="form-control" name="units" id="units">
-                                                   <option >Select Units</option>
-                                                   <option >no</option>
-                                                   <option >tablet</option>
-                                                   <option >mg</option>
-                                                   <option >ml</option>
-                                                   <option >ounce</option>
-                                                   <option >bottle</option>
-                                                   <option >box</option>
-                                                   <option >tube</option>
-                                                   <option >gram</option>
-                                                   <option >can</option>
-                                                   <option >pack</option>
-                                                   <option >pound</option>
-                                                   <option >device</option>
-                                                   <option >vial</option>
-                                                   <option >suppository</option>
-                                                   <option >es</option>
-                                                   <option >patch</option>
+                                                   <option value="" >Select Units</option>
+                                                   <option value="no" >no</option>
+                                                   <option value="tablet" >tablet</option>
+                                                   <option value="mg" >mg</option>
+                                                   <option value="ml" >ml</option>
+                                                   <option value="ounce" >ounce</option>
+                                                   <option value="bottle" >bottle</option>
+                                                   <option value="box" >box</option>
+                                                   <option value="tube" >tube</option>
+                                                   <option value="gram" >gram</option>
+                                                   <option value="can" >can</option>
+                                                   <option value="pack" >pack</option>
+                                                   <option value="pound" >pound</option>
+                                                   <option value="device" >device</option>
+                                                   <option value="vial" >vial</option>
+                                                   <option value="suppository" >suppository</option>
+                                                   <option value="es" >es</option>
+                                                   <option value="patch" >patch</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -414,15 +418,16 @@
 				<div class="col">
 				<form action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
 				  <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+					<input type="hidden" name="type" id="type" value="1">
 					<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 					<button type="submit" class="btn btn-xs btn-info">Assign to Pharmacy</button>
 				</form>
 				</div>
 				<div class="col">
 					<form action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
-				                         <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-
-					   <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+				    <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+                  <input type="hidden" name="type" id="type" value="2">
+				<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 				<button type="submit" class="btn btn-xs btn-warning">Assign to Investigation</button>
 				</form>
 				</div>
@@ -435,6 +440,7 @@
 				
                   <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                   <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+                  <input type="hidden" name="type" id="type" value="3">
 					<select style="width:200px;" class="form-control" id="assign_another_doctor" name="assign_another_doctor">
 						<option value="">Select </option>
 						<?php foreach($doctors_list as $list){ ?>
@@ -550,7 +556,7 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header bg-indigo">
-            <h5 class="modal-title" id="lineModalLabel">Add test list</h5>
+            <h5 class="modal-title" id="lineModalLabel">Add Vitals</h5>
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" >
@@ -958,6 +964,126 @@ function addtestlist(){
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Associate  problems can only consist of alphanumaric, space and dot'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});
+	$(document).ready(function() {
+	$('#add_medicines').bootstrapValidator({
+		fields: {
+          
+             type_of_medicine: {
+                 validators: {
+					notEmpty: {
+						message: 'Type of Medicine? is required'
+					}
+				}
+            }, 
+			medicine_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Search for Medicine is required'
+					}
+				}
+            },
+			substitute_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Substitute allowed is required'
+					}
+				}
+            },
+			condition: {
+                 validators: {
+					notEmpty: {
+						message: 'Condition is required'
+					}
+				}
+            },
+			dosage: {
+                 validators: {
+					notEmpty: {
+						message: 'Dosage is required'
+					}
+				}
+            },route: {
+                 validators: {
+					notEmpty: {
+						message: 'Route is required'
+					}
+				}
+            },
+			frequency: {
+                 validators: {
+					notEmpty: {
+						message: 'Frequency is required'
+					}
+				}
+            },
+			directions: {
+                 validators: {
+					notEmpty: {
+						message: 'Directions is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Directions can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			qty: {
+                 validators: {
+					notEmpty: {
+						message: 'Qty is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]+$/,
+					message: 'Qty can only consist of digits'
+					}
+				}
+            },
+			units: {
+                 validators: {
+					notEmpty: {
+						message: 'Units is required'
+					}
+				}
+            },
+			comments: {
+                 validators: {
+					notEmpty: {
+						message: 'Comments is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Comments can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			type_of_medicine: {
+                 validators: {
+					notEmpty: {
+						message: 'Type of Medicine? is required'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});
+	$(document).ready(function() {
+	$('#vitalscomment').bootstrapValidator({
+		fields: {
+          
+             'comments[]': {
+                 validators: {
+					notEmpty: {
+						message: 'Comment is required'
 					}
 				}
             }

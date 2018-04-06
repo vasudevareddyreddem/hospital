@@ -31,18 +31,7 @@
 											<div class="panel ">
 												<div class="panel-heading bg-indigo">
 													<span class="glyphicon glyphicon-comment"></span> Software Support
-													<div class="btn-group pull-right">
-														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-															<span class="fa fa-angle-down"> </span>
-														</button>
-														<ul class="dropdown-menu slidedown">
-															<li><a href="#"><span class="glyphicon glyphicon-refresh">
-															</span>Refresh</a></li>
-															<li class="divider"></li>
-															<li><a href="<?php echo base_url('dashboard/logout'); ?>"><span class="glyphicon glyphicon-off"></span>
-																Sign Out</a></li>
-														</ul>
-													</div>
+													
 												</div>
 												<div class="panel-body">
 													<ul class="chat">
@@ -54,7 +43,7 @@
 															<?php if($list['replayedpic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
@@ -79,7 +68,7 @@
 														<?php if($list['replaypic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
 
 														<?php } ?>
 														</span>
