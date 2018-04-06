@@ -71,7 +71,7 @@
 															<?php if($list['senderpic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['senderpic']); ?>" alt="<?php echo isset($list['sendername'])?$list['replayedname']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b>BA</b></span>
 
 														<?php } ?>
 														</span>
@@ -96,7 +96,7 @@
 														<?php if($list['resourcepic']!=''){ ?>
 															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['resourcepic']); ?>" alt="<?php echo isset($list['resourcename'])?$list['resourcename']:''; ?>" class="img-circle" />
 														<?php }else{ ?>
-															<img src="<?php echo  base_url('assets/me.png'); ?>" alt="User Avatar" class="img-circle" />
+															<span class="bg-success" style="padding:15px;border-radius:50%" ><b>BA</b></span>
 
 														<?php } ?>
 														</span>
