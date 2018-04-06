@@ -45,7 +45,7 @@
                 <div class="page-logo">
                     <a href="dashboard.php">
                     
-                    <span class="logo-default" >Main Adim Logo</span> </a>
+                    <span class="logo-default" ><img class="img-responsive" src="<?php echo base_url(); ?>assets/vendor/img/logo.png" alt="logo"> </span> </a>
                 </div>
                 <!-- logo end -->
 				<ul class="nav navbar-nav navbar-left in">

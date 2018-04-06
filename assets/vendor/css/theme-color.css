@@ -10,14 +10,14 @@
   --sidebar-color: #ffffff;
   --sidebar-font-color: #4680ff;
   --logo-color: #222c3c;
-  --header-color: #6673FC;
+  --header-color: #003f7f;
 }
 
 /*
   --white-color: #ffffff;
   --dark-color: #222c3c;
   --blue-color: #1880c9;
-  --indigo-color: #6673FC;
+  --indigo-color: #003f7f;
   --cyan-color: #4ABAD2;
   --green-color: #3FCC7E;
   --red-color: #E44F56;
@@ -405,7 +405,7 @@
 
 /* Indigo sidebar color */
 .indigo-sidebar-color .sidemenu-container {
-    background-color: #6673FC;
+    background-color: #003f7f;
 }
 .indigo-sidebar-color .sidemenu-container .sidemenu>li.active.open>a,
 .indigo-sidebar-color .sidemenu-container .sidemenu>li.active>a,
@@ -430,7 +430,7 @@
 .indigo-sidebar-color .sidemenu-container .sidemenu>li:hover>a, 
 .indigo-sidebar-color .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu>li.open>a, 
 .indigo-sidebar-color .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu>li:hover>a {
-    background-color: #6673FC;
+    background-color: #003f7f;
     color: #fff;
 }
 .indigo-sidebar-color .sidemenu-container .sidemenu>li.open>a>.arrow.open:before, 
@@ -478,7 +478,7 @@
 	color: #fff;
 }
 .indigo-sidebar-color .page-container{
-	background-color : #6673FC;
+	background-color : #003f7f;
 }
 .indigo-sidebar-color .sidemenu-container .sidemenu>li.heading>h3, 
 .indigo-sidebar-color .sidemenu-closed.sidemenu-container-fixed .sidemenu-container:hover .sidemenu>li.heading>h3{
@@ -759,7 +759,7 @@
 	background: #1880c9;
 }
 .logo-indigo .page-header.navbar .page-logo{
-	background: #6673FC;
+	background: #fff;
 }
 .logo-cyan .page-header.navbar .page-logo{
 	background: #4ABAD2;
@@ -1023,7 +1023,7 @@
 
 /* Header Indigo */
 .header-indigo .page-header.navbar{
-	background-color: #6673FC;
+	background-color: #003f7f;
 }
 .header-indigo form.search-form-opened .btn.submit {
     color: #fff;
