@@ -145,7 +145,9 @@
                      <label class="control-label" for="field1"><strong>Comments</strong></label>
                      <div class="controls">
                         <form id="vitalscomment" name="vitalscomment" role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
-                           <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+                           <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+                          
+						  <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                            <div class="entry input-group ">
                               <textarea type="textarea" class="form-control" name="comments[]" id="comments[]"  placeholder="Enter Comments" required></textarea>
                               <span class="input-group-btn">
@@ -177,6 +179,7 @@
                      <div class="tab-pane active" id="home">
                         <form id="add_medicines" name="add_medicines" action="<?php echo base_url('resources/medicine'); ?>" method="post" >
                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+                           <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
                            <div class="row">
                               <div class="col-md-12 ">
                                  <div class="container">
@@ -328,6 +331,8 @@
                      <div class="tab-pane" id="about">
 					 <form id="addinvestigation" name="addinvestigation" action="<?php echo base_url('resources/investigation'); ?>" method="post">
                          <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+							<input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+
 							<div class="container">
                            <div class="row">
                               <div class="col-md-6">
@@ -398,9 +403,10 @@
                               </div>
                            </div>
                            <br/>
-                           <button class="btn btn-sm btn-warning" type="button">Clear</button>
-                           <button class="btn btn-sm btn-info" type="button">View Investigation</button>
                            <button class="btn btn-sm btn-success" type="submit">Add Investigation</button>
+								<?php if(isset($patient_investigation_list) && count($patient_investigation_list)>0){?>
+                                 <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#investigationmodel"  type="button">View Investigation</a>
+                                 <?php } ?>
                         </div>
 						</form>
                      </div>
@@ -568,7 +574,8 @@
                      </div>
                      <div class="card-body ">
                         <form action="<?php echo base_url('resources/addvitals'); ?>"  method="post">
-                           <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+                          <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+							<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                            <div class="row">
                               <div class="col-md-4 ">
                                  <div class="col-md-12">
@@ -676,6 +683,57 @@
       </div>
    </div>
 </div>
+<!--view investigationmodel modal-->
+<div class="modal fade" id="investigationmodel" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header bg-indigo">
+            <h5 class="modal-title" id="lineModalLabel">Investigation</h5>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         </div>
+         <div class="modal-body">
+            <div class="">
+               <div class="">
+                  <div class=" card card-topline-red">
+                     <div class="card-head">
+                        <header>Investigation List</header>
+                     </div>
+                     <div class="card-body ">
+                        <div class="col-md-12 ">
+                           <div class="table-scrollable">
+                              <table class="table table-bordered">
+                                 <thead>
+                                    <tr>
+                                       <th>Investigation type</th>
+                                       <th>Priority</th>
+                                       <th>Associate diagnosis </th>
+                                       <th>Associate problems</th>
+                                       <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <?php foreach($patient_investigation_list as $list){ ?>
+                                    <tr id="investigation_id_<?php echo $list['id']; ?>">
+									   <td><?php echo $list['investigation_type']; ?></td>
+										<td><?php echo $list['priority']; ?></td>
+                                       <td><?php echo $list['associate_diagnosis']; ?> </td>
+                                       <td><?php echo $list['associate_problems']; ?></td>
+                                       <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" >Remove</span></td>
+                                    </tr>
+                                    <?php }?>											
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!--view investigationmodel-->
 <!--view preciption modal-->
 <div class="modal fade" id="prescriptionmodel" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">
@@ -774,7 +832,8 @@
 						   <div class="col-md-12 ">
 
                            <input type="hidden" name="test_patient_id" id="test_patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
-                             
+                           <input type="hidden" name="test_patient_bid" id="test_patient_bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+
 							 <div class="card-head">
                                  <header>Search results	</header>
                               </div>
@@ -820,6 +879,7 @@ function addtestlist(){
 					data: {
 						ids: favorite,
 						patinet_id: $('#test_patient_id').val(),
+						patinet_bid: $('#test_patient_bid').val(),
 					},
 					dataType: 'json',
 					type: 'POST',
@@ -1104,6 +1164,24 @@ function addtestlist(){
    					success: function (data) {
    					if(data.msg==1){
    						jQuery('#medicine_id_'+id).hide();
+   					}
+   				 }
+   				});
+   			}
+   	
+   }
+   function removeinvestigation(id){
+   	if(id!=''){
+   		 jQuery.ajax({
+   					url: "<?php echo site_url('resources/removeinvestigation');?>",
+   					data: {
+   						investigation_id: id,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+   					if(data.msg==1){
+   						jQuery('#investigation_id_'+id).hide();
    					}
    				 }
    				});

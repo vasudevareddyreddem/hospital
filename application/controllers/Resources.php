@@ -725,7 +725,8 @@ class Resources extends CI_Controller {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['encounters_list']=$this->Resources_model->get_vitals_list($patient_id);
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
-					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,date('y-m-d'));
+					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,$data['billing_id']);
+					$data['patient_investigation_list']=$this->Resources_model->get_patient_investigation_details_list($patient_id,$data['billing_id']);
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
 					$data['doctors_list']=$this->Resources_model->get_hospital_doctors_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit;
@@ -751,7 +752,7 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 					$billing=array(
 						'p_id'=>isset($post['pid'])?$post['pid']:'',
-						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'b_id'=>isset($post['bid'])?$post['bid']:'',
 						'assessment_type'=>isset($post['assessment_type'])?$post['assessment_type']:'',
 						'vitaltype'=>isset($post['vitaltype'])?$post['vitaltype']:'',
 						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
@@ -770,10 +771,10 @@ class Resources extends CI_Controller {
 						$update=$this->Resources_model->saving_patient_vital_details($billing);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Vitals successfully Added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']));
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']));
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -791,10 +792,11 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($admindetails);exit;
+					//echo '<pre>';print_r($post);exit;
 					foreach($post['comments'] as $lists){
 						$billing=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'b_id'=>isset($post['bid'])?$post['bid']:'',
 							'comments'=>$lists,
 							'created_at'=>date('Y-m-d H:i:s'),
 							'create_by'=>$admindetails['a_id']
@@ -805,10 +807,10 @@ class Resources extends CI_Controller {
 				
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Vitals Commets successfully Added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']));
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']));
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -828,6 +830,7 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'b_id'=>isset($post['bid'])?$post['bid']:'',
 							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
 							'medicine_name'=>isset($post['medicine_name'])?$post['medicine_name']:'',
 							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
@@ -848,10 +851,10 @@ class Resources extends CI_Controller {
 					$medicine=$this->Resources_model->saving_patient_medicine($addmedicine);
 					if(count($medicine)>0){
 							$this->session->set_flashdata('success',"Medicine successfully Added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -871,6 +874,7 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
+							'b_id'=>isset($post['bid'])?$post['bid']:'',
 							'investigation_type'=>isset($post['investigation_type'])?$post['investigation_type']:'',
 							'countrycode'=>isset($post['countrycode'])?$post['countrycode']:'',
 							'contact_number'=>isset($post['contact_number'])?$post['contact_number']:'',
@@ -887,10 +891,10 @@ class Resources extends CI_Controller {
 					$investigation=$this->Resources_model->saving_patient_investigation($addmedicine);
 					if(count($investigation)>0){
 							$this->session->set_flashdata('success',"Investigation successfully Added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-3');
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'#step-2');
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -910,6 +914,29 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 			
 					$removedattch=$this->Resources_model->remove_attachment($post['medicine_id']);
+					if(count($removedattch) > 0)
+					{
+					$data['msg']=1;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function removeinvestigation(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+			
+					$removedattch=$this->Resources_model->remove_investigation_attachment($post['investigation_id']);
 					if(count($removedattch) > 0)
 					{
 					$data['msg']=1;
@@ -980,6 +1007,7 @@ class Resources extends CI_Controller {
 			foreach($post['ids'] as $lists){
 					$test_list=array(
 						'p_id'=>isset($post['patinet_id'])?$post['patinet_id']:'',
+						'b_id'=>isset($post['patinet_bid'])?$post['patinet_bid']:'',
 						'test_id'=>$lists,
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d'),

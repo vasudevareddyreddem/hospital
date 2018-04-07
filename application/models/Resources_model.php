@@ -142,10 +142,16 @@ class Resources_model extends CI_Model
 		$this->db->insert('patient_medicine_list', $data);
 		return $insert_id = $this->db->insert_id();
 	}
-	public function get_patient_medicine_details_list($p_id,$date){
+	public function get_patient_medicine_details_list($p_id,$bid){
 		$this->db->select('*')->from('patient_medicine_list');
 		$this->db->where('patient_medicine_list.p_id',$p_id);
-		$this->db->where('patient_medicine_list.date',$date);
+		$this->db->where('patient_medicine_list.b_id',$bid);
+        return $this->db->get()->result_array();
+	}
+	public function get_patient_investigation_details_list($p_id,$bid){
+		$this->db->select('*')->from('investigation_patient_list');
+		$this->db->where('investigation_patient_list.p_id',$p_id);
+		$this->db->where('investigation_patient_list.b_id',$bid);
         return $this->db->get()->result_array();
 	}
 	public function get_hospital_medicine_list($hos_id){
@@ -179,6 +185,10 @@ class Resources_model extends CI_Model
 	}
 	function remove_attachment($id){
 		$sql1="DELETE FROM patient_medicine_list WHERE m_id = '".$id."'";
+		return $this->db->query($sql1);
+	}
+	function remove_investigation_attachment($id){
+		$sql1="DELETE FROM investigation_patient_list WHERE id = '".$id."'";
 		return $this->db->query($sql1);
 	}
 	public function add_addpatient_test($data){
