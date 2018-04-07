@@ -17,7 +17,12 @@
                                 <div class="col-md-12">
                                     <div class="card ">
                                         <div class="card-head">
-                                            <header>Prescription List </header>
+                                            <header>Name : &nbsp;<span>xxxxx </span><h4 class="py-2">850022546544</h4></header>
+									<div class="tools">
+                                   <h4><b>ID: <span>2556654</span></b></h4>
+                                   <h5><b>Date: <span>10-06-2018</span></b></h5>
+									
+                                 </div>
                                           
                                         </div>
                                         <div class="card-body " style="padding: 0px 24px 24px 24px;">
