@@ -116,7 +116,24 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');
 		}
-	}public function announcement()
+	}
+	public function announcement()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$hospital_list=$this->Admin_model->get_ll_Hospital_details();
+				foreach($hospital_list as $list){
+					$hos_lis[]=$list['hos_bas_name'];
+				}
+				$data['tt']= "'" . implode( "','", $hos_lis) . "'";
+				$this->load->view('admin/announcement',$data);
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function hospital_list()
 	{
 		if($this->session->userdata('userdetails'))
 		{
