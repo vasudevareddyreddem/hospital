@@ -26,7 +26,6 @@
                                             <table class="table custom-table table-hover" style="border-top:none">
                                                 <thead >
                                                     <tr >
-                                                        <th> S.NO</th>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
                                                         <th>Dosage</th>
@@ -36,8 +35,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+												<?php foreach($prescriptions as $list){ ?>
                                                     <tr>
-                                                        <td>1</td>
                                                         <td>Medicine Name</td>
                                                         <td style="width:100px">
 															<div class="form-group">
@@ -62,32 +61,9 @@
                                                         <td>Lorem Ipsum dorolo imit</td>
                                                        
                                                     </tr>
-													<tr>
-                                                        <td>2</td>
-                                                        <td>Medicine Name</td>
-                                                        <td style="width:100px">
-															<div class="form-group">
-															<input type="text" class="form-control" placeholder="Enter Qty">
-															</div>
-														</td>
-                                                        <td>
-															600
-														</td>
-                                                        <td>
-															<div class="form-group">
-																
-																<select class="form-control">
-																	<option>option 1</option>
-																	<option>option 2</option>
-																	<option>option 3</option>
-																
-																</select>
-															</div>
-														</td>
-                                                        <td>Lorem Ipsum dorolo imit</td>
-                                                        <td>Lorem Ipsum dorolo imit</td>
-                                                       
-                                                    </tr>
+													
+													<?php } ?>
+													
                                                     
                                                    
                                                     

@@ -58,7 +58,7 @@ class Users extends CI_Controller {
 					$data['prescriptions']= $this->Users_model->get_prescription_details($patient_id,$billing_id);
 					$this->load->view('prescription/prescription_view',$data);
 					$this->load->view('html/footer');
-					//echo '<pre>';print_r($data);exit;
+					echo '<pre>';print_r($data);exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
