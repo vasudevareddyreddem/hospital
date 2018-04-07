@@ -143,6 +143,7 @@ DROP TABLE IF EXISTS `investigation_patient_list`;
 CREATE TABLE `investigation_patient_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
   `investigation_type` varchar(250) DEFAULT NULL,
   `countrycode` varchar(250) DEFAULT NULL,
   `contact_number` varchar(250) DEFAULT NULL,
@@ -156,11 +157,11 @@ CREATE TABLE `investigation_patient_list` (
   `create_by` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `investigation_patient_list` */
 
-insert  into `investigation_patient_list`(`id`,`p_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (1,8,'lab','+91','85000050944','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-05 16:53:44',12,'2018-04-05');
+insert  into `investigation_patient_list`(`id`,`p_id`,`b_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (1,8,3,'lab','+91','85000050944','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-05 16:53:44',12,'2018-04-05'),(2,8,3,'Radiology','+91','6767686788','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-07 11:04:18',12,'2018-04-07');
 
 /*Table structure for table `lab_detailes` */
 
@@ -300,17 +301,18 @@ DROP TABLE IF EXISTS `patient_lab_test_list`;
 CREATE TABLE `patient_lab_test_list` (
   `it` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
   `test_id` int(11) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `date` date DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`it`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_lab_test_list` */
 
-insert  into `patient_lab_test_list`(`it`,`p_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (1,8,1,'2018-04-05 16:13:39','2018-04-05',12,1),(2,8,1,'2018-04-05 16:17:22','2018-04-05',12,1),(3,8,1,'2018-04-05 16:20:45','2018-04-05',12,1),(4,8,1,'2018-04-05 16:22:00','2018-04-05',12,1),(6,8,1,'2018-04-05 16:29:25','2018-04-05',12,1),(7,8,1,'2018-04-05 16:29:40','2018-04-05',12,1),(8,8,1,'2018-04-05 16:29:44','2018-04-05',12,1),(9,8,2,'2018-04-05 16:29:44','2018-04-05',12,1),(10,8,1,'2018-04-05 16:31:47','2018-04-05',12,1),(11,8,1,'2018-04-05 16:36:42','2018-04-05',12,1),(12,8,1,'2018-04-05 16:38:17','2018-04-05',12,1),(13,8,1,'2018-04-05 16:40:17','2018-04-05',12,1),(14,8,2,'2018-04-05 16:40:17','2018-04-05',12,1),(15,8,1,'2018-04-05 16:53:14','2018-04-05',12,1),(16,8,1,'2018-04-05 17:33:51','2018-04-05',12,1),(17,8,2,'2018-04-05 17:33:51','2018-04-05',12,1),(18,8,1,'2018-04-05 17:34:51','2018-04-05',12,1),(19,8,2,'2018-04-05 17:34:51','2018-04-05',12,1);
+insert  into `patient_lab_test_list`(`it`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (1,8,3,1,'2018-04-05 16:13:39','2018-04-05',12,1),(2,8,3,1,'2018-04-05 16:17:22','2018-04-05',12,1),(3,8,3,1,'2018-04-05 16:20:45','2018-04-05',12,1),(4,8,3,1,'2018-04-05 16:22:00','2018-04-05',12,1),(6,8,3,1,'2018-04-05 16:29:25','2018-04-05',12,1),(7,8,3,1,'2018-04-05 16:29:40','2018-04-05',12,1),(8,8,3,1,'2018-04-05 16:29:44','2018-04-05',12,1),(9,8,3,2,'2018-04-05 16:29:44','2018-04-05',12,1),(10,8,3,1,'2018-04-05 16:31:47','2018-04-05',12,1),(11,8,3,1,'2018-04-05 16:36:42','2018-04-05',12,1),(12,8,3,1,'2018-04-05 16:38:17','2018-04-05',12,1),(13,8,3,1,'2018-04-05 16:40:17','2018-04-05',12,1),(14,8,3,2,'2018-04-05 16:40:17','2018-04-05',12,1),(15,8,3,1,'2018-04-05 16:53:14','2018-04-05',12,1),(16,8,3,1,'2018-04-05 17:33:51','2018-04-05',12,1),(17,8,3,2,'2018-04-05 17:33:51','2018-04-05',12,1),(18,8,3,1,'2018-04-05 17:34:51','2018-04-05',12,1),(19,8,3,2,'2018-04-05 17:34:51','2018-04-05',12,1),(20,8,3,1,'2018-04-07 11:02:14','2018-04-07',12,1);
 
 /*Table structure for table `patient_medicine_list` */
 
@@ -319,6 +321,7 @@ DROP TABLE IF EXISTS `patient_medicine_list`;
 CREATE TABLE `patient_medicine_list` (
   `m_id` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
   `type_of_medicine` varchar(250) DEFAULT NULL,
   `medicine_name` varchar(250) DEFAULT NULL,
   `substitute_name` varchar(250) DEFAULT NULL,
@@ -336,11 +339,11 @@ CREATE TABLE `patient_medicine_list` (
   `date` date DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`m_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_medicine_list` */
 
-insert  into `patient_medicine_list`(`m_id`,`p_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`units`,`comments`,`create_at`,`date`,`create_by`) values (3,8,'Brand','AK','Yes','PRN','350 g','Mouth','Write Your Own','dfsd','03 April 2018','03 April 2018','12','es','fd','2018-04-03 18:31:58','2018-04-03',12),(4,8,'Brand','HI','Yes','Chronic','350 g','Mouth','At Bedtime','hj','06 April 2018','07 April 2018','12','suppository','g','2018-04-05 11:27:44','2018-04-05',12);
+insert  into `patient_medicine_list`(`m_id`,`p_id`,`b_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`units`,`comments`,`create_at`,`date`,`create_by`) values (3,8,4,'Brand','AK','Yes','PRN','350 g','Mouth','Write Your Own','dfsd','03 April 2018','03 April 2018','12','es','fd','2018-04-03 18:31:58','2018-04-03',12),(4,8,4,'Brand','HI','Yes','Chronic','350 g','Mouth','At Bedtime','hj','06 April 2018','07 April 2018','12','suppository','g','2018-04-05 11:27:44','2018-04-05',12),(5,8,4,'Generic','fgdf','Yes','Chronic','350 g','Mouth','Every Three Hours','tyrt','07 April 2018','07 April 2018','34','mg','dfsdfds','2018-04-07 10:46:29','2018-04-07',12),(6,8,3,'Generic','fgdf','Yes','PRN','550 g','Mouth','Every Three Hours While Awake','hjfgh','07 April 2018','06 April 2018','67','pound','uytu','2018-04-07 10:57:48','2018-04-07',12);
 
 /*Table structure for table `patient_vitals_list` */
 
@@ -364,11 +367,11 @@ CREATE TABLE `patient_vitals_list` (
   `create_at` datetime DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_vitals_list` */
 
-insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`tep_actuals`,`tep_range`,`temp_site_positioning`,`notes`,`pulse_actuals`,`pulse_range`,`pulse_rate_rhythm`,`pulse_rate_vol`,`notes1`,`create_at`,`date`) values (3,8,7,'Infection','Chief complaint','1','2','5','11','2','21','2','2','2','2018-04-03 14:17:58','2018-04-03'),(4,8,7,'Infection','Chief complaint','55','55','555','22','11','33','44','99','88','2018-04-03 14:25:43','2018-04-03'),(5,8,0,'Infection','Chief complaint','9','8','7','6','5','4','3','2','1','2018-04-03 15:36:10','2018-04-03'),(6,8,0,'Infection','Allergies','f','uu','uuu','ttt','tyttt','t','ttt','tt','yyutyuyt','2018-04-03 15:51:24','2018-04-03'),(7,8,0,'Infection','Chief complaint','uio','uiy','yuyuiyu','yuiyu','yuyuyu','yuy','uyuyu','yuyuyuy','yuiyu','2018-04-03 15:52:31','2018-04-03'),(8,8,0,'Diabetes','Surgical history','y','ytyut','ytyu','tytytyyt','yutyutyutyu','tyutyutyu','tyut','yut','ytu','2018-04-03 16:14:10','2018-04-03');
+insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`tep_actuals`,`tep_range`,`temp_site_positioning`,`notes`,`pulse_actuals`,`pulse_range`,`pulse_rate_rhythm`,`pulse_rate_vol`,`notes1`,`create_at`,`date`) values (3,8,7,'Infection','Chief complaint','1','2','5','11','2','21','2','2','2','2018-04-03 14:17:58','2018-04-03'),(4,8,7,'Infection','Chief complaint','55','55','555','22','11','33','44','99','88','2018-04-03 14:25:43','2018-04-03'),(11,8,3,'Infection','Chief complaint','1','2','3','4','5','6','7','8','9','2018-04-07 10:55:36','2018-04-07');
 
 /*Table structure for table `patients_list_1` */
 
@@ -600,13 +603,16 @@ DROP TABLE IF EXISTS `vital_comments`;
 CREATE TABLE `vital_comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
   `comments` varchar(250) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `vital_comments` */
+
+insert  into `vital_comments`(`id`,`p_id`,`b_id`,`comments`,`created_at`,`create_by`) values (1,8,3,'hjfgh','2018-04-07 10:48:16',12),(2,8,3,'jkgjhk','2018-04-07 10:50:39',12),(3,8,3,'hjhg','2018-04-07 10:54:11',12);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
