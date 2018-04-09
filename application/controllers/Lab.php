@@ -57,7 +57,7 @@ class Lab extends CI_Controller {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$adding=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-						't_name'=>isset($post['name'])?$post['name']:'',
+						't_name'=>isset($post['test_name'])?$post['test_name']:'',
 						't_short_form'=>isset($post['short_form'])?$post['short_form']:'',
 						't_description'=>isset($post['description'])?$post['description']:'',
 						't_department'=>isset($post['department'])?$post['department']:'',
