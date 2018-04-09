@@ -538,7 +538,7 @@
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="mobile">Department</label>
-											  <input type="text" class="form-control" id="department"  name="department" placeholder="Enter Email" value="<?php echo isset($billing_detailes['department'])?$billing_detailes['department']:''; ?>">
+											  <input type="text" class="form-control" id="department"  name="department" placeholder="Enter Department" value="<?php echo isset($billing_detailes['department'])?$billing_detailes['department']:''; ?>">
 											</div>
 											<div class="form-group col-md-6">
 											  <label for="mobile">Doctor</label>
@@ -664,8 +664,9 @@
 						
 						<div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_9">
 						<form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
-							<input type="hidden" id="pid" name="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
-
+											<input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+											
 							<div class="row table-responsive" >
 			<table class="table table-striped table-bordered table-hover table-checkable order-column">
 			<thead>

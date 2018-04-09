@@ -612,12 +612,14 @@ class Resources extends CI_Controller {
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d')
 						);
-					//echo '<pre>';print_r($billing);exit;
+					//echo '<pre>';print_r($updating);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($updating);
 						if(count($update)>0){
 							
 							$this->session->set_flashdata('success',"Vitals details successfully Updated.");
+							//redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));

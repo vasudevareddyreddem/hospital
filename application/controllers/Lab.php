@@ -171,6 +171,50 @@ class Lab extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function patient_database()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patient_list']=$this->Lab_model->get_all_labreports_lists($userdetails['hos_id']);
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$this->load->view('lab/patient_basebase',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function patient_report_details()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patient']=base64_decode($this->uri->segment(3));
+					$data['report_list']=$this->Lab_model->get_all_patient_reports_lists($data['patient']);
+					$this->load->view('lab/patient_report_list',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function patient_details()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -178,8 +222,10 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['labtest_list']=$this->Lab_model->get_all_patients_lists($userdetails['hos_id']);
-					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['patient_id']=base64_decode($this->uri->segment(3));
+					$data['billing_id']=base64_decode($this->uri->segment(4));
+					$data['patient_details']=$this->Lab_model->get_billing_details($data['patient_id'],$data['billing_id']);
+
 					$this->load->view('lab/patient_details',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -199,34 +245,62 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=5){
 					$post=$this->input->post();
-					echo '<pre>';print_r($_FILES);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$count = 0;
-					foreach ($_FILES['document']['name'] as $i => $name) {
-						if (strlen($_FILES['document']['name'][$i]) > 1) {
-							$pic=$_FILES['document']['name'][$i];
-							$picname = str_replace(" ", "", $pic);
-							$temp = explode(".", $_FILES['document']['name'][$i]);
+					$labdetails_list=array_combine($post['problem_name'],$post['symptoms']);
+						if(count($labdetails_list)>0){
 							
-							$imagename=round(microtime(true)) . '.' . end($temp);
-							$imgname = str_replace(" ", "", $imagename);
-								move_uploaded_file($_FILES['document']['tmp_name'][$i], 'assets/patient_reports/'.$imgname);
-								$count++;
-								$filedata=array(
-								'u_id'=>$loginuser_id['u_id'],
-								'img_name'=>$imgname,
-								'imag_org_name'=>$picname,
-								'page_id'=>$p,
-								'floder_id'=>$f,
-								'img_create_at'=>date('Y-m-d H:i:s'),				
-								'img_status'=>1,				
-								'img_undo'=>0,
-								);
-							echo '<pre>';print_r($updateuserdata);exit;
-							//$addfile = $this->Dashboard_model->save_userfile($filedata);
-							
-						}
+							$count = 0;
+							foreach ($_FILES['document']['name'] as $i => $name) {
+								if (strlen($_FILES['document']['name'][$i]) > 1) {
+									$pic=$_FILES['document']['name'][$i];
+									$picname = str_replace(" ", "", $pic);
+									$temp = explode(".", $_FILES['document']['name'][$i]);
+									$imagename=round(microtime(true)) . '.' . end($temp);
+									$imgname = str_replace(" ", "", $imagename);
+										move_uploaded_file($_FILES['document']['tmp_name'][$i], 'assets/patient_reports/'.$imgname);
+										
+										$names_list[]=$imgname;
+										$count++;
+										
+								}
+							}
+							$c=0;foreach($labdetails_list as $key=>$list){
+								if($key!='' && $list!=''){
+									$li[$c]['problem_name']=$key;
+									$li[$c]['symptoms']=$list;
+									$li[$c]['image']=$names_list[$c];
+									
+								}
+								$c++;}
+								
+								foreach($li as $imglist){
+									$addreports=array(
+										'p_id'=>$post['pid'],
+										'b_id'=>$post['b_id'],
+										'hos_id'=>$userdetails['hos_id'],
+										'problem'=>$imglist['problem_name'],
+										'symptoms'=>$imglist['symptoms'],
+										'image'=>$imglist['image'],
+										'create_at'=>date('Y-m-d H:i:s'),				
+										'status'=>1,				
+										'create_by'=>$admindetails['a_id']
+										);
+									$savereports = $this->Lab_model->save_patient_reports($addreports);
+									$compledata=array(
+									'report_completed'=>1
+									);
+									$this->Lab_model->update_billingreport_status($post['pid'],$post['b_id'],$compledata);
+
+								}
+								if(count($savereports)>0){
+								$this->session->set_flashdata('success',"Reports are successfully added");
+								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.($post['b_id']));
+								}else{
+								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.($post['b_id']));
+								}
+								
 					}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");

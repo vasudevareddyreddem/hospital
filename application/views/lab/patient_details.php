@@ -13,6 +13,16 @@
             </ol>
          </div>
       </div>
+	  <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
       <div class="row">
          <div class="col-md-12">
             <div class="panel tab-border card-topline-yellow">
@@ -23,8 +33,20 @@
                            <div class="panel panel-default">
                               <div class="panel-heading">Patient Report Details</div>
                               <div class="panel-body">
+								<div class="card-head">
+                                    <header>Name : &nbsp;<span><?php echo isset($patient_details['name'])?$patient_details['name']:''; ?> </span>
+									<h4 class="py-2"><?php echo isset($patient_details['mobile'])?$patient_details['mobile']:''; ?></h4></header>
+									<div class="tools">
+                                   <h4><b>ID: <span><?php echo isset($patient_details['pid'])?$patient_details['pid']:''; ?></span></b></h4>
+                                   <h5><b>DOB: <span><?php echo isset($patient_details['dob'])?$patient_details['dob']:''; ?></span></b></h5>
+									
+                                 </div>
+                                 </div>
                                  <form id="uploadreports" name="uploadreports" action="<?php echo base_url('lab/uploadreports'); ?>" method="post" enctype="multipart/form-data">
-                                    <div class="row">
+                                    	<input type="hidden" id="pid" name="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+                                    	<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+
+									<div class="row">
                                        <div class="col-md-12">
                                           <div id="education_fields">
                                           </div>
