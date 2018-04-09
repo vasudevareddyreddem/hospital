@@ -38,7 +38,7 @@
 		
 		<div class="col-md-12">
 		<div class="row">
-		<div class="col-md-3 nopadding">
+		<div class="col-md-6 nopadding">
 		  <div class="form-group">
 			<input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name">
 		  </div>
@@ -58,7 +58,7 @@
 	
 		
 	</div>
-	<div class="col-md-6 py-2">
+	<div class="col-md-9 py-2">
 	<button class="btn btn-success pull-right">submit</div>
 	</div>
 	</form>
@@ -72,8 +72,8 @@
 		</div>
 		
 		<div class="col-md-12">
-		<div class="row">
-		<div class="col-md-3 nopadding">
+		<div class="row ">
+		<div class="col-md-6 nopadding">
 		  <div class="form-group">
 			<input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name">
 		  </div>
@@ -93,7 +93,7 @@
 	
 		
 	</div>
-	<div class="col-md-6 py-2">
+	<div class="col-md-9 py-2">
 	<button class="btn btn-success pull-right">submit</div>
 	<div class="clearfix">&nbsp;</div>
 	</div>
@@ -125,7 +125,7 @@ function education_fields() {
     var divtest = document.createElement("div");
 	divtest.setAttribute("class", "form-group removeclass"+room);
 	var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="row"><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
+    divtest.innerHTML = '<div class="row"><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
     
     objTo.appendChild(divtest)
 }
@@ -142,7 +142,7 @@ function education_fields1() {
     var divtest = document.createElement("div");
 	divtest.setAttribute("class", "form-group removeclass"+room);
 	var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="row"><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="file" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields1('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
+    divtest.innerHTML = '<div class="row"><div class="col-md-6 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="file" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields1('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
     
     objTo.appendChild(divtest)
 }
