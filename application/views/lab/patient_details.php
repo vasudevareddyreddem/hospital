@@ -21,43 +21,88 @@
                                     <div class="tab-content">
                                        
 					
-                                            <div class="card card-topline-red">
+                                            <div class=" ">
 	
 	<div class="card-body ">
-	<?php if(isset($labtest_list) && count($labtest_list)>0){ ?>
-		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
-			<thead>
-				<tr>
-					<th> Patient Id </th>
-					<th> Name </th>
-					<th> Mobile </th>
-					<th> Address </th>
-					<th> Date </th>
-					<th> Created By</th>
-					<th> Action </th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php foreach($labtest_list as $list){ ?>
-				<tr class="odd gradeX">
-					
-					<td> <?php echo $list['pid']; ?> </td>
-					<td><?php echo $list['name']; ?></td>
-					<td><?php echo $list['mobile']; ?></td>
-					<td><?php echo $list['perment_address'].' , '.$list['p_c_name'].' , '.$list['p_s_name'].' , '.$list['p_country_name'].' - '.$list['p_zipcode']; ?></td>
-					<td><?php echo $list['create_at']; ?></td>
-					<td><?php echo $list['created_by']; ?> </td>
-					<td><a href="<?php echo base_url('lab/patient_details/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>
-					
-				</tr>
-				
-			<?php } ?>
-				
-			</tbody>
-		</table>
-	<?php }else{ ?>
-	<div>No data available</div>
-	<?php } ?>
+		<div class="panel panel-default">
+  
+  <div class="panel-heading">Patient List</div>
+  <div class="panel-body">
+	<form>
+  <div class="row">
+		<div class="col-md-12">
+			<div id="education_fields">
+			  
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+		<div class="row">
+		<div class="col-md-3 nopadding">
+		  <div class="form-group">
+			<input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name">
+		  </div>
+		</div>
+		<div class="col-md-3 nopadding">
+		  <div class="form-group">
+			<div class="input-group">
+			 <input type="text" class="form-control" id="Degree" name="Degree[]" value="" placeholder="Degree">
+			  <div class="input-group-btn">
+				<button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="fa fa-plus" aria-hidden="true"></span> </button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</div>
+		</div>
+	
+		
+	</div>
+	<div class="col-md-6 py-2">
+	<button class="btn btn-success pull-right">submit</div>
+	</div>
+	</form>
+	<hr >
+	<form>
+  <div class="row">
+		<div class="col-md-12">
+			<div id="education_fields1">
+			  
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+		<div class="row">
+		<div class="col-md-3 nopadding">
+		  <div class="form-group">
+			<input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name">
+		  </div>
+		</div>
+		<div class="col-md-3 nopadding">
+		  <div class="form-group">
+			<div class="input-group">
+			 <input type="file" class="form-control" id="Degree" name="Degree[]" value="" placeholder="Degree">
+			  <div class="input-group-btn">
+				<button class="btn btn-success" type="button"  onclick="education_fields1();"> <span class="fa fa-plus" aria-hidden="true"></span> </button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</div>
+		</div>
+	
+		
+	</div>
+	<div class="col-md-6 py-2">
+	<button class="btn btn-success pull-right">submit</div>
+	<div class="clearfix">&nbsp;</div>
+	</div>
+	
+	</form>
+	
+	
+</div>
+</div>
 	</div>
 </div>
                                        
@@ -71,6 +116,40 @@
    
    </div>
 </div>
+<script>
+var room = 1;
+function education_fields() {
+ 
+    room++;
+    var objTo = document.getElementById('education_fields')
+    var divtest = document.createElement("div");
+	divtest.setAttribute("class", "form-group removeclass"+room);
+	var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="row"><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
+    
+    objTo.appendChild(divtest)
+}
+   function remove_education_fields(rid) {
+	   $('.removeclass'+rid).remove();
+   }
+</script>
+<script>
+var room = 1;
+function education_fields1() {
+ 
+    room++;
+    var objTo = document.getElementById('education_fields1')
+    var divtest = document.createElement("div");
+	divtest.setAttribute("class", "form-group removeclass"+room);
+	var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<div class="row"><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="file" class="form-control" id="Schoolname" name="Schoolname[]" value="" placeholder="School name"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields1('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
+    
+    objTo.appendChild(divtest)
+}
+   function remove_education_fields1(rid) {
+	   $('.removeclass'+rid).remove();
+   }
+</script>
 <script>
 function assign_doctore(){
 	var pid=$('#patientid').val();
