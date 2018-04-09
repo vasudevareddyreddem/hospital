@@ -181,7 +181,7 @@ class Lab extends CI_Controller {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/patient_details',$data);
 					$this->load->view('html/footer');
-					echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
