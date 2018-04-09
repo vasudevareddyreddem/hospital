@@ -47,7 +47,8 @@ class Lab extends CI_Controller {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
-	}public function addtest()
+	}
+	public function addtest()
 	{	
 		if($this->session->userdata('userdetails'))
 		{
@@ -187,6 +188,50 @@ class Lab extends CI_Controller {
 					redirect('dashboard');
 				}
 			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function uploadreports()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$post=$this->input->post();
+					echo '<pre>';print_r($_FILES);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$count = 0;
+					foreach ($_FILES['document']['name'] as $i => $name) {
+						if (strlen($_FILES['document']['name'][$i]) > 1) {
+							$pic=$_FILES['document']['name'][$i];
+							$picname = str_replace(" ", "", $pic);
+							$temp = explode(".", $_FILES['document']['name'][$i]);
+							
+							$imagename=round(microtime(true)) . '.' . end($temp);
+							$imgname = str_replace(" ", "", $imagename);
+								move_uploaded_file($_FILES['document']['tmp_name'][$i], 'assets/patient_reports/'.$imgname);
+								$count++;
+								$filedata=array(
+								'u_id'=>$loginuser_id['u_id'],
+								'img_name'=>$imgname,
+								'imag_org_name'=>$picname,
+								'page_id'=>$p,
+								'floder_id'=>$f,
+								'img_create_at'=>date('Y-m-d H:i:s'),				
+								'img_status'=>1,				
+								'img_undo'=>0,
+								);
+							echo '<pre>';print_r($updateuserdata);exit;
+							//$addfile = $this->Dashboard_model->save_userfile($filedata);
+							
+						}
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
