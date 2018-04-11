@@ -157,11 +157,11 @@ CREATE TABLE `investigation_patient_list` (
   `create_by` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `investigation_patient_list` */
 
-insert  into `investigation_patient_list`(`id`,`p_id`,`b_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (1,8,3,'lab','+91','85000050944','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-05 16:53:44',12,'2018-04-05'),(2,8,3,'Radiology','+91','6767686788','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-07 11:04:18',12,'2018-04-07');
+insert  into `investigation_patient_list`(`id`,`p_id`,`b_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (1,8,3,'lab','+91','85000050944','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-05 16:53:44',12,'2018-04-05'),(2,8,3,'Radiology','+91','6767686788','testyt','Low','2018-04-05','2018-04-05','TESTING','likethat','2018-04-07 11:04:18',12,'2018-04-07'),(3,8,5,'lab','+91','6546546456','ghdfg','Medium','2018-04-09','2018-04-09','ghgf','ghdfg','2018-04-09 17:20:53',12,'2018-04-09'),(4,11,9,'lab','+91','85000050944','testyt','High','2018-04-05','2018-04-05','TESTING','likethat','2018-04-09 17:59:47',12,'2018-04-09');
 
 /*Table structure for table `lab_detailes` */
 
@@ -201,11 +201,11 @@ CREATE TABLE `lab_test_list` (
   `create_by` int(11) DEFAULT NULL,
   `update_by` datetime DEFAULT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 /*Data for the table `lab_test_list` */
 
-insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`) values (1,9,'tpa','tpa short','tpa des','tpa dep','2018-04-05 15:16:28',1,13,NULL),(2,9,'ttt','tt short','tt des','tt dep','2018-04-05 15:16:58',1,13,NULL),(3,9,'name','short name','description','department','2018-04-09 11:24:18',0,8,'0000-00-00 00:00:00'),(5,9,'jkgjk','jkghjk','jhk','kghjk','2018-04-09 12:00:00',1,8,NULL),(6,9,'vasudevareddy','jkjk','jk','kghjk','2018-04-09 12:01:41',1,8,NULL);
+insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`) values (1,9,'tpa','tpa short','tpa des','tpa dep','2018-04-05 15:16:28',1,13,NULL),(2,9,'ttt','tt short','tt des','tt dep','2018-04-05 15:16:58',1,13,NULL),(3,9,'name','short name','description','department','2018-04-09 11:24:18',0,8,'0000-00-00 00:00:00'),(5,9,'jkgjk','jkghjk','jhk','kghjk','2018-04-09 12:00:00',1,8,NULL),(6,9,'vasudevareddy','jkjk','jk','kghjk','2018-04-09 12:01:41',1,8,NULL),(18,9,'vasudevareddy','utyu','hgjfgh','hjfgh','2018-04-09 14:20:25',1,8,NULL),(23,9,'vaasu','bnvn','vbnvbn','vbn','2018-04-09 14:33:45',1,8,NULL),(24,9,'hjghj','ghfjgh','gfhjfg','hgfj','2018-04-09 14:35:51',1,8,NULL),(25,9,'ghfg','ghfg','ghfdgh','fgfdg','2018-04-09 17:13:12',1,8,NULL);
 
 /*Table structure for table `medicine_list` */
 
@@ -291,12 +291,35 @@ CREATE TABLE `patient_billing` (
   `medicine_payment_mode` varchar(250) DEFAULT NULL,
   `payment_updated_by` int(11) DEFAULT '0',
   `payment_createed_by` datetime DEFAULT NULL,
+  `report_completed` int(11) DEFAULT '0',
   PRIMARY KEY (`b_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_billing` */
 
-insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:43:59',NULL,0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:45:31',NULL,0,NULL,NULL,1,'reschedule',NULL,NULL,0,NULL),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cash','45000','vasudevareddy','1','12',1,'2018-03-20 18:52:04','2018-03-21 15:54:33',1,0,0,2,'new',12,NULL,0,NULL),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy','1','12',1,'2018-03-21 10:34:22','2018-03-21 15:54:33',1,0,0,1,'reschedule',12,'Cash Payment',7,'2018-04-07 15:35:10'),(5,8,'12','12','1899-12-21  ','df','dfsdf','sdfds','2018-04-04  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','34234','2','12',1,'2018-04-03 11:29:17','2018-04-03 11:30:01',0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL),(6,8,'12','uiyui','2018-04-26  ','tyuiyt','yuiytui','uyi','1899-12-13  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-04-03 11:37:08',NULL,0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL),(7,8,'gd','ghdfg','2018-04-03  ','df','gdg','ghd','2018-04-03  ','gdfgh','ghdfg','hfgh','ghdfg','dfghdf','ghdfgh','gdg','45000','gdgh','250000','netbanking','1233456','ffg',NULL,NULL,0,'2018-04-03 12:37:28','2018-04-03 13:56:18',0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL);
+insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`,`report_completed`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:43:59',NULL,0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL,0),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:45:31',NULL,0,NULL,NULL,1,'reschedule',NULL,NULL,0,NULL,0),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cash','45000','vasudevareddy','1','12',1,'2018-03-20 18:52:04','2018-03-21 15:54:33',1,0,0,2,'new',12,NULL,0,NULL,1),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy','1','12',1,'2018-03-21 10:34:22','2018-03-21 15:54:33',1,0,0,2,'reschedule',12,'Cash Payment',7,'2018-04-07 15:35:10',0),(5,8,'12','12','1899-12-21  ','df','dfsdf','sdfds','2018-04-04  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','34234','2','12',1,'2018-04-03 11:29:17','2018-04-03 11:30:01',1,0,0,2,'reschedule',12,NULL,0,NULL,0),(6,8,'12','uiyui','2018-04-26  ','tyuiyt','yuiytui','uyi','1899-12-13  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-04-03 11:37:08',NULL,0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL,0),(7,8,'gd','ghdfg','2018-04-03  ','df','gdg','ghd','2018-04-03  ','gdfgh','ghdfg','hfgh','ghdfg','dfghdf','ghdfgh','gdg','45000','gdgh','250000','netbanking','1233456','ffg',NULL,NULL,0,'2018-04-03 12:37:28','2018-04-03 13:56:18',0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL,0),(8,10,'fghh','dfgh','2018-04-09  ','fgdfg','fgdf','fgfd','2018-04-10  ','fgdfg','fgdfg','fg','fdgdfg','fgdfg','fgdf','65','56546','5656','6767','cashmode','454656','hgh',NULL,NULL,0,'2018-04-09 17:44:17','2018-04-09 17:44:58',0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL,0),(9,11,'123456','visit','2018-04-09  ','yuty','kl','12','2018-03-20','testing','staff','yty','test','vaasudevareddy','456321','12','25000','25000','45000','cash','45000','vasudevareddy','1','12',1,'2018-04-09 17:52:31','2018-04-09 17:53:41',1,0,0,2,'new',12,NULL,0,NULL,0);
+
+/*Table structure for table `patient_lab_reports` */
+
+DROP TABLE IF EXISTS `patient_lab_reports`;
+
+CREATE TABLE `patient_lab_reports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `p_id` int(11) DEFAULT NULL,
+  `b_id` int(11) DEFAULT NULL,
+  `hos_id` int(11) DEFAULT NULL,
+  `problem` varchar(250) DEFAULT NULL,
+  `symptoms` varchar(250) DEFAULT NULL,
+  `image` varchar(250) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+/*Data for the table `patient_lab_reports` */
+
+insert  into `patient_lab_reports`(`id`,`p_id`,`b_id`,`hos_id`,`problem`,`symptoms`,`image`,`create_at`,`status`,`create_by`) values (1,8,3,9,'2','22','1523273542.docx','2018-04-09 17:02:22',1,8),(5,8,3,9,'fgfd','fg','1523274144.docx','2018-04-09 17:12:23',1,8),(6,8,3,9,'blood test','fgfg',NULL,'2018-04-09 17:12:23',1,8),(7,8,3,9,'uytyu','ytutyu','1523274175.docx','2018-04-09 17:12:55',1,8),(9,8,4,9,'cvxcv','xcvxzcv','1523274704.docx','2018-04-09 17:21:44',1,8),(10,8,5,9,'vbxcvb','vcbxcv','1523274729.docx','2018-04-09 17:22:09',1,8),(11,8,5,9,'gg','hfgh','1523275182.docx','2018-04-09 17:29:42',1,8),(12,11,9,9,'DFDSF','SDFSDF','1523277017.pdf','2018-04-09 18:00:16',1,8),(13,8,3,9,'hjgh','hgjgh','1523278691.docx','2018-04-09 18:28:11',1,8),(14,8,3,9,'hjgh','hgjgh','1523278734.docx','2018-04-09 18:28:53',1,8),(15,8,3,9,'ghdfg','gfhfdg','1523278920.docx','2018-04-09 18:32:00',1,8);
 
 /*Table structure for table `patient_lab_test_list` */
 
@@ -312,11 +335,11 @@ CREATE TABLE `patient_lab_test_list` (
   `create_by` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`it`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_lab_test_list` */
 
-insert  into `patient_lab_test_list`(`it`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (1,8,3,1,'2018-04-05 16:13:39','2018-04-05',12,1),(2,8,3,1,'2018-04-05 16:17:22','2018-04-05',12,1),(3,8,3,1,'2018-04-05 16:20:45','2018-04-05',12,1),(4,8,3,1,'2018-04-05 16:22:00','2018-04-05',12,1),(6,8,3,1,'2018-04-05 16:29:25','2018-04-05',12,1),(7,8,3,1,'2018-04-05 16:29:40','2018-04-05',12,1),(8,8,3,1,'2018-04-05 16:29:44','2018-04-05',12,1),(9,8,3,2,'2018-04-05 16:29:44','2018-04-05',12,1),(10,8,3,1,'2018-04-05 16:31:47','2018-04-05',12,1),(11,8,3,1,'2018-04-05 16:36:42','2018-04-05',12,1),(12,8,3,1,'2018-04-05 16:38:17','2018-04-05',12,1),(13,8,3,1,'2018-04-05 16:40:17','2018-04-05',12,1),(14,8,3,2,'2018-04-05 16:40:17','2018-04-05',12,1),(15,8,3,1,'2018-04-05 16:53:14','2018-04-05',12,1),(16,8,3,1,'2018-04-05 17:33:51','2018-04-05',12,1),(17,8,3,2,'2018-04-05 17:33:51','2018-04-05',12,1),(18,8,3,1,'2018-04-05 17:34:51','2018-04-05',12,1),(19,8,3,2,'2018-04-05 17:34:51','2018-04-05',12,1),(20,8,3,1,'2018-04-07 11:02:14','2018-04-07',12,1);
+insert  into `patient_lab_test_list`(`it`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (1,8,3,1,'2018-04-05 16:13:39','2018-04-05',12,1),(2,8,3,1,'2018-04-05 16:17:22','2018-04-05',12,1),(3,8,3,1,'2018-04-05 16:20:45','2018-04-05',12,1),(4,8,3,1,'2018-04-05 16:22:00','2018-04-05',12,1),(6,8,3,1,'2018-04-05 16:29:25','2018-04-05',12,1),(7,8,3,1,'2018-04-05 16:29:40','2018-04-05',12,1),(8,8,3,1,'2018-04-05 16:29:44','2018-04-05',12,1),(9,8,3,2,'2018-04-05 16:29:44','2018-04-05',12,1),(10,8,3,1,'2018-04-05 16:31:47','2018-04-05',12,1),(11,8,3,1,'2018-04-05 16:36:42','2018-04-05',12,1),(12,8,3,1,'2018-04-05 16:38:17','2018-04-05',12,1),(13,8,3,1,'2018-04-05 16:40:17','2018-04-05',12,1),(14,8,3,2,'2018-04-05 16:40:17','2018-04-05',12,1),(15,8,3,1,'2018-04-05 16:53:14','2018-04-05',12,1),(16,8,3,1,'2018-04-05 17:33:51','2018-04-05',12,1),(17,8,3,2,'2018-04-05 17:33:51','2018-04-05',12,1),(18,8,3,1,'2018-04-05 17:34:51','2018-04-05',12,1),(19,8,3,2,'2018-04-05 17:34:51','2018-04-05',12,1),(20,8,3,1,'2018-04-07 11:02:14','2018-04-07',12,1),(21,8,5,1,'2018-04-09 17:20:36','2018-04-09',12,1),(22,8,5,2,'2018-04-09 17:20:36','2018-04-09',12,1),(23,11,9,1,'2018-04-09 17:59:29','2018-04-09',12,1),(24,11,9,2,'2018-04-09 17:59:29','2018-04-09',12,1);
 
 /*Table structure for table `patient_medicine_list` */
 
@@ -375,11 +398,11 @@ CREATE TABLE `patient_vitals_list` (
   `create_at` datetime DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_vitals_list` */
 
-insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`tep_actuals`,`tep_range`,`temp_site_positioning`,`notes`,`pulse_actuals`,`pulse_range`,`pulse_rate_rhythm`,`pulse_rate_vol`,`notes1`,`create_at`,`date`) values (3,8,7,'Infection','Chief complaint','1','2','5','11','2','21','2','2','2','2018-04-03 14:17:58','2018-04-03'),(4,8,7,'Infection','Chief complaint','55','55','555','22','11','33','44','99','88','2018-04-03 14:25:43','2018-04-03'),(11,8,3,'Infection','Chief complaint','1','2','3','4','5','6','7','8','9','2018-04-07 10:55:36','2018-04-07');
+insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`tep_actuals`,`tep_range`,`temp_site_positioning`,`notes`,`pulse_actuals`,`pulse_range`,`pulse_rate_rhythm`,`pulse_rate_vol`,`notes1`,`create_at`,`date`) values (3,8,7,'Infection','Chief complaint','1','2','5','11','2','21','2','2','2','2018-04-03 14:17:58','2018-04-03'),(4,8,7,'Infection','Chief complaint','55','55','555','22','11','33','44','99','88','2018-04-03 14:25:43','2018-04-03'),(11,8,3,'Infection','Chief complaint','1','2','3','4','5','6','7','8','9','2018-04-07 10:55:36','2018-04-07'),(12,0,0,NULL,NULL,'1','1','1','1','1','1','11','1','1','2018-04-09 17:45:20','2018-04-09'),(13,0,0,NULL,NULL,'1','2','3','4','5','6','7','8','9','2018-04-09 17:56:05','2018-04-09'),(14,11,9,NULL,NULL,'1','2','3','4','5','6','7','8','9','2018-04-09 17:57:47','2018-04-09'),(15,11,9,'Infection','Chief complaint','1','2','3','4','5','6','6','6','8','2018-04-09 17:59:03','2018-04-09');
 
 /*Table structure for table `patients_list_1` */
 
@@ -465,11 +488,11 @@ CREATE TABLE `patients_list_1` (
   `create_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patients_list_1` */
 
-insert  into `patients_list_1`(`pid`,`hos_id`,`registrationtype`,`patient_category`,`name`,`mobile`,`email`,`dob`,`age`,`bloodgroup`,`martial_status`,`nationali_id`,`perment_address`,`p_c_name`,`p_s_name`,`p_zipcode`,`p_country_name`,`temp_address`,`t_c_name`,`t_s_name`,`t_zipcode`,`t_country_name`,`religion`,`caste`,`mothername`,`language`,`primarylanguage`,`preferred_language`,`occupation`,`education`,`birth_place`,`work_phone`,`home_phone`,`citizen_proof`,`patient_identifier`,`relation`,`first_name`,`middel_name`,`last_name`,`next_address1`,`next_address2`,`next_pincode`,`next_city`,`next_state`,`next_country`,`next_email`,`next_mobile`,`next_occupation`,`referred`,`internal_external`,`search_doctor`,`relationship`,`g_first_name`,`g_middel_name`,`g_last_name`,`gender`,`nationality`,`g_language`,`living`,`g_address1`,`g_address2`,`g_pincode`,`g_city`,`g_state`,`g_country`,`payer_name`,`payer_mobile`,`payer_address`,`dependency`,`arrangement`,`incomegroup`,`description`,`confidential`,`student`,`barcode`,`create_at`,`create_by`,`updated_at`) values (8,9,'New','Staff','testtttt','85000050944','vasu@gmail.com','2018-03-19','27','o','Single','123456789014444','kothappli','mydukur','ap','516172','india','kukatpalli village','hyd','ts','50007','india','hj','oc','lakshmi','English','English','Telugu','job','btech','kothappli','8500050944','8019345212','Yes','','Relation','vasu','deve','reddy','test','test','516172','hyd',' ts','india','vasu@gmail.com','8500050944','job','vasu','internal','somethig','Relationship','First name','Last name','Last name','Female','Nationality','Telugu','Living dependency','XGFD','FGFD','516172','CITY','TS','FHF','jhgh','85222000212','ghjghjfgh','ytutyu','yutyu','ytutyu','yturtyu','yturtyu','ytuytu','15214532188.png','2018-04-03 12:37:01',15,'2018-04-03 12:37:12');
+insert  into `patients_list_1`(`pid`,`hos_id`,`registrationtype`,`patient_category`,`name`,`mobile`,`email`,`dob`,`age`,`bloodgroup`,`martial_status`,`nationali_id`,`perment_address`,`p_c_name`,`p_s_name`,`p_zipcode`,`p_country_name`,`temp_address`,`t_c_name`,`t_s_name`,`t_zipcode`,`t_country_name`,`religion`,`caste`,`mothername`,`language`,`primarylanguage`,`preferred_language`,`occupation`,`education`,`birth_place`,`work_phone`,`home_phone`,`citizen_proof`,`patient_identifier`,`relation`,`first_name`,`middel_name`,`last_name`,`next_address1`,`next_address2`,`next_pincode`,`next_city`,`next_state`,`next_country`,`next_email`,`next_mobile`,`next_occupation`,`referred`,`internal_external`,`search_doctor`,`relationship`,`g_first_name`,`g_middel_name`,`g_last_name`,`gender`,`nationality`,`g_language`,`living`,`g_address1`,`g_address2`,`g_pincode`,`g_city`,`g_state`,`g_country`,`payer_name`,`payer_mobile`,`payer_address`,`dependency`,`arrangement`,`incomegroup`,`description`,`confidential`,`student`,`barcode`,`create_at`,`create_by`,`updated_at`) values (8,9,'New','Staff','testtttt','85000050944','vasu@gmail.com','2018-03-19','27','o','Single','123456789014444','kothappli','mydukur','ap','516172','india','kukatpalli village','hyd','ts','50007','india','hj','oc','lakshmi','English','English','Telugu','job','btech','kothappli','8500050944','8019345212','Yes','','Relation','vasu','deve','reddy','test','test','516172','hyd',' ts','india','vasu@gmail.com','8500050944','job','vasu','internal','somethig','Relationship','First name','Last name','Last name','Female','Nationality','Telugu','Living dependency','XGFD','FGFD','516172','CITY','TS','FHF','jhgh','85222000212','ghjghjfgh','ytutyu','yutyu','ytutyu','yturtyu','yturtyu','ytuytu','15214532188.png','2018-04-03 12:37:01',15,'2018-04-03 12:37:12'),(9,9,'','','','','','0000-00-00','','','','','','','','','','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'15232635149.png','2018-04-09 14:15:14',8,NULL),(10,9,'New','VIP','gh','6756767777','utyuty@gmail.com','0000-00-00','56','b','Single','67546767567','fghfg','gfhfg','hf','65555','india','gfhfgh','gfgh','fghdfg','563456','india','tyty','tyerty','tyty','English','English','Telugu','ghdfg','hdfgh','67567','6756745667','6756767666','Yes','1523275514.png','hfgj','fghjfgh','jgfhj','jfgh','gfhjfg','hjfgh','666666','jfgh','hgjfg','hjgfh','hgfjg@gmail.com','67657677767','jfghjgfh','fgfdg','fdgdf','fdgdf','fgsdfg','fdgdfg','gfdg','fgdf','Other','567676765','English','gfhfdgh','ghdfg','hfghdf','676756','ghdfgh','6756','6765','gfhhf','6767657677','ghfg','gfhfg','hdfghf','hfdgh','ghdfg','fghfdg','hfghfd','152327549310.png','2018-04-09 17:34:52',5,'2018-04-09 17:43:57'),(11,9,'New','International cash','bayapureddy','85000226782','bayapu@gmail.com','1992-04-09','27','o positive','Single','96321458741','kothappla','mydukur','ap','516172','india','hyd','hyd','ts','516172','india','indin','oc','test','Telugu','Telugu','Telugu','emp','btech','kothapalli','1236547895','7412589632','Yes','','Relation','bayapu','reddy','test','likethat','address','516172','hyd','ts','inid','india@gmail.com','7412589632','emp','vasu','internal','somethig','Relationship','First name','Last name','Last name','Male','Nationality','Telugu','Living dependency','test','testing','516172','CITY','TS','FHF','jhgh','85222000212','ghfgh','ytutyu','yutyu','ytutyu','ytu','yturtyu','ytuytu','152327635111.png','2018-04-09 17:49:11',6,'2018-04-09 17:51:32');
 
 /*Table structure for table `resource_chating` */
 
