@@ -1,4 +1,15 @@
-
+<style>
+.dat-help .col-md-6{
+	       -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 80%;
+}
+.dataTables_info{
+	display:none
+}
+</style>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -23,87 +34,87 @@
 										<header>Release Announcement or Notifications</header>
 									</div>
 									<div class="card-body ">
-						            <div class = "mdl-tabs mdl-js-tabs">
-						               <div class = "mdl-tabs__tab-bar tab-left-side">
-						                  <a href = "#tab4-panel" class = "mdl-tabs__tab is-active">Announcements</a>
-						                  <a href = "#tab5-panel" class = "mdl-tabs__tab">Notifications</a>
-						               </div>
-						               <div class = "mdl-tabs__panel is-active p-t-20" id = "tab4-panel">
-						                  <div class="row">
+										<div class="panel tab-border card-topline-green">
+                                <header class="panel-heading panel-heading-gray custom-tab ">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item"><a href="#announc" data-toggle="tab" class="active" aria-expanded="false">Announcements</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#notifi" data-toggle="tab" class="" aria-expanded="false">Notifications</a>
+                                        </li>
+                                      
+                                    </ul>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="announc" aria-expanded="false">
+                                            <div class="row">
 											  <div class="col-4 card dat-help">
 											  <br>
 											  <h3>Announcements</h3>
 											 <textarea id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 												<div class="card-body ">
-                                    <form id="frm-example" action="/nosuchpage" method="POST">
-    
-<table id="example" class="display select" cellspacing="0" width="100%">
-   <thead>
-      <tr>
-         <th><input name="select_all" value="1" type="checkbox"></th>
-         <th>Name</th>
-     
-      </tr>
-   </thead>
-   <tfoot>
-      <tr>
-         <th></th>
-         <th>Name</th>
-      
-      </tr>
-   </tfoot>
-   <tbody>
-       <tr>
-           <td>1</td>
-           <td>Tiger Nixon</td>
-          
-       </tr>
-       <tr>
-           <td>2</td>
-           <td>Garrett Winters</td>
-       
-       </tr>
-       <tr>
-           <td>3</td>
-           <td>Ashton Cox</td>
-       
-       </tr>
-       <tr>
-           <td>4</td>
-           <td>Cedric Kelly</td>
-       
-       </tr>
-       <tr>
-           <td>5</td>
-           <td>Airi Satou</td>
-         
-       </tr>
-       <tr>
-           <td>6</td>
-           <td>Brielle Williamson</td>
-           
-       </tr>
-       <tr>
-           <td>7</td>
-           <td>Herrod Chandler</td>
-           
-       </tr>
-       <tr>
-           <td>8</td>
-           <td>Rhona Davidson</td>
-         
-       </tr>
-      
-       
-      
-   </tbody>
-</table>
-<hr>
+                                    <form id="frm-example" action="/nosuchpage" method="POST">											
+										<table id="example" class="display select" cellspacing="0" width="100%">
+										   <thead>
+											  <tr>
+												 <th><input name="select_all" value="1" type="checkbox"></th>
+												 <th>Name</th>
+											 
+											  </tr>
+										   </thead>
+										  
+										   <tbody>
+											   <tr>
+												   <td>1</td>
+												   <td>Tiger Nixon</td>
+												  
+											   </tr>
+											   <tr>
+												   <td>2</td>
+												   <td>Garrett Winters</td>
+											   
+											   </tr>
+											   <tr>
+												   <td>3</td>
+												   <td>Ashton Cox</td>
+											   
+											   </tr>
+											   <tr>
+												   <td>4</td>
+												   <td>Cedric Kelly</td>
+											   
+											   </tr>
+											   <tr>
+												   <td>5</td>
+												   <td>Airi Satou</td>
+												 
+											   </tr>
+											   <tr>
+												   <td>6</td>
+												   <td>Brielle Williamson</td>
+												   
+											   </tr>
+											   <tr>
+												   <td>7</td>
+												   <td>Herrod Chandler</td>
+												   
+											   </tr>
+											   <tr>
+												   <td>8</td>
+												   <td>Rhona Davidson</td>
+												 
+											   </tr>
+											  
+											   
+											  
+										   </tbody>
+										</table>
+										<hr>
 
 
-<p><button>Submit</button></p>
+										<button class="btn btn-success">Submit</button>
 
-</form>
+										</form>
                                 </div>	
                                          </div>
 											 
@@ -122,18 +133,25 @@
 											</div>
 								</div>
 										  </div>
-						               </div>
-						               <div class = "mdl-tabs__panel p-t-20" id = "tab5-panel">
-						                  <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
-						               </div>
-						               
-						            </div>
+                                        </div>
+                                        <div class="tab-pane" id="notifi" aria-expanded="false">
+                                           <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 									</div>
 								</div>
                         </div>
                     </div>
                     <!-- end admited patient list -->
                 </div>
+				
+				
+				
+				
+				
+				
             </div>
 <script>
 //
