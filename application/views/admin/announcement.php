@@ -1,11 +1,4 @@
-  <link href=" //cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
-<style>
 
-table.dataTable.select tbody tr,
-table.dataTable thead th:first-child {
-  cursor: pointer;
-}
-</style>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
