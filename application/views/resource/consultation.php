@@ -87,8 +87,8 @@
                </div>
             </div>
             <div class="col-md-3">
-               <button class="btn btn-sm btn-info" type="button">Previous Medication Reports</button>
-               <button class="btn btn-sm btn-success" type="button">Previous Investigation Reports</button>
+			   <a href="javascript:void(0)" data-toggle="modal" data-target="#medicine_list_hmodal" class="btn btn-sm btn-warning">Previous Medication Reports</a>
+               <a target="_blank" href="<?php echo base_url('resources/patient_report_details/'.base64_encode($patient_id));?>" class="btn btn-sm btn-success" type="button">Previous Investigation Reports</a>
             </div>
          </div>
       </div>
@@ -857,6 +857,63 @@
 								<button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
                               <button type="button" onclick="addtestlist();" class="btn btn-sm btn-info">Add </button>
 							  </div>
+							  
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+   </div>
+</div>
+<!--medicine_list_hmodal_modal-->
+<div class="modal fade" id="medicine_list_hmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header bg-indigo">
+            <h5 class="modal-title" id="lineModalLabel">All Prevoius medicine List</h5>
+            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         </div>
+         <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
+            <div class="">
+               <div class="">
+                  <div class=" card card-topline-red">
+                     <div class="card-head">
+                        <header>Prevoius Medicine List</header>
+                     </div>
+                     <div class="card-body ">
+                        <div class="row">
+                           	<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
+								<thead>
+									<tr>
+										<th> Type of Medicine? </th>
+										<th> Search for Medicine </th>
+										<th> Dosage  </th>
+										<th> Condition </th>
+										<th> Midification Reason </th>
+										<th> Date </th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach($patient_privious_medicine_list as $list){ ?>
+									<tr class="odd gradeX">
+										
+										<td> <?php echo $list['type_of_medicine']; ?> </td>
+										<td><?php echo $list['type_of_medicine']; ?></td>
+										<td><?php echo $list['medicine_name']; ?></td>
+										<td><?php echo $list['dosage']; ?> </td>
+										<td><?php echo $list['condition']; ?></td>
+										<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+										
+										
+									</tr>
+									
+								<?php } ?>
+									
+								</tbody>
+							</table>
 							  
                         </div>
                      </div>

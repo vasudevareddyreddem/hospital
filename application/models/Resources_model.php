@@ -212,6 +212,11 @@ class Resources_model extends CI_Model
 		$this->db->where('b_id',$b_id);
     	return $this->db->update("patient_billing",$data);
 	}
+	public function get_patient_previous_medicine_details_list($pid){
+		$this->db->select('patient_medicine_list.type_of_medicine,patient_medicine_list.medicine_name,patient_medicine_list.substitute_name,patient_medicine_list.dosage,patient_medicine_list.frequency,patient_medicine_list.directions,patient_medicine_list.comments,patient_medicine_list.create_at,patient_medicine_list.condition,patient_medicine_list.edit_reason')->from('patient_medicine_list');
+		$this->db->where('patient_medicine_list.p_id',$pid);
+        return $this->db->get()->result_array();
+	}
 	
 
 }

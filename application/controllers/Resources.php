@@ -15,6 +15,7 @@ class Resources extends CI_Controller {
 		$this->load->helper('security');
 		$this->load->library('zend');
 		$this->load->model('Admin_model');
+		$this->load->model('Lab_model');
 		$this->load->model('Resources_model');
 			if($this->session->userdata('userdetails'))
 			{
@@ -728,6 +729,7 @@ class Resources extends CI_Controller {
 					$data['encounters_list']=$this->Resources_model->get_vitals_list($patient_id);
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
 					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,$data['billing_id']);
+					$data['patient_privious_medicine_list']=$this->Resources_model->get_patient_previous_medicine_details_list($patient_id);
 					$data['patient_investigation_list']=$this->Resources_model->get_patient_investigation_details_list($patient_id,$data['billing_id']);
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
 					$data['doctors_list']=$this->Resources_model->get_hospital_doctors_list($userdetails['hos_id']);
@@ -1051,6 +1053,28 @@ class Resources extends CI_Controller {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('resources/consultation/'.base64_encode($post['pid']).''/''.base64_encode($post['billing_id']).'#step-3');
 			}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function patient_report_details()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patient']=base64_decode($this->uri->segment(3));
+					$data['report_list']=$this->Lab_model->get_all_patient_reports_lists($data['patient']);
+					$this->load->view('resource/patient_report_list',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
 			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
