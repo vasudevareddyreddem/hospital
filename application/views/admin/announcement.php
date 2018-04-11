@@ -40,44 +40,77 @@ table.dataTable thead th:first-child {
 											  <div class="col-4 card dat-help">
 											  <br>
 											  <h3>Announcements</h3>
-											 <textarea type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
+											 <textarea id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 												<div class="card-body ">
-                                    <table id="saveStage" class="display" style="width:100%;">
-                                        <thead>
-                                            <tr>
-                                                 <th><input name="select_all" value="1" type="checkbox"></th>
-                                                <th>HIN</th>
-												
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th></th>
-                                                <td>xxxxx Hospital</td>
-                                                
-                                            </tr>
-											<tr>
-                                                 <th></th>
-                                                <td>xxxxx Hospital</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                 <th></th>
-                                                <td>xxxxx Hospital</td>
-                                              
-                                            </tr>
-                                            <tr>
-                                                  <th></th>
-                                                <td>xxxxx Hospital</td>
-                                                
-                                            </tr>
-											<tr>
-                                                 <th></th>
-                                                <td>xxxxx Hospital</td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <form id="frm-example" action="/nosuchpage" method="POST">
+    
+<table id="example" class="display select" cellspacing="0" width="100%">
+   <thead>
+      <tr>
+         <th><input name="select_all" value="1" type="checkbox"></th>
+         <th>Name</th>
+     
+      </tr>
+   </thead>
+   <tfoot>
+      <tr>
+         <th></th>
+         <th>Name</th>
+      
+      </tr>
+   </tfoot>
+   <tbody>
+       <tr>
+           <td>1</td>
+           <td>Tiger Nixon</td>
+          
+       </tr>
+       <tr>
+           <td>2</td>
+           <td>Garrett Winters</td>
+       
+       </tr>
+       <tr>
+           <td>3</td>
+           <td>Ashton Cox</td>
+       
+       </tr>
+       <tr>
+           <td>4</td>
+           <td>Cedric Kelly</td>
+       
+       </tr>
+       <tr>
+           <td>5</td>
+           <td>Airi Satou</td>
+         
+       </tr>
+       <tr>
+           <td>6</td>
+           <td>Brielle Williamson</td>
+           
+       </tr>
+       <tr>
+           <td>7</td>
+           <td>Herrod Chandler</td>
+           
+       </tr>
+       <tr>
+           <td>8</td>
+           <td>Rhona Davidson</td>
+         
+       </tr>
+      
+       
+      
+   </tbody>
+</table>
+<hr>
+
+
+<p><button>Submit</button></p>
+
+</form>
                                 </div>	
                                          </div>
 											 
@@ -109,8 +142,8 @@ table.dataTable thead th:first-child {
                     <!-- end admited patient list -->
                 </div>
             </div>
-			<script>
-	//
+<script>
+//
 // Updates "Select all" control in a data table
 //
 function updateDataTableSelectAllCtrl(table){
@@ -146,20 +179,17 @@ $(document).ready(function (){
    // Array holding selected row IDs
    var rows_selected = [];
    var table = $('#example').DataTable({
-      'ajax': {
-         'url': '/lab/articles/jquery-datatables-checkboxes/ids-arrays.txt'
-      },
-      'columnDefs': [{
-         'targets': 0,
-         'searchable': false,
-         'orderable': false,
-         'width': '1%',
-         'className': 'dt-body-center',
-         'render': function (data, type, full, meta){
-             return '<input type="checkbox">';
-         }
-      }],
-      'order': [[1, 'asc']],
+     'columnDefs': [{
+   'targets': 0,
+   'searchable': false,
+   'orderable': false,
+   'width': '1%',
+   'className': 'dt-body-center',
+   'render': function (data, type, full, meta){
+       return '<input type="checkbox">';
+   }
+}],
+      'order': [1, 'asc'],
       'rowCallback': function(row, data, dataIndex){
          // Get row ID
          var rowId = data[0];
@@ -182,7 +212,7 @@ $(document).ready(function (){
       // Get row ID
       var rowId = data[0];
 
-      // Determine whether row ID is in the list of selected row IDs
+      // Determine whether row ID is in the list of selected row IDs 
       var index = $.inArray(rowId, rows_selected);
 
       // If checkbox is checked and row ID is not in list of selected row IDs
@@ -215,9 +245,9 @@ $(document).ready(function (){
    // Handle click on "Select all" control
    $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
       if(this.checked){
-         $('#example tbody input[type="checkbox"]:not(:checked)').trigger('click');
+         $('tbody input[type="checkbox"]:not(:checked)', table.table().container()).trigger('click');
       } else {
-         $('#example tbody input[type="checkbox"]:checked').trigger('click');
+         $('tbody input[type="checkbox"]:checked', table.table().container()).trigger('click');
       }
 
       // Prevent click event from propagating to parent
@@ -229,14 +259,14 @@ $(document).ready(function (){
       // Update state of "Select all" control
       updateDataTableSelectAllCtrl(table);
    });
-
-   // Handle form submission event
+    
+   // Handle form submission event 
    $('#frm-example').on('submit', function(e){
       var form = this;
 
       // Iterate over all selected checkboxes
       $.each(rows_selected, function(index, rowId){
-         // Create a hidden element
+         // Create a hidden element 
          $(form).append(
              $('<input>')
                 .attr('type', 'hidden')
@@ -244,8 +274,18 @@ $(document).ready(function (){
                 .val(rowId)
          );
       });
+
+      // FOR DEMONSTRATION ONLY     
+      
+      // Output form data to a console     
+      $('#example-console').text($(form).serialize());
+      console.log("Form submission", $(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
    });
-
 });
-
-	</script>
+</script>
