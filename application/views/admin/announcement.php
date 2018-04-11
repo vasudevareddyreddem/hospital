@@ -33,40 +33,41 @@
 											  <div class="col-4 card dat-help">
 											  <br>
 											  <h3>Announcements</h3>
-											 <textarea id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
+											 <textarea type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 												<div class="card-body ">
-                                    <form id="frm-example" action="/nosuchpage" method="POST">
+                                     
+<form id="frm-example" action="/nosuchpage" method="POST">
     
 <table id="example" class="display select" cellspacing="0" width="100%">
    <thead>
       <tr>
          <th><input name="select_all" value="1" type="checkbox"></th>
          <th>Name</th>
-     
+       
       </tr>
    </thead>
    <tfoot>
       <tr>
          <th></th>
          <th>Name</th>
-      
+        
       </tr>
    </tfoot>
    <tbody>
        <tr>
            <td>1</td>
            <td>Tiger Nixon</td>
-          
+       
        </tr>
        <tr>
            <td>2</td>
            <td>Garrett Winters</td>
-       
+         
        </tr>
        <tr>
            <td>3</td>
            <td>Ashton Cox</td>
-       
+          
        </tr>
        <tr>
            <td>4</td>
@@ -76,12 +77,12 @@
        <tr>
            <td>5</td>
            <td>Airi Satou</td>
-         
+          
        </tr>
        <tr>
            <td>6</td>
            <td>Brielle Williamson</td>
-           
+          
        </tr>
        <tr>
            <td>7</td>
@@ -91,18 +92,16 @@
        <tr>
            <td>8</td>
            <td>Rhona Davidson</td>
-         
+          
        </tr>
       
        
       
    </tbody>
 </table>
-<hr>
 
-
-<p><button>Submit</button></p>
-
+<pre id="example-console">
+</pre>
 </form>
                                 </div>	
                                          </div>
@@ -135,7 +134,7 @@
                     <!-- end admited patient list -->
                 </div>
             </div>
-<script>
+			<script>
 //
 // Updates "Select all" control in a data table
 //

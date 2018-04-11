@@ -121,11 +121,8 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-				$hospital_list=$this->Admin_model->get_ll_Hospital_details();
-				foreach($hospital_list as $list){
-					$hos_lis[]=$list['hos_bas_name'];
-				}
-				$data['tt']= "'" . implode( "','", $hos_lis) . "'";
+				$data['hospital_list']=$this->Admin_model->get_ll_Hospital_details();
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement',$data);
 				$this->load->view('html/footer');
 		}else{
@@ -141,6 +138,24 @@ class Admin extends CI_Controller {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement');
 				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function gethospitalsname()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$post=$this->input->post();
+				foreach($post['id'] as $list){
+					$hos_name=$this->Admin_model->get_Hospital_name($list);
+					$names[]=$hos_name['hos_bas_name'];
+				}
+				$tt=implode(",",$names);
+				$data['msg']=1;
+				$data['names_list']=$tt;
+				echo json_encode($data);exit;	
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');

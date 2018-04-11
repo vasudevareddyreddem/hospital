@@ -76,6 +76,11 @@ class Admin_model extends CI_Model
 		$this->db->order_by('hospital_admin_chating.id',"asc");
         return $this->db->get()->result_array();	
 	}
+	public function get_Hospital_name($id){
+		$this->db->select('hospital.hos_bas_name')->from('hospital');		
+		$this->db->where('hos_id', $id);
+        return $this->db->get()->row_array();
+	}
 
 
 }
