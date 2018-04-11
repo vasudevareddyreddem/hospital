@@ -39,7 +39,7 @@ class Admin_model extends CI_Model
 		$this->db->where('a_status', 1);
         return $this->db->get()->row_array();	
 	}
-	public function get_ll_Hospital_details(){
+	public function get_all_Hospital_details(){
 		$this->db->select('hospital.hos_id,hospital.hos_bas_name')->from('hospital');		
 		$this->db->where('hos_status !=', 2);
         return $this->db->get()->result_array();	
@@ -80,6 +80,18 @@ class Admin_model extends CI_Model
 		$this->db->select('hospital.hos_bas_name')->from('hospital');		
 		$this->db->where('hos_id', $id);
         return $this->db->get()->row_array();
+	}
+	public function save_notifications_list($data){
+		$this->db->insert('notifications', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_all_notification_details(){
+		$this->db->select('notifications.*,hospital.hos_bas_name,admin.a_name as sentname')->from('notifications');
+		$this->db->join('hospital', 'hospital.hos_id = notifications.hos_id', 'left');
+		$this->db->join('admin', 'admin.a_id = notifications.sent_by', 'left');
+		$this->db->group_by('notifications.hos_id');		
+		$this->db->order_by('notifications.int_id',"DESC");		
+        return $this->db->get()->result_array();	
 	}
 
 

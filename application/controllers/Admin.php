@@ -121,7 +121,8 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-				$data['hospital_list']=$this->Admin_model->get_ll_Hospital_details();
+				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
+				$data['notification_list']=$this->Admin_model->get_all_notification_details();
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement',$data);
 				$this->load->view('html/footer');
@@ -155,7 +156,47 @@ class Admin extends CI_Controller {
 				$tt=implode(",",$names);
 				$data['msg']=1;
 				$data['names_list']=$tt;
+				$data['ids']=$post['id'];
 				echo json_encode($data);exit;	
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function sendannouncements()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				if(isset($post['hospitals_ids']) && $post['hospitals_ids']!=''){
+				foreach(explode(",",$post['hospitals_ids']) as $lists){
+					if($lists !=''){
+					$addcomments=array(
+					'hos_id'=>$lists,
+					'comment'=>isset($post['comments'])?$post['comments']:'',
+					'create_at'=>date('Y-m-d H:i:s'),
+					'status'=>1,
+					'sent_by'=>$admindetails['a_id']
+					);
+					$saveNotification=$this->Admin_model->save_notifications_list($addcomments);
+					//echo $this->db->last_query();exit;
+					}
+				}
+				
+				if(count($saveNotification)>0){
+					$this->session->set_flashdata('success',"Notification successfully Send.");
+					redirect('admin/announcement');
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/announcement');
+				}
+				
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/announcement');
+				}
+			
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');

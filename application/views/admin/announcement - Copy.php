@@ -58,7 +58,7 @@
                                  <div class="col-4 card dat-help">
                                     <br>
                                     <h3>Announcements</h3>
-                                    <textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
+                                    <textarea id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
                                     <div class="card-body ">
                                        <form id="frm-example" action="" method="POST">
                                           <table id="example" class="display select" cellspacing="0" width="100%">
@@ -93,12 +93,12 @@
                                        <div class="panel-heading bg-indigo">
                                           <span class="glyphicon glyphicon-comment"></span> Announcements
                                        </div>
-									   <form id="addnotifications" action="<?php echo base_url('admin/sendannouncements'); ?>" method="POST" >
+									   <form action="<?php echo base_url('admin/sendannouncements'); ?>" method="POST" >
                                        <div class="panel-body">
 									   <input type="hidden" name="hospitals_ids" id="hospitals_ids" value="">
                                           <textarea style="height:150px;" type="textarea" id="comments" name="comments" class="form-control"  placeholder="Enter comments" ></textarea>
                                           <div class="clearfix">&nbsp;</div>
-                                          <button onclick="returnvalidation();" class="btn btn-sm deepPink-bgcolor pull-right" type="button" > Submit</button>
+                                          <button class="btn btn-sm deepPink-bgcolor pull-right" type="submit" > Submit</button>
                                        </div>
 									   </form>
                                     </div>
@@ -106,7 +106,33 @@
                               </div>
                            </div>
                            <div class="tab-pane" id="notifi" aria-expanded="false">
-                              <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
+						   <?php if(count($notification_list)>0){ ?>
+                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+                                        <thead>
+                                            <tr>
+												<th>Hospital Name</th>
+                                                <th>Notification </th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										<?php foreach($notification_list as $list){ ?>
+                                            <tr>
+                                                <td><?php echo htmlentities($list['hos_bas_name']); ?></td>
+                                                <td><?php echo htmlentities($list['comment']); ?></td>
+                                                <td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+                                                <td><a href="<?php echo base_url(); ?>">View</a></td>
+                                                
+                                            </tr>
+										<?php } ?>
+											
+                                            
+                                        </tbody>
+                                    </table>
+								<?php }else{ ?>
+								<div>No data Avaiable</div>
+								<?php } ?>
                            </div>
                         </div>
                      </div>
@@ -119,17 +145,6 @@
    </div>
 </div>
 <script>
-function returnvalidation(){
-	var ids=$('#hospitals_ids').val();
-	if(ids!=''){
-		document.getElementById("addnotifications").submit();
-	}else{
-		alert('please  select and submit hospital list in any one');
-		return false;
-	}
-	
-	
-}
    //
    // Updates "Select all" control in a data table
    //
