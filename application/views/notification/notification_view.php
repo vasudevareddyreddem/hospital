@@ -36,7 +36,7 @@
 							 
 							 <?php foreach($notification as $List){ ?>
     <div class="panel panel-default">
-       <a href="#"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
+       <a href="#" onclick="opennotification('<?php echo $List['int_id']; ?>')"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
         <h4  href="#collapse1<?php echo $List['int_id']; ?>" class="panel-title expand">
            <div class="right-arrow pull-right">+</div>
           <span><span class="notification-icon circle deepPink-bgcolor"><?php echo ucfirst(substr($List['comment'], 0, 1)); ?></span>   <?php echo substr($List['comment'], 0, 80); ?> </span>
@@ -76,6 +76,29 @@ $(function() {
   });
 });
 </script>
+<script>
+   function opennotification(id){
+	   if(id !=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('admin/get_notification_msg');?>",
+   			data: {
+				notification_id: id,
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+					$('#notification_count1').empty();
+   					$('#notification_count').empty();
+   					var parsedData = JSON.parse(data);
+   					$('#notification_msg').append(parsedData.names_list);
+   					$('#notification_time').append(parsedData.time);
+   					$('#notification_count1').append(parsedData.Unread_count);
+   					$('#notification_count').append(parsedData.Unread_count);
+   					}
+           });
+	   }
+	}
+   </script>
 <!--script for add row comment-->
 
 
