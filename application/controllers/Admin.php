@@ -110,7 +110,8 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-				$this->load->view('admin/hospitalchat');
+				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
+				$this->load->view('admin/hospitalgroup_chat',$data);
 				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
