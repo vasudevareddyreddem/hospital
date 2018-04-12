@@ -1,3 +1,5 @@
+
+<?php //echo '<pre>';print_r($userdetails);exit; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,70 +75,38 @@
                        
                         <!-- end language menu -->
                         <!-- start notification dropdown -->
+						<?php if($userdetails['role_id']==2){ ?>
                         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <i class="fa fa-bell-o"></i>
-                                <span class="badge headerBadgeColor1"> 6 </span>
+                                <span class="badge headerBadgeColor1"> <span id="notification_count1"><?php echo $Unread_count; ?></span></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="external">
                                     <h3><span class="bold">Notifications</span></h3>
-                                    <span class="notification-label purple-bgcolor">New 6</span>
+                                    <span class="notification-label purple-bgcolor">New <span id="notification_count"><?php echo $Unread_count; ?></span></span>
                                 </li>
                                 <li>
                                     <ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
-                                        <li>
-                                            <a data-toggle="modal" data-target="#exampleModalLong" >
-                                                <span class="time">just now</span>
+                                        <?php $cnt=1;foreach($notification as $List){ ?>
+										<?php if($cnt<=5){ ?>
+										<li>
+                                            <a onclick="opennotification('<?php echo $List['int_id']; ?>')" data-toggle="modal" data-target="#exampleModalLong" >
+                                                <span class="time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></span>
                                                 <span class="details">
-                                                <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span> Congratulations!. </span>
+                                                <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span><?php echo ucfirst(substr($List['comment'], 0, 20)); ?> </span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span class="time">3 mins</span>
-                                                <span class="details">
-                                                <span class="notification-icon circle purple-bgcolor"><i class="fa fa-user o"></i></span>
-                                                <b>John Micle </b>is now following you. </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span class="time">7 mins</span>
-                                                <span class="details">
-                                                <span class="notification-icon circle blue-bgcolor"><i class="fa fa-comments-o"></i></span>
-                                                <b>Sneha Jogi </b>sent you a message. </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span class="time">12 mins</span>
-                                                <span class="details">
-                                                <span class="notification-icon circle pink"><i class="fa fa-heart"></i></span>
-                                                <b>Ravi Patel </b>like your photo. </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span class="time">15 mins</span>
-                                                <span class="details">
-                                                <span class="notification-icon circle yellow"><i class="fa fa-warning"></i></span> Warning! </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span class="time">10 hrs</span>
-                                                <span class="details">
-                                                <span class="notification-icon circle red"><i class="fa fa-times"></i></span> Application error. </span>
-                                            </a>
-                                        </li>
-                                    </ul>
+										<?php } ?>
+										<?php $cnt++;} ?>
+                                     </ul>
                                     <div class="dropdown-menu-footer">
                                         <a href="<?php echo base_url('notification'); ?>"> All notifications </a>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+						<?php } ?>
                         <!-- end notification dropdown -->
                         <!-- start message dropdown -->
  						<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
@@ -260,13 +230,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Notifications <span class=""> ( 5 Min )</span ></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Notifications at <span class="" id="notification_time"></span ></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p id="notification_msg"> </p>
       
       </div>
       <div class="modal-footer">
@@ -277,3 +247,26 @@
   </div>
 </div>
    <!--notification modal end-->
+   <script>
+   function opennotification(id){
+	   if(id !=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('admin/get_notification_msg');?>",
+   			data: {
+				notification_id: id,
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+					$('#notification_count1').empty();
+   					$('#notification_count').empty();
+   					var parsedData = JSON.parse(data);
+   					$('#notification_msg').append(parsedData.names_list);
+   					$('#notification_time').append(parsedData.time);
+   					$('#notification_count1').append(parsedData.Unread_count);
+   					$('#notification_count').append(parsedData.Unread_count);
+   					}
+           });
+	   }
+	}
+   </script>

@@ -68,12 +68,8 @@
 															$admindetails=$this->session->userdata('userdetails');
 														if($list['user_id']==$admindetails['a_id']){ ?>
 														<li class="left clearfix"><span class="chat-img pull-left">
-															<?php if($list['senderpic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['senderpic']); ?>" alt="<?php echo isset($list['sendername'])?$list['replayedname']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
+														<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
@@ -93,12 +89,8 @@
 														</li>
 														<?php }else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">
-														<?php if($list['resourcepic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['resourcepic']); ?>" alt="<?php echo isset($list['sendername'])?$list['sendername']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
-															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
+														<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
@@ -185,12 +177,8 @@
 													
 														<?php if($list['type']=='Replayed'){ ?>
 														<li class="left clearfix"><span class="chat-img pull-left">
-															<?php if($list['replayedpic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
+														<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
@@ -210,12 +198,8 @@
 														</li>
 														<?php }else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">
-														<?php if($list['replaypic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
-															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
+														<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
@@ -289,12 +273,8 @@
 													
 														<?php if($list['type']=='Replayed'){ ?>
 														<li class="left clearfix"><span class="chat-img pull-left">
-															<?php if($list['replayedpic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replayedpic']); ?>" alt="<?php echo isset($list['replayedname'])?$list['replayedname']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
+														<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayedname'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
@@ -314,12 +294,9 @@
 														</li>
 														<?php }else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">
-														<?php if($list['replaypic']!=''){ ?>
-															<img src="<?php echo  base_url('assets/adminprofilepic/'.$list['replaypic']); ?>" alt="<?php echo isset($list['replayname'])?$list['replayname']:''; ?>" class="img-circle" />
-														<?php }else{ ?>
+													
 															<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['replayname'], 0, 2)); ?></b></span>
 
-														<?php } ?>
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">

@@ -20,6 +20,12 @@ class Admin extends CI_Controller {
 			{
 			$admindetails=$this->session->userdata('userdetails');
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
+			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+			if($data['userdetails']['role_id']==2){
+			$data['notification']=$this->Admin_model->get_all_notification($hos_details['hos_id']);
+			$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
+			$data['Unread_count']=count($Unread_count);
+			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
 			}
@@ -74,7 +80,9 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
-				$data['chat_list']=$this->Admin_model->getget_resourse_message_list();
+				$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$data['chat_list']=$this->Admin_model->get_resourse_message_list();
+				$data['resources_list']=$this->Admin_model->get_resource_list($userdetails['hos_id']);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/resourcesupport',$data);
 				$this->load->view('html/footer');
@@ -176,6 +184,45 @@ class Admin extends CI_Controller {
 				$data['msg']=1;
 				$data['names_list']=$tt;
 				$data['ids']=$post['id'];
+				echo json_encode($data);exit;	
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function getresourcesname()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$post=$this->input->post();
+				foreach($post['id'] as $list){
+					$hos_name=$this->Admin_model->get_resource_name($list);
+					$names[]=$hos_name['resource_name'];
+				}
+				$tt=implode(",",$names);
+				$data['msg']=1;
+				$data['names_list']=$tt;
+				$data['ids']=$post['id'];
+				echo json_encode($data);exit;	
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function get_notification_msg()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				$hos_name=$this->Admin_model->get_notification_comment($post['notification_id']);
+				$read=array('readcount'=>0);
+				$this->Admin_model->get_notification_comment_read($post['notification_id'],$read);
+				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
+				$data['names_list']=$hos_name['comment'];
+				$data['time']=$hos_name['create_at'];
+				$data['Unread_count']=count($Unread_count);
 				echo json_encode($data);exit;	
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");

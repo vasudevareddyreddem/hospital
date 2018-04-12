@@ -96,7 +96,7 @@
 									   <form id="addnotifications" action="<?php echo base_url('admin/sendannouncements'); ?>" method="POST" >
                                        <div class="panel-body">
 									   <input type="hidden" name="hospitals_ids" id="hospitals_ids" value="">
-                                          <textarea style="height:150px;" type="textarea" id="comments" name="comments" class="form-control"  placeholder="Enter comments" ></textarea>
+                                          <textarea style="height:150px;" type="textarea" id="comments" name="comments" class="form-control"  placeholder="Enter comments" required></textarea>
                                           <div class="clearfix">&nbsp;</div>
                                           <button onclick="returnvalidation();" class="btn btn-sm deepPink-bgcolor pull-right" type="button" > Submit</button>
                                        </div>
@@ -121,10 +121,14 @@
 <script>
 function returnvalidation(){
 	var ids=$('#hospitals_ids').val();
-	if(ids!=''){
+	var msg =$('#comments').val();
+	if(ids!='' && msg!=''){
 		document.getElementById("addnotifications").submit();
-	}else{
+	}else if(ids==''){
 		alert('please  select and submit hospital list in any one');
+		return false;
+	}else if(msg==''){
+		alert('Comment is required');
 		return false;
 	}
 	

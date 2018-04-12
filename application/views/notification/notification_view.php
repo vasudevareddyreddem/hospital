@@ -4,13 +4,13 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Admin Chating
+               <div class="page-title">Notification List
 				</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Admin chating</li>
+               <li class="active">Notification List</li>
             </ol>
          </div>
       </div>
@@ -33,49 +33,23 @@
                      <div class="col-md-12 ">
                         <div class="container">
 							 <div class="panel-group" id="accordion">
+							 
+							 <?php foreach($notification as $List){ ?>
     <div class="panel panel-default">
-       <a href="#"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1">
-        <h4  href="#collapse1" class="panel-title expand">
+       <a href="#"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
+        <h4  href="#collapse1<?php echo $List['int_id']; ?>" class="panel-title expand">
            <div class="right-arrow pull-right">+</div>
-          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   Congratulations!. </span>
-		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
+          <span><span class="notification-icon circle deepPink-bgcolor"><?php echo ucfirst(substr($List['comment'], 0, 1)); ?></span>   <?php echo substr($List['comment'], 0, 80); ?> </span>
+		  <span class="pull-right view-all-time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?> &nbsp;&nbsp;</span> 
         </h4>
       </div></a>
-      <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      <div id="collapse1<?php echo $List['int_id']; ?>" class="panel-collapse collapse">
+        <div class="panel-body"><?php echo $List['comment']; ?></div>
       </div>
     </div>
-    <div class="panel panel-default">
-      <a href="#"><div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-             <h4  href="#collapse1" class="panel-title expand">
-           <div class="right-arrow pull-right">+</div>
-          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   John Micle  is now following you. </span>
-		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
-        </h4>
-      </div>
-	  </a>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-       <a href="#"><div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading">
-              <h4  href="#collapse1" class="panel-title expand">
-           <div class="right-arrow pull-right">+</div>
-          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   Congratulations!. </span>
-		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
-        </h4>
-      </div></a>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      </div>
-    </div>
+							 <?php } ?>
+   
+    
   </div> 
                         </div>
                         <div class="clearfix">&nbsp;</div>
@@ -89,39 +63,7 @@
    </div>
 </div>
 <script>
-$(document).ready(function() {
- 
-    $('#resourcechat').bootstrapValidator({
-		fields: {
-          
-             comment: {
-                 validators: {
-					notEmpty: {
-						message: 'Comment is required'
-					}
-				}
-            },
-			image: {
-                 validators: {
-					regexp: {
-					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls|png|jpg|jpeg|gif|Png)$",
-					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,png,jpg,gif,Png,pdf files are allowed'
-					}
-				}
-            },resource_name: {
-                 validators: {
-					notEmpty: {
-						message: 'Resource is required'
-					}
-				}
-            }
-			}
-		
-	})
-     
-});
-
-   $(function() {
+$(function() {
   $(".expand").on( "click", function() {
     // $(this).next().slideToggle(200);
     $expand = $(this).find(">:first-child");

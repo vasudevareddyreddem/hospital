@@ -58,16 +58,12 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                            <ul class="sub-menu">
-	                                <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Resources </span>
-	                                    </a>
-	                                </li>
-	                                <li class="nav-item ">
+	                               <li class="nav-item ">
 	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('admin/chat'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    <a href="<?php echo base_url('chat/admin_softwareteam'); ?>" class="nav-link "> <span class="title">Software Team</span>
 	                                    </a>
 	                                </li>
 	                            </ul>
@@ -133,27 +129,12 @@
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('chat'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    <a href="<?php echo base_url('chat/admin_softwareteam'); ?>" class="nav-link "> <span class="title">Software Team</span>
 	                                    </a>
 	                                </li>
 	                            </ul>
 	                        </li>
-							<li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
-	                                <span class="title">Release </span>  <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                            <ul class="sub-menu">
-	                                <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <span class="title">Announcements to own hospital </span>
-	                                    </a>
-	                                </li>
-	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <span class="title">Notifications to own hospital</span>
-	                                    </a>
-	                                </li>
-	                            </ul>
-	                        </li> 
+							
 						<?php } else if($userdetails['role_id']==3){ ?>
 						  <li class="nav-item start ">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
@@ -310,6 +291,15 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 							
+						<?php } else if($userdetails['role_id']==8){ ?>
+						<li class="nav-item start ">
+	                            <a href="<?php echo base_url('admin/chat');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Chat</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li> 
 						<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>

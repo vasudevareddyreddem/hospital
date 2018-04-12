@@ -21,6 +21,12 @@ class Hospital extends CI_Controller {
 			{
 			$admindetails=$this->session->userdata('userdetails');
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
+			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+			if($data['userdetails']['role_id']==2){
+			$data['notification']=$this->Admin_model->get_all_notification($hos_details['hos_id']);
+			$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
+			$data['Unread_count']=count($Unread_count);
+			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
 			}
@@ -482,6 +488,15 @@ class Hospital extends CI_Controller {
 						}else{
 							$file3=$hospital_details['kyc_file3'];
 						}
+						
+						
+						//echo '<pre>';print_r($post);exit;
+						$onedata1=array(
+							'a_name'=>$post['hos_bas_name'],
+							'a_mobile'=>$post['hos_rep_mobile'],
+							'a_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$onedata1);
 						$editdata=array(
 							'hos_con_number'=>isset($post['hos_con_number'])?$post['hos_con_number']:$hospital_details['hos_con_number'],
 							'hos_email_id'=>isset($post['hos_email_id'])?$post['hos_email_id']:$hospital_details['hos_email_id'],
@@ -698,7 +713,7 @@ class Hospital extends CI_Controller {
 									//echo '<pre>';print_r($statusdata);exit;
 									$admindetails=array(
 									'role_id'=>$post['designation'],
-									'a_name'=>'Resource',
+									'a_name'=>$post['resource_name'],
 									'a_email_id'=>$post['resource_email'],
 									'a_password'=>md5($post['resource_cinformpaswword']),
 									'a_org_password'=>$post['resource_cinformpaswword'],
@@ -922,11 +937,13 @@ class Hospital extends CI_Controller {
 									//echo '<pre>';print_r($statusdata);exit;
 									$admin_details=array(
 									'role_id'=>$post['designation'],
+									'a_name'=>$post['resource_name'],
 									'a_email_id'=>$post['resource_email'],
 									'a_mobile'=>$post['resource_mobile'],
 									'a_updated_at'=>date('Y-m-d H:i:s')
 									);
 									$addresourcedmin = $this->Admin_model->update_adminhospital_details($post['admin_id'],$admin_details);
+									
 									$resourcedata=array(
 									'resource_name'=>$post['resource_name'],
 									'resource_mobile'=>$post['resource_mobile'],
@@ -950,7 +967,7 @@ class Hospital extends CI_Controller {
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
-										if($admindetails['role_id']==2){
+										if($admindetails['role_id']=2){
 										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 										}else{
 											redirect('profile');
@@ -995,6 +1012,7 @@ class Hospital extends CI_Controller {
 						$admin_details=array(
 									'role_id'=>$post['designation'],
 									'a_email_id'=>$post['resource_email'],
+									'a_name'=>$post['resource_name'],
 									'a_mobile'=>$post['resource_mobile'],
 									'a_updated_at'=>date('Y-m-d H:i:s')
 									);
@@ -1023,7 +1041,7 @@ class Hospital extends CI_Controller {
 									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
-										if($admindetails['role_id']==2){
+										if($admindetails['role_id']=2){
 										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 										}else{
 											redirect('profile');

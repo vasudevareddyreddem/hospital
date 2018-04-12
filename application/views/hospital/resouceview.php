@@ -10,7 +10,7 @@
 							 <ol class="breadcrumb page-breadcrumb pull-right">
 								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
 								</li>
-								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resouce/'.base64_encode(1)); ?>">Resource List</a>&nbsp;<i class="fa fa-angle-right"></i>
+								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resource/'); ?>">Resource List</a>&nbsp;<i class="fa fa-angle-right"></i>
 								</li>
 								<li class="active">View Resource Details</li>
 							 </ol>

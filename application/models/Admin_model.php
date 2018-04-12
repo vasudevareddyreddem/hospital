@@ -45,14 +45,14 @@ class Admin_model extends CI_Model
         return $this->db->get()->result_array();	
 	}
 	public function getget_team_message_list(){
-		$this->db->select('team_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
-		$this->db->join('resource_list as sentname', 'sentname.a_id = team_chating.user_id', 'left');
+		$this->db->select('team_chating.*,sentname.a_name as replayname,sentname.a_profile_pic as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
+		$this->db->join('admin as sentname', 'sentname.a_id = team_chating.user_id', 'left');
 		$this->db->join('admin', 'admin.a_id = team_chating.replay_user_id', 'left');
 		$this->db->order_by('team_chating.id',"DESC");
 		$this->db->group_by('team_chating.user_id');
         return $this->db->get()->result_array();	
 	}
-	public function getget_resourse_message_list(){
+	public function get_resourse_message_list(){
 		$this->db->select('hospital_admin_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('hospital_admin_chating');
 		$this->db->join('resource_list as sentname', 'sentname.a_id = hospital_admin_chating.user_id', 'left');
 		$this->db->join('admin', 'admin.a_id = hospital_admin_chating.replay_user_id', 'left');
@@ -61,16 +61,16 @@ class Admin_model extends CI_Model
 		return $this->db->get()->result_array();	
 	}
 	public function getget_team_replay_message_list($user_id){
-		$this->db->select('team_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
-		$this->db->join('resource_list as sentname', 'sentname.a_id = team_chating.user_id', 'left');
+		$this->db->select('team_chating.*,sentname.a_name as replayname,admin.a_name as replayedname')->from('team_chating');
+		$this->db->join('admin as sentname', 'sentname.a_id = team_chating.user_id', 'left');
 		$this->db->join('admin', 'admin.a_id = team_chating.replay_user_id', 'left');
 		$this->db->where('team_chating.user_id',$user_id);
 		$this->db->order_by('team_chating.id',"asc");
         return $this->db->get()->result_array();	
 	}
 	public function getget_resourse_replay_message_list($user_id){
-		$this->db->select('hospital_admin_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('hospital_admin_chating');
-		$this->db->join('resource_list as sentname', 'sentname.a_id = hospital_admin_chating.user_id', 'left');
+		$this->db->select('hospital_admin_chating.*,sentname.a_name as replayname,admin.a_name as replayedname')->from('hospital_admin_chating');
+		$this->db->join('admin as sentname', 'sentname.a_id = hospital_admin_chating.user_id', 'left');
 		$this->db->join('admin', 'admin.a_id = hospital_admin_chating.replay_user_id', 'left');
 		$this->db->where('hospital_admin_chating.user_id',$user_id);
 		$this->db->order_by('hospital_admin_chating.id',"asc");
@@ -79,6 +79,11 @@ class Admin_model extends CI_Model
 	public function get_Hospital_name($id){
 		$this->db->select('hospital.hos_bas_name')->from('hospital');		
 		$this->db->where('hos_id', $id);
+        return $this->db->get()->row_array();
+	}
+	public function get_resource_name($id){
+		$this->db->select('resource_list.resource_name')->from('resource_list');		
+		$this->db->where('a_id', $id);
         return $this->db->get()->row_array();
 	}
 	public function save_notifications_list($data){
@@ -114,6 +119,40 @@ class Admin_model extends CI_Model
 		$this->db->group_by('admin_chating.create_at');
 		$this->db->group_by('admin_chating.create_by');
         return $this->db->get()->result_array();	
+	}
+	public function get_all_resouce_details($admin_id){
+		$this->db->select('resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');		
+		$this->db->join('roles', 'roles.r_id = admin.role_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
+		$this->db->where('admin.a_id', $admin_id);
+		$this->db->where('admin.a_status', 1);
+        return $this->db->get()->row_array();	
+	}
+	public function get_resource_list($hos_id){
+		$this->db->select('resource_list.a_id,resource_list.resource_name')->from('resource_list');
+		$this->db->where('resource_list.hos_id',$hos_id);
+        return $this->db->get()->result_array();	
+	}
+	public function get_all_notification($hos_id){
+		$this->db->select('*')->from('notifications');
+		$this->db->where('notifications.hos_id',$hos_id);
+		$this->db->order_by('notifications.int_id',"DESC");
+        return $this->db->get()->result_array();	
+	}
+	public function get_all_notification_unread_count($hos_id){
+		$this->db->select('notifications.int_id')->from('notifications');
+		$this->db->where('notifications.hos_id',$hos_id);
+		$this->db->where('notifications.readcount',1);
+        return $this->db->get()->result_array();	
+	}
+	public function get_notification_comment($id){
+		$this->db->select('notifications.comment,notifications.create_at')->from('notifications');
+		$this->db->where('notifications.int_id',$id);
+        return $this->db->get()->row_array();
+	}
+	public function get_notification_comment_read($id,$read){
+		$this->db->where('int_id', $id);
+		return $this->db->update('notifications', $read);
 	}
 
 

@@ -118,7 +118,7 @@
 															<div class="chat-body clearfix">
 																<div class="header">
 																	<strong class="primary-font"><?php echo isset($List['sender_name'])?$List['sender_name']:''; ?></strong> <small class="pull-right text-muted">
-																		<span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+																		<span class="glyphicon glyphicon-time"></span><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></small>
 																</div>
 																<p>
 																	<?php echo isset($List['comments'])?$List['comments']:''; ?>
@@ -131,7 +131,7 @@
 														</span>
 															<div class="chat-body clearfix">
 																<div class="header">
-																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></small>
 																	<strong class="pull-right primary-font"><?php echo isset($List['reciver_name'])?$List['reciver_name']:''; ?></strong>
 																</div>
 																<p><?php echo isset($List['comments'])?$List['comments']:''; ?>
