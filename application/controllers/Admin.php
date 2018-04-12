@@ -118,6 +118,19 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function adminchat()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
+				$this->load->view('chat/hospital_chat',$data);
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	
 	public function announcement()
 	{
 		if($this->session->userdata('userdetails'))

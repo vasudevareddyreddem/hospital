@@ -244,44 +244,29 @@ class Chat extends CI_Controller {
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			$post=$this->input->post();
-			echo '<pre>';print_r($post);exit;
+			//echo '<pre>';print_r($post);
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
 				$temp = explode(".", $_FILES["image"]["name"]);
 				$img = round(microtime(true)) . '.' . end($temp);
 				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
 			}
 			$msg=array(
-			'user_id'=>$user_id,	
-			'comment'=>$post['comment'],
-			'from'=>$replaying,
-			'replay_user_id'=>$replaying,
-			'image'=>$img,
-			'type'=>$type,
+			'sender_id'=>$admindetails['a_id'],	
+			'comments'=>isset($post['comment'])?$post['comment']:'',
+			'image'=>isset($img)?$img:'',
+			'reciver_id'=>isset($post['hospitals_ids'])?$post['hospitals_ids']:'',
 			'create_at'=>date('Y-m-d H:i:s'),
-			'updated_by'=>date('Y-m-d H:i:s')
+			'type'=>'Replay',
 			);
-			
 			//echo '<pre>';print_r($msg);exit;
-			$comments=$this->Chat_model->adding_hospital_admin_chating($msg);
+			$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message send successfully.");
-					if(isset($post['replaying']) && $post['replaying']==1){
-						redirect('admin/chatinglist/'.base64_encode($post['a_id']).'/'.base64_encode(2));
-					}else{
-						redirect('chat/index/'.base64_encode(1));
-					}
-					
+					redirect('admin/gropchat');
 			}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					if(isset($post['replaying']) && $post['replaying']==1){
-						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
-					}else{
-						redirect('chat/index/'.base64_encode(1));
-					}
-					
+				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+				redirect('admin/gropchat');
 			}
-
-			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

@@ -52,6 +52,12 @@ class Chat_model extends CI_Model
 		$this->db->order_by('resource_chating.id',"asc");
         return $this->db->get()->result_array();	
 	}
+	/* admin chating to hospital chating*/
+	public function adding_adminchating_with_hospital_chating($data){
+		$this->db->insert('admin_chating', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	/* admin chating to hospital chating*/
 	
 	
 	
