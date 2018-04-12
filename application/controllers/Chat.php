@@ -249,17 +249,6 @@ class Chat extends CI_Controller {
 				$temp = explode(".", $_FILES["image"]["name"]);
 				$img = round(microtime(true)) . '.' . end($temp);
 				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
-			}else{
-				$img='';
-			}
-			if(isset($post['replaying']) && $post['replaying']==1){
-				$replaying=$admindetails['a_id'];
-				$user_id=$post['a_id'];
-				$type="Replayed";
-			}else{
-				$replaying='';
-				$user_id=$admindetails['a_id'];
-				$type="Replay";
 			}
 			$msg=array(
 			'user_id'=>$user_id,	
