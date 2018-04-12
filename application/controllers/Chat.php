@@ -251,16 +251,21 @@ class Chat extends CI_Controller {
 				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
 			}
 			foreach(explode(",",$post['hospitals_ids']) as $List){
-				$msg=array(
-				'sender_id'=>$admindetails['a_id'],	
-				'comments'=>isset($post['comment'])?$post['comment']:'',
-				'image'=>isset($img)?$img:'',
-				'reciver_id'=>$List,
-				'create_at'=>date('Y-m-d H:i:s'),
-				'type'=>'Replay',
-				);
-				//echo '<pre>';print_r($msg);exit;
-				$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+				
+				if($List !=''){
+					$msg=array(
+					'sender_id'=>$admindetails['a_id'],	
+					'comments'=>isset($post['comment'])?$post['comment']:'',
+					'image'=>isset($img)?$img:'',
+					'reciver_id'=>$List,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'type'=>'Replay',
+					'create_by'=>$admindetails['a_id'],
+					);
+					//echo '<pre>';print_r($msg);exit;
+					$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+				}
+			
 			}
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message send successfully.");

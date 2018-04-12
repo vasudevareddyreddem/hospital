@@ -111,8 +111,8 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
-				$data['chating_list']=$this->Admin_model->get_all_Hospital_details();
-				echo '<pre>';print_r($data);exit;
+				$data['chating_list']=$this->Admin_model->get_admin_chating_with_hospital();
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/hospitalgroup_chat',$data);
 				$this->load->view('html/footer');
 		}else{
