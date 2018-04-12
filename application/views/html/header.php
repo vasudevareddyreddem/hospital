@@ -86,7 +86,7 @@
                                 <li>
                                     <ul class="dropdown-menu-list small-slimscroll-style" data-handle-color="#637283">
                                         <li>
-                                            <a href="javascript:;">
+                                            <a data-toggle="modal" data-target="#exampleModalLong" >
                                                 <span class="time">just now</span>
                                                 <span class="details">
                                                 <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span> Congratulations!. </span>
@@ -255,4 +255,25 @@
         </div>
       
     </div>
-   
+   <!--notification modal start-->
+   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Notifications <span class=""> ( 5 Min )</span ></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+   <!--notification modal end-->

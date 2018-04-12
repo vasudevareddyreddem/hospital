@@ -32,41 +32,51 @@
                   <div class="row">
                      <div class="col-md-12 ">
                         <div class="container">
-						<div class="panel ">
-												<div class="panel-heading bg-indigo">
-													<span class="glyphicon glyphicon-comment"></span> Admin Chat List
-													
-												</div>
-												<div class="panel-body" style="height:300px;overflow-y: scroll;">
-													<ul class="chat">
-													gh
-													</ul>
-												</div>
-												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/resourcechat'); ?>" method="post" enctype="multipart/form-data">
-													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
-															
-															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
-															<input  type="file" name="image" id="image" class="form-control col-md-3" />
-															<select class="form-control col-md-3" name="resource_name" id="resource_name">
-															<option value="">Select</option>
-															<?php foreach($resources_list as $list){ ?>
-															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>
-															<?php } ?>
-															</select>
-															<span class="input-group-btn">
-																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
-																	Send</button>
-															</span>
-														
-														</div>
-													</div>
-												</form>
-											</div>
-                              
-									 
-                                    
-                          
+							 <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+       <a href="#"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1">
+        <h4  href="#collapse1" class="panel-title expand">
+           <div class="right-arrow pull-right">+</div>
+          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   Congratulations!. </span>
+		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
+        </h4>
+      </div></a>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <a href="#"><div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+             <h4  href="#collapse1" class="panel-title expand">
+           <div class="right-arrow pull-right">+</div>
+          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   John Micle  is now following you. </span>
+		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
+        </h4>
+      </div>
+	  </a>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+       <a href="#"><div data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-heading">
+              <h4  href="#collapse1" class="panel-title expand">
+           <div class="right-arrow pull-right">+</div>
+          <span><span class="notification-icon circle deepPink-bgcolor">A</span>   Congratulations!. </span>
+		  <span class="pull-right view-all-time">Just Once &nbsp;&nbsp;</span> 
+        </h4>
+      </div></a>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      </div>
+    </div>
+  </div> 
                         </div>
                         <div class="clearfix">&nbsp;</div>
                      </div>
@@ -112,7 +122,7 @@ $(document).ready(function() {
 });
 
    $(function() {
-   $(".expand").on( "click", function() {
+  $(".expand").on( "click", function() {
     // $(this).next().slideToggle(200);
     $expand = $(this).find(">:first-child");
     
@@ -121,42 +131,9 @@ $(document).ready(function() {
     } else {
       $expand.text("+");
     }
-   });
-   });
+  });
+});
 </script>
 <!--script for add row comment-->
-<script>
-   $(function()
-   {
-     $(document).on('click', '.btn-add', function(e)
-     {
-         e.preventDefault();
-   
-         var controlForm = $('.controls form:first'),
-             currentEntry = $(this).parents('.entry:first'),
-             newEntry = $(currentEntry.clone()).appendTo(controlForm);
-   
-         newEntry.find('input').val('');
-         controlForm.find('.entry:not(:last) .btn-add')
-             .removeClass('btn-add').addClass('btn-remove')
-             .removeClass('btn-success').addClass('btn-danger')
-             .html('<span class="glyphicon glyphicon-minus">-</span>');
-     }).on('click', '.btn-remove', function(e)
-     {
-   $(this).parents('.entry:first').remove();
-   
-   e.preventDefault();
-   return false;
-   });
-   });
-   
-</script>
-<script>
-   $(document).ready(function() {
-     $("#select2insidemodal").select2({
-       dropdownParent: $("#myModal")
-     });
-   });
-   
-</script>
+
 

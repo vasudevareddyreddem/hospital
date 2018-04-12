@@ -1,4 +1,10 @@
 <style>
+   .dat-help div.dataTables_wrapper div.dataTables_filter input {
+    margin-left: 0.5em;
+    display: inline-block;
+    width: 100%;
+}
+    
    .dat-help .col-md-6{
    -webkit-box-flex: 0;
    -webkit-flex: 0 0 50%;
@@ -50,7 +56,7 @@
 											<h3>Selected Hospitals</h3>
 											<textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 											<br>
-											 <form id="frm-example" action="" method="POST">
+											 <form class="dat-help" id="frm-example" action="" method="POST">
                                           <table id="example" class="display select" cellspacing="0" width="100%">
                                              <thead>
                                                 <tr>
@@ -74,7 +80,7 @@
                                              </tbody>
                                           </table>
                                           <hr>
-                                          <p><button>Submit</button></p>
+                                          <button class="btn btn-success">Submit</button>
                                        </form>
 										</div>
 										<div class="col-md-9 chat-help">
