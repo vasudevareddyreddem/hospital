@@ -129,7 +129,7 @@
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('admin/adminchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
+	                                    <a href="<?php echo base_url('admin/adminchat'); ?>" class="nav-link "> <span class="title">Admin Chating</span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
