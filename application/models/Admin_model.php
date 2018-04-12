@@ -93,6 +93,20 @@ class Admin_model extends CI_Model
 		$this->db->order_by('notifications.int_id',"DESC");		
         return $this->db->get()->result_array();	
 	}
+	
+	public function get_hospital_details($a_id){
+		$this->db->select('hospital.hos_bas_name,hospital.hos_id')->from('hospital');		
+		$this->db->where('a_id', $a_id);
+        return $this->db->get()->row_array();	
+	}
+	public function get_hospital_admin_chating($hos_id){
+		$this->db->select('admin_chating.*,admin.a_name as sender_name,hospital.hos_bas_name as reciver_name')->from('admin_chating');
+		$this->db->join('admin', 'admin.a_id = admin_chating.sender_id', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = admin_chating.reciver_id', 'left');
+		$this->db->where('admin_chating.reciver_id', $hos_id);
+		$this->db->or_where('admin_chating.sender_id', $hos_id);
+        return $this->db->get()->result_array();	
+	}
 
 
 }

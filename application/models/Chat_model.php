@@ -57,6 +57,12 @@ class Chat_model extends CI_Model
 		$this->db->insert('admin_chating', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	public function get_sender_id($id){
+		$this->db->select('admin_chating.sender_id,admin_chating.reciver_id')->from('admin_chating');		
+		$this->db->where('reciver_id', $id);
+		$this->db->order_by('admin_chating.id', "DESC");
+        return $this->db->get()->row_array();
+	}
 	/* admin chating to hospital chating*/
 	
 	

@@ -244,28 +244,68 @@ class Chat extends CI_Controller {
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			$post=$this->input->post();
-			//echo '<pre>';print_r($post);
+			//echo '<pre>';print_r($post);exit;
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
 				$temp = explode(".", $_FILES["image"]["name"]);
 				$img = round(microtime(true)) . '.' . end($temp);
 				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
 			}
-			$msg=array(
-			'sender_id'=>$admindetails['a_id'],	
-			'comments'=>isset($post['comment'])?$post['comment']:'',
-			'image'=>isset($img)?$img:'',
-			'reciver_id'=>isset($post['hospitals_ids'])?$post['hospitals_ids']:'',
-			'create_at'=>date('Y-m-d H:i:s'),
-			'type'=>'Replay',
-			);
-			//echo '<pre>';print_r($msg);exit;
-			$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+			foreach(explode(",",$post['hospitals_ids']) as $List){
+				$msg=array(
+				'sender_id'=>$admindetails['a_id'],	
+				'comments'=>isset($post['comment'])?$post['comment']:'',
+				'image'=>isset($img)?$img:'',
+				'reciver_id'=>$List,
+				'create_at'=>date('Y-m-d H:i:s'),
+				'type'=>'Replay',
+				);
+				//echo '<pre>';print_r($msg);exit;
+				$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+			}
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message send successfully.");
 					redirect('admin/gropchat');
 			}else{
 				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 				redirect('admin/gropchat');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function adminchating()
+	{	
+		
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+			$post=$this->input->post();
+			$get_sender_id=$this->Chat_model->get_sender_id($userdetails['hos_id']);
+
+			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+				$temp = explode(".", $_FILES["image"]["name"]);
+				$img = round(microtime(true)) . '.' . end($temp);
+				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
+			}
+				$msg=array(
+				'sender_id'=>$get_sender_id['sender_id'],	
+				'comments'=>isset($post['comment'])?$post['comment']:'',
+				'image'=>isset($img)?$img:'',
+				'reciver_id'=>$userdetails['hos_id'],
+				'create_at'=>date('Y-m-d H:i:s'),
+				'type'=>'Replayed',
+				'create_by'=>$admindetails['a_id']
+				);
+				$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+		
+			if(count($comments)>0){
+					$this->session->set_flashdata('success',"Message send successfully.");
+					redirect('admin/adminchat');
+			}else{
+				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+				redirect('admin/adminchat');
 			}
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');

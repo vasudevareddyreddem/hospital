@@ -111,6 +111,8 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
+				$data['chating_list']=$this->Admin_model->get_all_Hospital_details();
+				echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/hospitalgroup_chat',$data);
 				$this->load->view('html/footer');
 		}else{
@@ -122,7 +124,10 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
+				$admindetails=$this->session->userdata('userdetails');
+				$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$data['chating_list']=$this->Admin_model->get_hospital_admin_chating($userdetails['hos_id']);
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('chat/hospital_chat',$data);
 				$this->load->view('html/footer');
 		}else{

@@ -39,21 +39,47 @@
 												</div>
 												<div class="panel-body" style="height:300px;overflow-y: scroll;">
 													<ul class="chat">
-													gh
+													<?php if(isset($chating_list) && count($chating_list)>0){ ?>
+													<?php foreach($chating_list as $List){ ?>
+													
+													<?php if($List['type']=='Replay'){ ?>
+													<li class="left clearfix"><span class="chat-img pull-left">
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($List['sender_name'], 0, 2)); ?></b></span>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																	<strong class="primary-font"><?php echo isset($List['sender_name'])?$List['sender_name']:''; ?></strong> <small class="pull-right text-muted">
+																		<span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+																</div>
+																<p>
+																	<?php echo isset($List['comments'])?$List['comments']:''; ?>
+																</p>
+															</div>
+														</li>
+													<?php }else{ ?>
+														<li class="right clearfix"><span class="chat-img pull-right">
+															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($List['reciver_name'], 0, 2)); ?></b></span>
+														</span>
+															<div class="chat-body clearfix">
+																<div class="header">
+																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+																	<strong class="pull-right primary-font"><?php echo isset($List['reciver_name'])?$List['reciver_name']:''; ?></strong>
+																</div>
+																<p><?php echo isset($List['comments'])?$List['comments']:''; ?>
+																</p>
+															</div>
+														</li>
+													<?php } ?>
+															<?php } ?>
+													<?php } ?>
 													</ul>
 												</div>
-												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/resourcechat'); ?>" method="post" enctype="multipart/form-data">
+												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/adminchating'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
 														<div class="input-group input-chat-des">
 															
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
 															<input  type="file" name="image" id="image" class="form-control col-md-3" />
-															<select class="form-control col-md-3" name="resource_name" id="resource_name">
-															<option value="">Select</option>
-															<?php foreach($resources_list as $list){ ?>
-															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>
-															<?php } ?>
-															</select>
 															<span class="input-group-btn">
 																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
