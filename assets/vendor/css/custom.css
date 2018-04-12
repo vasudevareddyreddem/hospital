@@ -1,4 +1,9 @@
-
+/* notifications view*/
+.view-all-time{
+	font-size:14px;
+	color:#aaa;
+}
+/* notifications view end*/
 .help-block{
 	color:red;
 }
