@@ -32,7 +32,7 @@
                   <div class="row">
                      <div class="col-md-12 ">
                         <div class="container">
-						<form action="<?php echo base_url('admin/sendnotification'); ?>" method="post" >
+						<form id="notification" name="notification" action="<?php echo base_url('admin/sendnotification'); ?>" method="post" >
 							<div class="form-group col-md-6">
 							<label for="mobile">Notification</label>
 							<input type="text" class="form-control" id="notification"  name="notification" placeholder="Enter Notification" value="">
@@ -58,42 +58,25 @@
    </div>
 </div>
 <script>
-$(function() {
-  $(".expand").on( "click", function() {
-    // $(this).next().slideToggle(200);
-    $expand = $(this).find(">:first-child");
-    
-    if($expand.text() == "+") {
-      $expand.text("-");
-    } else {
-      $expand.text("+");
-    }
-  });
+$(document).ready(function() {
+ 
+    $('#notification').bootstrapValidator({
+        
+        fields: {
+            notification: {
+                validators: {
+                      notEmpty: {
+                        message: 'Notification is required '
+                    }
+                }
+            }
+            }
+        })
+     
 });
+
+
 </script>
-<script>
-   function opennotification(id){
-	   if(id !=''){
-		    jQuery.ajax({
-   			url: "<?php echo base_url('admin/get_notification_msg');?>",
-   			data: {
-				notification_id: id,
-			},
-   			type: "POST",
-   			format:"Json",
-   					success:function(data){
-					$('#notification_count1').empty();
-   					$('#notification_count').empty();
-   					var parsedData = JSON.parse(data);
-   					$('#notification_msg').append(parsedData.names_list);
-   					$('#notification_time').append(parsedData.time);
-   					$('#notification_count1').append(parsedData.Unread_count);
-   					$('#notification_count').append(parsedData.Unread_count);
-   					}
-           });
-	   }
-	}
-   </script>
 <!--script for add row comment-->
 
 
