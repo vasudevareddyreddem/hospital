@@ -143,7 +143,7 @@
                            <textarea type="textarea" id="hos_rep_add2" name="hos_rep_add2"  class="form-control"  placeholder="Enter Address" ><?php echo isset($hospital_details['hos_rep_add2'])?$hospital_details['hos_rep_add2']:''; ?></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                           <label for="email">Address3</label>
+                           <label for="email">Zipcode</label>
                            <div class="row">
                               <div class="col-md-6">
                                  <input type="text" id="hos_rep_zipcode" name="hos_rep_zipcode" value="<?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>" class="form-control"  placeholder="Enter Zip Code" >
@@ -219,7 +219,7 @@
                            <textarea type="textarea" id="hos_bas_add2" name="hos_bas_add2"  class="form-control"  placeholder="Enter Address" ><?php echo isset($hospital_details['hos_bas_add2'])?$hospital_details['hos_bas_add2']:''; ?></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                           <label for="email">Address3</label>
+                           <label for="email">Zipcode</label>
                            <div class="row">
                               <div class="col-md-6">
                                  <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter Zip Code" >

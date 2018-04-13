@@ -167,9 +167,11 @@ class Admin_model extends CI_Model
         $this->db->where("DATE_FORMAT(hos_created,'%Y')", $date);
 		return $this->db->get()->result_array();
 	}
-	public function get_last_sevendays_hospital_list($date){
+	public function get_last_sevendays_hospital_list(){
+		$start_date = date("Y-m-d H:i:s", strtotime("-1 week"));
+		$end_date = date("Y-m-d H:i:s");
 		$this->db->select('hospital.hos_id,hospital.hos_created')->from('hospital');
-        $this->db->where("DATE_FORMAT(hos_created,'%Y-%m-%d')", $date);
+		$this->db->where("hos_created >= '" . $start_date . "' AND hos_created <= '" . $end_date . "'");
 		return $this->db->get()->result_array();
 	}
 

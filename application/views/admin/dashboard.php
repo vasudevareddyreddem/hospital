@@ -88,7 +88,7 @@ $dat = explode("-", $cri['hos_created']);
                                 <div class="page-title">Dashboard</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+                                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                                 </li>
                                 <li class="active">Dashboard</li>
                             </ol>
@@ -103,13 +103,11 @@ $dat = explode("-", $cri['hos_created']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">New Hospital</span>
-						              <span class="info-box-number">450</span>
+						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: 45%"></div>
+						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
 						              </div>
-						              <span class="progress-description">
-						                    45% Increase in 28 Days
-						                  </span>
+						              <span class="progress-description">&nbsp;</span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
@@ -122,11 +120,9 @@ $dat = explode("-", $cri['hos_created']);
 						              <span class="info-box-text">Total Hospital</span>
 						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: 40%"></div>
+						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
 						              </div>
-						              <span class="progress-description">
-						                    40% Increase in 28 Days
-						                  </span>
+						              <span class="progress-description">&nbsp;</span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
@@ -157,9 +153,9 @@ $dat = explode("-", $cri['hos_created']);
 			
 			
 
+    	  <script src="<?php echo base_url(); ?>assets/vendor/plugins/canvasjs.min.js" ></script>
+
     
-    
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                               
 
 
