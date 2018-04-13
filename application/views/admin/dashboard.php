@@ -1,4 +1,85 @@
+<?php
+$dec=$jan=$feb=$mar=$apr=$may=$jun=$jul=$aug=$sep=$oct=$nov=0;
+foreach ($hospital_list as $cri){
+$dat = explode("-", $cri['hos_created']);
+	if($dat[1] == 12)
+	{
+	$dec++;
+	}
+	if($dat[1] == 11)
+	{
+		$nov++;
+	}
+	if($dat[1] == 10)
+	{
+		$oct++;
+	}
+	if($dat[1] == '09')
+	{
+		$sep++;
+	}if($dat[1] == '08')
+	{
+		$aug++;
+	}if($dat[1] == '07')
+	{
+		$jul++;
+	}if($dat[1] == '06')
+	{
+		$jun++;
+	}if($dat[1] == '05')
+	{
+		$may++;
+	}if($dat[1] == 04)
+	{
+		$apr++;
+	}if($dat[1] == 03)
+	{
+		$mar++;
+	}if($dat[1] == 02)
+	{
+		$feb++;
+	}if($dat[1] == 01)
+	{
+		$jan++;
+	}
+	
+} 
+    $dataPoints = array(
+    	array("y" => isset($jan)?$jan:'', "label" => "January"),
+    	array("y" => isset($feb)?$feb:'', "label" => "February"),
+    	array("y" => isset($mar)?$mar:'', "label" => "March"),
+    	array("y" => isset($apr)?$apr:'', "label" => "April "),
+    	array("y" => isset($may)?$may:'', "label" => "May"),
+    	array("y" => isset($jun)?$jun:'', "label" => "June"),
+    	array("y" => isset($jul)?$jul:'', "label" => "July"),
+    	array("y" => isset($aug)?$aug:'', "label" => "August"),
+    	array("y" => isset($sep)?$sep:'', "label" => "September"),
+    	array("y" => isset($oct)?$oct:'', "label" => "October"),
+    	array("y" => isset($nov)?$nov:'', "label" => "November"),
+    	array("y" => isset($dec)?$dec:'', "label" => "December"),
+    );
+     
+    ?>
 
+    <script>
+    window.onload = function () {
+     
+    var chart = new CanvasJS.Chart("chartContainer", {
+    	title: {
+    		text: "Month wise hospital List"
+    	},
+    	axisY: {
+    		title: "Hospital count range"
+    	},
+    	data: [{
+    		type: "line",
+    		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+    	}]
+    });
+    chart.render();
+     
+    }
+    </script>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -15,65 +96,56 @@
                     </div>
                    <!-- start widget -->
 	                  <div class="row">
-						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="row clearfix">            
-			                    <div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>New Hospitals</h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width">14% higher than last month</span> </div>
-			                        </div>
-			                    </div>
-			                    <div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>Total  Hospitals</h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width">7% higher than last month</span> </div>
-			                        </div>
-			                    </div>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>New Hospitals</h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width">14% higher than last month</span> </div>
-			                        </div>
-			                    </div>
-			                    <div class="col-md-6 col-sm-6 col-xs-12">
-			                        <div class="card">
-			                            <div class="panel-body">
-			                                <h3>Total  Hospitals</h3>
-			                                <div class="progressbar-xs progress-rounded progress-striped progress ng-isolate-scope active">
-			                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;"></div>
-			                                </div>
-			                                <span class="text-small margin-top-10 full-width">7% higher than last month</span> </div>
-			                        </div>
-			                    </div>
+			                    <div class="col-xl-6 col-md-6 col-12">
+						          <div class="info-box bg-blue">
+						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
+						            <div class="info-box-content">
+						              <span class="info-box-text">New Hospital</span>
+						              <span class="info-box-number">450</span>
+						              <div class="progress">
+						                <div class="progress-bar" style="width: 45%"></div>
+						              </div>
+						              <span class="progress-description">
+						                    45% Increase in 28 Days
+						                  </span>
+						            </div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+						        </div>
+			                    <div class="col-xl-6 col-md-6 col-12">
+						          <div class="info-box bg-orange">
+						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
+						            <div class="info-box-content">
+						              <span class="info-box-text">Total Hospital</span>
+						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
+						              <div class="progress">
+						                <div class="progress-bar" style="width: 40%"></div>
+						              </div>
+						              <span class="progress-description">
+						                    40% Increase in 28 Days
+						                  </span>
+						            </div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+						        </div>
+								
+			                    
 			                    
 			                </div>
 						</div>
-						 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card card-box">
                               <div class="card-head">
                                   <header>HOSPITAL SURVEY</header>
-                                  <div class="tools">
-                                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-									<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-									<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
-                                 </div>
+                                 
                               </div>
-                              <div class="card-body no-padding height-9">
-								<div class="row">
-								    <canvas id="canvas1"></canvas>
-								</div>
+                              <div class="">
+								    <div id="chartContainer" ></div>
+
 							</div>
                           </div>
 				            </div>
@@ -82,3 +154,12 @@
                     
                 </div>
             </div>
+			
+			
+
+    
+    
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                              
+
+

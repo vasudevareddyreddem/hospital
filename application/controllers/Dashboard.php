@@ -37,7 +37,11 @@ class Dashboard extends CI_Controller {
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']==1){
-				$this->load->view('admin/dashboard');
+				$data['hospital_list']=$this->Admin_model->get_hospitals_list_monthwise(date('Y'));
+				$data['sevendays_list']=$this->Admin_model->get_last_sevendays_hospital_list(date('Y-m-d'));
+				echo $this->db->last_query();
+				echo '<pre>';print_r($data);exit;
+				$this->load->view('admin/dashboard',$data);
 			}else if($admindetails['role_id']==2){
 				$this->load->view('hospital/dashboard');
 			}else if($admindetails['role_id']==3){

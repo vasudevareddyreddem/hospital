@@ -162,6 +162,16 @@ class Admin_model extends CI_Model
 		$this->db->where('int_id', $id);
 		return $this->db->update('announcements', $read);
 	}
+	public function get_hospitals_list_monthwise($date){
+		$this->db->select('hospital.hos_id,hospital.hos_created')->from('hospital');
+        $this->db->where("DATE_FORMAT(hos_created,'%Y')", $date);
+		return $this->db->get()->result_array();
+	}
+	public function get_last_sevendays_hospital_list($date){
+		$this->db->select('hospital.hos_id,hospital.hos_created')->from('hospital');
+        $this->db->where("DATE_FORMAT(hos_created,'%Y-%m-%d')", $date);
+		return $this->db->get()->result_array();
+	}
 
 
 }
