@@ -212,22 +212,22 @@ table, th, td {
 	  </tr> 
 	  <tr style="line-height:40px">
 		<th>Temperature</th>
-		<td><?php echo isset($details['tep_actuals'])?$details['tep_actuals']:''; ?></td>
-		<td><?php echo isset($details['tep_range'])?$details['tep_range']:''; ?></td>
+		<td><?php echo isset($vital_details['tep_actuals'])?$vital_details['tep_actuals']:''; ?></td>
+		<td><?php echo isset($vital_details['tep_range'])?$vital_details['tep_range']:''; ?></td>
 		<th>Temperature site</th>
-		<td><?php echo isset($details['temp_site_positioning'])?$details['temp_site_positioning']:''; ?></td>
-		<td><?php echo isset($details['notes'])?$details['notes']:''; ?></td>
+		<td><?php echo isset($vital_details['temp_site_positioning'])?$vital_details['temp_site_positioning']:''; ?></td>
+		<td><?php echo isset($vital_details['notes'])?$vital_details['notes']:''; ?></td>
 	  </tr>
 	  <tr style="line-height:40px">
 		<th>Pulse rate</th>
-		<td><?php echo isset($details['pulse_actuals'])?$details['pulse_actuals']:''; ?></td>
-		<td><?php echo isset($details['pulse_range'])?$details['pulse_range']:''; ?></td>
+		<td><?php echo isset($vital_details['pulse_actuals'])?$vital_details['pulse_actuals']:''; ?></td>
+		<td><?php echo isset($vital_details['pulse_range'])?$vital_details['pulse_range']:''; ?></td>
 		<th>Pulse rate sight</th>
 		<td >
-		<span><?php echo isset($details['pulse_rate_rhythm'])?$details['pulse_rate_rhythm']:''; ?></span> &nbsp;  &nbsp;
-		<span><?php echo isset($details['pulse_rate_vol'])?$details['pulse_rate_vol']:''; ?></span> &nbsp; &nbsp; 
+		<span><?php echo isset($vital_details['pulse_rate_rhythm'])?$vital_details['pulse_rate_rhythm']:''; ?></span> &nbsp;  &nbsp;
+		<span><?php echo isset($vital_details['pulse_rate_vol'])?$vital_details['pulse_rate_vol']:''; ?></span> &nbsp; &nbsp; 
 		</td>
-		<td><?php echo isset($details['notes1'])?$details['notes1']:''; ?></td>
+		<td><?php echo isset($vital_details['notes1'])?$vital_details['notes1']:''; ?></td>
 		
 	  </tr>
 	 </table>
@@ -236,8 +236,8 @@ table, th, td {
 		<th colspan="4">Doctor Name and Treatment</th>
 		</tr>
 		<tr>
-		<td colspan="2"><strong>Doctor Name:</strong> <span><?php echo isset($details['t_name'])?$details['t_name']:''; ?></span></td>
-		<td colspan="2"><strong>Treatment Name:</strong> <span><?php echo isset($details['resource_name'])?$details['resource_name']:''; ?></span></td>
+		<td colspan="2"><strong>Doctor Name:</strong> <span><?php echo isset($details['resource_name'])?$details['resource_name']:''; ?></span></td>
+		<td colspan="2"><strong>Treatment Name:</strong> <span><?php echo isset($details['t_name'])?$details['t_name']:''; ?></span></td>
 	  </tr>
 	   </table>
    

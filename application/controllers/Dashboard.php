@@ -46,15 +46,44 @@ class Dashboard extends CI_Controller {
 				}
 				$this->load->view('admin/dashboard',$data);
 			}else if($admindetails['role_id']==2){
-				
-				$data['hospital_list']=$this->Admin_model->get_hospitals_list_monthwise(date('Y'));
-				$sevendays_list=$this->Admin_model->get_last_sevendays_hospital_list();
-				if(count($sevendays_list)>0){
-				$data['sevendays_list']=count($sevendays_list);
+				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+			
+				$data['patients_list']=$this->Admin_model->get_hospitals_patient_list_monthwise($hos_details['hos_id'],date('Y'));
+
+				$new_patient_sevendays_list=$this->Admin_model->get_last_sevendays_hospital_new_patient_list($hos_details['hos_id']);
+				$new_all_patient_list=$this->Admin_model->get_hospital_new_patient_list($hos_details['hos_id']);
+
+				$reschedulepatient_sevendays_list=$this->Admin_model->get_last_sevendays_hospital_reschedule_patient_list($hos_details['hos_id']);
+
+				$reschedule_all_patient_list=$this->Admin_model->get_hospital_reschedule_patient_list($hos_details['hos_id']);
+
+				$edit_prescriptions_list=$this->Admin_model->get_hospital_edit_prescriptions_list($hos_details['hos_id']);
+				if(count($new_patient_sevendays_list)>0){
+				$data['newpatient_last_seven']=count($new_patient_sevendays_list);
 				}else{
-					$data['sevendays_list']='';
+					$data['newpatient_last_seven']='';
 				}
-				
+				if(count($new_all_patient_list)>0){
+				$data['total_newpatient_list']=count($new_all_patient_list);
+				}else{
+					$data['total_newpatient_list']='';
+				}
+				if(count($reschedulepatient_sevendays_list)>0){
+				$data['reschedule_last_seven']=count($reschedulepatient_sevendays_list);
+				}else{
+					$data['reschedule_last_seven']='';
+				}if(count($reschedule_all_patient_list)>0){
+				$data['total_reschudle_patient_list']=count($reschedule_all_patient_list);
+				}else{
+					$data['total_reschudle_patient_list']='';
+				}
+				if(count($edit_prescriptions_list)>0){
+				$data['prescriptions_list']=count($edit_prescriptions_list);
+				}else{
+					$data['prescriptions_list']='';
+				}
+				//echo '<pre>';print_r($data);exit;
+
 				$this->load->view('hospital/dashboard',$data);
 			}else if($admindetails['role_id']==3){
 				redirect('resources/desk');

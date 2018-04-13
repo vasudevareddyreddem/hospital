@@ -174,6 +174,59 @@ class Admin_model extends CI_Model
 		$this->db->where("hos_created >= '" . $start_date . "' AND hos_created <= '" . $end_date . "'");
 		return $this->db->get()->result_array();
 	}
+	public function get_hospitals_patient_list_monthwise($hos_id,$date){
+		$this->db->select('patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("DATE_FORMAT(patient_billing.create_at,'%Y')", $date);
+		$this->db->where("patient_billing.completed", 1);
+        $this->db->where("patients_list_1.hos_id", $hos_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_last_sevendays_hospital_new_patient_list($hos_id){
+		$start_date = date("Y-m-d H:i:s", strtotime("-1 week"));
+		$end_date = date("Y-m-d H:i:s");
+		$this->db->select('patient_billing.b_id,patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("patient_billing.create_at >= '" . $start_date . "' AND patient_billing.create_at <= '" . $end_date . "'");
+		$this->db->where("patients_list_1.hos_id", $hos_id);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "New");
+		return $this->db->get()->result_array();
+	}
+	public function get_hospital_new_patient_list($hos_id){
+		$this->db->select('patient_billing.b_id,patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("patients_list_1.hos_id", $hos_id);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "New");
+		return $this->db->get()->result_array();
+	}
+	public function get_last_sevendays_hospital_reschedule_patient_list($hos_id){
+		$start_date = date("Y-m-d H:i:s", strtotime("-1 week"));
+		$end_date = date("Y-m-d H:i:s");
+		$this->db->select('patient_billing.b_id,patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("patient_billing.create_at >= '" . $start_date . "' AND patient_billing.create_at <= '" . $end_date . "'");
+		$this->db->where("patients_list_1.hos_id", $hos_id);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "reschedule");
+		return $this->db->get()->result_array();
+	}
+	public function get_hospital_reschedule_patient_list($hos_id){
+		$this->db->select('patient_billing.b_id,patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("patients_list_1.hos_id", $hos_id);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "reschedule");
+		return $this->db->get()->result_array();
+	}
+	public function get_hospital_edit_prescriptions_list($hos_id){
+		$this->db->select('patient_medicine_list.p_id,patient_medicine_list.create_at')->from('patient_medicine_list');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_medicine_list.p_id', 'left');
+		$this->db->where("patients_list_1.hos_id", $hos_id);
+		$this->db->where("patient_medicine_list.edited", 1);
+		return $this->db->get()->result_array();
+	}
 
 
 }

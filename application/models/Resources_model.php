@@ -83,6 +83,12 @@ class Resources_model extends CI_Model
 		$this->db->where('b_id',$b_id);
         return $this->db->get()->row_array();
 	}
+	public function get_billing_vital_details($p_id,$b_id){
+		$this->db->select('*')->from('patient_vitals_list');
+		$this->db->where('p_id',$p_id);
+		$this->db->where('b_id',$b_id);
+        return $this->db->get()->row_array();
+	}
 	/*patient billing details*/
 	public function get_doctor_worksheet_list($hos_id,$doctor_id){
 		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,treament.t_name,resource_list.resource_name')->from('patient_billing');

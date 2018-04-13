@@ -1,7 +1,8 @@
 <?php
 $dec=$jan=$feb=$mar=$apr=$may=$jun=$jul=$aug=$sep=$oct=$nov=0;
-foreach ($hospital_list as $cri){
-$dat = explode("-", $cri['hos_created']);
+if(isset($patients_list) && count($patients_list)>0){
+foreach ($patients_list as $cri){
+$dat = explode("-", $cri['create_at']);
 	if($dat[1] == 12)
 	{
 	$dec++;
@@ -42,7 +43,7 @@ $dat = explode("-", $cri['hos_created']);
 	{
 		$jan++;
 	}
-	
+}	
 } 
     $dataPoints = array(
     	array("y" => isset($jan)?$jan:'', "label" => "January"),
@@ -66,10 +67,10 @@ $dat = explode("-", $cri['hos_created']);
      
     var chart = new CanvasJS.Chart("chartContainer", {
     	title: {
-    		text: "Month wise hospital List"
+    		text: "Month wise Patients List"
     	},
     	axisY: {
-    		title: "Hospital count range"
+    		title: "Patients count range"
     	},
     	data: [{
     		type: "line",
@@ -102,10 +103,10 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-blue">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">Patient Registration</span>
-						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
+						              <span class="info-box-text">New Patient Registration</span>
+						              <span class="info-box-number"><?php echo $newpatient_last_seven; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php echo $newpatient_last_seven; ?>%"></div>
 						              </div>
 						              <span class="progress-description">Last 7 days</span>
 						            </div>
@@ -117,12 +118,12 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-orange">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">Total Patient Registration</span>
-						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
+						              <span class="info-box-text">Total New Patient Registration</span>
+						              <span class="info-box-number"><?php echo $total_newpatient_list; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php echo $total_newpatient_list; ?>%"></div>
 						              </div>
-						              <span class="progress-description">13-04-2018</span>
+						              <span class="progress-description"><?php echo date('d-m-Y'); ?></span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
@@ -133,9 +134,9 @@ $dat = explode("-", $cri['hos_created']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">New Reschedule patients</span>
-						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
+						              <span class="info-box-number"><?php echo $reschedule_last_seven; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php echo $reschedule_last_seven; ?>%"></div>
 						              </div>
 						              <span class="progress-description">Last 7 days</span>
 						            </div>
@@ -153,9 +154,9 @@ $dat = explode("-", $cri['hos_created']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total Reschedule patients</span>
-						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
+						              <span class="info-box-number"><?php echo $total_reschudle_patient_list; ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php echo $total_reschudle_patient_list; ?>%"></div>
 						              </div>
 						              <span class="progress-description">&nbsp;</span>
 						            </div>
@@ -167,10 +168,25 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-indigo">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">Total Modified prescriptions</span>
-						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
+						              <span class="info-box-text">Total Patients</span>
+						              <span class="info-box-number"><?php echo count($patients_list); ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php echo count($patients_list); ?>%"></div>
+						              </div>
+						              <span class="progress-description">&nbsp;</span>
+						            </div>
+						            <!-- /.info-box-content -->
+						          </div>
+						          <!-- /.info-box -->
+						        </div>
+								<div class="col-xl-4 col-md-6 col-12">
+						          <div class="info-box bg-warning">
+						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
+						            <div class="info-box-content">
+						              <span class="info-box-text">Total Modified prescriptions</span>
+						              <span class="info-box-number"><?php echo $prescriptions_list; ?></span>
+						              <div class="progress">
+						                <div class="progress-bar" style="width: <?php echo $prescriptions_list; ?>%"></div>
 						              </div>
 						              <span class="progress-description">&nbsp;</span>
 						            </div>
@@ -184,7 +200,7 @@ $dat = explode("-", $cri['hos_created']);
 						 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card card-box">
                               <div class="card-head">
-                                  <header>HOSPITAL SURVEY</header>
+                                  <header>Patients SURVEY</header>
                                  
                               </div>
                               <div class="">

@@ -569,6 +569,7 @@ class Resources extends CI_Controller {
 					$bid=base64_decode($this->uri->segment(4));
 					$admindetails=$this->session->userdata('userdetails');
 					$data['details']=$this->Resources_model->get_billing_details($pid,$bid);
+					$data['vital_details']=$this->Resources_model->get_billing_vital_details($pid,$bid);
 					//echo '<pre>';print_r($data);exit;
 					$path = rtrim(FCPATH,"/");
 					$file_name = $data['details']['p_id'].'_'.$data['details']['b_id'].'.pdf';                
