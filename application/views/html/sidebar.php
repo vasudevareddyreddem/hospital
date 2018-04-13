@@ -136,15 +136,7 @@
 	                        </li>
 							
 						<?php } else if($userdetails['role_id']==3){ ?>
-						  <li class="nav-item start ">
-	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Dashboard</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                           
-	                        </li> 
+						 
 						 <li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/desk');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
@@ -174,14 +166,7 @@
 	                        </li> 
 							
 						<?php } else if($userdetails['role_id']==4){ ?>
-						  <li class="nav-item start ">
-	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Dashboard</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li> 
+						 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('users');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>

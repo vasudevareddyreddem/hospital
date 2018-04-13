@@ -40,8 +40,12 @@ class Dashboard extends CI_Controller {
 				$this->load->view('admin/dashboard');
 			}else if($admindetails['role_id']==2){
 				$this->load->view('hospital/dashboard');
-			}else if($admindetails['role_id']==3 || $admindetails['role_id']==4 || $admindetails['role_id']==5){
-				$this->load->view('hospital/resourcedashboard');
+			}else if($admindetails['role_id']==3){
+				redirect('resources/desk');
+			}else if($admindetails['role_id']==4){
+				redirect('users');
+			}else if($admindetails['role_id']==5){
+				redirect('lab/patient_list');
 			}else if($admindetails['role_id']==6){
 				redirect('resources/worksheet');
 			}else if($admindetails['role_id']==8){
