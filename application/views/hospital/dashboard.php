@@ -97,8 +97,8 @@ $dat = explode("-", $cri['hos_created']);
                    <!-- start widget -->
 	                  <div class="row">
 						<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
-							<div class="row clearfix">            
-			                    <div class="col-xl-3 col-md-6 col-12">
+							<div class="row ">            
+			                    <div class="col-xl-4 col-md-6 col-12">
 						          <div class="info-box bg-blue">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
@@ -113,7 +113,7 @@ $dat = explode("-", $cri['hos_created']);
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-			                    <div class="col-xl-3 col-md-6 col-12">
+			                    <div class="col-xl-4 col-md-6 col-12">
 						          <div class="info-box bg-orange">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
@@ -122,20 +122,13 @@ $dat = explode("-", $cri['hos_created']);
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
 						              </div>
-						              <span class="progress-description">&nbsp;</span>
+						              <span class="progress-description">13-04-2018</span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-								
-			                    
-			                    
-			                </div>
-						</div>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="row clearfix">            
-			                    <div class="col-xl-3 col-md-6 col-12">
+								<div class="col-xl-4 col-md-6 col-12">
 						          <div class="info-box bg-purple">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
@@ -150,7 +143,12 @@ $dat = explode("-", $cri['hos_created']);
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-			                    <div class="col-xl-3 col-md-6 col-12">
+			                </div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="row  ">            
+			                    
+			                    <div class="col-xl-4 col-md-6 col-12">
 						          <div class="info-box bg-success">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
@@ -165,15 +163,8 @@ $dat = explode("-", $cri['hos_created']);
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-								
-			                    
-			                    
-			                </div>
-						</div>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="row clearfix">            
-			                    <div class="col-xl-3 col-md-6 col-12">
-						          <div class="info-box bg-purple">
+								  <div class="col-xl-4 col-md-6 col-12">
+						          <div class="info-box bg-indigo">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total Modified prescriptions</span>
@@ -187,12 +178,9 @@ $dat = explode("-", $cri['hos_created']);
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-			                    
-								
-			                    
-			                    
 			                </div>
 						</div>
+					
 						 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card card-box">
                               <div class="card-head">
@@ -209,9 +197,11 @@ $dat = explode("-", $cri['hos_created']);
 					
                     
                 </div>
+				
+			
             </div>
 			
-			
+		
 
     	  <script src="<?php echo base_url(); ?>assets/vendor/plugins/canvasjs.min.js" ></script>
 
