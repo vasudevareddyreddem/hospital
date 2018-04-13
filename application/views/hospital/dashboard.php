@@ -102,12 +102,12 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-blue">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">New Hospital</span>
+						              <span class="info-box-text">Patient Registration</span>
 						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
 						              </div>
-						              <span class="progress-description">&nbsp;</span>
+						              <span class="progress-description">Last 7 days</span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
@@ -117,7 +117,7 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-orange">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">Total Hospital</span>
+						              <span class="info-box-text">Total Patient Registration</span>
 						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
@@ -139,12 +139,12 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-purple">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">New Hospital</span>
+						              <span class="info-box-text">New Reschedule patients</span>
 						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
 						              </div>
-						              <span class="progress-description">&nbsp;</span>
+						              <span class="progress-description">Last 7 days</span>
 						            </div>
 						            <!-- /.info-box-content -->
 						          </div>
@@ -154,7 +154,7 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-success">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">Total Hospital</span>
+						              <span class="info-box-text">Total Reschedule patients</span>
 						              <span class="info-box-number"><?php echo isset($hospital_list)?count($hospital_list):''; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo isset($hospital_list)?count($hospital_list):''; ?>%"></div>
@@ -176,7 +176,7 @@ $dat = explode("-", $cri['hos_created']);
 						          <div class="info-box bg-purple">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">New Hospital</span>
+						              <span class="info-box-text">Total Modified prescriptions</span>
 						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
@@ -187,7 +187,7 @@ $dat = explode("-", $cri['hos_created']);
 						          </div>
 						          <!-- /.info-box -->
 						        </div>
-			                   
+			                    
 								
 			                    
 			                    
