@@ -46,7 +46,16 @@ class Dashboard extends CI_Controller {
 				}
 				$this->load->view('admin/dashboard',$data);
 			}else if($admindetails['role_id']==2){
-				$this->load->view('hospital/dashboard');
+				
+				$data['hospital_list']=$this->Admin_model->get_hospitals_list_monthwise(date('Y'));
+				$sevendays_list=$this->Admin_model->get_last_sevendays_hospital_list();
+				if(count($sevendays_list)>0){
+				$data['sevendays_list']=count($sevendays_list);
+				}else{
+					$data['sevendays_list']='';
+				}
+				
+				$this->load->view('hospital/dashboard',$data);
 			}else if($admindetails['role_id']==3){
 				redirect('resources/desk');
 			}else if($admindetails['role_id']==4){
