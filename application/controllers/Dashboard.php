@@ -44,6 +44,8 @@ class Dashboard extends CI_Controller {
 				$this->load->view('hospital/resourcedashboard');
 			}else if($admindetails['role_id']==6){
 				redirect('resources/worksheet');
+			}else if($admindetails['role_id']==8){
+				redirect('admin/chat');
 			}
 			$this->load->view('html/footer');
 
