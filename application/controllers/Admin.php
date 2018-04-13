@@ -22,8 +22,8 @@ class Admin extends CI_Controller {
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			if($data['userdetails']['role_id']==2){
-			$data['notification']=$this->Admin_model->get_all_notification($hos_details['hos_id']);
-			$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
+			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
+			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 			$data['Unread_count']=count($Unread_count);
 			}
 			$this->load->view('html/header',$data);
@@ -158,6 +158,17 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function notification()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$this->load->view('notification/notification');
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	public function hospital_list()
 	{
 		if($this->session->userdata('userdetails'))
@@ -166,6 +177,32 @@ class Admin extends CI_Controller {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement');
 				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function sendnotification()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
+				$addnotification=array(
+					'comment'=>isset($post['notification'])?$post['notification']:'',
+					'create_at'=>date('Y-m-d H:i:s'),
+					'status'=>1,
+					'create_by'=>$admindetails['a_id']
+					);
+					$saveNotification=$this->Admin_model->save_notification($addnotification);
+					if(count($saveNotification)>0){
+						$this->session->set_flashdata('success',"Notification successfully Send");
+						redirect('admin/notification');
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('admin/notification');
+					}
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');
@@ -215,11 +252,11 @@ class Admin extends CI_Controller {
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$post=$this->input->post();
-				$hos_name=$this->Admin_model->get_notification_comment($post['notification_id']);
+				$hos_name=$this->Admin_model->get_announcements_comment($post['notification_id']);
 				$read=array('readcount'=>0);
-				$this->Admin_model->get_notification_comment_read($post['notification_id'],$read);
+				$this->Admin_model->get_announcement_comment_read($post['notification_id'],$read);
 				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-				$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
+				$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 				$data['names_list']=$hos_name['comment'];
 				$data['time']=$hos_name['create_at'];
 				$data['Unread_count']=count($Unread_count);
@@ -245,7 +282,7 @@ class Admin extends CI_Controller {
 					'status'=>1,
 					'sent_by'=>$admindetails['a_id']
 					);
-					$saveNotification=$this->Admin_model->save_notifications_list($addcomments);
+					$saveNotification=$this->Admin_model->save_announcements_list($addcomments);
 					//echo $this->db->last_query();exit;
 					}
 				}

@@ -299,6 +299,14 @@
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('admin/notification');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Notification</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
 	                        </li> 
 						<?php } ?>
 							<li class="nav-item  ">

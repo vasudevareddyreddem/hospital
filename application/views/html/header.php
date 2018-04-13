@@ -101,7 +101,7 @@
 										<?php $cnt++;} ?>
                                      </ul>
                                     <div class="dropdown-menu-footer">
-                                        <a href="<?php echo base_url('notification'); ?>"> All notifications </a>
+                                        <a href="<?php echo base_url('announcement'); ?>"> All notifications </a>
                                     </div>
                                 </li>
                             </ul>

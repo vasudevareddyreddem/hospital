@@ -22,11 +22,11 @@ class Users extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-				if($data['userdetails']['role_id']==2){
-				$data['notification']=$this->Admin_model->get_all_notification($hos_details['hos_id']);
-				$Unread_count=$this->Admin_model->get_all_notification_unread_count($hos_details['hos_id']);
-				$data['Unread_count']=count($Unread_count);
-				}
+			if($data['userdetails']['role_id']==2){
+			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
+			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
+			$data['Unread_count']=count($Unread_count);
+			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
 			}

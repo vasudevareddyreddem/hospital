@@ -86,16 +86,20 @@ class Admin_model extends CI_Model
 		$this->db->where('a_id', $id);
         return $this->db->get()->row_array();
 	}
-	public function save_notifications_list($data){
+	public function save_announcements_list($data){
+		$this->db->insert('announcements', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function save_notification($data){
 		$this->db->insert('notifications', $data);
 		return $insert_id = $this->db->insert_id();
 	}
-	public function get_all_notification_details(){
-		$this->db->select('notifications.*,hospital.hos_bas_name,admin.a_name as sentname')->from('notifications');
-		$this->db->join('hospital', 'hospital.hos_id = notifications.hos_id', 'left');
-		$this->db->join('admin', 'admin.a_id = notifications.sent_by', 'left');
-		$this->db->group_by('notifications.hos_id');		
-		$this->db->order_by('notifications.int_id',"DESC");		
+	public function get_all_announcements_details(){
+		$this->db->select('announcements.*,hospital.hos_bas_name,admin.a_name as sentname')->from('announcements');
+		$this->db->join('hospital', 'hospital.hos_id = announcements.hos_id', 'left');
+		$this->db->join('admin', 'admin.a_id = announcements.sent_by', 'left');
+		$this->db->group_by('announcements.hos_id');		
+		$this->db->order_by('announcements.int_id',"DESC");		
         return $this->db->get()->result_array();	
 	}
 	
@@ -133,26 +137,30 @@ class Admin_model extends CI_Model
 		$this->db->where('resource_list.hos_id',$hos_id);
         return $this->db->get()->result_array();	
 	}
-	public function get_all_notification($hos_id){
+	public function get_all_announcement($hos_id){
+		$this->db->select('*')->from('announcements');
+		$this->db->where('announcements.hos_id',$hos_id);
+		$this->db->order_by('announcements.int_id',"DESC");
+        return $this->db->get()->result_array();	
+	}
+	public function get_all_announcement_unread_count($hos_id){
+		$this->db->select('announcements.int_id')->from('announcements');
+		$this->db->where('announcements.hos_id',$hos_id);
+		$this->db->where('announcements.readcount',1);
+        return $this->db->get()->result_array();	
+	}
+	public function get_all_notification_details(){
 		$this->db->select('*')->from('notifications');
-		$this->db->where('notifications.hos_id',$hos_id);
-		$this->db->order_by('notifications.int_id',"DESC");
         return $this->db->get()->result_array();	
 	}
-	public function get_all_notification_unread_count($hos_id){
-		$this->db->select('notifications.int_id')->from('notifications');
-		$this->db->where('notifications.hos_id',$hos_id);
-		$this->db->where('notifications.readcount',1);
-        return $this->db->get()->result_array();	
-	}
-	public function get_notification_comment($id){
-		$this->db->select('notifications.comment,notifications.create_at')->from('notifications');
-		$this->db->where('notifications.int_id',$id);
+	public function get_announcements_comment($id){
+		$this->db->select('announcements.comment,announcements.create_at')->from('announcements');
+		$this->db->where('announcements.int_id',$id);
         return $this->db->get()->row_array();
 	}
-	public function get_notification_comment_read($id,$read){
+	public function get_announcement_comment_read($id,$read){
 		$this->db->where('int_id', $id);
-		return $this->db->update('notifications', $read);
+		return $this->db->update('announcements', $read);
 	}
 
 

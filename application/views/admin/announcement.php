@@ -25,12 +25,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Support</div>
+               <div class="page-title">Announcements</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Support</li>
+               <li class="active">Announcements</li>
             </ol>
          </div>
       </div>
@@ -39,13 +39,13 @@
          <div class="col-md-12 col-sm-12">
             <div class="card-box">
                <div class="card-head">
-                  <header>Notifications</header>
+                  <header>Announcements</header>
                </div>
                <div class="card-body ">
                   <div class="panel tab-border card-topline-green">
                      <header class="panel-heading panel-heading-gray custom-tab ">
                         <ul class="nav nav-tabs">
-                           <li class="nav-item"><a href="#announc" data-toggle="tab" class="active" aria-expanded="false">Notifications</a>
+                           <li class="nav-item"><a href="#announc" data-toggle="tab" class="active" aria-expanded="false">Announcements</a>
                            </li>
                            <li class="nav-item"><a href="#notifi" data-toggle="tab" class="" aria-expanded="false">Notifications List</a>
                            </li>
@@ -106,7 +106,9 @@
                               </div>
                            </div>
                            <div class="tab-pane" id="notifi" aria-expanded="false">
-                              <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
+						   <?php foreach($notification_list as $list){ ?>
+                              <p><?php echo $list['comment']; ?>  &nbsp;&nbsp; Date :<?php echo date('M j h:i A',strtotime(htmlentities($list['create_at'])));?> </p>
+						   <?php } ?>
                            </div>
                         </div>
                      </div>
