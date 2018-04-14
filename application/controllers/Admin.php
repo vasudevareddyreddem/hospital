@@ -126,6 +126,96 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function edit()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$data['admin_detail']= $this->Admin_model->get_admin_details_data($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('admin/profileedit',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function editpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					$admin_detail= $this->Admin_model->get_admin_details_data($admindetails['a_id']);
+					if($admin_detail['a_email_id']!= $post['email_id']){
+						$emailcheck= $this->Admin_model->check_email_exits($post['email_id']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('admin/edit/'.base64_encode($admindetails['a_id']));
+								}else{
+										if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+										unlink("assets/adminprofilepic/".$admin_detail['a_profile_pic']);
+										$temp = explode(".", $_FILES["image"]["name"]);
+										$img = round(microtime(true)) . '.' . end($temp);
+										move_uploaded_file($_FILES['image']['tmp_name'], "assets/adminprofilepic/" . $img);
+										}else{
+										$img=$admin_detail['a_profile_pic'];
+										}
+									$details=array(
+									'a_email_id'=>$post['email_id'],
+									'a_name'=>$post['name'],
+									'a_mobile'=>$post['mobile_number'],
+									'a_profile_pic'=>$img
+									);
+								$update= $this->Admin_model->update_admin_details($admindetails['a_id'],$details);
+								if(count($update)>0){
+										$this->session->set_flashdata('success',"Profile details successfully Updated.");
+										redirect('profile');
+									}else{
+											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+											redirect('admin/edit/'.base64_encode($admindetails['a_id']));
+									}
+								}
+					}else{
+						if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+										unlink("assets/adminprofilepic/".$admin_detail['a_profile_pic']);
+										$temp = explode(".", $_FILES["image"]["name"]);
+										$img = round(microtime(true)) . '.' . end($temp);
+										move_uploaded_file($_FILES['image']['tmp_name'], "assets/adminprofilepic/" . $img);
+										}else{
+										$img=$admin_detail['a_profile_pic'];
+										}
+						$details=array(
+						'a_email_id'=>$post['email_id'],
+						'a_name'=>$post['name'],
+						'a_mobile'=>$post['mobile_number'],
+						'a_profile_pic'=>$img
+						);
+						$update= $this->Admin_model->update_admin_details($admindetails['a_id'],$details);
+						if(count($update)>0){
+								$this->session->set_flashdata('success',"Profile details successfully Updated.");
+								redirect('profile');
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('admin/edit/'.base64_encode($admindetails['a_id']));
+							}
+					}
+
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	public function gropchat()
 	{
 		if($this->session->userdata('userdetails'))

@@ -506,14 +506,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },hos_rep_city: {
@@ -624,14 +619,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },hos_bas_city: {

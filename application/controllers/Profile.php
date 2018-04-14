@@ -50,8 +50,10 @@ class Profile extends CI_Controller {
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
-				if($admindetails['role_id']==1){
-					
+				if($admindetails['role_id']==1 || $admindetails['role_id']==8){
+					$data['admin_detail']= $this->Admin_model->get_admin_details_data($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('admin/profileview',$data);
 				}else if($admindetails['role_id']==2){
 					$data['hospital_details']= $this->Hospital_model->get_hospital_detailsfor_profile($admindetails['a_id']);
 					$this->load->view('admin/hospitalview',$data);

@@ -12,10 +12,19 @@ class Admin_model extends CI_Model
 		$this->db->where('a_id',$a_id);
     	return $this->db->update("admin",$data);
 	}
+	public function check_email_exits($email){
+		$sql = "SELECT admin.a_id FROM admin WHERE a_email_id ='".$email."'";
+		return $this->db->query($sql)->row_array();	
+	}
 	public function get_adminpassword_details($admin_id){
 		$this->db->select('admin.a_id,admin.a_password')->from('admin');
 		$this->db->where('a_id', $admin_id);
 		$this->db->where('a_status', 1);
+		return $this->db->get()->row_array();	
+	}
+	public function get_admin_details_data($admin_id){
+		$this->db->select('*')->from('admin');
+		$this->db->where('a_id', $admin_id);
 		return $this->db->get()->row_array();	
 	}
 	public function save_admin($data){

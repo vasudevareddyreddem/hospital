@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Rources List</div>
+               <div class="page-title">Resources List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Rources</li>
+               <li class="active">Resources</li>
             </ol>
          </div>
       </div>
@@ -345,13 +345,12 @@ $(document).ready(function() {
 						message: 'Zipcode is required'
 					},
 					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
+                        max: 7,
+                        message: 'Zipcode  must be less than 7 characters'
                     },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },resource_photo: {

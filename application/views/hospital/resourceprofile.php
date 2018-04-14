@@ -137,7 +137,8 @@
 														  <?php echo isset($resouse_detail['resource_email'])?$resouse_detail['resource_email']:''; ?>
 														 </div>
 													 </div>
-													</div><div class="col-md-6">
+													</div>
+													<div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
 														 <strong> Resource Photo</strong>
