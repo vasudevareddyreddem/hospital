@@ -33,6 +33,7 @@
 					<th> Name </th>
 					<th> Mobile </th>
 					<th> Address </th>
+					<th> Lab Tests </th>
 					<th> Date </th>
 					<th> Created By</th>
 					<th> Action </th>
@@ -47,6 +48,13 @@
 					<td><?php echo $list['name']; ?></td>
 					<td><?php echo $list['mobile']; ?></td>
 					<td><?php echo $list['perment_address'].' , '.$list['p_c_name'].' , '.$list['p_s_name'].' , '.$list['p_country_name'].' - '.$list['p_zipcode']; ?></td>
+					<td>
+					<?php if(isset($list['tests']) && count($list['tests'])>0){ ?>
+					<?php $cnt=1;foreach($list['tests'] as $li){ ?>
+					<p><?php echo $cnt; ?>.<?php echo $li['t_name']; ?></p>
+					<?php $cnt++;} ?>
+					<?php }?>
+					</td>
 					<td><?php echo $list['create_at']; ?></td>
 					<td><?php echo $list['created_by']; ?> </td>
 					<td><a href="<?php echo base_url('lab/patient_details/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>

@@ -44,19 +44,21 @@
                                  <form action="<?php echo base_url('hospital/tabdetailspost'); ?>" method="POST" id="labdetailsform" name="labdetailsform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-									     <select  class="form-control" id="investigation" name="investigation[]">
+									     <select  class="form-control" id="investigation" name="investigation[]" required>
 									   <option value="">Select Investigation </option>
 									   <option value="Lab">Lab</option>
 									   <option value="Radiology">Radiology</option>
 									   </select>
-									   <input class="form-control" id="lab_code" name="lab_code[]" placeholder="Lab Code">&nbsp;
-									   <input class="form-control" id="lab_name" name="lab_name[]" placeholder="Lab Name">&nbsp;
-									    <select  class="form-control" id="lab_assistent" name="lab_assistent[]">
-									   <?php if(count($labassistents_list)>0){ ?>
-									   <option value="">Assign Lab Assistant</option>
+									   <input class="form-control" id="lab_code" name="lab_code[]" placeholder="Lab Code" required>&nbsp;
+									   <input class="form-control" id="lab_name" name="lab_name[]" placeholder="Lab Name" required>&nbsp;
+									    <select  class="form-control" id="lab_assistent" name="lab_assistent[]" required>
+									   		<option value="">Assign Lab Assistant</option>
+										<?php if(count($labassistents_list)>0){ ?>
 									   <?php foreach($labassistents_list as $list){ ?>
 									   <option value="<?php echo $list['r_id']; ?>"><?php echo $list['resource_name']; ?> </option>
 									   <?php } ?>
+									   <?php }else{ ?>
+									   <option value="">Lab Assistants are Not added</option>
 									   <?php } ?>
 									   </select>
                                        <span class="input-group-btn">

@@ -920,7 +920,7 @@ class Hospital extends CI_Controller {
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 								}else{
-															if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
+											if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 												unlink("assets/adminprofilepic/".$resouse_detail['resource_photo']);
 												$temp = explode(".", $_FILES["resource_photo"]["name"]);
 												$photo =round(microtime(true)) . '.' . end($temp);
@@ -957,6 +957,7 @@ class Hospital extends CI_Controller {
 									$addresourcedmin = $this->Admin_model->update_adminhospital_details($post['admin_id'],$admin_details);
 									
 									$resourcedata=array(
+									'role_id'=>$post['designation'],
 									'resource_name'=>$post['resource_name'],
 									'resource_mobile'=>$post['resource_mobile'],
 									'resource_add1'=>$post['resource_add1'],
@@ -1030,6 +1031,7 @@ class Hospital extends CI_Controller {
 									);
 									$addresourcedmin = $this->Hospital_model->update_adminhospital_details($post['admin_id'],$admin_details);
 									$resourcedata=array(
+									'role_id'=>$post['designation'],
 									'resource_name'=>$post['resource_name'],
 									'resource_mobile'=>$post['resource_mobile'],
 									'resource_add1'=>$post['resource_add1'],

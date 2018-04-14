@@ -56,7 +56,7 @@ class Lab_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	public function get_all_labreports_lists($hos_id){
-		$this->db->select('patients_list_1.pid,patients_list_1.hos_id,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,patients_list_1.create_at')->from('patient_lab_reports');
+		$this->db->select('patient_lab_reports.b_id,patients_list_1.pid,patients_list_1.hos_id,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,patients_list_1.create_at')->from('patient_lab_reports');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_lab_reports.p_id', 'left');
 		$this->db->group_by('patient_lab_reports.p_id');
 		$this->db->where('patient_lab_reports.hos_id',$hos_id);
@@ -66,6 +66,13 @@ class Lab_model extends CI_Model
 		$this->db->select('patients_list_1.pid,patients_list_1.hos_id,patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patient_lab_reports.*')->from('patient_lab_reports');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_lab_reports.p_id', 'left');
 		$this->db->where('patient_lab_reports.p_id',$p_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_all_patients_test_lists($p_id,$b_id){
+		$this->db->select('lab_test_list.t_name')->from('patient_lab_test_list');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->where('patient_lab_test_list.p_id',$p_id);
+		$this->db->where('patient_lab_test_list.b_id',$b_id);
 		return $this->db->get()->result_array();
 	}
 	

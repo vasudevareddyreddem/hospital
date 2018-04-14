@@ -31,9 +31,10 @@
 					<th> Patient Id </th>
 					<th> Billing Id </th>
 					<th> Name </th>
-					<th> Mobile </th>
+					<th> Problem </th>
+					<th> Symptoms </th>
 					<th> Date </th>
-					<th> Action </th>
+					<th> Report File </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,7 +44,8 @@
 					<td> <?php echo $list['pid']; ?> </td>
 					<td> <?php echo $list['b_id']; ?> </td>
 					<td><?php echo $list['name']; ?></td>
-					<td><?php echo $list['mobile']; ?></td>
+					<td><?php echo $list['problem']; ?></td>
+					<td><?php echo $list['symptoms']; ?></td>
 					<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
 					<td>
 					<?php if($list['image'] !=''){ ?>

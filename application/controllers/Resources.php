@@ -979,10 +979,13 @@ class Resources extends CI_Controller {
 		{
 				if($admindetails['role_id']=6){
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					//echo '<pre>';print_r($post);exit;
 					$details=$this->Resources_model->get_investigation_list($userdetails['hos_id'],$post['searchdata']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($details);exit;
+
 					if(count($details) > 0)
 					{
 					$data['msg']=1;
@@ -1003,10 +1006,12 @@ class Resources extends CI_Controller {
 		{
 				if($admindetails['role_id']=6){
 					$post=$this->input->post();
-					$admindetails=$this->session->userdata('userdetails');
-					$userdetails=$this->Resources_model->get_all_resouce_details($post['labassistentid']);
 					//echo '<pre>';print_r($post);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$details=$this->Resources_model->get_test_list($userdetails['hos_id'],$post['labassistentid']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($details);exit;
 					if(count($details) > 0)
 					{
 					$data['msg']=1;

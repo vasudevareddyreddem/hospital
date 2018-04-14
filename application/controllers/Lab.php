@@ -84,7 +84,7 @@ class Lab extends CI_Controller {
 						'status'=>1,
 						'create_by'=>$admindetails['a_id']
 						);
-					//echo '<pre>';print_r($billing);exit;
+						//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Added.");
@@ -174,7 +174,19 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['labtest_list']=$this->Lab_model->get_all_patients_lists($userdetails['hos_id']);
+					$datalabtest_list=$this->Lab_model->get_all_patients_lists($userdetails['hos_id']);
+					
+					if(isset($datalabtest_list) && count($datalabtest_list)>0){
+						foreach($datalabtest_list as $list){
+							$tests_list=$this->Lab_model->get_all_patients_test_lists($list['pid'],$list['b_id']);
+							$lis[$list['b_id']]=$list;
+							$lis[$list['b_id']]['tests']=$tests_list;
+						
+						}
+						$data['labtest_list']=$lis;
+					}else{
+						$data['labtest_list']=array();
+					}
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/patient_list',$data);
 					$this->load->view('html/footer');
@@ -196,9 +208,21 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['patient_list']=$this->Lab_model->get_all_labreports_lists($userdetails['hos_id']);
+					$datapatient_list=$this->Lab_model->get_all_labreports_lists($userdetails['hos_id']);
+					if(isset($datapatient_list) && count($datapatient_list)>0){
+						foreach($datapatient_list as $list){
+							//echo '<pre>';print_r($list);exit;
+							$tests_list=$this->Lab_model->get_all_patients_test_lists($list['pid'],$list['b_id']);
+							$lis[$list['b_id']]=$list;
+							$lis[$list['b_id']]['tests']=$tests_list;
+						
+						}
+						$data['patient_list']=$lis;
+					}else{
+						$data['patient_list']=array();
+					}
 					$data['tab']=base64_decode($this->uri->segment(3));
-					$this->load->view('lab/patient_basebase',$data);
+					$this->load->view('lab/patient_database',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
 				}else{

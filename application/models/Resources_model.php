@@ -167,7 +167,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_investigation_list($hos_id,$val){
-		$this->db->select('lab_detailes.l_id,lab_detailes.l_code,lab_detailes.l_assistent_id')->from('lab_detailes');
+		$this->db->select('lab_detailes.l_id,lab_detailes.hos_id,lab_detailes.l_code,lab_detailes.l_assistent_id')->from('lab_detailes');
 		$this->db->where('lab_detailes.hos_id',$hos_id);
 		$this->db->where('lab_detailes.l_investigation',$val);
 		$this->db->where('lab_detailes.l_status',1);
@@ -176,7 +176,7 @@ class Resources_model extends CI_Model
 	public function get_test_list($hos_id,$val){
 		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form')->from('lab_test_list');
 		$this->db->where('lab_test_list.hos_id',$hos_id);
-		$this->db->where('lab_test_list.create_by',$val);
+		//$this->db->where('lab_test_list.create_by',$val);
 		$this->db->where('lab_test_list.status',1);
         return $this->db->get()->result_array();
 	}

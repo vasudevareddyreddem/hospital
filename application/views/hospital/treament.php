@@ -44,7 +44,7 @@
                                  <form action="<?php echo base_url('hospital/treatmenaddtpost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-									   <select  class="form-control" id="treatment_name" name="treatment_name[]">
+									   <select  class="form-control" id="treatment_name" name="treatment_name[]" required>
 									   <?php if(count($treatment_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($treatment_list as $list){ ?>
@@ -52,7 +52,7 @@
 									   <?php } ?>
 									   <?php } ?>
 									   </select>&nbsp;
-									   <select  class="form-control" id="assign_doctor" name="assign_doctor[]">
+									   <select  class="form-control" id="assign_doctor" name="assign_doctor[]" required>
 									   <?php if(count($doctors_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($doctors_list as $list){ ?>
@@ -119,6 +119,29 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#treatmentform1').bootstrapValidator({
+        
+        fields: {
+            
+            'treatment_name[]': {
+                 validators: {
+					notEmpty: {
+						message: 'Treatment is required'
+					}
+				}
+            },
+			'assign_doctor[]': {
+                 validators: {
+					notEmpty: {
+						message: 'Doctor is required'
+					}
+				}
+            }
+            }
+        })
+     
+});
 
    $(function() {
    $(".expand").on( "click", function() {
