@@ -80,7 +80,7 @@ $(function() {
    function opennotification(id){
 	   if(id !=''){
 		    jQuery.ajax({
-   			url: "<?php echo base_url('admin/get_notification_msg');?>",
+   			url: "<?php echo base_url('admin/get_resource_notification_msg');?>",
    			data: {
 				notification_id: id,
 			},

@@ -75,7 +75,8 @@
                        
                         <!-- end language menu -->
                         <!-- start notification dropdown -->
-						<?php if($userdetails['role_id']==2){ ?>
+						<?php if($userdetails['role_id']==2 || $userdetails['role_id']==3 || $userdetails['role_id']==4 || $userdetails['role_id']==5 || $userdetails['role_id']==6){ ?>
+						<?php if(isset($notification) && count($notification)>0){ ?>
                         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <i class="fa fa-bell-o"></i>
@@ -91,8 +92,12 @@
                                         <?php $cnt=1;foreach($notification as $List){ ?>
 										<?php if($cnt<=5){ ?>
 										<li>
-                                            <a onclick="opennotification('<?php echo $List['int_id']; ?>')" data-toggle="modal" data-target="#exampleModalLong" >
-                                                <span class="time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></span>
+                                            <?php if($userdetails['role_id']==2){ ?>
+											<a onclick="opennotification('<?php echo $List['int_id']; ?>')" data-toggle="modal" data-target="#exampleModalLong" >
+                                            <?php }else{ ?>
+											<a onclick="resourceopennotification('<?php echo $List['int_id']; ?>')" data-toggle="modal" data-target="#exampleModalLong" >
+											<?php } ?>
+												<span class="time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></span>
                                                 <span class="details">
                                                 <span class="notification-icon circle deepPink-bgcolor"><i class="fa fa-check"></i></span><?php echo ucfirst(substr($List['comment'], 0, 20)); ?> </span>
                                             </a>
@@ -101,11 +106,16 @@
 										<?php $cnt++;} ?>
                                      </ul>
                                     <div class="dropdown-menu-footer">
-                                        <a href="<?php echo base_url('announcement'); ?>"> All notifications </a>
+									<?php if($userdetails['role_id']==2){ ?>
+                                        <a href="<?php echo base_url('hospital/announcement/'.base64_encode(1)); ?>"> All notifications </a>
+									<?php }else{ ?>
+									      <a href="<?php echo base_url('announcement/'); ?>"> All notifications </a>
+									<?php } ?>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+						<?php } ?>
 						<?php } ?>
                         <!-- end notification dropdown -->
                        
@@ -166,6 +176,28 @@
 	   if(id !=''){
 		    jQuery.ajax({
    			url: "<?php echo base_url('admin/get_notification_msg');?>",
+   			data: {
+				notification_id: id,
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+					$('#notification_count1').empty();
+   					$('#notification_count').empty();
+   					$('#notification_time').empty();
+   					var parsedData = JSON.parse(data);
+   					$('#notification_msg').append(parsedData.names_list);
+   					$('#notification_time').append(parsedData.time);
+   					$('#notification_count1').append(parsedData.Unread_count);
+   					$('#notification_count').append(parsedData.Unread_count);
+   					}
+           });
+	   }
+	}
+	 function resourceopennotification(id){
+	   if(id !=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('admin/get_resource_notification_msg');?>",
    			data: {
 				notification_id: id,
 			},

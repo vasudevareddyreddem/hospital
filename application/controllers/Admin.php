@@ -24,7 +24,19 @@ class Admin extends CI_Controller {
 			if($data['userdetails']['role_id']==2){
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			$data['Unread_count']=count($Unread_count);
+			if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
+			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
+				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
+				if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
 			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
@@ -259,7 +271,35 @@ class Admin extends CI_Controller {
 				$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 				$data['names_list']=$hos_name['comment'];
 				$data['time']=$hos_name['create_at'];
+				if(count($Unread_count)>0){
 				$data['Unread_count']=count($Unread_count);
+				}else{
+				$data['Unread_count']='';	
+				}
+				echo json_encode($data);exit;	
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function get_resource_notification_msg()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				$hos_name=$this->Admin_model->get_resource_announcements_comment($post['notification_id']);
+				$read=array('readcount'=>0);
+				$this->Admin_model->get_resource_announcement_comment_read($post['notification_id'],$read);
+				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
+				$data['names_list']=$hos_name['comment'];
+				$data['time']=$hos_name['create_at'];
+				if(count($Unread_count)>0){
+				$data['Unread_count']=count($Unread_count);
+				}else{
+				$data['Unread_count']='';	
+				}
 				echo json_encode($data);exit;	
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");

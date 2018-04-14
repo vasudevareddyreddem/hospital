@@ -25,12 +25,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Announcements</div>
+               <div class="page-title">Announcements & Notifications</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Announcements</li>
+               <li class="active">Announcements & Notifications</li>
             </ol>
          </div>
       </div>
@@ -39,41 +39,41 @@
          <div class="col-md-12 col-sm-12">
             <div class="card-box">
                <div class="card-head">
-                  <header>Announcements</header>
+                  <header>Announcements & Notifications</header>
                </div>
                <div class="card-body ">
                   <div class="panel tab-border card-topline-green">
                      <header class="panel-heading panel-heading-gray custom-tab ">
                         <ul class="nav nav-tabs">
-                           <li class="nav-item"><a href="#announc" data-toggle="tab" class="active" aria-expanded="false">Announcements</a>
+                           <li class="nav-item"><a href="#announc" data-toggle="tab" class="<?php if(isset($tab) && $tab==''){ echo "active"; } ?>" aria-expanded="false">Announcements</a>
                            </li>
-                           <li class="nav-item"><a href="#notifi" data-toggle="tab" class="" aria-expanded="false">Notifications List</a>
+                           <li class="nav-item"><a href="#notifi" data-toggle="tab" class="<?php if(isset($tab) && $tab==1){ echo "active"; } ?>" aria-expanded="false">Notifications List</a>
                            </li>
                         </ul>
                      </header>
                      <div class="panel-body">
                         <div class="tab-content">
-                           <div class="tab-pane active" id="announc" aria-expanded="false">
+                           <div class="tab-pane <?php if(isset($tab) && $tab==''){ echo "active"; } ?>" id="announc" aria-expanded="false">
                               <div class="row">
                                  <div class="col-4 card dat-help">
                                     <br>
                                     <h3>Announcements</h3>
-                                    <textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
+                                    <textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Resource Names" ></textarea>
                                     <div class="card-body ">
                                        <form id="frm-example" action="" method="POST">
                                           <table id="example" class="display select" cellspacing="0" width="100%">
                                              <thead>
                                                 <tr>
                                                    <th><input name="select_all" value="1" type="checkbox"></th>
-                                                   <th>Hospital Name</th>
+                                                   <th>Resource Name</th>
                                                 </tr>
                                              </thead>
                                               <tbody>
-                                                <?php if(isset($hospital_list) && count($hospital_list)>0){ ?>
-                                                <?php foreach($hospital_list as $list){ ?>
+                                                <?php if(isset($resources_list) && count($resources_list)>0){ ?>
+                                                <?php foreach($resources_list as $list){ ?>
                                                 <tr>
-                                                   <td><?php echo $list['hos_id']; ?></td>
-                                                   <td><?php echo $list['hos_bas_name']; ?></td>
+                                                  <td><?php echo $list['a_id']; ?></td>
+                                                   <td><?php echo $list['resource_name']; ?></td>
                                                 </tr>
                                                 <?php } ?>
                                                 <?php }else{ ?>
@@ -93,7 +93,7 @@
                                        <div class="panel-heading bg-indigo">
                                           <span class="glyphicon glyphicon-comment"></span> Announcements
                                        </div>
-									   <form id="addnotifications" action="<?php echo base_url('admin/sendannouncements'); ?>" method="POST" >
+									   <form id="addnotifications" action="<?php echo base_url('hospital/sendannouncements'); ?>" method="POST" >
                                        <div class="panel-body">
 									   <input type="hidden" name="hospitals_ids" id="hospitals_ids" value="">
                                           <textarea style="height:150px;" type="textarea" id="comments" name="comments" class="form-control"  placeholder="Enter comments" required></textarea>
@@ -105,11 +105,11 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="tab-pane" id="notifi" aria-expanded="false">
-						  <?php if(isset($notification_list) && count($notification_list)>0){ ?>
-						   <?php foreach($notification_list as $List){ ?>
+                           <div class="tab-pane <?php if(isset($tab) && $tab==1){ echo "active"; } ?>" id="notifi" aria-expanded="false">
+						   <?php if(isset($notification) && count($notification)>0){ ?>
+						   <?php foreach($notification as $List){ ?>
 								<div class="panel panel-default">
-								   <a href="#" ><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
+								   <a href="#" onclick="opennotification('<?php echo $List['int_id']; ?>')"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
 									<h4  href="#collapse1<?php echo $List['int_id']; ?>" class="panel-title expand">
 									   <div class="right-arrow pull-right">+</div>
 									  <span><span class="notification-icon circle deepPink-bgcolor"><?php echo ucfirst(substr($List['comment'], 0, 1)); ?></span>   <?php echo substr($List['comment'], 0, 80); ?> </span>
@@ -140,7 +140,7 @@ function returnvalidation(){
 	if(ids!='' && msg!=''){
 		document.getElementById("addnotifications").submit();
 	}else if(ids==''){
-		alert('please  select and submit hospital list in any one');
+		alert('please  select and submit resource name list in any one');
 		return false;
 	}else if(msg==''){
 		alert('Comment is required');
@@ -149,6 +149,28 @@ function returnvalidation(){
 	
 	
 }
+function opennotification(id){
+	   if(id !=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('admin/get_notification_msg');?>",
+   			data: {
+				notification_id: id,
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+					$('#notification_count1').empty();
+   					$('#notification_count').empty();
+   					$('#notification_time').empty();
+   					var parsedData = JSON.parse(data);
+   					$('#notification_msg').append(parsedData.names_list);
+   					$('#notification_time').append(parsedData.time);
+   					$('#notification_count1').append(parsedData.Unread_count);
+   					$('#notification_count').append(parsedData.Unread_count);
+   					}
+           });
+	   }
+	}
    //
    // Updates "Select all" control in a data table
    //
@@ -288,7 +310,7 @@ function returnvalidation(){
    	  var $data=$(form).serialize();
 	  //$('#hospitals_ids').val($data);
    	   jQuery.ajax({
-   			url: "<?php echo base_url('admin/gethospitalsname');?>",
+   			url: "<?php echo base_url('admin/getresourcesname');?>",
    			data:$data,
    			type: "POST",
    			format:"Json",

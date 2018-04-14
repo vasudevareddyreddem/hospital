@@ -25,7 +25,19 @@ class Hospital extends CI_Controller {
 			if($data['userdetails']['role_id']==2){
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			$data['Unread_count']=count($Unread_count);
+			if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
+			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
+				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
+				if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
 			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
@@ -1525,6 +1537,71 @@ class Hospital extends CI_Controller {
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
+		}
+	}
+	public function announcement()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['resources_list']=$this->Admin_model->get_resource_list($userdetails['hos_id']);
+					$admindetails=$this->session->userdata('userdetails');
+					$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
+					$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
+					$data['tab']=base64_decode($this->uri->segment(3));
+					//echo '<pre>';print_r($data['tab']);exit;
+					$this->load->view('hospital/announcement',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function sendannouncements()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				if(isset($post['hospitals_ids']) && $post['hospitals_ids']!=''){
+				foreach(explode(",",$post['hospitals_ids']) as $lists){
+					if($lists !=''){
+					$addcomments=array(
+					'res_id'=>$lists,
+					'comment'=>isset($post['comments'])?$post['comments']:'',
+					'create_at'=>date('Y-m-d H:i:s'),
+					'status'=>1,
+					'sent_by'=>$admindetails['a_id']
+					);
+					$saveNotification=$this->Hospital_model->save_announcements_list($addcomments);
+					//echo $this->db->last_query();exit;
+					}
+				}
+				
+				if(count($saveNotification)>0){
+					$this->session->set_flashdata('success',"Notification successfully Send.");
+					redirect('hospital/announcement');
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/announcement');
+				}
+				
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/announcement');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
 		}
 	}
 	

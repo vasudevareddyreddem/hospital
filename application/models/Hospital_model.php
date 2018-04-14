@@ -148,6 +148,11 @@ class Hospital_model extends CI_Model
     	return $this->db->update("lab_detailes",$data);
 	}
 	/*lab details*/
+	/* hospital*/
+	public function save_announcements_list($data){
+		$this->db->insert('hospital_announcements', $data);
+		return $insert_id = $this->db->insert_id();
+	}
 	
 	
 

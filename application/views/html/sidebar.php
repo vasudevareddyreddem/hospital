@@ -134,6 +134,11 @@
 	                                </li>
 	                            </ul>
 	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('hospital/announcement'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 							
 						<?php } else if($userdetails['role_id']==3){ ?>
 						 

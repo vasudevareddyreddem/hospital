@@ -227,6 +227,28 @@ class Admin_model extends CI_Model
 		$this->db->where("patient_medicine_list.edited", 1);
 		return $this->db->get()->result_array();
 	}
+	/* resource announcement */
+	public function get_all_resource_announcement($res_id){
+		$this->db->select('*')->from('hospital_announcements');
+		$this->db->where('hospital_announcements.res_id',$res_id);
+		$this->db->order_by('hospital_announcements.int_id',"DESC");
+        return $this->db->get()->result_array();	
+	}
+	public function get_all_resource_announcement_unread_count($res_id){
+		$this->db->select('hospital_announcements.int_id')->from('hospital_announcements');
+		$this->db->where('hospital_announcements.res_id',$res_id);
+		$this->db->where('hospital_announcements.readcount',1);
+        return $this->db->get()->result_array();	
+	}
+	public function get_resource_announcements_comment($id){
+		$this->db->select('hospital_announcements.comment,hospital_announcements.create_at')->from('hospital_announcements');
+		$this->db->where('hospital_announcements.int_id',$id);
+        return $this->db->get()->row_array();
+	}
+	public function get_resource_announcement_comment_read($id,$read){
+		$this->db->where('int_id', $id);
+		return $this->db->update('hospital_announcements', $read);
+	}
 
 
 }

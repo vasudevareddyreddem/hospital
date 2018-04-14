@@ -25,7 +25,19 @@ class Users extends CI_Controller {
 			if($data['userdetails']['role_id']==2){
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			$data['Unread_count']=count($Unread_count);
+			if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
+			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
+				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
+				if(count($Unread_count)>0){
+					$data['Unread_count']=count($Unread_count);
+				}else{
+					$data['Unread_count']='';
+				}
 			}
 			$this->load->view('html/header',$data);
 			$this->load->view('html/sidebar',$data);
