@@ -182,6 +182,24 @@ class Admin_model extends CI_Model
         $this->db->where("patients_list_1.hos_id", $hos_id);
 		return $this->db->get()->result_array();
 	}
+	public function get_hospitals_reschudle_patient_list_monthwise($hos_id,$date){
+		$this->db->select('patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("DATE_FORMAT(patient_billing.create_at,'%Y')", $date);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "reschedule");
+        $this->db->where("patients_list_1.hos_id", $hos_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_hospitals_new_patient_list_monthwise($hos_id,$date){
+		$this->db->select('patient_billing.p_id,patient_billing.create_at')->from('patient_billing');
+        $this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->where("DATE_FORMAT(patient_billing.create_at,'%Y')", $date);
+		$this->db->where("patient_billing.completed", 1);
+		$this->db->where("patient_billing.type", "New");
+        $this->db->where("patients_list_1.hos_id", $hos_id);
+		return $this->db->get()->result_array();
+	}
 	public function get_last_sevendays_hospital_new_patient_list($hos_id){
 		$start_date = date("Y-m-d H:i:s", strtotime("-1 week"));
 		$end_date = date("Y-m-d H:i:s");

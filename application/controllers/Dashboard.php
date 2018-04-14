@@ -61,6 +61,8 @@ class Dashboard extends CI_Controller {
 				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			
 				$data['patients_list']=$this->Admin_model->get_hospitals_patient_list_monthwise($hos_details['hos_id'],date('Y'));
+				$data['new_patients_list']=$this->Admin_model->get_hospitals_new_patient_list_monthwise($hos_details['hos_id'],date('Y'));
+				$data['reschudle_patients_list']=$this->Admin_model->get_hospitals_reschudle_patient_list_monthwise($hos_details['hos_id'],date('Y'));
 
 				$new_patient_sevendays_list=$this->Admin_model->get_last_sevendays_hospital_new_patient_list($hos_details['hos_id']);
 				$new_all_patient_list=$this->Admin_model->get_hospital_new_patient_list($hos_details['hos_id']);
