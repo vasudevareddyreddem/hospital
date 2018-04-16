@@ -34,6 +34,7 @@
 					<th> Mobile </th>
 					<th> Address </th>
 					<th> Lab Tests </th>
+					<th> Out source Lab Tests </th>
 					<th> Date </th>
 					<th> Created By</th>
 					<th> Action </th>
@@ -55,6 +56,7 @@
 					<?php $cnt++;} ?>
 					<?php }?>
 					</td>
+					<td><a href="<?php echo base_url('lab/outsource/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>
 					<td><?php echo $list['create_at']; ?></td>
 					<td><?php echo $list['created_by']; ?> </td>
 					<td><a href="<?php echo base_url('lab/patient_details/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>

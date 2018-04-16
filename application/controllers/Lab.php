@@ -235,6 +235,26 @@ class Lab extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function outsource()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$this->load->view('lab/outsource_list',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function patient_report_details()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -345,6 +365,25 @@ class Lab extends CI_Controller {
 								
 					}
 				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function testtype()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$this->load->view('admin/lab_tests',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
