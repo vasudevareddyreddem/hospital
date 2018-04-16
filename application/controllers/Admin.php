@@ -15,6 +15,7 @@ class Admin extends CI_Controller {
 		$this->load->helper('security');
 		$this->load->library('zend');
 		$this->load->model('Admin_model');
+		$this->load->model('Hospital_model');
 		$this->load->library('zend');
 		if($this->session->userdata('userdetails'))
 			{
@@ -441,9 +442,9 @@ class Admin extends CI_Controller {
 		{
 			if($admindetails['role_id']=1){
 					$post=$this->input->post();
-					//echo '<pre>';print_r($_FILES);exit;
-					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
-								$emailcheck= $this->Hospital_model->check_email_exits($post['lab_email']);
+					//echo '<pre>';print_r($post);exit;
+					if(md5($post['lab_password'])==md5($post['lab_cinformpaswword'])){
+								$emailcheck= $this->Admin_model->check_email_exits($post['lab_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('lab/oursource');
@@ -457,21 +458,24 @@ class Admin extends CI_Controller {
 									}
 									$admindetails=$this->session->userdata('userdetails');
 									//echo '<pre>';print_r($statusdata);exit;
-									$admindetails=array(
-									'role_id'=>$post['designation'],
-									'a_name'=>$post['resource_name'],
-									'a_email_id'=>$post['resource_email'],
-									'a_password'=>md5($post['resource_cinformpaswword']),
-									'a_org_password'=>$post['resource_cinformpaswword'],
-									'a_mobile'=>$post['resource_mobile'],
+									$details=array(
+									'role_id'=>5,
+									'out_source'=>1,
+									'a_name'=>$post['lab_name'],
+									'a_email_id'=>$post['lab_email'],
+									'a_password'=>md5($post['lab_cinformpaswword']),
+									'a_org_password'=>$post['lab_cinformpaswword'],
+									'a_mobile'=>$post['lab_mobile'],
 									'a_status'=>1,
-									'a_create_at'=>date('Y-m-d H:i:s')
+									'a_create_at'=>date('Y-m-d H:i:s'),
+									'create_by'=>$admindetails['a_id']
 									);
-									$addresourcedmin = $this->Admin_model->save_admin($admindetails);
+									$addresourcedmin = $this->Admin_model->save_admin($details);
 									$resourcedata=array(
 									'a_id'=>$addresourcedmin,
-									'role_id'=>$post['designation'],
-									'hos_id'=>$hos_ids['hos_id'],
+									'role_id'=>'5',
+									'hos_id'=>'',
+									'out_source_lab'=>1,
 									'resource_name'=>$post['lab_name'],
 									'resource_mobile'=>$post['lab_mobile'],
 									'resource_add1'=>$post['lab_add1'],
@@ -484,11 +488,11 @@ class Admin extends CI_Controller {
 									'resource_email'=>$post['lab_email'],
 									'resource_photo'=>$photo,
 									'r_status'=>1,
-									'r_create_by'=>$hos_ids['a_id'],
+									'r_create_by'=>$admindetails['a_id'],
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
 									//echo '<pre>';print_r($onedata);exit;
-									$saveresource =$this->Hospital_model->save_resource($resourcedata);
+									$saveresource =$this->Admin_model->save_out_source_lab($resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Our source lab are successfully created");
 										redirect('lab/oursource/'.base64_encode(1));
@@ -512,7 +516,86 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	
+	public function resourcestatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$resourse_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($resourse_id!=''){
+						$stusdetails=array(
+							'r_status'=>$statu,
+							'r_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$stus=array(
+							'a_status'=>$statu,
+							'a_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$r_details= $this->Admin_model->get_resourse_details(base64_decode($resourse_id));
+							$this->Admin_model->update_resourse_details($r_details['a_id'],$stus);
+							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Lab successfully Deactivate.");
+								}else{
+									$this->session->set_flashdata('success',"Lab successfully Activate.");
+								}
+								redirect('lab/oursource/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('lab/oursource/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/oursource/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function resourcedelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$resourse_id=$this->uri->segment(3);
+					if($resourse_id!=''){
+							$r_details= $this->Admin_model->get_resourse_details(base64_decode($resourse_id));
+							$this->Admin_model->delete_out_sources($r_details['a_id']);
+							$deletedata= $this->Admin_model->delete_resourse_details(base64_decode($resourse_id));
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Hospital successfully removed.");
+								redirect('lab/oursource/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('lab/oursource/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/oursource/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function emps(){
 		
 		

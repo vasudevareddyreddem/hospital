@@ -36,7 +36,7 @@ class Admin_model extends CI_Model
 		return $this->db->query($sql)->row_array();	
 	}
 	public function get_admin_details($admin_id){
-		$this->db->select('admin.a_id,admin.role_id,admin.a_email_id')->from('admin');		
+		$this->db->select('admin.a_id,admin.role_id,admin.a_email_id,admin.out_source')->from('admin');		
 		$this->db->where('a_id', $admin_id);
 		$this->db->where('a_status', 1);
         return $this->db->get()->row_array();	
@@ -275,6 +275,27 @@ class Admin_model extends CI_Model
 	public function get_resource_announcement_comment_read($id,$read){
 		$this->db->where('int_id', $id);
 		return $this->db->update('hospital_announcements', $read);
+	}
+	public function save_out_source_lab($data){
+		$this->db->insert('resource_list', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_resourse_details($id){
+		$this->db->select('resource_list.r_id,resource_list.a_id')->from('resource_list');
+		$this->db->where('resource_list.r_id',$id);
+        return $this->db->get()->row_array();
+	}
+	public function update_resourse_details($id,$data){
+		$this->db->where('a_id',$id);
+    	return $this->db->update("admin",$data);
+	}
+	public function delete_out_sources($t_id){
+		$sql1="DELETE FROM admin WHERE a_id = '".$t_id."'";
+		return $this->db->query($sql1);
+	}
+	public function delete_resourse_details($t_id){
+		$sql1="DELETE FROM resource_list WHERE r_id = '".$t_id."'";
+		return $this->db->query($sql1);
 	}
 
 

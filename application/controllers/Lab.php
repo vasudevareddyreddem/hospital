@@ -87,9 +87,10 @@ class Lab extends CI_Controller {
 						't_department'=>isset($post['department'])?$post['department']:'',
 						'create_at'=>date('Y-m-d H:i:s'),
 						'status'=>1,
-						'create_by'=>$admindetails['a_id']
+						'create_by'=>$admindetails['a_id'],
+						'out_source'=>$admindetails['out_source']
 						);
-						//echo '<pre>';print_r($adding);exit;
+						//echo '<pre>';print_r($admindetails);exit;
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Added.");
@@ -407,7 +408,7 @@ class Lab extends CI_Controller {
 					
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
-					$data['test_list']=$this->Lab_model->get_all_test_list($admindetails['a_id']);
+					$data['out_sourcelab_list']=$this->Lab_model->out_sourcelab_list($admindetails['a_id']);
 					$this->load->view('admin/oursource',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -492,7 +493,8 @@ class Lab extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$test_id=base64_decode($this->uri->segment(3));
-					$delete=$this->Lab_model->delete_test_type($test_id);
+					$detail=array('status'=>2);
+					$delete=$this->Lab_model->delete_test_type($test_id,$detail);
 						if(count($delete)>0){
 							$this->session->set_flashdata('success',"Test type successfully Deleted.");
 							redirect('lab/testtype/'.base64_encode(1));

@@ -112,11 +112,10 @@
                      <div class="container">
                         <div class="row">
                             <div class="card-body col-md-12">
-								<?php if(count($resource_list)>0){ ?>
+								<?php if(count($out_sourcelab_list)>0){ ?>
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Role</th>
 												<th>Name</th>
 												<th>Email Address</th>
                                                 <th>Contact Number </th>
@@ -126,13 +125,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($resource_list as $list){ ?>
+										<?php foreach($out_sourcelab_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['r_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_email']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_contatnumber']); ?></td>
-                                                <td><?php echo htmlentities($list['r_created_at']); ?></td>
+                                                <td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['r_created_at'])));?></td>
 												<td><?php if($list['r_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
                                                     <div class="btn-group">
@@ -141,19 +139,12 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
+                                                                <a href="<?php echo base_url('admin/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
                                                                     <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
-															<li>
-                                                                <a href="<?php echo base_url('hospital/resourceview/'.base64_encode($list['r_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>View</a>
-                                                            </li> 
-															<li>
-                                                                <a href="<?php echo base_url('hospital/resourceedit/'.base64_encode($list['r_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>Edit</a>
-                                                            </li>
+															
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['r_id'])); ?>">
+                                                                <a href="<?php echo base_url('admin/resourcedelete/'.base64_encode($list['r_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             

@@ -84,7 +84,7 @@ class Lab_model extends CI_Model
 	public function get_all_test_list($a_id){
 		$this->db->select('*')->from('lab_test_type');
 		$this->db->where('lab_test_type.created_by',$a_id);
-		//$this->db->where('lab_test_type.status',1);
+		$this->db->where('lab_test_type.status !=',2);
 		return $this->db->get()->result_array();
 	}
 	public function get_lab_test_type_details(){
@@ -97,9 +97,16 @@ class Lab_model extends CI_Model
 		$this->db->where('id',$t_id);
     	return $this->db->update("lab_test_type",$data);
 	}
-	public function delete_test_type($t_id){
-			$sql1="DELETE FROM lab_test_type WHERE id = '".$t_id."'";
-		return $this->db->query($sql1);
+	public function delete_test_type($t_id,$data){
+			$this->db->where('id',$t_id);
+    	return $this->db->update("lab_test_type",$data);
+	}
+	public function out_sourcelab_list($a_id){
+		$this->db->select('admin.a_id,resource_list.*')->from('admin');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
+		$this->db->where('admin.out_source',1);
+		$this->db->where('resource_list.r_create_by',$a_id);
+		return $this->db->get()->result_array();
 	}
 	
 	
