@@ -52,6 +52,7 @@ class Lab extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id'],$admindetails['a_id']);
+					$data['test_type_list']=$this->Lab_model->get_lab_test_type_details();
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/testsdetails',$data);
 					$this->load->view('html/footer');
@@ -77,6 +78,10 @@ class Lab extends CI_Controller {
 					$adding=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 						't_name'=>isset($post['test_name'])?$post['test_name']:'',
+						'test_type'=>isset($post['test_type'])?$post['test_type']:'',
+						'type'=>isset($post['type'])?$post['type']:'',
+						'duration'=>isset($post['duration'])?$post['duration']:'',
+						'amuont'=>isset($post['amuont'])?$post['amuont']:'',
 						't_short_form'=>isset($post['short_form'])?$post['short_form']:'',
 						't_description'=>isset($post['description'])?$post['description']:'',
 						't_department'=>isset($post['department'])?$post['department']:'',
@@ -379,7 +384,9 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=1){
 					
+					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['test_list']=$this->Lab_model->get_all_test_list($admindetails['a_id']);
 					$this->load->view('admin/lab_tests',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -392,6 +399,157 @@ class Lab extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function oursource()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$admindetails=$this->session->userdata('userdetails');
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['test_list']=$this->Lab_model->get_all_test_list($admindetails['a_id']);
+					$this->load->view('admin/oursource',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addtest_type()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$add=array(
+						'type_name'=>$post['test_type'],
+						'type'=>$post['type'],
+						'create_at'=>date('Y-m-d H:i:s'),
+						'status'=>1,
+						'created_by'=>$admindetails['a_id']
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$save=$this->Lab_model->add_lab_test_type($add);
+						if(count($save)>0){
+							$this->session->set_flashdata('success',"Test Type successfully added.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function update_test_type()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$add=array(
+						'type_name'=>$post['editname'],
+						'type'=>$post['type'],
+						'updated_time'=>$admindetails['a_id']
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$save=$this->Lab_model->update_testtype_details($post['test_id'],$add);
+						if(count($save)>0){
+							$this->session->set_flashdata('success',"Test Type successfully Updated.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function deletetest_type()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$test_id=base64_decode($this->uri->segment(3));
+					$delete=$this->Lab_model->delete_test_type($test_id);
+						if(count($delete)>0){
+							$this->session->set_flashdata('success',"Test type successfully Deleted.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function test_type_status()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$test_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$sta=0;
+					}else{
+						$sta=1;
+					}
+					$details=array(
+						'status'=>$sta,
+						'updated_time'=>date('Y-m-d H:i:s')
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$updated=$this->Lab_model->update_testtype_details($test_id,$details);
+						if(count($updated)>0){
+							if($status==1){
+							$this->session->set_flashdata('success',"Test successfully Deactivate.");
+							}else{
+								$this->session->set_flashdata('success',"Test successfully Activate.");
+							}
+							redirect('lab/testtype/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
 	
 	
 	

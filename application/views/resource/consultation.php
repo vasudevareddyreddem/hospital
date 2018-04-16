@@ -854,9 +854,10 @@
                                  </table>
                               </div>
                               <div class="clearfix">&nbsp;</div>
-								<button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
-                              <button type="button" onclick="addtestlist();" class="btn btn-sm btn-info">Add </button>
-							  </div>
+								 <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
+								 <button type="button" onclick="addtestlist();" class="btn btn-sm btn-info">Add </button>
+								 <a href="javascript:void(0)" onclick="get_patient_list()" data-toggle="modal" data-target="#test_list_searchmodal" class="btn btn-sm btn-warning">View</a>
+								</div>
 							  
                         </div>
                      </div>
@@ -868,6 +869,9 @@
       </div>
    </div>
 </div>
+<input type="hidden" name="patient_id_test_list" id="patient_id_test_list" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+ <input type="hidden" name="patient_bid_test_list" id="patient_bid_test_list" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+
 <!--medicine_list_hmodal_modal-->
 <div class="modal fade" id="medicine_list_hmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">
@@ -906,8 +910,6 @@
 										<td><?php echo $list['dosage']; ?> </td>
 										<td><?php echo $list['condition']; ?></td>
 										<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
-										
-										
 									</tr>
 									
 								<?php } ?>
@@ -925,6 +927,60 @@
       </div>
    </div>
 </div>
+<!-- patient_lab_test_list_model-->
+<div class="modal fade" id="test_list_searchmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header bg-indigo">
+            <h5 class="modal-title" id="lineModalLabel">Lab Test List</h5>
+            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         </div>
+         <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
+            <div class="">
+               <div class="">
+                  <div class=" card card-topline-red">
+                     <div class="card-head">
+                        <header>List</header>
+                     </div>
+                     <div class="card-body ">
+                        <div class="row">
+                           
+						   <div class="col-md-12 ">
+
+                              <div class="table-scrollable">
+                                 <table class="table table-bordered">
+                                    <thead>
+                                       <tr>
+                                          <th> Test Name</th>
+                                          <th> Type</th>
+                                          <th> Amount</th>
+                                          <th> Duration</th>
+                                          <th>Short form</th>
+                                          <th>Description </th>
+                                          <th>Department</th>
+                                          <th>Remove</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody id="lab_test_type_list">
+                                      
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <div class="clearfix">&nbsp;</div>
+								 <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
+								</div>
+							  
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+   </div>
+</div>
+<!-- patient_lab_test_list_model-->
 <script>
 function addtestlist(){
 	var favorite = [];
@@ -943,6 +999,7 @@ function addtestlist(){
 					success: function (data) {
 						if(data.msg==1){
 							 $('#countdisplaying').show();
+							 $('#testcount').empty();
 							 $('#testcount').append(data.count);
 							 $('#popupclose').click();
 						}
@@ -966,7 +1023,7 @@ function addtestlist(){
 						$('#internal_code').append("<option value=''>select </option>");                      
 
 						for(i=0; i<data.text.length; i++) {
-						$('#internal_code').append("<option value="+data.text[i].hos_id+">"+data.text[i].l_code+"</option>");                      
+						$('#internal_code').append("<option value="+data.text[i].id+">"+data.text[i].type_name+"</option>");                      
 						}
 						}
 				 }
@@ -979,7 +1036,8 @@ function addtestlist(){
 			jQuery.ajax({
 					url: "<?php echo base_url('resources/testsearch');?>",
 					data: {
-						labassistentid: id,
+						type: 'Lab',
+						test_type_id: id,
 					},
 					dataType: 'json',
 					type: 'POST',
@@ -995,6 +1053,44 @@ function addtestlist(){
 				 }
 			});
 		}
+	}
+	function get_patient_list(){
+			$('#lab_test_type_list').empty();
+			jQuery.ajax({
+					url: "<?php echo base_url('resources/get_patinent_list');?>",
+					data: {
+						patinet_id: $('#patient_id_test_list').val(),
+						patinet_bid: $('#patient_bid_test_list').val(),
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+						if(data.msg==1){
+						$('#lab_test_type_list').empty();
+						for(i=0; i<data.text.length; i++) {
+						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
+						$('#lab_test_type_list').append("<tr id=td_id"+data.text[i].PLid+"><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type_name+"</td><td>"+data.text[i].amuont+"</td><td>"+data.text[i].duration+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td>"+data.text[i].t_department+"</td><td><a onclick='remove_patient_lab_test("+data.text[i].PLid+");'>Remove</a></td></tr>");                      
+
+						}
+						}
+				 }
+			});
+	}
+	function remove_patient_lab_test(t_id){
+		jQuery.ajax({
+					url: "<?php echo base_url('resources/remove_patient_treatment_id');?>",
+					data: {
+						t_id: t_id,
+					},
+					dataType: 'json',
+					type: 'POST',
+					success: function (data) {
+						if(data.msg==1){
+   						jQuery('#td_id'+id).hide();
+   					}
+				 }
+			});
+		
 	}
 	
 	$(".form-control").change(function(){

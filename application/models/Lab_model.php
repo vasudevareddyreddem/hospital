@@ -18,7 +18,9 @@ class Lab_model extends CI_Model
 		return $insert_id = $this->db->insert_id();	
 	}
 	public function get_lab_test_details($hos_id,$u_id){
-		$this->db->select('*')->from('lab_test_list');	
+		$this->db->select('lab_test_list.*,lab_test_type.type_name')->from('lab_test_list');
+		$this->db->join('lab_test_type ', 'lab_test_type.id = lab_test_list.test_type', 'left');
+		
 		$this->db->where('lab_test_list.create_by',$u_id);
 		$this->db->where('lab_test_list.hos_id',$hos_id);
         return $this->db->get()->result_array();	
@@ -75,7 +77,30 @@ class Lab_model extends CI_Model
 		$this->db->where('patient_lab_test_list.b_id',$b_id);
 		return $this->db->get()->result_array();
 	}
-	
+	public function add_lab_test_type($add){
+		$this->db->insert('lab_test_type', $add);
+		return $insert_id = $this->db->insert_id();	
+	}
+	public function get_all_test_list($a_id){
+		$this->db->select('*')->from('lab_test_type');
+		$this->db->where('lab_test_type.created_by',$a_id);
+		//$this->db->where('lab_test_type.status',1);
+		return $this->db->get()->result_array();
+	}
+	public function get_lab_test_type_details(){
+		$this->db->select('*')->from('lab_test_type');
+		$this->db->where('lab_test_type.status',1);
+		$this->db->group_by('lab_test_type.type_name');
+		return $this->db->get()->result_array();
+	}
+	public function update_testtype_details($t_id,$data){
+		$this->db->where('id',$t_id);
+    	return $this->db->update("lab_test_type",$data);
+	}
+	public function delete_test_type($t_id){
+			$sql1="DELETE FROM lab_test_type WHERE id = '".$t_id."'";
+		return $this->db->query($sql1);
+	}
 	
 	
 

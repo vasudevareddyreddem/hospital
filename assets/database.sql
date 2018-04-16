@@ -251,6 +251,10 @@ CREATE TABLE `lab_test_list` (
   `t_id` int(11) NOT NULL AUTO_INCREMENT,
   `hos_id` int(11) DEFAULT NULL,
   `t_name` varchar(250) DEFAULT NULL,
+  `test_type` int(11) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `duration` varchar(250) DEFAULT NULL,
+  `amuont` varchar(250) DEFAULT NULL,
   `t_short_form` varchar(250) DEFAULT NULL,
   `t_description` varchar(250) DEFAULT NULL,
   `t_department` varchar(250) DEFAULT NULL,
@@ -259,11 +263,30 @@ CREATE TABLE `lab_test_list` (
   `create_by` int(11) DEFAULT NULL,
   `update_by` datetime DEFAULT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 /*Data for the table `lab_test_list` */
 
-insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`) values (1,9,'tpa','tpa short','tpa des','tpa dep','2018-04-05 15:16:28',1,13,NULL),(2,9,'ttt','tt short','tt des','tt dep','2018-04-05 15:16:58',1,13,NULL),(3,9,'name','short name','description','department','2018-04-09 11:24:18',0,8,'0000-00-00 00:00:00'),(5,9,'jkgjk','jkghjk','jhk','kghjk','2018-04-09 12:00:00',1,8,NULL),(6,9,'vasudevareddy','jkjk','jk','kghjk','2018-04-09 12:01:41',1,8,NULL),(18,9,'vasudevareddy','utyu','hgjfgh','hjfgh','2018-04-09 14:20:25',1,8,NULL),(23,9,'vaasu','bnvn','vbnvbn','vbn','2018-04-09 14:33:45',1,8,NULL),(24,9,'hjghj','ghfjgh','gfhjfg','hgfj','2018-04-09 14:35:51',1,8,NULL),(25,9,'ghfg','ghfg','ghfdgh','fgfdg','2018-04-09 17:13:12',1,8,NULL),(26,16,'blood','short form','Description','dep','2018-04-14 17:10:21',1,32,NULL),(27,16,'sugar','short form','Description','dep','2018-04-14 17:10:45',1,32,NULL),(28,16,'vasu test1','jfhj','hjhjh','jhjkhh','2018-04-14 17:50:25',1,32,NULL),(29,16,'fgh','ghfg','ghfg','hfgh','2018-04-14 17:59:18',1,32,NULL),(30,16,'ghfgh','gfhfg','fghfgh','gghgf','2018-04-14 18:01:02',1,32,NULL);
+insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`test_type`,`type`,`duration`,`amuont`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`) values (1,9,'tpa',4,'Lab','10 min','150','tpa short','tpa des','tpa dep','2018-04-05 15:16:28',1,13,NULL),(2,9,'ttt',4,'Lab','50 min','22','tt short','tt des','tt dep','2018-04-05 15:16:58',1,13,NULL),(3,9,'name',4,'Lab','60 min','21','short name','description','department','2018-04-09 11:24:18',0,8,'0000-00-00 00:00:00'),(5,9,'jkgjk',3,'Lab','30 min','20','jkghjk','jhk','kghjk','2018-04-09 12:00:00',1,8,NULL),(6,9,'vasudevareddy',3,'Lab','90 min','90','jkjk','jk','kghjk','2018-04-09 12:01:41',1,8,NULL),(18,9,'vasudevareddy',3,'Lab','30 min','80','utyu','hgjfgh','hjfgh','2018-04-09 14:20:25',1,8,NULL),(23,9,'vaasu',5,'Lab','30 min','70','bnvn','vbnvbn','vbn','2018-04-09 14:33:45',1,8,NULL),(24,9,'hjghj',5,'Lab','120 min','60','ghfjgh','gfhjfg','hgfj','2018-04-09 14:35:51',1,8,NULL),(25,9,'ghfg',5,'Lab','30 min','50','ghfg','ghfdgh','fgfdg','2018-04-09 17:13:12',1,8,NULL),(26,16,'blood',4,'Lab','30 min','43','short form','Description','dep','2018-04-14 17:10:21',1,32,NULL),(27,16,'sugar',4,'Lab','150 min','30','short form','Description','dep','2018-04-14 17:10:45',1,32,NULL),(28,16,'vasu test1',4,'Lab','30 min','333','jfhj','hjhjh','jhjkhh','2018-04-14 17:50:25',1,32,NULL),(29,16,'fgh',3,'Lab','20 min','222','ghfg','ghfg','hfgh','2018-04-14 17:59:18',1,32,NULL),(30,16,'ghfgh',3,'Lab','30 min','111','gfhfg','fghfgh','gghgf','2018-04-14 18:01:02',1,32,NULL),(31,9,'boold test',3,'Lab','30 min','580',' Short Form','Description','Department','2018-04-16 14:22:38',1,8,NULL),(32,9,'ggfg',5,'Lab','45','455','hgh','fghfg','ghfgh','2018-04-16 15:35:04',1,8,NULL);
+
+/*Table structure for table `lab_test_type` */
+
+DROP TABLE IF EXISTS `lab_test_type`;
+
+CREATE TABLE `lab_test_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(250) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+/*Data for the table `lab_test_type` */
+
+insert  into `lab_test_type`(`id`,`type_name`,`type`,`create_at`,`status`,`created_by`,`updated_time`) values (3,'fever','Lab','2018-04-16 13:25:39',1,1,'2018-04-16 14:15:47'),(4,'Sugar','Lab','2018-04-16 13:25:44',1,1,NULL),(5,'Heart','Lab','2018-04-16 14:15:33',1,1,NULL),(6,'Heart','Radiology','2018-04-16 15:40:12',1,1,'0000-00-00 00:00:00'),(7,'Heart','Lab','2018-04-16 15:41:00',1,1,NULL);
 
 /*Table structure for table `medicine_list` */
 
@@ -360,7 +383,7 @@ CREATE TABLE `patient_billing` (
   `doctor_status` int(11) DEFAULT '0',
   `assign_doctor_to` int(11) DEFAULT NULL,
   `assign_doctor_by` int(11) DEFAULT NULL,
-  `completed_type` int(11) DEFAULT NULL,
+  `completed_type` int(11) DEFAULT '0',
   `type` varchar(250) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   `medicine_payment_mode` varchar(250) DEFAULT NULL,
@@ -372,7 +395,7 @@ CREATE TABLE `patient_billing` (
 
 /*Data for the table `patient_billing` */
 
-insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`,`report_completed`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:43:59',NULL,0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL,0),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:45:31',NULL,0,NULL,NULL,1,'reschedule',NULL,NULL,0,NULL,0),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cash','45000','vasudevareddy','1','12',1,'2018-03-20 18:52:04','2018-03-21 15:54:33',1,0,0,1,'new',12,'Swipe',7,'2018-04-14 17:31:09',1),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy','1','12',1,'2018-03-21 10:34:22','2018-03-21 15:54:33',1,0,0,2,'reschedule',12,'Cash Payment',7,'2018-04-07 15:35:10',1),(5,8,'12','12','1899-12-21  ','df','dfsdf','sdfds','2018-04-04  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','34234','2','12',1,'2018-04-03 11:29:17','2018-04-03 11:30:01',1,0,0,2,'reschedule',12,NULL,0,NULL,0),(9,11,'123456','visit','2018-04-09  ','yuty','kl','12','2018-03-20','testing','staff','yty','test','vaasudevareddy','456321','12','25000','25000','45000','cash','45000','vasudevareddy','1','12',1,'2018-04-09 17:52:31','2018-04-09 17:53:41',1,0,0,2,'new',12,NULL,0,NULL,0),(10,12,'1234566','visit des','2018-04-13  ','test','vasudevareddy','10','2014-06-04  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash',' 25000','vasudevareddy','1','12',1,'2018-04-13 17:41:10','2018-04-13 17:42:41',0,NULL,NULL,NULL,'new',NULL,NULL,0,NULL,0),(11,12,'1234566',' Visit description','2018-04-13  ','test','vasudevareddy','10','2018-04-13  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash','25000','vasudevareddy','1','12',1,'2018-04-13 17:44:15','2018-04-13 17:44:37',0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL,0),(12,8,'12','hfgh','2018-04-14  ','df','dfsdf','sdfds','2018-04-15  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','ffg','1','12',1,'2018-04-14 12:51:07','2018-04-14 12:51:26',0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL,0),(13,13,'vasu','test','2018-04-14  ','test','vasu','123','2018-04-14  ','test','test','test','test','test','25000','12','25888','vasu','250000','cashmode','2500','vasudevareddy','7','33',1,'2018-04-14 16:48:23','2018-04-14 16:49:01',1,0,0,1,'new',33,NULL,0,NULL,0),(14,13,'123','test','2018-04-14  ','test','vasu','123','2018-04-14  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'300','cash ','300','casu','7','33',1,'2018-04-14 17:06:09','2018-04-14 17:07:00',1,0,0,2,'new',33,NULL,0,NULL,1),(15,13,'1234566','nbn','2018-04-14  ','test','vasudevareddy','10','2018-04-14  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash','25000','vasudevareddy','7','select',1,'2018-04-14 19:09:21','2018-04-14 19:09:44',0,NULL,NULL,NULL,'reschedule',NULL,NULL,0,NULL,0);
+insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`date_of_visit`,`department`,`docotr_name`,`no_of_visits`,`last_visiting_date`,`service_type`,`service`,`visit_type`,`doctor`,`payer`,`price`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`,`report_completed`) values (1,8,'klk','kl','2018-03-20  ','kl','kl','12','2018-03-20  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:43:59',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0),(2,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-03-20 18:45:31',NULL,0,NULL,NULL,1,'reschedule',NULL,NULL,0,NULL,0),(3,8,'klk','yty','2018-03-20','kl','kl','12','2018-03-20',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'cash','45000','vasudevareddy','1','12',1,'2018-03-20 18:52:04','2018-03-21 15:54:33',1,0,0,2,'new',12,'Swipe',7,'2018-04-14 17:31:09',1),(4,8,'46456','ff','2018-03-20','phy','ttt','df','2018-03-21  ','testing','staff','yty','test','vaasudevareddy','456321','10','25000','due','45000','cash','45000','vasudevareddy','1','12',1,'2018-03-21 10:34:22','2018-03-21 15:54:33',1,0,0,2,'reschedule',12,'Cash Payment',7,'2018-04-07 15:35:10',1),(5,8,'12','12','1899-12-21  ','df','dfsdf','sdfds','2018-04-04  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','34234','2','12',1,'2018-04-03 11:29:17','2018-04-03 11:30:01',1,0,0,2,'reschedule',12,NULL,0,NULL,0),(9,11,'123456','visit','2018-04-09  ','yuty','kl','12','2018-03-20','testing','staff','yty','test','vaasudevareddy','456321','12','25000','25000','45000','cash','45000','vasudevareddy','1','12',1,'2018-04-09 17:52:31','2018-04-09 17:53:41',1,0,0,2,'new',12,NULL,0,NULL,0),(10,12,'1234566','visit des','2018-04-13  ','test','vasudevareddy','10','2014-06-04  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash',' 25000','vasudevareddy','1','12',1,'2018-04-13 17:41:10','2018-04-13 17:42:41',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0),(11,12,'1234566',' Visit description','2018-04-13  ','test','vasudevareddy','10','2018-04-13  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash','25000','vasudevareddy','1','12',1,'2018-04-13 17:44:15','2018-04-13 17:44:37',0,NULL,NULL,0,'reschedule',NULL,NULL,0,NULL,0),(12,8,'12','hfgh','2018-04-14  ','df','dfsdf','sdfds','2018-04-15  ','dfds','fsdfd','sdf','fsdf','dfasdf','df','34','4343','34343','343432','4234','34234','ffg','1','12',1,'2018-04-14 12:51:07','2018-04-14 12:51:26',1,0,0,2,'reschedule',12,NULL,0,NULL,0),(13,13,'vasu','test','2018-04-14  ','test','vasu','123','2018-04-14  ','test','test','test','test','test','25000','12','25888','vasu','250000','cashmode','2500','vasudevareddy','7','33',1,'2018-04-14 16:48:23','2018-04-14 16:49:01',1,0,0,1,'new',33,NULL,0,NULL,0),(14,13,'123','test','2018-04-14  ','test','vasu','123','2018-04-14  ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'300','cash ','300','casu','7','33',1,'2018-04-14 17:06:09','2018-04-14 17:07:00',1,0,0,2,'new',33,NULL,0,NULL,1),(15,13,'1234566','nbn','2018-04-14  ','test','vasudevareddy','10','2018-04-14  ','Service type','Service','Visit type','Doctor','Payer','Price','12','25000','50000','250000','cash','25000','vasudevareddy','7','select',1,'2018-04-14 19:09:21','2018-04-14 19:09:44',0,NULL,NULL,0,'reschedule',NULL,NULL,0,NULL,0);
 
 /*Table structure for table `patient_lab_reports` */
 
@@ -401,7 +424,7 @@ insert  into `patient_lab_reports`(`id`,`p_id`,`b_id`,`hos_id`,`problem`,`sympto
 DROP TABLE IF EXISTS `patient_lab_test_list`;
 
 CREATE TABLE `patient_lab_test_list` (
-  `it` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
   `b_id` int(11) DEFAULT NULL,
   `test_id` int(11) DEFAULT NULL,
@@ -409,12 +432,12 @@ CREATE TABLE `patient_lab_test_list` (
   `date` date DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`it`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_lab_test_list` */
 
-insert  into `patient_lab_test_list`(`it`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (1,8,3,1,'2018-04-05 16:13:39','2018-04-05',12,1),(2,8,3,1,'2018-04-05 16:17:22','2018-04-05',12,1),(3,8,3,1,'2018-04-05 16:20:45','2018-04-05',12,1),(4,8,3,1,'2018-04-05 16:22:00','2018-04-05',12,1),(6,8,3,1,'2018-04-05 16:29:25','2018-04-05',12,1),(7,8,3,1,'2018-04-05 16:29:40','2018-04-05',12,1),(8,8,3,1,'2018-04-05 16:29:44','2018-04-05',12,1),(9,8,3,2,'2018-04-05 16:29:44','2018-04-05',12,1),(10,8,3,1,'2018-04-05 16:31:47','2018-04-05',12,1),(11,8,3,1,'2018-04-05 16:36:42','2018-04-05',12,1),(12,8,3,1,'2018-04-05 16:38:17','2018-04-05',12,1),(13,8,3,1,'2018-04-05 16:40:17','2018-04-05',12,1),(14,8,3,2,'2018-04-05 16:40:17','2018-04-05',12,1),(15,8,3,1,'2018-04-05 16:53:14','2018-04-05',12,1),(16,8,3,1,'2018-04-05 17:33:51','2018-04-05',12,1),(17,8,3,2,'2018-04-05 17:33:51','2018-04-05',12,1),(18,8,3,1,'2018-04-05 17:34:51','2018-04-05',12,1),(19,8,3,2,'2018-04-05 17:34:51','2018-04-05',12,1),(20,8,3,1,'2018-04-07 11:02:14','2018-04-07',12,1),(21,8,5,1,'2018-04-09 17:20:36','2018-04-09',12,1),(22,8,5,2,'2018-04-09 17:20:36','2018-04-09',12,1),(23,11,9,1,'2018-04-09 17:59:29','2018-04-09',12,1),(24,11,9,2,'2018-04-09 17:59:29','2018-04-09',12,1),(25,8,3,1,'2018-04-14 17:23:24','2018-04-14',12,1),(26,8,3,2,'2018-04-14 17:23:28','2018-04-14',12,1),(27,8,3,1,'2018-04-14 17:23:28','2018-04-14',12,1),(28,8,3,2,'2018-04-14 17:23:28','2018-04-14',12,1),(29,13,14,26,'2018-04-14 18:10:40','2018-04-14',33,1),(30,13,14,27,'2018-04-14 18:10:40','2018-04-14',33,1),(31,13,14,28,'2018-04-14 18:10:40','2018-04-14',33,1),(32,13,14,30,'2018-04-14 18:10:40','2018-04-14',33,1);
+insert  into `patient_lab_test_list`(`id`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`) values (21,8,5,1,'2018-04-09 17:20:36','2018-04-09',12,1),(22,8,5,2,'2018-04-09 17:20:36','2018-04-09',12,1),(23,11,9,1,'2018-04-09 17:59:29','2018-04-09',12,1),(24,11,9,2,'2018-04-09 17:59:29','2018-04-09',12,1),(29,13,14,26,'2018-04-14 18:10:40','2018-04-14',33,1),(30,13,14,27,'2018-04-14 18:10:40','2018-04-14',33,1),(31,13,14,28,'2018-04-14 18:10:40','2018-04-14',33,1),(32,13,14,30,'2018-04-14 18:10:40','2018-04-14',33,1),(49,8,3,23,'2018-04-16 17:13:17','2018-04-16',12,1),(50,8,3,24,'2018-04-16 17:13:17','2018-04-16',12,1),(51,8,3,25,'2018-04-16 17:13:17','2018-04-16',12,1),(52,8,3,32,'2018-04-16 17:13:17','2018-04-16',12,1),(53,8,3,23,'2018-04-16 17:17:00','2018-04-16',12,1);
 
 /*Table structure for table `patient_medicine_list` */
 
@@ -445,11 +468,11 @@ CREATE TABLE `patient_medicine_list` (
   `edited_by` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   PRIMARY KEY (`m_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_medicine_list` */
 
-insert  into `patient_medicine_list`(`m_id`,`p_id`,`b_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`units`,`comments`,`create_at`,`date`,`create_by`,`edit_reason`,`edited`,`edited_by`,`amount`) values (3,8,4,'Brand','AK','Yes','PRN','350 g','Mouth','Write Your Own','dfsd','03 April 2018','03 April 2018','45','es','fd','2018-04-03 18:31:58','2018-04-03',12,'ghg',1,7,458),(4,8,4,'Brand','HI','Yes','Chronic','350 g','Mouth','At Bedtime','hj','06 April 2018','07 April 2018','12','suppository','g','2018-04-05 11:27:44','2018-04-05',12,'hjfghj',1,7,45),(5,8,4,'Generic','fgdf','Yes','Chronic','350 g','Mouth','Every Three Hours','tyrt','07 April 2018','07 April 2018','34','mg','dfsdfds','2018-04-07 10:46:29','2018-04-07',12,'ghjfgh',1,7,456),(6,8,3,'Generic','fgdf','Yes','PRN','550 g','Mouth','Every Three Hours While Awake','hjfgh','07 April 2018','06 April 2018','67','pound','uytu','2018-04-07 10:57:48','2018-04-07',12,'ghg',1,7,120),(8,13,13,'Generic','tablet2','Yes','Chronic','350 g','Mouth','Four Times Per Day','test','21 April 2018','22 April 2018','12','suppository','ntg','2018-04-14 17:18:44','2018-04-14',33,NULL,0,NULL,NULL),(9,8,3,'Generic','fgdf','Yes','PRN','150 g','Mouth','Single Dose','test','14 April 2018','14 April 2018','34','suppository','test','2018-04-14 17:28:47','2018-04-14',12,NULL,1,7,250);
+insert  into `patient_medicine_list`(`m_id`,`p_id`,`b_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`units`,`comments`,`create_at`,`date`,`create_by`,`edit_reason`,`edited`,`edited_by`,`amount`) values (3,8,4,'Brand','AK','Yes','PRN','350 g','Mouth','Write Your Own','dfsd','03 April 2018','03 April 2018','45','es','fd','2018-04-03 18:31:58','2018-04-03',12,'ghg',1,7,458),(4,8,4,'Brand','HI','Yes','Chronic','350 g','Mouth','At Bedtime','hj','06 April 2018','07 April 2018','12','suppository','g','2018-04-05 11:27:44','2018-04-05',12,'hjfghj',1,7,45),(5,8,4,'Generic','fgdf','Yes','Chronic','350 g','Mouth','Every Three Hours','tyrt','07 April 2018','07 April 2018','34','mg','dfsdfds','2018-04-07 10:46:29','2018-04-07',12,'ghjfgh',1,7,456),(6,8,3,'Generic','fgdf','Yes','PRN','550 g','Mouth','Every Three Hours While Awake','hjfgh','07 April 2018','06 April 2018','67','pound','uytu','2018-04-07 10:57:48','2018-04-07',12,'ghg',1,7,120),(8,13,13,'Generic','tablet2','Yes','Chronic','350 g','Mouth','Four Times Per Day','test','21 April 2018','22 April 2018','12','suppository','ntg','2018-04-14 17:18:44','2018-04-14',33,NULL,0,NULL,NULL),(9,8,3,'Generic','fgdf','Yes','PRN','150 g','Mouth','Single Dose','test','14 April 2018','14 April 2018','34','suppository','test','2018-04-14 17:28:47','2018-04-14',12,NULL,1,7,250),(10,8,12,'Generic','fgdf','No','Chronic','350 g','Mouth','Every Two Hours','test','16 April 2018','31 December 1899','12','es','tyrt','2018-04-16 17:23:57','2018-04-16',12,NULL,0,NULL,NULL);
 
 /*Table structure for table `patient_vitals_list` */
 
@@ -676,11 +699,11 @@ CREATE TABLE `treament` (
   `t_updated_at` datetime DEFAULT NULL,
   `t_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `treament` */
 
-insert  into `treament`(`t_id`,`hos_id`,`t_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (1,9,'anglogyi',1,'2018-02-23 17:14:24','2018-02-23 17:49:23',3),(2,9,'test166',1,'2018-02-23 17:15:29','2018-02-23 17:49:46',3),(3,9,'test166',1,'2018-02-23 17:50:01','2018-02-23 17:50:11',3),(4,14,'treatment1',1,'2018-04-14 15:27:43',NULL,25),(5,14,'treatment2',1,'2018-04-14 15:27:49',NULL,25),(6,14,'treatment3',1,'2018-04-14 15:27:54',NULL,25),(7,16,'Treatment1',1,'2018-04-14 16:51:36',NULL,29),(8,16,'Treatment2',1,'2018-04-14 16:51:48',NULL,29);
+insert  into `treament`(`t_id`,`hos_id`,`t_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (1,9,'anglogyi',1,'2018-02-23 17:14:24','2018-02-23 17:49:23',3),(2,9,'test166',1,'2018-02-23 17:15:29','2018-02-23 17:49:46',3),(3,9,'test166',1,'2018-02-23 17:50:01','2018-02-23 17:50:11',3),(4,14,'treatment1',1,'2018-04-14 15:27:43',NULL,25),(5,14,'treatment2',1,'2018-04-14 15:27:49',NULL,25),(6,14,'treatment3',1,'2018-04-14 15:27:54',NULL,25),(7,16,'Treatment1',1,'2018-04-14 16:51:36',NULL,29),(8,16,'Treatment2',1,'2018-04-14 16:51:48',NULL,29),(9,NULL,'',1,'2018-04-16 12:52:06',NULL,NULL);
 
 /*Table structure for table `treatmentwise_doctors` */
 

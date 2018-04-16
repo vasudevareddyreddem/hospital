@@ -41,8 +41,35 @@
 					  <form action="<?php echo base_url('lab/addtest'); ?>" method="post" id="addtreatment" name="addtreatment" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6">
+									<label> Test Type</label>
+									<select class="form-control" name="test_type" id="test_type">
+									<option value="">Select</option>
+									<?php if(isset($test_type_list) && count($test_type_list)>0){ ?>
+										<?php foreach($test_type_list as $list){ ?>
+										<option value="<?php echo $list['id']; ?> "><?php echo $list['type_name']; ?> </option>
+										<?php } ?>
+									<?php } ?>
+									</select>
+								</div>
+								<div class="col-md-6">
+									<label>Type</label>
+									<select class="form-control" name="type" id="type">
+									<option value="">Select</option>
+									<option value="Lab">Lab</option>
+									<option value="Radiology">Radiology</option>
+									</select>
+								</div>
+								<div class="col-md-6">
 									<label> Name</label>
 								<input class="form-control" id="test_name" name="test_name" value="" type="text" placeholder="Name">
+								</div>
+								<div class="col-md-6">
+									<label> Duration</label>
+									<input class="form-control" id="duration" name="duration" value="" type="text" placeholder="Duration">
+								</div>
+								<div class="col-md-6">
+									<label> Amount</label>
+									<input class="form-control" id="amuont" name="amuont" value="" type="text" placeholder="Amount">
 								</div>
 								<div class="col-md-6">
 									<label> Short Form</label>
@@ -75,7 +102,11 @@
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
+												<th>Test Type Name</th>
+												<th>Type</th>
 												<th>Name</th>
+												<th>Duration</th>
+												<th>Amount</th>
 												<th>Short Form</th>
                                                 <th>Description</th>
                                                 <th>Department</th>
@@ -86,7 +117,11 @@
                                         <tbody>
 										<?php foreach($labtest_list as $list){ ?>
                                             <tr>
+                                                <td><?php echo htmlentities($list['type_name']); ?></td>
+                                                <td><?php echo htmlentities($list['type']); ?></td>
                                                 <td><?php echo htmlentities($list['t_name']); ?></td>
+                                                <td><?php echo htmlentities($list['duration']); ?></td>
+                                                <td><?php echo htmlentities($list['amuont']); ?></td>
                                                 <td><?php echo htmlentities($list['t_short_form']); ?></td>
                                                 <td><?php echo htmlentities($list['t_description']); ?></td>
                                                 <td><?php echo htmlentities($list['t_department']); ?></td>
@@ -123,7 +158,20 @@ $(document).ready(function() {
         
         fields: {
             
-            test_name: {
+            test_type: {
+                 validators: {
+					notEmpty: {
+						message: 'Test type is required'
+					}
+				}
+            },
+			type: {
+                 validators: {
+					notEmpty: {
+						message: 'Type is required'
+					}
+				}
+            },test_name: {
                  validators: {
 					notEmpty: {
 						message: 'Name is required'
@@ -131,6 +179,27 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },duration: {
+                 validators: {
+					notEmpty: {
+						message: 'Duration is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Duration can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			amuont: {
+                 validators: {
+					notEmpty: {
+						message: 'Amuont is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Amuont can only consist of alphanumaric, space and dot'
 					}
 				}
             },short_form: {

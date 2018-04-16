@@ -435,6 +435,83 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+		public function addlab()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($_FILES);exit;
+					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
+								$emailcheck= $this->Hospital_model->check_email_exits($post['lab_email']);
+								if(count($emailcheck)>0){
+									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									redirect('lab/oursource');
+								}else{
+									if(isset($_FILES['lab_photo']['name']) && $_FILES['lab_photo']['name']!=''){
+									$temp = explode(".", $_FILES["lab_photo"]["name"]);
+									$photo =round(microtime(true)) . '.' . end($temp);
+									move_uploaded_file($_FILES['lab_photo']['tmp_name'], "assets/adminprofilepic/" . $photo);
+									}else{
+									$photo='';
+									}
+									$admindetails=$this->session->userdata('userdetails');
+									//echo '<pre>';print_r($statusdata);exit;
+									$admindetails=array(
+									'role_id'=>$post['designation'],
+									'a_name'=>$post['resource_name'],
+									'a_email_id'=>$post['resource_email'],
+									'a_password'=>md5($post['resource_cinformpaswword']),
+									'a_org_password'=>$post['resource_cinformpaswword'],
+									'a_mobile'=>$post['resource_mobile'],
+									'a_status'=>1,
+									'a_create_at'=>date('Y-m-d H:i:s')
+									);
+									$addresourcedmin = $this->Admin_model->save_admin($admindetails);
+									$resourcedata=array(
+									'a_id'=>$addresourcedmin,
+									'role_id'=>$post['designation'],
+									'hos_id'=>$hos_ids['hos_id'],
+									'resource_name'=>$post['lab_name'],
+									'resource_mobile'=>$post['lab_mobile'],
+									'resource_add1'=>$post['lab_add1'],
+									'resource_add2'=>$post['lab_add2'],
+									'resource_city'=>$post['lab_city'],
+									'resource_state'=>$post['lab_state'],
+									'resource_zipcode'=>$post['lab_zipcode'],
+									'resource_other_details'=>$post['lab_other_details'],
+									'resource_contatnumber'=>$post['lab_contatnumber'],
+									'resource_email'=>$post['lab_email'],
+									'resource_photo'=>$photo,
+									'r_status'=>1,
+									'r_create_by'=>$hos_ids['a_id'],
+									'r_created_at'=>date('Y-m-d H:i:s')
+									);
+									//echo '<pre>';print_r($onedata);exit;
+									$saveresource =$this->Hospital_model->save_resource($resourcedata);
+									if(count($saveresource)>0){
+										$this->session->set_flashdata('success',"Our source lab are successfully created");
+										redirect('lab/oursource/'.base64_encode(1));
+									}else{
+										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+										redirect('lab/oursource');
+									}
+								}
+								
+							}else{
+								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
+								redirect('lab/oursource');
+							}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	public function emps(){
 		
