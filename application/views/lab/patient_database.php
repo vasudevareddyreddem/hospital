@@ -48,9 +48,9 @@
 					<td>
 					<?php if(isset($list['tests']) && count($list['tests'])>0){ ?>
 					<?php $cnt=1;foreach($list['tests'] as $li){ ?>
-					<p><?php echo $cnt; ?>.<?php echo $li['t_name']; ?></p>
+					<?php echo $cnt; ?>.<?php echo $li['t_name'].', '; ?>
 					<?php $cnt++;} ?>
-					<?php }?>
+					<?php } ?>
 					</td>
 					<td><?php echo $list['create_at']; ?></td>
 					<td><a href="<?php echo base_url('lab/patient_report_details/'.base64_encode($list['pid'])); ?>">View </td>

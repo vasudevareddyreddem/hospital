@@ -61,6 +61,14 @@
 	                            </a>
 	                           
 	                        </li> 
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Out source</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li> 
 							<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
@@ -262,6 +270,14 @@
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">My WorkSheet</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('resources/completed_worksheet');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Completed WorkSheet</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

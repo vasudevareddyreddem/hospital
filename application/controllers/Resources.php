@@ -707,6 +707,29 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function completed_worksheet()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					$data['worksheet']=$this->Resources_model->get_completed_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/completed_worksheet',$data);
+					$this->load->view('html/footer');
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function referrals()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -752,7 +775,8 @@ class Resources extends CI_Controller {
 					$data['patient_investigation_list']=$this->Resources_model->get_patient_investigation_details_list($patient_id,$data['billing_id']);
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
 					$data['doctors_list']=$this->Resources_model->get_hospital_doctors_list($userdetails['hos_id']);
-					//echo '<pre>';print_r($data);exit;
+					//$data['patient_lab_list']=$this->Resources_model->get_patient_lab_test_list($patient_id,$data['billing_id']);
+					//echo '<pre>';print_r($data['patient_lab_list']);exit;
 					$this->load->view('resource/consultation',$data);
 					$this->load->view('html/footer');
 					
@@ -1009,7 +1033,7 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$details=$this->Resources_model->get_test_list($userdetails['hos_id'],$post['labassistentid']);
+					$details=$this->Resources_model->get_test_list($post['type'],$post['test_type_id']);
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($details);exit;
 					if(count($details) > 0)
@@ -1027,11 +1051,68 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function get_patinent_list(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=6){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$details=$this->Resources_model->get_patient_lab_test_list($post['patinet_id'],$post['patinet_bid']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($details);exit;
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['text']=$details;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function remove_patient_treatment_id(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+			
+					$removedattch=$this->Resources_model->remove_treatment_attachment($post['t_id']);
+					//echo $this->db->last_query();exit;
+					if(count($removedattch) > 0)
+					{
+					$data['msg']=1;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function selected_test(){
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			$post=$this->input->post();
+			/*$test_list=$this->Resources_model->get_old_test_list($post['patinet_id'],$post['patinet_bid']);
+			if(isset($test_list) && count($test_list)>0){
+				foreach($test_list as $List){
+					$this->Resources_model->delete_billign_previous_data($List['id']);
+				}
+				
+			}*/
 			foreach($post['ids'] as $lists){
 					$test_list=array(
 						'p_id'=>isset($post['patinet_id'])?$post['patinet_id']:'',

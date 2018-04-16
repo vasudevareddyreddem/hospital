@@ -99,6 +99,20 @@ class Resources_model extends CI_Model
 		$this->db->join('resource_list as assignby', 'assignby.a_id = patient_billing.assign_doctor_by', 'left');
 		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
 		$this->db->where('patients_list_1.hos_id',$hos_id);
+		$this->db->where('patient_billing.completed_type',0);
+		$this->db->where('patient_billing.doct_id',$doctor_id);
+        return $this->db->get()->result_array();
+	}
+	public function get_completed_doctor_worksheet_list($hos_id,$doctor_id){
+		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,treament.t_name,resource_list.resource_name')->from('patient_billing');
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
+		$this->db->join('resource_list as assignto', 'assignto.a_id = patient_billing.assign_doctor_to', 'left');
+		$this->db->join('resource_list as assignby', 'assignby.a_id = patient_billing.assign_doctor_by', 'left');
+		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
+		$this->db->where('patients_list_1.hos_id',$hos_id);
+		$this->db->where('patient_billing.completed_type !=',0);
 		$this->db->where('patient_billing.doct_id',$doctor_id);
         return $this->db->get()->result_array();
 	}
@@ -167,16 +181,16 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_investigation_list($hos_id,$val){
-		$this->db->select('lab_detailes.l_id,lab_detailes.hos_id,lab_detailes.l_code,lab_detailes.l_assistent_id')->from('lab_detailes');
-		$this->db->where('lab_detailes.hos_id',$hos_id);
-		$this->db->where('lab_detailes.l_investigation',$val);
-		$this->db->where('lab_detailes.l_status',1);
+		$this->db->select('lab_test_type.type_name,lab_test_type.id')->from('lab_test_type');
+		$this->db->where('lab_test_type.status',1);
+		$this->db->where('lab_test_type.type',$val);
+		$this->db->group_by('lab_test_type.type_name');
         return $this->db->get()->result_array();
 	}
-	public function get_test_list($hos_id,$val){
+	public function get_test_list($type,$test_type_id){
 		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form')->from('lab_test_list');
-		$this->db->where('lab_test_list.hos_id',$hos_id);
-		//$this->db->where('lab_test_list.create_by',$val);
+		$this->db->where('lab_test_list.type',$type);
+		$this->db->where('lab_test_list.test_type',$test_type_id);
 		$this->db->where('lab_test_list.status',1);
         return $this->db->get()->result_array();
 	}
@@ -222,6 +236,29 @@ class Resources_model extends CI_Model
 		$this->db->select('patient_medicine_list.type_of_medicine,patient_medicine_list.medicine_name,patient_medicine_list.substitute_name,patient_medicine_list.dosage,patient_medicine_list.frequency,patient_medicine_list.directions,patient_medicine_list.comments,patient_medicine_list.create_at,patient_medicine_list.condition,patient_medicine_list.edit_reason')->from('patient_medicine_list');
 		$this->db->where('patient_medicine_list.p_id',$pid);
         return $this->db->get()->result_array();
+	}
+	public function get_old_test_list($pid,$bid){
+		$this->db->select('*')->from('patient_lab_test_list');
+		$this->db->where('patient_lab_test_list.p_id',$pid);
+		$this->db->where('patient_lab_test_list.b_id',$bid);
+        return $this->db->get()->result_array();
+	}
+	public function delete_billign_previous_data($t_id){
+		$sql1="DELETE FROM patient_lab_test_list WHERE id = '".$t_id."'";
+		return $this->db->query($sql1);
+	}
+	public function get_patient_lab_test_list($pid,$bid){
+		
+		$this->db->select('lab_test_list.*,lab_test_type.type_name,patient_lab_test_list.id as PLid')->from('patient_lab_test_list');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->join('lab_test_type', 'lab_test_type.id = lab_test_list.test_type', 'left');
+		$this->db->where('patient_lab_test_list.p_id',$pid);
+		$this->db->where('patient_lab_test_list.b_id',$bid);
+        return $this->db->get()->result_array();
+	}
+	function remove_treatment_attachment($id){
+		$sql1="DELETE FROM patient_lab_test_list WHERE id = '".$id."'";
+		return $this->db->query($sql1);
 	}
 	
 
