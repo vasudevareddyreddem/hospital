@@ -4,7 +4,7 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Patient List</div>
+               <div class="page-title">Outsources Patient List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -13,16 +13,6 @@
             </ol>
          </div>
       </div>
-	  <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
 	  <div class="row">	
 			<div class="col-md-12">
                             <div class="panel tab-border card-topline-yellow">
@@ -34,47 +24,36 @@
                                             <div class="card card-topline-red">
 	
 	<div class="card-body ">
-	<?php if(isset($labtest_list) && count($labtest_list)>0){ ?>
+	<?php if(isset($outsources_labtests) && count($outsources_labtests)>0){ ?>
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>
 				<tr>
 					<th> Patient Id </th>
-					<th> Billing Id </th>
 					<th> Name </th>
 					<th> Mobile </th>
 					<th> Address </th>
 					<th> Lab Tests </th>
-					<th> Out source Lab Tests </th>
 					<th> Date </th>
-					<th> Created By</th>
 					<th> Action </th>
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($labtest_list as $list){ ?>
+			<?php foreach($outsources_labtests as $list){ ?>
 				<tr class="odd gradeX">
 					
 					<td> <?php echo $list['pid']; ?> </td>
-					<td> <?php echo $list['b_id']; ?> </td>
 					<td><?php echo $list['name']; ?></td>
 					<td><?php echo $list['mobile']; ?></td>
 					<td><?php echo $list['perment_address'].' , '.$list['p_c_name'].' , '.$list['p_s_name'].' , '.$list['p_country_name'].' - '.$list['p_zipcode']; ?></td>
 					<td>
 					<?php if(isset($list['tests']) && count($list['tests'])>0){ ?>
 					<?php $cnt=1;foreach($list['tests'] as $li){ ?>
-					<p><?php if($userdetails['hos_id']= $li['hos_id']){?>
-					<i class="fa fa-circle user-online"></i><span class="txtOnline"> &nbsp;</span>
-					<?php }else{ ?>
-					<i class="fa fa-circle user-offline"></i><span class="txtOnline"> &nbsp;</span>
-					<?php } ?>
-					<?php echo $cnt; ?>.<?php echo $li['t_name']; ?></p>
+					<?php echo $cnt; ?>.<?php echo $li['t_name'].', '; ?>
 					<?php $cnt++;} ?>
-					<?php }?>
+					<?php } ?>
 					</td>
-					<td><a href="<?php echo base_url('lab/outsource/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>
 					<td><?php echo $list['create_at']; ?></td>
-					<td><?php echo $list['created_by']; ?> </td>
-					<td><a href="<?php echo base_url('lab/patient_details/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">View </td>
+					<td><a href="<?php echo base_url('lab/patient_report_details/'.base64_encode($list['pid'])); ?>">View </td>
 					
 				</tr>
 				

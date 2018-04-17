@@ -112,33 +112,48 @@
 											<div class="col-md-8  py-3">
 												<div class="clearfix">&nbsp;</div>
 											 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+											 
+											 <form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
+											 <input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+											 <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 											 <table id="myTable">
 												  <tr class="header">
 													<th style="width:100%;">Name of the test</th>
 												</tr>
 												<?php if(isset($test_list) && count($test_list)>0){ ?>
-													<?php foreach($test_list as $list){ ?>
+													<?php foreach($test_list as $list){ 
+													
+													//echo '<pre>';print_r($list);exit;
+													?>
+													<?php foreach($list['lab_adress'] as $li){ ?>
 														<tr>
 														<td>
-														<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo isset($list['a_id'])?$list['a_id']:''; ?>"> &nbsp; Lab Name : <?php echo isset($list['a_name'])?$list['a_name']:''; ?>
-														<b>Test Name : <?php echo isset($list['t_name'])?$list['t_name'].',':''; ?>
-														Duration : <?php echo isset($list['duration'])?$list['duration'].',':''; ?>
-														Amount : <?php echo isset($list['amuont'])?$list['amuont'].',':''; ?></b>
+													
+															<?php if (in_array($list['id'], $out_source_list)) {?>
+																<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+															<?php }else{ ?>
+																<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+															<?php } ?>
+														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name'].',':''; ?>
+														Duration : <?php echo isset($li['duration'])?$li['duration'].',':''; ?>
+														Amount : <?php echo isset($li['amuont'])?$li['amuont'].',':''; ?></b>
 														Address : 
-														<?php echo isset($list['resource_add1'])?$list['resource_add1'].',':''; ?>
-														<?php echo isset($list['resource_add2'])?$list['resource_add2'].',':''; ?>
-														<?php echo isset($list['resource_city'])?$list['resource_city'].',':''; ?>
-														<?php echo isset($list['resource_state'])?$list['resource_state'].',':''; ?>
-														<?php echo isset($list['resource_zipcode'])?$list['resource_zipcode']:''; ?>
+														<?php echo isset($li['resource_add1'])?$li['resource_add1'].',':''; ?>
+														<?php echo isset($li['resource_add2'])?$li['resource_add2'].',':''; ?>
+														<?php echo isset($li['resource_city'])?$li['resource_city'].',':''; ?>
+														<?php echo isset($li['resource_state'])?$li['resource_state'].',':''; ?>
+														<?php echo isset($li['resource_zipcode'])?$li['resource_zipcode']:''; ?>
 														</td>
 													   </tr>
 													<?php } ?>
+												<?php } ?>
 												<?php } ?>
 												  
 												  
 												</table>
 												<div class="clearfix">&nbsp;</div>
-												<button class="btn btn-primary ">Submit</button>
+												<button type="submit" class="btn btn-primary ">Submit</button>
+												</form>
 											</div>
 											</div>
                                         </div>

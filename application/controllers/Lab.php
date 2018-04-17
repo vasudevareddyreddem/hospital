@@ -44,6 +44,28 @@ class Lab extends CI_Controller {
 			$this->load->view('html/sidebar',$data);
 			}
 		}
+	public function outsources_labtests()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['outsources_labtests']=$this->Lab_model->get_outsources_labtests_details($admindetails['a_id']);
+					//echo $this->db->last_query();
+					$this->load->view('lab/outsources_labtests',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function index()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -249,12 +271,18 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					
-					$patient_id=base64_decode($this->uri->segment(3));
-					$billing_id=base64_decode($this->uri->segment(4));
+					$data['patient_id']=base64_decode($this->uri->segment(3));
+					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($patient_id,$billing_id);
-					//echo '<pre>';print_r($tests_list);exit;
+					$out_source_list=$this->Lab_model->get_out_source_lab_test_list($data['patient_id'],$data['billing_id']);
+					foreach($out_source_list as $source_list){
+						$lists[]=$source_list['p_l_t_id'];
+					}
+					$data['out_source_list']=$lists;
+					//echo $this->db->last_query();
+					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($data['patient_id'],$data['billing_id']);
+					//echo '<pre>';print_r($data);exit;
 					if(isset($tests_list) && count($tests_list)>0){
 						foreach($tests_list as $Lis){
 							if($Lis['hos_id'] != $userdetails['hos_id']){
@@ -262,30 +290,77 @@ class Lab extends CI_Controller {
 							}
 						}
 						foreach($li as $l){
-							$lab_test_lists[]=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
-						//echo '<pre>';print_r($l);	
+							$data['test_list'][$l['id']]=$l;
+							$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
+							//echo '<pre>';print_r($l);	
 						}
-						echo '<pre>';print_r($lab_test_lists);
+						//echo '<pre>';print_r($data);exit;
 						
-						exit;
-						$data['test_list']=$li;
 					}else{
 						$data['test_list']=array();
 					}
 					if(isset($tests_list) && count($tests_list)>0){
 						foreach($tests_list as $Lis){
 							if($Lis['hos_id'] != $userdetails['hos_id']){
-							$citylist[]=$Lis['resource_city'];
-							}
-						}
-						$data['location_list']=$citylist;
-					}else{
-						$data['location_list']=array();
-					}
-					
+							 //$citylist[]=$Lis['t_name'];
+							 $citylist[]=$this->Lab_model->get_test_locaton_list($l['t_name']);
+							 }
+						 }
+						 foreach( $citylist as $list){
+							 foreach($list as $Li){
+								$location_names[]=$Li['resource_city'];
+								 
+							 }
+								 
+						 }
+						$data['location_list']=array_unique($location_names);
+					 }else{
+						 $data['location_list']=array();
+					 }
+					//echo '<pre>';print_r($data);
+					//exit;
 					$this->load->view('lab/outsource_list',$data);
 					$this->load->view('html/footer');
-					//echo '<pre>';print_r($data);exit;
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function select_out_source_test(){
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']=5){
+					$post=$this->input->post();
+					foreach($post['lab_id'] as $List){
+						$p_l_t_id=explode('_',$List);
+						$details=array(
+						'lab_id'=>$p_l_t_id[0],
+						'p_l_t_id'=>$p_l_t_id[1],
+						'p_id'=>$post['patient_id'],
+						'b_id'=>$post['billing_id'],
+						'status'=>0,
+						'create_at'=>date('Y-m-d H:i:s'),
+						'create_BY'=>$admindetails['a_id']
+						);
+						//echo '<pre>';print_r($details);exit;
+						$out_source_list = $this->Lab_model->save_lab_tests($details);
+
+					}
+					if(count($out_source_list)>0){
+						$this->session->set_flashdata('success',"Lab test are successfully added");
+						redirect('lab/patient_list');
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/patient_list');
+					}
+					
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

@@ -231,6 +231,7 @@
 	                            </a>
 	                        </li> 
 						<?php } else if($userdetails['role_id']==5){ ?>
+					
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/patient_list');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
@@ -243,6 +244,14 @@
 	                            <a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Lab Test details</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Out Sources Lab Test details</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

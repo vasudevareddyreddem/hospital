@@ -111,7 +111,7 @@ class Lab_model extends CI_Model
 	
 	/*outsource*/
 	public function get_all_patients_out_souces_test_lists($p_id,$b_id){
-		$this->db->select('lab_test_list.t_name,lab_test_list.out_source,lab_test_list.hos_id')->from('patient_lab_test_list');
+		$this->db->select('patient_lab_test_list.id,lab_test_list.t_name,lab_test_list.t_name,lab_test_list.out_source,lab_test_list.hos_id')->from('patient_lab_test_list');
 		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
 		$this->db->where('patient_lab_test_list.p_id',$p_id);
 		$this->db->where('patient_lab_test_list.b_id',$b_id);
@@ -124,15 +124,30 @@ class Lab_model extends CI_Model
 		$this->db->where('lab_test_list.t_name',$test_name);
 		return $this->db->get()->result_array();
 	}
+	public function get_test_locaton_list($test_name){
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,resource_list.resource_city')->from('lab_test_list');
+		$this->db->join('resource_list', 'resource_list.a_id = lab_test_list.create_by', 'left');
+		$this->db->where('lab_test_list.t_name',$test_name);
+		$this->db->group_by('resource_list.resource_city');
+		return $this->db->get()->result_array();
+		
+	}
 	
-	
-	public function back_get_all_patients_all_out_souces_test_lists($p_id,$b_id){
-		$this->db->select('lab_test_list.t_name,lab_test_list.duration,lab_test_list.amuont,lab_test_list.out_source,lab_test_list.hos_id,admin.a_name,admin.a_id,resource_list.resource_name,resource_list.resource_add1,resource_list.resource_add2,resource_list.resource_city,resource_list.resource_state,resource_list.resource_zipcode')->from('patient_lab_test_list');
-		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
-		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
-		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
-		$this->db->where('patient_lab_test_list.p_id',$p_id);
-		$this->db->where('patient_lab_test_list.b_id',$b_id);
+	public function save_lab_tests($data){
+		$this->db->insert('out_source_lab_test_lists', $data);
+		return $insert_id = $this->db->insert_id();	
+	}
+	public function get_out_source_lab_test_list($p_id,$b_id){
+		$this->db->select('out_source_lab_test_lists.p_l_t_id,out_source_lab_test_lists.p_id,out_source_lab_test_lists.b_id')->from('out_source_lab_test_lists');
+		$this->db->where('out_source_lab_test_lists.p_id',$p_id);
+		$this->db->where('out_source_lab_test_lists.b_id',$b_id);
+		$this->db->where('out_source_lab_test_lists.status',0);
+		return $this->db->get()->result_array();
+	}
+	public function get_outsources_labtests_details($lab_id){
+		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_zipcode,patients_list_1.p_country_name,out_source_lab_test_lists.*')->from('out_source_lab_test_lists');
+		$this->db->join('patients_list_1', 'patients_list_1.pid = out_source_lab_test_lists.p_id', 'left');
+		$this->db->where('out_source_lab_test_lists.lab_id',$lab_id);
 		return $this->db->get()->result_array();
 	}
 	/*outsource*/
