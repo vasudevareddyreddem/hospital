@@ -52,7 +52,12 @@
 					<td>
 					<?php if(isset($list['tests']) && count($list['tests'])>0){ ?>
 					<?php $cnt=1;foreach($list['tests'] as $li){ ?>
-					<p><?php echo $cnt; ?>.<?php echo $li['t_name']; ?></p>
+					<p><?php if($userdetails['hos_id']= $li['hos_id']){?>
+					<i class="fa fa-circle user-online"></i><span class="txtOnline"> &nbsp;</span>
+					<?php }else{ ?>
+					<i class="fa fa-circle user-offline"></i><span class="txtOnline"> &nbsp;</span>
+					<?php } ?>
+					<?php echo $cnt; ?>.<?php echo $li['t_name']; ?></p>
 					<?php $cnt++;} ?>
 					<?php }?>
 					</td>

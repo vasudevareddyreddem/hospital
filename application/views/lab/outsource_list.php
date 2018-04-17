@@ -40,7 +40,7 @@
 	width: 70px;
 }
 </style>
-<?php //echo '<pre>';print_r($hospital_details);exit; ?>
+<?php //echo '<pre>';print_r($location_list);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -76,61 +76,36 @@
 											
 											<h3 class="font-weight-bold ">Filters</h3>
 											<hr>
-												<div class="price-help-class">
+												<!--<div class="price-help-class">
 													<label><h4 class="font-weight-bold">Price Range</h4></label>
 													<div class="example">
 															<div id="html5"></div>
 															<select id="input-select"></select>
 															<input class="pull-right" type="number" min="-20" max="40" step="1" id="input-number">
 													</div>
-												</div>
+												</div>-->
 												<div class="location-help-class pt-4">
 												<label><h4 class="font-weight-bold">Location</h4></label>
 														<div class="row">
+															<?php foreach($location_list as $list){ ?>
+
 															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 1
+																<input type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
 															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 2
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 3
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 4
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 5
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 6
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 7
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 8
-															</div>
-															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; Location 9
-															</div>
+															<?php } ?>
 														</div>
 												</div>
-												<div class="duration-help-class pt-4">
+												<!--<div class="duration-help-class pt-4">
 												<label><h3>Duration</h3></label>
 														<div class="row">
 															<div class="col-md-4 pt-2">
 																<input type="checkbox" name="" value=""> &nbsp; 10 min
 															</div>
 															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; 20min
-															</div>
-															<div class="col-md-4 pt-2">
 																<input type="checkbox" name="" value=""> &nbsp; 30 min
 															</div>
-															
 														</div>
-												</div>
+												</div>-->
 
 											
 											</div>
@@ -140,40 +115,27 @@
 											 <table id="myTable">
 												  <tr class="header">
 													<th style="width:100%;">Name of the test</th>
-													
-												  </tr>
-												  <tr>
-													<td><input type="checkbox" name="" value=""> &nbsp; Alfreds Futterkiste</td>
-												   
-												  </tr>
-												  <tr>
-													<td><input type="checkbox" name="" value=""> &nbsp;  Berglunds snabbkop</td>
-												   
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  Island Trading</td>
-													
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  Koniglich Essen</td>
-													
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  Laughing Bacchus Winecellars</td>
-													
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  Magazzini Alimentari Riuniti</td>
-													
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  North/South</td>
-													
-												  </tr>
-												  <tr>
-													<td> <input type="checkbox" name="" value=""> &nbsp;  Paris specialites</td>
-													
-												  </tr>
+												</tr>
+												<?php if(isset($test_list) && count($test_list)>0){ ?>
+													<?php foreach($test_list as $list){ ?>
+														<tr>
+														<td>
+														<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo isset($list['a_id'])?$list['a_id']:''; ?>"> &nbsp; Lab Name : <?php echo isset($list['a_name'])?$list['a_name']:''; ?>
+														<b>Test Name : <?php echo isset($list['t_name'])?$list['t_name'].',':''; ?>
+														Duration : <?php echo isset($list['duration'])?$list['duration'].',':''; ?>
+														Amount : <?php echo isset($list['amuont'])?$list['amuont'].',':''; ?></b>
+														Address : 
+														<?php echo isset($list['resource_add1'])?$list['resource_add1'].',':''; ?>
+														<?php echo isset($list['resource_add2'])?$list['resource_add2'].',':''; ?>
+														<?php echo isset($list['resource_city'])?$list['resource_city'].',':''; ?>
+														<?php echo isset($list['resource_state'])?$list['resource_state'].',':''; ?>
+														<?php echo isset($list['resource_zipcode'])?$list['resource_zipcode']:''; ?>
+														</td>
+													   </tr>
+													<?php } ?>
+												<?php } ?>
+												  
+												  
 												</table>
 												<div class="clearfix">&nbsp;</div>
 												<button class="btn btn-primary ">Submit</button>

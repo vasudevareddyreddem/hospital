@@ -180,6 +180,8 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					$data['userdetails']=$userdetails;
 					$datalabtest_list=$this->Lab_model->get_all_patients_lists($userdetails['hos_id']);
 					
 					if(isset($datalabtest_list) && count($datalabtest_list)>0){
@@ -247,7 +249,40 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					
-					$data['tab']=base64_decode($this->uri->segment(3));
+					$patient_id=base64_decode($this->uri->segment(3));
+					$billing_id=base64_decode($this->uri->segment(4));
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($patient_id,$billing_id);
+					//echo '<pre>';print_r($tests_list);exit;
+					if(isset($tests_list) && count($tests_list)>0){
+						foreach($tests_list as $Lis){
+							if($Lis['hos_id'] != $userdetails['hos_id']){
+							$li[]=$Lis;
+							}
+						}
+						foreach($li as $l){
+							$lab_test_lists[]=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
+						//echo '<pre>';print_r($l);	
+						}
+						echo '<pre>';print_r($lab_test_lists);
+						
+						exit;
+						$data['test_list']=$li;
+					}else{
+						$data['test_list']=array();
+					}
+					if(isset($tests_list) && count($tests_list)>0){
+						foreach($tests_list as $Lis){
+							if($Lis['hos_id'] != $userdetails['hos_id']){
+							$citylist[]=$Lis['resource_city'];
+							}
+						}
+						$data['location_list']=$citylist;
+					}else{
+						$data['location_list']=array();
+					}
+					
 					$this->load->view('lab/outsource_list',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
