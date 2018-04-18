@@ -59,9 +59,11 @@
 					<td> <?php if($list['status']==1){ echo "Initiate"; }else if($list['status']==2){ echo "Accept"; }else if($list['status']==3){ echo "Decline"; }else if($list['status']==4){ echo "Approved"; }else{"";} ?> </td>
 
 					<td>
+					<?php if($list['status']!=4){ ?>
 					<button type="submit">Accept | </button>
 					</form>
 					<a href="<?php echo base_url('lab/bidding_decline/'.base64_encode($list['id'])); ?>">decline 
+					<?php } ?>
 					</td>
 					
 				</tr>
