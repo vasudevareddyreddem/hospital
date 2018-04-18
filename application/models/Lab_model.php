@@ -111,14 +111,16 @@ class Lab_model extends CI_Model
 	
 	/*outsource*/
 	public function get_all_patients_out_souces_test_lists($p_id,$b_id){
-		$this->db->select('patient_lab_test_list.id,lab_test_list.t_name,lab_test_list.t_name,lab_test_list.out_source,lab_test_list.hos_id')->from('patient_lab_test_list');
+		$this->db->select('patient_lab_test_list.id,lab_test_list.t_name,lab_test_list.t_id,lab_test_list.t_name,lab_test_list.out_source,lab_test_list.hos_id,resource_list.a_id')->from('patient_lab_test_list');
 		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 		$this->db->where('patient_lab_test_list.p_id',$p_id);
 		$this->db->where('patient_lab_test_list.b_id',$b_id);
 		return $this->db->get()->result_array();
 	}
 	public function get_all_patients_all_out_souces_test_lists($test_name){
-		$this->db->select('lab_test_list.t_name,lab_test_list.duration,lab_test_list.amuont,lab_test_list.out_source,lab_test_list.hos_id,admin.a_name,admin.a_id,resource_list.resource_name,resource_list.resource_add1,resource_list.resource_add2,resource_list.resource_city,resource_list.resource_state,resource_list.resource_zipcode')->from('lab_test_list');
+		$this->db->select('lab_test_list.t_name,lab_test_list.t_id,lab_test_list.duration,lab_test_list.amuont,lab_test_list.out_source,lab_test_list.hos_id,admin.a_name,admin.a_id,resource_list.resource_name,resource_list.resource_add1,resource_list.resource_add2,resource_list.resource_city,resource_list.resource_state,resource_list.resource_zipcode')->from('lab_test_list');
 		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 		$this->db->where('lab_test_list.t_name',$test_name);
@@ -145,10 +147,64 @@ class Lab_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public function get_outsources_labtests_details($lab_id){
-		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_zipcode,patients_list_1.p_country_name,out_source_lab_test_lists.*')->from('out_source_lab_test_lists');
+		$this->db->select('lab_test_list.t_name,patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_zipcode,patients_list_1.p_country_name,out_source_lab_test_lists.*')->from('out_source_lab_test_lists');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = out_source_lab_test_lists.p_id', 'left');
+		$this->db->join('patient_lab_test_list', 'patient_lab_test_list.id = out_source_lab_test_lists.p_l_t_id', 'left');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
 		$this->db->where('out_source_lab_test_lists.lab_id',$lab_id);
 		return $this->db->get()->result_array();
+	}
+	
+	public function get_all_patients_location_wise_all_out_souces_test_lists($test_name,$location){
+		$this->db->select('lab_test_list.t_name,lab_test_list.duration,lab_test_list.amuont,lab_test_list.out_source,lab_test_list.hos_id,admin.a_name,admin.a_id,resource_list.resource_name,resource_list.resource_add1,resource_list.resource_add2,resource_list.resource_city,resource_list.resource_state,resource_list.resource_zipcode')->from('lab_test_list');
+		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
+		$this->db->where('lab_test_list.t_name',$test_name);
+		$this->db->where_in('resource_list.resource_city',$location);
+		return $this->db->get()->result_array();
+	}
+	public function save_search_data($data){
+		$this->db->insert('out_source_lab_search', $data);
+		return $insert_id = $this->db->insert_id();	
+	}
+	public function get_test_names($t_id){
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name')->from('lab_test_list');
+		$this->db->where('lab_test_list.t_id',$t_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_test_lab_ids($t_name){
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,resource_list.a_id')->from('lab_test_list');
+		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
+		$this->db->where('lab_test_list.t_name',$t_name);
+		return $this->db->get()->result_array();
+	}
+	public function sent_bidding_for_test($data){
+		$this->db->insert('bidding_test', $data);
+		return $insert_id = $this->db->insert_id();	
+	}
+	public function get_all_bidding_test_list($a_id){
+		$this->db->select('bidding_test.id,bidding_test.test_id,bidding_test.duration,bidding_test.amount,bidding_test.status,bidding_test.create_at,lab_test_list.t_name')->from('bidding_test');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = bidding_test.test_id', 'left');
+		$this->db->where('bidding_test.create_by',$a_id);
+		$this->db->order_by('bidding_test.id',"DESC");
+		return $this->db->get()->result_array();
+	}
+	public function get_bidding_test_list($a_id){
+		$this->db->select('bidding_test.id,bidding_test.test_id,bidding_test.duration,bidding_test.amount,bidding_test.status,bidding_test.create_at,lab_test_list.t_name')->from('bidding_test');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = bidding_test.test_id', 'left');
+		$this->db->where('bidding_test.lab_id',$a_id);
+		$this->db->order_by('bidding_test.id',"DESC");
+		return $this->db->get()->result_array();
+	}
+	public function update_bidding_details($b_id,$data){
+			$this->db->where('id',$b_id);
+    	return $this->db->update("bidding_test",$data);
+	}
+	public function get_bidding_details($b_id){
+		$this->db->select('*')->from('bidding_test');
+		$this->db->where('bidding_test.id',$b_id);
+		return $this->db->get()->row_array();
 	}
 	/*outsource*/
 	

@@ -317,8 +317,10 @@ class Lab extends CI_Controller {
 					 }else{
 						 $data['location_list']=array();
 					 }
-					//echo '<pre>';print_r($data);
-					//exit;
+					$data['bidding_test_list']=$this->Lab_model->get_all_bidding_test_list($admindetails['a_id']);
+					$data['userdetails']=$userdetails;
+					//echo '<pre>';print_r($data);exit;
+
 					$this->load->view('lab/outsource_list',$data);
 					$this->load->view('html/footer');
 					
@@ -661,7 +663,256 @@ class Lab extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	
+	public function location_search()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$deails=array(
+					'ip_address'=>$this->input->ip_address(),
+					'p_id'=>$post['patient_id'],
+					'b_id'=>$post['billing_id'],
+					'location'=>$post['location_name'],
+					'create_at'=>date('Y-m-d H:i:s')
+					);
+					$updated=$this->Lab_model->save_search_data($deails);
+					if(count($updated)>0){
+						redirect('lab/location_search_result');
+					}
+					//echo '<pre>';print_r($post);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function location_search_result()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists(14,16);
+					if(isset($tests_list) && count($tests_list)>0){
+						foreach($tests_list as $Lis){
+							if($Lis['hos_id'] != $userdetails['hos_id']){
+							$li[]=$Lis;
+							}
+						}
+						foreach($li as $l){
+							$data['test_list'][$l['id']]=$l;
+							$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_location_wise_all_out_souces_test_lists($l['t_name'],'hyd');
+							//echo '<pre>';print_r($l);	
+						}
+						//echo '<pre>';print_r($data);exit;
+						
+					}else{
+						$data['test_list']=array();
+					}
+					$this->load->view('lab/outsource_list_result',$data);
+					echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function sendbid()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					foreach($post['test_id'] as $li){
+						$ids=explode('_',$li);
+					$test_list=$this->Lab_model->get_test_names($ids[0]);
+					$lab_ids=$this->Lab_model->get_test_lab_ids($test_list['t_name']);
+						foreach($lab_ids as $l){
+								$details=array(
+								'test_id'=>$test_list['t_id'],
+								'p_l_t_id'=>$ids[1],
+								'lab_id'=>$l['a_id'],
+								'status'=>1,
+								'create_at'=>date('Y-m-d H:i:s'),
+								'create_by'=>$admindetails['a_id']
+								);
+								$bidding=$this->Lab_model->sent_bidding_for_test($details);
+							}
+					}
+					if(count($bidding)>0){
+							$this->session->set_flashdata('success',"Bid successfully Send.");
+							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']));
+					}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']));
+					}
+					
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function bidding_list()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['bidding_test_list']=$this->Lab_model->get_bidding_test_list($admindetails['a_id']);
+					$this->load->view('lab/bidding',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($admindetails);exit;
+					
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function bidding_post()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$details=array(
+								'amount'=>isset($post['amount'])?$post['amount']:'',
+								'duration'=>isset($post['duration'])?$post['duration']:'',
+								'status'=>2,
+								'send_by'=>$admindetails['a_id'],
+								);
+								$bidding=$this->Lab_model->update_bidding_details($post['bid_id'],$details);
+					if(count($bidding)>0){
+							$this->session->set_flashdata('success',"Bid successfully Updated.");
+							redirect('lab/bidding_list');
+					}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/bidding_list');
+						}
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function bidding_decline()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$b_id=base64_decode($this->uri->segment(3));
+					$details=array(
+								'amount'=>isset($post['amount'])?$post['amount']:'',
+								'duration'=>isset($post['duration'])?$post['duration']:'',
+								'status'=>3,
+								'send_by'=>$admindetails['a_id'],
+								);
+								$bidding=$this->Lab_model->update_bidding_details($b_id,$details);
+					if(count($bidding)>0){
+							$this->session->set_flashdata('success',"Bid successfully Updated.");
+							redirect('lab/bidding_list');
+					}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/bidding_list');
+						}
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function bidding_approved()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$b_id=base64_decode($this->uri->segment(3));
+					$p_id=$this->uri->segment(4);
+					$billing_id=$this->uri->segment(5);
+					$change=base64_decode($this->uri->segment(6));
+					if(isset($change) && $change==22){
+							$details=array(
+								'status'=>2,
+								);
+					}else{
+					$details=array(
+								'status'=>4,
+								);
+								
+					}
+					$bidding=$this->Lab_model->update_bidding_details($b_id,$details);
+					$get_bidding_details=$this->Lab_model->get_bidding_details($b_id);
+					if(count($bidding)>0){
+						if(isset($change) && $change !=22){
+							$details=array(
+							'lab_id'=>$get_bidding_details['lab_id'],
+							'p_l_t_id'=>$get_bidding_details['p_l_t_id'],
+							'p_id'=>base64_decode($p_id),
+							'b_id'=>base64_decode($billing_id),
+							'status'=>0,
+							'create_at'=>date('Y-m-d H:i:s'),
+							'create_BY'=>$admindetails['a_id']
+							);
+							//echo '<pre>';print_r($details);exit;
+							$out_source_list = $this->Lab_model->save_lab_tests($details);
+							}
+						
+							$this->session->set_flashdata('success',"Bid successfully approved.");
+							redirect('lab/outsource/'.$p_id.'/'.$billing_id);
+					}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/outsource/'.$p_id.'/'.$billing_id);
+						}
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	

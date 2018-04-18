@@ -1,18 +1,28 @@
-<?php //echo '<pre>';print_r($hospital_details);exit; ?>
+<?php //echo '<pre>';print_r($bidding_test_list);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Outsources Patient List</div>
+               <div class="page-title"> Bidding lab Test List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Patient List</li>
+               <li class="active">Bidding Test List</li>
             </ol>
          </div>
       </div>
+	  <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
 	  <div class="row">	
 			<div class="col-md-12">
                             <div class="panel tab-border card-topline-yellow">
@@ -24,31 +34,35 @@
                                             <div class="card card-topline-red">
 	
 	<div class="card-body ">
-	<?php if(isset($outsources_labtests) && count($outsources_labtests)>0){ ?>
+	<?php if(isset($bidding_test_list) && count($bidding_test_list)>0){ ?>
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>
 				<tr>
-					<th> Patient Id </th>
-					<th> Name </th>
-					<th> Mobile </th>
-					<th> Address </th>
-					<th> Lab Tests </th>
-					<th> Date </th>
+					<th> Test Name </th>
+					<th> Date & TIme </th>
+					<th> Amount</th>
+					<th> Duartion </th>
+					<th> Status </th>
 					<th> Action </th>
+					
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($outsources_labtests as $list){ ?>
+			<?php foreach($bidding_test_list as $list){ ?>
 				<tr class="odd gradeX">
-					
-					<td> <?php echo $list['pid']; ?> </td>
-					<td><?php echo $list['name']; ?></td>
-					<td><?php echo $list['mobile']; ?></td>
-					<td><?php echo $list['perment_address'].' , '.$list['p_c_name'].' , '.$list['p_s_name'].' , '.$list['p_country_name'].' - '.$list['p_zipcode']; ?></td>
-					<td><?php echo $list['t_name']; ?>
+					<form action="<?php echo base_url('lab/bidding_post'); ?>" method="post">
+					<input type="hidden" name="bid_id" id="bid_id" value="<?php echo $list['id']; ?>">
+					<td> <?php echo $list['t_name']; ?> </td>
+					<td> <?php echo $list['create_at']; ?> </td>
+					<td> <input type="text" name="amount" id="amount" value="<?php echo $list['amount']; ?>" required> </td>
+					<td> <input type="text" name="duration" id="duration" value="<?php echo $list['duration']; ?>" required> </td>
+					<td> <?php if($list['status']==1){ echo "Initiate"; }else if($list['status']==2){ echo "Accept"; }else if($list['status']==3){ echo "Decline"; }else if($list['status']==4){ echo "Approved"; }else{"";} ?> </td>
+
+					<td>
+					<button type="submit">Accept | </button>
+					</form>
+					<a href="<?php echo base_url('lab/bidding_decline/'.base64_encode($list['id'])); ?>">decline 
 					</td>
-					<td><?php echo $list['create_at']; ?></td>
-					<td><a href="<?php echo base_url('lab/patient_details/'.base64_encode($list['p_id']).'/'.base64_encode($list['b_id'])); ?>">View </td>
 					
 				</tr>
 				

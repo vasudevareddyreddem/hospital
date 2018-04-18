@@ -56,7 +56,16 @@
          </div>
       </div>
 	  <div class="row">	
-	
+	 <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
 	<div class="col-md-12 ">
                             <div class="panel tab-border card-topline-green">
                                 <header class="panel-heading panel-heading-gray custom-tab ">
@@ -65,13 +74,15 @@
                                         </li>
                                         <li class="nav-item"><a href="#about" data-toggle="tab" class="" aria-expanded="false">Bidding</a>
                                         </li>
+										<li class="nav-item"><a href="#bidding_accept" data-toggle="tab" class="" aria-expanded="false">Bidding Accept</a>
+                                        </li>
                                         
                                     </ul>
                                 </header>
                                 <div class="panel-body">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home" aria-expanded="false">
-										<div class="row">
+										<div class="row" id="result_search">
 										<div class="col-md-4  py-3">
 											
 											<h3 class="font-weight-bold ">Filters</h3>
@@ -90,7 +101,7 @@
 															<?php foreach($location_list as $list){ ?>
 
 															<div class="col-md-4 pt-2">
-																<input type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
+																<input onclick="locationsearch('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
 															</div>
 															<?php } ?>
 														</div>
@@ -160,6 +171,10 @@
                                         <div class="tab-pane" id="about" aria-expanded="false">
 												<div class="row justify-content-center">
 												<div class="col-md-8  card">
+												<form action="<?php echo base_url('lab/sendbid'); ?>" method="POST">
+												<input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+												<input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
+											 
 												<div class="panel-heading ">
 												<h3 class="font-weight-bold text-center">Send for Bidding</h3>
 												</div>
@@ -168,72 +183,71 @@
 														<th style="width:100%;">Name of the test</th>
 														
 													  </tr>
-													  <tr>
-														<td><input type="checkbox" name="" value=""> &nbsp; Alfreds Futterkiste</td>
-													   
-													  </tr>
-													  <tr>
-														<td><input type="checkbox" name="" value=""> &nbsp;  Berglunds snabbkop</td>
-													   
-													  </tr>
-													  <tr>
-														<td> <input type="checkbox" name="" value=""> &nbsp;  Island Trading</td>
-														
-													  </tr>
+													 <?php if(isset($test_list) && count($test_list)>0){
+
+															//echo '<pre>';print_r($test_list);exit;?>
+													<?php foreach($test_list as $li){ ?>
+														<tr>
+														<td>
+													
+														<input type="checkbox" id="test_id" name="test_id[]" value="<?php echo $li['t_id'].'_'.$li['id']; ?>"> &nbsp; 
+														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name']:''; ?></b>
+														</td>
+													   </tr>
+													<?php } ?>
+												<?php } ?>
+													 
 													 
 													</table>
-													<div class="location-help-class pt-4">
-													<label><h4 class="font-weight-bold">Location</h4></label>
-															<div class="row">
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 1
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 2
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 3
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 4
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 5
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 6
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 7
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 8
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; Location 9
-																</div>
-															</div>
-													</div>
-													<div class="duration-help-class pt-4">
-													<label><h3>Duration</h3></label>
-															<div class="row">
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; 10 min
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; 20min
-																</div>
-																<div class="col-md-4 pt-2">
-																	<input type="checkbox" name="" value=""> &nbsp; 30 min
-																</div>
-																
-															</div>
-													</div>
+													
 													<div class="clearfix">&nbsp;</div>
 													<button class="btn btn-primary "> Send for Bidding</button>
+													</form>
 												</div>
                                         </div>
                                         </div>
+										<div class="tab-pane " id="bidding_accept" aria-expanded="false">
+										<?php if(isset($bidding_test_list) && count($bidding_test_list)>0){ ?>
+		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
+			<thead>
+				<tr>
+					<th> Test Name </th>
+					<th> Date & TIme </th>
+					<th> Amount</th>
+					<th> Duartion </th>
+					<th> Status </th>
+					<th> Action </th>
+					
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach($bidding_test_list as $list){ ?>
+				<tr class="odd gradeX">
+					<td> <?php echo $list['t_name']; ?> </td>
+					<td> <?php echo $list['create_at']; ?> </td>
+					<td> <input type="text" name="amount" id="amount" value="<?php echo $list['amount']; ?>" required> </td>
+					<td> <input type="text" name="duration" id="duration" value="<?php echo $list['duration']; ?>" required> </td>
+					<td> <?php if($list['status']==1){ echo "Initiate"; }else if($list['status']==2){ echo "Accept"; }else if($list['status']==3){ echo "Decline"; }else if($list['status']==4){ echo "Approved"; }else{"";} ?> </td>
+
+					<td>
+					<?php if($list['status']==2 || $list['status']==4){ ?>
+					<a href="<?php echo base_url('lab/bidding_approved/'.base64_encode($list['id']).'/'.base64_encode($patient_id).'/'.base64_encode($billing_id)); ?>">Approve 
+					<?php } ?>
+					<?php if($list['status']==4){ ?>
+						| <a href="<?php echo base_url('lab/bidding_approved/'.base64_encode($list['id']).'/'.base64_encode($patient_id).'/'.base64_encode($billing_id).'/'.base64_encode(22)); ?>">Change 
+					<?php } ?>
+					</td>
+					
+				</tr>
+				
+			<?php } ?>
+				
+			</tbody>
+		</table>
+	<?php }else{ ?>
+	<div>No data available</div>
+	<?php } ?>
+										</div>
                                        
                                     </div>
                                 </div>
@@ -243,6 +257,25 @@
 	 </div>
 </div>
 <script>
+function locationsearch(p_id,b_id,location){
+		if(p_id!='' && b_id!='' && location!=''){
+   		 jQuery.ajax({
+   					url: "<?php echo site_url('lab/location_search');?>",
+   					data: {
+   						patient_id: p_id,
+   						billing_id: b_id,
+   						location_name: location,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						$("#result_search").empty();
+						$("#result_search").append(data);
+					}
+   				});
+   			}
+	
+}
 function myFunction() {
   var input, filter, table, tr, td, i;
   input = document.getElementById("myInput");
