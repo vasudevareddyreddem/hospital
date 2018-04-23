@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,18 +57,26 @@
 								'hash' => $this->security->get_csrf_hash()
 						); ?>
 					<div class="form-group">
-					<input class="form-control" type="text" id="email_id" name="email_id"  placeholder="Email Address" />
+					<input class="form-control" type="text" id="email_id" name="email_id"  placeholder="Email Address"  value="<?php echo $this->input->cookie('username');?>" />
 					</div>
 					<div class="form-group">
-					<input class="form-control" type="password" id="password" name="password" placeholder="Password" />
+					<input class="form-control" type="password" id="password" name="password" placeholder="Password" value="<?php echo $this->input->cookie('password');?>" />
 					</div>
 				<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
                 <div class="remember text-left">
                     <div class="checkbox checkbox-primary">
-                        <input id="checkbox2" type="checkbox" checked>
-                        <label for="checkbox2">
+								<?php if($this->input->cookie('remember')!=''){ ?>
+									<input id="checkbox2" type="checkbox" checked name="remember_me" id="remember_me" value="1">
+								 <label for="checkbox2">
                             Remember me
                         </label>
+								<?php } else{ ?>
+								     <input id="checkbox2" type="checkbox" name="remember_me" id="remember_me" value="1">
+								 <label for="checkbox2">
+                            Remember me
+                        </label>
+								<?php } ?>
+                       
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block text-white">Login</button>

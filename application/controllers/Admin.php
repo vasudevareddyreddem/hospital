@@ -59,8 +59,27 @@ class Admin extends CI_Controller {
 		if(!$this->session->userdata('userdetails'))
 		{
 			$post=$this->input->post();
+			echo '<pre>';print_r($post);
 			$login_deta=array('email'=>$post['email_id'],'password'=>md5($post['password']));
 			$check_login=$this->Admin_model->login_details($login_deta);
+				$this->load->helper('cookie');
+
+			if(isset($post['remember_me']) && $post['remember_me']==1){
+					$usernamecookie = array('name' => 'username', 'value' => $post["email_id"],'expire' => time()+86500 ,'path'   => '/');
+					$passwordcookie = array('name' => 'password', 'value' => $post["password"],'expire' => time()+86500,'path'   => '/');
+					$remembercookie = array('name' => 'remember', 'value' => $post["remember_me"],'expire' => time()+86500,'path'   => '/');
+					$this->input->set_cookie($usernamecookie);
+					$this->input->set_cookie($passwordcookie);
+					$this->input->set_cookie($remembercookie);
+					$this->load->helper('cookie');
+					$this->input->cookie('username', TRUE);
+					//echo print_r($usernamecookie);exit;
+
+					}else{
+						delete_cookie('username');
+						delete_cookie('password');
+						delete_cookie('remember');
+					}
 			if(count($check_login)>0){
 				$login_details=$this->Admin_model->get_admin_details($check_login['a_id']);
 				$this->session->set_userdata('userdetails',$login_details);
