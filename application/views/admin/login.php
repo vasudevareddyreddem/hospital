@@ -37,6 +37,21 @@
         <div class="">
         </div>
         <div class="form formLogin">
+		 <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('loginerror')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('loginerror');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
             <h2>Login to your account</h2>
             <form id="loginform" name="loginform" action="<?php echo base_url('admin/loginpost'); ?>" method="post" enctype="multipart/form-data">
 				<?php $csrf = array(
@@ -66,9 +81,9 @@
     
         <div class="form formReset">
             <h2>Reset your password?</h2>
-            <form>
-                <input type="email" placeholder="Email Address" />
-                <button>Send Verification Email</button>
+            <form id="forgot" name="forgot" action="<?php echo base_url('admin/forgotpassword'); ?>" method="post">
+                <input type="email" name="forgot_password_email" id="forgot_password_email" placeholder="Email Address" />
+                <button type="submit">Send Verification Email</button>
             </form>
         </div>
     </div>
@@ -114,7 +129,8 @@
             }
         })
      
-});
+});	
+
 
 
 </script>

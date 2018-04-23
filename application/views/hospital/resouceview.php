@@ -9,7 +9,7 @@
 				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
 				</div>
 			<?php endif; ?>
-<div class="page-content-wrapper">
+		<div class="page-content-wrapper">
                 <div class="page-content" >
 						<div class="page-bar">
 						  <div class="page-title-breadcrumb">
@@ -126,7 +126,24 @@
 														 <strong>Resource Designation</strong>
 														 </div>
 														<div class=" col-sm-6">
-														  <?php echo isset($resouse_detail['role_id'])?$resouse_detail['role_id']:''; ?>
+														  <?php if(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==1){
+															  echo "Admin";
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==2){
+																echo "Hospital Admin";	
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==3){
+																echo "Receptionist";	
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==4){
+																echo "Pharmacy";	
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==5){
+																echo "lab coordinator";	
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==6){
+																echo "Doctor";
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==7){
+																echo "Patient";	
+															}elseif(isset($resouse_detail['role_id']) && $resouse_detail['role_id']==8){
+																echo "Software team";	
+															}
+														  ?>
 														 </div>
 													 </div>
 													</div><div class="col-md-6">

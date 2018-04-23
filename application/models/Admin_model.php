@@ -35,6 +35,10 @@ class Admin_model extends CI_Model
 		$sql = "SELECT * FROM admin WHERE (a_email_id ='".$data['email']."' AND a_password='".$data['password']."' AND a_status=1) OR (a_username ='".$data['email']."' AND a_password='".$data['password']."' AND a_status=1)";
 		return $this->db->query($sql)->row_array();	
 	}
+	public function email_check_details($email){
+		$sql = "SELECT * FROM admin WHERE a_email_id ='".$email."'";
+		return $this->db->query($sql)->row_array();	
+	}
 	public function get_admin_details($admin_id){
 		$this->db->select('admin.a_id,admin.role_id,admin.a_email_id,admin.out_source')->from('admin');		
 		$this->db->where('a_id', $admin_id);

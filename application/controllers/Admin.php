@@ -88,6 +88,38 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function forgotpassword()
+	{	
+		if(!$this->session->userdata('userdetails'))
+		{
+			$post=$this->input->post();
+			$check_login=$this->Admin_model->email_check_details($post['forgot_password_email']);
+			if(count($check_login)>0){
+				
+					$this->load->library('email');
+					$this->email->set_newline("\r\n");
+					$this->email->set_mailtype("html");
+					$this->email->to($check_login['a_email_id']);
+					$this->email->from('customerservice@e-healthinfra.com');
+					$body = "<b> Your Account login Password is </b> : ".$check_login['a_org_password'];
+					 $this->email->message($body);
+					if ($this->email->send())
+					{
+						$this->session->set_flashdata('success',"Password sent to your registered email address. Please Check your registered email address");
+						redirect('admin');
+					}else{
+						$this->session->set_flashdata('error'," In Localhost mail  didn't send");
+						redirect('admin');
+					}
+			}else{
+				$this->session->set_flashdata('error',"Invalid login details. Please try again once");
+				redirect('admin');
+			}
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	public function resourceschat()
 	{
 		if($this->session->userdata('userdetails'))

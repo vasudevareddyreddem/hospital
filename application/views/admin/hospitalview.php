@@ -84,7 +84,7 @@
 													</div><div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
-														 <strong>Hospital Representative Lanline Number</strong>
+														 <strong>Hospital Representative Landline Number</strong>
 														 </div>
 														<div class=" col-sm-6">
 														  <?php echo isset($hospital_details['hos_rep_contact'])?$hospital_details['hos_rep_contact']:''; ?>

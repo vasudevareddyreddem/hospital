@@ -790,6 +790,7 @@ class Hospital extends CI_Controller {
 			if($admindetails['role_id']=1){
 					$resourse_id=$this->uri->segment(3);
 					$status=base64_decode($this->uri->segment(4));
+					$a_id=$this->uri->segment(5);
 					if($status==1){
 						$statu=0;
 					}else{
@@ -800,7 +801,12 @@ class Hospital extends CI_Controller {
 							'r_status'=>$statu,
 							'r_updated_at'=>date('Y-m-d H:i:s')
 							);
+							$admin_stusdetails=array(
+							'a_status'=>$statu,
+							'a_updated_at'=>date('Y-m-d H:i:s')
+							);
 							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
+							$this->Admin_model->update_resourse_details(base64_decode($a_id),$admin_stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
 								$this->session->set_flashdata('success',"Resource successfully Deactivate.");

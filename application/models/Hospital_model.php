@@ -51,7 +51,7 @@ class Hospital_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public function get_resources_list($a_id,$hos_id){
-		$this->db->select('Resource_list.r_id,roles.r_name,Resource_list.resource_name,Resource_list.role_id,Resource_list.resource_contatnumber,Resource_list.r_status,Resource_list.r_created_at,Resource_list.resource_email')->from('Resource_list');		
+		$this->db->select('Resource_list.r_id,Resource_list.a_id,roles.r_name,Resource_list.resource_name,Resource_list.role_id,Resource_list.resource_contatnumber,Resource_list.r_status,Resource_list.r_created_at,Resource_list.resource_email')->from('Resource_list');		
         $this->db->join('roles', 'roles.r_id = Resource_list.role_id', 'left');
 		$this->db->where('Resource_list.r_create_by',$a_id);
 		$this->db->where('Resource_list.hos_id',$hos_id);
