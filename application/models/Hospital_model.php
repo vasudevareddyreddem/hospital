@@ -14,7 +14,7 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function save_resource($data){
-		$this->db->insert('Resource_list', $data);
+		$this->db->insert('resource_list', $data);
 		return $insert_id = $this->db->insert_id();
 	}
 	public function check_email_exits($email){
@@ -51,11 +51,11 @@ class Hospital_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public function get_resources_list($a_id,$hos_id){
-		$this->db->select('Resource_list.r_id,Resource_list.a_id,roles.r_name,Resource_list.resource_name,Resource_list.role_id,Resource_list.resource_contatnumber,Resource_list.r_status,Resource_list.r_created_at,Resource_list.resource_email')->from('Resource_list');		
-        $this->db->join('roles', 'roles.r_id = Resource_list.role_id', 'left');
-		$this->db->where('Resource_list.r_create_by',$a_id);
-		$this->db->where('Resource_list.hos_id',$hos_id);
-		$this->db->where('Resource_list.r_status !=',2);
+		$this->db->select('resource_list.r_id,resource_list.a_id,roles.r_name,resource_list.resource_name,resource_list.role_id,resource_list.resource_contatnumber,resource_list.r_status,resource_list.r_created_at,resource_list.resource_email')->from('resource_list');		
+        $this->db->join('roles', 'roles.r_id = resource_list.role_id', 'left');
+		$this->db->where('resource_list.r_create_by',$a_id);
+		$this->db->where('resource_list.hos_id',$hos_id);
+		$this->db->where('resource_list.r_status !=',2);
 		return $this->db->get()->result_array();
 	}
 	public function get_resourse_data($r_id){
@@ -88,12 +88,12 @@ class Hospital_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public function get_doctors_list($a_id,$hos_id){
-		$this->db->select('Resource_list.a_id,Resource_list.resource_name')->from('Resource_list');		
-		$this->db->where('Resource_list.r_create_by',$a_id);
-		$this->db->where('Resource_list.hos_id',$hos_id);
-		$this->db->where('Resource_list.r_status !=',2);
-		$this->db->where('Resource_list.r_status',1);
-		$this->db->where('Resource_list.role_id',6);
+		$this->db->select('resource_list.a_id,resource_list.resource_name')->from('resource_list');		
+		$this->db->where('resource_list.r_create_by',$a_id);
+		$this->db->where('resource_list.hos_id',$hos_id);
+		$this->db->where('resource_list.r_status !=',2);
+		$this->db->where('resource_list.r_status',1);
+		$this->db->where('resource_list.role_id',6);
 		return $this->db->get()->result_array();
 	}
 	public function update_treatment_details($t_id,$data){
@@ -123,12 +123,12 @@ class Hospital_model extends CI_Model
 	/*add treament*/
 	/*lab details*/
 	public function get_labassistents_list($a_id,$hos_id){
-		$this->db->select('Resource_list.r_id,Resource_list.resource_name')->from('Resource_list');		
-		$this->db->where('Resource_list.r_create_by',$a_id);
-		$this->db->where('Resource_list.hos_id',$hos_id);
-		$this->db->where('Resource_list.r_status !=',2);
-		$this->db->where('Resource_list.r_status',1);
-		$this->db->where('Resource_list.role_id',5);
+		$this->db->select('resource_list.r_id,resource_list.resource_name')->from('resource_list');		
+		$this->db->where('resource_list.r_create_by',$a_id);
+		$this->db->where('resource_list.hos_id',$hos_id);
+		$this->db->where('resource_list.r_status !=',2);
+		$this->db->where('resource_list.r_status',1);
+		$this->db->where('resource_list.role_id',5);
 		return $this->db->get()->result_array();
 	}
 	public function save_addlabdetails($data){

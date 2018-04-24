@@ -275,6 +275,12 @@ class Lab extends CI_Controller {
 					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$previousdata=$this->Lab_model->get_previous_search_data($admindetails['a_id'],$this->input->ip_address());
+					if(isset($previousdata) && count($previousdata)>0){
+						foreach($previousdata as $lis){
+							$this->Lab_model->delete_get_previous_search_data($lis['id']);
+						}
+					}
 					$out_source_list=$this->Lab_model->get_out_source_lab_test_list($data['patient_id'],$data['billing_id']);
 					foreach($out_source_list as $source_list){
 						$lists[]=$source_list['p_l_t_id'];
@@ -671,16 +677,32 @@ class Lab extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					if($post['post_type']=='check'){
 					$deails=array(
 					'ip_address'=>$this->input->ip_address(),
 					'p_id'=>$post['patient_id'],
 					'b_id'=>$post['billing_id'],
 					'location'=>$post['location_name'],
-					'create_at'=>date('Y-m-d H:i:s')
+					'create_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$admindetails['a_id']
 					);
 					$updated=$this->Lab_model->save_search_data($deails);
+					}else{
+							$list=$this->Lab_model->getprevious_search_data($admindetails['a_id'],$post['location_name']);
+							if(count($list)>0){
+								foreach($list as $Li){
+									$da=array('location'=>'');
+									$updated=$this->Lab_model->delete_previous_search_data($Li['id'],$da);
+									//echo $this->db->last_query();exit;
+								}
+							}
+							
+							//echo '<pre>';print_r($list);exit;
+						
+					}
 					if(count($updated)>0){
-						redirect('lab/location_search_result');
+						redirect('lab1/location_search_result');
 					}
 					//echo '<pre>';print_r($post);exit;
 				}else{
@@ -699,26 +721,58 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=5){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$post=$this->input->post();
-					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists(14,16);
-					if(isset($tests_list) && count($tests_list)>0){
+					$serach_result=$this->Lab_model->get_search_result($admindetails['a_id']);
+					if(isset($serach_result) && count($serach_result)>0){
+						foreach($serach_result as $list){
+							$location_list[]=$list['location'];
+							$p_id=$list['p_id'];
+							$b_id=$list['b_id'];
+						}
+						$areas="'" . implode("','", $location_list). "'";
+						$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($p_id,$b_id);
+					//echo '<pre>';print_r($data);exit;
+						if(isset($tests_list) && count($tests_list)>0){
+							foreach($tests_list as $Lis){
+								if($Lis['hos_id'] != $userdetails['hos_id']){
+								$li[]=$Lis;
+								}
+							}
+							foreach($li as $l){
+								$data['test_list'][$l['id']]=$l;
+								$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists_with_areawise($l['t_name'],$areas);
+								//echo $this->db->last_query();exit;
+							}
+							//echo '<pre>';print_r($data);exit;
+							
+						}else{
+							$data['test_list']=array();
+						}
+						if(isset($tests_list) && count($tests_list)>0){
 						foreach($tests_list as $Lis){
 							if($Lis['hos_id'] != $userdetails['hos_id']){
-							$li[]=$Lis;
-							}
-						}
-						foreach($li as $l){
-							$data['test_list'][$l['id']]=$l;
-							$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_location_wise_all_out_souces_test_lists($l['t_name'],'hyd');
-							//echo '<pre>';print_r($l);	
-						}
-						//echo '<pre>';print_r($data);exit;
+							 //$citylist[]=$Lis['t_name'];
+							 $citylist[]=$this->Lab_model->get_test_locaton_list($l['t_name']);
+							 }
+						 }
+						 foreach( $citylist as $list){
+							 foreach($list as $Li){
+								$location_names[]=$Li['resource_city'];
+								 
+							 }
+								 
+						 }
+						$data['location_list']=array_unique($location_names);
+					 }else{
+						 $data['location_list']=array();
+					 }
 						
 					}else{
-						$data['test_list']=array();
+						
 					}
+					
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('lab/outsource_list_result',$data);
-					echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

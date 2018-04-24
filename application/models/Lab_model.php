@@ -207,6 +207,54 @@ class Lab_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	/*outsource*/
+	/* search result*/
+	public function get_search_result($a_id){
+		$this->db->select('*')->from('out_source_lab_search');
+		$this->db->where('out_source_lab_search.created_by',$a_id);
+		$this->db->group_by('out_source_lab_search.location');
+		$this->db->where('out_source_lab_search.location !=','');
+		return $this->db->get()->result_array();
+		
+	}
+	public function get_search_result_patient_ids($a_id,$ip){
+		$this->db->select('*')->from('out_source_lab_search');
+		$this->db->where('out_source_lab_search.created_by',$a_id);
+		$this->db->where('out_source_lab_search.ip_address',$ip);
+		return $this->db->get()->result_array();
+		
+	}
+	public function get_all_patients_all_out_souces_test_lists_with_areawise($test_name,$location){
+		$this->db->select('lab_test_list.t_name,lab_test_list.t_id,lab_test_list.duration,lab_test_list.amuont,lab_test_list.out_source,lab_test_list.hos_id,admin.a_name,admin.a_id,resource_list.resource_name,resource_list.resource_add1,resource_list.resource_add2,resource_list.resource_city,resource_list.resource_state,resource_list.resource_zipcode')->from('lab_test_list');
+		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
+		$this->db->where('lab_test_list.t_name',$test_name);
+		//$this->db->where_in('resource_list.resource_city',$location);
+		$this->db->where_in('resource_list.resource_city','"'.$location.'"',false);
+
+		return $this->db->get()->result_array();
+	}
+	public function getprevious_search_data($a_id,$location_name){
+		$this->db->select('*')->from('out_source_lab_search');
+		$this->db->where('out_source_lab_search.created_by',$a_id);
+		$this->db->where('out_source_lab_search.location',$location_name);
+		return $this->db->get()->result_array();
+	}
+	public function delete_previous_search_data($id,$data){
+		$this->db->where('id',$id);
+    	return $this->db->update("out_source_lab_search",$data);
+	}
+	public function get_previous_search_data($a_id,$ip){
+		$this->db->select('*')->from('out_source_lab_search');
+		$this->db->where('out_source_lab_search.created_by',$a_id);
+		$this->db->where('out_source_lab_search.ip_address',$ip);
+		return $this->db->get()->result_array();
+	}
+	
+	public function delete_get_previous_search_data($id){
+		$sql1="DELETE FROM out_source_lab_search WHERE id = '".$id."'";
+		return $this->db->query($sql1);
+	}
+	/* search result*/
 	
 	
 

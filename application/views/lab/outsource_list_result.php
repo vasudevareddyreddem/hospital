@@ -1,6 +1,9 @@
 
-                                        <div class="tab-pane active" id="home" aria-expanded="false">
-										<div class="row">
+
+<?php //echo '<pre>';print_r($location_list);exit; ?>
+<div class="page-content-wrapper">
+   <div class="container" >
+     <div class="row" id="result_search1">
 										<div class="col-md-4  py-3">
 											
 											<h3 class="font-weight-bold ">Filters</h3>
@@ -15,14 +18,30 @@
 												</div>-->
 												<div class="location-help-class pt-4">
 												<label><h4 class="font-weight-bold">Location</h4></label>
+												<?php if(isset($area_list) && count($area_list)>0){ ?>
 														<div class="row">
 															<?php foreach($location_list as $list){ ?>
+																	<?php if (in_array($list, $area_list)){ ?>
+																		<div class="col-md-6 pt-2">
+																			<input checked onclick="locationsearch_result('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>','uncheck');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
+																		</div>
+																	<?php }else{ ?>
+																		<div class="col-md-6 pt-2">
+																			<input onclick="locationsearch_result('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>','check');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
+																		</div>
+																	<?php } ?>
+															<?php }?>
+														</div>
+												<?php }else{ ?>
+												<div class="row">
+															<?php foreach($location_list as $list){ ?>
 
-															<div class="col-md-4 pt-2">
-																<input onclick="locationsearch('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
+															<div class="col-md-6 pt-2">
+																<input onclick="locationsearch('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>','check');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
 															</div>
 															<?php } ?>
 														</div>
+												<?php }?>
 												</div>
 												<!--<div class="duration-help-class pt-4">
 												<label><h3>Duration</h3></label>
@@ -58,11 +77,11 @@
 														<tr>
 														<td>
 													
-															<?php if (in_array($list['id'], $out_source_list)) {?>
-																<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
-															<?php }else{ ?>
-																<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
-															<?php } ?>
+														<?php if (in_array($list['id'], $out_source_list)) {?>
+															<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+														<?php }else{ ?>
+															<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+														<?php } ?>
 														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name'].',':''; ?>
 														Duration : <?php echo isset($li['duration'])?$li['duration'].',':''; ?>
 														Amount : <?php echo isset($li['amuont'])?$li['amuont'].',':''; ?></b>
@@ -84,27 +103,30 @@
 												<button type="submit" class="btn btn-primary ">Submit</button>
 												</form>
 											</div>
-											</div>
-                                        </div>
-                                        
+											</div> 
+
+	</div>
+	</div>
 <script>
-function locationsearch(p_id,b_id,location){
-		if(p_id!='' && b_id!='' && location!=''){
-   		 jQuery.ajax({
+function locationsearch_result(p_id,b_id,location,types){
+
+   	jQuery.ajax({
    					url: "<?php echo site_url('lab/location_search');?>",
    					data: {
    						patient_id: p_id,
    						billing_id: b_id,
    						location_name: location,
+   						post_type: types,
    					},
-   					dataType: 'json',
+   					dataType: 'html',
    					type: 'POST',
    					success: function (data) {
-						$("#mobileviewelectoriccategory").empty();
-						$("#mobileviewelectoriccategory").append(data);
+						$("#result_search1").empty();
+						$("#result_search1").append(data);
 					}
    				});
-   			}
+   				
+   			
 	
 }
 function myFunction() {
@@ -126,6 +148,8 @@ function myFunction() {
 }
 </script>
 <script>
+
+/*
 var select = document.getElementById('input-select');
 
 // Append the option elements
@@ -137,8 +161,7 @@ for ( var i = -20; i <= 40; i++ ){
 
 	select.appendChild(option);
 }
-</script>			
-<script>
+
 var html5Slider = document.getElementById('html5');
 
 noUiSlider.create(html5Slider, {
@@ -149,8 +172,7 @@ noUiSlider.create(html5Slider, {
 		'max': 40
 	}
 });
-</script>			
-<script>
+
 var inputNumber = document.getElementById('input-number');
 
 html5Slider.noUiSlider.on('update', function( values, handle ) {
@@ -171,6 +193,8 @@ select.addEventListener('change', function(){
 inputNumber.addEventListener('change', function(){
 	html5Slider.noUiSlider.set([null, this.value]);
 });
+*/
 </script>
+
 
 

@@ -100,8 +100,8 @@
 														<div class="row">
 															<?php foreach($location_list as $list){ ?>
 
-															<div class="col-md-4 pt-2">
-																<input onclick="locationsearch('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
+															<div class="col-md-6 pt-2">
+																<input onclick="locationsearch('<?php echo isset($patient_id)?$patient_id:''; ?>','<?php echo isset($billing_id)?$billing_id:''; ?>','<?php echo isset($list)?$list:''; ?>','check');" type="checkbox" name="" value=""> &nbsp; <?php echo isset($list)?$list:''; ?>
 															</div>
 															<?php } ?>
 														</div>
@@ -257,7 +257,7 @@
 	 </div>
 </div>
 <script>
-function locationsearch(p_id,b_id,location){
+function locationsearch(p_id,b_id,location,types){
 		if(p_id!='' && b_id!='' && location!=''){
    		 jQuery.ajax({
    					url: "<?php echo site_url('lab/location_search');?>",
@@ -265,8 +265,9 @@ function locationsearch(p_id,b_id,location){
    						patient_id: p_id,
    						billing_id: b_id,
    						location_name: location,
+   						post_type: types,
    					},
-   					dataType: 'json',
+   					dataType: 'html',
    					type: 'POST',
    					success: function (data) {
 						$("#result_search").empty();
@@ -295,6 +296,8 @@ function myFunction() {
 }
 </script>
 <script>
+
+/*
 var select = document.getElementById('input-select');
 
 // Append the option elements
@@ -306,8 +309,7 @@ for ( var i = -20; i <= 40; i++ ){
 
 	select.appendChild(option);
 }
-</script>			
-<script>
+
 var html5Slider = document.getElementById('html5');
 
 noUiSlider.create(html5Slider, {
@@ -318,8 +320,7 @@ noUiSlider.create(html5Slider, {
 		'max': 40
 	}
 });
-</script>			
-<script>
+
 var inputNumber = document.getElementById('input-number');
 
 html5Slider.noUiSlider.on('update', function( values, handle ) {
@@ -340,6 +341,9 @@ select.addEventListener('change', function(){
 inputNumber.addEventListener('change', function(){
 	html5Slider.noUiSlider.set([null, this.value]);
 });
+*/
 </script>
+
+
 
 
