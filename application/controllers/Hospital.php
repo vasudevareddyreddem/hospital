@@ -59,7 +59,7 @@ class Hospital extends CI_Controller {
 				}
 			
 		}else{
-			$this->session->set_flashdata('error','Please login to continue');
+			//$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}

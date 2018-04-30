@@ -216,7 +216,7 @@ class Users extends CI_Controller {
 					$path = rtrim(FCPATH,"/");
 					$file_name = $patient_id.'_'.$billing_id.'.pdf';                
 					$data['page_title'] = $data['details']['information']['name'].'invoice'; // pass data to the view
-					$pdfFilePath = $path."assets/patient_medical_bill/".$file_name;
+					$pdfFilePath = $path."/assets/patient_medical_bill/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
 					$html = $this->load->view('prescription/billprescription', $data, true); // render the view into HTML
 					$this->load->library('pdf');
