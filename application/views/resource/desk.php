@@ -205,7 +205,7 @@
 											</div>
 											
 										</div>
-										<button class="btn btn-praimry " type="submit">Submit</button>
+										<button class="btn btn-praimry " type="submit">Next</button>
                                     </form>
 					</div>
 					<div class="tab-pane <?php if(isset($tab) && $tab==2){ echo "active";}?>" id="tab_6_2">
@@ -284,7 +284,7 @@
 											  <input type="file" class="form-control" id="patient_identifier"  name="patient_identifier"  value="">
 											</div>
 								</div>
-							<button class="btn btn-praimry " type="submit">Submit</button>
+							<button class="btn btn-praimry " type="submit">Next</button>
 
 						</form>
 					</div>
@@ -346,7 +346,7 @@
 										</div>
 										
 								</div>
-								<button class="btn btn-praimry " type="submit">Submit</button>
+								<button class="btn btn-praimry " type="submit">Next</button>
 								</form>
 					</div>
 					<div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
@@ -366,7 +366,7 @@
 							  <input type="text" class="form-control" id="search_doctor"  name="search_doctor"  value="<?php echo isset($patient_detailes['search_doctor'])?$patient_detailes['search_doctor']:''; ?>">
 							</div>
 						</div>										
-													<button class="btn btn-praimry " type="submit">Submit</button>
+													<button class="btn btn-praimry " type="submit">Next</button>
 
 					</form>
 					</div>
@@ -442,7 +442,7 @@
 										</div>
 										
 						</div>
-						<button class="btn btn-praimry " type="submit">Submit</button>
+						<button class="btn btn-praimry " type="submit">Next</button>
 						</form>
 						</div>
 					<div class="tab-pane <?php if(isset($tab) && $tab==6){ echo "active";}?>" id="tab_6_6">
@@ -462,7 +462,7 @@
 											  <textarea type="textarea" id="payer_address" name="payer_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['payer_address'])?$patient_detailes['payer_address']:''; ?></textarea>
 								</div>
 						</div>
-						<button class="btn btn-praimry " type="submit">Submit</button>
+						<button class="btn btn-praimry " type="submit">Next</button>
 						</form>
 					</div>
 					<div class="tab-pane <?php if(isset($tab) && $tab==7){ echo "active";}?>" id="tab_6_7">
@@ -494,7 +494,7 @@
 								  <input type="text" class="form-control" id="student"  name="student"  value="<?php echo isset($patient_detailes['student'])?$patient_detailes['student']:''; ?>">
 								</div>
 							</div>
-							<button class="btn btn-praimry " type="submit">Submit</button>
+							<button class="btn btn-praimry " type="submit">Next</button>
 						</form>
 						</div>
 						
@@ -716,7 +716,7 @@
 		</table>
 		
 							</div>
-							<button class="btn btn-praimry " type="submit">Submit</button>
+							<button class="btn btn-praimry " type="submit">Next</button>
 						</form>
 						</div>
 						
@@ -1363,14 +1363,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },g_city: {
@@ -1555,14 +1550,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },next_city: {
@@ -1924,14 +1914,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },
@@ -1975,14 +1960,9 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Zipcode is required'
 					},
-					stringLength: {
-                        max: 6,
-                        message: 'Zipcode  must be less than 10 characters'
-                    },
 					regexp: {
-					// regexp: /^[0-9A-Za-z ]{5,10}$/,
-					 regexp: /^[0-9][1-9]([0-9][0-9][0-9])|[1-9][0-9]([0-9][0-9][0-9])$/ ,
-					message: 'Zipcode is not valid, Should be like 32216.'
+					regexp: /^[0-9]{5,7}$/,
+					message: 'Zipcode  must be  5 to 7 characters'
 					}
 				}
             },
