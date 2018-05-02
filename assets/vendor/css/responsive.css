@@ -64,6 +64,11 @@
     .hidden-1024 {
         display: none
     }
+	div.dataTables_wrapper div.dataTables_filter input {
+    margin-left: -6.5em;
+    display: inline-block;
+    width: auto;
+}
 }
 
 @media (max-width:480px) {

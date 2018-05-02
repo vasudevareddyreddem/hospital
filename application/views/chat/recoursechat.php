@@ -124,9 +124,9 @@
 													<div class="panel-footer"><br>
 														<div class="input-group input-chat-des">
 															
-															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
-															<input  type="file" name="image" id="image" class="form-control col-md-3" />
-															<select class="form-control col-md-3" name="resource_name" id="resource_name">
+															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required> &nbsp;
+															<input  type="file" name="image" id="image" class="form-control col-md-3" /> &nbsp;
+															<select class="form-control col-md-3 " name="resource_name" id="resource_name" style="height:44px;">
 															<option value="">Select</option>
 															<?php foreach($resources_list as $list){ ?>
 															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>

@@ -6,7 +6,9 @@
 
 
 /* Doctor list style*/
-
+.col-sm-6{
+	  word-wrap: break-word;
+}
 ul.docListWindow {
 	list-style-type: none;
     padding: 0 10px;

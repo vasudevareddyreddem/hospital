@@ -37,17 +37,17 @@
         <div class="form formLogin">
 		 <?php if($this->session->flashdata('success')): ?>
 				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="fa fa-check text-success ico_bac" aria-hidden="true"></i>
 				</div>
 			<?php endif; ?>
 			<?php if($this->session->flashdata('error')): ?>
 				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="fa fa-exclamation-triangle text-warning ico_bac" aria-hidden="true"></i>
 				</div>
 			<?php endif; ?>
 			<?php if($this->session->flashdata('loginerror')): ?>
 				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('loginerror');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				<?php echo $this->session->flashdata('loginerror');?> &nbsp; <i class="fa fa-exclamation-triangle text-warning ico_bac" aria-hidden="true"></i>
 				</div>
 			<?php endif; ?>
             <h2>Login to your account</h2>

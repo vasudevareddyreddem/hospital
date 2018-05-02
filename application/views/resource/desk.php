@@ -150,12 +150,12 @@
 											
 										
 										
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-12">
 											  <label for="email"> Perment Address</label>
 											  <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
 											</div>
 											
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-12">
 											  <label for="email">Nationality</label>
 											  
 											 <div class="row">
@@ -177,11 +177,11 @@
 											</div>
 											</div>
 											</div>
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-12">
 											  <label for="email">temp Address</label>
 											  <textarea type="textarea" id="temp_address" name="temp_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['temp_address'])?$patient_detailes['temp_address']:''; ?></textarea>
 											</div>
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-12">
 											  <label for="email">Nationality</label>
 											  
 											 <div class="row">
