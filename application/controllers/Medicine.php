@@ -51,10 +51,14 @@ class Medicine extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$medicine_list=$this->medicine_model->get_all_medicine_list($userdetails['hos_id']);
-					foreach($medicine_list as $lists){
-						$list[]=$lists["medicine_name"];
+					if(count($medicine_list)>0){
+							foreach($medicine_list as $lists){
+							$list[]=$lists["medicine_name"];
+							}
+						$data['medicine_lists'] ="'" . implode ( "', '", $list ) . "'";
+					}else{
+						$data['medicine_lists']=array();
 					}
-					$data['medicine_lists'] ="'" . implode ( "', '", $list ) . "'";
 					$this->load->view('resource/medicine',$data);
 					$this->load->view('html/footer1');
 				}else{
