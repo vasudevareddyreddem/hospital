@@ -1,3 +1,4 @@
+<?php //echo '<pre>';print_r($prescriptions);exit; ?>
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -13,16 +14,34 @@
 				 </ol>
 			  </div>
 		   </div>
+		     <?php if($this->session->flashdata('success')): ?>
+				<div class="alert_msg1 animated slideInUp bg-succ">
+				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
+			<?php if($this->session->flashdata('error')): ?>
+				<div class="alert_msg1 animated slideInUp bg-warn">
+				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
+				</div>
+			<?php endif; ?>
 					<div class="row">
                                 <div class="col-md-12">
                                     <div class="card ">
                                         <div class="card-head">
                                             <header>Name : &nbsp;<span><?php echo isset($prescriptions['information']['name'])?$prescriptions['information']['name']:''; ?> </span><h4 class="py-2"><?php echo isset($prescriptions['information']['mobile'])?$prescriptions['information']['mobile']:''; ?></h4></header>
-									<div class="tools">
-                                   <h4><b>ID: <span><?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?></span></b></h4>
-                                   <h5><b>DOB: <span><?php echo isset($prescriptions['information']['dob'])?$prescriptions['information']['dob']:''; ?></span></b></h5>
-									
-                                 </div>
+											<div class="tools">
+											<h4><b>ID: <span><?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?></span></b></h4>
+											<h5><b>DOB: <span><?php echo isset($prescriptions['information']['dob'])?$prescriptions['information']['dob']:''; ?></span></b></h5>
+											<?php if($prescriptions['information']['sheet_prescription']==1){ ?>
+											<form action="<?php echo base_url('users/sheet_prescription'); ?>" method="post" enctype="multipart/form-data">
+											<input type="hidden" name="p_id" value="<?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?>">
+											<input type="hidden" name="b_id" value="<?php echo isset($prescriptions['information']['b_id'])?$prescriptions['information']['b_id']:''; ?>">
+											<input type="hidden" name="sheet_prescription_name" value="<?php echo isset($prescriptions['information']['sheet_prescription_file'])?$prescriptions['information']['sheet_prescription_file']:''; ?>">
+											Sheet Prescription File : <input type="file" name="sheet_prescription">
+											<button type="submit" value="submit">submit</button>
+											</form>
+											<?php } ?>
+											</div>
                                           
                                         </div>
                                         <div class="card-body " style="padding: 0px 24px 24px 24px;">

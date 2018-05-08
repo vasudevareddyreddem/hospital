@@ -172,7 +172,10 @@
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Investigation</a>
                      </li>
+					
+                   
                   </ul>
+				  <a href="<?php echo base_url('resources/skip_prescription/'.base64_encode($patient_id).'/'.base64_encode($billing_id)); ?>" >Alternate way</a>
                </header>
                <div class="panel-body">
                   <div class="tab-content">

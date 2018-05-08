@@ -60,6 +60,8 @@ class Resources extends CI_Controller {
 						$data['pid']= base64_decode($this->uri->segment(3));
 						$data['subtab']=base64_decode($this->uri->segment(6));
 						$data['bill_id']=base64_decode($this->uri->segment(5));
+						
+						
 						$billing_id=base64_decode($this->uri->segment(5));
 						if($billing_id!=''){
 							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
@@ -149,10 +151,20 @@ class Resources extends CI_Controller {
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab1);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Basic Details successfully Updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(2));
+							if(isset($post['op']) && $post['op']==1){
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
+							}else{
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(2));	
+							}
+							
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(1));
+							if(isset($post['op']) && $post['op']==1){
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
+							}else{
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(1));
+							
+							}
 						}
 					}else{
 							$addtab=$this->Resources_model->save_basic_details($tab1);
@@ -168,7 +180,18 @@ class Resources extends CI_Controller {
 
 								$this->Resources_model->update_patient_details($addtab,$code);
 								$this->session->set_flashdata('success',"Basic Details successfully Added.");
-								redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(2));
+								if(isset($post['op']) && $post['op']==1){
+									$billing=array(
+									'p_id'=>isset($addtab)?$addtab:'',
+									'create_at'=>date('Y-m-d H:i:s'),
+									'type'=>'new'
+									);
+									//echo '<pre>';print_r($billing);exit;
+									$update=$this->Resources_model->update_all_patient_billing_details($billing);
+								redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(11).'/'.base64_encode($update));
+								}else{
+								redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(2));	
+								}
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 									redirect('resources/desk');
@@ -674,7 +697,7 @@ class Resources extends CI_Controller {
 		'completed'=>1
 		);
 		$update=$this->Resources_model->update_patient_billing_details($post['billing_id'],$billing);
-
+		//echo $this->db->last_query();exit;
 		if(count($update) > 0)
 				{
 				$data['msg']=1;
@@ -1157,6 +1180,30 @@ class Resources extends CI_Controller {
 			}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('resources/consultation/'.base64_encode($post['pid']).''/''.base64_encode($post['billing_id']).'#step-3');
+			}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function skip_prescription(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$post=$this->input->post();
+			$pid=base64_decode($this->uri->segment(3));
+			$billing_id=base64_decode($this->uri->segment(4));
+			$complete=array(
+			'sheet_prescription'=>1,
+			);
+			$completed=$this->Resources_model->update_all_billing_compelted_details($pid,$billing_id,$complete);
+			if(count($completed)>0){
+				$this->session->set_flashdata('success',"Patient details successfully updated.");
+				redirect('resources/consultation/'.base64_encode($pid).'/'.base64_encode($billing_id).'#step-3');
+			}else{
+				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+				redirect('resources/consultation/'.base64_encode($pid).'/'.base64_encode($billing_id).'#step-2');
 			}
 			
 		}else{

@@ -134,13 +134,7 @@ table, th, td {
 		</span></td>
 	
 		
-	  </tr>   
-	  <tr>
-		<td colspan="3"><strong>Address:</strong> <span>Use this tool as test data for an automated system </span></td>
-		<td><strong>Name:</strong> <span>siva kumar reddy</span></td>
-		
-		
-	  </tr> 
+	  </tr>  
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Visit Info</th>
 		

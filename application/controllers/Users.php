@@ -108,6 +108,47 @@ class Users extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function sheet_prescription()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$pic=$_FILES['sheet_prescription']['name'];
+					$picname = str_replace(" ", "", $pic);
+					$imagename=microtime().basename($picname);
+					$imgname = str_replace(" ", "", $imagename);
+					if(move_uploaded_file($_FILES['sheet_prescription']['tmp_name'], "assets/sheet_prescriptions/" . $imgname)){
+						if($post['sheet_prescription_name']!=''){
+							unlink("assets/sheet_prescriptions/".$post['sheet_prescription_name']);
+
+						}
+					$filedata=array(
+						'sheet_prescription_file'=>$imgname,
+						);
+					$addfile = $this->Users_model->update_billing_prescription_file($post['p_id'],$post['b_id'],$filedata);
+						if(count($addfile)>0){
+							$this->session->set_flashdata('success',"Patient prescription file successfully updated.");
+							redirect('users/prescriptionview/'.base64_encode($post['p_id']).'/'.base64_encode($post['b_id']));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('users/prescriptionview/'.base64_encode($post['p_id']).'/'.base64_encode($post['b_id']));
+
+						}
+					}
+					echo '<pre>';print_r($post);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function viewprescription()
 	{	
 		if($this->session->userdata('userdetails'))
