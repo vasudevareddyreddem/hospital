@@ -611,9 +611,11 @@
 																 <div id="demo" class="collapse in">
 																	<div class="form-group col-md-12">
 																		<label for="mobile">Coupon Code</label>
-																		<input type="text" class="form-control" id="coupon_code"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
-																	</div><span id="errormsg" style="color:red;"></span>
+																		<input type="text" class="form-control" id="coupon_code"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																	</div>
 																	<span id="successmsg" style="color:green;"></span>
+																	<span id="errormsg" style="color:red;"></span>
+																	
 																	<div class="form-group col-md-12">
 																	<button type="button" onclick="apply_couponcode();" id="">Apply</button>
 																	</div>
@@ -1014,8 +1016,15 @@ function apply_couponcode(){
    					type: 'POST',
    					success: function (data) {
 						$('#sucessmsg').show();
+						if(data.msg==1){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Promo code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							$('#bill_amount').val(data.amt);
+							document.getElementById("successmsg").innerHTML="Promo code applied Successfully.coupon Amount is "+data.cou_amt+" decreased";
+						}
 						if(data.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid coupon code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}if(data.msg==3){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
