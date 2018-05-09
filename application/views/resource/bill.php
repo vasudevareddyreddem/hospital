@@ -170,15 +170,27 @@ table, th, td {
 		<td colspan="4"><strong>Bill:</strong> <span><?php echo isset($details['bill'])?$details['bill']:''; ?></span></td>
 		</tr>
 		<tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Bill Info</th>
+		<th colspan="5">Bill Info</th>
 		
 	  </tr>
 	  <tr>
 		<td><strong>Patient amount / payer amount / deposit:</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
 		<td><strong>Payment mode:</strong> <span><?php echo isset($details['payment_mode'])?$details['payment_mode']:''; ?></span></td>
-		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
+		<td><strong>Amount:</strong> <span>
+		<?php if($details['coupon_code']!=''){ ?>
+			<?php echo isset($details['with_out_coupon_code'])?$details['with_out_coupon_code']:''; ?>  <?php echo $amt = (($details['coupon_code_amount']) - ($details['with_out_coupon_code'])); ?> : <?php echo isset($details['coupon_code_amount'])?$details['coupon_code_amount']:''; ?>
+		<?php }else{ ?>
+			<?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?>
+		<?php } ?>
+		</span></td>
 		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
 	  </tr>
+	  <?php if($details['coupon_code']!=''){ ?>
+	  <tr>
+		<td colspan="2"><strong>Coupon code:</strong> <span><?php echo isset($details['coupon_code'])?$details['coupon_code']:''; ?></span></td>
+		<td colspan="2"><strong>Coupon code Status:</strong> <span>Applied</span></td>
+		</tr>
+	  <?php } ?>
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Payer Auth Info</th>
 		

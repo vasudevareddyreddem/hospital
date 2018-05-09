@@ -1022,9 +1022,11 @@ function apply_couponcode(){
 							document.getElementById("successmsg").innerHTML="Promo code applied Successfully.coupon Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid coupon code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Promo code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}if(data.msg==4){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Promo code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}

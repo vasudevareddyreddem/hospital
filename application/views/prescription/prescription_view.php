@@ -37,7 +37,7 @@
 											<input type="hidden" name="p_id" value="<?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?>">
 											<input type="hidden" name="b_id" value="<?php echo isset($prescriptions['information']['b_id'])?$prescriptions['information']['b_id']:''; ?>">
 											<input type="hidden" name="sheet_prescription_name" value="<?php echo isset($prescriptions['information']['sheet_prescription_file'])?$prescriptions['information']['sheet_prescription_file']:''; ?>">
-											Sheet Prescription File : <input type="file" name="sheet_prescription">
+											Upload Prescription File : <input type="file" name="sheet_prescription">
 											<button type="submit" value="submit">submit</button>
 											</form>
 											<?php } ?>
