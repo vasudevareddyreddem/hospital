@@ -28,17 +28,17 @@
             <div class="panel tab-border card-topline-yellow">
                <header class="panel-heading panel-heading-gray custom-tab ">
                   <ul class="nav nav-tabs">
-                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11){ echo "active";}?>">IP New-Registration</a>
+                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12){ echo "active";}?>">IP New-Registration</a>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule-Registration</a>
                      </li>
-                     <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11){ echo "active";}?>">OP Reschedule-Registration</a>
+                     <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>">OP Registration</a>
                      </li>
                   </ul>
                </header>
                <div class="panel-body">
                   <div class="tab-content">
-                     <div class="tab-pane <?php if(isset($tab) && $tab!=11){ echo "active";}?>" id="home">
+                     <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12){ echo "active";}?>" id="home">
                         <div class="card ">
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
                               <div class="row">
@@ -782,30 +782,32 @@
                            </div>
                         </div>
                      </div>
-                     <div class="tab-pane  <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="aboutop">
+                     <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>" id="aboutop">
                         <div class="card card-topline-red">
                            <div class="card-head">
                               <header>Patients Details</header>
                              
                            </div>
                            <div class="card-body ">
-                              <div class="card ">
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
                               <div class="row">
                                  <div class="col-md-3 col-sm-3 col-xs-3">
                                     <ul class="nav nav-tabs tabs-left">
                                        <li class="nav-item">
-                                          <a href="#tab_6_11" data-toggle="tab" class="<?php if(isset($tab) && $tab !=11){ echo "active";}?>"> Basic Details </a>
+                                          <a href="#tab_6_11" data-toggle="tab" class="<?php if(isset($tab) && $tab !=11 && $tab!=12){ echo "active";}?>"> Basic Details </a>
                                        </li>
                                        <li class="nav-item ">
-                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Assign </a>
+                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Bill Information </a>
+                                       </li>
+									   <li class="nav-item ">
+                                          <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Assign </a>
                                        </li>
                                       
                                     </ul>
                                  </div>
                                  <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="tab-content">
-                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11){ echo "active";}?>" id="tab_6_11">
+                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12){ echo "active";}?>" id="tab_6_11">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
@@ -832,6 +834,10 @@
                                                       <option value="Sponsor" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Sponsor'){ echo "Selected"; } ?>>Sponsor</option>
                                                       <option value="International cash" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
                                                    </select>
+                                                </div>
+												<div class="form-group col-md-12">
+                                                   <label for="Name">Problem</label>
+                                                   <input type="text" class="form-control" id="problem"  name="problem" placeholder="Enter Problem" value="<?php echo isset($patient_detailes['problem'])?$patient_detailes['problem']:''; ?>">
                                                 </div>
 												<div class="form-group col-md-6">
                                                    <label for="Name">Name</label>
@@ -900,6 +906,33 @@
 										</form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_22">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
+                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+                                             <input type="hidden" id="op" name="op" value="1">
+
+											  <div class="row">
+                                               <div class="form-group col-md-6">
+                                                                  <label for="mobile">Patient amount / payer amount / deposit</label>
+                                                                  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Patient amount / payer amount / deposit" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
+                                                               </div>
+                                                               <div class="form-group col-md-6">
+                                                                  <label for="mobile">Payment mode</label>
+                                                                  <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
+                                                               </div>
+                                                               <div class="form-group col-md-6">
+                                                                  <label for="mobile">Amount</label>
+                                                                  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+                                                               </div>
+                                                               <div class="form-group col-md-6">
+                                                                  <label for="mobile">Received from</label>
+                                                                  <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
+                                                               </div>
+                                             </div>
+                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                          </form>
+                                       </div> 
+									   <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_223">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/desk'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
@@ -921,7 +954,7 @@
                                                 <div class="form-group col-md-6">
                                                    <label for="email">&nbsp;</label>
                                                    <a href="javascript:void(0);" onclick="assign_doctore1();" class="btn btn-praimry " >Assign</a>
-                                                   <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry">Print</a>
+                                                   <a target="_blank" href="<?php echo base_url('resources/op_print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry">Print</a>
                                                 </div>
                                              </div>
                                              <button class="btn btn-praimry " type="submit">Next</button>
@@ -937,7 +970,6 @@
                                  </div>
                               </div>
                            </div>
-                        </div>
                            </div>
                         </div>
                      </div>
