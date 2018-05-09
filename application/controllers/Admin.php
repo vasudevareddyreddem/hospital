@@ -102,6 +102,26 @@ class Admin extends CI_Controller {
 					$post=$this->input->post();
 					$checkcode=$this->Admin_model->get_coupon_code_details(trim($post['coupon_code']));
 					if(count($checkcode)>0){
+						
+						if($checkcode['type']=='Amount'){
+							$amount=($post['bill_amount'])-($checkcode['percentage_amount']);
+							$code_details=array(
+							'coupon_code'=>$post['coupon_code'],
+							'coupon_code_amount'=>$checkcode['percentage_amount']
+							'with_out_coupon_code'=>$checkcode['bill_amount']
+							);
+							$addcode=$this->Admin_model->update_billing_details($post['patient_id'],$post['biling_id'],$code_details);
+							if(count($addcode)>0){
+								$data['msg']=1;
+								$data['amt']=$amount;
+								echo json_encode($data);exit;
+							}else{
+								$data['msg']=3;
+								echo json_encode($data);exit;
+							}
+						}else{
+							
+						}
 						echo '<pre>';print_r($checkcode);exit;
 					}else{
 						$data['msg']=2;

@@ -323,5 +323,10 @@ class Admin_model extends CI_Model
 		$this->db->where('coupon_codes.coupon_code',$code);
         return $this->db->get()->row_array();
 	}
+	public function update_billing_details($pid,$bid,$data){
+		$this->db->where('b_id',$bid);
+		$this->db->where('p_id',$pid);
+    	return $this->db->update("patient_billing",$data);
+	}
 
 }
