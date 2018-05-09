@@ -301,6 +301,22 @@ class Admin_model extends CI_Model
 		$sql1="DELETE FROM resource_list WHERE r_id = '".$t_id."'";
 		return $this->db->query($sql1);
 	}
-
+	public function save_coupon_codes($data){
+		$this->db->insert('coupon_codes', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	public function get_all_coupon_code_list($id){
+		$this->db->select('*')->from('coupon_codes');
+		$this->db->where('coupon_codes.create_by',$id);
+        return $this->db->get()->result_array();
+	}
+	public function delete_coupon_code($c_id){
+		$sql1="DELETE FROM coupon_codes WHERE id = '".$c_id."'";
+		return $this->db->query($sql1);
+	}
+	public function update_coupon_code_details($id,$data){
+		$this->db->where('id',$id);
+    	return $this->db->update("coupon_codes",$data);
+	}
 
 }

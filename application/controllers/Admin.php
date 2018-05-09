@@ -93,6 +93,154 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function couponcodes()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$admindetails=$this->session->userdata('userdetails');
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
+					$this->load->view('admin/coupon_codes',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function coupon_post()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					$coupon_code=array(
+					'coupon_code'=>$post['coupon_code'],
+					'type'=>$post['type'],
+					'percentage_amount'=>$post['percentage_amount'],
+					'create_at'=>date('Y-m-d H:i:s'),
+					'create_by'=>$admindetails['a_id']
+					);
+					$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
+					if(count($addcoupon)>0){
+						$this->session->set_flashdata('success',"password successfully updated");
+						redirect('admin/couponcodes/'.base64_encode(1));
+					}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('admin/couponcodes');
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function delete_couponcode()
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$coupon_id=base64_decode($this->uri->segment(3));
+					$delete=$this->Admin_model->delete_coupon_code($coupon_id);
+						if(count($delete)>0){
+							$this->session->set_flashdata('success',"Coupon Code successfully Deleted.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function coupon_code_status()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$admindetails=$this->session->userdata('userdetails');
+					$test_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$sta=0;
+					}else{
+						$sta=1;
+					}
+					$details=array(
+						'status'=>$sta,
+						'updated_time'=>date('Y-m-d H:i:s')
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$updated=$this->Admin_model->update_coupon_code_details($test_id,$details);
+						if(count($updated)>0){
+							if($status==1){
+							$this->session->set_flashdata('success',"Coupon code successfully Deactivate.");
+							}else{
+								$this->session->set_flashdata('success',"Coupon code successfully Activate.");
+							}
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function update_coupon_code()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$post=$this->input->post();
+						$coupon_code=array(
+						'coupon_code'=>$post['coupon_code'],
+						'type'=>$post['type'],
+						'percentage_amount'=>$post['percentage_amount'],
+						'updated_time'=>date('Y-m-d H:i:s')
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
+						if(count($save)>0){
+							$this->session->set_flashdata('success',"Coupon code successfully Updated.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function chat()
 	{
 		if($this->session->userdata('userdetails'))

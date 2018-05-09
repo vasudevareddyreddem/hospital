@@ -28,12 +28,14 @@
             <div class="panel tab-border card-topline-yellow">
                <header class="panel-heading panel-heading-gray custom-tab ">
                   <ul class="nav nav-tabs">
+				    
                      <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12){ echo "active";}?>">IP New-Registration</a>
+                     </li>
+					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>">OP Registration</a>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule-Registration</a>
                      </li>
-                     <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>">OP Registration</a>
-                     </li>
+                   
                   </ul>
                </header>
                <div class="panel-body">
@@ -145,11 +147,11 @@
                                                    <label for="text">National ID</label>
                                                    <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Adhar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                    <label for="email"> Perment Address</label>
                                                    <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                    <label for="email">Nationality</label>
                                                    <div class="row">
                                                       <div class="col-md-3 row">
@@ -166,11 +168,11 @@
                                                       </div>
                                                    </div>
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                    <label for="email">temp Address</label>
                                                    <textarea type="textarea" id="temp_address" name="temp_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['temp_address'])?$patient_detailes['temp_address']:''; ?></textarea>
                                                 </div>
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                    <label for="email">Nationality</label>
                                                    <div class="row">
                                                       <div class="col-md-3 row">
@@ -603,6 +605,18 @@
                                                                   <label for="mobile">Received from</label>
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
+															   <div class="form-group col-md-12">
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> I Have a coupon code ?</a>
+																 </div>
+																 <div id="demo" class="collapse in">
+																	<div class="form-group col-md-12">
+																		<label for="mobile">Coupon Code</label>
+																		<input type="text" class="form-control" id="coupon_code"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
+																	</div>
+																	<div class="form-group col-md-12">
+																	<button type="button" id="">Apply</button>
+																	</div>
+																 </div>
                                                             </div>
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
@@ -808,7 +822,7 @@
                                  <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="tab-content">
                                        <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12){ echo "active";}?>" id="tab_6_11">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details1" name="basic_details1">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
@@ -1962,6 +1976,233 @@
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'Name can only consist of alphanumaric, space and dot'
+   					}
+   				}
+               },
+               email: {
+                  validators: {
+   					notEmpty: {
+   						message: 'Email is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+   					message: 'Please enter a valid email address. For example johndoe@domain.com.'
+   					}
+   				}
+               },
+               mobile: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Mobile Number is required'
+   					},
+   					regexp: {
+   					regexp:  /^[0-9]{10,14}$/,
+   					message:'Mobile Number must be 10 to 14 digits'
+   					}
+   				
+   				}
+               },
+   			age: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Age is required'
+   					},
+   					regexp: {
+   					regexp:  /^[0-9]{2}$/,
+   					message:'Mobile Number must be 10 to 14 digits'
+   					}
+   				
+   				}
+               },
+   			bloodgroup: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Blood group is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Blood group can only consist of alphanumaric, space and dot'
+   					}
+   				}
+               },
+   			martial_status: {
+                    validators: {
+   					 notEmpty: {
+                           message: 'Please select Martial status'
+                       }
+   				
+   				}
+               },
+               nationali_id: {
+                    validators: {
+   					notEmpty: {
+   						message: 'National ID is required'
+   					},
+   					regexp: {
+   					regexp:  /^[0-9]{10,16}$/,
+   					message:'National ID must be 10 to 14 digits'
+   					}
+   				
+   				}
+               }, 
+   			perment_address: {
+                   validators: {
+   					notEmpty: {
+   						message: 'Address is required'
+   					},
+                       regexp: {
+   					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+   					message:'Address wont allow <> [] = % '
+   					}
+                   }
+               },
+               p_c_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'City is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'City can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               },
+               p_country_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'Country is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Country can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               },
+   			p_s_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'State is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'State can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               },
+               p_zipcode: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Zipcode is required'
+   					},
+   					regexp: {
+   					regexp: /^[0-9]{5,7}$/,
+   					message: 'Zipcode  must be  5 to 7 characters'
+   					}
+   				}
+               },
+   			temp_address: {
+                   validators: {
+   					notEmpty: {
+   						message: 'Address is required'
+   					},
+                       regexp: {
+   					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+   					message:'Address wont allow <> [] = % '
+   					}
+                   }
+               },
+   			t_c_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'City is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'City can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               },
+   			t_s_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'State is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'State can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               },
+   			t_zipcode: {
+                 validators: {
+   					notEmpty: {
+   						message: 'Zipcode is required'
+   					},
+   					regexp: {
+   					regexp: /^[0-9]{5,7}$/,
+   					message: 'Zipcode  must be  5 to 7 characters'
+   					}
+   				}
+               },
+   			t_country_name: {
+                   validators: {
+   					notEmpty: {
+   						message: 'Country is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Country can only consist of alphanumaric, space and dot'
+   					}
+   				
+   				}
+               }
+               }
+           })
+        
+   });
+   $(document).ready(function() {
+    
+       $('#basic_details1').bootstrapValidator({
+           
+           fields: {
+               registrationtype: {
+                   validators: {
+                         notEmpty: {
+                           message: 'Please select Registration Type '
+                       }
+                   }
+               },
+   			patient_category: {
+                   validators: {
+                         notEmpty: {
+                           message: 'Please select Patient category '
+                       }
+                   }
+               },
+                name: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Name is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Name can only consist of alphanumaric, space and dot'
+   					}
+   				}
+               },
+			   problem: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Problem is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Problem can only consist of alphanumaric, space and dot'
    					}
    				}
                },
