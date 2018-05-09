@@ -93,6 +93,30 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function checking_coupon_code()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$post=$this->input->post();
+					$checkcode=$this->Admin_model->get_coupon_code_details(trim($post['coupon_code']));
+					if(count($checkcode)>0){
+						echo '<pre>';print_r($checkcode);exit;
+					}else{
+						$data['msg']=2;
+						echo json_encode($data);exit;
+					}
+					//echo '<pre>';print_r($post);exit;
+					}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function couponcodes()
 	{	
 		if($this->session->userdata('userdetails'))

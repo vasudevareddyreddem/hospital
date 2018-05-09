@@ -318,5 +318,10 @@ class Admin_model extends CI_Model
 		$this->db->where('id',$id);
     	return $this->db->update("coupon_codes",$data);
 	}
+	public function get_coupon_code_details($code){
+		$this->db->select('*')->from('coupon_codes');
+		$this->db->where('coupon_codes.coupon_code',$code);
+        return $this->db->get()->row_array();
+	}
 
 }

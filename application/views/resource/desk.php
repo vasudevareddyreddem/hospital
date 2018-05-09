@@ -612,12 +612,14 @@
 																	<div class="form-group col-md-12">
 																		<label for="mobile">Coupon Code</label>
 																		<input type="text" class="form-control" id="coupon_code"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
-																	</div>
+																	</div><span id="errormsg" style="color:red;"></span>
+																	<span id="successmsg" style="color:green;"></span>
 																	<div class="form-group col-md-12">
-																	<button type="button" id="">Apply</button>
+																	<button type="button" onclick="apply_couponcode();" id="">Apply</button>
+																	</div>
 																	</div>
 																 </div>
-                                                            </div>
+                                                            
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
                                                          </form>
@@ -996,6 +998,34 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+function apply_couponcode(){
+	var amount=$('#bill_amount').val();
+	if(amount !=''){
+		document.getElementById("errormsg").innerHTML="";
+				jQuery.ajax({
+   				url: "<?php echo base_url('admin/checking_coupon_code');?>",
+   					data: {
+   						coupon_code: $('#coupon_code').val(),
+   						bill_amount: amount,
+   						patient_id: $('#pid').val(),
+   						biling_id: $('#b_id').val(),
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						$('#sucessmsg').show();
+						if(data.msg==2){
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid coupon code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}
+   						
+   					}
+   				});
+
+	}else{
+		 document.getElementById("errormsg").innerHTML="Please eneter amount";
+	}
+	
+}
    function assign_doctore(){
    	var pid=$('#patientid').val();
    	var bid=$('#billing_id').val();
