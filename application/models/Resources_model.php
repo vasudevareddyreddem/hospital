@@ -130,7 +130,7 @@ class Resources_model extends CI_Model
 		$this->db->join('resource_list as assignby', 'assignby.a_id = patient_billing.assign_doctor_by', 'left');
 		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
 		$this->db->where('patients_list_1.hos_id',$hos_id);
-		$this->db->where('patient_billing.assign_doctor_by',$doctor_id);
+		$this->db->where('patient_billing.assign_doctor_to',$doctor_id);
         return $this->db->get()->result_array();
 	}
 	public function get_patient_details($pid){
