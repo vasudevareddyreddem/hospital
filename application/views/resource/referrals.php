@@ -35,9 +35,11 @@
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>Queue No</th>
+                                                <th>Billing No</th>
                                                 <th>Slot</th>
 												<th>PURN</th>
+												 <th>Patient Card Number </th>
+
                                                 <th>Patient Name </th>
                                                 <th>Age/Sex</th>
                                                 <th>Visit Type</th>
@@ -52,6 +54,7 @@
                                                 <td><?php echo htmlentities($list['b_id']); ?></td>
                                                 <td><button class="btn btn-xs bg-success no-margin" type="button"><?php echo htmlentities($list['type']); ?></button></td>
                                                 <td><?php echo htmlentities($list['pid']); ?></td>
+                                                <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><?php echo htmlentities($list['name']); ?></td>
                                                 
 												<td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>

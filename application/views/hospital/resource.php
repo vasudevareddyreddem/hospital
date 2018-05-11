@@ -69,8 +69,8 @@
 										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
 									</div>
 									<div class="col-md-6">
-										<label> Zipcode</label>
-										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Zipcode">
+										<label> Pin code</label>
+										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Pin code">
 									</div>
 										<div class="col-md-6">
 										<label> Other Details</label>
@@ -342,15 +342,11 @@ $(document).ready(function() {
             },resource_zipcode: {
                   validators: {
 					notEmpty: {
-						message: 'Zipcode is required'
+						message: 'Pin code is required'
 					},
-					stringLength: {
-                        max: 7,
-                        message: 'Zipcode  must be less than 7 characters'
-                    },
 					regexp: {
 					regexp: /^[0-9]{5,7}$/,
-					message: 'Zipcode  must be  5 to 7 characters'
+					message: 'Pin code  must be  5 to 7 characters'
 					}
 				}
             },resource_photo: {

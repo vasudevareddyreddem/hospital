@@ -84,7 +84,15 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-12">
+                                                   <label for="email">Patient Card Number</label>
+													<?php if(isset($patient_detailes['card_number']) && $patient_detailes['card_number']!=''){ ?>
+                                                   <input type="text" class="form-control"  onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" disabled>
+												   <?php } else{ ?>
+												           <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+
+												   <?php } ?>                                               </div>
+												<div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
                                                    <select id="registrationtype" name="registrationtype" class="form-control" >
                                                       <option value="">Select</option>
@@ -135,7 +143,7 @@
                                                    <input type="text" class="form-control" id="bloodgroup"  name="bloodgroup" placeholder="Enter Blood Group" value="<?php echo isset($patient_detailes['bloodgroup'])?$patient_detailes['bloodgroup']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="mobile">Martial status</label>
+                                                   <label for="mobile">Marital status</label>
                                                    <select id="martial_status" name="martial_status" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="Single" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
@@ -161,7 +169,7 @@
                                                          <input type="text" id="p_s_name" name="p_s_name"  class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['p_s_name'])?$patient_detailes['p_s_name']:''; ?>">
                                                       </div>
                                                       <div class="col-md-3">
-                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Zip Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
+                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
                                                       <div class="col-md-3 row">
                                                          <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>" >
@@ -182,7 +190,7 @@
                                                          <input type="text" id="t_s_name" name="t_s_name" class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['t_s_name'])?$patient_detailes['t_s_name']:''; ?>">
                                                       </div>
                                                       <div class="col-md-3">
-                                                         <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Zip Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
+                                                         <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
                                                       </div>
                                                       <div class="col-md-3 row">
                                                          <input type="text" id="t_country_name" name="t_country_name" class="form-control" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>"  placeholder="Country" >
@@ -190,7 +198,7 @@
                                                    </div>
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-praimry" id="firstform" type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==2){ echo "active";}?>" id="tab_6_2">
@@ -685,7 +693,7 @@
                                                          <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
                                                          <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
                                                          </td>
-                                                         <th> Pulse rate sight  </th>
+                                                         <th> Pulse rate site  </th>
                                                          <td>
                                                             <div class="row">					
                                                                <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
@@ -752,6 +760,7 @@
                                  <thead>
                                     <tr>
                                        <th> Patient Id </th>
+                                       <th> Patient card Nunber</th>
                                        <th> Name </th>
                                        <th> Type </th>
                                        <th> category </th>
@@ -764,6 +773,7 @@
                                     <?php foreach($patients_list as $list){ ?>
                                     <tr class="odd gradeX">
                                        <td> <?php echo $list['pid']; ?> </td>
+                                       <td> <?php echo $list['card_number']; ?> </td>
                                        <td>
                                           <?php echo $list['name']; ?>
                                        </td>
@@ -830,6 +840,15 @@
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
+												<div class="form-group col-md-12">
+                                                   <label for="email">Patient Card Number</label>
+												   <?php if(isset($patient_detailes['card_number']) && $patient_detailes['card_number']!=''){ ?>
+                                                   <input type="text" class="form-control"  onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" disabled>
+												   <?php } else{ ?>
+												           <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+
+												   <?php } ?>
+												</div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
                                                    <select id="registrationtype" name="registrationtype" class="form-control" >
@@ -919,7 +938,7 @@
                                                    </div>
                                                 </div>
 												 
-												    <button class="btn btn-praimry " type="submit">Next</button>
+												    <button class="btn btn-praimry" id="firstform1" type="submit">Next</button>
                                           </div>
 										</form>
                                        </div>
@@ -1000,6 +1019,36 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+function checkpatient_number(num){
+	var length=num.length;
+	if(length>= '12' && length<= '16'){
+			jQuery.ajax({
+   				url: "<?php echo base_url('resources/checking_card_number');?>",
+   					data: {
+   						card_number: num,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						$('#sucessmsg').show();
+						if(data.msg==1){
+							document.getElementById("firstform1").disabled = true;
+							document.getElementById("firstform").disabled = true;
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Card number already exits. Please use another one <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}
+   						
+   					}
+   				});
+	}else{
+		document.getElementById("firstform1").disabled = false;
+		document.getElementById("firstform").disabled = false;
+		$('#sucessmsg').show();
+		$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid card number. Please try again. <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+
+	}
+	
+	
+}
 function apply_couponcode(){
 	var amount=$('#bill_amount').val();
 	if(amount !=''){
@@ -1585,11 +1634,11 @@ function apply_couponcode(){
    			g_pincode: {
                    validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },g_city: {
@@ -1772,11 +1821,11 @@ function apply_couponcode(){
    			next_pincode: {
                    validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },next_city: {
@@ -1995,7 +2044,18 @@ function apply_couponcode(){
        $('#basic_details').bootstrapValidator({
            
            fields: {
-               registrationtype: {
+               patient_card_number: {
+                   validators: {
+   					notEmpty: {
+   						message: 'Card Number is required'
+   					},
+   					regexp: {
+   					regexp: /^[0-9]{12,16}$/,
+   					message: 'Card Number must be 12 to 16 digits'
+   					}
+   				}
+               }, 
+			   registrationtype: {
                    validators: {
                          notEmpty: {
                            message: 'Please select Registration Type '
@@ -2136,11 +2196,11 @@ function apply_couponcode(){
                p_zipcode: {
                     validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },
@@ -2182,11 +2242,11 @@ function apply_couponcode(){
    			t_zipcode: {
                  validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },
@@ -2363,11 +2423,11 @@ function apply_couponcode(){
                p_zipcode: {
                     validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },
@@ -2409,11 +2469,11 @@ function apply_couponcode(){
    			t_zipcode: {
                  validators: {
    					notEmpty: {
-   						message: 'Zipcode is required'
+   						message: 'Pin code is required'
    					},
    					regexp: {
    					regexp: /^[0-9]{5,7}$/,
-   					message: 'Zipcode  must be  5 to 7 characters'
+   					message: 'Pin code  must be  5 to 7 characters'
    					}
    				}
                },

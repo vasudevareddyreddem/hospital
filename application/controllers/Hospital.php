@@ -154,6 +154,7 @@ class Hospital extends CI_Controller {
 									redirect('hospital/add/'.base64_encode(1));
 								}else{
 									
+									
 									$admindetails=array(
 									'role_id'=>2,
 									'a_name'=>'Hospital Admin',
@@ -165,10 +166,20 @@ class Hospital extends CI_Controller {
 									'a_create_at'=>date('Y-m-d H:i:s')
 									);
 									$addhospitaladmin= $this->Admin_model->save_admin($admindetails);
+										/* barcode*/
+										$this->zend->load('Zend/Barcode');
+										$file = Zend_Barcode::draw('code128', 'image', array('text' => $addhospitaladmin), array());
+										$code = time().$addhospitaladmin;
+										$store_image1 = imagepng($file, $this->config->item('documentroot')."assets/hospital_barcodes/{$code}.png");
+
+										/* barcode*/
+									
+									
 									$onedata=array(
 									'a_id'=>$addhospitaladmin,
 									'hos_con_number'=>$post['hos_con_number'],
 									'hos_email_id'=>$post['hos_email_id'],
+									'barcode'=>$code.'.png',
 									'hos_status'=>1,
 									'hos_created'=>date('Y-m-d H:i:s'),
 									'hos_updated_at'=>date('Y-m-d H:i:s')

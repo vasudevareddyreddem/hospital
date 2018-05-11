@@ -156,7 +156,7 @@
                               </button>
                               </span>
                            </div>
-                           <button type="submit" >Sent</button>
+                           <button type="submit" >Send</button>
                         </form>
                         <br>
                      </div>

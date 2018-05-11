@@ -122,6 +122,7 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 					$tab1=array(
 					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
+					'card_number'=>isset($post['patient_card_number'])?$post['patient_card_number']:'',
 					'registrationtype'=>isset($post['registrationtype'])?$post['registrationtype']:'',
 					'patient_category'=>isset($post['patient_category'])?$post['patient_category']:'',
 					'problem'=>isset($post['problem'])?$post['problem']:'',
@@ -734,6 +735,19 @@ class Resources extends CI_Controller {
 				echo json_encode($data);exit;	
 				}else{
 					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
+	}
+	public function checking_card_number(){
+		$post=$this->input->post();
+		$details=$this->Resources_model->get_card_number_list($post['card_number']);
+		if(count($details) > 0)
+				{
+				$data['msg']=1;
+				$data['list']=$details;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=0;
 					echo json_encode($data);exit;
 				}
 	}

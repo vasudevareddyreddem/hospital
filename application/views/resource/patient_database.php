@@ -29,6 +29,7 @@
 			<thead>
 				<tr>
 					<th> Patient Id </th>
+					<th> Patient Card Number</th>
 					<th> Name </th>
 					<th> Type </th>
 					<th> category </th>
@@ -43,6 +44,7 @@
 				<tr class="odd gradeX">
 					
 					<td> <?php echo $list['pid']; ?> </td>
+					<td> <?php echo $list['card_number']; ?> </td>
 					<td>
 						<?php echo $list['name']; ?>
 					</td>

@@ -112,7 +112,7 @@ table, th, td {
  
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Paient info</th>
+		<th colspan="4">Patient info</th>
 		
 	  </tr>
 	

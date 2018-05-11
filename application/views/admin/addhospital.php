@@ -143,10 +143,10 @@
                            <textarea type="textarea" id="hos_rep_add2" name="hos_rep_add2"  class="form-control"  placeholder="Enter Address" ><?php echo isset($hospital_details['hos_rep_add2'])?$hospital_details['hos_rep_add2']:''; ?></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                           <label for="email">Zipcode</label>
+                           <label for="email">Pin code</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_rep_zipcode" name="hos_rep_zipcode" value="<?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>" class="form-control"  placeholder="Enter Zip Code" >
+                                 <input type="text" id="hos_rep_zipcode" name="hos_rep_zipcode" value="<?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>" class="form-control"  placeholder="Enter pin Code" >
                               </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_rep_city" name="hos_rep_city" value="<?php echo isset($hospital_details['hos_rep_city'])?$hospital_details['hos_rep_city']:''; ?>" class="form-control"  placeholder="Enter City" >
@@ -219,10 +219,10 @@
                            <textarea type="textarea" id="hos_bas_add2" name="hos_bas_add2"  class="form-control"  placeholder="Enter Address" ><?php echo isset($hospital_details['hos_bas_add2'])?$hospital_details['hos_bas_add2']:''; ?></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                           <label for="email">Zipcode</label>
+                           <label for="email">Pin code</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter Zip Code" >
+                                 <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter pin Code" >
                               </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_bas_city" name="hos_bas_city" value="<?php echo isset($hospital_details['hos_bas_city'])?$hospital_details['hos_bas_city']:''; ?>" class="form-control"  placeholder="Enter City" >
@@ -504,11 +504,11 @@ $(document).ready(function() {
             },hos_rep_zipcode: {
               validators: {
 					notEmpty: {
-						message: 'Zipcode is required'
+						message: 'Pin code is required'
 					},
 					regexp: {
 					regexp: /^[0-9]{5,7}$/,
-					message: 'Zipcode  must be  5 to 7 characters'
+					message: 'Pin code  must be  5 to 7 characters'
 					}
 				}
             },hos_rep_city: {
@@ -617,11 +617,11 @@ $(document).ready(function() {
             },hos_bas_zipcode: {
               validators: {
 					notEmpty: {
-						message: 'Zipcode is required'
+						message: 'Pin code is required'
 					},
 					regexp: {
 					regexp: /^[0-9]{5,7}$/,
-					message: 'Zipcode  must be  5 to 7 characters'
+					message: 'Pin code  must be  5 to 7 characters'
 					}
 				}
             },hos_bas_city: {

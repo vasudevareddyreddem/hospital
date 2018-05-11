@@ -56,6 +56,7 @@ class Profile extends CI_Controller {
 					$this->load->view('admin/profileview',$data);
 				}else if($admindetails['role_id']==2){
 					$data['hospital_details']= $this->Hospital_model->get_hospital_detailsfor_profile($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/hospitalview',$data);
 				}else if($admindetails['role_id']==3 || $admindetails['role_id']==4 || $admindetails['role_id']==5 || $admindetails['role_id']==6){
 					$data['resouse_detail']= $this->Hospital_model->get_resourse_data($admindetails['a_id']);

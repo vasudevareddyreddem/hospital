@@ -28,6 +28,7 @@
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>
 				<tr>
+					<th> Patient Card Number </th>
 					<th> Patient Id </th>
 					<th> Name </th>
 					<th> Mobile </th>
@@ -41,6 +42,7 @@
 			<?php foreach($patient_list as $list){ ?>
 				<tr class="odd gradeX">
 					
+					<td> <?php echo $list['card_number']; ?> </td>
 					<td> <?php echo $list['pid']; ?> </td>
 					<td><?php echo $list['name']; ?></td>
 					<td><?php echo $list['mobile']; ?></td>

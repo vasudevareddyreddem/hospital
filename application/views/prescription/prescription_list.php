@@ -36,6 +36,7 @@
                                         <thead>
                                             <tr>
 												<th>Patient Id</th>
+												<th>Patient Card Number</th>
 												<th>Name</th>
                                                 <th>Referred By</th>
                                                 <th>Date</th>
@@ -46,6 +47,7 @@
 										<?php foreach($prescriptions as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['pid']); ?></td>
+                                                <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><?php echo htmlentities($list['name']); ?></td>
                                                 <td><?php echo htmlentities($list['created_by']); ?></td>
                                                 <td><?php echo date('M j Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>

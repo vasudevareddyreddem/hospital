@@ -10,12 +10,12 @@ class Resources_model extends CI_Model
 	}
 	
 	public function get_all_patients_database($hos_id){
-		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category,patients_list_1.dob,patients_list_1.nationali_id,patients_list_1.create_at')->from('patients_list_1');		
+		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category,patients_list_1.dob,patients_list_1.nationali_id,patients_list_1.create_at')->from('patients_list_1');		
 		$this->db->where('patients_list_1.hos_id', $hos_id);
         return $this->db->get()->result_array();	
 	}
 	public function get_all_patients_lists($hos_id){
-		$this->db->select('patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category')->from('patients_list_1');		
+		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category')->from('patients_list_1');		
 		$this->db->where('patients_list_1.hos_id', $hos_id);
         return $this->db->get()->result_array();	
 	}
@@ -73,6 +73,11 @@ class Resources_model extends CI_Model
 		$this->db->where('resource_list.r_status',1);
         return $this->db->get()->result_array();
 	}
+	public function get_card_number_list($card_num){
+		$this->db->select('patients_list_1.card_number')->from('patients_list_1');		
+		$this->db->where('patients_list_1.card_number',$card_num);
+        return $this->db->get()->row_array();
+	}
 	public function get_billing_details($p_id,$b_id){
 		$this->db->select('patient_billing.*,patients_list_1.name,patients_list_1.problem,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,hospital.hos_bas_logo,hospital.hos_email_id,hospital.hos_con_number,hospital.hos_bas_email,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_zipcode,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_country,hospital.hos_bas_name,hospital.hos_bas_contact,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
@@ -91,7 +96,7 @@ class Resources_model extends CI_Model
 	}
 	/*patient billing details*/
 	public function get_doctor_worksheet_list($hos_id,$doctor_id){
-		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,treament.t_name,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,patients_list_1.card_number,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
@@ -104,7 +109,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_completed_doctor_worksheet_list($hos_id,$doctor_id){
-		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,treament.t_name,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,patients_list_1.card_number,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
@@ -117,7 +122,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_doctor_refrrals_list($hos_id,$doctor_id){
-		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,treament.t_name,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('assignby.resource_name as assignbydoctor,assignto.resource_name as assigntodoctor,patient_billing.b_id,patient_billing.doctor_status,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,patients_list_1.card_number,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
@@ -129,7 +134,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_patient_details($pid){
-		$this->db->select('patient_billing.b_id,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,hospital.hos_bas_logo,hospital.hos_email_id,hospital.hos_con_number,hospital.hos_bas_email,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_zipcode,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_country,hospital.hos_bas_name,hospital.hos_bas_contact,treament.t_name,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('patient_billing.b_id,patient_billing.type,patient_billing.visit_type,patients_list_1.pid,patients_list_1.name,patients_list_1.age,patients_list_1.dob,patients_list_1.bloodgroup,patients_list_1.martial_status,patients_list_1.gender,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_country_name,patients_list_1.p_zipcode,patients_list_1.mobile,patients_list_1.barcode,patients_list_1.card_number,hospital.hos_bas_logo,hospital.hos_email_id,hospital.hos_con_number,hospital.hos_bas_email,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_zipcode,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_country,hospital.hos_bas_name,hospital.hos_bas_contact,treament.t_name,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');

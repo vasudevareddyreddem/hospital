@@ -138,7 +138,7 @@
 													</div><div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
-														 <strong>Zipcode</strong>
+														 <strong>Pincode</strong>
 														 </div>
 														<div class=" col-sm-6">
 														  <?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>
@@ -399,6 +399,8 @@
 														 </div>
 													 </div>
 													</div>
+											
+
 													
 													
 													
