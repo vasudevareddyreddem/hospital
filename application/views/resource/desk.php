@@ -86,12 +86,10 @@
                                              <div class="row">
                                                 <div class="form-group col-md-12">
                                                    <label for="email">Patient Card Number</label>
-													<?php if(isset($patient_detailes['card_number']) && $patient_detailes['card_number']!=''){ ?>
-                                                   <input type="text" class="form-control"  onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" disabled>
-												   <?php } else{ ?>
-												           <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+                                                   <input type="hidden" class="form-control"  id="patient_old1_card_number"  name="patient_old1_card_number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" >
+												    <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
 
-												   <?php } ?>                                               </div>
+												   </div>
 												<div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
                                                    <select id="registrationtype" name="registrationtype" class="form-control" >
@@ -607,19 +605,19 @@
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Amount</label>
-                                                                  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+                                                                  <input type="text" class="form-control" id="bill_amount" autocomplete="off"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Received from</label>
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> I Have a coupon code ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> I Have a Privilege card ?</a>
 																 </div>
 																 <div id="demo" class="collapse in">
 																	<div class="form-group col-md-12">
-																		<label for="mobile">Coupon Code</label>
-																		<input type="text" class="form-control" id="coupon_code"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<label for="mobile">Privilege card</label>
+																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg" style="color:green;"></span>
 																	<span id="errormsg" style="color:red;"></span>
@@ -760,7 +758,7 @@
                                  <thead>
                                     <tr>
                                        <th> Patient Id </th>
-                                       <th> Patient card Nunber</th>
+                                       <th> Patient card Number</th>
                                        <th> Name </th>
                                        <th> Type </th>
                                        <th> category </th>
@@ -840,15 +838,16 @@
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
-												<div class="form-group col-md-12">
+												<div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
-												   <?php if(isset($patient_detailes['card_number']) && $patient_detailes['card_number']!=''){ ?>
-                                                   <input type="text" class="form-control"  onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" disabled>
-												   <?php } else{ ?>
-												           <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+                                                   <input type="hidden" class="form-control" id="patient_old_card_number"  name="patient_old_card_number"  value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+												   <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number1"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
 
-												   <?php } ?>
 												</div>
+												  <div class="form-group col-md-6">
+                                                   <label for="mobile">Referred by?</label>
+                                                   <input type="text" class="form-control" id="referred"  name="referred"  value="<?php echo isset($patient_detailes['referred'])?$patient_detailes['referred']:''; ?>">
+                                                </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
                                                    <select id="registrationtype" name="registrationtype" class="form-control" >
@@ -1020,31 +1019,37 @@
 <div id="sucessmsg" style="display:none;"></div>
 <script>
 function checkpatient_number(num){
-	var length=num.length;
-	if(length>= '12' && length<= '16'){
-			jQuery.ajax({
-   				url: "<?php echo base_url('resources/checking_card_number');?>",
-   					data: {
-   						card_number: num,
-   					},
-   					dataType: 'json',
-   					type: 'POST',
-   					success: function (data) {
-						$('#sucessmsg').show();
-						if(data.msg==1){
-							document.getElementById("firstform1").disabled = true;
-							document.getElementById("firstform").disabled = true;
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Card number already exits. Please use another one <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
-						}
-   						
-   					}
-   				});
-	}else{
-		document.getElementById("firstform1").disabled = false;
-		document.getElementById("firstform").disabled = false;
-		$('#sucessmsg').show();
-		$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid card number. Please try again. <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+	var val1=$('#patient_old_card_number').val();
+	var val2=$('#patient_card_number1').val();
+	var val3=$('#patient_card_number').val();
+	var val4=$('#patient_old1_card_number').val();
+	if(val1 != val2 || val4 != val3){
+			var length=num.length;
+			if(length>= '12' && length<= '16'){
+					jQuery.ajax({
+						url: "<?php echo base_url('resources/checking_card_number');?>",
+							data: {
+								card_number: num,
+							},
+							dataType: 'json',
+							type: 'POST',
+							success: function (data) {
+								$('#sucessmsg').show();
+								if(data.msg==1){
+									document.getElementById("firstform1").disabled = true;
+									document.getElementById("firstform").disabled = true;
+									 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Card number already exits. Please use another one <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+								}
+								
+							}
+						});
+			}else{
+				document.getElementById("firstform1").disabled = false;
+				document.getElementById("firstform").disabled = false;
+				$('#sucessmsg').show();
+				$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid card number. Please try again. <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 
+			}
 	}
 	
 	
@@ -1066,16 +1071,16 @@ function apply_couponcode(){
    					success: function (data) {
 						$('#sucessmsg').show();
 						if(data.msg==1){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Promo code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount').val(data.amt);
-							document.getElementById("successmsg").innerHTML="Promo code applied Successfully.coupon Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg").innerHTML="Privilege code applied Successfully.Privilege Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Promo code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Promo code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
@@ -2293,6 +2298,14 @@ function apply_couponcode(){
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'Name can only consist of alphanumaric, space and dot'
+   					}
+   				}
+               },
+			   referred: {
+                    validators: {
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Referred  by can only consist of alphanumaric, space and dot'
    					}
    				}
                },

@@ -126,6 +126,7 @@ class Resources extends CI_Controller {
 					'registrationtype'=>isset($post['registrationtype'])?$post['registrationtype']:'',
 					'patient_category'=>isset($post['patient_category'])?$post['patient_category']:'',
 					'problem'=>isset($post['problem'])?$post['problem']:'',
+					'referred'=>isset($post['referred'])?$post['referred']:'',
 					'name'=>isset($post['name'])?$post['name']:'',
 					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
 					'email'=>isset($post['email'])?$post['email']:'',

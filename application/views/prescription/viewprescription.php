@@ -29,7 +29,7 @@
                                         <div class="table-responsive">
 											<table class="table custom-table table-hover" style="border-top:none">
                                                 <thead >
-                                                    <tr >
+                                                    <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
                                                         <th>Dosage</th>

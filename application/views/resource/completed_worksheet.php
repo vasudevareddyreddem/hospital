@@ -35,34 +35,26 @@
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>Queue No</th>
-                                                <th>Slot</th>
 												<th>PURN</th>
 												<th>Patient card number</th>
-                                                <th>Patient Name </th>
+												<th>Slot</th>
+												<th>Patient Name </th>
                                                 <th>Age/Sex</th>
                                                 <th>Visit Type</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 										<?php foreach($worksheet as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['b_id']); ?></td>
-                                                <td><button class="btn btn-xs bg-success no-margin" type="button"><?php echo htmlentities($list['type']); ?></button></td>
                                                 <td><?php echo htmlentities($list['pid']); ?></td>
                                                 <td><?php echo htmlentities($list['card_number']); ?></td>
-                                                <td><?php echo htmlentities($list['name']); ?></td>
-                                                
-												<td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>
+												<td><button class="btn btn-xs bg-success no-margin" type="button"><?php echo htmlentities($list['type']); ?></button></td>
+												<td><?php echo htmlentities($list['name']); ?></td>
+                                                <td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
-                                                <td>
-                                                  <button class="btn btn-xs bg-success no-margin" type="button">Call</button>
-												 <!-- <a href="<?php echo base_url('resources/consultation/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>" class="btn btn-xs bg-primary no-margin" type="button">Start Consultation</a>
-												  --><button class="btn btn-xs bg-danger no-margin" type="button">Close</button>
-                                                </td>
+                                              
                                             </tr>
 										<?php } ?>
 											

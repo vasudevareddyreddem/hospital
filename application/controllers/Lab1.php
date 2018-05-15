@@ -95,10 +95,15 @@ class Lab1 extends CI_Controller {
 						$data['patient_id']=$patient_ids[0]['p_id'];
 							$data['billing_id']=$patient_ids[0]['b_id'];
 							$out_source_list=$this->Lab_model->get_out_source_lab_test_list($data['patient_id'],$data['billing_id']);
-							foreach($out_source_list as $source_list){
-								$lists[]=$source_list['p_l_t_id'];
+							
+							if(count($out_source_list)>0){
+								foreach($out_source_list as $source_list){
+									$lists[]=$source_list['p_l_t_id'];
+								}
+								$data['out_source_list']=$lists;
+							}else{
+									$data['out_source_list']=array();
 							}
-							$data['out_source_list']=$lists;
 							//echo $this->db->last_query();
 							$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($data['patient_id'],$data['billing_id']);
 							//echo '<pre>';print_r($data);exit;

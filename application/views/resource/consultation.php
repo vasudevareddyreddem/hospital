@@ -110,7 +110,7 @@
          <div id="step-1" class="">
             <div class="row">
                <div class="col-md-2"> 
-                  <strong>Encounters</strong>
+                  <strong>Patient History</strong>
                </div>
                <div class="col-md-1"> 
                   <span class="btn btn-xs btn-info" data-toggle="modal" data-target="#squarespaceModal">View All</span>
@@ -121,12 +121,15 @@
             </div>
             <div class="row clearfix">
                <?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
-               <?php $cnt=0;foreach($encounters_list as $list){ ?>
+               <?php $cnt=0;foreach($encounters_list as $list){
+									//echo "<pre>";print_r($list);exit; 
+
+			   ?>
                <?php if($cnt<=3){ ?>								
                <div class="col-md-3 col-sm-3 col-xs-12">
                   <div class="card card-topline-purple">
                      <div class="card-head">
-                        <header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
+                        <header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</header>
                      </div>
                      <div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
                      <div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
@@ -200,38 +203,14 @@
                                           <select class="form-control  select2" id="medicine_name" name="medicine_name">
                                              <option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
-                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?></option>
+                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?> - <?php echo "Avl qty :".$list['qty']; ?></option>
                                              <?php } ?>
                                           </select>
                                        </div>
                                        <div class="col-md-6">
-                                          <label>Substitute allowed or not allowed?</label>									
-                                          <select class="form-control" name="substitute_name" id="substitute_name">
-                                             <option value="" >Select </option>
-                                             <option value="Yes" >Yes </option>
-                                             <option value="No" >No</option>
-                                          </select>
-                                       </div>
-                                       <div class="col-md-6">
-                                          <label>Condition</label>									
-                                          <select class="form-control" id="condition" name="condition">
-                                             <option value="" >Select  </option>
-                                             <option value="Chronic" >Chronic  </option>
-                                             <option value="PRN" >PRN</option>
-                                          </select>
-                                       </div>
-                                       <div class="col-md-6">
-                                          <label>Dosage</label>									
-                                          <select class="form-control" id="dosage" name="dosage">
-                                             <option value="" >Select Dosage </option>
-                                             <option value="600 g">600 g </option>
-                                             <option value="350 g">350 g</option>
-                                             <option value="150 g">150 g</option>
-                                             <option value="250 g">250 g</option>
-                                             <option value="550 g">550 g</option>
-                                             <option value="650 g">650 g</option>
-                                          </select>
-                                       </div>
+                                                <label> Qty</label>
+                                                <input class="form-control" name="qty" id="qty" type="text" placeholder="enter Qty">
+                                            </div>
                                        <div class="col-md-6">
                                           <div class="row">
                                              <div class="col-md-4">
@@ -265,6 +244,26 @@
                                           </div>
                                        </div>
                                        <div class="col-md-6">
+                                          <label>Dosage</label>									
+                                          <select class="form-control" id="dosage" name="dosage">
+                                             <option value="" >Select Dosage </option>
+                                             <option value="600 g">600 g </option>
+                                             <option value="350 g">350 g</option>
+                                             <option value="150 g">150 g</option>
+                                             <option value="250 g">250 g</option>
+                                             <option value="550 g">550 g</option>
+                                             <option value="650 g">650 g</option>
+                                          </select>
+                                       </div>
+                                         <div class="col-md-6">
+                                          <label>Condition</label>									
+                                          <select class="form-control" id="condition" name="condition">
+                                             <option value="" >Select  </option>
+                                             <option value="Chronic" >Chronic  </option>
+                                             <option value="PRN" >PRN</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
                                        </div>
@@ -286,10 +285,14 @@
                                        </div>
                                        <div class="col-md-6">
                                           <div class="row">
-                                             <div class="col-md-6">
-                                                <label> Qty</label>
-                                                <input class="form-control" name="qty" id="qty" type="text" placeholder="enter Qty">
-                                             </div>
+                                           <div class="col-md-6">
+												<label>Substitute allowed or not allowed?</label>									
+												<select class="form-control" name="substitute_name" id="substitute_name">
+													<option value="" >Select </option>
+													<option value="Yes" >Yes </option>
+													<option value="No" >No</option>
+												</select>
+											</div>
                                              <div class="col-md-6">
                                                 <label> Units</label>
                                                 <select class="form-control" name="units" id="units">

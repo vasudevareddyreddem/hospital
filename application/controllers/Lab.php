@@ -282,23 +282,34 @@ class Lab extends CI_Controller {
 						}
 					}
 					$out_source_list=$this->Lab_model->get_out_source_lab_test_list($data['patient_id'],$data['billing_id']);
-					foreach($out_source_list as $source_list){
+					
+					if(count($out_source_list)>0){
+						foreach($out_source_list as $source_list){
 						$lists[]=$source_list['p_l_t_id'];
 					}
 					$data['out_source_list']=$lists;
+					}else{
+						$data['out_source_list']=array();
+					}
 					//echo $this->db->last_query();
 					$tests_list=$this->Lab_model->get_all_patients_out_souces_test_lists($data['patient_id'],$data['billing_id']);
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($tests_list);exit;
 					if(isset($tests_list) && count($tests_list)>0){
 						foreach($tests_list as $Lis){
 							if($Lis['hos_id'] != $userdetails['hos_id']){
 							$li[]=$Lis;
+							}else{
+								$li[]=array();
 							}
 						}
-						foreach($li as $l){
-							$data['test_list'][$l['id']]=$l;
-							$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
-							//echo '<pre>';print_r($l);	
+						//echo '<pre>';print_r($li);exit;
+						if(count($li[0])>0){
+							foreach($li as $l){
+								$data['test_list'][$l['id']]=$l;
+								$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
+							}
+						}else{
+							$data['test_list']=array();
 						}
 						//echo '<pre>';print_r($data);exit;
 						
@@ -310,16 +321,24 @@ class Lab extends CI_Controller {
 							if($Lis['hos_id'] != $userdetails['hos_id']){
 							 //$citylist[]=$Lis['t_name'];
 							 $citylist[]=$this->Lab_model->get_test_locaton_list($l['t_name']);
+							 }else{
+								 $citylist=array();  
 							 }
 						 }
-						 foreach( $citylist as $list){
+						// echo '<pre>';print_r($citylist);exit;
+						 if(count($citylist)>0){
+								 foreach( $citylist as $list){
 							 foreach($list as $Li){
 								$location_names[]=$Li['resource_city'];
 								 
 							 }
 								 
 						 }
-						$data['location_list']=array_unique($location_names);
+							$data['location_list']=array_unique($location_names); 
+						 }else{
+							 $data['location_list']=array(); 
+						 }
+					
 					 }else{
 						 $data['location_list']=array();
 					 }

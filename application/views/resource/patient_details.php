@@ -120,7 +120,7 @@ table, th, td {
 		<td><strong>Name:</strong> <span><?php echo isset($details['name'])?$details['name']:''; ?></span></td>
 		<td><strong>Mobile:</strong> <span><?php echo isset($details['mobile'])?$details['mobile']:''; ?></span></td>
 		<td><strong>Blood group:</strong> <span><?php echo isset($details['bloodgroup'])?$details['bloodgroup']:''; ?></span></td>
-		<td><strong>Martial status:</strong> <span><?php echo isset($details['martial_status'])?$details['martial_status']:''; ?></span></td>
+		<td><strong>Marital status:</strong> <span><?php echo isset($details['martial_status'])?$details['martial_status']:''; ?></span></td>
 	  </tr>
 	    <tr>
 		<td><strong>DOB:</strong> <span><?php echo isset($details['dob'])?$details['dob']:''; ?></span></td>
@@ -216,7 +216,7 @@ table, th, td {
 		<th>Pulse rate</th>
 		<td><?php echo isset($vital_details['pulse_actuals'])?$vital_details['pulse_actuals']:''; ?></td>
 		<td><?php echo isset($vital_details['pulse_range'])?$vital_details['pulse_range']:''; ?></td>
-		<th>Pulse rate sight</th>
+		<th>Pulse rate site</th>
 		<td >
 		<span><?php echo isset($vital_details['pulse_rate_rhythm'])?$vital_details['pulse_rate_rhythm']:''; ?></span> &nbsp;  &nbsp;
 		<span><?php echo isset($vital_details['pulse_rate_vol'])?$vital_details['pulse_rate_vol']:''; ?></span> &nbsp; &nbsp; 
