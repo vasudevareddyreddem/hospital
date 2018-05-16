@@ -61,7 +61,7 @@
                            <p><?php echo isset($patient_details['bloodgroup'])?$patient_details['bloodgroup']:''; ?></p>
                         </div>
                         <div class="col-md-3">
-                           <strong>Martial status</strong>
+                           <strong>Marital status</strong>
                            <p><?php echo isset($patient_details['martial_status'])?$patient_details['martial_status']:''; ?></p>
                         </div>
                         <div class="col-md-3">

@@ -110,7 +110,7 @@ table, th, td {
     </header>
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Paient info</th>
+		<th colspan="4">Patient info</th>
 		
 	  </tr>
 	
@@ -118,7 +118,7 @@ table, th, td {
 		<td><strong>Name:</strong> <span><?php echo isset($details['name'])?$details['name']:''; ?></span></td>
 		<td><strong>Mobile:</strong> <span><?php echo isset($details['mobile'])?$details['mobile']:''; ?></span></td>
 		<td><strong>Blood group:</strong> <span><?php echo isset($details['bloodgroup'])?$details['bloodgroup']:''; ?></span></td>
-		<td><strong>Martial status:</strong> <span><?php echo isset($details['martial_status'])?$details['martial_status']:''; ?></span></td>
+		<td><strong>Marital status:</strong> <span><?php echo isset($details['martial_status'])?$details['martial_status']:''; ?></span></td>
 	  </tr>
 	    <tr>
 		<td><strong>DOB:</strong> <span><?php echo isset($details['dob'])?$details['dob']:''; ?></span></td>

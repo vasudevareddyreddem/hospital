@@ -903,7 +903,7 @@
                                                    <input type="text" class="form-control" id="bloodgroup"  name="bloodgroup" placeholder="Enter Blood Group" value="<?php echo isset($patient_detailes['bloodgroup'])?$patient_detailes['bloodgroup']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="mobile">Martial status</label>
+                                                   <label for="mobile">Marital status</label>
                                                    <select id="martial_status" name="martial_status" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="Single" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
@@ -2134,7 +2134,7 @@ function apply_couponcode(){
    			martial_status: {
                     validators: {
    					 notEmpty: {
-                           message: 'Please select Martial status'
+                           message: 'Please select Marital status'
                        }
    				
    				}
@@ -2369,7 +2369,7 @@ function apply_couponcode(){
    			martial_status: {
                     validators: {
    					 notEmpty: {
-                           message: 'Please select Martial status'
+                           message: 'Please select Marital status'
                        }
    				
    				}

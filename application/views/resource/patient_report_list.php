@@ -1089,7 +1089,7 @@ $(document).ready(function() {
 			martial_status: {
                  validators: {
 					 notEmpty: {
-                        message: 'Please select Martial status'
+                        message: 'Please select Marital status'
                     }
 				
 				}
