@@ -43,6 +43,16 @@
                            
 						  
                               <div class="row">
+							  <div class="col-md-6">
+									<label> Resource Designation</label>
+									<select class="form-control" id="designation" name="designation">
+										<option value="">Select</option>
+										<option value="3">Receptionist</option>
+										<option value="4">Pharmacy</option>
+										<option value="5">lab coordinator</option>
+										<option value="6">Doctor</option>
+									</select>
+									</div>
                                  <div class="col-md-6">
 									<label> Name</label>
 										<input class="form-control" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
@@ -80,16 +90,7 @@
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Resource Contact Number">
 									</div>
-										<div class="col-md-6">
-									<label> Resource Designation</label>
-									<select class="form-control" id="designation" name="designation">
-										<option value="">Select</option>
-										<option value="3">Receptionist</option>
-										<option value="4">Pharmacy</option>
-										<option value="5">lab coordinator</option>
-										<option value="6">Doctor</option>
-									</select>
-									</div>
+										
 									<div class="col-md-6">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" type="text" placeholder="Resource Email ID">
