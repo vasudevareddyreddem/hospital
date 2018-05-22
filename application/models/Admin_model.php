@@ -12,6 +12,10 @@ class Admin_model extends CI_Model
 		$this->db->where('a_id',$a_id);
     	return $this->db->update("admin",$data);
 	}
+	public function update_login_details($a_id,$data){
+		$this->db->where('a_id',$a_id);
+    	return $this->db->update("hospital",$data);
+	}
 	public function check_email_exits($email){
 		$sql = "SELECT admin.a_id FROM admin WHERE a_email_id ='".$email."'";
 		return $this->db->query($sql)->row_array();	

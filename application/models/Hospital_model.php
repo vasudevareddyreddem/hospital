@@ -50,6 +50,12 @@ class Hospital_model extends CI_Model
         $this->db->where('hos_undo',0);
 		return $this->db->get()->result_array();
 	}
+	public function get_total_patient_list($hos_id){
+		
+		$this->db->select('patients_list_1.pid')->from('patients_list_1');		
+		$this->db->where('patients_list_1.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+	}
 	public function get_resources_list($a_id,$hos_id){
 		$this->db->select('resource_list.r_id,resource_list.a_id,roles.r_name,resource_list.resource_name,resource_list.role_id,resource_list.resource_contatnumber,resource_list.r_status,resource_list.r_created_at,resource_list.resource_email')->from('resource_list');		
         $this->db->join('roles', 'roles.r_id = resource_list.role_id', 'left');

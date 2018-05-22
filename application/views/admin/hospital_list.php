@@ -50,7 +50,7 @@
                                                 <td><?php echo htmlentities($list['hos_id']); ?></td>
                                                 <td><?php echo htmlentities($list['hos_bas_name']); ?></td>
                                                 <td><?php echo htmlentities($list['hos_con_number']); ?></td>
-                                                <td>10</td>
+                                                <td><?php echo htmlentities($list['patient_list']); ?></td>
 												<td><?php if($list['hos_curent_login']==1){ echo "Online";}else{ echo "Offline"; } ?></td>
 												<td><?php if($list['hos_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">

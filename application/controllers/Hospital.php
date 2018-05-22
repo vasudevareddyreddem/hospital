@@ -49,7 +49,19 @@ class Hospital extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					$data['hospital_list']= $this->Hospital_model->get_hospital_list_details();
+					$hospital_list= $this->Hospital_model->get_hospital_list_details();
+					if(count($hospital_list)>0){
+					foreach($hospital_list as $list){
+						$patient_list=$this->Hospital_model->get_total_patient_list($list['hos_id']);
+						$hos_dat[$list['hos_id']]=$list;
+						$hos_dat[$list['hos_id']]['patient_list']=count($patient_list);
+						//echo '<pre>';print_r($list);exit;
+					}
+					$data['hospital_list']=$hos_dat;
+					}else{
+						$data['hospital_list']=array();
+					}
+					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/hospital_list',$data);
 					$this->load->view('html/footer');
@@ -971,7 +983,7 @@ class Hospital extends CI_Controller {
 									'a_mobile'=>$post['resource_mobile'],
 									'a_updated_at'=>date('Y-m-d H:i:s')
 									);
-									$addresourcedmin = $this->Admin_model->update_adminhospital_details($post['admin_id'],$admin_details);
+									$addresourcedmin = $this->Admin_model->update_admin_details($post['admin_id'],$admin_details);
 									
 									$resourcedata=array(
 									'role_id'=>$post['designation'],

@@ -1119,7 +1119,8 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$details=$this->Resources_model->get_test_list($post['type'],$post['test_type_id']);
+					$name=$this->Resources_model->get_test_name($post['test_type_id']);
+					$details=$this->Resources_model->get_test_list($name['type'],$post['test_type_id']);
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($details);exit;
 					if(count($details) > 0)

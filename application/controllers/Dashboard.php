@@ -59,6 +59,8 @@ class Dashboard extends CI_Controller {
 				$this->load->view('admin/dashboard',$data);
 			}else if($admindetails['role_id']==2){
 				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$up_details=array('hos_curent_login'=>1);
+				$update=$this->Admin_model->update_login_details($admindetails['a_id'],$up_details);
 			
 				$data['patients_list']=$this->Admin_model->get_hospitals_patient_list_monthwise($hos_details['hos_id'],date('Y'));
 				$data['new_patients_list']=$this->Admin_model->get_hospitals_new_patient_list_monthwise($hos_details['hos_id'],date('Y'));
@@ -172,6 +174,9 @@ class Dashboard extends CI_Controller {
 	 
 	}
 	public function logout(){
+		$admindetails=$this->session->userdata('userdetails');
+		$up_details=array('hos_curent_login'=>0);
+		$update=$this->Admin_model->update_login_details($admindetails['a_id'],$up_details);
 		$userinfo = $this->session->userdata('userdetails');
         $this->session->unset_userdata($userinfo);
 		$this->session->sess_destroy('userdetails');

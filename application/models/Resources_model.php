@@ -265,6 +265,11 @@ class Resources_model extends CI_Model
 		$sql1="DELETE FROM patient_lab_test_list WHERE id = '".$id."'";
 		return $this->db->query($sql1);
 	}
+	public function get_test_name($tid){
+		$this->db->select('lab_test_type.type')->from('lab_test_type');
+		$this->db->where('lab_test_type.id',$tid);
+        return $this->db->get()->row_array();
+	}
 	
 
 }

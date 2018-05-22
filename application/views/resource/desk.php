@@ -2114,8 +2114,8 @@ function apply_couponcode(){
    						message: 'Age is required'
    					},
    					regexp: {
-   					regexp:  /^[0-9]{2}$/,
-   					message:'Mobile Number must be 10 to 14 digits'
+   					regexp:  /^[0-9]*$/,
+   					message:'Age must be digits'
    					}
    				
    				}
@@ -2349,8 +2349,8 @@ function apply_couponcode(){
    						message: 'Age is required'
    					},
    					regexp: {
-   					regexp:  /^[0-9]{2}$/,
-   					message:'Mobile Number must be 10 to 14 digits'
+   					regexp:  /^[0-9]*$/,
+   					message:'Age must be digits'
    					}
    				
    				}
