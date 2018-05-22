@@ -113,10 +113,14 @@ class Lab1 extends CI_Controller {
 									$li[]=$Lis;
 									}
 								}
-								foreach($li as $l){
-									$data['test_list'][$l['id']]=$l;
-									$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
-									//echo '<pre>';print_r($l);	
+								if(isset($li) && count($li)>0){
+									foreach($li as $l){
+										$data['test_list'][$l['id']]=$l;
+										$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
+										//echo '<pre>';print_r($l);	
+									}
+								}else{
+									$data['test_list']=array();
 								}
 								//echo '<pre>';print_r($data);exit;
 								

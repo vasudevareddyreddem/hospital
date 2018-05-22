@@ -65,10 +65,11 @@ class Admin_model extends CI_Model
 		$this->db->group_by('team_chating.user_id');
         return $this->db->get()->result_array();	
 	}
-	public function get_resourse_message_list(){
+	public function get_resourse_message_list($hos_id){
 		$this->db->select('hospital_admin_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('hospital_admin_chating');
 		$this->db->join('resource_list as sentname', 'sentname.a_id = hospital_admin_chating.user_id', 'left');
 		$this->db->join('admin', 'admin.a_id = hospital_admin_chating.replay_user_id', 'left');
+		$this->db->where('hospital_admin_chating.hos_id',$hos_id);
 		$this->db->group_by('hospital_admin_chating.user_id');
 		$this->db->order_by('hospital_admin_chating.id',"asc");
 		return $this->db->get()->result_array();	

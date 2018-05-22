@@ -298,12 +298,10 @@ class Lab extends CI_Controller {
 						foreach($tests_list as $Lis){
 							if($Lis['hos_id'] != $userdetails['hos_id']){
 							$li[]=$Lis;
-							}else{
-								$li[]=array();
 							}
 						}
 						//echo '<pre>';print_r($li);exit;
-						if(count($li[0])>0){
+						if(isset($li) && count($li)>0){
 							foreach($li as $l){
 								$data['test_list'][$l['id']]=$l;
 								$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);

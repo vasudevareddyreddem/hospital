@@ -360,7 +360,7 @@ class Admin extends CI_Controller {
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-				$data['chat_list']=$this->Admin_model->get_resourse_message_list();
+				$data['chat_list']=$this->Admin_model->get_resourse_message_list($userdetails['hos_id']);
 				$data['resources_list']=$this->Admin_model->get_resource_list($userdetails['hos_id']);
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/resourcesupport',$data);

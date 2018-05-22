@@ -227,8 +227,11 @@ class Chat extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
+			$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+			//echo $this->db->last_query();
+
 			$post=$this->input->post();
-			//echo '<pre>';print_r($post);exit;
+			//echo '<pre>';print_r($userdetails);exit;
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
 				$temp = explode(".", $_FILES["image"]["name"]);
 				$img = round(microtime(true)) . '.' . end($temp);
@@ -253,7 +256,8 @@ class Chat extends CI_Controller {
 			'image'=>$img,
 			'type'=>$type,
 			'create_at'=>date('Y-m-d H:i:s'),
-			'updated_by'=>date('Y-m-d H:i:s')
+			'updated_by'=>date('Y-m-d H:i:s'),
+			'hos_id'=>$userdetails['hos_id'],
 			);
 			
 			//echo '<pre>';print_r($msg);exit;
@@ -288,6 +292,7 @@ class Chat extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
+			$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			$post=$this->input->post();
 			//echo '<pre>';print_r($post);exit;
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
@@ -307,7 +312,8 @@ class Chat extends CI_Controller {
 					'image'=>$img,
 					'type'=>"Replayed",
 					'create_at'=>date('Y-m-d H:i:s'),
-					'updated_by'=>date('Y-m-d H:i:s')
+					'updated_by'=>date('Y-m-d H:i:s'),
+					'hos_id'=>$userdetails['hos_id']
 					);
 					//echo '<pre>';print_r($msg);exit;
 					$comments=$this->Chat_model->adding_hospital_admin_chating($msg);
