@@ -134,7 +134,7 @@ class Admin extends CI_Controller {
 									if(count($addcode)>0){
 										$data['msg']=1;
 										$data['amt']=$amount;
-										$data['cou_amt']=$checkcode['percentage_amount'];
+										$data['cou_amt']=$checkcode['percentage_amount'].'%';
 										echo json_encode($data);exit;
 									}else{
 										$data['msg']=3;

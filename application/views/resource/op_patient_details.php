@@ -141,9 +141,9 @@ table, th, td {
 		
 	  </tr>
 	  <tr>
-		<td><strong>Patient amount / payer amount / deposit:</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
+		<td><strong>Total Amount:</strong> <span><?php echo isset($details['patient_payer_deposit_amount'])?$details['patient_payer_deposit_amount']:''; ?></span></td>
 		<td><strong>Payment mode:</strong> <span><?php echo isset($details['payment_mode'])?$details['payment_mode']:''; ?></span></td>
-		<td><strong>Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
+		<td><strong>Payable Amount:</strong> <span><?php echo isset($details['bill_amount'])?$details['bill_amount']:''; ?></span></td>
 		<td><strong>Received from:</strong> <span><?php echo isset($details['received_form'])?$details['received_form']:''; ?></span></td>
 	  </tr>
 	

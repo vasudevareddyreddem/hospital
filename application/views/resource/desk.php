@@ -1057,7 +1057,7 @@ function apply_couponcode(){
 						if(data.msg==1){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount').val(data.amt);
-							document.getElementById("successmsg").innerHTML="Privilege code applied Successfully.Privilege Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
