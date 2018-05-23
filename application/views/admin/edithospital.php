@@ -211,7 +211,7 @@
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">National ID</label>
-                           <input type="text" id="hos_bas_nationali_id" name="hos_bas_nationali_id" value="<?php echo isset($hospital_details['hos_bas_nationali_id'])?$hospital_details['hos_bas_nationali_id']:''; ?>" class="form-control"  placeholder="Adhar Id" >
+                           <input type="text" id="hos_bas_nationali_id" name="hos_bas_nationali_id" value="<?php echo isset($hospital_details['hos_bas_nationali_id'])?$hospital_details['hos_bas_nationali_id']:''; ?>" class="form-control"  placeholder="National ID" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Address1</label>

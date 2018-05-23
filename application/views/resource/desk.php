@@ -508,7 +508,7 @@
                                                             <div class="row">
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Visit Number</label>
-                                                                  <input type="text" class="form-control" id="visit_no"  name="visit_no" placeholder="Enter Email" value="<?php echo isset($billing_detailes['visit_no'])?$billing_detailes['visit_no']:''; ?>">
+                                                                  <input type="text" class="form-control" id="visit_no"  name="visit_no" placeholder="Visit Number" value="<?php echo isset($billing_detailes['visit_no'])?$billing_detailes['visit_no']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="email"> Visit description</label>
@@ -554,16 +554,12 @@
                                                                   <input type="text" class="form-control" id="service_type"  name="service_type" placeholder="Enter Service type" value="<?php echo isset($billing_detailes['service_type'])?$billing_detailes['service_type']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Service</label>
-                                                                  <input type="text" class="form-control" id="service"  name="service" placeholder="Enter Service" value="<?php echo isset($billing_detailes['service'])?$billing_detailes['service']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
                                                                   <label for="mobile">Visit type</label>
                                                                   <input type="text" class="form-control" id="visit_type"  name="visit_type" placeholder="Enter Visit type" value="<?php echo isset($billing_detailes['visit_type'])?$billing_detailes['visit_type']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Doctor</label>
-                                                                  <input type="text" class="form-control" id="doctor"  name="doctor" placeholder="Enter doctor" value="<?php echo isset($billing_detailes['doctor'])?$billing_detailes['doctor']:''; ?>">
+                                                                  <input type="text" class="form-control" id="doctor"  name="doctor" placeholder="Enter doctor Name" value="<?php echo isset($billing_detailes['doctor'])?$billing_detailes['doctor']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payer</label>
@@ -572,18 +568,6 @@
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Price</label>
                                                                   <input type="text" class="form-control" id="price"  name="price" placeholder="Enter Price" value="<?php echo isset($billing_detailes['price'])?$billing_detailes['price']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Qty</label>
-                                                                  <input type="text" class="form-control" id="qty"  name="qty" placeholder="Enter Qty" value="<?php echo isset($billing_detailes['qty'])?$billing_detailes['qty']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Amount</label>
-                                                                  <input type="text" class="form-control" id="amount"  name="amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['amount'])?$billing_detailes['amount']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Bill</label>
-                                                                  <input type="text" class="form-control" id="bill"  name="bill" placeholder="Enter Bill" value="<?php echo isset($billing_detailes['bill'])?$billing_detailes['bill']:''; ?>">
                                                                </div>
                                                             </div>
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8)); ?>" class="btn btn-praimry ">Back</a>
@@ -596,16 +580,16 @@
                                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                                             <div class="row">
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Patient amount / payer amount / deposit</label>
-                                                                  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Patient amount / payer amount / deposit" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
+                                                                  <label for="mobile">Total Amount</label>
+                                                                  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Total Amount" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payment mode</label>
                                                                   <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Amount</label>
-                                                                  <input type="text" class="form-control" id="bill_amount" autocomplete="off"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+                                                                  <label for="mobile">Payable Amount</label>
+                                                                  <input type="text" class="form-control" id="bill_amount" autocomplete="off"  name="bill_amount" placeholder="Enter Payable Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Received from</label>
@@ -949,16 +933,16 @@
 
 											  <div class="row">
                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Patient amount / payer amount / deposit</label>
-                                                                  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Patient amount / payer amount / deposit" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
+                                                                  <label for="mobile">Total Amount</label>
+                                                                  <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Total Amount" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payment mode</label>
                                                                   <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Amount</label>
-                                                                  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+                                                                  <label for="mobile">Payable Amount</label>
+                                                                  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Payable Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Received from</label>
@@ -1087,7 +1071,7 @@ function apply_couponcode(){
    				});
 
 	}else{
-		 document.getElementById("errormsg").innerHTML="Please eneter amount";
+		 document.getElementById("errormsg").innerHTML="Please Payable Amount";
 	}
 	
 }
@@ -1297,17 +1281,7 @@ function apply_couponcode(){
    					}
    				}
                },
-   			service: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Service is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Service can only consist of alphanumaric, space and dot'
-   					}
-   				}
-               },visit_type: {
+   			visit_type: {
                     validators: {
    					notEmpty: {
    						message: 'Visit type is required'
@@ -1345,37 +1319,6 @@ function apply_couponcode(){
                        regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'price can only consist of alphanumaric, space and dot'
-   					}
-                   }
-               },qty: {
-                     validators: {
-   					notEmpty: {
-   						message: 'Qty is required'
-   					},
-                       regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Qty can only consist of alphanumaric, space and dot'
-   					}
-                   }
-               },amount: {
-                     validators: {
-   					notEmpty: {
-   						message: 'Amount is required'
-   					},
-                       regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Amount can only consist of alphanumaric, space and dot'
-   					}
-                   }
-               },
-              bill: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Bill is required'
-   					},
-                       regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'BIll can only consist of alphanumaric, space and dot'
    					}
                    }
                }
