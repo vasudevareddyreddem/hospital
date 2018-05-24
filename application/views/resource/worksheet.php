@@ -39,7 +39,7 @@
 												<th>Patient card number</th>
 												<th>Slot</th>
 												<th>Patient Name </th>
-                                                <th>Age/Sex</th>
+                                                <th>Age</th>
                                                 <th>Visit Type</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -52,7 +52,7 @@
                                                 <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><button class="btn btn-xs bg-success no-margin" type="button"><?php echo htmlentities($list['type']); ?></button></td>
 												<td><?php echo htmlentities($list['name']); ?></td>
-                                                <td> <?php echo htmlentities($list['age']); ?> / <?php echo htmlentities($list['gender']); ?></td>
+                                                <td> <?php echo htmlentities($list['age']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
                                                 <td>

@@ -39,9 +39,10 @@
 												<th>Other Code</th>
 												<th>Medicine Name</th>
 												<th>QTY</th>
+												<th>Amount</th>
 												<th>SGST</th>
 												<th>CGST</th>
-												<th>Other</th>
+												<th>Total Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,9 +52,10 @@
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','othercode');" value="<?php echo htmlentities($list['othercode']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_name');" value="<?php echo htmlentities($list['medicine_name']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','qty');" value="<?php echo htmlentities($list['qty']); ?>"></td>
+                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','amount');" value="<?php echo htmlentities($list['amount']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','sgst');" value="<?php echo htmlentities($list['sgst']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','cgst');" value="<?php echo htmlentities($list['cgst']); ?>"></td>
-                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','other');" value="<?php echo htmlentities($list['other']); ?>"></td>
+                                                <td><input readonly="true" type="text" id="total_amt<?php echo $list['id']; ?>" value="<?php echo htmlentities($list['total_amount']); ?>"></td>
                                                 
                                             </tr>
 										<?php } ?>
@@ -88,6 +90,7 @@
 							type: 'POST',
 							success: function (data) {
 								$('#sucessmsg').show();
+								$('#total_amt'+id).val(data.t_amt);
 								if(data.msg==1){
 									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Details Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(data.msg==2){

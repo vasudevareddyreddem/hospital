@@ -101,12 +101,19 @@ class Medicine extends CI_Controller {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					
 					foreach($post['addmedicn'] as $list){
+						
+						$st_percentage= $list['sgst'] + $list['cgst'];
+						$percen_amount= ($list['amount'] * $st_percentage)/100;
+						$total_amount=$list['amount'] + $percen_amount;
+						
 						$addmedicines=array(
 						'hos_id'=>$userdetails['hos_id'],
 						'hsn'=>$list['hsn'],
 						'othercode'=>$list['othercode'],
 						'medicine_name'=>$list['medicine'],
 						'qty'=>$list['qty'],
+						'amount'=>$list['amount'],
+						'total_amount'=>$total_amount,
 						'sgst'=>$list['sgst'],
 						'cgst'=>$list['cgst'],
 						'other'=>$list['other'],
@@ -176,6 +183,7 @@ class Medicine extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
+					$details=$this->medicine_model->get_medicine_list_details($post['med_id']);
 					if($post['field_name']=='hsn'){
 						$update=array(
 						'hsn'=>$post['med_name'],
@@ -196,14 +204,33 @@ class Medicine extends CI_Controller {
 						'qty'=>$post['med_name'],
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
-					}if($post['field_name']=='sgst'){
+					}if($post['field_name']=='amount'){
+						$st_percentage= $details['sgst'] + $details['cgst'];
+						$percen_amount= ($post['med_name'] * $st_percentage)/100;
+						$total_amount=$post['med_name'] + $percen_amount;
+						$update=array(
+						'amount'=>$post['med_name'],
+						'total_amount'=>$total_amount,
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					}
+					if($post['field_name']=='sgst'){
+						
+						$st_percentage= $post['med_name'] + $details['cgst'];
+						$percen_amount= ($details['amount'] * $st_percentage)/100;
+						$total_amount=$details['amount'] + $percen_amount;
 						$update=array(
 						'sgst'=>$post['med_name'],
+						'total_amount'=>$total_amount,
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
 					}if($post['field_name']=='cgst'){
+						$st_percentage= $details['sgst'] + $post['med_name'];
+						$percen_amount= ($details['amount'] * $st_percentage)/100;
+						$total_amount=$details['amount'] + $percen_amount;
 						$update=array(
 						'cgst'=>$post['med_name'],
+						'total_amount'=>$total_amount,
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
 					}if($post['field_name']=='other'){
@@ -215,7 +242,9 @@ class Medicine extends CI_Controller {
 					$updatedata=$this->medicine_model->update_medicine_details($post['med_id'],$update);
 					if(count($updatedata) > 0)
 					{
+						$amt=$this->medicine_model->get_medicine_list_details($post['med_id']);
 						$data['msg']=1;
+						$data['t_amt']=$amt['total_amount'];
 						echo json_encode($data);exit;	
 					}else{
 						$data['msg']=2;

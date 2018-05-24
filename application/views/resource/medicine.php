@@ -58,16 +58,23 @@
 			</div>
 			<div class="col-md-2">
 			  <div class="form-group">
+					<label >Amount</label>
+			  </div>
+			</div>
+			<div class="col-md-1">
+			  <div class="form-group">
 					<label >SGST</label>
 			  </div>
-			</div><div class="col-md-2">
+			</div>
+			<div class="col-md-1">
 			  <div class="form-group">
 					<label >CGST</label>
 			  </div>
 			</div>
+			
 			<div class="col-md-2">
 			  <div class="form-group">
-					<label >Others</label>
+					<label >Total amount</label>
 			  </div>
 			</div>
 			
@@ -98,16 +105,22 @@
 			</div>
 			<div class="col-md-2">
 			  <div class="form-group">
-				<input type="text" id="sgst" name="addmedicn[0][sgst]" class="form-control hero-demo"  placeholder="SGST">
-			  </div>
-			</div><div class="col-md-2">
-			  <div class="form-group">
-				<input type="text" id="cgst" name="addmedicn[0][cgst]" class="form-control hero-demo" placeholder="CGST">
+				<input type="text" id="amount0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][amount]" class="form-control hero-demo"  placeholder="Amount">
 			  </div>
 			</div>
+			<div class="col-md-1">
+			  <div class="form-group">
+				<input type="text" id="sgst0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][sgst]" class="form-control hero-demo"  placeholder="SGST">
+			  </div>
+			</div><div class="col-md-1">
+			  <div class="form-group">
+				<input type="text" id="cgst0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][cgst]" class="form-control hero-demo" placeholder="CGST">
+			  </div>
+			</div>
+			
 			<div class="col-md-2">
 			  <div class="form-group">
-				<input type="text" id="other" name="addmedicn[0][other]" class="form-control hero-demo"  placeholder="Other">
+				<input type="text" id="total0" readonly="true" name="addmedicn[0][total]" class="form-control hero-demo"  placeholder="total">
 			  </div>
 			</div>
 			
@@ -129,6 +142,25 @@
 </div>
 <script>
 
+function  amount_count(id,val){
+	
+	var amount=$('#amount'+id).val();
+	var cgst=$('#sgst'+id).val();
+	var sgst=$('#cgst'+id).val();
+	if(amount!='' && cgst!='' && sgst!=''){
+		
+		var perc= (parseInt(cgst)+parseInt(sgst));
+		var percent_amount= ((amount)*(perc))/100;
+		var amt= (parseInt(percent_amount)+parseInt(amount));
+		$('#total'+id).val(amt);
+		
+	}else{
+		$('#total'+id).val('');
+	}
+	
+	//alert(val);
+}
+
    $(document).ready(function() {
     var max_fields      = 15; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -143,7 +175,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='Other Code'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='sgst' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='cgst' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='other' name='addmedicn["+x+"][other]' class='form-control '  placeholder='Other'></div></div></div>"); 
+		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='Other Code'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY'></div></div>   <div class='col-md-2'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='amount"+x+"' name='addmedicn["+x+"][amount]' class='form-control'  placeholder='Amount'></div></div>    <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='sgst"+x+"' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value); id='cgst"+x+"' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='total"+x+"' name='addmedicn["+x+"][total]' value='' class='form-control '  placeholder='total'></div></div></div>"); 
             
             $(wrapper).find('.searchng').autocomplete({
                 source: availableAttributes
@@ -160,6 +192,10 @@
 	});	
     
 });
+
+function testsssss(){
+	alert();
+}
 
 $(document).ready(function() {
  

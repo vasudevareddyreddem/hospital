@@ -961,6 +961,7 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
+					$qtys=$this->Resources_model->get_medicine_list_details($post['medicine_name']);
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
@@ -975,6 +976,8 @@ class Resources extends CI_Controller {
 							'formdate'=>isset($post['formdate'])?$post['formdate']:'',
 							'todate'=>isset($post['todate'])?$post['todate']:'',
 							'qty'=>isset($post['qty'])?$post['qty']:'',
+							'org_amount'=>(($qtys['total_amount'])*($post['qty'])),
+							'amount'=>$qtys['total_amount'],
 							'units'=>isset($post['units'])?$post['units']:'',
 							'comments'=>isset($post['comments'])?$post['comments']:'',
 							'create_at'=>date('Y-m-d H:i:s'),
@@ -982,7 +985,12 @@ class Resources extends CI_Controller {
 							'create_by'=>$admindetails['a_id']
 						);
 					$medicine=$this->Resources_model->saving_patient_medicine($addmedicine);
+					
+					//echo $this->db->last_query();exit;
 					if(count($medicine)>0){
+						$qty=(($qtys['qty'])-($post['qty']));
+						$data=array('qty'=>$qty);
+							$this->Resources_model->update_medicine_details($qtys['id'],$data);
 							$this->session->set_flashdata('success',"Medicine successfully Added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{

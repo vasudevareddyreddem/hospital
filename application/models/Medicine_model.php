@@ -38,6 +38,11 @@ class Medicine_model extends CI_Model
 		$this->db->where('id',$med_id);
     	return $this->db->update("medicine_list",$data);
 	}
+	public function get_medicine_list_details($id){
+		$this->db->select('medicine_list.total_amount,medicine_list.sgst,medicine_list.cgst,medicine_list.amount')->from('medicine_list');		
+		$this->db->where('medicine_list.id',$id);
+        return $this->db->get()->row_array();	
+	}
 	
 	
 

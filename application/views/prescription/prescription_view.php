@@ -54,12 +54,14 @@
                                                     <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
+														 <th>Amount</th>
+
                                                         <th>Dosage</th>
                                                         <th>Usage </th>
                                                         <th>Usage Instructions</th>
                                                         <th>Substitute allowed?</th>
-                                                        <th>Amount</th>
                                                         <th>Modify medicine Reason:</th>
+                                                        <th>Total Amount</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -68,7 +70,12 @@
                                                         <td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
                                                         <td style="width:100px">
 															<div class="form-group">
-															<input autocomplete="off" onkeyup="changeqty(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>','')" name="qty" id="qty" type="text" class="form-control" value="<?php echo isset($list['qty'])?$list['qty']:''; ?>" placeholder="Enter Qty">
+															<input autocomplete="off" onkeyup="changeqty(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>','');change_qtys('<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value);" name="qty" id="qty<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['qty'])?$list['qty']:''; ?>" placeholder="Enter Qty">
+															</div>
+														</td>
+														 <td style="width:100px">
+															<div class="form-group">
+															<input autocomplete="off" onkeyup="changeamount(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>');change_qtys('<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value);" name="amount" id="amount<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['amount'])?$list['amount']:''; ?>" placeholder="Enter amount">
 															</div>
 														</td>
                                                         <td>
@@ -84,15 +91,17 @@
 														</td>
                                                         <td><?php echo isset($list['directions'])?$list['directions']:''; ?></td>
                                                         <td><?php echo isset($list['substitute_name'])?$list['substitute_name']:''; ?></td>
-                                                       <td style="width:100px">
-															<div class="form-group">
-															<input autocomplete="off" onkeyup="changeamount(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>')" name="amount" id="amount" type="text" class="form-control" value="<?php echo isset($list['amount'])?$list['amount']:''; ?>" placeholder="Enter amount">
-															</div>
-														</td>
+                                                      
 													   <td style="width:100px">
 															<div class="form-group">
 															<input name="reason" id="reason" onkeyup="changeqty('','<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value)" type="text" class="form-control" value="<?php echo isset($list['edit_reason'])?$list['edit_reason']:''; ?>" placeholder="Enter Reason">
 															</div>
+														</td>
+														<td>
+														<div class="form-group">
+															<input name="total_amt" id="total_amt<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['org_amount'])?$list['org_amount']:''; ?>" placeholder="Enter Total Amount">
+															</div>
+															
 														</td>
                                                     </tr>
 													
@@ -128,6 +137,14 @@
             </div>
 			<div id="sucessmsg" style="display:none;"></div>
 <script>
+function change_qtys(id,val){
+	
+	var qty=$('#qty'+id).val();
+	var amt=$('#amount'+id).val();
+	var total=(parseInt(qty)*parseInt(amt));
+	$('#total_amt'+id).val(total);
+	
+}
 $(document).ready(function() {
  $('#prescription').bootstrapValidator({
 		fields: {
@@ -171,6 +188,8 @@ function changeqty(qty,id,reason){
    						medicine_qty: qty,
    						medicine_id: id,
    						reason: reason,
+						qtys: $('#qty'+id).val(),
+   						amt: $('#amount'+id).val(),
    					},
    					dataType: 'json',
    					type: 'POST',

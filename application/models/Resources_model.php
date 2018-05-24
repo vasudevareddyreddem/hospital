@@ -270,6 +270,14 @@ class Resources_model extends CI_Model
 		$this->db->where('lab_test_type.id',$tid);
         return $this->db->get()->row_array();
 	}
-	
+	public function get_medicine_list_details($name){
+		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.qty,medicine_list.cgst,medicine_list.amount')->from('medicine_list');		
+		$this->db->where('medicine_list.medicine_name',$name);
+        return $this->db->get()->row_array();	
+	}
+	public function update_medicine_details($med_id,$data){
+		$this->db->where('id',$med_id);
+    	return $this->db->update("medicine_list",$data);
+	}
 
 }

@@ -138,7 +138,7 @@ class Users extends CI_Controller {
 
 						}
 					}
-					echo '<pre>';print_r($post);exit;
+					//echo '<pre>';print_r($post);exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
@@ -196,6 +196,8 @@ class Users extends CI_Controller {
 					}
 					$details=array(
 					'qty'=>	$qty,
+					'amount'=>$amount,
+					'org_amount'=>(($amount)*($qty)),
 					'edit_reason'=>$reason,
 					'amount'=>$amount,
 					'edited'=>1,
@@ -260,6 +262,7 @@ class Users extends CI_Controller {
 					$pdfFilePath = $path."/assets/patient_medical_bill/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
 					$html = $this->load->view('prescription/billprescription', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
 					$this->load->library('pdf');
 					$pdf = $this->pdf->load();
 					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
