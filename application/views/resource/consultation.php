@@ -597,7 +597,7 @@
                                        </thead>
                                        <tbody>
                                           <tr>
-                                             <th>Blood Press </th>
+                                             <th>Blood pressure </th>
                                              <td>Actuals</td>
                                              <td>Range</td>
                                              <th>Blood pressure site</th>

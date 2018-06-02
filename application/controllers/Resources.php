@@ -132,6 +132,7 @@ class Resources extends CI_Controller {
 					'name'=>isset($post['name'])?$post['name']:'',
 					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
 					'email'=>isset($post['email'])?$post['email']:'',
+					'gender'=>isset($post['gender'])?$post['gender']:'',
 					'dob'=>isset($post['dob'])?$post['dob']:'',
 					'age'=>isset($post['age'])?$post['age']:'',
 					'bloodgroup'=>isset($post['bloodgroup'])?$post['bloodgroup']:'',

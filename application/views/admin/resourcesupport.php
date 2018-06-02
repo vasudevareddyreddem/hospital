@@ -126,7 +126,7 @@
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
 															<span class="input-group-btn">
-																<button onclick="returnvalidation();" class="btn btn-warning btn-sm" id="btn-chat">
+																<button type="button" onclick="returnvalidation();" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
 														
@@ -154,12 +154,18 @@ $(document).ready(function(){
     });
   });
 });
+
+
 function returnvalidation(){
 	var ids=$('#hospitals_ids').val();
-	if(ids!=''){
+	var msg=$('#comment').val();
+	if(ids!='' && msg!=''){
 		document.getElementById("addmags").submit();
-	}else{
+	}else if(ids==''){
 		alert('please  select and submit hospital list in any one');
+		return false;
+	}else if(msg==''){
+		alert('Message is required');
 		return false;
 	}
 	

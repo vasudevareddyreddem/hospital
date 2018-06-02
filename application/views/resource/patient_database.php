@@ -35,7 +35,7 @@
 					<th> category </th>
 					<th> Age </th>
 					<th> Mobile </th>
-					<th> Create at </th>
+					<th> Created on </th>
 					<th> Action </th>
 				</tr>
 			</thead>

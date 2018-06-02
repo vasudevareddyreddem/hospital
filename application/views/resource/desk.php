@@ -85,12 +85,16 @@
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <div class="row">
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
                                                    <input type="hidden" class="form-control"  id="patient_old1_card_number"  name="patient_old1_card_number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" >
 												    <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
 
 												   </div>
+												    <div class="form-group col-md-6">
+                                                   <label for="Name">Name</label>
+                                                   <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
+                                                </div>
 												<div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
                                                    <select id="registrationtype" name="registrationtype" class="form-control" >
@@ -115,9 +119,14 @@
                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="Name">Name</label>
-                                                   <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
-                                                </div>
+                                                   <label for="Name">Gender</label>
+													<select id="gender" name="gender" class="form-control" >
+                                                      <option value="">Select</option>
+                                                      <option value="Male" <?php if(isset($patient_detailes['gender']) && $patient_detailes['gender']=='Male'){ echo "Selected"; } ?>>Male</option>
+                                                      <option value="Female" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Female'){ echo "Selected"; } ?>>Female</option>
+                                                      <option value="Other" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
+                                                   </select> 
+												   </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Mobile Number</label>
                                                    <input type="text" class="form-control" id="mobile"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
@@ -164,10 +173,10 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="text">National ID</label>
-                                                   <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Adhar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
+                                                   <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Aadhaar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email"> Perment Address</label>
+                                                   <label for="email"> Permanent address</label>
                                                    <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -680,7 +689,7 @@
                                                    </thead>
                                                    <tbody>
                                                       <tr>
-                                                         <th>Blood Press </th>
+                                                         <th>Blood pressure </th>
                                                          <td>Actuals</td>
                                                          <td>Range</td>
                                                          <th>Blood pressure site</th>
@@ -892,10 +901,19 @@
                                                       <option value="International cash" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
                                                    </select>
                                                 </div>
-												<div class="form-group col-md-12">
+												<div class="form-group col-md-6">
                                                    <label for="Name">Problem</label>
                                                    <input type="text" class="form-control" id="problem"  name="problem" placeholder="Enter Problem" value="<?php echo isset($patient_detailes['problem'])?$patient_detailes['problem']:''; ?>">
                                                 </div>
+												 <div class="form-group col-md-6">
+                                                   <label for="Name">Gender</label>
+													<select id="gender" name="gender" class="form-control" >
+                                                      <option value="">Select</option>
+                                                      <option value="Male" <?php if(isset($patient_detailes['gender']) && $patient_detailes['gender']=='Male'){ echo "Selected"; } ?>>Male</option>
+                                                      <option value="Female" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Female'){ echo "Selected"; } ?>>Female</option>
+                                                      <option value="Other" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
+                                                   </select> 
+												   </div>
 												<div class="form-group col-md-6">
                                                    <label for="Name">Name</label>
                                                    <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
@@ -946,10 +964,10 @@
                                                 </div>
 												 <div class="form-group col-md-6">
                                                    <label for="text">National ID</label>
-                                                   <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Adhar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
+                                                   <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Aadhaar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email"> Perment Address</label>
+                                                   <label for="email"> Permanent address</label>
                                                    <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -991,7 +1009,7 @@
                                                    </thead>
                                                    <tbody>
                                                       <tr>
-                                                         <th>Blood Press </th>
+                                                         <th>Blood pressure </th>
                                                          <td>Actuals</td>
                                                          <td>Range</td>
                                                          <th>Blood pressure site</th>
@@ -1055,12 +1073,30 @@
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payable Amount</label>
-                                                                  <input type="text" class="form-control" id="bill_amount"  name="bill_amount" placeholder="Enter Payable Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
+                                                                  <input type="text" class="form-control" id="bill_amount1"  name="bill_amount" placeholder="Enter Payable Amount" value="<?php echo isset($billing_detailes['bill_amount'])?$billing_detailes['bill_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Received from</label>
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
+															   
+															   <div class="form-group col-md-12">
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1"> I Have a Privilege card ?</a>
+																 </div>
+																 <div id="demo1" class="collapse in">
+																	<div class="form-group col-md-12">
+																		<label for="mobile">Privilege card</label>
+																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																	</div>
+																	<span id="successmsg1" style="color:green;"></span>
+																	<span id="errormsg1" style="color:red;"></span>
+																	
+																	<div class="form-group col-md-12">
+																	<button type="button" onclick="apply_couponcode1();" id="">Apply</button>
+																	</div>
+																	</div>
+															   
+															   
                                              </div>
                                              <button class="btn btn-praimry " type="submit">Next</button>
                                           </form>
@@ -1186,6 +1222,43 @@ function apply_couponcode(){
 
 	}else{
 		 document.getElementById("errormsg").innerHTML="Please Payable Amount";
+	}
+	
+}
+function apply_couponcode1(){
+	var amount=$('#bill_amount1').val();
+	if(amount !=''){
+		document.getElementById("errormsg1").innerHTML="";
+				jQuery.ajax({
+   				url: "<?php echo base_url('admin/checking_coupon_code');?>",
+   					data: {
+   						coupon_code: $('#coupon_code1').val(),
+   						bill_amount: amount,
+   						patient_id: $('#pid').val(),
+   						biling_id: $('#b_id').val(),
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						$('#sucessmsg').show();
+						if(data.msg==1){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							$('#bill_amount1').val(data.amt);
+							document.getElementById("successmsg1").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+						}
+						if(data.msg==2){
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}if(data.msg==3){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}if(data.msg==4){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}
+   						
+   					}
+   				});
+
+	}else{
+		 document.getElementById("errormsg1").innerHTML="Please Payable Amount";
 	}
 	
 }
@@ -2169,6 +2242,13 @@ function apply_couponcode(){
                        }
                    }
                },
+			   gender: {
+                   validators: {
+                         notEmpty: {
+                           message: 'Please select Gender'
+                       }
+                   }
+               },
                 name: {
                     validators: {
    					notEmpty: {
@@ -2237,7 +2317,7 @@ function apply_couponcode(){
    						message: 'National ID is required'
    					},
    					regexp: {
-   					regexp:  /^[0-9]{10,16}$/,
+   					regexp:  /^[0-9]{10,14}$/,
    					message:'National ID must be 10 to 14 digits'
    					}
    				
@@ -2382,6 +2462,13 @@ function apply_couponcode(){
                        }
                    }
                },
+			   gender: {
+                   validators: {
+                         notEmpty: {
+                           message: 'Please select gender '
+                       }
+                   }
+               },
                 name: {
                     validators: {
    					notEmpty: {
@@ -2468,7 +2555,7 @@ function apply_couponcode(){
    						message: 'National ID is required'
    					},
    					regexp: {
-   					regexp:  /^[0-9]{10,16}$/,
+   					regexp:  /^[0-9]{10,14}$/,
    					message:'National ID must be 10 to 14 digits'
    					}
    				

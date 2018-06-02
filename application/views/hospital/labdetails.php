@@ -89,7 +89,7 @@
 												<th>Investigation </th>
 												<th>Lab Name</th>
 												<th>Lab Code</th>
-												<th>Lab Assistent</th>
+												<th>Lab Assistant</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>

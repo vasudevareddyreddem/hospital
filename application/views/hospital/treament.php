@@ -97,12 +97,14 @@
                                                 <td><?php echo htmlentities($list['t_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
 												<td><?php if($list['t_d_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-                                                <td><a href="<?php echo base_url('hospital/addtreatmentstatus/'.base64_encode($list['t_d_id']).'/'.base64_encode($list['t_d_status'])); ?>">
+                                                
+												<td><a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['t_d_id'])).'/'.base64_encode(htmlentities($list['t_d_status']));?>');adminstatus('<?php echo $list['t_d_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                    <?php if($list['t_d_status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
 												<a href="<?php echo base_url('hospital/addtreatmentdeletes/'.base64_encode($list['t_d_id'])); ?>">Delete</a>
                                                     
                                                           
                                                 </td>
+												
                                             </tr>
 										<?php } ?>
 											
@@ -115,10 +117,49 @@
             </div>
          </div>
          <div class="clearfix">&nbsp;</div>
+		 <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
       </div>
    </div>
 </div>
 <script>
+function admindeactive(id){
+	$(".popid").attr("href","<?php echo base_url('hospital/addtreatmentstatus'); ?>"+"/"+id);
+}
+function adminstatus(id){
+	if(id==1){
+			$('#content1').html('Are you sure you want to Dactivate?');
+		
+	}if(id==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
 $(document).ready(function() {
     $('#treatmentform1').bootstrapValidator({
         

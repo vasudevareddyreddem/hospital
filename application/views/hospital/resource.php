@@ -237,7 +237,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'Mobile Number must be 10 to 14 digits'
+					message:'Mobile number must be 10 to 14 digits'
 					}
 				
 				}
@@ -310,11 +310,11 @@ $(document).ready(function() {
             },resource_add2: {
                  validators: {
 					notEmpty: {
-						message: 'Address1 is required'
+						message: 'Address 2 is required'
 					},
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Address1 wont allow <> [] = % '
+					message:'Address 2 wont allow <> [] = % '
 					}
                 }
             },

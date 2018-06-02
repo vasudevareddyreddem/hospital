@@ -1178,7 +1178,7 @@ class Hospital extends CI_Controller {
 					//echo '<pre>';print_r($treatment_details);exit;
 				$treatment = $this->Hospital_model->save_treatment($treatment_details);
 				if(count($treatment)>0){
-					$this->session->set_flashdata('success',"Treatment are successfully added");
+					$this->session->set_flashdata('success',"Treatment added successfully");
 					redirect('hospital/addtreatment/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1277,9 +1277,9 @@ class Hospital extends CI_Controller {
 							$statusdata= $this->Hospital_model->update_treatment_details(base64_decode($treament_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Treatment successfully Deactivate.");
+								$this->session->set_flashdata('success',"Treatment successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Treatment successfully Activate.");
+									$this->session->set_flashdata('success',"Treatment successfully activated.");
 								}
 									redirect('hospital/addtreatment/'.base64_encode(1));;
 							}else{
@@ -1370,9 +1370,9 @@ class Hospital extends CI_Controller {
 							$statusdata= $this->Hospital_model->update_addtreatment_details(base64_decode($treament_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Treatment successfully Deactivate.");
+								$this->session->set_flashdata('success',"Treatment wise doctor successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Treatment successfully Activate.");
+									$this->session->set_flashdata('success',"Treatment wise doctor successfully activated.");
 								}
 									redirect('hospital/treatment/'.base64_encode(1));
 							}else{
