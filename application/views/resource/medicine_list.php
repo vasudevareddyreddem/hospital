@@ -44,6 +44,7 @@
 												<th>SGST</th>
 												<th>CGST</th>
 												<th>Total Amount</th>
+												<th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,6 +59,7 @@
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','sgst');" value="<?php echo htmlentities($list['sgst']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','cgst');" value="<?php echo htmlentities($list['cgst']); ?>"></td>
                                                 <td><input readonly="true" type="text" id="total_amt<?php echo $list['id']; ?>" value="<?php echo htmlentities($list['total_amount']); ?>"></td>
+                                                <td><a href="<?php echo base_url('medicine/delete/'.base64_encode($list['id'])); ?>">Delete</a></td>
                                                 
                                             </tr>
 										<?php } ?>

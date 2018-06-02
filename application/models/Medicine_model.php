@@ -44,6 +44,11 @@ class Medicine_model extends CI_Model
         return $this->db->get()->row_array();	
 	}
 	
+	public function delete_medicine($m_id){
+	  $this->db->where('id', $m_id);
+     return $this->db->delete('medicine_list');
+	}
+	
 	
 
 }

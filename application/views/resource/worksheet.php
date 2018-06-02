@@ -40,7 +40,7 @@
 												<th>Slot</th>
 												<th>Patient Name </th>
                                                 <th>Age</th>
-                                                <th>Visit Type</th>
+                                                <th>Visit-Type</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>

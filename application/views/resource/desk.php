@@ -83,6 +83,7 @@
                                        <div class="tab-pane <?php if(isset($tab) && $tab==1){ echo "active";}?>" id="tab_6_1">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <div class="row">
                                                 <div class="form-group col-md-12">
                                                    <label for="email">Patient Card Number</label>
@@ -801,13 +802,13 @@
                                                 </li>
 												<?php if($list['patient_reschedule_date']==1){ ?>
 													<li>
-                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1).'/'.base64_encode($list['patient_reschedule_date'])) ?>">
-                                                    <i class="icon-docs"></i> Verify </a>
+                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1).'/'.base64_encode('verify')) ?>">
+                                                    <i class="icon-docs"></i> Reschedule </a>
 													</li>
 												<?php } ?>
                                                 <li>
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8).'/'.base64_encode('reschedule')); ?>">
-                                                   <i class="icon-docs"></i> Reschedule </a>
+                                                   <i class="icon-docs"></i> Repeated </a>
                                                 </li>
                                              </ul>
                                           </div>
@@ -854,6 +855,8 @@
                                        <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12 && $tab !=13){ echo "active";}?>" id="tab_6_11">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details1" name="basic_details1">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+											  <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
 												<div class="form-group col-md-6">
@@ -962,7 +965,7 @@
                                                          <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
                                                       <div class="col-md-3 row">
-                                                         <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>" >
+                                                         <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['p_country_name'])?$patient_detailes['p_country_name']:''; ?>" >
                                                       </div>
                                                    </div>
                                                 </div>

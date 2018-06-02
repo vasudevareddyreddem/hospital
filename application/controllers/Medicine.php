@@ -285,6 +285,39 @@ class Medicine extends CI_Controller {
 		
 	}
 	
+	public  function delete($id){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$post=$this->input->post();
+					echo $m_id=base64_decode($this->uri->segment(3));
+					
+					if($m_id!=''){
+						$Delete=$this->medicine_model->delete_medicine($m_id);
+						if(count($Delete)>0){
+								$this->session->set_flashdata('success',"Medicine  successfully Deleted.");
+								redirect('medicine/lists');
+							}else{
+								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('medicine/lists');
+							}
+						
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('medicine/lists');
+					}
+					
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
 	
 	
 	

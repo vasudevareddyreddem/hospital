@@ -332,8 +332,15 @@
                                  </div>
                               </div>
                               <div class="col-md-6">
-                                 <label>Frequency</label>									
-                                 <input type="text" class="form-control"  id="frequency" name="frequency" placeholder="Enter text Frequency" >
+                                 <label>Frequency</label>	
+										<select class="form-control" name="frequency" id="frequency">
+                                                   <option value="" >Select</option>
+                                                   <option value="4 hours">4 hours</option>
+                                                   <option value="6 hours">6 hours</option>
+                                                   <option value="12 hours">12 hours</option>
+                                                   <option value="24 hours">24 hours</option>
+                                                   
+                                                </select>								 
                               </div>
                               <div class="col-md-6">
                                  <label>Priority</label>									
@@ -843,8 +850,8 @@
 <div class="modal fade" id="medicine_list_hmodal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
+            <h5 class="modal-title" id="lineModalLabel">Previous Medicine List </h5>
          <div class="modal-header bg-indigo">
-            <h5 class="modal-title" id="lineModalLabel">All Prevoius medicine List</h5>
             <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
@@ -863,7 +870,7 @@
 										<th> Search for Medicine </th>
 										<th> Dosage  </th>
 										<th> Condition </th>
-										<th> Modification Prescription Reason </th>
+										<th> Modified Prescription Reason</th>
 										<th> Date </th>
 									</tr>
 								</thead>
@@ -872,10 +879,10 @@
 									<tr class="odd gradeX">
 										
 										<td> <?php echo $list['type_of_medicine']; ?> </td>
-										<td><?php echo $list['type_of_medicine']; ?></td>
 										<td><?php echo $list['medicine_name']; ?></td>
-										<td><?php echo $list['dosage']; ?> </td>
-										<td><?php echo $list['condition']; ?></td>
+										<td><?php echo $list['dosage']; ?></td>
+										<td><?php echo $list['condition']; ?> </td>
+										<td><?php echo $list['edit_reason']; ?></td>
 										<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
 									</tr>
 									
@@ -1114,10 +1121,6 @@ function addtestlist(){
                   validators: {
 					notEmpty: {
 						message: 'Frequency is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Frequency can only consist of alphanumaric, space and dot'
 					}
 				}
             },priority: {

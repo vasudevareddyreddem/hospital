@@ -160,11 +160,17 @@ class Resources extends CI_Controller {
 									$billing=array(
 									'p_id'=>isset($post['pid'])?$post['pid']:'',
 									'create_at'=>date('Y-m-d H:i:s'),
-									'type'=>'reschedule'
+									'type'=>'Reschedule'
 									);
 									//echo '<pre>';print_r($billing);exit;
 									$update=$this->Resources_model->update_all_patient_billing_details($billing);
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
+									
+									if(isset($post['verifying']) && $post['verifying']=='verify'){
+										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($update));
+									}else{
+										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
+
+									}
 							}else{
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(2));	
 							}
@@ -464,7 +470,7 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
-					if($post['bill_id']=='reschedule'){
+					if($post['bill_id']=='Repeated'){
 						$bill_type=$post['bill_id'];
 					}else{
 						$bill_type='new';
