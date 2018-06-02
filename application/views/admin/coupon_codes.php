@@ -177,18 +177,29 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#add_typetest').bootstrapValidator({
+    $('#coupon_post').bootstrapValidator({
         
         fields: {
             
-            test_type: {
+            coupon_code: {
                  validators: {
 					notEmpty: {
-						message: 'Lab Test Type is required'
+						message: 'Name is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Lab Test Type can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
+			percentage_amount: {
+                 validators: {
+					notEmpty: {
+						message: 'Percentage / Amount  is required'
+					},
+					regexp: {
+					regexp: /^[0-9]*$/,
+					message: ' Percentage / Amount  only consist of digits'
 					}
 				}
             },type: {
