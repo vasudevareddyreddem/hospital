@@ -48,6 +48,8 @@
                            <li class="nav-item"><a href="#announc" data-toggle="tab" class="<?php if(isset($tab) && $tab==''){ echo "active"; } ?>" aria-expanded="false">Announcements</a>
                            </li>
                            <li class="nav-item"><a href="#notifi" data-toggle="tab" class="<?php if(isset($tab) && $tab==1){ echo "active"; } ?>" aria-expanded="false">Notifications List</a>
+                           </li> 
+						   <li class="nav-item"><a href="#sent_notifi" data-toggle="tab" class="" aria-expanded="false">Sent Announcements List</a>
                            </li>
                         </ul>
                      </header>
@@ -122,6 +124,31 @@
 								</div>
 							 <?php } ?>
 						   <?php } ?>
+                           </div> 
+						   <div class="tab-pane " id="sent_notifi" aria-expanded="false">
+						   <?php if(isset($notification_sent_list) && count($notification_sent_list)>0){ ?>
+						   <?php foreach($notification_sent_list as $List){ ?>
+								<div class="panel panel-default">
+								   <a href="#" onclick="opennotification('<?php echo $List['int_id']; ?>')"><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
+									<h4  href="#collapse1<?php echo $List['int_id']; ?>" class="panel-title expand">
+									   <div class="right-arrow pull-right">+</div>
+									  <span><span class="notification-icon circle deepPink-bgcolor"><?php echo ucfirst(substr($List['comment'], 0, 1)); ?></span>   <?php echo substr($List['comment'], 0, 80); ?> </span>
+									  <span class="pull-right view-all-time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?> &nbsp;&nbsp;</span> 
+									</h4>
+								  </div></a>
+								  <div id="collapse1<?php echo $List['int_id']; ?>" class="panel-collapse collapse">
+									<div class="panel-body"><?php echo $List['comment']; ?></div>
+									<?php if(isset($List['r_list']) && count($List['r_list'])>0){ ?>
+									<div class="panel-body"><?php foreach($List['r_list'] as $Lists){ ?>
+									<?php echo $Lists['resource_name'].','; ?>
+									<?php } ?>
+									</div>
+								  <?php } ?>
+								  </div>
+								  
+								</div>
+							 <?php } ?>
+						   <?php } ?>
                            </div>
                         </div>
                      </div>
@@ -167,6 +194,11 @@ function opennotification(id){
    					$('#notification_time').append(parsedData.time);
    					$('#notification_count1').append(parsedData.Unread_count);
    					$('#notification_count').append(parsedData.Unread_count);
+					if(parsedData.Unread_count==''){
+							$('#count_symbole').hide();
+						}else{
+							$('#count_symbole').show();
+						}
    					}
            });
 	   }

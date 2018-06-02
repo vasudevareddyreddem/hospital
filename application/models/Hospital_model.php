@@ -159,6 +159,29 @@ class Hospital_model extends CI_Model
 		$this->db->insert('hospital_announcements', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	public function get_all_sent_notification_details($a_id){
+		$this->db->select('hospital_announcements.*')->from('hospital_announcements');		
+		$this->db->where('sent_by', $a_id);
+		$this->db->group_by('hospital_announcements.comment');
+        $return=$this->db->get()->result_array();
+		foreach( $return as $Lis){
+			
+			$msg=$this->get_sent_announcements_resouces_list($Lis['comment']);
+			$data[$Lis['int_id']]=$Lis;
+			$data[$Lis['int_id']]['r_list']=$msg;
+		}
+		if(!empty($data))
+		{
+		return $data;
+		}
+	}
+	
+	public function get_sent_announcements_resouces_list($msg){
+		$this->db->select('hospital_announcements.res_id,resource_list.resource_name')->from('hospital_announcements');	
+		$this->db->join('resource_list', 'resource_list.a_id = hospital_announcements.res_id', 'left');
+		$this->db->where('comment', $msg);
+        return $this->db->get()->result_array();
+	}
 	
 	
 

@@ -49,6 +49,8 @@
                            </li>
                            <li class="nav-item"><a href="#notifi" data-toggle="tab" class="" aria-expanded="false">Notifications List</a>
                            </li>
+						   <li class="nav-item"><a href="#sent_notifi" data-toggle="tab" class="" aria-expanded="false">Sent Announcements List</a>
+                           </li>
                         </ul>
                      </header>
                      <div class="panel-body">
@@ -118,6 +120,30 @@
 								  </div></a>
 								  <div id="collapse1<?php echo $List['int_id']; ?>" class="panel-collapse collapse">
 									<div class="panel-body"><?php echo $List['comment']; ?></div>
+								  </div>
+								</div>
+							 <?php } ?>
+						   <?php } ?>
+                           </div>
+						   <div class="tab-pane" id="sent_notifi" aria-expanded="false">
+						  <?php if(isset($notification_sent_list) && count($notification_sent_list)>0){ ?>
+						   <?php foreach($notification_sent_list as $List){ ?>
+								<div class="panel panel-default">
+								   <a href="#" ><div data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#collapse1<?php echo $List['int_id']; ?>">
+									<h4  href="#collapse1<?php echo $List['int_id']; ?>" class="panel-title expand">
+									   <div class="right-arrow pull-right">+</div>
+									  <span><span class="notification-icon circle deepPink-bgcolor"><?php echo ucfirst(substr($List['comment'], 0, 1)); ?></span>   <?php echo substr($List['comment'], 0, 80); ?> </span>
+									  <span class="pull-right view-all-time"><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?> &nbsp;&nbsp;</span> 
+									</h4>
+								  </div></a>
+								  <div id="collapse1<?php echo $List['int_id']; ?>" class="panel-collapse collapse">
+									<div class="panel-body"><?php echo $List['comment']; ?></div>
+									<?php if(isset($List['h_list']) && count($List['h_list'])>0){ ?>
+									<div class="panel-body"><?php foreach($List['h_list'] as $Lists){ ?>
+									<?php echo $Lists['hos_bas_name'].','; ?>
+									<?php } ?>
+									</div>
+								  <?php } ?>
 								  </div>
 								</div>
 							 <?php } ?>

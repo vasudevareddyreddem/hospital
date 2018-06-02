@@ -108,6 +108,28 @@ class Admin_model extends CI_Model
 		$this->db->insert('announcements', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	public function get_all_sent_notification_details($a_id){
+		$this->db->select('announcements.*')->from('announcements');		
+		$this->db->where('sent_by', $a_id);
+		$this->db->group_by('announcements.comment');
+        $return=$this->db->get()->result_array();
+		foreach( $return as $Lis){
+			
+			$msg=$this->get_sent_announcements_resouces_list($Lis['comment']);
+			$data[$Lis['int_id']]=$Lis;
+			$data[$Lis['int_id']]['h_list']=$msg;
+		}
+		if(!empty($data))
+		{
+		return $data;
+		}
+	}
+	public function get_sent_announcements_resouces_list($msg){
+		$this->db->select('announcements.hos_id,hospital.hos_bas_name')->from('announcements');	
+		$this->db->join('hospital', 'hospital.hos_id = announcements.hos_id', 'left');
+		$this->db->where('comment', $msg);
+        return $this->db->get()->result_array();
+	}
 	public function save_notification($data){
 		$this->db->insert('notifications', $data);
 		return $insert_id = $this->db->insert_id();
@@ -358,6 +380,10 @@ class Admin_model extends CI_Model
 		$this->db->select('*')->from('coupon_codes');
 		$this->db->where('coupon_codes.id',$id);
         return $this->db->get()->row_array();
+	}public function get_all_sent_notify_details($id){
+		$this->db->select('*')->from('notifications');
+		$this->db->where('notifications.create_by',$id);
+        return $this->db->get()->result_array();
 	}
 	
 

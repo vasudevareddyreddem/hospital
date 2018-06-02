@@ -135,7 +135,7 @@ class Chat extends CI_Controller {
 			//echo '<pre>';print_r($msg);exit;
 			$comments=$this->Chat_model->adding_resource_chating($msg);
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
 						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
 					}else{
@@ -196,7 +196,7 @@ class Chat extends CI_Controller {
 			//echo '<pre>';print_r($msg);exit;
 			$comments=$this->Chat_model->adding_team_chating($msg);
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
 						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
 					}else if(isset($post['adminchat']) && $post['adminchat']==1){
@@ -265,7 +265,7 @@ class Chat extends CI_Controller {
 			//echo '<pre>';print_r($msg);exit;
 			$comments=$this->Chat_model->adding_hospital_admin_chating($msg);
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
 						redirect('admin/chatinglist/'.base64_encode($post['a_id']).'/'.base64_encode(2));
 					}else{
@@ -322,7 +322,7 @@ class Chat extends CI_Controller {
 				}
 			}
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
 						redirect('admin/resourceschat');
 					}else{
@@ -376,7 +376,7 @@ class Chat extends CI_Controller {
 			
 			}
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					redirect('admin/gropchat');
 			}else{
 				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -414,7 +414,7 @@ class Chat extends CI_Controller {
 				$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
 		
 			if(count($comments)>0){
-					$this->session->set_flashdata('success',"Message send successfully.");
+					$this->session->set_flashdata('success',"Message sent successfully.");
 					redirect('admin/adminchat');
 			}else{
 				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

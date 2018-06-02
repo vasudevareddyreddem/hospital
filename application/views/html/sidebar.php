@@ -13,7 +13,7 @@
 	                            <div class="user-panel">
 								<?php //echo '<pre>';print_r($userdetails);exit; ?>
 	                                <div class="pull-left image">
-										   <?php if($userdetails['role_id']==1){ ?>
+										   <?php if($userdetails['role_id']==1 || $userdetails['role_id']==8){ ?>
 												<?php if($userdetails['a_profile_pic']!=''){?>
 														<img src="<?php echo base_url('assets/adminprofilepic/'.$userdetails['a_profile_pic']);?>" class="img-circle" alt="<?php echo htmlentities($userdetails['a_profile_pic']); ?>" />
 														<?php }else{ ?>
@@ -358,6 +358,14 @@
 	                            <a href="<?php echo base_url('admin/notification');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Notification</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('admin/notificationlist');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Sent Notification List</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

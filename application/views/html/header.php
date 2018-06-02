@@ -80,9 +80,11 @@
                         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <i class="fa fa-bell-o"></i>
+								<span id="count_symbole">
 								<?php if($Unread_count !=''){  ?>
-                                <span id="count_symbole" class="badge headerBadgeColor1"> <span id="notification_count1"><?php echo $Unread_count; ?></span></span>
+                                <span id="" class="badge headerBadgeColor1"> <span id="notification_count1"><?php echo $Unread_count; ?></span></span>
 								<?php } ?>
+								</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="external">
@@ -124,7 +126,7 @@
  						<!-- start manage user dropdown -->
  						<li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <?php if($userdetails['role_id']==1){ ?>
+                                <?php if($userdetails['role_id']==1 || $userdetails['role_id']==8){ ?>
 								<?php if($userdetails['a_profile_pic']!=''){?>
 	                                    <img src="<?php echo base_url('assets/adminprofilepic/'.$userdetails['a_profile_pic']);?>" class="img-circle" alt="<?php echo htmlentities($userdetails['a_profile_pic']); ?>" />
 										<?php }else{ ?>

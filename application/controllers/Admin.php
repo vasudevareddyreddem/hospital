@@ -374,7 +374,7 @@ class Admin extends CI_Controller {
 						$this->session->set_flashdata('success',"Password sent to your registered email address. Please Check your registered email address");
 						redirect('admin');
 					}else{
-						$this->session->set_flashdata('error'," In Localhost mail  didn't send");
+						$this->session->set_flashdata('error'," In Localhost mail  didn't sent");
 						redirect('admin');
 					}
 			}else{
@@ -549,8 +549,11 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
+				$admindetails=$this->session->userdata('userdetails');
 				$data['hospital_list']=$this->Admin_model->get_all_Hospital_details();
 				$data['notification_list']=$this->Admin_model->get_all_notification_details();
+				$data['notification_sent_list']=$this->Admin_model->get_all_sent_notification_details($admindetails['a_id']);
+				//echo $this->db->last_query();
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/announcement',$data);
 				$this->load->view('html/footer');
@@ -564,6 +567,19 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$this->load->view('notification/notification');
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function notificationlist()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$data['notification']=$this->Admin_model->get_all_sent_notify_details($admindetails['a_id']);
+				$this->load->view('notification/notification_view',$data);
 				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
@@ -598,8 +614,8 @@ class Admin extends CI_Controller {
 					);
 					$saveNotification=$this->Admin_model->save_notification($addnotification);
 					if(count($saveNotification)>0){
-						$this->session->set_flashdata('success',"Notification successfully Send");
-						redirect('admin/notification');
+						$this->session->set_flashdata('success',"Notification successfully Sent");
+						redirect('admin/notificationlist');
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('admin/notification');
@@ -717,7 +733,7 @@ class Admin extends CI_Controller {
 				}
 				
 				if(count($saveNotification)>0){
-					$this->session->set_flashdata('success',"Notification successfully Send.");
+					$this->session->set_flashdata('success',"Notification successfully Sent.");
 					redirect('admin/announcement');
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

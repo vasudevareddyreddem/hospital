@@ -1596,6 +1596,7 @@ class Hospital extends CI_Controller {
 					$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 					$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 					$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
+					$data['notification_sent_list']=$this->Hospital_model->get_all_sent_notification_details($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
 					//echo '<pre>';print_r($data['tab']);exit;
 					$this->load->view('hospital/announcement',$data);
