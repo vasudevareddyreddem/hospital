@@ -132,7 +132,7 @@
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">National ID</label>
-                           <input type="text" id="hos_rep_nationali_id" name="hos_rep_nationali_id" value="<?php echo isset($hospital_details['hos_rep_nationali_id'])?$hospital_details['hos_rep_nationali_id']:''; ?>" class="form-control"  placeholder="Adhar Id" >
+                           <input type="text" id="hos_rep_nationali_id" name="hos_rep_nationali_id" value="<?php echo isset($hospital_details['hos_rep_nationali_id'])?$hospital_details['hos_rep_nationali_id']:''; ?>" class="form-control"  placeholder="Aadhaar Id" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Address1</label>
@@ -503,7 +503,7 @@ $(document).ready(function() {
 						message: 'National ID is required'
 					},
 					regexp: {
-					regexp:  /^[0-9]{10,16}$/,
+					regexp:  /^[0-9]{10,14}$/,
 					message:'National ID must be 10 to 14 digits'
 					}
 				
@@ -616,7 +616,7 @@ $(document).ready(function() {
 						message: 'National ID is required'
 					},
 					regexp: {
-					regexp:  /^[0-9]{10,16}$/,
+					regexp:  /^[0-9]{10,14}$/,
 					message:'National ID must be 10 to 14 digits'
 					}
 				
