@@ -29,9 +29,9 @@
                <header class="panel-heading panel-heading-gray custom-tab ">
                   <ul class="nav nav-tabs">
 				    
-                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12){ echo "active";}?>">IP New-Registration</a>
+                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13){ echo "active";}?>">IP New-Registration</a>
                      </li>
-					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>">OP Registration</a>
+					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13){ echo "active";}?>">OP Registration</a>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule-Registration</a>
                      </li>
@@ -40,7 +40,7 @@
                </header>
                <div class="panel-body">
                   <div class="tab-content">
-                     <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12){ echo "active";}?>" id="home">
+                     <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13){ echo "active";}?>" id="home">
                         <div class="card ">
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
                               <div class="row">
@@ -138,7 +138,19 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Blood Group</label>
-                                                   <input type="text" class="form-control" id="bloodgroup"  name="bloodgroup" placeholder="Enter Blood Group" value="<?php echo isset($patient_detailes['bloodgroup'])?$patient_detailes['bloodgroup']:''; ?>">
+												   <?php $modes = array('O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
+																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
+																	  <option value = "">Select</option>
+																		<?php foreach($modes as $key=>$state):
+																				if($patient_detailes['bloodgroup'] == $state):
+																				$selected ='selected=selected';
+																				else : 
+																				$selected = '';
+																				endif;
+																			 ?>
+																			<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+																		<?php endforeach; ?>
+																	  </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Marital status</label>
@@ -585,7 +597,19 @@
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payment mode</label>
-                                                                  <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
+																   <?php $modes = array('Cash'=>'Cash','Online'=>'Online','Other'=>'Other'); ?>
+																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
+																	  <option value = "">Select</option>
+																		<?php foreach($modes as $key=>$state):
+																				if($billing_detailes['payment_mode'] == $state):
+																				$selected ='selected=selected';
+																				else : 
+																				$selected = '';
+																				endif;
+																			 ?>
+																			<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+																		<?php endforeach; ?>
+																	  </select>
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payable Amount</label>
@@ -775,9 +799,15 @@
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1)); ?>">
                                                    <i class="icon-docs"></i> Edit </a>
                                                 </li>
+												<?php if($list['patient_reschedule_date']==1){ ?>
+													<li>
+                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1).'/'.base64_encode($list['patient_reschedule_date'])) ?>">
+                                                    <i class="icon-docs"></i> Verify </a>
+													</li>
+												<?php } ?>
                                                 <li>
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8).'/'.base64_encode('reschedule')); ?>">
-                                                   <i class="icon-docs"></i> Billing </a>
+                                                   <i class="icon-docs"></i> Reschedule </a>
                                                 </li>
                                              </ul>
                                           </div>
@@ -792,7 +822,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12){ echo "active";}?>" id="aboutop">
+                     <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13){ echo "active";}?>" id="aboutop">
                         <div class="card card-topline-red">
                            <div class="card-head">
                               <header>Patients Details</header>
@@ -804,10 +834,14 @@
                                  <div class="col-md-3 col-sm-3 col-xs-3">
                                     <ul class="nav nav-tabs tabs-left">
                                        <li class="nav-item">
-                                          <a href="#tab_6_11" data-toggle="tab" class="<?php if(isset($tab) && $tab !=11 && $tab!=12){ echo "active";}?>"> Basic Details </a>
+                                          <a href="#tab_6_11" data-toggle="tab" class="<?php if(isset($tab) && $tab !=11 && $tab!=12 && $tab!=13){ echo "active";}?>"> Basic Details </a>
+                                       </li>
+									   
+									   <li class="nav-item ">
+                                          <a href="#tab_6_224" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Vitals </a>
                                        </li>
                                        <li class="nav-item ">
-                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Bill Information </a>
+                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==13){ echo "active";}?>"> Bill Information </a>
                                        </li>
 									   <li class="nav-item ">
                                           <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Assign </a>
@@ -817,7 +851,7 @@
                                  </div>
                                  <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="tab-content">
-                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12){ echo "active";}?>" id="tab_6_11">
+                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12 && $tab !=13){ echo "active";}?>" id="tab_6_11">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details1" name="basic_details1">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
@@ -884,7 +918,19 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Blood Group</label>
-                                                   <input type="text" class="form-control" id="bloodgroup"  name="bloodgroup" placeholder="Enter Blood Group" value="<?php echo isset($patient_detailes['bloodgroup'])?$patient_detailes['bloodgroup']:''; ?>">
+												   <?php $modes = array('O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
+																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
+																	  <option value = "">Select</option>
+																		<?php foreach($modes as $key=>$state):
+																				if($patient_detailes['bloodgroup'] == $state):
+																				$selected ='selected=selected';
+																				else : 
+																				$selected = '';
+																				endif;
+																			 ?>
+																			<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+																		<?php endforeach; ?>
+																	  </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Marital status</label>
@@ -925,8 +971,60 @@
                                           </div>
 										</form>
                                        </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_22">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
+									   <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_224">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals_1">
+                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+                                             <input type="hidden" id="op" name="op" value="1">
+                                             <div class="row table-responsive" >
+                                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                                   <thead>
+                                                      <tr>
+                                                         <th> Vitals </th>
+                                                         <th class="text-center" colspan="2"> Values  </th>
+                                                         <th class="text-center" colspan="2"> Others  </th>
+                                                         <th> Notes  </th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      <tr>
+                                                         <th>Blood Press </th>
+                                                         <td>Actuals</td>
+                                                         <td>Range</td>
+                                                         <th>Blood pressure site</th>
+                                                         <td>Positioning</td>
+                                                         <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th>Temperature </th>
+                                                         <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
+                                                         <td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
+                                                         <th>Temperature site</th>
+                                                         <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
+                                                         <td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"> </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th> Pulse rate</th>
+                                                         <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
+                                                         <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
+                                                         </td>
+                                                         <th> Pulse rate site  </th>
+                                                         <td>
+                                                            <div class="row">					
+                                                               <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
+                                                               <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
+                                                            </div>
+                                                         </td>
+                                                         <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                          </form>
+                                       </div>
+                                       <div class="tab-pane <?php if(isset($tab) && $tab==13){ echo "active";}?>" id="tab_6_22">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="opbills" name="opbills" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
@@ -938,7 +1036,19 @@
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payment mode</label>
-                                                                  <input type="text" class="form-control" id="payment_mode"  name="payment_mode" placeholder="Enter Payment mode" value="<?php echo isset($billing_detailes['payment_mode'])?$billing_detailes['payment_mode']:''; ?>">
+																   <?php $modes = array('Cash'=>'Cash','Online'=>'Online','Other'=>'Other'); ?>
+																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
+																	  <option value = "">Select</option>
+																		<?php foreach($modes as $key=>$state):
+																				if($billing_detailes['payment_mode'] == $state):
+																				$selected ='selected=selected';
+																				else : 
+																				$selected = '';
+																				endif;
+																			 ?>
+																			<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+																		<?php endforeach; ?>
+																	  </select>
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payable Amount</label>
@@ -952,6 +1062,7 @@
                                              <button class="btn btn-praimry " type="submit">Next</button>
                                           </form>
                                        </div> 
+									   
 									   <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_223">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/desk'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
@@ -1151,6 +1262,52 @@ function apply_couponcode(){
    }
    	$(document).ready(function() {
     
+       $('#opbills').bootstrapValidator({
+   		fields: {
+   			patient_payer_deposit_amount: {
+                   validators: {
+					notEmpty: {
+						message: 'Total Amount is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]*$/,
+					message:'Total Amount must be digits'
+					}
+				}
+               },payment_mode: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Payment mode is required'
+   					}
+   				}
+               },bill_amount: {
+                     validators: {
+					notEmpty: {
+						message: 'Payable Amount is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]*$/,
+					message:'Payable Amount must be digits'
+					}
+				}
+               },received_form: {
+                      validators: {
+					notEmpty: {
+						message: 'Name is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Name can only consist of alphanumaric, space and dot'
+					}
+				}
+               }
+   			}
+   		
+   	})
+        
+   }); 
+   $(document).ready(function() {
+    
        $('#vitals').bootstrapValidator({
    		fields: {
    			tep_actuals: {
@@ -1233,10 +1390,6 @@ function apply_couponcode(){
                     validators: {
    					notEmpty: {
    						message: 'Payment mode is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Payment mode can only consist of alphanumaric, space and dot'
    					}
    				}
                },bill_amount: {
@@ -1337,8 +1490,8 @@ function apply_couponcode(){
    						message: 'Visit Number is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Visit Number can only consist of alphanumaric, space and dot'
+   					regexp: /^[0-9]*$/,
+   					message: 'Visit Number can only consist of digits'
    					}
    				}
                },
@@ -1856,8 +2009,8 @@ function apply_couponcode(){
    						message: 'Religion is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Religion can only consist of alphanumaric, space and dot'
+   					regexp: /^[a-zA-Z ]+$/,
+   					message: 'Religion can only consist of alphabets and space'
    					}
    				}
                },caste: {
@@ -1866,8 +2019,8 @@ function apply_couponcode(){
    						message: 'Caste is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Caste can only consist of alphanumaric, space and dot'
+   					regexp: /^[a-zA-Z ]+$/,
+   					message: 'Caste can only consist of alphabets and space'
    					}
    				}
                },mothername: {
@@ -1959,12 +2112,8 @@ function apply_couponcode(){
                     validators: {
    					notEmpty: {
    						message: 'Blood group is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Blood group can only consist of alphanumaric, space and dot'
    					}
-   				}
+					}
                },
    			citizen_proof: {
                     validators: {
@@ -2067,12 +2216,9 @@ function apply_couponcode(){
                     validators: {
    					notEmpty: {
    						message: 'Blood group is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Blood group can only consist of alphanumaric, space and dot'
    					}
-   				}
+					}
+   				
                },
    			martial_status: {
                     validators: {
@@ -2302,10 +2448,6 @@ function apply_couponcode(){
                     validators: {
    					notEmpty: {
    						message: 'Blood group is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Blood group can only consist of alphanumaric, space and dot'
    					}
    				}
                },
@@ -2447,6 +2589,70 @@ function apply_couponcode(){
                }
                }
            })
+        
+   });
+    $(document).ready(function() {
+    
+       $('#vitals_1').bootstrapValidator({
+   		fields: {
+   			tep_actuals: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Actualsis required'
+   					}
+   				}
+               },tep_range: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Range is required'
+   					}
+   				}
+               },temp_site_positioning: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Positioning is required'
+   					}
+   				}
+               },notes: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Notes is required'
+   					}
+   				}
+               },pulse_actuals: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Actuals is required'
+   					}
+   				}
+               },pulse_range: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Range is required'
+   					}
+   				}
+               },pulse_rate_rhythm: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Rhythm is required'
+   					}
+   				}
+               },pulse_rate_vol: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Vol is required'
+   					}
+   				}
+               },notes1: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Notes is required'
+   					}
+   				}
+               }
+   			}
+   		
+   	})
         
    });
    

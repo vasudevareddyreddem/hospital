@@ -87,24 +87,6 @@
 											<div class="panel ">
 												<div class="panel-heading bg-indigo">
 													<span class="glyphicon glyphicon-comment"></span> Hospital Name
-													<div class="btn-group pull-right">
-														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-															<span class="fa fa-angle-down"> </span>
-														</button>
-														<ul class="dropdown-menu slidedown">
-															<li><a href="#"><span class="glyphicon glyphicon-refresh">
-															</span>Refresh</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-ok-sign">
-															</span>Available</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-remove">
-															</span>Busy</a></li>
-															<li><a href="#"><span class="glyphicon glyphicon-time"></span>
-																Away</a></li>
-															<li class="divider"></li>
-															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
-																Sign Out</a></li>
-														</ul>
-													</div>
 												</div>
 												<div class="panel-body">
 												<ul class="chat">
@@ -144,14 +126,14 @@
 													</ul>
 												</div>
 												<div class="panel-footer"><br>
-													<form action="<?php echo base_url('chat/adminchatingpost'); ?>" method="post" enctype="multipart/form-data">
+													<form id="admin_grou_chat" action="<?php echo base_url('chat/adminchatingpost'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
 														<div class="input-group input-chat-des">
 															 <input type="hidden" name="hospitals_ids" id="hospitals_ids" value="">
-															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															<input  type="text" name="comment" id="admin_comment" class="form-control input-sm" placeholder="Type your message here..." required>
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
 															<span class="input-group-btn">
-																<button class="btn btn-warning btn-sm" id="btn-chat">
+																<button type="button" onclick="returnvalidation();" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
 														
@@ -171,6 +153,7 @@
                 </div>
             </div>
 			<script>
+			
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -181,10 +164,15 @@ $(document).ready(function(){
 });
 function returnvalidation(){
 	var ids=$('#hospitals_ids').val();
-	if(ids!=''){
-		document.getElementById("addnotifications").submit();
-	}else{
+	var msg =$('#admin_comment').val();
+	if(ids!='' && msg!=''){
+		document.getElementById("admin_grou_chat").submit();
+		return true;
+	}else if(ids==''){
 		alert('please  select and submit hospital list in any one');
+		return false;
+	}else if(msg==''){
+		alert('Comment is required');
 		return false;
 	}
 	

@@ -18,7 +18,7 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Front Desk</div>
+               <div class="page-title">Add Medicine </div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -53,6 +53,11 @@
 			</div>
 			<div class="col-md-1">
 			  <div class="form-group">
+					<label >Medicine Dosage</label>
+			  </div>
+			</div>
+			<div class="col-md-1">
+			  <div class="form-group">
 					<label >Qty</label>
 			  </div>
 			</div>
@@ -72,7 +77,7 @@
 			  </div>
 			</div>
 			
-			<div class="col-md-2">
+			<div class="col-md-1">
 			  <div class="form-group">
 					<label >Total amount</label>
 			  </div>
@@ -100,25 +105,31 @@
 			</div>
 			<div class="col-md-1">
 			  <div class="form-group">
-				<input type="text" id="qty" name="addmedicn[0][qty]" class="form-control hero-demo"  placeholder="QTY">
+				<input type="text" id="medicins" name="addmedicn[0][dosage]" class="form-control searchingmedicine"  placeholder="Medicine dosage">
+			  </div>
+			</div>
+			<div class="col-md-1">
+			  <div class="form-group">
+				<input type="text" id="qty"  name="addmedicn[0][qty]" class="form-control hero-demo"  placeholder="QTY">
 			  </div>
 			</div>
 			<div class="col-md-2">
 			  <div class="form-group">
-				<input type="text" id="amount0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][amount]" class="form-control hero-demo"  placeholder="Amount">
+				<input type="text"  id="amount0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][amount]" class="form-control hero-demo"  placeholder="Amount">
 			  </div>
 			</div>
 			<div class="col-md-1">
 			  <div class="form-group">
 				<input type="text" id="sgst0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][sgst]" class="form-control hero-demo"  placeholder="SGST">
 			  </div>
-			</div><div class="col-md-1">
+			</div>
+			<div class="col-md-1">
 			  <div class="form-group">
 				<input type="text" id="cgst0" onkeyup="amount_count('0',this.value);" name="addmedicn[0][cgst]" class="form-control hero-demo" placeholder="CGST">
 			  </div>
 			</div>
 			
-			<div class="col-md-2">
+			<div class="col-md-1">
 			  <div class="form-group">
 				<input type="text" id="total0" readonly="true" name="addmedicn[0][total]" class="form-control hero-demo"  placeholder="total">
 			  </div>
@@ -175,7 +186,7 @@ function  amount_count(id,val){
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='Other Code'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY'></div></div>   <div class='col-md-2'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='amount"+x+"' name='addmedicn["+x+"][amount]' class='form-control'  placeholder='Amount'></div></div>    <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='sgst"+x+"' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value); id='cgst"+x+"' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='total"+x+"' name='addmedicn["+x+"][total]' value='' class='form-control '  placeholder='total'></div></div></div>"); 
+		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='Other Code'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][dosage]' class='form-control searchng'  placeholder='Medicine dosage'></div></div><div class='col-md-1'><div class='form-group'><input type='text' pattern='[0-9]' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY' required></div></div>   <div class='col-md-2'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='amount"+x+"' pattern='[0-9]' name='addmedicn["+x+"][amount]' class='form-control'  placeholder='Amount'></div></div>    <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='sgst"+x+"' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value); id='cgst"+x+"' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='total"+x+"' name='addmedicn["+x+"][total]' value='' class='form-control '  placeholder='total'></div></div></div>"); 
             
             $(wrapper).find('.searchng').autocomplete({
                 source: availableAttributes
@@ -192,10 +203,6 @@ function  amount_count(id,val){
 	});	
     
 });
-
-function testsssss(){
-	alert();
-}
 
 $(document).ready(function() {
  
@@ -225,7 +232,7 @@ $(document).ready(function() {
 					}
 				}
             },
-			'addmedicn[0][medicin]': {
+			'addmedicn[0][medicine]': {
                  validators: {
 					notEmpty: {
 						message: 'Medicin Name is required'
@@ -236,14 +243,37 @@ $(document).ready(function() {
 					}
 				}
             },
+			'addmedicn[0][dosage]': {
+                 validators: {
+					notEmpty: {
+						message: 'Medicin Dosage is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Medicin Dosage can only consist of alphanumaric, space and dot'
+					}
+				}
+            },
 			'addmedicn[0][qty]': {
                  validators: {
 					notEmpty: {
 						message: 'Qty is required'
 					},
-					integer: {
-                        message: 'The value is not an integer'
-                    }
+					regexp: {
+					regexp: /^[0-9]*$/,
+					message: 'Qty can only consist digits'
+					}
+				}
+            },
+			'addmedicn[0][amount]': {
+                 validators: {
+					notEmpty: {
+						message: 'Amount is required'
+					},
+					regexp: {
+					regexp: /^[0-9]*$/,
+					message: 'Amount can only consist digits'
+					}
 				}
             },
 			'addmedicn[0][sgst]': {

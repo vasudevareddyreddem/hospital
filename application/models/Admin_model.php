@@ -333,5 +333,26 @@ class Admin_model extends CI_Model
 		$this->db->where('p_id',$pid);
     	return $this->db->update("patient_billing",$data);
 	}
+	
+	public function get_get_out_sources_details($r_id){
+		$this->db->select('*')->from('resource_list');
+		$this->db->where('resource_list.r_id',$r_id);
+        return $this->db->get()->row_array();
+	}
+	public function update_lab_resourse_details($r_id,$data){
+		$this->db->where('r_id',$r_id);
+    	return $this->db->update("resource_list",$data);
+		
+	}
+	public function get_hosipital_imges($a_id){
+		$this->db->select('hospital.hos_bas_logo as img')->from('hospital');
+		$this->db->where('hospital.a_id',$a_id);
+        return $this->db->get()->row_array();
+	}
+	public function get_resource_imges($a_id){
+		$this->db->select('resource_list.resource_photo as img')->from('resource_list');
+		$this->db->where('resource_list.a_id',$a_id);
+        return $this->db->get()->row_array();
+	}
 
 }

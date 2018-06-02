@@ -23,6 +23,7 @@ class Medicine extends CI_Controller {
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			if($data['userdetails']['role_id']==2){
+			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 			if(count($Unread_count)>0){
@@ -31,6 +32,7 @@ class Medicine extends CI_Controller {
 					$data['Unread_count']='';
 				}
 			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
 				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
 				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
 				if(count($Unread_count)>0){
@@ -97,6 +99,7 @@ class Medicine extends CI_Controller {
 		{
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					
@@ -111,6 +114,7 @@ class Medicine extends CI_Controller {
 						'hsn'=>$list['hsn'],
 						'othercode'=>$list['othercode'],
 						'medicine_name'=>$list['medicine'],
+						'dosage'=>$list['dosage'],
 						'qty'=>$list['qty'],
 						'amount'=>$list['amount'],
 						'total_amount'=>$total_amount,
@@ -236,6 +240,11 @@ class Medicine extends CI_Controller {
 					}if($post['field_name']=='other'){
 						$update=array(
 						'other'=>$post['med_name'],
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					}if($post['field_name']=='dosage'){
+						$update=array(
+						'dosage'=>$post['med_name'],
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
 					}

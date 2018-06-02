@@ -60,7 +60,7 @@
                                                         <th>Usage </th>
                                                         <th>Usage Instructions</th>
                                                         <th>Substitute allowed?</th>
-                                                        <th>Modify medicine Reason:</th>
+                                                        <th>Modify Prescription Reason:</th>
                                                         <th>Total Amount</th>
                                                     </tr>
                                                 </thead>

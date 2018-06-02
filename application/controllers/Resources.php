@@ -23,6 +23,7 @@ class Resources extends CI_Controller {
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			if($data['userdetails']['role_id']==2){
+			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 			if(count($Unread_count)>0){
@@ -31,6 +32,7 @@ class Resources extends CI_Controller {
 					$data['Unread_count']='';
 				}
 			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
 				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
 				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
 				if(count($Unread_count)>0){
@@ -50,7 +52,7 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=3){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['patients_list']= $this->Resources_model->get_all_patients_lists($userdetails['hos_id']);
+					$data['patients_list']= $this->Resources_model->get_all_reschedule_patients_lists($userdetails['hos_id']);
 					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit; 
 					$patient_id= base64_decode($this->uri->segment(3));
@@ -155,7 +157,14 @@ class Resources extends CI_Controller {
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Basic Details successfully Updated.");
 							if(isset($post['op']) && $post['op']==1){
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
+									$billing=array(
+									'p_id'=>isset($post['pid'])?$post['pid']:'',
+									'create_at'=>date('Y-m-d H:i:s'),
+									'type'=>'reschedule'
+									);
+									//echo '<pre>';print_r($billing);exit;
+									$update=$this->Resources_model->update_all_patient_billing_details($billing);
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
 							}else{
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(2));	
 							}
@@ -689,7 +698,7 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=3){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);
+					//echo '<pre>';print_r($post);exit;
 					$updating=array(
 						'p_id'=>isset($post['pid'])?$post['pid']:'',
 						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
@@ -708,14 +717,23 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($updating);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($updating);
 						if(count($update)>0){
-							
 							$this->session->set_flashdata('success',"Vitals details successfully Updated.");
 							//redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+							
+							if(isset($post['op']) && $post['op']==1){
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
+							}else{
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+							}
 
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));
+							
+							if(isset($post['op']) && $post['op']==1){
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
+							}else{
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));
+							}
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -862,7 +880,7 @@ class Resources extends CI_Controller {
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
 					$data['doctors_list']=$this->Resources_model->get_hospital_doctors_list($userdetails['hos_id']);
 					//$data['patient_lab_list']=$this->Resources_model->get_patient_lab_test_list($patient_id,$data['billing_id']);
-					//echo '<pre>';print_r($data['patient_lab_list']);exit;
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/consultation',$data);
 					$this->load->view('html/footer');
 					
@@ -962,6 +980,7 @@ class Resources extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
 					$qtys=$this->Resources_model->get_medicine_list_details($post['medicine_name']);
+						//echo '<pre>';print_r($qtys);exit;
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
@@ -969,7 +988,7 @@ class Resources extends CI_Controller {
 							'medicine_name'=>isset($post['medicine_name'])?$post['medicine_name']:'',
 							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
 							'condition'=>isset($post['condition'])?$post['condition']:'',
-							'dosage'=>isset($post['dosage'])?$post['dosage']:'',
+							'dosage'=>isset($qtys['dosage'])?$qtys['dosage']:'',
 							'route'=>isset($post['route'])?$post['route']:'',
 							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
 							'directions'=>isset($post['directions'])?$post['directions']:'',

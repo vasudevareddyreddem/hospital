@@ -1,5 +1,5 @@
 
-<?php //echo '<pre>';print_r($userdetails);exit; ?>
+<?php //echo '<pre>';print_r($Unread_count);exit; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +80,9 @@
                         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <i class="fa fa-bell-o"></i>
-                                <span class="badge headerBadgeColor1"> <span id="notification_count1"><?php echo $Unread_count; ?></span></span>
+								<?php if($Unread_count !=''){  ?>
+                                <span id="count_symbole" class="badge headerBadgeColor1"> <span id="notification_count1"><?php echo $Unread_count; ?></span></span>
+								<?php } ?>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="external">
@@ -122,7 +124,26 @@
  						<!-- start manage user dropdown -->
  						<li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle " src="<?php echo base_url(); ?>assets/vendor/img/dp.jpg" />
+                                <?php if($userdetails['role_id']==1){ ?>
+								<?php if($userdetails['a_profile_pic']!=''){?>
+	                                    <img src="<?php echo base_url('assets/adminprofilepic/'.$userdetails['a_profile_pic']);?>" class="img-circle" alt="<?php echo htmlentities($userdetails['a_profile_pic']); ?>" />
+										<?php }else{ ?>
+										 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+										<?php } ?>
+										
+								<?php }else if($userdetails['role_id']==2){ ?>
+									<?php if($img['img']!=''){?>
+	                                    <img src="<?php echo base_url('assets/hospital_logos/'.$img['img']);?>" class="img-circle" alt="<?php echo htmlentities($img['img']); ?>" />
+										<?php }else{ ?>
+										 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+										<?php } ?>
+								<?php } else{ ?>
+									<?php if($img['img']!=''){?>
+	                                    <img src="<?php echo base_url('assets/adminprofilepic/'.$img['img']);?>" class="img-circle" alt="<?php echo htmlentities($img['img']); ?>" />
+										<?php }else{ ?>
+										 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+										<?php } ?>
+								<?php } ?>
                                 <span class="username username-hide-on-mobile">  <?php echo isset($userdetails['a_name'])?htmlentities($userdetails['a_name']):''; ?> </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
@@ -187,9 +208,15 @@
    					$('#notification_time').empty();
    					var parsedData = JSON.parse(data);
    					$('#notification_msg').append(parsedData.names_list);
+   					$('#notification_msg').append(parsedData.names_list);
    					$('#notification_time').append(parsedData.time);
    					$('#notification_count1').append(parsedData.Unread_count);
    					$('#notification_count').append(parsedData.Unread_count);
+						if(parsedData.Unread_count==''){
+							$('#count_symbole').hide();
+						}else{
+							$('#count_symbole').show();
+						}
    					}
            });
 	   }

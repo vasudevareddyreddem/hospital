@@ -23,6 +23,7 @@ class Hospital extends CI_Controller {
 			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			if($data['userdetails']['role_id']==2){
+			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
 			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
 			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
 			if(count($Unread_count)>0){
@@ -31,6 +32,7 @@ class Hospital extends CI_Controller {
 					$data['Unread_count']='';
 				}
 			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
+				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
 				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
 				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
 				if(count($Unread_count)>0){
@@ -464,20 +466,29 @@ class Hospital extends CI_Controller {
 		{		$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==1 || $admindetails['role_id']==2){
 					$post=$this->input->post();
+					
+					echo '<pre>';print_r($post);
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
-						if($hospital_details['hos_email_id']!= $post['hos_email_id']){
-							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
+						if($hospital_details['hos_email_id']!= $post['hos_bas_email']){
+							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_bas_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
 									redirect('hospital/edit/'.$post['hospital_id']);
 								}
 						}
 						if(isset($_FILES['hos_bas_logo']['name']) && $_FILES['hos_bas_logo']['name']!=''){
-							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
-							unlink("assets/hospital_logos/".$hospital_details['hos_bas_logo']);
+							//unlink("assets/hospital_logos/".$hospital_details['hos_bas_logo']);
 							$temp = explode(".", $_FILES["hos_bas_logo"]["name"]);
 							$hos_bas_logo = round(microtime(true)) . '.' . end($temp);
 							move_uploaded_file($_FILES['hos_bas_logo']['tmp_name'], "assets/hospital_logos/" . $hos_bas_logo);
+						}else{
+							$hos_bas_logo=$hospital_details['hos_bas_logo'];
+						}
+						if(isset($_FILES['hos_bas_logo']['name']) && $_FILES['hos_bas_logo']['name']!=''){
+							//unlink("assets/adminprofilepic/".$hospital_details['hos_bas_logo']);
+							$temp = explode(".", $_FILES["hos_bas_logo"]["name"]);
+							$hos_bas_logo = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['hos_bas_logo']['tmp_name'], "assets/adminprofilepic/" . $hos_bas_logo);
 						}else{
 							$hos_bas_logo=$hospital_details['hos_bas_logo'];
 						}
@@ -528,11 +539,14 @@ class Hospital extends CI_Controller {
 						//echo '<pre>';print_r($post);exit;
 						$onedata1=array(
 							'a_name'=>$post['hos_bas_name'],
-							'a_mobile'=>$post['hos_rep_mobile'],
+							'a_mobile'=>isset($post['hos_bas_contact'])?$post['hos_bas_contact']:$hospital_details['hos_bas_contact'],
 							'a_updated_at'=>date('Y-m-d H:i:s')
 							);
+							
+							//echo '<pre>';print_r($onedata1);exit;
 							$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$onedata1);
 						$editdata=array(
+							'reschedule_date'=>isset($post['reschedule_date'])?$post['reschedule_date']:$hospital_details['reschedule_date'],
 							'hos_con_number'=>isset($post['hos_con_number'])?$post['hos_con_number']:$hospital_details['hos_con_number'],
 							'hos_email_id'=>isset($post['hos_email_id'])?$post['hos_email_id']:$hospital_details['hos_email_id'],
 							'hos_representative'=>isset($post['hos_representative'])?$post['hos_representative']:$hospital_details['hos_representative'],

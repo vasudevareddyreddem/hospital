@@ -19,6 +19,42 @@ class Resources_model extends CI_Model
 		$this->db->where('patients_list_1.hos_id', $hos_id);
         return $this->db->get()->result_array();	
 	}
+	public function get_all_reschedule_patients_lists($hos_id){
+		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,hospital.reschedule_date,patients_list_1.registrationtype,patients_list_1.patient_category')->from('patients_list_1');		
+		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
+		$this->db->where('patients_list_1.hos_id', $hos_id);
+        $return=$this->db->get()->result_array();	
+		foreach($return as $Lis){
+							$dat=$this->get_lastest_billing_id($Lis['pid']);
+						$current=date('Y-m-d H:i:s');
+						$date1=date_create($dat['create_at']);
+						$date2=date_create($current);
+						$diff=date_diff($date1,$date2);
+						$now_date=$diff->format("%a");
+						if($now_date<=$Lis['reschedule_date']){
+							$reschedule=1;
+						}else{
+							$reschedule=0;
+						}
+				$data[$Lis['pid']]=$Lis;
+				$data[$Lis['pid']]['patient_reschedule_date']=$reschedule;
+		}
+		return $data;
+	}
+	
+	public function get_lastest_billing_id($p_id){
+		$this->db->select('patient_billing.b_id,patient_billing.create_at')->from('patient_billing');		
+		$this->db->where('patient_billing.p_id',$p_id);
+		$this->db->order_by("patient_billing.b_id",'DESC');
+		$this->db->limit(1);
+        return $this->db->get()->row_array();
+	}
+	public function get_all_reschedule_patients_lists_back($hos_id){
+		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,hospital.reschedule_date,patients_list_1.registrationtype,patients_list_1.patient_category,patients_list_1.create_at')->from('patients_list_1');		
+		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
+		$this->db->where('patients_list_1.hos_id', $hos_id);
+        return $this->db->get()->result_array();	
+	}
 	public function get_all_resouce_details($admin_id){
 		$this->db->select('resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');		
 		$this->db->join('roles', 'roles.r_id = admin.role_id', 'left');
@@ -180,7 +216,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_hospital_medicine_list($hos_id){
-		$this->db->select('medicine_list.medicine_name,medicine_list.id,medicine_list.qty')->from('medicine_list');
+		$this->db->select('medicine_list.medicine_name,medicine_list.id,medicine_list.qty,medicine_list.dosage')->from('medicine_list');
 		$this->db->where('medicine_list.hos_id',$hos_id);
 		$this->db->where('medicine_list.qty >=',1);
         return $this->db->get()->result_array();
@@ -271,7 +307,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	public function get_medicine_list_details($name){
-		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.qty,medicine_list.cgst,medicine_list.amount')->from('medicine_list');		
+		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.qty,medicine_list.cgst,medicine_list.amount,medicine_list.dosage')->from('medicine_list');		
 		$this->db->where('medicine_list.medicine_name',$name);
         return $this->db->get()->row_array();	
 	}

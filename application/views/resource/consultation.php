@@ -203,7 +203,7 @@
                                           <select class="form-control  select2" id="medicine_name" name="medicine_name">
                                              <option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
-                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?> - <?php echo "Avl qty :".$list['qty']; ?></option>
+                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo $list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?></option>
                                              <?php } ?>
                                           </select>
                                        </div>
@@ -217,43 +217,20 @@
                                                 <label>Route</label>
                                                 <select class="form-control" id="route" name="route">
                                                    <option value="" >Select Route </option>
-                                                   <option value="Mouth" >Mouth</option>
+                                                   <option value="Mouth" selected>Mouth</option>
                                                 </select>
                                              </div>
                                              <div class="col-md-8">
                                                 <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
                                                    <option value="" >Select</option>
-                                                   <option value="Single Dose" >Single Dose</option>
-                                                   <option value="Once Per Day" >Once Per Day</option>
-                                                   <option value="Twice Per Day" >Twice Per Day</option>
-                                                   <option value="Thrice Per Day" >Thrice Per Day</option>
-                                                   <option value="Four Times Per Day" >Four Times Per Day</option>
-                                                   <option value="Five Times Per Day" >Five Times Per Day</option>
-                                                   <option value="Every Morning" >Every Morning</option>
-                                                   <option value="At Bedtime" >At Bedtime</option>
-                                                   <option value="Every Other Day" >Every Other Day</option>
-                                                   <option value="Every Three Days" >Every Three Days</option>
-                                                   <option value="Every Two Hours" >Every Two Hours</option>
-                                                   <option value="Every Two Hours While Awake" >Every Two Hours While Awake</option>
-                                                   <option value="Every Three Hours" >Every Three Hours</option>
-                                                   <option value="Every Three Hours While Awake" >Every Three Hours While Awake</option>
-                                                   <option value="Write Your Own" >Write Your Own</option>
+                                                   <option value="4 hours">4 hours</option>
+                                                   <option value="6 hours">6 hours</option>
+                                                   <option value="12 hours">12 hours</option>
+                                                   
                                                 </select>
                                              </div>
                                           </div>
-                                       </div>
-                                       <div class="col-md-6">
-                                          <label>Dosage</label>									
-                                          <select class="form-control" id="dosage" name="dosage">
-                                             <option value="" >Select Dosage </option>
-                                             <option value="600 g">600 g </option>
-                                             <option value="350 g">350 g</option>
-                                             <option value="150 g">150 g</option>
-                                             <option value="250 g">250 g</option>
-                                             <option value="550 g">550 g</option>
-                                             <option value="650 g">650 g</option>
-                                          </select>
                                        </div>
                                          <div class="col-md-6">
                                           <label>Condition</label>									
@@ -266,22 +243,6 @@
                                        <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
-                                       </div>
-                                       <div class="col-md-6">
-                                          <label> From</label>
-                                          <div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                             <input class="form-control" name="formdate" id="formdate" type="text" value="">
-                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                          </div>
-                                          <input class ="form-control" type="hidden" id="dtp_input2" value="" />
-                                       </div>
-                                       <div class="col-md-6">
-                                          <label> To</label>
-                                          <div class="input-group date form_date col-md-12" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                             <input class="form-control" name="todate" id="todate"  type="text" value="">
-                                             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                          </div>
-                                          <input class ="form-control" type="hidden" id="dtp_input2" value="" />
                                        </div>
                                        <div class="col-md-6">
                                           <div class="row">
@@ -891,7 +852,7 @@
                <div class="">
                   <div class=" card card-topline-red">
                      <div class="card-head">
-                        <header>Prevoius Medicine List</header>
+                        <header>Previous Medicine List</header>
                      </div>
                      <div class="card-body ">
                         <div class="row">
@@ -902,7 +863,7 @@
 										<th> Search for Medicine </th>
 										<th> Dosage  </th>
 										<th> Condition </th>
-										<th> Midification Reason </th>
+										<th> Modification Prescription Reason </th>
 										<th> Date </th>
 									</tr>
 								</thead>
@@ -1156,7 +1117,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Namey can only consist of alphanumaric, space and dot'
+					message: 'Frequency can only consist of alphanumaric, space and dot'
 					}
 				}
             },priority: {

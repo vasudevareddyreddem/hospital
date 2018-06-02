@@ -13,11 +13,26 @@
 	                            <div class="user-panel">
 								<?php //echo '<pre>';print_r($userdetails);exit; ?>
 	                                <div class="pull-left image">
-										<?php if($userdetails['a_profile_pic']!=''){?>
-	                                    <img src="<?php echo base_url('assets/adminprofilepic/'.$userdetails['a_profile_pic']);?>" class="img-circle user-img-circle" alt="<?php echo htmlentities($userdetails['a_profile_pic']); ?>" />
-										<?php }else{ ?>
-										 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle user-img-circle" alt="User Image" />
-										<?php } ?>
+										   <?php if($userdetails['role_id']==1){ ?>
+												<?php if($userdetails['a_profile_pic']!=''){?>
+														<img src="<?php echo base_url('assets/adminprofilepic/'.$userdetails['a_profile_pic']);?>" class="img-circle" alt="<?php echo htmlentities($userdetails['a_profile_pic']); ?>" />
+														<?php }else{ ?>
+														 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+														<?php } ?>
+										
+											<?php }else if($userdetails['role_id']==2){ ?>
+														<?php if($img['img']!=''){?>
+															<img src="<?php echo base_url('assets/hospital_logos/'.$img['img']);?>" class="img-circle" alt="<?php echo htmlentities($img['img']); ?>" />
+															<?php }else{ ?>
+															 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+															<?php } ?>
+											<?php } else{ ?>
+														<?php if($img['img']!=''){?>
+															<img src="<?php echo base_url('assets/adminprofilepic/'.$img['img']);?>" class="img-circle" alt="<?php echo htmlentities($img['img']); ?>" />
+														<?php }else{ ?>
+															<img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
+														<?php } ?>
+											<?php } ?>
 	                                </div>
 	                                <div class="pull-left info">
 	                                    <p> <?php echo isset($userdetails['a_name'])?htmlentities($userdetails['a_name']):''; ?> </p>
@@ -71,7 +86,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Out source</span>
+	                                <span class="title">Out source </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -128,7 +143,7 @@
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Lab / Treatment </span>
+	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Assign treatment to doctor </span>
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
@@ -187,7 +202,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Chating </span>
+	                                <span class="title">Chat </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

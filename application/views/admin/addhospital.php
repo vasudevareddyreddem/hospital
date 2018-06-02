@@ -157,7 +157,19 @@
                            <label for="email">Nationality</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_rep_state" name="hos_rep_state" value="<?php echo isset($hospital_details['hos_rep_state'])?$hospital_details['hos_rep_state']:''; ?>" class="form-control"  placeholder=" Enter State" >
+							  <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+								  <select class="form-control" required="required" name="hos_rep_state" id="hos_rep_state">
+								  <option value = "">Select State</option>
+									<?php foreach($states as $key=>$state):
+											if($hospital_details['hos_rep_state'] == $state):
+											$selected ='selected=selected';
+											else : 
+											$selected = '';
+											endif;
+										 ?>
+										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+									<?php endforeach; ?>
+								  </select>  
                               </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_rep_country" name="hos_rep_country" value="<?php echo isset($hospital_details['hos_rep_country'])?$hospital_details['hos_rep_country']:''; ?>" class="form-control"  placeholder="Enter Country" >
@@ -223,7 +235,8 @@
                            <div class="row">
                               <div class="col-md-6">
                                  <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter pin Code" >
-                              </div>
+                              
+							  </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_bas_city" name="hos_bas_city" value="<?php echo isset($hospital_details['hos_bas_city'])?$hospital_details['hos_bas_city']:''; ?>" class="form-control"  placeholder="Enter City" >
                               </div>
@@ -233,8 +246,19 @@
                            <label for="email">Nationality</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_bas_state" name="hos_bas_state" value="<?php echo isset($hospital_details['hos_bas_state'])?$hospital_details['hos_bas_state']:''; ?>" class="form-control"  placeholder=" Enter State" >
-                              </div>
+								<select class="form-control" required="required" name="hos_bas_state" id="hos_bas_state">
+								  <option value = "">Select State</option>
+									<?php foreach($states as $key=>$state):
+											if($hospital_details['hos_bas_state'] == $state):
+											$selected ='selected=selected';
+											else : 
+											$selected = '';
+											endif;
+										 ?>
+										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+									<?php endforeach; ?>
+								  </select> 
+							  </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_bas_country" name="hos_bas_country" value="<?php echo isset($hospital_details['hos_bas_country'])?$hospital_details['hos_bas_country']:''; ?>" class="form-control"  placeholder="Enter Country" >
                               </div>
@@ -681,8 +705,8 @@ $(document).ready(function() {
 						message: 'Bank Holder Name is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Bank Holder Name can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'Bank Holder Name can only consist of alphabets and space'
 					}
 				}
             },
@@ -705,8 +729,8 @@ $(document).ready(function() {
 						message: 'BankName is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'BankName can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'BankName can only consist of alphabets and Space'
 					}
 				}
             },bank_ifsc: {

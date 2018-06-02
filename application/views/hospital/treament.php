@@ -28,7 +28,7 @@
             <ul class="nav nav-tabs">
                <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Treatments </a>
                </li>
-               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Investigation</a>
+               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Treatments wise doctor Names</a>
                </li>
             </ul>
          </header>
@@ -70,7 +70,7 @@
                                  <br>
 								 									
                               </div>
-							  <button type="submit" class="btn btn-sm btn-success">Add Prescription</button>
+							  <button type="submit" class="btn btn-sm btn-success">Add Lab Treatment </button>
 
 								 </form>
                            </div>

@@ -233,11 +233,11 @@ $(document).ready(function() {
 			 resource_mobile: {
                 validators: {
 					notEmpty: {
-						message: 'landline Number is required'
+						message: 'Mobile Number is required'
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'landline Number must be 10 to 14 digits'
+					message:'Mobile Number must be 10 to 14 digits'
 					}
 				
 				}
