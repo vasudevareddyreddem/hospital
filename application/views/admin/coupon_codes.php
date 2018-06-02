@@ -99,9 +99,9 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="<?php echo base_url('admin/coupon_code_status/'.base64_encode($list['id']).'/'.base64_encode($list['status'])); ?>">
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
-                                                            </li> 
+                                                            </li>
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
 
                                                             <li>
@@ -170,12 +170,51 @@
                   </div>
                </div>
             </div>
+			<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
             <div class="clearfix">&nbsp;</div>
        
       </div>
    </div>
 </div>
 <script>
+function admindeactive(id){
+	$(".popid").attr("href","<?php echo base_url('admin/coupon_code_status'); ?>"+"/"+id);
+}
+function adminstatus(id){
+	if(id==1){
+			$('#content1').html('Are you sure you want to Dactivate?');
+		
+	}if(id==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
 $(document).ready(function() {
     $('#coupon_post').bootstrapValidator({
         

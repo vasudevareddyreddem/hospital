@@ -119,7 +119,7 @@
 												<th>Name</th>
 												<th>Email Address</th>
                                                 <th>Contact Number </th>
-                                                <th>Create date</th>
+                                                <th>Created date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -138,9 +138,14 @@
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
+                                                           
                                                             <li>
+                                                                <a href="<?php echo base_url('admin/viewoutsourcelab/'.base64_encode($list['r_id'])); ?>">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </li> 
+															<li>
                                                                 <a href="<?php echo base_url('admin/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
-                                                                    <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                                    <i class="fa fa-line-chart"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															<li>
                                                                 <a href="<?php echo base_url('admin/editoutsource/'.base64_encode($list['r_id'])); ?>">

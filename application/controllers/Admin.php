@@ -922,6 +922,34 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function viewoutsourcelab(){
+		
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$lab_id=base64_decode($this->uri->segment(3));
+					if($lab_id!=''){
+						
+						$data['lab_detils']= $this->Admin_model->get_get_out_sources_details(base64_decode($this->uri->segment(3)));
+							$this->load->view('admin/view_outsource',$data);
+							$this->load->view('html/footer');
+						
+						//echo "<pre>";print_r($data);exit; 
+							
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('lab/oursource/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	public function editlab(){
 		if($this->session->userdata('userdetails'))

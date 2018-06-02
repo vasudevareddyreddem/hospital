@@ -271,12 +271,18 @@
                            <label for="email">Upload Documents</label>
                            <div class="compose-editor">
                               <input type="file" id="hos_bas_document" name="hos_bas_document"class="default">
-                           </div>
+								<?php if($hospital_details['hos_bas_country']!=''){ ?>
+								<a href="<?php echo base_url('assets/hospital_basic_documents/'.$hospital_details['hos_bas_country']); ?>">Download</a>
+								<?php } ?> 
+								</div>
                         </div>
 						<div class="form-group col-md-6">
                            <label for="email">Hospital Logo</label>
                            <div class="compose-editor">
                               <input type="file" id="hos_bas_logo" name="hos_bas_logo"class="default">
+								<?php if($hospital_details['hos_bas_logo']!=''){ ?>
+								<img width="50px" height="50px" src="<?php echo base_url('assets/hospital_logos/'.$hospital_details['hos_bas_logo']); ?>">
+								<?php } ?>
                            </div>
                         </div>
 						  <div class="form-group col-md-6">
@@ -346,6 +352,9 @@
                            <label for="email">Upload Documents</label>
                            <div class="compose-editor">
                               <input type="file" id="bank_documents" name="bank_documents" class="default">
+								<?php if($hospital_details['bank_document']!=''){ ?>
+								<a href="<?php echo base_url('assets/bank_documents/'.$hospital_details['bank_document']); ?>">Download</a>
+								<?php } ?>
                            </div>
                         </div>
                      </div>
@@ -384,6 +393,9 @@
                            <label for="email">Upload </label>
                            <div class="compose-editor">
                               <input type="file" id="kyc_file1" name="kyc_file1" class="default" >
+							   <?php if($hospital_details['kyc_file1']!=''){ ?>
+														  <a href="<?php echo base_url('assets/kyc_documents/'.$hospital_details['kyc_file1']); ?>">Download</a>
+														  <?php } ?>
                            </div>
                         </div>
                         <div class="form-group col-md-6">
@@ -394,6 +406,9 @@
                            <label for="email">Upload </label>
                            <div class="compose-editor">
                               <input type="file" id="kyc_file2" name="kyc_file2" class="default" >
+								<?php if($hospital_details['kyc_file2']!=''){ ?>
+								<a href="<?php echo base_url('assets/kyc_documents/'.$hospital_details['kyc_file2']); ?>">Download</a>
+								<?php } ?>
                            </div>
                         </div>
                         <div class="form-group col-md-6">
@@ -404,6 +419,9 @@
                            <label for="email">Upload </label>
                            <div class="compose-editor">
                               <input type="file" id="kyc_file3" name="kyc_file3" class="default" >
+								<?php if($hospital_details['kyc_file3']!=''){ ?>
+								<a href="<?php echo base_url('assets/kyc_documents/'.$hospital_details['kyc_file3']); ?>">Download</a>
+								<?php } ?>
                            </div>
                         </div>
                      </div>
