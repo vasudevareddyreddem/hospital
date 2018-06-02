@@ -198,12 +198,19 @@ class Admin extends CI_Controller {
 					'create_at'=>date('Y-m-d H:i:s'),
 					'create_by'=>$admindetails['a_id']
 					);
-					$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
-					if(count($addcoupon)>0){
-						$this->session->set_flashdata('success',"Coupon code  successfully Added");
-						redirect('admin/couponcodes/'.base64_encode(1));
+					$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code']);
+					if(count($checking)==0){
+						$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
+						if(count($addcoupon)>0){
+							$this->session->set_flashdata('success',"Coupon code  successfully Added");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}else{
+								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('admin/couponcodes');
+						}
+					
 					}else{
-							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
 							redirect('admin/couponcodes');
 					}
 				}else{
@@ -294,6 +301,10 @@ class Admin extends CI_Controller {
 						'updated_time'=>date('Y-m-d H:i:s')
 						);
 					//echo '<pre>';print_r($billing);exit;
+					$coupon_details=$this->Admin_model->check_coupon_exits_details($post['coupon_code_id']);
+					//echo '<pre>';print_r($coupon_details);exit;
+					if($coupon_details['coupon_code'] == $post['coupon_code']){
+						
 						$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 						if(count($save)>0){
 							$this->session->set_flashdata('success',"Coupon code successfully Updated.");
@@ -302,6 +313,24 @@ class Admin extends CI_Controller {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}
+						
+					}else{
+							$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code']);
+						if(count($checking)==0){
+							$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
+							if(count($save)>0){
+								$this->session->set_flashdata('success',"Coupon code successfully Updated.");
+								redirect('admin/couponcodes/'.base64_encode(1));
+							}else{
+								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('admin/couponcodes/'.base64_encode(1));
+							}
+							
+						}else{
+							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
+							redirect('admin/couponcodes/'.base64_encode(1));
+						}
+					}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

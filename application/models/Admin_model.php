@@ -354,5 +354,11 @@ class Admin_model extends CI_Model
 		$this->db->where('resource_list.a_id',$a_id);
         return $this->db->get()->row_array();
 	}
+	public function check_coupon_exits_details($id){
+		$this->db->select('*')->from('coupon_codes');
+		$this->db->where('coupon_codes.id',$id);
+        return $this->db->get()->row_array();
+	}
+	
 
 }
