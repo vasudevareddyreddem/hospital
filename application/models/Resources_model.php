@@ -39,7 +39,10 @@ class Resources_model extends CI_Model
 				$data[$Lis['pid']]=$Lis;
 				$data[$Lis['pid']]['patient_reschedule_date']=$reschedule;
 		}
+		if(!empty($data))
+		{
 		return $data;
+		}
 	}
 	
 	public function get_lastest_billing_id($p_id){

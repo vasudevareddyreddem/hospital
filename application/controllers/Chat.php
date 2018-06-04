@@ -54,15 +54,25 @@ class Chat extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['out_source']=$admindetails;
 					//echo '<pre>';print_r($userdetails);exit;
 					$data['chat_list']=$this->Chat_model->getget_team_replay_message_list($admindetails['a_id']);
 					$data['resources_list']=$this->Chat_model->get_resource_list($userdetails['hos_id']);
 					$data['resources_chating']=$this->Chat_model->get_resource_chating_list($admindetails['a_id']);
 					$data['hospitaladmin_chat_list']=$this->Chat_model->get_hospitaladmin_replay_message_list($admindetails['a_id']);
 					//echo '<pre>';print_r($data);exit;
-
-					$data['tab']=base64_decode($this->uri->segment(3));
-					$this->load->view('chat/recoursechat',$data);
+					if($admindetails['out_source']==1){
+						$data['tab']=1;
+					}else{
+					$data['tab']=base64_decode($this->uri->segment(3));	
+					}
+					if($admindetails['out_source']==1){
+						$this->load->view('chat/outrecoursechat',$data);
+					}else{
+					$this->load->view('chat/recoursechat',$data);	
+					}
+					
+					
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -387,6 +397,67 @@ class Chat extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function adminlabchatingpost()
+	{	
+			
+		
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+			$post=$this->input->post();
+			//echo '<pre>';print_r($post);
+			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+				$temp = explode(".", $_FILES["image"]["name"]);
+				$img = round(microtime(true)) . '.' . end($temp);
+				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
+			}else{
+				$img='';
+			}
+			foreach(explode(",",$post['labs_ids']) as $List){
+				if($List!=''){
+					$msg=array(
+					'user_id'=>$List,	
+					'comment'=>$post['comment'],
+					'from'=>$admindetails['a_id'],
+					'replay_user_id'=>$admindetails['a_id'],
+					'image'=>$img,
+					'type'=>"Replayed",
+					'create_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>date('Y-m-d H:i:s'),
+					'lab_id'=>$List,
+					);
+					//echo '<pre>';print_r($msg);exit;
+					$comments=$this->Chat_model->adding_adminchating_with_outsource_lab_chating($msg);
+				}
+			}
+			
+			
+			//exit;
+			if(count($comments)>0){
+					$this->session->set_flashdata('success',"Message sent successfully.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/outsourcelabgropchat');
+					}else{
+						redirect('admin/labchatinglist/'.base64_encode($post['labs_ids']).'/'.base64_encode(2));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/outsourcelabgropchat');
+					}else{
+						redirect('admin/labchatinglist/'.base64_encode($post['labs_ids']).'/'.base64_encode(2));
+					}
+					
+			}
+
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function adminchating()
 	{	
 		
@@ -395,6 +466,8 @@ class Chat extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			$post=$this->input->post();
+			
+			//echo '<pre>';print_r($admindetails);exit;
 			$get_sender_id=$this->Chat_model->get_sender_id($userdetails['hos_id']);
 
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
@@ -403,7 +476,7 @@ class Chat extends CI_Controller {
 				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
 			}
 				$msg=array(
-				'sender_id'=>$get_sender_id['sender_id'],	
+				'sender_id'=>isset($get_sender_id['sender_id'])?$get_sender_id['sender_id']:$admindetails['a_id'],	
 				'comments'=>isset($post['comment'])?$post['comment']:'',
 				'image'=>isset($img)?$img:'',
 				'reciver_id'=>$userdetails['hos_id'],
@@ -411,7 +484,13 @@ class Chat extends CI_Controller {
 				'type'=>'Replayed',
 				'create_by'=>$admindetails['a_id']
 				);
-				$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+				
+				//echo '<pre>';print_r($msg);exit;
+				if($admindetails['out_source']==1){
+					$comments=$this->Chat_model->adding_adminchating_with_outsource_lab_chating($msg);
+				}else{
+					$comments=$this->Chat_model->adding_adminchating_with_hospital_chating($msg);
+				}
 		
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message sent successfully.");
@@ -420,6 +499,70 @@ class Chat extends CI_Controller {
 				$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 				redirect('admin/adminchat');
 			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function adminlabchatting()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+			//echo $this->db->last_query();
+
+			$post=$this->input->post();
+			//echo '<pre>';print_r($userdetails);exit;
+			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+				$temp = explode(".", $_FILES["image"]["name"]);
+				$img = round(microtime(true)) . '.' . end($temp);
+				move_uploaded_file($_FILES['image']['tmp_name'], "assets/chating_file/" . $img);
+			}else{
+				$img='';
+			}
+			if(isset($post['replaying']) && $post['replaying']==1){
+				$replaying=$admindetails['a_id'];
+				$user_id=$post['a_id'];
+				$type="Replayed";
+			}else{
+				$replaying='';
+				$user_id=$admindetails['a_id'];
+				$type="Replay";
+			}
+			$msg=array(
+			'user_id'=>$user_id,	
+			'comment'=>$post['comment'],
+			'from'=>$replaying,
+			'replay_user_id'=>$replaying,
+			'image'=>$img,
+			'type'=>$type,
+			'create_at'=>date('Y-m-d H:i:s'),
+			'updated_by'=>date('Y-m-d H:i:s'),
+			'lab_id'=>$userdetails['a_id'],
+			);
+			
+			//echo '<pre>';print_r($msg);exit;
+			$comments=$this->Chat_model->adding_adminchating_with_outsource_lab_chating($msg);
+			if(count($comments)>0){
+					$this->session->set_flashdata('success',"Message sent successfully.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/chatinglist/'.base64_encode($post['a_id']).'/'.base64_encode(2));
+					}else{
+						redirect('admin/adminchat');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					if(isset($post['replaying']) && $post['replaying']==1){
+						redirect('admin/chatinglist/'.base64_encode($post['a_id']));
+					}else{
+						redirect('admin/adminchat');
+					}
+					
+			}
+
+			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

@@ -61,6 +61,13 @@ class Admin_model extends CI_Model
 		$this->db->where('hos_status !=', 2);
         return $this->db->get()->result_array();	
 	}
+	public function get_all_out_source_lab_details($a_id){
+		$this->db->select('resource_list.r_id,resource_list.a_id,resource_list.resource_name')->from('resource_list');		
+		$this->db->where('resource_list.out_source_lab ', 1);
+		$this->db->where('resource_list.r_create_by', $a_id);
+        return $this->db->get()->result_array();	
+	}
+	
 	public function getget_team_message_list(){
 		$this->db->select('team_chating.*,sentname.a_name as replayname,sentname.a_profile_pic as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('team_chating');
 		$this->db->join('admin as sentname', 'sentname.a_id = team_chating.user_id', 'left');
@@ -94,9 +101,22 @@ class Admin_model extends CI_Model
 		$this->db->order_by('hospital_admin_chating.id',"asc");
         return $this->db->get()->result_array();	
 	}
+	public function getget_lab_resourse_replay_message_list($user_id){
+		$this->db->select('out_source_lab_chating.*,sentname.a_name as replayname,admin.a_name as replayedname')->from('out_source_lab_chating');
+		$this->db->join('admin as sentname', 'sentname.a_id = out_source_lab_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = out_source_lab_chating.replay_user_id', 'left');
+		$this->db->where('out_source_lab_chating.user_id',$user_id);
+		$this->db->order_by('out_source_lab_chating.id',"asc");
+        return $this->db->get()->result_array();	
+	}
 	public function get_Hospital_name($id){
 		$this->db->select('hospital.hos_bas_name')->from('hospital');		
 		$this->db->where('hos_id', $id);
+        return $this->db->get()->row_array();
+	}
+	public function get_outsource_lab_name($r_id){
+		$this->db->select('resource_list.resource_name')->from('resource_list');		
+		$this->db->where('a_id', $r_id);
         return $this->db->get()->row_array();
 	}
 	public function get_resource_name($id){
@@ -156,8 +176,19 @@ class Admin_model extends CI_Model
 		$this->db->or_where('admin_chating.sender_id', $hos_id);
         return $this->db->get()->result_array();	
 	}
+	public function get_outsourcelab_admin_chating($lab_id){
+		
+		$this->db->select('out_source_lab_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('out_source_lab_chating');
+		$this->db->join('resource_list as sentname', 'sentname.a_id = out_source_lab_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = out_source_lab_chating.replay_user_id', 'left');
+		$this->db->where('out_source_lab_chating.user_id',$lab_id);
+		$this->db->order_by('out_source_lab_chating.id',"asc");
+        return $this->db->get()->result_array();
+
+		
+	}
 	public function get_admin_chating_with_hospital(){
-		$this->db->select('admin_chating.*,admin.a_name as sender_name,hospital.hos_bas_name as reciver_name')->from('admin_chating');
+		$this->db->select('admin_chating.*,admin.out_source,admin.a_name as sender_name,hospital.hos_bas_name as reciver_name')->from('admin_chating');
 		$this->db->join('admin', 'admin.a_id = admin_chating.sender_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = admin_chating.reciver_id', 'left');
 		$this->db->group_by('admin_chating.create_at');
@@ -385,6 +416,28 @@ class Admin_model extends CI_Model
 		$this->db->where('notifications.create_by',$id);
         return $this->db->get()->result_array();
 	}
+	
+	/* out souce lab chating */
+	public function get_outsourcelab_message_list($lab_id){
+		/*$this->db->select('out_source_lab_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('out_source_lab_chating');
+		$this->db->join('resource_list as sentname', 'sentname.a_id = out_source_lab_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = out_source_lab_chating.replay_user_id', 'left');
+		$this->db->where('out_source_lab_chating.lab_id',$lab_id);
+		$this->db->group_by('out_source_lab_chating.user_id');
+		$this->db->order_by('out_source_lab_chating.id',"asc");
+		return $this->db->get()->result_array();*/
+		
+		
+		$this->db->select('out_source_lab_chating.*,sentname.resource_name as replayname,sentname.resource_photo as replaypic,admin.a_name as replayedname,admin.a_profile_pic as replayedpic')->from('out_source_lab_chating');
+		$this->db->join('resource_list as sentname', 'sentname.a_id = out_source_lab_chating.user_id', 'left');
+		$this->db->join('admin', 'admin.a_id = out_source_lab_chating.replay_user_id', 'left');
+		$this->db->group_by('out_source_lab_chating.user_id');
+		$this->db->order_by('out_source_lab_chating.id',"asc");
+		return $this->db->get()->result_array();	
+	}
+		
+	
+	/* out souce lab chating */
 	
 
 }

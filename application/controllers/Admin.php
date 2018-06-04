@@ -407,12 +407,37 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
-				$user_id=base64_decode($this->uri->segment(3));
+				echo $user_id=base64_decode($this->uri->segment(3));
 				$type_id=base64_decode($this->uri->segment(4));
 				if($type_id==2){
 				$data['chat_list']=$this->Admin_model->getget_resourse_replay_message_list($user_id);
 				//echo '<pre>';print_r($data);exit;
+				//echo $this->db->last_query();exit;
 				$this->load->view('admin/replyresourschat',$data);
+				}else{
+				$data['chat_list']=$this->Admin_model->getget_team_replay_message_list($user_id);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('admin/replyteamchat',$data);
+				}
+				
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function labchatinglist()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				echo $user_id=base64_decode($this->uri->segment(3));
+				$type_id=base64_decode($this->uri->segment(4));
+				if($type_id==2){
+				$data['chat_list']=$this->Admin_model->getget_lab_resourse_replay_message_list($user_id);
+				//echo '<pre>';print_r($data);exit;
+				//echo $this->db->last_query();exit;
+				$this->load->view('admin/replylabresourschat',$data);
 				}else{
 				$data['chat_list']=$this->Admin_model->getget_team_replay_message_list($user_id);
 				//echo '<pre>';print_r($data);exit;
@@ -529,15 +554,38 @@ class Admin extends CI_Controller {
 			redirect('dashboard');
 		}
 	}
+	public function outsourcelabgropchat()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$data['chat_list']=$this->Admin_model->get_outsourcelab_message_list($admindetails['a_id']);
+				
+				$data['outsources_lab_list']=$this->Admin_model->get_all_out_source_lab_details($admindetails['a_id']);
+				//echo '<pre>';print_r($data['chat_list']);exit;
+				$this->load->view('admin/outsource_lab_group_chat',$data);
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	public function adminchat()
 	{
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-				$data['chating_list']=$this->Admin_model->get_hospital_admin_chating($userdetails['hos_id']);
+				if($admindetails['out_source']==1){
+					$data['chating_list']=$this->Admin_model->get_outsourcelab_admin_chating($admindetails['a_id']);
+					$this->load->view('chat/outsourcelab_chat',$data);
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$data['chating_list']=$this->Admin_model->get_hospital_admin_chating($userdetails['hos_id']);
+					$this->load->view('chat/hospital_chat',$data);
+				}
 				//echo '<pre>';print_r($data);exit;
-				$this->load->view('chat/hospital_chat',$data);
+				
 				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
@@ -633,6 +681,25 @@ class Admin extends CI_Controller {
 				foreach($post['id'] as $list){
 					$hos_name=$this->Admin_model->get_Hospital_name($list);
 					$names[]=$hos_name['hos_bas_name'];
+				}
+				$tt=implode(",",$names);
+				$data['msg']=1;
+				$data['names_list']=$tt;
+				$data['ids']=$post['id'];
+				echo json_encode($data);exit;	
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function getoutsource_lab_name()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$post=$this->input->post();
+				foreach($post['id'] as $list){
+					$lab_name=$this->Admin_model->get_outsource_lab_name($list);
+					$names[]=$lab_name['resource_name'];
 				}
 				$tt=implode(",",$names);
 				$data['msg']=1;

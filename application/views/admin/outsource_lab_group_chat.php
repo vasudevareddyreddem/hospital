@@ -16,6 +16,8 @@
    display:none
    }
 </style>
+
+<?php //echo '<pre>';print_r($chat_list);exit; ?>
 <?php if($this->session->flashdata('success')): ?>
 				<div class="alert_msg1 animated slideInUp bg-succ">
 				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
@@ -53,7 +55,7 @@
 									<div class="row">
 										<div class="form-group col-md-3 card">
 									
-											<h3>Selected Hospitals</h3>
+											<h3>Selected Out source labs</h3>
 											<textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 											<br>
 											 <form class="dat-help" id="frm-example" action="" method="POST">
@@ -61,15 +63,15 @@
                                              <thead>
                                                 <tr>
                                                    <th><input name="select_all" value="1" type="checkbox"></th>
-                                                   <th>Hospital Name</th>
+                                                   <th>Out source lab Name</th>
                                                 </tr>
                                              </thead>
                                               <tbody>
-                                                <?php if(isset($hospital_list) && count($hospital_list)>0){ ?>
-                                                <?php foreach($hospital_list as $list){ ?>
+                                                <?php if(isset($outsources_lab_list) && count($outsources_lab_list)>0){ ?>
+                                                <?php foreach($outsources_lab_list as $list){ ?>
                                                 <tr>
-                                                   <td><?php echo $list['hos_id']; ?></td>
-                                                   <td><?php echo $list['hos_bas_name']; ?></td>
+                                                   <td><?php echo $list['a_id']; ?></td>
+                                                   <td><?php echo $list['resource_name']; ?></td>
                                                 </tr>
                                                 <?php } ?>
                                                 <?php }else{ ?>
@@ -86,59 +88,51 @@
 										<div class="col-md-9 chat-help">
 											<div class="panel ">
 												<div class="panel-heading bg-indigo">
-													<span class="glyphicon glyphicon-comment"></span> Hospital Name
+													<span class="glyphicon glyphicon-comment"></span> Out source lab Name
 												</div>
 												<div class="panel-body">
 												
 												
 												<ul class="chat">
-													<?php if(isset($chating_list) && count($chating_list)>0){ ?>
-														<?php //echo '<pre>';print_r($chating_list);exit; ?>
-
-													<?php foreach($chating_list as $List){ ?>
-													
-													<?php if($List['type']=='Replay'){ ?>
-													
-													<li class="left clearfix"><span class="chat-img pull-left">
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($List['sender_name'], 0, 2)); ?></b></span>
-														</span>
-															<div class="chat-body clearfix">
-																<div class="header">
-																	<strong class="primary-font"><?php echo isset($List['sender_name'])?$List['sender_name']:''; ?></strong> <small class="pull-right text-muted">
-																		<span class="glyphicon glyphicon-time"></span><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></small>
-																</div>
-																<p>
-																	<?php echo isset($List['comments'])?$List['comments']:''; ?>
-																</p>
-															</div>
-														</li>
-													<?php }else{ ?>
-														<li class="right clearfix"><span class="chat-img pull-right">
-															<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($List['reciver_name'], 0, 2)); ?></b></span>
-														</span>
-															<div class="chat-body clearfix">
-																<div class="header">
-																	<small class=" text-muted"><span class="glyphicon glyphicon-time"></span><?php echo date('M j h:i A',strtotime(htmlentities($List['create_at'])));?></small>
-																	<strong class="pull-right primary-font"><?php echo isset($List['reciver_name'])?$List['reciver_name']:''; ?></strong>
-																</div>
-																<p><?php echo isset($List['comments'])?$List['comments']:''; ?>
-																</p>
-															</div>
-														</li>
-													<?php } ?>
-															<?php } ?>
-													<?php } ?>
-													</ul>
+													<?php if(count($chat_list)>0){ ?>
+															<table id="saveStage" class="display" style="width:100%;">
+																<thead>
+																	<tr>
+																		<th>Name</th>
+																		<th>Message</th>
+																		<th>Create at</th>
+																		<th>Status</th>
+																	</tr>
+																</thead>
+																<tbody>
+																<?php foreach($chat_list as $list){ ?>
+																	<tr>
+																		<td><?php echo htmlentities($list['replayname']); ?></td>
+																		<td><?php echo htmlentities($list['comment']); ?></td>
+																		<td><?php echo htmlentities($list['create_at']); ?></td>
+																		<td><a href="<?php echo base_url('admin/labchatinglist/'.base64_encode($list['user_id']).'/'.base64_encode(2)); ?>">View</a></td>
+																	  
+																	</tr>
+																<?php } ?>
+																	
+																	
+																</tbody>
+															</table>
+														<?php } ?>
+																			</ul>
 												</div>
 												<div class="panel-footer"><br>
-													<form id="admin_grou_chat" action="<?php echo base_url('chat/adminchatingpost'); ?>" method="post" enctype="multipart/form-data">
+													<form id="admin_grou_chat" action="<?php echo base_url('chat/adminlabchatingpost'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
 														<div class="input-group input-chat-des">
-															 <input type="hidden" name="hospitals_ids" id="hospitals_ids" value="">
-															<input  type="text" name="comment" id="admin_comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															 <input type="hidden" name="labs_ids" id="labs_ids" value="">
+
+															<input  type="hidden" name="replaying" id="replaying" value="1" />
+															<input  type="hidden" name="a_id" id="a_id" value="<?php echo isset($chat_list[0]['user_id'])?$chat_list[0]['user_id']:'' ; ?>" >
+															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..."  required>
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
 															<span class="input-group-btn">
-																<button type="button" onclick="returnvalidation();" class="btn btn-warning btn-sm" id="btn-chat">
+																<button class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
 														
@@ -168,7 +162,7 @@ $(document).ready(function(){
   });
 });
 function returnvalidation(){
-	var ids=$('#hospitals_ids').val();
+	var ids=$('#labs_ids').val();
 	var msg =$('#admin_comment').val();
 	if(ids!='' && msg!=''){
 		document.getElementById("admin_grou_chat").submit();
@@ -320,16 +314,16 @@ function returnvalidation(){
          //$('#example-console').text($(form).serialize());
         // console.log("Form submission", $(form).serialize());
    	  var $data=$(form).serialize();
-	  //$('#hospitals_ids').val($data);
+	  //$('#labs_ids').val($data);
    	   jQuery.ajax({
-   			url: "<?php echo base_url('admin/gethospitalsname');?>",
+   			url: "<?php echo base_url('admin/getoutsource_lab_name');?>",
    			data:$data,
    			type: "POST",
    			format:"Json",
    					success:function(data){
    					var parsedData = JSON.parse(data);
    					$('#example-console').text(parsedData.names_list);
-   					$('#hospitals_ids').val(parsedData.ids);
+   					$('#labs_ids').val(parsedData.ids);
    					}
            });
          // Remove added elements

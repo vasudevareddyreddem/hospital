@@ -65,7 +65,12 @@ class Chat_model extends CI_Model
 	}
 	/* admin chating to hospital chating*/
 	
-	
+	/* out  source lab testing */
+	public function adding_adminchating_with_outsource_lab_chating($data){
+		$this->db->insert('out_source_lab_chating', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	/* out  source lab testing */
 	
 
 }

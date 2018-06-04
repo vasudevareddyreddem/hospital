@@ -101,6 +101,10 @@
 	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
 	                                    </a>
 	                                </li>
+									<li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/outsourcelabgropchat'); ?>" class="nav-link "> <span class="title">Group of Outsource Lab</span>
+	                                    </a>
+	                                </li>
 	                                <li class="nav-item ">
 	                                    <a href="<?php echo base_url('chat/admin_softwareteam'); ?>" class="nav-link "> <span class="title">Software Team</span>
 	                                    </a>
@@ -293,7 +297,26 @@
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                        </li> 
+	                        </li>
+							<?php if($userdetails['out_source']==1){ ?>							
+							 
+									<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                                <span class="title">Chat</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                               <li class="nav-item ">
+	                                    <a href="<?php echo base_url('admin/adminchat'); ?>" class="nav-link "> <span class="title">Admin Chat</span>
+	                                    </a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <a href="<?php echo base_url('chat/admin_softwareteam'); ?>" class="nav-link "> <span class="title">Software Team</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li>
+							<?php }else{ ?>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
@@ -301,7 +324,9 @@
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                        </li> 
+	                        </li>
+							
+							<?php }?>
 						
 						<?php } else if($userdetails['role_id']==6){ ?>	
 							
