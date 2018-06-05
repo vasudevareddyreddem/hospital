@@ -138,8 +138,8 @@ $(document).ready(function() {
                         message: 'document is required'
                     },
 					regexp: {
-					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
-					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					regexp: "(.*?)\.(docx|doc|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx files are allowed'
 					}
                 }
             }

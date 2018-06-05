@@ -1651,6 +1651,49 @@ class Hospital extends CI_Controller {
 		}
 	}
 	
+	public  function modified_prescription(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['get_m_precption_list']=$this->Hospital_model->get_modified_prescription_list($userdetails['hos_id']);
+					//echo '<pre>';print_r($get_m_precption_list);exit;
+					$this->load->view('hospital/modified_prescription_list',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public  function viewprescription(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$billing_id=base64_decode($this->uri->segment(4));
+					$patient_id=base64_decode($this->uri->segment(3));
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['prescriptions']=$this->Hospital_model->get_prescription_details($patient_id,$billing_id);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/prescription_view',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
 	
 	
 	

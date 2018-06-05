@@ -166,7 +166,9 @@
 														  <?php } ?>
 														 </div>
 													 </div>
-													</div><div class="col-md-6">
+													</div>
+													<?php if($userdetails['out_source']!=1){ ?>
+													<div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
 														 <strong>Resource Document</strong>
@@ -219,6 +221,7 @@
 														 </div>
 													 </div>
 													</div>
+													<?php } ?>
 													
 													
 													

@@ -152,6 +152,24 @@ class Resources extends CI_Controller {
 					'create_by'=>$userdetails['a_id']
 					);
 					//echo '<pre>';print_r($tab1);exit;
+					$check_patient_card=$this->Resources_model->get_card_number_list($post['patient_card_number']);
+					if(isset($post['pid']) && $post['pid']!=''){
+						$_detail=$this->Resources_model->get_details_details($post['pid']);
+						if($_detail['card_number']!=$post['patient_card_number']){
+										if(count($check_patient_card)>0){
+											$this->session->set_flashdata('error',"Patient Card Number already exist. Please  use  another Number");
+											redirect('resources/desk');
+										}
+									
+									
+							}
+					
+					}else{
+						if(count($check_patient_card)>0){
+									$this->session->set_flashdata('error',"Patient Card Number already exist. Please  use  another Number");
+									redirect('resources/desk');
+						}	
+					}
 					if(isset($post['pid']) && $post['pid']!=''){
 						
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab1);
@@ -216,6 +234,7 @@ class Resources extends CI_Controller {
 									redirect('resources/desk');
 							}
 					}
+					
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
@@ -767,7 +786,10 @@ class Resources extends CI_Controller {
 	public function checking_card_number(){
 		$post=$this->input->post();
 		$details=$this->Resources_model->get_card_number_list($post['card_number']);
-		if(count($details) > 0)
+		//echo count($details);
+		//echo $this->db->last_query();
+		//echo '<pre>';print_r($details);exit;
+		if(count($details)>0)
 				{
 				$data['msg']=1;
 				$data['list']=$details;

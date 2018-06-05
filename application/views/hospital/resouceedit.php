@@ -111,6 +111,8 @@
 									<label> Resource Photo</label>
 										<input class="form-control" id="resource_photo" name="resource_photo" type="file"  placeholder="Resource Photo">
 									</div>
+									
+									<?php if($userdetails['out_source']!=1){ ?>
 										<div class="col-md-6">
 									<label> Resource Document</label>
 										<input class="form-control" id="resource_document" name="resource_document" type="file" placeholder="Resource Document">
@@ -132,6 +134,7 @@
 									<label> Resource Upload Any document</label>
 										<input class="form-control" id="resource_other_document" name="resource_other_document" type="file"  placeholder="Resource Photo">
 									</div>
+									<?php } ?>
                               </div>
                            </div>
                            <div class="clearfix">&nbsp;</div>

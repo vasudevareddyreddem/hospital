@@ -314,6 +314,7 @@ class Admin_model extends CI_Model
         $this->db->join('patients_list_1', 'patients_list_1.pid = patient_medicine_list.p_id', 'left');
 		$this->db->where("patients_list_1.hos_id", $hos_id);
 		$this->db->where("patient_medicine_list.edited", 1);
+		$this->db->group_by("patient_medicine_list.b_id");
 		return $this->db->get()->result_array();
 	}
 	/* resource announcement */

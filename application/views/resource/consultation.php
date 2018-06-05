@@ -17,6 +17,8 @@
    margin-top:50px;
    }
 </style>
+
+<?php //echo '<pre>';print_r($patient_details);exit; ?>
 <?php if($this->session->flashdata('success')): ?>
 <div class="alert_msg1 animated slideInUp bg-succ">
    <?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
@@ -54,7 +56,7 @@
                         </div>
                         <div class="col-md-3">
                            <strong>Mobile</strong>
-                           <p><?php echo isset($patient_details['name'])?$patient_details['name']:''; ?></p>
+                           <p><?php echo isset($patient_details['mobile'])?$patient_details['mobile']:''; ?></p>
                         </div>
                         <div class="col-md-3">
                            <strong>Blood group:</strong>
@@ -1209,9 +1211,6 @@ function addtestlist(){
             },
 			directions: {
                  validators: {
-					notEmpty: {
-						message: 'Directions is required'
-					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Directions can only consist of alphanumaric, space and dot'

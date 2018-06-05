@@ -139,7 +139,7 @@
 
 			</div>
 		
-			<button class="add_field_button">Add More Fields</button>
+			<button class="add_field_button">Add More Medicine</button>
 			<button id="remobing" class="remove_field">Remove</button>
 			<button type="submit">Submit</button>
 			</form>

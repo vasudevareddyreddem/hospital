@@ -56,7 +56,7 @@
 					<td> <?php echo $list['create_at']; ?> </td>
 					<td> <input type="text" name="amount" id="amount" value="<?php echo $list['amount']; ?>" required> </td>
 					<td> <input type="text" name="duration" id="duration" value="<?php echo $list['duration']; ?>" required> </td>
-					<td> <?php if($list['status']==1){ echo "Initiate"; }else if($list['status']==2){ echo "Accept"; }else if($list['status']==3){ echo "Decline"; }else if($list['status']==4){ echo "Approved"; }else{"";} ?> </td>
+					<td> <?php if($list['status']==1){ echo "Initiate"; }else if($list['status']==2){ echo "Accept"; }else if($list['status']==3){ echo "Decline"; }else if($list['status']==4){ echo "Approved"; } ?> </td>
 
 					<td>
 					<?php if($list['status']!=4){ ?>

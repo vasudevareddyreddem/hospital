@@ -182,6 +182,11 @@
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('hospital/modified_prescription'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Modified prescription List</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 							
 						<?php } else if($userdetails['role_id']==3){ ?>
 						 

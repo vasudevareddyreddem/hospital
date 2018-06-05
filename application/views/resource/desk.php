@@ -197,7 +197,7 @@
                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">temp Address</label>
+                                                   <label for="email">Temporary Address</label>
                                                    <textarea type="textarea" id="temp_address" name="temp_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['temp_address'])?$patient_detailes['temp_address']:''; ?></textarea>
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -1454,11 +1454,11 @@ function apply_couponcode1(){
                 patient_payer_deposit_amount: {
                     validators: {
    					notEmpty: {
-   						message: 'Patient amount / payer amount / deposit is required'
+   						message: 'Total Amount is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Patient amount / payer amount / deposit can only consist of alphanumaric, space and dot'
+   					regexp: /^[0-9.]*$/,
+   					message: 'Total Amount can only consist of digits and dot'
    					}
    				}
                },
@@ -1471,11 +1471,11 @@ function apply_couponcode1(){
                },bill_amount: {
                     validators: {
    					notEmpty: {
-   						message: 'Amount is required'
+   						message: 'Payable Amount is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Amount can only consist of alphanumaric, space and dot'
+   					regexp: /^[0-9.]*$/,
+   					message: 'Payable Amount can only consist of digits and dot'
    					}
    				}
                },received_form: {
@@ -2219,9 +2219,6 @@ function apply_couponcode1(){
            fields: {
                patient_card_number: {
                    validators: {
-   					notEmpty: {
-   						message: 'Card Number is required'
-   					},
    					regexp: {
    					regexp: /^[0-9]{12,16}$/,
    					message: 'Card Number must be 12 to 16 digits'

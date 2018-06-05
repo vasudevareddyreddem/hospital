@@ -431,7 +431,7 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
-				echo $user_id=base64_decode($this->uri->segment(3));
+				$user_id=base64_decode($this->uri->segment(3));
 				$type_id=base64_decode($this->uri->segment(4));
 				if($type_id==2){
 				$data['chat_list']=$this->Admin_model->getget_lab_resourse_replay_message_list($user_id);
