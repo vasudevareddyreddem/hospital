@@ -41,7 +41,6 @@
 												<th>Patient Name </th>
                                                 <th>Age</th>
                                                 <th>Visit-Type</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -54,7 +53,6 @@
 												<td><?php echo htmlentities($list['name']); ?></td>
                                                 <td> <?php echo htmlentities($list['age']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
-												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
                                                 <td>
                                                   <button class="btn btn-xs bg-success no-margin" type="button">Call</button>
 												  <a href="<?php echo base_url('resources/consultation/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>" class="btn btn-xs bg-primary no-margin" type="button">Start Consultation</a>
