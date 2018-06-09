@@ -121,7 +121,7 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					//echo '<pre>';print_r($post);exit;
+					//echo '<pre>';print_r($post);
 					$tab1=array(
 					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 					'card_number'=>isset($post['patient_card_number'])?$post['patient_card_number']:'',
@@ -153,10 +153,12 @@ class Resources extends CI_Controller {
 					);
 					//echo '<pre>';print_r($tab1);exit;
 					$check_patient_card=$this->Resources_model->get_card_number_list($post['patient_card_number']);
+					//echo count($check_patient_card);
+					//echo '<pre>';print_r($check_patient_card);exit;
 					if(isset($post['pid']) && $post['pid']!=''){
 						$_detail=$this->Resources_model->get_details_details($post['pid']);
 						if($_detail['card_number']!=$post['patient_card_number']){
-										if(count($check_patient_card)>0){
+										if(count($check_patient_card['card_number'])>0){
 											$this->session->set_flashdata('error',"Patient Card Number already exist. Please  use  another Number");
 											redirect('resources/desk');
 										}
@@ -165,11 +167,15 @@ class Resources extends CI_Controller {
 							}
 					
 					}else{
-						if(count($check_patient_card)>0){
-									$this->session->set_flashdata('error',"Patient Card Number already exist. Please  use  another Number");
-									redirect('resources/desk');
-						}	
+						if($post['patient_card_number']!=''){
+							if(count($check_patient_card['card_number'])>0){
+										$this->session->set_flashdata('error',"Patient Card Number already exist. Please  use  another Number");
+										redirect('resources/desk');
+							}
+						}						
 					}
+					
+					//exit;
 					if(isset($post['pid']) && $post['pid']!=''){
 						
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab1);
@@ -1249,6 +1255,8 @@ class Resources extends CI_Controller {
 		{
 			$admindetails=$this->session->userdata('userdetails');
 			$post=$this->input->post();
+			
+			//echo '<pre>';print_r($post);exit;
 			/*$test_list=$this->Resources_model->get_old_test_list($post['patinet_id'],$post['patinet_bid']);
 			if(isset($test_list) && count($test_list)>0){
 				foreach($test_list as $List){
@@ -1257,6 +1265,8 @@ class Resources extends CI_Controller {
 				
 			}*/
 			foreach($post['ids'] as $lists){
+				
+				$test_details=$this->Resources_model->get_test_details($lists);
 					$test_list=array(
 						'p_id'=>isset($post['patinet_id'])?$post['patinet_id']:'',
 						'b_id'=>isset($post['patinet_bid'])?$post['patinet_bid']:'',
@@ -1264,6 +1274,7 @@ class Resources extends CI_Controller {
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d'),
 						'create_by'=>$admindetails['a_id'],
+						'out_source'=>$test_details['out_source'],
 						'status'=>1
 						);
 				$addtest=$this->Resources_model->add_addpatient_test($test_list);

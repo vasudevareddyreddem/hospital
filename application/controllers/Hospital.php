@@ -1168,6 +1168,11 @@ class Hospital extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 				//echo '<pre>';print_r($post);exit;
+					$exits_treatment = $this->Hospital_model->get_saved_treatment($post['treatment_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"Treatment name already exists .please use another name");
+						redirect('hospital/addtreatment/'.base64_encode(1));
+					}
 				$treatment_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
 					't_name'=>$post['treatment_name'],
@@ -1198,13 +1203,24 @@ class Hospital extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
+			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
+				$editdata_check= $this->Hospital_model->get_treatment_details($post['treamentid']);
+				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+
+				if($editdata_check['t_name']!=$post['treatment_name']){
+					$exits_treatment = $this->Hospital_model->get_saved_treatment($post['treatment_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"Treatment name already exists .please use another name");
+						redirect('hospital/addtreatment/'.base64_encode(1));
+					}
+				}
 				$edittreatment_details=array(
 					't_name'=>$post['treatment_name'],
 					't_updated_at'=>date('Y-m-d H:i:s'),
 					);
-					//echo '<pre>';print_r($treatment_details);exit;
+					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Hospital_model->update_treatment_details($post['treamentid'],$edittreatment_details);
 				if(count($editdata)>0){
 					$this->session->set_flashdata('success',"Treatment are successfully Updated");

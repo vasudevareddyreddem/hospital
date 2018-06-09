@@ -150,10 +150,10 @@
 	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Assign treatment to doctor </span>
 	                                    </a>
 	                                </li>
-									<li class="nav-item ">
+									<!--<li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/labdetails'); ?>" class="nav-link "> <span class="title"> Lab Details </span>
 	                                    </a>
-	                                </li>
+	                                </li>-->
 	                                
 	                            </ul>
 	                        </li> 
@@ -263,49 +263,32 @@
 	                        </li> 
 						<?php } else if($userdetails['role_id']==5){ ?>
 					
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('lab/patient_list');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Patient List</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li>
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Lab Test details</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li>
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Out Sources Lab Test details</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li> 
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Bidding Lab Test List</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li> 
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('lab/patient_database');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Patient Database</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li>
-							<?php if($userdetails['out_source']==1){ ?>							
-							 
-									<li class="nav-item  open ">
+								<?php if($userdetails['out_source']==1){ ?>	
+										<li class="nav-item start ">
+											<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
+												<i class="material-icons">dashboard</i>
+												<span class="title">Patient List</span>
+												<span class="selected"></span>
+												<span class="arrow "></span>
+											</a>
+										</li> 
+										<li class="nav-item start ">
+											<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
+												<i class="material-icons">dashboard</i>
+												<span class="title">Bidding Lab Test List</span>
+												<span class="selected"></span>
+												<span class="arrow "></span>
+											</a>
+										</li> 
+										<li class="nav-item start ">
+											<a href="<?php echo base_url('lab/patient_database');?>" class="nav-link nav-toggle">
+												<i class="material-icons">dashboard</i>
+												<span class="title">Patient Database</span>
+												<span class="selected"></span>
+												<span class="arrow "></span>
+											</a>
+										</li>
+										<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -321,15 +304,55 @@
 	                                </li>
 	                            </ul>
 	                        </li>
-							<?php }else{ ?>
+								<?php  }else{ ?>
+								<li class="nav-item start ">
+									<a href="<?php echo base_url('lab/patient_list');?>" class="nav-link nav-toggle">
+										<i class="material-icons">dashboard</i>
+										<span class="title">Patient List</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li>
+								<li class="nav-item start ">
+									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
+										<i class="material-icons">dashboard</i>
+										<span class="title">Lab Test details</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li>
+								<li class="nav-item start ">
+									<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
+										<i class="material-icons">dashboard</i>
+										<span class="title">Out Sources Lab Test details</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li> 
+								<li class="nav-item start ">
+									<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
+										<i class="material-icons">dashboard</i>
+										<span class="title">Bidding Lab Test List</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li> 
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('lab/patient_database');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Chat</span>
+	                                <span class="title">Patient Database</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
+									<li class="nav-item start ">
+										<a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
+											<i class="material-icons">dashboard</i>
+											<span class="title">Chat</span>
+											<span class="selected"></span>
+											<span class="arrow "></span>
+										</a>
+									</li>
 							
 							<?php }?>
 						

@@ -34,6 +34,12 @@ class Lab_model extends CI_Model
 		$this->db->where('b_id',$b_id);
     	return $this->db->update("patient_billing",$data);
 	}
+	public function update_patient_billingreport_status($test_id,$p_id,$b_id,$data){
+		$this->db->where('test_id',$test_id);
+		$this->db->where('b_id',$b_id);
+		$this->db->where('b_id',$b_id);
+    	return $this->db->update("patient_lab_test_list",$data);
+	}
 	public function delete_labtest($t_id){
 			$sql1="DELETE FROM lab_test_list WHERE t_id = '".$t_id."'";
 		return $this->db->query($sql1);
@@ -80,6 +86,17 @@ class Lab_model extends CI_Model
 	public function add_lab_test_type($add){
 		$this->db->insert('lab_test_type', $add);
 		return $insert_id = $this->db->insert_id();	
+	}
+	public function check_lab_test_type($name,$type){
+		$this->db->select('*')->from('lab_test_type');
+		$this->db->where('lab_test_type.type_name',$name);
+		$this->db->where('lab_test_type.type',$type);
+		return $this->db->get()->row_array();
+	}
+	public function check_get_lab_test_type_details($id){
+		$this->db->select('*')->from('lab_test_type');
+		$this->db->where('lab_test_type.id',$id);
+		return $this->db->get()->row_array();
 	}
 	public function get_all_test_list($a_id){
 		$this->db->select('*')->from('lab_test_type');
@@ -152,6 +169,15 @@ class Lab_model extends CI_Model
 		$this->db->join('patient_lab_test_list', 'patient_lab_test_list.id = out_source_lab_test_lists.p_l_t_id', 'left');
 		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
 		$this->db->where('out_source_lab_test_lists.lab_id',$lab_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_all_outsources_labtests_details($lab_id){
+		$this->db->select('lab_test_list.t_name,patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patients_list_1.perment_address,patients_list_1.p_c_name,patients_list_1.p_s_name,patients_list_1.p_zipcode,patients_list_1.p_country_name,out_source_lab_test_lists.*')->from('out_source_lab_test_lists');
+		$this->db->join('patients_list_1', 'patients_list_1.pid = out_source_lab_test_lists.p_id', 'left');
+		$this->db->join('patient_lab_test_list', 'patient_lab_test_list.id = out_source_lab_test_lists.p_l_t_id', 'left');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->where('out_source_lab_test_lists.lab_id',$lab_id);
+		$this->db->group_by('out_source_lab_test_lists.b_id');
 		return $this->db->get()->result_array();
 	}
 	
@@ -255,6 +281,76 @@ class Lab_model extends CI_Model
 		return $this->db->query($sql1);
 	}
 	/* search result*/
+	
+	/* out lab patient report details looikng into in lab */
+	public function get_all_patients_out_labtest_lists($p_id,$b_id,$out_source,$a_id){
+		$this->db->select('lab_test_list.t_name,lab_test_list.t_id,lab_test_list.out_source,lab_test_list.hos_id')->from('patient_lab_test_list');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->join('bidding_test', 'bidding_test.test_id = lab_test_list.t_id', 'left');
+		$this->db->where('patient_lab_test_list.p_id',$p_id);
+		$this->db->where('bidding_test.b_id',$b_id);
+		$this->db->where('bidding_test.send_by',$a_id);
+		$this->db->where('patient_lab_test_list.out_source',$out_source);
+		$this->db->where('bidding_test.status',4);
+		return $this->db->get()->result_array();	
+	}
+	public function get_all_patients_in_labtest_lists($p_id,$b_id,$out_source){
+		$this->db->select('lab_test_list.t_name,lab_test_list.t_id,lab_test_list.out_source,lab_test_list.hos_id')->from('patient_lab_test_list');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->where('patient_lab_test_list.p_id',$p_id);
+		$this->db->where('patient_lab_test_list.b_id',$b_id);
+		$this->db->where('patient_lab_test_list.out_source',$out_source);
+		return $this->db->get()->result_array();	
+	}
+	
+	public  function get_all_patients_lab_report_lists($pid,$bid){
+		$this->db->select('patient_lab_reports.*,lab_test_list.t_name')->from('patient_lab_reports');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_reports.test_id', 'left');
+		$this->db->where('patient_lab_reports.p_id',$pid);
+		$this->db->where('patient_lab_reports.b_id',$bid);
+		return $this->db->get()->result_array();
+	}
+	public  function get_all_patients_out_source_lab_report_lists($pid,$bid,$out_source,$a_id){
+		$this->db->select('patient_lab_reports.*,lab_test_list.t_name')->from('patient_lab_reports');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_reports.test_id', 'left');
+		$this->db->where('patient_lab_reports.p_id',$pid);
+		$this->db->where('patient_lab_reports.b_id',$bid);
+		$this->db->where('lab_test_list.out_source',$out_source);
+		$this->db->where('patient_lab_reports.create_by',$a_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_previous_report_details($pid,$bid,$test_id){
+		
+		$this->db->select('patient_lab_reports.*')->from('patient_lab_reports');
+		$this->db->where('patient_lab_reports.test_id',$test_id);
+		$this->db->where('patient_lab_reports.p_id',$pid);
+		$this->db->where('patient_lab_reports.b_id',$bid);
+		return $this->db->get()->row_array();
+	}
+	public function delete_previous_report_details($pid,$bid,$test_id){
+		$this->db->where('patient_lab_reports.test_id',$test_id);
+		$this->db->where('patient_lab_reports.p_id',$pid);
+		$this->db->where('patient_lab_reports.b_id',$bid);
+		$this->db->delete('patient_lab_reports');
+	}
+	
+	public function check_report_all_geting($pid,$bid){
+		$this->db->select('patient_lab_test_list.*')->from('patient_lab_test_list');
+		$this->db->where('patient_lab_test_list.p_id',$pid);
+		$this->db->where('patient_lab_test_list.b_id',$bid);
+		$this->db->where('patient_lab_test_list.report_completed',0);
+		return $this->db->get()->result_array();
+	}
+	public function delete_accept_bidding_remaining_tests($t_id){
+		$this->db->select('bidding_test.*')->from('bidding_test');
+		$this->db->where('bidding_test.test_id',$t_id);
+		$this->db->where('bidding_test.status !=',4);
+		return $this->db->get()->result_array();
+	}
+	public function delete_accept_bidding_test($test_id){
+		$this->db->where('bidding_test.id',$test_id);
+		$this->db->delete('bidding_test');
+	}
 	
 	
 

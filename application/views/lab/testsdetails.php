@@ -79,10 +79,6 @@
 									<label>Description</label>
 									<input type="text" class="form-control" id="description"  name="description" placeholder="Enter Description" value="" required>
 								</div>
-								<div class="col-md-6">
-									<label>Department</label>
-									<input type="text" class="form-control" id="department"  name="department" placeholder="Enter Department" value="" required>
-								</div>
 								<div class="">
 								<label>&nbsp;</label>
 								</div>	
@@ -104,12 +100,11 @@
                                             <tr>
 												<th>Test Type Name</th>
 												<th>Type</th>
-												<th>Name</th>
+												<th> Test Name</th>
 												<th>Duration</th>
 												<th>Amount</th>
 												<th>Short Form</th>
                                                 <th>Description</th>
-                                                <th>Department</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -124,13 +119,10 @@
                                                 <td><?php echo htmlentities($list['amuont']); ?></td>
                                                 <td><?php echo htmlentities($list['t_short_form']); ?></td>
                                                 <td><?php echo htmlentities($list['t_description']); ?></td>
-                                                <td><?php echo htmlentities($list['t_department']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td><a href="<?php echo base_url('lab/teststatus/'.base64_encode($list['t_id']).'/'.base64_encode($list['status'])); ?>">
                                                          <?php if($list['status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
 												<a href="<?php echo base_url('lab/deletelab/'.base64_encode($list['t_id'])); ?>">Delete</a>
-                                                    
-                                                          
                                                 </td>                                               
                                             </tr>
 										<?php } ?>
@@ -198,8 +190,8 @@ $(document).ready(function() {
 						message: 'Amuont is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Amuont can only consist of alphanumaric, space and dot'
+					regexp: /^[0-9. ]*$/,
+					message: 'Amuont can only consist of digits and dot'
 					}
 				}
             },short_form: {
@@ -220,16 +212,6 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Description can only consist of alphanumaric, space and dot'
-					}
-				}
-            },department: {
-                 validators: {
-					notEmpty: {
-						message: 'Department is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Department can only consist of alphanumaric, space and dot'
 					}
 				}
             }

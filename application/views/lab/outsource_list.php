@@ -171,7 +171,7 @@
                                         <div class="tab-pane" id="about" aria-expanded="false">
 												<div class="row justify-content-center">
 												<div class="col-md-8  card">
-												<form action="<?php echo base_url('lab/sendbid'); ?>" method="POST">
+												<form action="<?php echo base_url('lab/sendbid'); ?>" method="POST" onsubmit="return validations();">
 												<input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 												<input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 											 
@@ -257,6 +257,13 @@
 	 </div>
 </div>
 <script>
+
+function validations(){
+	var check=document.getElementById('test_id').checked;
+	if(check==false){
+		alert('Please select atleast one option.');return false;
+	}
+}
 function locationsearch(p_id,b_id,location,types){
 		if(p_id!='' && b_id!='' && location!=''){
    		 jQuery.ajax({

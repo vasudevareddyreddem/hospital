@@ -71,7 +71,7 @@
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Name</th>
+												<th> Test Name</th>
 												<th>Type</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
