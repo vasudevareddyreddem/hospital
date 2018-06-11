@@ -1141,7 +1141,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate diagnosis can only consist of alphanumaric, space and dot'
+					message: 'Associate diagnosis can only consist of alphanumeric, space and dot'
 					}
 				}
             },associate_problems: {
@@ -1151,7 +1151,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate  problems can only consist of alphanumaric, space and dot'
+					message: 'Associate  problems can only consist of alphanumeric, space and dot'
 					}
 				}
             }
@@ -1216,7 +1216,7 @@ function addtestlist(){
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Directions can only consist of alphanumaric, space and dot'
+					message: 'Directions can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1245,7 +1245,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Comments can only consist of alphanumaric, space and dot'
+					message: 'Comments can only consist of alphanumeric, space and dot'
 					}
 				}
             },

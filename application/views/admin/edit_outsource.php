@@ -123,7 +123,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -215,7 +215,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					message: 'City can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -226,7 +226,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					message: 'State can only consist of alphanumeric, space and dot'
 					}
 				
 				}

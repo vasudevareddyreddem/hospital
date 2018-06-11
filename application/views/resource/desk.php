@@ -33,7 +33,7 @@
                      </li>
 					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13){ echo "active";}?>">OP Registration</a>
                      </li>
-                     <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule-Registration</a>
+                     <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule/Repeated -Registration</a>
                      </li>
                    
                   </ul>
@@ -105,7 +105,7 @@
                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">Patient category</label>
+                                                   <label for="email">Patient Category</label>
                                                    <select id="patient_category" name="patient_category" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="VIP" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
@@ -630,7 +630,7 @@
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> I Have a Privilege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Privilege card ?</a>
 																 </div>
 																 <div id="demo" class="collapse in">
 																	<div class="form-group col-md-12">
@@ -779,7 +779,7 @@
                                        <th> Patient card Number</th>
                                        <th> Name </th>
                                        <th> Type </th>
-                                       <th> category </th>
+                                       <th> Category </th>
                                        <th> Age </th>
                                        <th> Mobile </th>
                                        <th> Action </th>
@@ -888,7 +888,7 @@
                                                    </select>
                                                 </div>
 												<div class="form-group col-md-6">
-                                                   <label for="email">Patient category</label>
+                                                   <label for="email">Patient Category</label>
                                                    <select id="patient_category" name="patient_category" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="VIP" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
@@ -1081,7 +1081,7 @@
                                                                </div>
 															   
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1"> I Have a Privilege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Privilege card ?</a>
 																 </div>
 																 <div id="demo1" class="collapse in">
 																	<div class="form-group col-md-12">
@@ -1373,7 +1373,7 @@ function apply_couponcode1(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
                }
@@ -1390,55 +1390,82 @@ function apply_couponcode1(){
                     validators: {
    					notEmpty: {
    						message: 'Actualsis required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Actualsis can only consist of alphanumeric, space and dot'
+					}
    				}
                },tep_range: {
                     validators: {
    					notEmpty: {
    						message: 'Range is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Range can only consist of alphanumeric, space and dot'
+					}
    				}
                },temp_site_positioning: {
                     validators: {
    					notEmpty: {
    						message: 'Positioning is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Positioning can only consist of alphanumeric, space and dot'
+					}
    				}
                },notes: {
                     validators: {
    					notEmpty: {
    						message: 'Notes is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Notes can only consist of alphanumeric, space and dot'
+					}
    				}
                },pulse_actuals: {
                     validators: {
    					notEmpty: {
    						message: 'Actuals is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Actuals can only consist of alphanumeric, space and dot'
+					}
    				}
                },pulse_range: {
                     validators: {
    					notEmpty: {
    						message: 'Range is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Range can only consist of alphanumeric, space and dot'
+					}
    				}
                },pulse_rate_rhythm: {
                     validators: {
    					notEmpty: {
    						message: 'Rhythm is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Rhythm can only consist of alphanumeric, space and dot'
+					}
    				}
                },pulse_rate_vol: {
                     validators: {
    					notEmpty: {
    						message: 'Vol is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Vol can only consist of alphanumeric, space and dot'
+					}
    				}
                },notes1: {
                     validators: {
    					notEmpty: {
    						message: 'Notes is required'
-   					}
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Notes can only consist of alphanumeric, space and dot'
+					}
    				}
                }
    			}
@@ -1485,7 +1512,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Received from can only consist of alphanumaric, space and dot'
+   					message: 'Received from can only consist of alphanumeric, space and dot'
    					}
    				}
                }
@@ -1506,7 +1533,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Service type can only consist of alphanumaric, space and dot'
+   					message: 'Service type can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -1517,7 +1544,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Visit type can only consist of alphanumaric, space and dot'
+   					message: 'Visit type can only consist of alphanumeric, space and dot'
    					}
    				}
                },doctor: {
@@ -1527,7 +1554,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Doctor can only consist of alphanumaric, space and dot'
+   					message: 'Doctor can only consist of alphanumeric, space and dot'
    					}
    				}
                },payer: {
@@ -1537,7 +1564,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Payer can only consist of alphanumaric, space and dot'
+   					message: 'Payer can only consist of alphanumeric, space and dot'
    					}
    				}
                },price: {
@@ -1547,7 +1574,7 @@ function apply_couponcode1(){
    					},
                        regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'price can only consist of alphanumaric, space and dot'
+   					message: 'price can only consist of alphanumeric, space and dot'
    					}
                    }
                }
@@ -1578,7 +1605,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Department can only consist of alphanumaric, space and dot'
+   					message: 'Department can only consist of alphanumeric, space and dot'
    					}
    				}
                },docotr_name: {
@@ -1588,17 +1615,17 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Doctor can only consist of alphanumaric, space and dot'
+   					message: 'Doctor can only consist of alphanumeric, space and dot'
    					}
    				}
                },no_of_visits: {
-                    validators: {
-   					notEmpty: {
+                    validators: {	
+						notEmpty: {
    						message: 'No- of visits is required'
    					},
    					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'No- of visits can only consist of alphanumaric, space and dot'
+   					regexp: /^[0-9]*$/,
+   					message: 'No- of visits can only consist of digits'
    					}
    				}
                },visit_desc: {
@@ -1640,7 +1667,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Name can only consist of alphanumaric, space and dot'
+   					message: 'Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },payer_mobile: {
@@ -1683,7 +1710,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living dependency can only consist of alphanumaric, space and dot'
+   					message: 'Living dependency can only consist of alphanumeric, space and dot'
    					}
    				}
                },arrangement: {
@@ -1693,7 +1720,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living arrangement can only consist of alphanumaric, space and dot'
+   					message: 'Living arrangement can only consist of alphanumeric, space and dot'
    					}
    				}
                },incomegroup: {
@@ -1703,7 +1730,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Income group can only consist of alphanumaric, space and dot'
+   					message: 'Income group can only consist of alphanumeric, space and dot'
    					}
    				}
                },description: {
@@ -1713,7 +1740,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Description can only consist of alphanumaric, space and dot'
+   					message: 'Description can only consist of alphanumeric, space and dot'
    					}
                    }
                },confidential: {
@@ -1723,7 +1750,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Confidential can only consist of alphanumaric, space and dot'
+   					message: 'Confidential can only consist of alphanumeric, space and dot'
    					}
                    }
                },
@@ -1734,7 +1761,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'student group can only consist of alphanumaric, space and dot'
+   					message: 'student group can only consist of alphanumeric, space and dot'
    					}
                    }
                }
@@ -1756,7 +1783,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Relationship can only consist of alphanumaric, space and dot'
+   					message: 'Relationship can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_first_name: {
@@ -1766,14 +1793,14 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'First Name can only consist of alphanumaric, space and dot'
+   					message: 'First Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_middel_name: {
                     validators: {
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Middle Name can only consist of alphanumaric, space and dot'
+   					message: 'Middle Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_last_name: {
@@ -1783,7 +1810,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Last Name can only consist of alphanumaric, space and dot'
+   					message: 'Last Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_address1: {
@@ -1825,7 +1852,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_state: {
@@ -1835,7 +1862,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -1846,7 +1873,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				}
    			},nationality: {
@@ -1856,7 +1883,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Nationality can only consist of alphanumaric, space and dot'
+   					message: 'Nationality can only consist of alphanumeric, space and dot'
    					}
    				}
    			},living: {
@@ -1866,7 +1893,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living dependency can only consist of alphanumaric, space and dot'
+   					message: 'Living dependency can only consist of alphanumeric, space and dot'
    					}
    				}
    			},
@@ -1902,7 +1929,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Referred by can only consist of alphanumaric, space and dot'
+   					message: 'Referred by can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -1913,7 +1940,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Internal external can only consist of alphanumaric, space and dot'
+   					message: 'Internal external can only consist of alphanumeric, space and dot'
    					}
    				}
    			},search_doctor: {
@@ -1923,7 +1950,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Search doctor can only consist of alphanumaric, space and dot'
+   					message: 'Search doctor can only consist of alphanumeric, space and dot'
    					}
    				}
    			}
@@ -1943,7 +1970,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Relation can only consist of alphanumaric, space and dot'
+   					message: 'Relation can only consist of alphanumeric, space and dot'
    					}
    				}
                },first_name: {
@@ -1953,14 +1980,14 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'First Name can only consist of alphanumaric, space and dot'
+   					message: 'First Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },middel_name: {
                     validators: {
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Middle Name can only consist of alphanumaric, space and dot'
+   					message: 'Middle Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },last_name: {
@@ -1970,7 +1997,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Last Name can only consist of alphanumaric, space and dot'
+   					message: 'Last Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },next_address1: {
@@ -2012,7 +2039,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				}
                },next_state: {
@@ -2022,7 +2049,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2033,7 +2060,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				}
    			},
@@ -2066,7 +2093,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Occupation can only consist of alphanumaric, space and dot'
+   					message: 'Occupation can only consist of alphanumeric, space and dot'
    					}
    				}
    			}
@@ -2106,7 +2133,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Mother name can only consist of alphanumaric, space and dot'
+   					message: 'Mother name can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2136,7 +2163,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Occupation  can only consist of alphanumaric, space and dot'
+   					message: 'Occupation  can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2147,7 +2174,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Education  can only consist of alphanumaric, space and dot'
+   					message: 'Education  can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2158,7 +2185,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Birth place  can only consist of alphanumaric, space and dot'
+   					message: 'Birth place  can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2253,7 +2280,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Name can only consist of alphanumaric, space and dot'
+   					message: 'Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2338,7 +2365,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2350,7 +2377,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2362,7 +2389,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2396,7 +2423,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2408,7 +2435,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2431,7 +2458,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2473,7 +2500,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Name can only consist of alphanumaric, space and dot'
+   					message: 'Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2481,7 +2508,7 @@ function apply_couponcode1(){
                     validators: {
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Referred  by can only consist of alphanumaric, space and dot'
+   					message: 'Referred  by can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2492,7 +2519,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Problem can only consist of alphanumaric, space and dot'
+   					message: 'Problem can only consist of alphanumeric, space and dot'
    					}
    				}
                },
@@ -2576,7 +2603,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2588,7 +2615,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2600,7 +2627,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2634,7 +2661,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumaric, space and dot'
+   					message: 'City can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2646,7 +2673,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumaric, space and dot'
+   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2669,7 +2696,7 @@ function apply_couponcode1(){
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumaric, space and dot'
+   					message: 'Country can only consist of alphanumeric, space and dot'
    					}
    				
    				}

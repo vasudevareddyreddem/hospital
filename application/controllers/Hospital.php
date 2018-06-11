@@ -1223,7 +1223,7 @@ class Hospital extends CI_Controller {
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Hospital_model->update_treatment_details($post['treamentid'],$edittreatment_details);
 				if(count($editdata)>0){
-					$this->session->set_flashdata('success',"Treatment are successfully Updated");
+					$this->session->set_flashdata('success',"Treatment successfully updated");
 					redirect('hospital/addtreatment/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

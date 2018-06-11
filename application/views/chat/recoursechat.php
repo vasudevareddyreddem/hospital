@@ -144,20 +144,7 @@
 						<div class="panel ">
 												<div class="panel-heading bg-indigo">
 													<span class="glyphicon glyphicon-comment"></span> Hospital Admin Support
-													<div class="btn-group pull-right">
-														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-															<span class="fa fa-angle-down"> </span>
-														</button>
-														<ul class="dropdown-menu slidedown">
-															<li><a href="<?php echo base_url('chat'); ?>"><span class="glyphicon glyphicon-refresh">
-															</span>Refresh</a></li>
-														
-															
-															<li class="divider"></li>
-															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
-																Sign Out</a></li>
-														</ul>
-													</div>
+													
 												</div>
 												<div class="panel-body" style="height:300px;overflow-y: scroll;">
 													<ul class="chat">
@@ -240,20 +227,7 @@
 						<div class="panel ">
 												<div class="panel-heading bg-indigo">
 													<span class="glyphicon glyphicon-comment"></span> Software Support
-													<div class="btn-group pull-right">
-														<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-															<span class="fa fa-angle-down"> </span>
-														</button>
-														<ul class="dropdown-menu slidedown">
-															<li><a href="<?php echo base_url('chat'); ?>"><span class="glyphicon glyphicon-refresh">
-															</span>Refresh</a></li>
-														
-															
-															<li class="divider"></li>
-															<li><a href="#"><span class="glyphicon glyphicon-off"></span>
-																Sign Out</a></li>
-														</ul>
-													</div>
+													
 												</div>
 												<div class="panel-body" style="height:300px;overflow-y: scroll;">
 													<ul class="chat">

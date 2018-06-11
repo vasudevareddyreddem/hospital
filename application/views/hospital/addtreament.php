@@ -108,7 +108,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="treamentid" id="treamentid" value="<?php echo $list['t_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Treament Rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Treatment rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
@@ -197,7 +197,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             }

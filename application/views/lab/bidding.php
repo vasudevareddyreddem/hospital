@@ -210,7 +210,7 @@ function get_doctor_list(id){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Patient amount / payer amount / deposit can only consist of alphanumaric, space and dot'
+					message: 'Patient amount / payer amount / deposit can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -221,7 +221,7 @@ function get_doctor_list(id){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Payment mode can only consist of alphanumaric, space and dot'
+					message: 'Payment mode can only consist of alphanumeric, space and dot'
 					}
 				}
             },bill_amount: {
@@ -231,7 +231,7 @@ function get_doctor_list(id){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Amount can only consist of alphanumaric, space and dot'
+					message: 'Amount can only consist of alphanumeric, space and dot'
 					}
 				}
             },received_form: {
@@ -241,7 +241,7 @@ function get_doctor_list(id){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Received from can only consist of alphanumaric, space and dot'
+					message: 'Received from can only consist of alphanumeric, space and dot'
 					}
 				}
             }
@@ -262,7 +262,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Service type can only consist of alphanumaric, space and dot'
+					message: 'Service type can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -273,7 +273,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Service can only consist of alphanumaric, space and dot'
+					message: 'Service can only consist of alphanumeric, space and dot'
 					}
 				}
             },visit_type: {
@@ -283,7 +283,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Visit type can only consist of alphanumaric, space and dot'
+					message: 'Visit type can only consist of alphanumeric, space and dot'
 					}
 				}
             },doctor: {
@@ -293,7 +293,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Doctor can only consist of alphanumaric, space and dot'
+					message: 'Doctor can only consist of alphanumeric, space and dot'
 					}
 				}
             },payer: {
@@ -303,7 +303,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Payer can only consist of alphanumaric, space and dot'
+					message: 'Payer can only consist of alphanumeric, space and dot'
 					}
 				}
             },price: {
@@ -313,7 +313,7 @@ $(document).ready(function() {
 					},
                     regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'price can only consist of alphanumaric, space and dot'
+					message: 'price can only consist of alphanumeric, space and dot'
 					}
                 }
             },qty: {
@@ -323,7 +323,7 @@ $(document).ready(function() {
 					},
                     regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Qty can only consist of alphanumaric, space and dot'
+					message: 'Qty can only consist of alphanumeric, space and dot'
 					}
                 }
             },amount: {
@@ -333,7 +333,7 @@ $(document).ready(function() {
 					},
                     regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Amount can only consist of alphanumaric, space and dot'
+					message: 'Amount can only consist of alphanumeric, space and dot'
 					}
                 }
             },
@@ -344,7 +344,7 @@ $(document).ready(function() {
 					},
                     regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'BIll can only consist of alphanumaric, space and dot'
+					message: 'BIll can only consist of alphanumeric, space and dot'
 					}
                 }
             }
@@ -364,7 +364,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Visit Number can only consist of alphanumaric, space and dot'
+					message: 'Visit Number can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -375,7 +375,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Department can only consist of alphanumaric, space and dot'
+					message: 'Department can only consist of alphanumeric, space and dot'
 					}
 				}
             },docotr_name: {
@@ -385,7 +385,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Doctor can only consist of alphanumaric, space and dot'
+					message: 'Doctor can only consist of alphanumeric, space and dot'
 					}
 				}
             },no_of_visits: {
@@ -395,7 +395,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'No- of visits can only consist of alphanumaric, space and dot'
+					message: 'No- of visits can only consist of alphanumeric, space and dot'
 					}
 				}
             },visit_desc: {
@@ -437,7 +437,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },payer_mobile: {
@@ -480,7 +480,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Living dependency can only consist of alphanumaric, space and dot'
+					message: 'Living dependency can only consist of alphanumeric, space and dot'
 					}
 				}
             },arrangement: {
@@ -490,7 +490,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Living arrangement can only consist of alphanumaric, space and dot'
+					message: 'Living arrangement can only consist of alphanumeric, space and dot'
 					}
 				}
             },incomegroup: {
@@ -500,7 +500,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Income group can only consist of alphanumaric, space and dot'
+					message: 'Income group can only consist of alphanumeric, space and dot'
 					}
 				}
             },description: {
@@ -510,7 +510,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Description can only consist of alphanumaric, space and dot'
+					message: 'Description can only consist of alphanumeric, space and dot'
 					}
                 }
             },confidential: {
@@ -520,7 +520,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Confidential can only consist of alphanumaric, space and dot'
+					message: 'Confidential can only consist of alphanumeric, space and dot'
 					}
                 }
             },
@@ -531,7 +531,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'student group can only consist of alphanumaric, space and dot'
+					message: 'student group can only consist of alphanumeric, space and dot'
 					}
                 }
             }
@@ -553,7 +553,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Relationship can only consist of alphanumaric, space and dot'
+					message: 'Relationship can only consist of alphanumeric, space and dot'
 					}
 				}
             },g_first_name: {
@@ -563,14 +563,14 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'First Name can only consist of alphanumaric, space and dot'
+					message: 'First Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },g_middel_name: {
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Middle Name can only consist of alphanumaric, space and dot'
+					message: 'Middle Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },g_last_name: {
@@ -580,7 +580,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Last Name can only consist of alphanumaric, space and dot'
+					message: 'Last Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },g_address1: {
@@ -627,7 +627,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					message: 'City can only consist of alphanumeric, space and dot'
 					}
 				}
             },g_state: {
@@ -637,7 +637,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					message: 'State can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -648,7 +648,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					message: 'Country can only consist of alphanumeric, space and dot'
 					}
 				}
 			},nationality: {
@@ -658,7 +658,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Nationality can only consist of alphanumaric, space and dot'
+					message: 'Nationality can only consist of alphanumeric, space and dot'
 					}
 				}
 			},living: {
@@ -668,7 +668,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Living dependency can only consist of alphanumaric, space and dot'
+					message: 'Living dependency can only consist of alphanumeric, space and dot'
 					}
 				}
 			},
@@ -704,7 +704,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Referred by can only consist of alphanumaric, space and dot'
+					message: 'Referred by can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -715,7 +715,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Internal external can only consist of alphanumaric, space and dot'
+					message: 'Internal external can only consist of alphanumeric, space and dot'
 					}
 				}
 			},search_doctor: {
@@ -725,7 +725,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Search doctor can only consist of alphanumaric, space and dot'
+					message: 'Search doctor can only consist of alphanumeric, space and dot'
 					}
 				}
 			}
@@ -745,7 +745,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Relation can only consist of alphanumaric, space and dot'
+					message: 'Relation can only consist of alphanumeric, space and dot'
 					}
 				}
             },first_name: {
@@ -755,14 +755,14 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'First Name can only consist of alphanumaric, space and dot'
+					message: 'First Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },middel_name: {
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Middle Name can only consist of alphanumaric, space and dot'
+					message: 'Middle Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },last_name: {
@@ -772,7 +772,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Last Name can only consist of alphanumaric, space and dot'
+					message: 'Last Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },next_address1: {
@@ -819,7 +819,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					message: 'City can only consist of alphanumeric, space and dot'
 					}
 				}
             },next_state: {
@@ -829,7 +829,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					message: 'State can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -840,7 +840,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					message: 'Country can only consist of alphanumeric, space and dot'
 					}
 				}
 			},
@@ -873,7 +873,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Occupation can only consist of alphanumaric, space and dot'
+					message: 'Occupation can only consist of alphanumeric, space and dot'
 					}
 				}
 			}
@@ -893,7 +893,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Religion can only consist of alphanumaric, space and dot'
+					message: 'Religion can only consist of alphanumeric, space and dot'
 					}
 				}
             },caste: {
@@ -903,7 +903,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Caste can only consist of alphanumaric, space and dot'
+					message: 'Caste can only consist of alphanumeric, space and dot'
 					}
 				}
             },mothername: {
@@ -913,7 +913,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Mother name can only consist of alphanumaric, space and dot'
+					message: 'Mother name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -943,7 +943,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Occupation  can only consist of alphanumaric, space and dot'
+					message: 'Occupation  can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -954,7 +954,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Education  can only consist of alphanumaric, space and dot'
+					message: 'Education  can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -965,7 +965,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Birth place  can only consist of alphanumaric, space and dot'
+					message: 'Birth place  can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -998,7 +998,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Blood group can only consist of alphanumaric, space and dot'
+					message: 'Blood group can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1049,7 +1049,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1095,7 +1095,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Blood group can only consist of alphanumaric, space and dot'
+					message: 'Blood group can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1137,7 +1137,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					message: 'City can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -1149,7 +1149,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					message: 'Country can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -1161,7 +1161,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					message: 'State can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -1200,7 +1200,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					message: 'City can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -1212,7 +1212,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					message: 'State can only consist of alphanumeric, space and dot'
 					}
 				
 				}
@@ -1240,7 +1240,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					message: 'Country can only consist of alphanumeric, space and dot'
 					}
 				
 				}

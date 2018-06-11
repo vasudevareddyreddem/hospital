@@ -170,7 +170,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },duration: {
@@ -180,7 +180,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Duration can only consist of alphanumaric, space and dot'
+					message: 'Duration can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -201,7 +201,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },description: {
@@ -211,7 +211,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Description can only consist of alphanumaric, space and dot'
+					message: 'Description can only consist of alphanumeric, space and dot'
 					}
 				}
             }

@@ -177,7 +177,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Lab Test Type can only consist of alphanumaric, space and dot'
+					message: 'Lab Test Type can only consist of alphanumeric, space and dot'
 					}
 				}
             },type: {

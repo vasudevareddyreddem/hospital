@@ -217,7 +217,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Hsn can only consist of alphanumaric, space and dot'
+					message: 'Hsn can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -228,7 +228,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Othercode can only consist of alphanumaric, space and dot'
+					message: 'Othercode can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -239,7 +239,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Medicin Name can only consist of alphanumaric, space and dot'
+					message: 'Medicin Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -250,7 +250,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Medicine dosage can only consist of alphanumaric, space and dot'
+					message: 'Medicine dosage can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -307,7 +307,7 @@ $(document).ready(function() {
 					},
                     regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Others can only consist of alphanumaric, space and dot'
+					message: 'Others can only consist of alphanumeric, space and dot'
 					}
                 }
             }

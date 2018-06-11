@@ -196,18 +196,18 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
 			 lab_mobile: {
                 validators: {
 					notEmpty: {
-						message: 'landline Number is required'
+						message: 'Mobile Number is required'
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'landline Number must be 10 to 14 digits'
+					message:'Mobile number must be 10 to 14 digits'
 					}
 				
 				}
@@ -287,8 +287,8 @@ $(document).ready(function() {
 						message: 'City is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'City can only consist of alphabets and Space'
 					}
 				
 				}
@@ -298,8 +298,8 @@ $(document).ready(function() {
 						message: 'State is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'State can only consist of alphabets and Space'
 					}
 				
 				}
