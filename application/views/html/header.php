@@ -31,6 +31,7 @@
     <link href="<?php echo base_url(); ?>assets/vendor/css/plugins.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/style.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/custom.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css/all-ie-only.css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/theme-color.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url(); ?>assets/vendor/plugins/select2/css/select2.css" rel="stylesheet" type="text/css" />
@@ -47,7 +48,7 @@
                 <div class="page-logo">
                     <a href="<?php echo base_url('dashboard'); ?>">
                     
-                    <span class="logo-default" ><img class="img-responsive" src="<?php echo base_url(); ?>assets/vendor/img/logo.png" alt="logo"> </span> </a>
+                    <span class="logo-default" ><img style="width:180px;height:auto;" class="img-responsive" src="<?php echo base_url(); ?>assets/vendor/img/logo.png" alt="logo"> </span> </a>
                 </div>
                 <!-- logo end -->
 				<ul class="nav navbar-nav navbar-left in">
