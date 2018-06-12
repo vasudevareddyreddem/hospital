@@ -2479,6 +2479,14 @@ function apply_couponcode1(){
                        }
                    }
                },
+			   patient_card_number: {
+                   validators: {
+   					regexp: {
+   					regexp: /^[0-9]{12,16}$/,
+   					message: 'Card Number must be 12 to 16 digits'
+   					}
+   				}
+               }, 
    			patient_category: {
                    validators: {
                          notEmpty: {

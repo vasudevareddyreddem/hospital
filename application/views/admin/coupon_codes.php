@@ -227,7 +227,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Privilage card can only consist of alphanumaric, space and dot'
+					message: 'Privilage card can only consist of alphanumeric, space and dot'
 					}
 				}
             },
