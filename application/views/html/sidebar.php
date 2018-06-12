@@ -51,7 +51,7 @@
 	                           
 	                        </li> 
 	                        <li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons"> local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -92,7 +92,7 @@
 	                            </a>
 	                        </li> 
 							<li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -114,7 +114,7 @@
 	                       
 							
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
@@ -129,7 +129,7 @@
 	                           
 	                        </li> 
 						  <li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -158,7 +158,7 @@
 	                            </ul>
 	                        </li> 
 							<li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -178,12 +178,12 @@
 	                            </ul>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('hospital/announcement'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('hospital/announcement'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('hospital/modified_prescription'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('hospital/modified_prescription'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
 	                                <span class="title">Modified prescription List</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
@@ -210,7 +210,7 @@
 	                        </li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -255,7 +255,7 @@
 	                        </li>
 							  <li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -289,7 +289,7 @@
 											</a>
 										</li>
 										<li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons">person</i>
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -347,7 +347,7 @@
 	                        </li>
 									<li class="nav-item start ">
 										<a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
-											<i class="material-icons">dashboard</i>
+											<i class="material-icons">email</i>
 											<span class="title">Chat</span>
 											<span class="selected"></span>
 											<span class="arrow "></span>
@@ -392,7 +392,7 @@
 	                        </li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -401,7 +401,7 @@
 						<?php } else if($userdetails['role_id']==8){ ?>
 						<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/chat');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -425,7 +425,7 @@
 	                        </li> 
 						<?php } ?>
 							<li class="nav-item  ">
-	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons">person</i>
+	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons"> power_settings_new</i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
