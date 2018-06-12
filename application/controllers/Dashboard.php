@@ -55,7 +55,9 @@ class Dashboard extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']==1){
 				$data['hospital_list']=$this->Admin_model->get_hospitals_list_monthwise(date('Y'));
+				
 				$sevendays_list=$this->Admin_model->get_last_sevendays_hospital_list();
+				//echo '<pre>';print_r($data);exit;
 				if(count($sevendays_list)>0){
 				$data['sevendays_list']=count($sevendays_list);
 				}else{

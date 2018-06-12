@@ -236,6 +236,7 @@ class Admin_model extends CI_Model
 	public function get_hospitals_list_monthwise($date){
 		$this->db->select('hospital.hos_id,hospital.hos_created')->from('hospital');
         $this->db->where("DATE_FORMAT(hos_created,'%Y')", $date);
+		 $this->db->where('hos_undo ',0);
 		return $this->db->get()->result_array();
 	}
 	public function get_last_sevendays_hospital_list(){
@@ -243,6 +244,7 @@ class Admin_model extends CI_Model
 		$end_date = date("Y-m-d H:i:s");
 		$this->db->select('hospital.hos_id,hospital.hos_created')->from('hospital');
 		$this->db->where("hos_created >= '" . $start_date . "' AND hos_created <= '" . $end_date . "'");
+		$this->db->where('hos_undo ',0);
 		return $this->db->get()->result_array();
 	}
 	public function get_hospitals_patient_list_monthwise($hos_id,$date){
