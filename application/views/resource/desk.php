@@ -1575,8 +1575,8 @@ function apply_couponcode1(){
    						message: 'price is required'
    					},
                        regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'price can only consist of alphanumeric, space and dot'
+   					regexp: /^[0-9. ]+$/,
+   					message: 'price can only consist of digits, space and dot'
    					}
                    }
                }
