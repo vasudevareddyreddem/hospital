@@ -677,8 +677,9 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <div class="row table-responsive" >
-                                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                             <div class="row " >
+                                             <div class="table-responsive" >
+                                                <table class="table table-striped table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
                                                          <th> Vitals </th>
@@ -720,6 +721,7 @@
                                                       </tr>
                                                    </tbody>
                                                 </table>
+                                             </div>
                                              </div>
                                              <button class="btn btn-praimry " type="submit">Next</button>
                                           </form>
