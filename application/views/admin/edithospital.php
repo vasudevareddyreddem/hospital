@@ -219,7 +219,7 @@
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Email</label>
-                           <input type="email" id="hos_bas_email" name="hos_bas_email" value="<?php echo isset($hospital_details['hos_bas_email'])?$hospital_details['hos_bas_email']:''; ?>" class="form-control"  placeholder="Enter email" >
+                           <input type="text" id="hos_bas_email" name="hos_bas_email" value="<?php echo isset($hospital_details['hos_bas_email'])?$hospital_details['hos_bas_email']:''; ?>" class="form-control"  placeholder="Enter email" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">National ID</label>

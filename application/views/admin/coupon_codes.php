@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Privilage card List</div>
+               <div class="page-title">Previlege card List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Privilage card List</li>
+               <li class="active">Previlege card List</li>
             </ol>
          </div>
       </div>
@@ -27,9 +27,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Privilage card </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Previlege card </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Privilage card List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Previlege card List</a>
                   </li>
                </ul>
             </header>
@@ -42,7 +42,7 @@
 								<div class="row">
 								<div class="col-md-6">
 								<label> Name</label>
-								<input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Privilage card">
+								<input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Previlege card">
 								</div>
 								<div class="col-md-6">
 									<label>Type</label>
@@ -125,7 +125,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="coupon_code_id" id="coupon_code_id" value="<?php echo $list['id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Privilage card Rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Previlege card Rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
@@ -223,11 +223,11 @@ $(document).ready(function() {
             coupon_code: {
                  validators: {
 					notEmpty: {
-						message: 'Privilage card is required'
+						message: 'Previlege card is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Privilage card can only consist of alphanumaric, space and dot'
+					message: 'Previlege card can only consist of alphanumeric, space and dot'
 					}
 				}
             },
