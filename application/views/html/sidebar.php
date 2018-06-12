@@ -69,7 +69,7 @@
 	                        </li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/couponcodes');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">list</i>
 	                                <span class="title">Previlege card List</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -77,7 +77,7 @@
 	                        </li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/testtype');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">assignment_turned_in</i>
 	                                <span class="title">Lab Test Types</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -85,7 +85,7 @@
 	                        </li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">track_changes</i>
 	                                <span class="title">Out source </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -192,7 +192,7 @@
 						 
 						 <li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/desk');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Front desk</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -201,7 +201,7 @@
 	                        </li>  
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/patient_databse');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">sd_storage</i>
 	                                <span class="title">Patient Registration Database </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -266,7 +266,7 @@
 								<?php if($userdetails['out_source']==1){ ?>	
 										<li class="nav-item start ">
 											<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
-												<i class="material-icons">dashboard</i>
+												<i class="material-icons">person_add</i>
 												<span class="title">Patient List</span>
 												<span class="selected"></span>
 												<span class="arrow "></span>
@@ -307,7 +307,7 @@
 								<?php  }else{ ?>
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab/patient_list');?>" class="nav-link nav-toggle">
-										<i class="material-icons">dashboard</i>
+										<i class="material-icons">person_add</i>
 										<span class="title">Patient List</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
@@ -315,7 +315,7 @@
 								</li>
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
-										<i class="material-icons">dashboard</i>
+										<i class="material-icons">format_color_fill</i>
 										<span class="title">Lab Test details</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
@@ -323,7 +323,7 @@
 								</li>
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
-										<i class="material-icons">dashboard</i>
+										<i class="material-icons">details</i>
 										<span class="title">Out Sources Lab Test details</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
@@ -331,7 +331,7 @@
 								</li> 
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
-										<i class="material-icons">dashboard</i>
+										<i class="material-icons">format_list_numbered</i>
 										<span class="title">Bidding Lab Test List</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
@@ -339,7 +339,7 @@
 								</li> 
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/patient_database');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">sd_storage</i>
 	                                <span class="title">Patient Database</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -360,7 +360,7 @@
 							
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">description</i>
 	                                <span class="title">My WorkSheet</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -368,7 +368,7 @@
 	                        </li>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/completed_worksheet');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons"> done_all</i>
 	                                <span class="title">Completed WorkSheet</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -376,7 +376,7 @@
 	                        </li>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Appointments</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -384,7 +384,7 @@
 	                        </li>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/referrals');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">border_all</i>
 	                                <span class="title">Referrals </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -409,7 +409,7 @@
 	                        </li>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/notification');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">notifications</i>
 	                                <span class="title">Notification</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -417,7 +417,7 @@
 	                        </li>
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/notificationlist');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">dashboard</i>
+	                                <i class="material-icons">notifications</i>
 	                                <span class="title">Sent Notification List</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
