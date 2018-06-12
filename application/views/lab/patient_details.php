@@ -1,4 +1,4 @@
-<?php //echo '<pre>';print_r($hospital_details);exit; ?>
+<?php //echo '<pre>';print_r($report_lists);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -40,8 +40,15 @@
                                    <h4><b>ID: <span><?php echo isset($patient_details['pid'])?$patient_details['pid']:''; ?></span></b></h4>
                                    <h5><b>DOB: <span><?php echo isset($patient_details['dob'])?$patient_details['dob']:''; ?></span></b></h5>
 									
+									</div>
                                  </div>
-                                 </div>
+								 <?php if(isset($report_lists) && count($report_lists)>0){ ?>
+								 <?php foreach($report_lists as $Lis){ ?>
+									 <div class="">
+										<header><?php echo $Lis['t_name']; ?> : &nbsp;<span><a  target="_blank" href="<?php echo base_url('assets/patient_reports/'.$Lis['image']); ?>">download</a></span>
+									</div>
+								 <?php } ?>
+								 <?php } ?>
                                  <form id="uploadreports" name="uploadreports" action="<?php echo base_url('lab/uploadreports'); ?>" method="post" enctype="multipart/form-data">
                                     	<input type="hidden" id="pid" name="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                                     	<input type="hidden" id="b_id" name="b_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
@@ -53,17 +60,29 @@
                                        </div>
                                        <div class="col-md-12">
                                           <div class="row">
-                                             <div class="col-md-4 nopadding">
+                                             <div class="col-md-3 nopadding">
+                                                <div class="form-group">
+                                                   <select id="test_id[]" name="test_id[]" class="form-control">
+												   <option value="">Select</option>
+												   <?php if(isset($labtest_list) && count($labtest_list)>0){ ?>
+													   <?php foreach($labtest_list as $list){ ?>
+															   <option value="<?php echo $list['t_id']; ?>"><?php echo $list['t_name']; ?></option>
+													   <?php } ?>
+												   <?php } ?>
+												   </select>
+                                                </div>
+                                             </div>
+											 <div class="col-md-3 nopadding">
                                                 <div class="form-group">
                                                    <input type="text" class="form-control" id="problem_name" name="problem_name[]" value="" placeholder="Enter Problem">
                                                 </div>
                                              </div> 
-											 <div class="col-md-4 nopadding">
+											 <div class="col-md-3 nopadding">
                                                 <div class="form-group">
                                                    <input type="text" class="form-control" id="symptoms" name="symptoms[]" value="" placeholder="Enter Symptoms">
                                                 </div>
                                              </div>
-                                             <div class="col-md-4 nopadding">
+                                             <div class="col-md-3 nopadding">
                                                 <div class="form-group">
                                                    <div class="input-group">
                                                       <input type="file" class="form-control" id="document" name="document[]" value="">
@@ -104,7 +123,7 @@
        var divtest = document.createElement("div");
    	divtest.setAttribute("class", "form-group removeclass"+room);
    	var rdiv = 'removeclass'+room;
-       divtest.innerHTML = '<div class="row"><div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control" id="problem_name" name="problem_name[]" value="" placeholder="Enter Problem"></div></div><div class="col-md-4 nopadding"><div class="form-group"> <input type="text" class="form-control"id="symptoms" name="symptoms[]" value="" placeholder="Enter Symptoms"></div></div><div class="col-md-4 nopadding"><div class="form-group"><div class="input-group"> <input type="file" class="form-control" id="document" name="document[]"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
+       divtest.innerHTML = '<div class="row"><div class="col-md-3 nopadding"><div class="form-group">    <select id="test_id[]" name="test_id[]" class="form-control" required><option value="">Select</option><?php if(isset($labtest_list) && count($labtest_list)>0){ ?> <?php foreach($labtest_list as $list){ ?><?php if($list['out_source']==0){ ?> <option value="<?php echo $list['t_id']; ?>"><?php echo $list['t_name']; ?></option><?php } ?>  <?php } ?> <?php } ?> </select></div></div><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control" id="problem_name" name="problem_name[]" value="" placeholder="Enter Problem"></div></div><div class="col-md-3 nopadding"><div class="form-group"> <input type="text" class="form-control"id="symptoms" name="symptoms[]" value="" placeholder="Enter Symptoms"></div></div><div class="col-md-3 nopadding"><div class="form-group"><div class="input-group"> <input type="file" class="form-control" id="document" name="document[]"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="fa fa-minus" aria-hidden="true"></span> </button></div></div></div></div></div>';
        
        objTo.appendChild(divtest)
    }
@@ -118,7 +137,14 @@ $(document).ready(function() {
     $('#uploadreports').bootstrapValidator({
         
         fields: {
-            'problem_name[]': {
+            'test_id[]': {
+                validators: {
+                      notEmpty: {
+                        message: 'Test name is required'
+                    }
+                }
+            },
+			'problem_name[]': {
                 validators: {
                       notEmpty: {
                         message: 'Problem is required'

@@ -202,7 +202,7 @@ class Admin extends CI_Controller {
 					if(count($checking)==0){
 						$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
 						if(count($addcoupon)>0){
-							$this->session->set_flashdata('success',"Coupon code  successfully Added");
+							$this->session->set_flashdata('success',"Privilage card successfully Added");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -210,7 +210,7 @@ class Admin extends CI_Controller {
 						}
 					
 					}else{
-							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
+							$this->session->set_flashdata('error',"Privilage card already exists. Please try again.");
 							redirect('admin/couponcodes');
 					}
 				}else{
@@ -231,7 +231,7 @@ class Admin extends CI_Controller {
 					$coupon_id=base64_decode($this->uri->segment(3));
 					$delete=$this->Admin_model->delete_coupon_code($coupon_id);
 						if(count($delete)>0){
-							$this->session->set_flashdata('success',"Coupon Code successfully Deleted.");
+							$this->session->set_flashdata('success',"Privilage card successfully Deleted.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -267,9 +267,9 @@ class Admin extends CI_Controller {
 						$updated=$this->Admin_model->update_coupon_code_details($test_id,$details);
 						if(count($updated)>0){
 							if($status==1){
-							$this->session->set_flashdata('success',"Coupon code successfully Deactivate.");
+							$this->session->set_flashdata('success',"Privilage card successfully Deactivate.");
 							}else{
-								$this->session->set_flashdata('success',"Coupon code successfully Activate.");
+								$this->session->set_flashdata('success',"Privilage card successfully Activate.");
 							}
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
@@ -307,7 +307,7 @@ class Admin extends CI_Controller {
 						
 						$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 						if(count($save)>0){
-							$this->session->set_flashdata('success',"Coupon code successfully Updated.");
+							$this->session->set_flashdata('success',"Privilage card successfully Updated.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -319,7 +319,7 @@ class Admin extends CI_Controller {
 						if(count($checking)==0){
 							$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 							if(count($save)>0){
-								$this->session->set_flashdata('success',"Coupon code successfully Updated.");
+								$this->session->set_flashdata('success',"Privilage card successfully Updated.");
 								redirect('admin/couponcodes/'.base64_encode(1));
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -327,7 +327,7 @@ class Admin extends CI_Controller {
 							}
 							
 						}else{
-							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
+							$this->session->set_flashdata('error',"Privilage card already exists. Please try again.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}
 					}

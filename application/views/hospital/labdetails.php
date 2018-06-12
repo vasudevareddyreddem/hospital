@@ -136,7 +136,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Lab Code can only consist of alphanumaric, space and dot'
+					message: 'Lab Code can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -147,7 +147,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Lab Name can only consist of alphanumaric, space and dot'
+					message: 'Lab Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },'lab_assistent[]': {

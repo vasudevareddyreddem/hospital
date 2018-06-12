@@ -511,7 +511,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Representative Name can only consist of alphanumaric, space and dot'
+					message: 'Representative Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -591,8 +591,8 @@ $(document).ready(function() {
 						message: 'City is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'City can only consist of alphabets and Space'
 					}
 				
 				}
@@ -602,8 +602,8 @@ $(document).ready(function() {
 						message: 'State is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'State can only consist of alphabets and Space'
 					}
 				
 				}
@@ -614,8 +614,8 @@ $(document).ready(function() {
 						message: 'Country is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'Country can only consist of alphabets and Space'
 					}
 				
 				}
@@ -635,7 +635,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumaric, space and dot'
+					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -704,8 +704,8 @@ $(document).ready(function() {
 						message: 'City is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'City can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'City can only consist of alphabets and Space'
 					}
 				
 				}
@@ -715,8 +715,8 @@ $(document).ready(function() {
 						message: 'State is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'State can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'State can only consist of alphabets and Space'
 					}
 				
 				}
@@ -727,8 +727,8 @@ $(document).ready(function() {
 						message: 'Country is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Country can only consist of alphanumaric, space and dot'
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'Country can only consist of alphabets and Space'
 					}
 				
 				}
@@ -804,7 +804,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
-					 message: 'IFSC Code must be alphanumaric'
+					 message: 'IFSC Code must be alphanumeric'
 					}
 				}
             },
@@ -831,7 +831,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Document Name can only consist of alphanumaric, space and dot'
+					message: 'Document Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -846,7 +846,7 @@ $(document).ready(function() {
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Document Name can only consist of alphanumaric, space and dot'
+					message: 'Document Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -861,7 +861,7 @@ $(document).ready(function() {
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Document Name can only consist of alphanumaric, space and dot'
+					message: 'Document Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },

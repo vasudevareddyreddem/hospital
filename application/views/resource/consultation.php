@@ -44,7 +44,7 @@
                <div class="panel panel-default">
                   <div class="panel-heading">
                      <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="panel-title expand">
-                        <div class="right-arrow pull-right">+</div>
+                        <div class="right-arrow pull-right" style="cursor:pointer">+</div>
                         <a href="#">Patient Details</a>
                      </h4>
                   </div>
@@ -53,6 +53,10 @@
                         <div class="col-md-3">
                            <strong>Patient Name</strong>
                            <p><?php echo isset($patient_details['name'])?$patient_details['name']:''; ?></p>
+                        </div>
+						<div class="col-md-3">
+                           <strong>Gender</strong>
+                           <p><?php echo isset($patient_details['gender'])?$patient_details['gender']:''; ?></p>
                         </div>
                         <div class="col-md-3">
                            <strong>Mobile</strong>
@@ -820,7 +824,6 @@
                                           <th> Test Name</th>
                                           <th>Short form</th>
                                           <th>Description </th>
-                                          <th>Department</th>
                                           <th>Select</th>
                                        </tr>
                                     </thead>
@@ -1022,7 +1025,7 @@ function addtestlist(){
 						$('#testlist').empty();
 						for(i=0; i<data.text.length; i++) {
 						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
-						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td>"+data.text[i].t_department+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
+						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
 
 						}
 						}
@@ -1138,7 +1141,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate diagnosis can only consist of alphanumaric, space and dot'
+					message: 'Associate diagnosis can only consist of alphanumeric, space and dot'
 					}
 				}
             },associate_problems: {
@@ -1148,7 +1151,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate  problems can only consist of alphanumaric, space and dot'
+					message: 'Associate  problems can only consist of alphanumeric, space and dot'
 					}
 				}
             }
@@ -1213,7 +1216,7 @@ function addtestlist(){
                  validators: {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Directions can only consist of alphanumaric, space and dot'
+					message: 'Directions can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1242,7 +1245,7 @@ function addtestlist(){
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Comments can only consist of alphanumaric, space and dot'
+					message: 'Comments can only consist of alphanumeric, space and dot'
 					}
 				}
             },

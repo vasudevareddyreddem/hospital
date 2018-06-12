@@ -53,7 +53,7 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['outsources_labtests']=$this->Lab_model->get_outsources_labtests_details($admindetails['a_id']);
+					$data['outsources_labtests']=$this->Lab_model->get_all_outsources_labtests_details($admindetails['a_id']);
 					//echo $this->db->last_query();
 					$this->load->view('lab/outsources_labtests',$data);
 					$this->load->view('html/footer');
@@ -97,7 +97,13 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=5){
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
+					$test_exits=$this->Resources_model->check_test_exits($admindetails['a_id'],$post['test_name'],$post['type']);
+					if(count($test_exits)>0){
+						$this->session->set_flashdata('error',"Test Name already exists. please try another test name.");
+						redirect('lab');
+					}
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$adding=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
@@ -430,7 +436,13 @@ class Lab extends CI_Controller {
 					$data['patient_id']=base64_decode($this->uri->segment(3));
 					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$data['patient_details']=$this->Lab_model->get_billing_details($data['patient_id'],$data['billing_id']);
-
+					if($admindetails['out_source']==1){
+						$data['labtest_list']=$this->Lab_model->get_all_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
+						$data['report_lists']=$this->Lab_model->get_all_patients_out_source_lab_report_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
+					}else{
+						$data['labtest_list']=$this->Lab_model->get_all_patients_in_labtest_lists($data['patient_id'],$data['billing_id'],0);
+						$data['report_lists']=$this->Lab_model->get_all_patients_lab_report_lists($data['patient_id'],$data['billing_id']);
+					}
 					$this->load->view('lab/patient_details',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -450,8 +462,12 @@ class Lab extends CI_Controller {
 		{
 				if($admindetails['role_id']=5){
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					
+				
 					$labdetails_list=array_combine($post['problem_name'],$post['symptoms']);
 						if(count($labdetails_list)>0){
 							
@@ -475,9 +491,13 @@ class Lab extends CI_Controller {
 									$li[$c]['problem_name']=$key;
 									$li[$c]['symptoms']=$list;
 									$li[$c]['image']=$names_list[$c];
+									$li[$c]['test_id']=$post['test_id'][$c];
 									
 								}
 								$c++;}
+								
+								
+								//echo '<pre>';print_r($li);exit;
 								
 								foreach($li as $imglist){
 									$addreports=array(
@@ -487,23 +507,50 @@ class Lab extends CI_Controller {
 										'problem'=>$imglist['problem_name'],
 										'symptoms'=>$imglist['symptoms'],
 										'image'=>$imglist['image'],
+										'test_id'=>$imglist['test_id'],
 										'create_at'=>date('Y-m-d H:i:s'),				
 										'status'=>1,				
 										'create_by'=>$admindetails['a_id']
 										);
+										$test_deatils=$this->Lab_model->get_previous_report_details($post['pid'],$post['b_id'],$imglist['test_id']);
+										//echo '<pre>';print_r($test_deatils);
+										if(count($test_deatils)>0){
+											 unlink("assets/patient_reports/".$test_deatils['image']);
+											$this->Lab_model->delete_previous_report_details($post['pid'],$post['b_id'],$imglist['test_id']);
+										}
+										
+										//echo '<pre>';print_r($addreports);exit;
 									$savereports = $this->Lab_model->save_patient_reports($addreports);
+									/*delete out source lab bidding list */
+										$delete_accept_bidding_tests=$this->Lab_model->delete_accept_bidding_remaining_tests($imglist['test_id']);
+										if(isset($delete_accept_bidding_tests) && count($delete_accept_bidding_tests)>0){
+											foreach($delete_accept_bidding_tests as $List){
+												$this->Lab_model->delete_accept_bidding_test($List['id']);
+											}
+											
+										}
+
 									$compledata=array(
 									'report_completed'=>1
 									);
-									$this->Lab_model->update_billingreport_status($post['pid'],$post['b_id'],$compledata);
+									$this->Lab_model->update_patient_billingreport_status($imglist['test_id'],$post['pid'],$post['b_id'],$compledata);
 
 								}
 								if(count($savereports)>0){
+										$check_report_all_geting=$this->Lab_model->check_report_all_geting($post['pid'],$post['b_id']);
+										//echo $this->db->last_query();
+										if(count($check_report_all_geting)==0){
+											$compledata=array(
+											'report_completed'=>1
+											);
+											$this->Lab_model->update_billingreport_status($post['pid'],$post['b_id'],$compledata);
+	
+										}
 								$this->session->set_flashdata('success',"Reports are successfully added");
-								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.($post['b_id']));
+								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.base64_encode($post['b_id']));
 								}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.($post['b_id']));
+								redirect('lab/patient_details/'.base64_encode($post['pid']).'/'.base64_encode($post['b_id']));
 								}
 								
 					}
@@ -565,6 +612,11 @@ class Lab extends CI_Controller {
 				if($admindetails['role_id']=1){
 					$admindetails=$this->session->userdata('userdetails');
 					$post=$this->input->post();
+					$check=$this->Lab_model->check_lab_test_type($post['test_type'],$post['type']);
+					if(count($check)>0){
+						$this->session->set_flashdata('error',"Test Type name already exists .please use another name.");
+						redirect('lab/testtype/'.base64_encode(1));
+					}
 					//echo '<pre>';print_r($post);exit;
 					$add=array(
 						'type_name'=>$post['test_type'],
@@ -599,6 +651,13 @@ class Lab extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
+					$check=$this->Lab_model->check_get_lab_test_type_details($post['test_id']);
+					if($check['type_name']!= $post['editname'] || $check['type']!= $post['type']){
+						if(count($check)>0){
+							$this->session->set_flashdata('error',"Test Type name already exists .please use another name.");
+							redirect('lab/testtype/'.base64_encode(1));
+						}
+					}
 					$add=array(
 						'type_name'=>$post['editname'],
 						'type'=>$post['type'],
@@ -809,12 +868,15 @@ class Lab extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$post=$this->input->post();
+					
+					//echo '<pre>';print_r($post);exit;
 					foreach($post['test_id'] as $li){
 						$ids=explode('_',$li);
 					$test_list=$this->Lab_model->get_test_names($ids[0]);
 					$lab_ids=$this->Lab_model->get_test_lab_ids($test_list['t_name']);
 						foreach($lab_ids as $l){
 								$details=array(
+								'b_id'=>$post['billing_id'],
 								'test_id'=>$test_list['t_id'],
 								'p_l_t_id'=>$ids[1],
 								'lab_id'=>$l['a_id'],
