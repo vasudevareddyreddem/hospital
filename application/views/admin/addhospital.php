@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Email</label>
-                           <input type="email" id="hos_rep_email" name="hos_rep_email" value="<?php echo isset($hospital_details['hos_rep_email'])?$hospital_details['hos_rep_email']:''; ?>" class="form-control"  placeholder="Enter email" >
+                           <input type="text" id="hos_rep_email" name="hos_rep_email" value="<?php echo isset($hospital_details['hos_rep_email'])?$hospital_details['hos_rep_email']:''; ?>" class="form-control"  placeholder="Enter email" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">National ID</label>
