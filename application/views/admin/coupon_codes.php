@@ -209,7 +209,7 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
+			$('#content1').html('Are you sure you want to Deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');

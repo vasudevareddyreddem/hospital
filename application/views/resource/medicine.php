@@ -235,11 +235,11 @@ $(document).ready(function() {
 			'addmedicn[0][medicine]': {
                  validators: {
 					notEmpty: {
-						message: 'Medicin Name is required'
+						message: 'Medicine Name is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Medicin Name can only consist of alphanumeric, space and dot'
+					message: 'Medicine Name can only consist of alphanumeric, space and dot'
 					}
 				}
             },
