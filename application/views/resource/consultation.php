@@ -213,6 +213,41 @@
                                              <?php } ?>
                                           </select>
                                        </div>
+									   <div class="col-md-6">
+                                          <div class="row">
+                                           <div class="col-md-6">
+												<label>Substitute allowed or not allowed?</label>									
+												<select class="form-control" name="substitute_name" id="substitute_name">
+													<option value="" >Select </option>
+													<option value="Yes" >Yes </option>
+													<option value="No" >No</option>
+												</select>
+											</div>
+                                             <div class="col-md-6">
+                                                <label> Units</label>
+                                                <select class="form-control" name="units" id="units">
+                                                   <option value="" >Select Units</option>
+                                                   <option value="no" >no</option>
+                                                   <option value="tablet" >tablet</option>
+                                                   <option value="mg" >mg</option>
+                                                   <option value="ml" >ml</option>
+                                                   <option value="ounce" >ounce</option>
+                                                   <option value="bottle" >bottle</option>
+                                                   <option value="box" >box</option>
+                                                   <option value="tube" >tube</option>
+                                                   <option value="gram" >gram</option>
+                                                   <option value="can" >can</option>
+                                                   <option value="pack" >pack</option>
+                                                   <option value="pound" >pound</option>
+                                                   <option value="device" >device</option>
+                                                   <option value="vial" >vial</option>
+                                                   <option value="suppository" >suppository</option>
+                                                   <option value="es" >es</option>
+                                                   <option value="patch" >patch</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </div>
                                        <div class="col-md-6">
                                                 <label> Qty</label>
                                                 <input class="form-control" name="qty" id="qty" type="text" placeholder="enter Qty">
@@ -250,41 +285,7 @@
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
                                        </div>
-                                       <div class="col-md-6">
-                                          <div class="row">
-                                           <div class="col-md-6">
-												<label>Substitute allowed or not allowed?</label>									
-												<select class="form-control" name="substitute_name" id="substitute_name">
-													<option value="" >Select </option>
-													<option value="Yes" >Yes </option>
-													<option value="No" >No</option>
-												</select>
-											</div>
-                                             <div class="col-md-6">
-                                                <label> Units</label>
-                                                <select class="form-control" name="units" id="units">
-                                                   <option value="" >Select Units</option>
-                                                   <option value="no" >no</option>
-                                                   <option value="tablet" >tablet</option>
-                                                   <option value="mg" >mg</option>
-                                                   <option value="ml" >ml</option>
-                                                   <option value="ounce" >ounce</option>
-                                                   <option value="bottle" >bottle</option>
-                                                   <option value="box" >box</option>
-                                                   <option value="tube" >tube</option>
-                                                   <option value="gram" >gram</option>
-                                                   <option value="can" >can</option>
-                                                   <option value="pack" >pack</option>
-                                                   <option value="pound" >pound</option>
-                                                   <option value="device" >device</option>
-                                                   <option value="vial" >vial</option>
-                                                   <option value="suppository" >suppository</option>
-                                                   <option value="es" >es</option>
-                                                   <option value="patch" >patch</option>
-                                                </select>
-                                             </div>
-                                          </div>
-                                       </div>
+                                       
                                        <div class="col-md-6">
                                           <label> Comment</label>
                                           <textarea type="textarea" name="comments" id="comments" class="form-control"  placeholder="Enter Comment" required></textarea>
@@ -344,7 +345,7 @@
                                     <option value="High">High</option>
                                  </select>
                               </div>
-                              <div class="col-md-6" id="investigation_formdates">
+                              <!--<div class="col-md-6" id="investigation_formdates">
                                  <label> From</label>
                                  <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" id="datePicker11">
                                     <input class="form-control" name="investigation_formdate" id="investigation_formdate"  type="text" value="" >
@@ -359,7 +360,7 @@
                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                  </div>
                                  <input class ="form-control" type="hidden" id="dtp_input2" value="" />
-                              </div>
+                              </div>-->
                               <div class="col-md-6">
                                  <label>  Associate diagnosis</label>
                                  <input class="form-control" type="text" id="associate_diagnosis" name="associate_diagnosis"placeholder="Enter  Associate diagnosis">
@@ -948,15 +949,7 @@
 </div>
 <!-- patient_lab_test_list_model-->
 <script>
- $(function() {
-			 
-			    // Bootstrap DateTimePicker v4
-			    $('#investigation_todate').datetimepicker({
-			      //format: 'DD/MM/YYYY'
-				  maxDate: "+1"
-			    });
-			  });
-
+ 
 function check_lab_test(){
 	var count=$('#test_list_count').val();
 	if(count==''){
@@ -971,10 +964,12 @@ function check_qty(){
 	var med_name = $('#medicine_name').text();
 	var qty=$('#qty').val();
 	var or_qty = med_name.split(":");
-	if(or_qty[1] >qty){
-		
-		alert('medicine quantity is greater than available quantity');
-		return false;
+	if(qty!=''){
+		if(or_qty[1] >qty){
+			
+			alert('medicine quantity is greater than available quantity');
+			return false;
+		}
 	}
 	
 	
@@ -1122,12 +1117,6 @@ function addtestlist(){
                  validators: {
 					notEmpty: {
 						message: 'Investigation type is required'
-					}
-				}
-            },investigation_formdate: {
-                 validators: {
-					notEmpty: {
-						message: 'Date is required'
 					}
 				}
             },frequency: {

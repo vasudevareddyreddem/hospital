@@ -121,8 +121,8 @@
 											<option value="Other">Other</option>
 											</select>
 											</div> &nbsp;
-											<a target="_blank" href="<?php echo base_url('Users/viewprescription/'.base64_encode($prescriptions['information']['pid']).'/'.base64_encode($prescriptions['information']['b_id']));?>" class="btn btn-warning">Print Prescription</a>
-											<button type="submit"  class="btn btn-success">Bill Prescription</button>
+											<a target="_blank" href="<?php echo base_url('Users/viewprescription/'.base64_encode($prescriptions['information']['pid']).'/'.base64_encode($prescriptions['information']['b_id']));?>" class="btn btn-warning">View Prescription</a>
+											<button type="submit"  class="btn btn-success">Print Prescription</button>
 											</div>
 
 											</form>
