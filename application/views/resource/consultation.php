@@ -189,7 +189,7 @@
                <div class="panel-body">
                   <div class="tab-content">
                      <div class="tab-pane active" id="home">
-                        <form id="add_medicines" name="add_medicines" action="<?php echo base_url('resources/medicine'); ?>" method="post" >
+                        <form id="add_medicines" name="add_medicines" onsubmit="return check_qty()"  action="<?php echo base_url('resources/medicine'); ?>" method="post" >
                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
                            <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
                            <div class="row">
@@ -302,7 +302,7 @@
                         </form>
                      </div>
                      <div class="tab-pane" id="about">
-					 <form id="addinvestigation" name="addinvestigation" action="<?php echo base_url('resources/investigation'); ?>" method="post">
+					 <form id="addinvestigation" name="addinvestigation" onsubmit="return check_lab_test();" action="<?php echo base_url('resources/investigation'); ?>" method="post">
                          <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 							<input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 
@@ -321,22 +321,9 @@
                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#searchmodal" class="btn btn-sm btn-warning">Search</a>
 								<span id="countdisplaying" style="display:none">Patinet test count : <span id="testcount" ></span></span>
 							  </div>
-                              <div class="form-group col-md-6">
-                                 <label for="email">Hospital Representative Contact Number</label>
-                                 <div class="row">
-                                    <div class="col-md-12 row">
-                                       <div class="col-md-4">
-                                          <select class="form-control" id="countrycode" name="countrycode">
-                                             <option>+91</option>
-                                             <option>+91</>
-                                          </select>
-                                       </div>
-                                       <div class="col-md-8">
-                                          <input type="text" id="contact_number" name="contact_number" class="form-control"  placeholder="Enter Number" >
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+							  
+							  <input type="hidden" name="test_list_count" id="test_list_count" value="">
+                              
                               <div class="col-md-6">
                                  <label>Frequency</label>	
 										<select class="form-control" name="frequency" id="frequency">
@@ -368,7 +355,7 @@
                               <div class="col-md-6">
                                  <label> To</label>
                                  <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" id="investigation_todate" name="investigation_todate"  type="text" value=""required>
+                                    <input class="form-control" id="investigation_todate" name="investigation_todate"  type="text" value="">
                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                  </div>
                                  <input class ="form-control" type="hidden" id="dtp_input2" value="" />
@@ -454,7 +441,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Encounters</h5>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body">
             <div class="container">
@@ -543,7 +530,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Add Vitals</h5>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" >
             <div class="">
@@ -669,7 +656,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Investigation</h5>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body">
             <div class="">
@@ -720,7 +707,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Prescription</h5>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body">
             <div class="">
@@ -771,7 +758,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Add Test List</h5>
-            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
             <div class="">
@@ -857,7 +844,7 @@
       <div class="modal-content">
             <h5 class="modal-title" id="lineModalLabel">Previous Medicine List </h5>
          <div class="modal-header bg-indigo">
-            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
             <div class="">
@@ -912,7 +899,7 @@
       <div class="modal-content">
          <div class="modal-header bg-indigo">
             <h5 class="modal-title" id="lineModalLabel">Lab Test List</h5>
-            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">Ã—</span><span class="sr-only">Close</span></button>
+            <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
             <div class="">
@@ -961,6 +948,33 @@
 </div>
 <!-- patient_lab_test_list_model-->
 <script>
+
+     $('#investigation_formdate').datepicker({ 
+    startDate: new Date(),
+});
+
+function check_lab_test(){
+	var count=$('#test_list_count').val();
+	if(count==''){
+		alert('Please select atleast one Investigation test');		
+		return false;
+		
+	}
+	
+}
+
+function check_qty(){
+	var med_name = $('#medicine_name').text();
+	var qty=$('#qty').val();
+	var or_qty = med_name.split(":");
+	if(or_qty[1]  <= qty){
+		
+		alert('medicine quantity is greater than available quantity');
+		return false;
+	}
+	
+	
+}
 function addtestlist(){
 	var favorite = [];
             $.each($("input[name='testlistid']:checked"), function(){            
@@ -979,7 +993,9 @@ function addtestlist(){
 						if(data.msg==1){
 							 $('#countdisplaying').show();
 							 $('#testcount').empty();
+							 $('#test_list_count').empty();
 							 $('#testcount').append(data.count);
+							 $('#test_list_count').append(data.count);
 							 $('#popupclose').click();
 						}
 					}
@@ -1108,18 +1124,6 @@ function addtestlist(){
                  validators: {
 					notEmpty: {
 						message: 'Date is required'
-					}
-				}
-            },
-			
-			contact_number: {
-                   validators: {
-					notEmpty: {
-						message: 'Mobile Number is required'
-					},
-					regexp: {
-					regexp:  /^[0-9]{10,14}$/,
-					message:'Mobile Number must be 10 to 14 digits'
 					}
 				}
             },frequency: {
