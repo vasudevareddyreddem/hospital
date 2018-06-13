@@ -14,6 +14,7 @@
 			todayHighlight: 1,
 			startView: 2,
 			minView: 2,
+			 minDate: 0,
 			forceParse: 0
 		});
 		$('.form_time').datetimepicker({
@@ -24,6 +25,8 @@
 			startView: 1,
 			minView: 0,
 			maxView: 1,
+						 minDate: 0,
+
 			forceParse: 0
 		});
 		$(function () {
