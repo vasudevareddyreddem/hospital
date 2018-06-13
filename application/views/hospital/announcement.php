@@ -44,7 +44,7 @@
                <div class="card-body ">
                   <div class="panel tab-border card-topline-green">
                      <header class="panel-heading panel-heading-gray custom-tab ">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs x-scrool" >
                            <li class="nav-item"><a href="#announc" data-toggle="tab" class="<?php if(isset($tab) && $tab==''){ echo "active"; } ?>" aria-expanded="false">Announcements</a>
                            </li>
                            <li class="nav-item"><a href="#notifi" data-toggle="tab" class="<?php if(isset($tab) && $tab==1){ echo "active"; } ?>" aria-expanded="false">Notifications List</a>
@@ -57,11 +57,11 @@
                         <div class="tab-content">
                            <div class="tab-pane <?php if(isset($tab) && $tab==''){ echo "active"; } ?>" id="announc" aria-expanded="false">
                               <div class="row">
-                                 <div class="col-4 card dat-help">
+                                 <div class="col-md-4 card dat-help">
                                     <br>
                                     <h3>Announcements</h3>
                                     <textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Resource Names" ></textarea>
-                                    <div class="card-body ">
+                                    <div class="card-body  table-reseponsive">
                                        <form id="frm-example" action="" method="POST">
                                           <table id="example" class="display select" cellspacing="0" width="100%">
                                              <thead>

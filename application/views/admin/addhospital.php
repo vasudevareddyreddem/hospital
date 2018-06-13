@@ -17,7 +17,7 @@
    <div class="row">
       <div class="col-md-12 col-sm-12">
          <!-- Nav tabs -->
-         <ul class="nav nav-tabs nav-justified">
+         <ul class="nav nav-tabs nav-justified x-scrool" >
             <li class="nav-item">
                <a class="nav-link <?php if(isset($tab) && $tab==1){ echo "in show active"; }?>" data-toggle="tab" href="#Credentials" role="tab">Hospital Credentials</a>
             </li>

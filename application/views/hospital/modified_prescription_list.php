@@ -30,7 +30,7 @@
                                      <header>Modified prescription List</header>
                                    
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body table-responsive">
 								<?php if(count($get_m_precption_list)>0){ ?>
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
