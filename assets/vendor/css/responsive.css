@@ -16,6 +16,10 @@
     .hidden-phone {
 	    display: none;
 	}
+	.x-scrool{
+		width:100%;
+		overflow-x: scroll;
+	}
 }
 
 @media (max-width:480px) {

@@ -27,7 +27,7 @@
          <div class="col-md-12">
             <div class="panel tab-border card-topline-yellow">
                <header class="panel-heading panel-heading-gray custom-tab ">
-                  <ul class="nav nav-tabs">
+                  <ul class="nav nav-tabs x-scrool">
 				    
                      <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13){ echo "active";}?>">IP New-Registration</a>
                      </li>
@@ -1000,7 +1000,7 @@
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row table-responsive" >
-                                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                                <table class="table table-striped table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
                                                          <th> Vitals </th>
