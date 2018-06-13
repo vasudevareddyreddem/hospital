@@ -668,7 +668,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z ]+$/,
-					message: 'Country can only consist of alphabes and Space'
+					message: 'Country can only consist of alphabets and Space'
 					}
 				
 				}
