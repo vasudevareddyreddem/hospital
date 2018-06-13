@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
    
     <title>Hospital</title>
     <!-- google font -->
@@ -11,14 +12,15 @@
 	<!-- icons -->
     <link href="<?php echo base_url(); ?>assets/vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<!-- style -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/css/login.css">
+	<!-- favicon -->
     <!-- bootstrap -->
     <link href="<?php echo base_url(); ?>assets/vendor/plugins/tether/css/tether.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url(); ?>assets/vendor/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
 
-	<!-- style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/css/login.css">
-	<!-- favicon -->
+
     
 </head>
 <style>
