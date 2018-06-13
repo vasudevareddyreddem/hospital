@@ -20,9 +20,10 @@
                <header class="panel-heading panel-heading-gray custom-tab ">
                   <ul class="nav nav-tabs x-scrool">
 				    
-                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13){ echo "active";}?>">IP New-Registration</a>
+					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>">OP Registration</a>
                      </li>
-					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13){ echo "active";}?>">OP Registration</a>
+					 
+                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13  && $tab!=0){ echo "active";}?>">IP New-Registration</a>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule/Repeated -Registration</a>
                      </li>
@@ -31,7 +32,7 @@
                </header>
                <div class="panel-body">
                   <div class="tab-content">
-                     <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13){ echo "active";}?>" id="home">
+                     <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13 && $tab!=0){ echo "active";}?>" id="home">
                         <div class="card ">
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
                               <div class="row">
@@ -825,7 +826,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13){ echo "active";}?>" id="aboutop">
+                     <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>" id="aboutop">
                         <div class="card card-topline-red">
                            <div class="card-head">
                               <header>Patients Details</header>

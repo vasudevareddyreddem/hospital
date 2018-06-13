@@ -74,7 +74,7 @@ class Resources extends CI_Controller {
 						}
 					}else{
 						$data['patient_detailes']=array();
-						$data['tab']=1;
+						$data['tab']=0;
 						 $data['pid']='';
 						 $data['bill_id']='';
 					}
