@@ -14,16 +14,7 @@
             </ol>
          </div>
       </div>
-	   <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-				<?php endif; ?>
+	   
       <div class="panel tab-border card-topline-green">
          
          <div class="panel-body">

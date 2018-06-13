@@ -16,16 +16,7 @@
 					<div class="row">
                        <div class="col-md-12">
                             <div class="card card-topline-aqua">
-							 <?php if($this->session->flashdata('success')): ?>
-										<div class="alert_msg1 animated slideInUp bg-succ">
-										<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-										</div>
-									<?php endif; ?>
-									<?php if($this->session->flashdata('error')): ?>
-										<div class="alert_msg1 animated slideInUp bg-warn">
-										<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-										</div>
-									<?php endif; ?>
+							
                                 <div class="card-head">
                                      <header>Chat List</header>
                                    

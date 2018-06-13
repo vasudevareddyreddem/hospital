@@ -2,16 +2,7 @@
  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
- <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
+
 <?php //echo '<pre>';print_r($hospital_details);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
