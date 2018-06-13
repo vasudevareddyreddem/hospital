@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+
  
     <title>Hospital</title>
     <!-- google font -->
@@ -37,6 +39,7 @@
 	<link href="<?php echo base_url(); ?>assets/vendor/plugins/select2/css/select2.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	  <script src="<?php echo base_url(); ?>assets/vendor/plugins/jquery.min.js" ></script>
+	  
  </head>
  <!-- END HEAD -->
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-indigo white-sidebar-color logo-indigo">
