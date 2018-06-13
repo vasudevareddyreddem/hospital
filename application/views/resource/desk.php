@@ -68,7 +68,7 @@
                                           <a href="#tab_6_7" data-toggle="tab"> Socio- economic details </a>
                                        </li>
                                        <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
-                                          <a href="#tab_6_8" data-toggle="tab"> Billing </a>
+                                          <a href="#tab_6_8" data-toggle="tab"> Billing Information </a>
                                        </li>
                                        <li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
                                           <a href="#tab_6_9" data-toggle="tab"> Vitals </a>
@@ -853,7 +853,7 @@
                                           <a href="#tab_6_224" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Vitals </a>
                                        </li>
                                        <li class="nav-item ">
-                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==13){ echo "active";}?>"> Bill Information </a>
+                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==13){ echo "active";}?>"> Billing Information </a>
                                        </li>
 									   <li class="nav-item ">
                                           <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Assign </a>
