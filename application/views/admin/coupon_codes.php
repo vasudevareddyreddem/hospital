@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="card-body col-md-12">
 								<?php if(count($couponcode_list)>0){ ?>
-                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
 												<th>Name</th>
@@ -194,6 +194,12 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
+
 function admindeactive(id){
 	$(".popid").attr("href","<?php echo base_url('admin/coupon_code_status'); ?>"+"/"+id);
 }

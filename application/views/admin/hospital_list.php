@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="card-body ">
 								<?php if(count($hospital_list)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
+								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
 												<th>HIN</th>
@@ -114,7 +114,13 @@
       
     </div>
   </div>
-  
+  <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>
   <script>
   function admindeactive(id){
 	$(".popid").attr("href","<?php echo base_url('hospital/status'); ?>"+"/"+id);

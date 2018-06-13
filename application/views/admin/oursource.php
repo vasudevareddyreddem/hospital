@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="card-body col-md-12">
 								<?php if(count($out_sourcelab_list)>0){ ?>
-                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+                                    <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
 												<th>Name</th>
@@ -173,6 +173,11 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 3, "desc" ]]
+    } );
+} );
 $(document).ready(function() {
     $('#addlab').bootstrapValidator({
         

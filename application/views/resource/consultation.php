@@ -876,6 +876,20 @@
 							</table>
 							  
                         </div>
+						
+						<div>
+						<h3>
+						Prescription File
+						</h3><hr>
+						<?php if(isset($patient_privious_alternate_medicine_list) && count($patient_privious_alternate_medicine_list)>0){ ?>
+						<?php foreach($patient_privious_alternate_medicine_list as $list){  ?>
+						<a href="<?php echo base_url('assets/sheet_prescriptions/'. $list['sheet_prescription_file']); ?>">Download</a><br>
+						
+						<?php } ?>
+						
+						<?php } ?>
+						
+						</div>
                      </div>
                   </div>
                </div>
@@ -956,7 +970,7 @@ function check_qty(){
 	var qty=$('#qty').val();
 	var or_qty = med_name.split(":");
 	if(qty!=''){
-		if(or_qty[1] >qty){
+		if(qty > or_qty[1]){
 			
 			alert('medicine quantity is greater than available quantity');
 			return false;
@@ -985,7 +999,7 @@ function addtestlist(){
 							 $('#testcount').empty();
 							 $('#test_list_count').empty();
 							 $('#testcount').append(data.count);
-							 $('#test_list_count').append(data.count);
+							 $('#test_list_count').val(data.count);
 							 $('#popupclose').click();
 						}
 					}

@@ -1709,6 +1709,27 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public  function patient_list(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+
+					$data['patient_list']=$this->Hospital_model->get_patient_list($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/patient_list',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	

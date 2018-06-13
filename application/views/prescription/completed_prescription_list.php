@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="card-body ">
 								<?php if(count($prescriptions)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
+									<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
 												<th>Patient Id</th>
@@ -61,3 +61,10 @@
                     
                 </div>
             </div>
+<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>

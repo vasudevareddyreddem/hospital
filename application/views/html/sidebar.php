@@ -128,6 +128,14 @@
 	                            </a>
 	                           
 	                        </li> 
+							<li class="nav-item start ">
+									<a href="<?php echo base_url('hospital/patient_list');?>" class="nav-link nav-toggle">
+										<i class="material-icons">person_add</i>
+										<span class="title">Patient List</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li>
 						  <li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>

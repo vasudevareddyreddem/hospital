@@ -21,11 +21,12 @@
                                      <header>Medicine List</header>
                                    
                                 </div>
-                                <div class="card-body table-responsive">
+                                <div class="table-responsive">
 								<?php if(count($medicine_list)>0){ ?>
-                                    <table id="addmedicinelist" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+									<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
+												<th style="display:none"></th>
 												<th>HSN</th>
 												<th>Other Code</th>
 												<th>Medicine Name</th>
@@ -41,6 +42,7 @@
                                         <tbody>
 										<?php foreach($medicine_list as $list){ ?>
                                             <tr>
+                                                <td style="display:none"><input type="text" value="<?php echo htmlentities($list['id']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','hsn');" value="<?php echo htmlentities($list['hsn']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','othercode');" value="<?php echo htmlentities($list['othercode']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_name');" value="<?php echo htmlentities($list['medicine_name']); ?>"></td>
@@ -115,3 +117,22 @@
 				});
 				});
 			</script>
+			<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+		 "columnDefs": [
+			{ "targets": 0, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 1, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 2, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 3, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 4, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 5, "orderDataType": "dom-text", "type": "string" },
+			{ "targets": 6, "orderDataType": "dom-text", "type": "string" }
+          
+        ],
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+
+
+</script>

@@ -66,6 +66,13 @@ class Users_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	
+	public function get_alternate_prescription_details($p_id,$b_id){
+		$this->db->select('sheet_prescription_file')->from('patient_billing');	
+		$this->db->where('patient_billing.b_id', $b_id);
+		$this->db->where('patient_billing.p_id', $p_id);
+        return $this->db->get()->row_array();
+	}
+	
 	
 
 }

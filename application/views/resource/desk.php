@@ -992,7 +992,7 @@
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row table-responsive" >
-                                                <table class="table table-striped table-bordered table-hover  order-column">
+                                                <table  class="table table-striped table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
                                                          <th> Vitals </th>
@@ -1012,25 +1012,33 @@
                                                       </tr>
                                                       <tr>
                                                          <th>Temperature </th>
-                                                         <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
+                                                         <td>
+														 <div class="form-group">
+														 <input type="text" class="form-control " id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals">
+															</div>														
+														</td>
+                                                         <td>
+														 <div class="form-group">
+														 <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range">
+														 </div>
+														 </td>
                                                          <th>Temperature site</th>
-                                                         <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
-                                                         <td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"> </td>
+                                                         <td> <div class="form-group"> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "></div> </td>
+                                                         <td> <div class="form-group"> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"></div> </td>
                                                       </tr>
                                                       <tr>
                                                          <th> Pulse rate</th>
-                                                         <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
+                                                         <td><div class="form-group">  <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </div></td>
+                                                         <td><div class="form-group">  <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"></div> 
                                                          </td>
                                                          <th> Pulse rate site  </th>
                                                          <td>
-                                                            <div class="row">					
+                                                            <div class="row form-group">					
                                                                <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
                                                                <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
                                                             </div>
                                                          </td>
-                                                         <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
+                                                         <td><div class="form-group">  <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </div></td>
                                                       </tr>
                                                    </tbody>
                                                 </table>
@@ -1146,6 +1154,13 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+ 
+ $(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+
 function checkpatient_number(num){
 	var val1=$('#patient_old_card_number').val();
 	var val2=$('#patient_card_number1').val();
@@ -2714,55 +2729,91 @@ function apply_couponcode1(){
    			tep_actuals: {
                     validators: {
    					notEmpty: {
-   						message: 'Actualsis required'
+   						message: 'Actuals is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Actuals can only consist of alphanumeric, space and dot'
    					}
    				}
                },tep_range: {
                     validators: {
    					notEmpty: {
    						message: 'Range is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Range can only consist of alphanumeric, space and dot'
    					}
    				}
                },temp_site_positioning: {
                     validators: {
    					notEmpty: {
    						message: 'Positioning is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Positioning can only consist of alphanumeric, space and dot'
    					}
    				}
                },notes: {
                     validators: {
    					notEmpty: {
    						message: 'Notes is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Notes can only consist of alphanumeric, space and dot'
    					}
    				}
                },pulse_actuals: {
                     validators: {
    					notEmpty: {
    						message: 'Actuals is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Actuals can only consist of alphanumeric, space and dot'
    					}
    				}
                },pulse_range: {
                     validators: {
    					notEmpty: {
    						message: 'Range is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Range can only consist of alphanumeric, space and dot'
    					}
    				}
                },pulse_rate_rhythm: {
                     validators: {
    					notEmpty: {
    						message: 'Rhythm is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Rhythm can only consist of alphanumeric, space and dot'
    					}
    				}
                },pulse_rate_vol: {
                     validators: {
    					notEmpty: {
    						message: 'Vol is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Vol can only consist of alphanumeric, space and dot'
    					}
    				}
                },notes1: {
                     validators: {
    					notEmpty: {
    						message: 'Notes is required'
+   					},
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Notes can only consist of alphanumeric, space and dot'
    					}
    				}
                }

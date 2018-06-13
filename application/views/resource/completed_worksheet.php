@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="card-body ">
 								<?php if(count($worksheet)>0){ ?>
-                                    <table id="saveStage" class="display" style="width:100%;">
+                                    <table id="example4" class="table table-striped table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
 												<th>PURN</th>
@@ -64,3 +64,10 @@
                     
                 </div>
             </div>
+<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>

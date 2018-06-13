@@ -12,6 +12,14 @@ class Resources_model extends CI_Model
 	public function get_all_patients_database($hos_id){
 		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,patients_list_1.registrationtype,patients_list_1.patient_category,patients_list_1.dob,patients_list_1.nationali_id,patients_list_1.create_at')->from('patients_list_1');		
 		$this->db->where('patients_list_1.hos_id', $hos_id);
+		$this->db->order_by('patients_list_1.pid', "DESC");
+        return $this->db->get()->result_array();	
+	}
+	
+	public  function get_patient_previous_alternate_medicine_details_list($pid){
+		$this->db->select('sheet_prescription_file')->from('patient_billing');		
+		$this->db->where('patient_billing.p_id', $pid);
+		$this->db->where('sheet_prescription_file !=', '');
         return $this->db->get()->result_array();	
 	}
 	public function get_all_patients_lists($hos_id){
@@ -23,6 +31,7 @@ class Resources_model extends CI_Model
 		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.name,patients_list_1.mobile,patients_list_1.age,patients_list_1.hos_id,hospital.reschedule_date,patients_list_1.registrationtype,patients_list_1.patient_category')->from('patients_list_1');		
 		$this->db->join('hospital', 'hospital.hos_id = patients_list_1.hos_id', 'left');
 		$this->db->where('patients_list_1.hos_id', $hos_id);
+		$this->db->order_by('patients_list_1.pid', "DESC");
         $return=$this->db->get()->result_array();	
 		foreach($return as $Lis){
 							$dat=$this->get_lastest_billing_id($Lis['pid']);

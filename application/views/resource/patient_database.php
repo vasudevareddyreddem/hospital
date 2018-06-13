@@ -96,3 +96,12 @@
    
    </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+
+
+</script>

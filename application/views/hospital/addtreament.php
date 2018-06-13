@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="card-body col-md-12 table-responsive">
 								<?php if(count($treatment_list)>0){ ?>
-                                    <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+                                    <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
 												<th>Name</th>
@@ -164,6 +164,11 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 1, "desc" ]]
+    } );
+} );
 function admindeactive(id){
 	$(".popid").attr("href","<?php echo base_url('hospital/treatmentstatus'); ?>"+"/"+id);
 }

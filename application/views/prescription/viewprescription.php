@@ -70,6 +70,10 @@
 											<?php if(isset($prescriptions['information']['medicine_payment_mode']) && $prescriptions['information']['medicine_payment_mode']!=''){ ?>
 											<p>Payment Mode : <?php echo $prescriptions['information']['medicine_payment_mode']; ?>
 											<?php } ?>
+											<?php if(isset($previous_alter_medication_list['sheet_prescription_file']) && $previous_alter_medication_list['sheet_prescription_file']!=''){ ?>
+											<p>Prescription File</p><a href="<?php echo base_url('assets/sheet_prescriptions/'. $previous_alter_medication_list['sheet_prescription_file']); ?>">Download</a><br>
+
+											<?php } ?>
 
                                             </div>
                                         </div>
