@@ -12,15 +12,14 @@
 	<!-- icons -->
     <link href="<?php echo base_url(); ?>assets/vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!-- style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/css/login.css">
-	<!-- favicon -->
     <!-- bootstrap -->
     <link href="<?php echo base_url(); ?>assets/vendor/plugins/tether/css/tether.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url(); ?>assets/vendor/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/vendor/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css" />
 
-
+	<!-- style -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/css/login.css">
+	<!-- favicon -->
     
 </head>
 <style>
