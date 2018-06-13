@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="card-body " style="padding: 0px 24px 24px 24px;">
                                         <div class="table-responsive">
-										<form id="prescription" name="prescription" method="post"  action="<?php echo base_url('Users/billprescription'); ?>">
+										<form id="prescription" name="prescription" method="post" target="_blank"  action="<?php echo base_url('Users/billprescription'); ?>">
                                             <input type="hidden" name="pid" id="pid" value="<?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?>">
                                             <input type="hidden" name="bid" id="bid" value="<?php echo isset($prescriptions['information']['b_id'])?$prescriptions['information']['b_id']:''; ?>">
 											<table class="table custom-table table-hover" style="border-top:none">
@@ -113,7 +113,7 @@
                                                 </tbody>
                                             </table>
 											<div class="pull-right">
-											<div class="pull-left">
+											<div class="pull-left form-group">
 											<select onchange="savepaymentmode(this.value,'<?php echo $prescriptions['information']['b_id']; ?>');" id="paymentmode" name="paymentmode" class="form-control">
 											<option value="">Select Payment </option>
 											<option value="Swipe">Swipe</option>
@@ -122,7 +122,7 @@
 											</select>
 											</div> &nbsp;
 											<a target="_blank" href="<?php echo base_url('Users/viewprescription/'.base64_encode($prescriptions['information']['pid']).'/'.base64_encode($prescriptions['information']['b_id']));?>" class="btn btn-warning">Print Prescription</a>
-											<a target="_blank" href="<?php echo base_url('Users/billprescription/'.base64_encode($prescriptions['information']['pid']).'/'.base64_encode($prescriptions['information']['b_id']));?>" class="btn btn-success">Bill Prescription</a>
+											<button type="submit"  class="btn btn-success">Bill Prescription</button>
 											</div>
 
 											</form>

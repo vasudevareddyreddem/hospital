@@ -948,10 +948,14 @@
 </div>
 <!-- patient_lab_test_list_model-->
 <script>
-
-     $('#investigation_formdate').datepicker({ 
-    startDate: new Date(),
-});
+ $(function() {
+			 
+			    // Bootstrap DateTimePicker v4
+			    $('#investigation_todate').datetimepicker({
+			      //format: 'DD/MM/YYYY'
+				  maxDate: "+1"
+			    });
+			  });
 
 function check_lab_test(){
 	var count=$('#test_list_count').val();
@@ -967,7 +971,7 @@ function check_qty(){
 	var med_name = $('#medicine_name').text();
 	var qty=$('#qty').val();
 	var or_qty = med_name.split(":");
-	if(or_qty[1]  <= qty){
+	if(or_qty[1] >qty){
 		
 		alert('medicine quantity is greater than available quantity');
 		return false;

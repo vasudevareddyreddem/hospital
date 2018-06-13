@@ -253,10 +253,23 @@ class Users extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=4){
+					
+					
+					
+					$post=$this->input->post();
+					
+					//echo '<pre>';print_r($post);exit;
+					//exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					if($this->uri->segment(3)!=''){
 					$patient_id=base64_decode($this->uri->segment(3));
 					$billing_id=base64_decode($this->uri->segment(4));
+					}else{
+						$patient_id=$post['pid'];
+						$billing_id=$post['bid'];
+					}
 					$data['details']= $this->Users_model->get_prescription_details($patient_id,$billing_id);
 					$path = rtrim(FCPATH,"/");
 					$file_name = $patient_id.'_'.$billing_id.'.pdf';                
