@@ -36,7 +36,7 @@
         <div class="">
         </div>
         <div class="form formLogin">
-		 <?php if($this->session->flashdata('success')): ?>
+		<?php if($this->session->flashdata('success')): ?>
 				<div class="alert_msg1 animated slideInUp bg-succ">
 				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="fa fa-check text-success ico_bac" aria-hidden="true"></i>
 				</div>

@@ -91,6 +91,32 @@ class Lab extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function edit()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id'],$admindetails['a_id']);
+					$data['test_type_list']=$this->Lab_model->get_lab_test_type_details();
+					$test_id=base64_decode($this->uri->segment(3));
+					$data['tet_details']=$this->Lab_model->get_test_details($test_id);
+					
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('lab/edit_test',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function addtest()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -124,6 +150,53 @@ class Lab extends CI_Controller {
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Added.");
+							redirect('lab/index/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('lab/index/'.base64_encode(1));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function updatetest()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$details=$this->Lab_model->check_test_details($post['t_id']);
+					
+					if($details['t_name'] !=$post['test_name'] || $details['type'] !=$post['type']){
+							$test_exits=$this->Resources_model->check_test_exits($admindetails['a_id'],$post['test_name'],$post['type']);
+							if(count($test_exits)>0){
+								$this->session->set_flashdata('error',"Test Name already exists. please try another test name.");
+								redirect('lab');
+							}
+					
+					}
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$adding=array(
+						't_name'=>isset($post['test_name'])?$post['test_name']:'',
+						'test_type'=>isset($post['test_type'])?$post['test_type']:'',
+						'type'=>isset($post['type'])?$post['type']:'',
+						'duration'=>isset($post['duration'])?$post['duration']:'',
+						'amuont'=>isset($post['amuont'])?$post['amuont']:'',
+						't_short_form'=>isset($post['short_form'])?$post['short_form']:'',
+						't_description'=>isset($post['description'])?$post['description']:'',
+						't_department'=>isset($post['department'])?$post['department']:'',
+						);
+						//echo '<pre>';print_r($adding);exit;
+						$saveing=$this->Lab_model->update_tabtest_details($post['t_id'],$adding);
+						if(count($saveing)>0){
+							$this->session->set_flashdata('success',"Test successfully Updated.");
 							redirect('lab/index/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

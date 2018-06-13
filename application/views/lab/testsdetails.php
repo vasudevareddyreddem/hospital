@@ -13,16 +13,6 @@
             </ol>
          </div>
       </div>
-	   <?php if($this->session->flashdata('success')): ?>
-				<div class="alert_msg1 animated slideInUp bg-succ">
-				<?php echo $this->session->flashdata('success');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
-			<?php if($this->session->flashdata('error')): ?>
-				<div class="alert_msg1 animated slideInUp bg-warn">
-				<?php echo $this->session->flashdata('error');?> &nbsp; <i class="glyphicon glyphicon-ok text-success ico_bac" aria-hidden="true"></i>
-				</div>
-			<?php endif; ?>
    
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
@@ -122,6 +112,7 @@
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td><a href="<?php echo base_url('lab/teststatus/'.base64_encode($list['t_id']).'/'.base64_encode($list['status'])); ?>">
                                                          <?php if($list['status']==0){ echo "Active";}else{  echo "Deactive";}?>  </a> |
+												<a href="<?php echo base_url('lab/edit/'.base64_encode($list['t_id'])); ?>">Edit</a> |
 												<a href="<?php echo base_url('lab/deletelab/'.base64_encode($list['t_id'])); ?>">Delete</a>
                                                 </td>                                               
                                             </tr>

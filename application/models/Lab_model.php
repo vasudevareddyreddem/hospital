@@ -351,6 +351,21 @@ class Lab_model extends CI_Model
 		$this->db->where('bidding_test.id',$test_id);
 		$this->db->delete('bidding_test');
 	}
+	public function get_test_details($t_id){
+		$this->db->select('*')->from('lab_test_list');
+		$this->db->where('lab_test_list.t_id',$t_id);
+		return $this->db->get()->row_array();
+	}
+	 public function check_test_details($t_id){
+		$this->db->select('*')->from('lab_test_list');
+		$this->db->where('t_id',$t_id);
+		return $this->db->get()->row_array(); 
+	}
+	public function update_tabtest_details($t_id,$data){
+		$this->db->where('t_id',$t_id);
+		return $this->db->update('lab_test_list',$data);
+		
+	}
 	
 	
 
