@@ -288,6 +288,14 @@
 												<span class="arrow "></span>
 											</a>
 										</li>
+										<li class="nav-item start ">
+									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
+										<i class="material-icons">format_color_fill</i>
+										<span class="title">Lab Test details</span>
+										<span class="selected"></span>
+										<span class="arrow "></span>
+									</a>
+								</li>
 										<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
