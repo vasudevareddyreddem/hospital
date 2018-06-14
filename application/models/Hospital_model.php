@@ -230,7 +230,14 @@ class Hospital_model extends CI_Model
 		$this->db->where('patients_list_1.hos_id', $hos_id);
 		$this->db->order_by('patients_list_1.pid', "DESC");
         return $this->db->get()->result_array();	
+	}
+	
+	public  function get_patient_details($p_id){
+		$this->db->select('patient_lab_reports.*,patients_list_1.card_number,patients_list_1.name,')->from('patient_lab_reports');
+		$this->db->join('patients_list_1 ', 'patients_list_1.pid = patient_lab_reports.p_id', 'left');
 		
+		$this->db->where('patient_lab_reports.p_id', $p_id);
+        return $this->db->get()->result_array();
 	}
 	
 	

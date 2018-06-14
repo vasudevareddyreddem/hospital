@@ -3,12 +3,12 @@
                     <div class="page-bar">
 			  <div class="page-title-breadcrumb">
 				 <div class=" pull-left">
-					<div class="page-title">Patient List</div>
+					<div class="page-title">Patient details</div>
 				 </div>
 				 <ol class="breadcrumb page-breadcrumb pull-right">
 					<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
 					</li>
-					<li><a class="parent-item active" >Patient List</a>&nbsp;</i>
+					<li><a class="parent-item active" >Patient details</a>&nbsp;</i>
 					</li>
 				 </ol>
 			  </div>
@@ -18,31 +18,31 @@
                             <div class="card card-topline-aqua">
 							
                                 <div class="card-head">
-                                     <header>Patient  List</header>
+                                     <header>Patient details</header>
                                    
                                 </div>
                                 <div class="card-body ">
-								<?php if(count($patient_list)>0){ ?>
+								<?php if(count($patient_details)>0){ ?>
 								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
 												<th>Patient Id</th>
 												<th>Patient Card Number</th>
 												<th>Name</th>
-                                                <th>Registration type</th>
+                                                <th>Problem</th>
+                                                <th>Symptom</th>
                                                 <th>Date</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($patient_list as $list){ ?>
+										<?php foreach($patient_details as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['pid']); ?></td>
+                                                <td><?php echo htmlentities($list['p_id']); ?></td>
                                                 <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><?php echo htmlentities($list['name']); ?></td>
-                                                <td><?php echo htmlentities($list['registrationtype']); ?></td>
+                                                <td><?php echo htmlentities($list['problem']); ?></td>
+                                                <td><?php echo htmlentities($list['symptoms']); ?></td>
                                                 <td><?php echo date('M j Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
-                                                <td><a  href="<?php echo base_url('hospital/patient_details/'.base64_encode($list['pid'])); ?>">view</a></td>
                                                
                                             </tr>
 										<?php } ?>
