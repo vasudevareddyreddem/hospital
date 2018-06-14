@@ -354,6 +354,7 @@ class Lab extends CI_Controller {
 					
 					$data['patient_id']=base64_decode($this->uri->segment(3));
 					$data['billing_id']=base64_decode($this->uri->segment(4));
+					$data['tab']=base64_decode($this->uri->segment(5));
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$previousdata=$this->Lab_model->get_previous_search_data($admindetails['a_id'],$this->input->ip_address());
@@ -960,11 +961,11 @@ class Lab extends CI_Controller {
 							}
 					}
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully Send.");
-							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']));
+							$this->session->set_flashdata('success',"Bid successfully Sent.");
+							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']).'/'.base64_encode(3));
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']));
+							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']).'/'.base64_encode(3));
 					}
 					
 					
@@ -1105,10 +1106,10 @@ class Lab extends CI_Controller {
 							}
 						
 							$this->session->set_flashdata('success',"Bid successfully approved.");
-							redirect('lab/outsource/'.$p_id.'/'.$billing_id);
+							redirect('lab/outsource/'.$p_id.'/'.$billing_id.'/'.base64_encode(3));
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('lab/outsource/'.$p_id.'/'.$billing_id);
+							redirect('lab/outsource/'.$p_id.'/'.$billing_id.'/'.base64_encode(3));
 						}
 					
 				}else{
