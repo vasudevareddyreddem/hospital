@@ -35,7 +35,7 @@
 								<input class="form-control" id="treatment_name" name="treatment_name" value="" type="text" placeholder="Name">
 								</div>
 								<div class="col-md-2">
-								<label style="visibility: hidden;">0</label>
+								<label style="visibility: hidden;">test	</label>
 								<button type="submit" class="btn btn-sm btn-success " type="button">Add Treatment</button>
 								</div>	
 							</div>
