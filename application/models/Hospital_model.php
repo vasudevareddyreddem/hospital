@@ -232,11 +232,18 @@ class Hospital_model extends CI_Model
         return $this->db->get()->result_array();	
 	}
 	
-	public  function get_patient_details($p_id){
+	public  function get_patient_lab_details($p_id){
 		$this->db->select('patient_lab_reports.*,patients_list_1.card_number,patients_list_1.name,')->from('patient_lab_reports');
 		$this->db->join('patients_list_1 ', 'patients_list_1.pid = patient_lab_reports.p_id', 'left');
 		
 		$this->db->where('patient_lab_reports.p_id', $p_id);
+        return $this->db->get()->result_array();
+	}
+	public  function get_patient_medicine_details($p_id){
+		$this->db->select('patient_medicine_list.*,patients_list_1.card_number,patients_list_1.name,')->from('patient_medicine_list');
+		$this->db->join('patients_list_1 ', 'patients_list_1.pid = patient_medicine_list.p_id', 'left');
+		
+		$this->db->where('patient_medicine_list.p_id', $p_id);
         return $this->db->get()->result_array();
 	}
 	
