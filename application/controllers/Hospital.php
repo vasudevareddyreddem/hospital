@@ -1730,6 +1730,48 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public  function patient_labdetails(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$admindetails=$this->session->userdata('userdetails');
+					$p_id=base64_decode($this->uri->segment(3));
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['patient_details']=$this->Hospital_model->get_patient_lab_details($p_id);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/patient_labdetails',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public  function patient_medicinedetails(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$admindetails=$this->session->userdata('userdetails');
+					$p_id=base64_decode($this->uri->segment(3));
+					$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+					$data['patient_details']=$this->Hospital_model->get_patient_medicine_details($p_id);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/patient_medicinedetails',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	

@@ -70,7 +70,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/couponcodes');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">list</i>
-	                                <span class="title">Previlege card List</span>
+	                                <span class="title">Privilege card List</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

@@ -106,6 +106,11 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 1, "desc" ]]
+    } );
+} );
 function assign_doctore(){
 	var pid=$('#patientid').val();
 	var bid=$('#billing_id').val();

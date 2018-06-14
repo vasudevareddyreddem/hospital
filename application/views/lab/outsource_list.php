@@ -60,18 +60,18 @@
                             <div class="panel tab-border card-topline-green">
                                 <header class="panel-heading panel-heading-gray custom-tab ">
                                     <ul class="nav nav-tabs">
-                                        <li class="nav-item "><a href="#home" data-toggle="tab" class="active" aria-expanded="false">Select One</a>
+                                        <li class="nav-item "><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab=='' || $tab==1){ echo "active"; } ?>" aria-expanded="false">Select One</a>
                                         </li>
                                         <li class="nav-item"><a href="#about" data-toggle="tab" class="" aria-expanded="false">Bidding</a>
                                         </li>
-										<li class="nav-item"><a href="#bidding_accept" data-toggle="tab" class="" aria-expanded="false">Bidding Accept</a>
+										<li class="nav-item"><a href="#bidding_accept" data-toggle="tab" class="<?php if(isset($tab) && $tab==3){ echo "active"; } ?>" aria-expanded="false">Bidding Accept</a>
                                         </li>
                                         
                                     </ul>
                                 </header>
                                 <div class="panel-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="home" aria-expanded="false">
+                                        <div class="tab-pane <?php if(isset($tab) && $tab=='' || $tab==1){ echo "active"; } ?>" id="home" aria-expanded="false">
 										<div class="row" id="result_search">
 										<div class="col-md-4  py-3">
 											
@@ -170,7 +170,7 @@
 												</div>
 												<table id="myTable">
 													  <tr class="header">
-														<th style="width:100%;">Name of the test</th>
+														<th style="width:100%;"><input type="checkbox" name="checkall" class="select-checkall" onchange="checkAll(this)" value="" value="">&nbsp;Name of the test</th>
 														
 													  </tr>
 													 <?php if(isset($test_list) && count($test_list)>0){
@@ -180,7 +180,7 @@
 														<tr>
 														<td>
 													
-														<input type="checkbox" id="test_id" name="test_id[]" value="<?php echo $li['t_id'].'_'.$li['id']; ?>"> &nbsp; 
+														<input type="checkbox" class="checkcheckbox" id="test_id" name="test_id[]" value="<?php echo $li['t_id'].'_'.$li['id']; ?>"> &nbsp; 
 														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name']:''; ?></b>
 														</td>
 													   </tr>
@@ -196,7 +196,7 @@
 												</div>
                                         </div>
                                         </div>
-										<div class="tab-pane " id="bidding_accept" aria-expanded="false">
+										<div class="tab-pane <?php if(isset($tab) && $tab==3){ echo "active"; } ?>" id="bidding_accept" aria-expanded="false">
 										<?php if(isset($bidding_test_list) && count($bidding_test_list)>0){ ?>
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>
@@ -248,6 +248,23 @@
 </div>
 <script>
 
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByClassName('checkcheckbox');
+     if (ele.checked) {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             console.log(i)
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     }
+ }	 
 function validations(){
 	var check=document.getElementById('test_id').checked;
 	if(check==false){
