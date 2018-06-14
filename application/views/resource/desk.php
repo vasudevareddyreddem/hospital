@@ -622,12 +622,12 @@
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Previlege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Privilege card ?</a>
 																 </div>
 																 <div id="demo" class="collapse in">
 																	<div class="form-group col-md-12">
-																		<label for="mobile">Previlege card</label>
-																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Previlege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<label for="mobile">Privilege card</label>
+																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg" style="color:green;"></span>
 																	<span id="errormsg" style="color:red;"></span>
@@ -1083,12 +1083,12 @@
                                                                </div>
 															   
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Previlege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Privilege card ?</a>
 																 </div>
 																 <div id="demo1" class="collapse in">
 																	<div class="form-group col-md-12">
-																		<label for="mobile">Previlege card</label>
-																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Previlege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<label for="mobile">Privilege card</label>
+																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg1" style="color:green;"></span>
 																	<span id="errormsg1" style="color:red;"></span>
@@ -1214,16 +1214,16 @@ function apply_couponcode(){
    					success: function (data) {
 						$('#sucessmsg').show();
 						if(data.msg==1){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Previlege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount').val(data.amt);
-							document.getElementById("successmsg").innerHTML="Previlege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Previlege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Previlege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
@@ -1251,16 +1251,16 @@ function apply_couponcode1(){
    					success: function (data) {
 						$('#sucessmsg').show();
 						if(data.msg==1){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Previlege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount1').val(data.amt);
-							document.getElementById("successmsg1").innerHTML="Previlege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg1").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Previlege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Previlege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
