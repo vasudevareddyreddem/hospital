@@ -101,7 +101,7 @@
 												</div>
 												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/resourcechat'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
+														<div class="input-group input-chat-des row">
 															
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required> &nbsp;
 															<input  type="file" name="image" id="image" class="form-control col-md-3" /> &nbsp;
@@ -111,7 +111,7 @@
 															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>
 															<?php } ?>
 															</select>
-															<span class="input-group-btn">
+															<span class="input-group-btn col-md-">
 																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
