@@ -72,15 +72,20 @@
 												</div>
 												<form id="teamchat" name="teamchat" action="<?php echo base_url('chat/softwareteam'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
-															
+														<div class="row input-chat-des">
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="hidden" name="adminchat" id="adminchat" value="1">
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															</div>
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
 															<span class="input-group-btn">
 																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
+															</div>
 														
 														</div>
 													</div>
