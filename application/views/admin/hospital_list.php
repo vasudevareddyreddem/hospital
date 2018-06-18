@@ -20,7 +20,7 @@
                                      <header>Hospitals</header>
                                    
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body  table-responsive">
 								<?php if(count($hospital_list)>0){ ?>
 								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
