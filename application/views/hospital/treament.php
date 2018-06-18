@@ -70,7 +70,7 @@
                   </div>
                </div>
                <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
-                  <div class="container">
+                  <div class="container table-responsive">
 					<?php if(count($hospital_treatment_list)>0){ ?>
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>

@@ -764,7 +764,7 @@
                                  <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
                               </div>
                            </div>
-                           <div class="card-body ">
+                           <div class="card-body table-responsive ">
                               <?php if(isset($patients_list) && count($patients_list)>0){ ?>
                               <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                  <thead>
