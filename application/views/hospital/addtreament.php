@@ -31,8 +31,8 @@
 					  <form action="<?php echo base_url('hospital/treatmentpost'); ?>" method="post" id="addtreatment" name="addtreatment" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6">
-									<label> Name</label>
-								<input class="form-control" id="treatment_name" name="treatment_name" value="" type="text" placeholder="Name">
+									<label> Department</label>
+								<input class="form-control" id="treatment_name" name="treatment_name" value="" type="text" placeholder="Department">
 								</div>
 								<div class="col-md-2">
 								<label style="visibility: hidden;">test	</label>
@@ -52,7 +52,7 @@
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Name</th>
+												<th>Department</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>

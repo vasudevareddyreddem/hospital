@@ -119,6 +119,11 @@
                                                       <option value="Other" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
                                                    </select> 
 												   </div>
+												   
+												   <div class="form-group col-md-6">
+                                                   <label for="mobile">Referred by?</label>
+                                                   <input type="text" class="form-control" id="referred"  name="referred"  value="<?php echo isset($patient_detailes['referred'])?$patient_detailes['referred']:''; ?>">
+                                                </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Mobile Number</label>
                                                    <input type="text" class="form-control" id="mobile"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
@@ -217,18 +222,29 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/demographic'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
-                                                <div class="form-group col-md-6">
+<div class="form-group col-md-6">
+                                                   <label for="Name"> Guardian name</label>
+                                                   <input type="text" class="form-control" id="mothername"  name="mothername"  value="<?php echo isset($patient_detailes['mothername'])?$patient_detailes['mothername']:''; ?>">
+                                                </div>
+												
+                                                
+                                                
+							
+												<div class="form-group col-md-6">
                                                    <label for="Name">Religion</label>
                                                    <input type="text" class="form-control" id="religion"  name="religion"  value="<?php echo isset($patient_detailes['religion'])?$patient_detailes['religion']:''; ?>">
                                                 </div>
-                                                <div class="form-group col-md-6">
+												
+												<div class="form-group col-md-6">
                                                    <label for="Name">Caste</label>
                                                    <input type="text" class="form-control" id="caste"  name="caste"  value="<?php echo isset($patient_detailes['caste'])?$patient_detailes['caste']:''; ?>">
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Mothers maiden name</label>
-                                                   <input type="text" class="form-control" id="mothername"  name="mothername"  value="<?php echo isset($patient_detailes['mothername'])?$patient_detailes['mothername']:''; ?>">
-                                                </div>
+												
+												
+												
+												
+												
+												
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Language</label>
                                                    <select id="language" name="language" class="form-control" >
@@ -238,24 +254,8 @@
                                                       <option value="Hindi"<?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
                                                    </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Primary language</label>
-                                                   <select id="primarylanguage" name="primarylanguage" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Telugu" <?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-                                                      <option value="English" <?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='English'){ echo "Selected"; } ?>>English</option>
-                                                      <option value="Hindi"<?php if(isset($patient_detailes['primarylanguage']) &&  $patient_detailes['primarylanguage']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
-                                                   </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Preferred language</label>
-                                                   <select id="preferred_language" name="preferred_language" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Telugu" <?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-                                                      <option value="English" <?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='English'){ echo "Selected"; } ?>>English</option>
-                                                      <option value="Hindi"<?php if(isset($patient_detailes['preferred_language']) &&  $patient_detailes['preferred_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
-                                                   </select>
-                                                </div>
+                                               
+                                                
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Occupation</label>
                                                    <input type="text" class="form-control" id="occupation"  name="occupation"  value="<?php echo isset($patient_detailes['occupation'])?$patient_detailes['occupation']:''; ?>">
@@ -264,16 +264,10 @@
                                                    <label for="Name">Education</label>
                                                    <input type="text" class="form-control" id="education"  name="education"  value="<?php echo isset($patient_detailes['education'])?$patient_detailes['education']:''; ?>">
                                                 </div>
+                                                
+                                                
                                                 <div class="form-group col-md-6">
-                                                   <label for="Name">Birth place</label>
-                                                   <input type="text" class="form-control" id="birth_place"  name="birth_place"  value="<?php echo isset($patient_detailes['birth_place'])?$patient_detailes['birth_place']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Work phone</label>
-                                                   <input type="text" class="form-control" id="work_phone"  name="work_phone"  value="<?php echo isset($patient_detailes['work_phone'])?$patient_detailes['work_phone']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Home phone</label>
+                                                   <label for="Name">Mobile Number</label>
                                                    <input type="text" class="form-control" id="home_phone"  name="home_phone"  value="<?php echo isset($patient_detailes['home_phone'])?$patient_detailes['home_phone']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -296,22 +290,21 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/next'); ?> " method="post"  id="next" name="next" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
+											 <div class="form-group col-md-6">
+                                                   <label for="Name">Name of Kin</label>
+                                                   <input type="text" class="form-control" id="first_name"  name="first_name"  value="<?php echo isset($patient_detailes['first_name'])?$patient_detailes['first_name']:''; ?>">
+                                                </div>
+                                                
+											 
+											 
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Relation</label>
                                                    <input type="text" class="form-control" id="relation"  name="relation"  value="<?php echo isset($patient_detailes['relation'])?$patient_detailes['relation']:''; ?>">
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">First name</label>
-                                                   <input type="text" class="form-control" id="first_name"  name="first_name"  value="<?php echo isset($patient_detailes['first_name'])?$patient_detailes['first_name']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Middle name</label>
-                                                   <input type="text" class="form-control" id="middel_name"  name="middel_name"  value="<?php echo isset($patient_detailes['middel_name'])?$patient_detailes['middel_name']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Last name</label>
-                                                   <input type="text" class="form-control" id="last_name"  name="last_name"  value="<?php echo isset($patient_detailes['last_name'])?$patient_detailes['last_name']:''; ?>">
-                                                </div>
+												
+												
+												
+                                                
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Address1</label>
                                                    <textarea type="textarea" id="next_address1" name="next_address1" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['next_address1'])?$patient_detailes['next_address1']:''; ?></textarea>
@@ -352,7 +345,7 @@
                                              <button class="btn btn-praimry " type="submit">Next</button>
                                           </form>
                                        </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
+                                      <div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/referral'); ?> " method="post"  id="referral">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
@@ -414,10 +407,7 @@
                                                       <option value="Hindi"<?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
                                                    </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Living dependency</label>
-                                                   <input type="text" class="form-control" id="living"  name="living"  value="<?php echo isset($patient_detailes['living'])?$patient_detailes['living']:''; ?>">
-                                                </div>
+                                              
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Address1</label>
                                                    <textarea type="textarea" id="g_address1" name="g_address1" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['g_address1'])?$patient_detailes['g_address1']:''; ?></textarea>
@@ -896,8 +886,8 @@
                                                    </select>
                                                 </div>
 												<div class="form-group col-md-6">
-                                                   <label for="Name">Problem</label>
-                                                   <input type="text" class="form-control" id="problem"  name="problem" placeholder="Enter Problem" value="<?php echo isset($patient_detailes['problem'])?$patient_detailes['problem']:''; ?>">
+                                                   <label for="Name">Department</label>
+                                                   <input type="text" class="form-control" id="problem"  name="problem" placeholder="Enter Department" value="<?php echo isset($patient_detailes['problem'])?$patient_detailes['problem']:''; ?>">
                                                 </div>
 												 <div class="form-group col-md-6">
                                                    <label for="Name">Gender</label>

@@ -187,14 +187,7 @@
                               <div class="col-md-12 ">
                                  <div class="container">
                                     <div class="row">
-                                       <div class="col-md-6">
-                                          <label>Type of Medicine?</label>									
-                                          <select class="form-control" id="type_of_medicine" name="type_of_medicine">
-                                             <option value="">Select </option>
-                                             <option value="Generic">Generic </option>
-                                             <option value="Brand">Brand</option>
-                                          </select>
-                                       </div>
+                                      
                                        <div class="col-md-6">
                                           <label>Search for Medicine</label>									
                                           <select class="form-control  select2" id="medicine_name" name="medicine_name">
@@ -214,29 +207,7 @@
 													<option value="No" >No</option>
 												</select>
 											</div>
-                                             <div class="col-md-6">
-                                                <label> Units</label>
-                                                <select class="form-control" name="units" id="units">
-                                                   <option value="" >Select Units</option>
-                                                   <option value="no" >no</option>
-                                                   <option value="tablet" >tablet</option>
-                                                   <option value="mg" >mg</option>
-                                                   <option value="ml" >ml</option>
-                                                   <option value="ounce" >ounce</option>
-                                                   <option value="bottle" >bottle</option>
-                                                   <option value="box" >box</option>
-                                                   <option value="tube" >tube</option>
-                                                   <option value="gram" >gram</option>
-                                                   <option value="can" >can</option>
-                                                   <option value="pack" >pack</option>
-                                                   <option value="pound" >pound</option>
-                                                   <option value="device" >device</option>
-                                                   <option value="vial" >vial</option>
-                                                   <option value="suppository" >suppository</option>
-                                                   <option value="es" >es</option>
-                                                   <option value="patch" >patch</option>
-                                                </select>
-                                             </div>
+                                             
                                           </div>
                                        </div>
                                        <div class="col-md-6">
@@ -256,22 +227,36 @@
                                                 <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
                                                    <option value="" >Select</option>
+                                                   <option value="1 hours">1 hours</option>
+                                                   <option value="2 hours">2 hours</option>
+                                                   <option value="3 hours">3 hours</option>
                                                    <option value="4 hours">4 hours</option>
+                                                   <option value="5 hours">5 hours</option>
                                                    <option value="6 hours">6 hours</option>
+                                                   <option value="7 hours">7 hours</option>
+                                                   <option value="8 hours">8 hours</option>
+                                                   <option value="9 hours">9 hours</option>
+                                                   <option value="10 hours">10 hours</option>
+                                                   <option value="11 hours">11 hours</option>
                                                    <option value="12 hours">12 hours</option>
+                                                   <option value="13 hours">13 hours</option>
+                                                   <option value="14 hours">14 hours</option>
+                                                   <option value="15 hours">15 hours</option>
+                                                   <option value="16 hours">16 hours</option>
+                                                   <option value="17 hours">17 hours</option>
+                                                   <option value="18 hours">18 hours</option>
+                                                   <option value="19 hours">19 hours</option>
+                                                   <option value="20 hours">20 hours</option>
+                                                   <option value="21 hours">21 hours</option>
+                                                   <option value="22 hours">22 hours</option>
+                                                   <option value="23 hours">23 hours</option>
+                                                   <option value="24 hours">24 hours</option>
                                                    
                                                 </select>
                                              </div>
                                           </div>
                                        </div>
-                                         <div class="col-md-6">
-                                          <label>Condition</label>									
-                                          <select class="form-control" id="condition" name="condition">
-                                             <option value="" >Select  </option>
-                                             <option value="Chronic" >Chronic  </option>
-                                             <option value="PRN" >PRN</option>
-                                          </select>
-                                       </div>
+                                         
                                        <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>

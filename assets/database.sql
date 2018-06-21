@@ -2,7 +2,8 @@
 SQLyog Community v11.52 (64 bit)
 MySQL - 5.6.39-cll-lve : Database - e_healthinfra
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,9 +13,9 @@ MySQL - 5.6.39-cll-lve : Database - e_healthinfra
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`e_healthinfra` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`hospital` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `e_healthinfra`;
+USE `hospital`;
 
 /*Table structure for table `admin` */
 

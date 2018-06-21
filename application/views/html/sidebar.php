@@ -155,7 +155,7 @@
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Assign treatment to doctor </span>
+	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Assign treatment to Consultant </span>
 	                                    </a>
 	                                </li>
 									<!--<li class="nav-item ">
