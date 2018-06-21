@@ -4,21 +4,21 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Treatments List</div>
+               <div class="page-title">Department List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Treatments List</li>
+               <li class="active">Department List</li>
             </ol>
          </div>
       </div>
       <div class="panel tab-border card-topline-green">
          <header class="panel-heading panel-heading-gray custom-tab ">
             <ul class="nav nav-tabs">
-               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"> Add treatment </a>
+               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"> Add Department </a>
                </li>
-               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Treatments wise consultant Names</a>
+               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Department wise consultant Names</a>
                </li>
             </ul>
          </header>
@@ -29,7 +29,7 @@
                      <div class="col-md-12 ">
                         <div class="container">
                            <div class="control-group" id="fields">
-                              <label class="control-label" for="field1"><strong>Treatment Details</strong></label>
+                              <label class="control-label" for="field1"><strong>Department Details</strong></label>
                               <div class="controls">
                                  <form action="<?php echo base_url('hospital/treatmenaddtpost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
@@ -60,7 +60,7 @@
                                  <br>
 								 									
                               </div>
-							  <button type="submit" class="btn btn-sm btn-success">Add Lab Treatment </button>
+							  <button type="submit" class="btn btn-sm btn-success">Add consultant</button>
 
 								 </form>
                            </div>
