@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-md-2">
 			  <div class="form-group">
-					<label >Other code</label>
+					<label >MFR</label>
 			  </div>
 			</div>
 			<div class="col-md-2">
@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-md-2">
 			  <div class="form-group">
-					<label >Amount</label>
+					<label >Rate</label>
 			  </div>
 			</div>
 			<div class="col-md-1">
@@ -70,7 +70,7 @@
 			
 			<div class="col-md-1">
 			  <div class="form-group">
-					<label >Total amount</label>
+					<label >MRP</label>
 			  </div>
 			</div>
 			
