@@ -222,7 +222,7 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/demographic'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
-<div class="form-group col-md-6">
+                                               <div class="form-group col-md-6">
                                                    <label for="Name"> Guardian name</label>
                                                    <input type="text" class="form-control" id="mothername"  name="mothername"  value="<?php echo isset($patient_detailes['mothername'])?$patient_detailes['mothername']:''; ?>">
                                                 </div>
@@ -2280,6 +2280,15 @@ function apply_couponcode1(){
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'Name can only consist of alphanumeric, space and dot'
+   					}
+   				}
+               }, 
+			   referred: {
+                    validators: {
+   					
+   					regexp: {
+   					regexp: /^[a-zA-Z0-9. ]+$/,
+   					message: 'Referral can only consist of alphanumeric, space and dot'
    					}
    				}
                },
