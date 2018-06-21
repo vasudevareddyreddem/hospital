@@ -101,20 +101,28 @@
 												</div>
 												<form id="resourcechat" name="resourcechat" action="<?php echo base_url('chat/resourcechat'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
+														<div class="row input-chat-des ">
 															
-															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required> &nbsp;
-															<input  type="file" name="image" id="image" class="form-control col-md-3" /> &nbsp;
-															<select class="form-control col-md-3 " name="resource_name" id="resource_name" style="height:44px;">
+															<div class="col-md-3" style="margin-top:5px;">
+																<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
+															<input  type="file" name="image" id="image" class="form-control " /> 
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
+															<select class="form-control  " name="resource_name" id="resource_name" style="height:44px;">
 															<option value="">Select</option>
 															<?php foreach($resources_list as $list){ ?>
 															<option value="<?php echo $list['a_id']; ?>"><?php echo $list['resource_name']; ?></option>
 															<?php } ?>
 															</select>
-															<span class="input-group-btn">
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
+															<span class="input-group-btn ">
 																<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
+															</div>
 														
 														</div>
 													</div>
@@ -197,14 +205,19 @@
 												</div>
 												<form action="<?php echo base_url('chat/hospitaladmin'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
-															
+														<div class="row input-chat-des">
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															</div>
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
 															<span class="input-group-btn">
 																<button class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
+															</div>
 														
 														</div>
 													</div>
@@ -281,14 +294,19 @@
 												</div>
 												<form action="<?php echo base_url('chat/softwareteam'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
-														<div class="input-group input-chat-des">
-															
+														<div class="row input-chat-des">
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
+															</div>
+															<div class="col-md-4" style="margin-top:5px;">
 															<input  type="file" name="image" id="image" class="form-control input-sm" />
+															</div>
+															<div class="col-md-3" style="margin-top:5px;">
 															<span class="input-group-btn">
 																<button class="btn btn-warning btn-sm" id="btn-chat">
 																	Send</button>
 															</span>
+															</div>
 														
 														</div>
 													</div>

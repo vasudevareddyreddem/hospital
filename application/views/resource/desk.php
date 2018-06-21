@@ -502,7 +502,7 @@
                                           <div class="col-md-12">
                                              <div class="panel tab-border card-topline-green">
                                                 <header class="panel-heading panel-heading-gray custom-tab ">
-                                                   <ul class="nav nav-tabs">
+                                                   <ul class="nav nav-tabs x-scrool">
                                                       <li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==''){ echo "active";}?>" href="#subtab1" data-toggle="tab" >Visit info</a>
                                                       </li>
                                                       <li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==2){ echo "active";}?>" href="#subtab2" data-toggle="tab">Order</a>
@@ -764,7 +764,7 @@
                                  <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
                               </div>
                            </div>
-                           <div class="card-body ">
+                           <div class="card-body table-responsive ">
                               <?php if(isset($patients_list) && count($patients_list)>0){ ?>
                               <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                  <thead>

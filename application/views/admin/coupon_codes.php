@@ -61,7 +61,7 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" id="about">
                      <div class="container">
                         <div class="row">
-                            <div class="card-body col-md-12">
+                            <div class="card-body col-md-12 table-responsive">
 								<?php if(count($couponcode_list)>0){ ?>
 								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>

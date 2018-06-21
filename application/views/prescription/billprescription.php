@@ -108,6 +108,7 @@ table, th, td {
       </div>
       
     </header>
+	<div class="table-responsive">
 	<table style="width:100%">
 	  <tr style="background:#ddd;line-height:25px">
 		<th colspan="4">Patient info</th>
@@ -178,6 +179,7 @@ table, th, td {
 		</tr>
 	  
 	</table>
+	</div>
    
   </body>
 </html>

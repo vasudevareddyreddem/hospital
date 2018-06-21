@@ -23,7 +23,7 @@
 					
                                             <div class="card card-topline-red">
 	
-	<div class="card-body ">
+	<div class="card-body table-responsive">
 	<?php if(isset($patients_list) && count($patients_list)>0){ ?>
 		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 			<thead>

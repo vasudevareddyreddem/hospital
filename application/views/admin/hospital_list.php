@@ -20,7 +20,7 @@
                                      <header>Hospitals</header>
                                    
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body  table-responsive">
 								<?php if(count($hospital_list)>0){ ?>
 								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
@@ -102,11 +102,13 @@
 				<div id="content1" class="col-xs-12 col-xl-12 form-group">
 				Are you sure ? 
 				</div>
-				<div class="col-xs-6 col-md-6">
-				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
 				</div>
-				<div class="col-xs-6 col-md-6">
-                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				<div class="row">
+				<div class="col-md-6 col-sm-6  col-sm-6 ">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn pull-left">Cancel</button>
+				</div>
+				<div class="col-md-6 col-sm-6  col-sm-6 ">
+                <a href="?id=value" class="btn  blueBtn popid pull-right" style="text-decoration:none;"> <span aria-hidden="true">Ok</span></a>
 				</div>
 			 </div>
 		  </div>

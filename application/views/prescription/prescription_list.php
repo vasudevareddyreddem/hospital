@@ -21,7 +21,7 @@
                                      <header>Prescription  List</header>
                                    
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body table-responsive">
 								<?php if(count($prescriptions)>0){ ?>
 								<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>

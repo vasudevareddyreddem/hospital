@@ -25,7 +25,7 @@
 	
 	<div class="card-body table-responsive ">
 	<?php if(isset($labtest_list) && count($labtest_list)>0){ ?>
-		<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
+		<table class="table table-striped table-bordered table-hover" id="example4">
 			<thead>
 				<tr>
 					<th> Patient Card Number </th>

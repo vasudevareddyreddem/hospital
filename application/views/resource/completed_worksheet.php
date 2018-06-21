@@ -21,7 +21,7 @@
                                      <header>Completed worksheet</header>
                                
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body table-responsive">
 								<?php if(count($worksheet)>0){ ?>
                                     <table id="example4" class="table table-striped table-bordered" style="width:100%;">
                                         <thead>
