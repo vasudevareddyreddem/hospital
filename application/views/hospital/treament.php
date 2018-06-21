@@ -16,7 +16,7 @@
       <div class="panel tab-border card-topline-green">
          <header class="panel-heading panel-heading-gray custom-tab ">
             <ul class="nav nav-tabs">
-               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Treatments </a>
+               <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"> Add treatment </a>
                </li>
                <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Treatments wise doctor Names</a>
                </li>

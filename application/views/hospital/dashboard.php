@@ -208,7 +208,7 @@ $dat = explode("-", $cri['create_at']);
 		{
     		type: "spline",
 			showInLegend: true,
-			name: "Reschudle Patients",
+			name: "Reschedule Patients",
 			lineDashType: "dash",
 			color: "#FF1493",			
     		dataPoints: <?php echo json_encode($reschudle_patients, JSON_NUMERIC_CHECK); ?>
@@ -286,7 +286,7 @@ $dat = explode("-", $cri['create_at']);
 						          <div class="info-box bg-purple">
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
-						              <span class="info-box-text">New Reschedule patients</span>
+						              <span class="info-box-text">New Reschedule Patients</span>
 						              <span class="info-box-number"><?php echo isset($reschedule_last_seven)?$reschedule_last_seven:''; ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo isset($reschedule_last_seven)?$reschedule_last_seven:''; ?>%"></div>

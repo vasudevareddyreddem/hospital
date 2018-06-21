@@ -62,7 +62,7 @@ class Admin extends CI_Controller {
 		if(!$this->session->userdata('userdetails'))
 		{
 			$post=$this->input->post();
-			echo '<pre>';print_r($post);
+			//echo '<pre>';print_r($post);
 			$login_deta=array('email'=>$post['email_id'],'password'=>md5($post['password']));
 			$check_login=$this->Admin_model->login_details($login_deta);
 				$this->load->helper('cookie');

@@ -716,6 +716,7 @@
                                     <tr>
                                        <th>Type of Medicine?</th>
                                        <th>Search for Medicine</th>
+                                       <th>Qty</th>
                                        <th>Dosage </th>
                                        <th>Condition</th>
                                        <th>Action</th>
@@ -726,6 +727,7 @@
                                     <tr id="medicine_id_<?php echo $list['m_id']; ?>">
                                        <td><?php echo $list['type_of_medicine']; ?></td>
                                        <td><?php echo $list['medicine_name']; ?></td>
+                                       <td><?php echo $list['qty']; ?></td>
                                        <td><?php echo $list['dosage']; ?> </td>
                                        <td><?php echo $list['condition']; ?></td>
                                        <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" >Remove</span></td>
@@ -852,6 +854,7 @@
 									<tr>
 										<th> Type of Medicine? </th>
 										<th> Search for Medicine </th>
+										<th> Qty </th>
 										<th> Dosage  </th>
 										<th> Condition </th>
 										<th> Modified Prescription Reason</th>
@@ -864,6 +867,7 @@
 										
 										<td> <?php echo $list['type_of_medicine']; ?> </td>
 										<td><?php echo $list['medicine_name']; ?></td>
+										<td><?php echo $list['qty']; ?></td>
 										<td><?php echo $list['dosage']; ?></td>
 										<td><?php echo $list['condition']; ?> </td>
 										<td><?php echo $list['edit_reason']; ?></td>

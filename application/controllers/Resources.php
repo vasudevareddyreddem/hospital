@@ -496,7 +496,7 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
-					if($post['bill_id']=='Repeated'){
+					if($post['bill_id']=='reschedule'){
 						$bill_type=$post['bill_id'];
 					}else{
 						$bill_type='new';
