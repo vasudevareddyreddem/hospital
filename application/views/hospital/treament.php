@@ -60,11 +60,11 @@
                                  <br>
 								 									
                               </div>
-							  <button type="submit" class="btn btn-sm btn-success">Add consultant</button>
+							  <button type="submit" class="btn btn-sm btn-success">Add  consultant</button>
 
 								 </form>
                            </div>
-                        </div>
+                        </div>                                         
                         <div class="clearfix">&nbsp;</div>
                      </div>
                   </div>

@@ -50,8 +50,8 @@
 									</select>
 								</div>
 								<div class="col-md-6">
-									<label> Name</label>
-								<input class="form-control" id="test_name" name="test_name" value="" type="text" placeholder="Name">
+									<label>Test Name</label>
+								<input class="form-control" id="test_name" name="test_name" value="" type="text" placeholder="Test Name">
 								</div>
 								<div class="col-md-6">
 									<label> Duration</label>
@@ -62,13 +62,10 @@
 									<input class="form-control" id="amuont" name="amuont" value="" type="text" placeholder="Amount">
 								</div>
 								<div class="col-md-6">
-									<label> Short Form</label>
-									<input type="text" class="form-control" id="short_form"  name="short_form" placeholder="Enter Short Form" value="" required>
+									<label>Comment</label>
+									<input type="text" class="form-control" id="short_form"  name="short_form" placeholder="Enter Comment" value="" required>
 								</div>
-								<div class="col-md-6">
-									<label>Description</label>
-									<input type="text" class="form-control" id="description"  name="description" placeholder="Enter Description" value="" required>
-								</div>
+								
 								<div class="">
 								<label>&nbsp;</label>
 								</div>	
@@ -256,16 +253,6 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Name can only consist of alphanumeric, space and dot'
-					}
-				}
-            },description: {
-                 validators: {
-					notEmpty: {
-						message: 'Description is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Description can only consist of alphanumeric, space and dot'
 					}
 				}
             }
