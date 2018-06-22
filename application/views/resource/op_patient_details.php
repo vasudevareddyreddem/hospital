@@ -152,15 +152,12 @@ table, th, td {
 	
 	 <table style="width:100%">
 	 <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Doctor Name and Treatment</th>
+		<th colspan="4">Doctor Name and Department</th>
 		</tr>
-		<tr>
-		<td colspan="2"><strong>Problem:</strong></td>
-		<td colspan="2"> <span><?php echo isset($details['problem'])?$details['problem']:''; ?></span></td>
-	  </tr>
+		
 	  <tr>
 		<td colspan="2"><strong>Doctor Name:</strong> <span><?php echo isset($details['resource_name'])?$details['resource_name']:''; ?></span></td>
-		<td colspan="2"><strong>Treatment Name:</strong> <span><?php echo isset($details['t_name'])?$details['t_name']:''; ?></span></td>
+		<td colspan="2"><strong>Department Name:</strong> <span><?php echo isset($details['t_name'])?$details['t_name']:''; ?></span></td>
 	  </tr>
 	   </table>
    
