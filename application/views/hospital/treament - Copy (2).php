@@ -34,7 +34,7 @@
                                  <form action="<?php echo base_url('hospital/treatmenaddtpost'); ?>" method="POST" id="treatmentform" name="treatmentform" role="form" autocomplete="off">
                                     <div class="entry input-group ">
                                        
-									   <select  class="form-control" id="treatment_name" onchange="get_department_list(this.value);" name="treatment_name" required>
+									   <select  class="form-control" id="treatment_name" onchange="get_department_list(this.value);" name="treatment_name[]" required>
 									   <?php if(count($treatment_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($treatment_list as $list){ ?>
@@ -42,10 +42,10 @@
 									   <?php } ?>
 									   <?php } ?>
 									   </select>&nbsp;
-										<select id="specialist_doc" name="specialist_doctor_id" class="form-control" >
+										<select id="specialist_doc" name="specialist_doctor_id[]" class="form-control" >
                                                   <option value="">Select Doctor</option>
                                          </select>
-										<select  class="form-control" id="assign_doctor" name="assign_doctor" required>
+										<select  class="form-control" id="assign_doctor" name="assign_doctor[]" required>
 									   <?php if(count($doctors_list)>0){ ?>
 									   <option value="">Select</option>
 									   <?php foreach($doctors_list as $list){ ?>
@@ -75,8 +75,7 @@
                                         <thead>
                                             <tr>
 												<th>Treatment Name</th>
-												<th>Specialist Name</th>
-												<th>consultant Name</th>
+												<th>Doctor Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -85,7 +84,6 @@
 										<?php foreach($hospital_treatment_list as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['t_name']); ?></td>
-                                                <td><?php echo htmlentities($list['specialist_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
 												<td><?php if($list['t_d_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 

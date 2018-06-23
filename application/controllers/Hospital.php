@@ -1389,17 +1389,19 @@ class Hospital extends CI_Controller {
 				$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				//echo '<pre>';print_r($post);
-				$treamts_list=array_combine($post['treatment_name'],$post['assign_doctor']);
-				if(count($treamts_list)>0){
-				
-						//echo '<pre>';print_r($treamts_list);
-						foreach($treamts_list as $key=>$list){
-							//echo '<pre>';print_r($key);exit;
+					
+					$check=$this->Hospital_model->treatment_exist($post['treatment_name'],$post['specialist_doctor_id'],$post['assign_doctor']);
+					if(count($check)>0){
+						$this->session->set_flashdata('error',"Treatment already exists. Please try again");
+						redirect('hospital/treatment');
+					}
+					//echo '<pre>';print_r($post);exit;
+				//echo '<pre>';print_r($key);exit;
 							$addtreatment_details=array(
 							'hos_id'=>$hos_ids['hos_id'],
-							't_d_doc_id'=>$list,
-							't_d_name'=>$key,
+							's_id'=>$post['specialist_doctor_id'],
+							't_d_doc_id'=>$post['assign_doctor'],
+							't_d_name'=>$post['treatment_name'],
 							't_d_status'=>1,
 							't_d_create_at'=>date('Y-m-d H:i:s'),
 							't_d_updated_at'=>date('Y-m-d H:i:s'),
@@ -1407,7 +1409,7 @@ class Hospital extends CI_Controller {
 							);
 							//echo '<pre>';print_r($addtreatment_details);exit;
 						$treatment = $this->Hospital_model->save_addtreatment($addtreatment_details);
-						}
+						
 						if(count($treatment)>0){
 							$this->session->set_flashdata('success',"Treatment are successfully added");
 							redirect('hospital/treatment/'.base64_encode(1));
@@ -1415,12 +1417,7 @@ class Hospital extends CI_Controller {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('hospital/treatment');
 						}
-				}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('hospital/treatment');
-				}
-									
-				
+			
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1957,6 +1954,22 @@ class Hospital extends CI_Controller {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
+	}
+	
+	
+	public  function get_specialists_list(){
+		$post=$this->input->post();
+		$details=$this->Hospital_model->get_d_id_wise_specialist_list($post['dep_id']);
+		//echo $this->db->last_query();exit;
+		if(count($details) > 0)
+				{
+				$data['msg']=1;
+				$data['list']=$details;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
 	}
 	
 	

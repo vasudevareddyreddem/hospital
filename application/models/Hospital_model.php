@@ -162,6 +162,13 @@ class Hospital_model extends CI_Model
 		$this->db->where('s_id',$s_id);
 		return $this->db->get()->row_array();
 	}
+	public function get_d_id_wise_specialist_list($d_id){
+		$this->db->select('specialist.s_id,specialist.specialist_name')->from('specialist');		
+		$this->db->where('d_id',$d_id);
+		$this->db->where('t_status',1);
+		return $this->db->get()->result_array();
+	}
+	
 	/*specilist*/
 	/*add treament*/
 		public function save_addtreatment($data){
@@ -169,9 +176,10 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function get_all_doctor_treatment_list($a_id,$hos_id){
-		$this->db->select('treatmentwise_doctors.t_d_id,treament.t_name,treatmentwise_doctors.t_d_status,resource_list.resource_name')->from('treatmentwise_doctors');		
+		$this->db->select('treatmentwise_doctors.t_d_id,treament.t_name,treatmentwise_doctors.t_d_status,resource_list.resource_name,specialist.specialist_name')->from('treatmentwise_doctors');		
 		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
 		$this->db->join('treament', 'treament.t_id = treatmentwise_doctors.t_d_name', 'left');
+		$this->db->join('specialist', 'specialist.s_id = treatmentwise_doctors.s_id', 'left');
 		$this->db->where('treatmentwise_doctors.t_d_create_by',$a_id);
 		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
 		$this->db->where('treatmentwise_doctors.t_d_status !=',2);
@@ -180,6 +188,13 @@ class Hospital_model extends CI_Model
 	public function update_addtreatment_details($t_d_id,$data){
 		$this->db->where('t_d_id',$t_d_id);
     	return $this->db->update("treatmentwise_doctors",$data);
+	}
+	public  function treatment_exist($t_id,$s_id,$d_id){
+		$this->db->select('*')->from('treatmentwise_doctors');		
+		$this->db->where('t_d_doc_id',$t_id);
+		$this->db->where('t_d_name',$d_id);
+		$this->db->where('s_id',$s_id);
+		return $this->db->get()->row_array();
 	}
 	
 	/*add treament*/
