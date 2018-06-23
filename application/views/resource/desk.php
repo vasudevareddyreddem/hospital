@@ -855,10 +855,6 @@
                                                       <option value="International cash" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='International cash'){ echo "Selected"; } ?>>International cash</option>
                                                    </select>
                                                 </div>
-												<div class="form-group col-md-6">
-                                                   <label for="Name">Department</label>
-                                                   <input type="text" class="form-control" id="problem"  name="problem" placeholder="Enter Department" value="<?php echo isset($patient_detailes['problem'])?$patient_detailes['problem']:''; ?>">
-                                                </div>
 												 <div class="form-group col-md-6">
                                                    <label for="Name">Gender</label>
 													<select id="gender" name="gender" class="form-control" >
@@ -924,7 +920,7 @@
                                                    <label for="email"> Permanent address</label>
                                                    <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-12">
                                                    <label for="email">Nationality</label>
                                                    <div class="row">
                                                       <div class="col-md-6">
