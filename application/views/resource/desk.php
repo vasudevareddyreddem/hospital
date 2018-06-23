@@ -577,27 +577,34 @@
                                           </form>
                                        </div>
 									   <div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_10">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="assign">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="assigna">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <div class="row">
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Consultant  Department</label>
-                                                   <select id="department_name" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
+                                                   <select id="department_name1" name="department_name" onchange="get_department_list(this.value);" class="form-control" >
                                                       <option value="">Select</option>
                                                       <?php foreach($departments_list as $lis){ ?>
                                                       <option value="<?php echo $lis['t_id']; ?>"><?php echo $lis['t_name']; ?></option>
                                                       <?php } ?>
                                                    </select>
                                                 </div>
+												
+												<div class="form-group col-md-6">
+                                                   <label for="email">Consultant  Specialist</label>
+                                                   
+												<select id="specialist_doc1" name="specialist_doctor_id" onchange="get_doctor_list(this.value);" class="form-control" >
+                                                  <option value="">Select Specialist</option>
+												</select>
+												</div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Consultant name</label>
-                                                   <select id="department_doctors" name="department_doctors" class="form-control" >
+                                                   <select id="department_doctors2" name="department_doctors" class="form-control" >
                                                       <option value="">Select Consultant</option>
                                                    </select>
                                                 </div>
-                                                
-                                             </div>
+												</div>
                                              <button class="btn btn-praimry" type="submit">Next</button>
                                           </form>
                                        </div>
@@ -1081,20 +1088,27 @@
                                        </div> 
 									   
 									   <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_223">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="assign" name="assign" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Consultant  Department</label>
-                                                   <select id="department_name1" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
+                                                   <select id="department_name1" name="department_name" onchange="get_department_list(this.value);" class="form-control" >
                                                       <option value="">Select</option>
                                                       <?php foreach($departments_list as $lis){ ?>
                                                       <option value="<?php echo $lis['t_id']; ?>"><?php echo $lis['t_name']; ?></option>
                                                       <?php } ?>
                                                    </select>
                                                 </div>
+												<div class="form-group col-md-6">
+                                                   <label for="email">Consultant  Specialist</label>
+                                                   
+												<select id="specialist_doc" name="specialist_doctor_id" onchange="get_doctor_list(this.value);" class="form-control" >
+                                                  <option value="">Select Specialist</option>
+												</select>
+												</div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Consultant name</label>
                                                    <select id="department_doctors1" name="department_doctors" class="form-control" >
@@ -1133,7 +1147,34 @@
         "order": [[ 0, "desc" ]]
     } );
 } );
-
+function get_department_list(id){
+	
+		if(id!=''){
+			jQuery.ajax({
+   					url: "<?php echo base_url('hospital/get_specialists_list');?>",
+   					data: {
+   						dep_id: id,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						//console.log(data);return false;
+   						$('#specialist_doc').empty();
+   						$('#specialist_doc1').empty();
+   						$('#specialist_doc').append("<option>select</option>");
+   						$('#specialist_doc1').append("<option>select</option>");
+   						for(i=0; i<data.list.length; i++) {
+   							$('#specialist_doc').append("<option value="+data.list[i].s_id+">"+data.list[i].specialist_name+"</option>");                      
+   							$('#specialist_doc1').append("<option value="+data.list[i].s_id+">"+data.list[i].specialist_name+"</option>");                      
+                         
+   						}
+   						//console.log(data);return false;
+   					}
+   				
+   				});
+				
+			}
+}
 function checkpatient_number(num){
 	var val1=$('#patient_old_card_number').val();
 	var val2=$('#patient_card_number1').val();
@@ -1296,20 +1337,21 @@ function apply_couponcode1(){
    }
    function get_doctor_list(id){
    				jQuery.ajax({
-   					url: "<?php echo base_url('resources/get_doctors_list');?>",
+   					url: "<?php echo base_url('resources/get_spec_doctors_list');?>",
    					data: {
-   						dep_id: id,
+   						spec_id: id,
    					},
    					dataType: 'json',
    					type: 'POST',
    					success: function (data) {
+						//console.log(data);return false;
    						$('#department_doctors').empty();
-   						$('#department_doctors1').empty();
+   						$('#department_doctors2').empty();
    						$('#department_doctors').append("<option>select</option>");
-   						$('#department_doctors1').append("<option>select</option>");
+   						$('#department_doctors2').append("<option>select</option>");
    						for(i=0; i<data.list.length; i++) {
    							$('#department_doctors').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
-   							$('#department_doctors1').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
+   							$('#department_doctors2').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
                          
    						}
    						//console.log(data);return false;
@@ -2687,7 +2729,45 @@ function apply_couponcode1(){
    						message: 'Consultant Department is required'
    					}
    				}
-               },department_doctors: {
+               },
+			   specialist_doctor_id: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant  Specialist is required'
+   					}
+   				}
+               },
+			   department_doctors: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant name is required'
+   					}
+   				}
+               }
+   			}
+   		
+   	})
+        
+   });
+   $(document).ready(function() {
+    
+       $('#assigna').bootstrapValidator({
+   		fields: {
+   			department_name: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant Department is required'
+   					}
+   				}
+               },
+			   specialist_doctor_id: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant  Specialist is required'
+   					}
+   				}
+               },
+			   department_doctors: {
                     validators: {
    					notEmpty: {
    						message: 'Consultant name is required'

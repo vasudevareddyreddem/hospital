@@ -121,6 +121,13 @@ class Resources_model extends CI_Model
 		$this->db->where('resource_list.r_status',1);
         return $this->db->get()->result_array();
 	}
+	public function get_spec_doctors_list($spe_id){
+		$this->db->select('resource_list.resource_name,resource_list.current_status,treatmentwise_doctors.t_d_doc_id,treatmentwise_doctors.t_d_name')->from('treatmentwise_doctors');		
+		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
+		$this->db->where('treatmentwise_doctors.s_id',$spe_id);
+		$this->db->where('resource_list.r_status',1);
+        return $this->db->get()->result_array();
+	}
 	public function get_card_number_list($card_num){
 		$this->db->select('*')->from('patients_list_1');		
 		$this->db->where('patients_list_1.card_number',$card_num);

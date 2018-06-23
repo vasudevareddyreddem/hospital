@@ -353,6 +353,7 @@ class Resources extends CI_Controller {
 					$tab11=array(
 						'treatment_id'=>$post['department_name'],
 						'doct_id'=>$post['department_doctors'],
+						'specialist_id'=>$post['specialist_doctor_id'],
 						);
 						
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$tab11);
@@ -747,6 +748,20 @@ class Resources extends CI_Controller {
 	public function get_doctors_list(){
 		$post=$this->input->post();
 		$details=$this->Resources_model->get_doctors_list($post['dep_id']);
+		if(count($details) > 0)
+				{
+				$data['msg']=1;
+				$data['list']=$details;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
+	}
+	public function get_spec_doctors_list(){
+		$post=$this->input->post();
+		$details=$this->Resources_model->get_spec_doctors_list($post['spec_id']);
+		//echo $this->db->last_query();exit;
 		if(count($details) > 0)
 				{
 				$data['msg']=1;

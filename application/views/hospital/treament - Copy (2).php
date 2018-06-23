@@ -138,8 +138,6 @@
    </div>
 </div>
 <script>
-
-
 function get_department_list(id){
 	
 		if(id!=''){
