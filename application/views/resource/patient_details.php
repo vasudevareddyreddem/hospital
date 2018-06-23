@@ -161,15 +161,7 @@ table, th, td {
 		<td><strong>Visit type:</strong> <span><?php echo isset($details['visit_type'])?$details['visit_type']:''; ?></span></td>
 		<td><strong>Doctor:</strong> <span><?php echo isset($details['doctor'])?$details['doctor']:''; ?></span></td>
 	  </tr>
-	  <tr>
-		<td><strong>Payer:</strong> <span><?php echo isset($details['payer'])?$details['payer']:''; ?></span></td>
-		<td><strong>Price:</strong> <span><?php echo isset($details['price'])?$details['price']:''; ?></span></td>
-		<td><strong>Qty:</strong> <span><?php echo isset($details['qty'])?$details['qty']:''; ?></span></td>
-		<td><strong>Amount:</strong> <span><?php echo isset($details['amount'])?$details['amount']:''; ?></span></td>
-	  </tr>
-	  <tr>
-		<td colspan="4"><strong>Bill:</strong> <span><?php echo isset($details['bill'])?$details['bill']:''; ?></span></td>
-		</tr>
+	  
 		<tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Bill Info</th>
 		
