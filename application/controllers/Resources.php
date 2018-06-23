@@ -714,7 +714,7 @@ class Resources extends CI_Controller {
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d')
 						);
-					//echo '<pre>';print_r($updating);exit;
+						//echo '<pre>';print_r($updating);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($updating);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Vitals details successfully Updated.");

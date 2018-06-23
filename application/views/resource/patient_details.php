@@ -142,25 +142,10 @@ table, th, td {
 	   <tr>
 		<td><strong>Visit Number:</strong> <span><?php echo isset($details['visit_no'])?$details['visit_no']:''; ?></span></td>
 		<td><strong>Visit description:</strong> <span><?php echo isset($details['visit_desc'])?$details['visit_desc']:''; ?></span></td>
-		<td><strong>Date of visit:</strong> <span><?php echo isset($details['date_of_visit'])?$details['date_of_visit']:''; ?></span></td>
-		<td><strong>Department:</strong> <span><?php echo isset($details['department'])?$details['department']:''; ?></span></td>
-	  </tr>
-	  <tr>
-		<td><strong>Doctor:</strong> <span><?php echo isset($details['docotr_name'])?$details['docotr_name']:''; ?></span></td>
-		<td><strong>No- of visits:</strong> <span><?php echo isset($details['no_of_visits'])?$details['no_of_visits']:''; ?></span></td>
-		<td><strong>Last visit date:</strong> <span><?php echo isset($details['last_visiting_date'])?$details['last_visiting_date']:''; ?></span></td>
-		<td></td>
-	  </tr>
-	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="4">Order Info</th>
-		
-	  </tr>
-	  <tr>
 		<td><strong>Service type:</strong> <span><?php echo isset($details['service_type'])?$details['service_type']:''; ?></span></td>
-		<td><strong>Service:</strong> <span><?php echo isset($details['service'])?$details['service']:''; ?></span></td>
 		<td><strong>Visit type:</strong> <span><?php echo isset($details['visit_type'])?$details['visit_type']:''; ?></span></td>
-		<td><strong>Doctor:</strong> <span><?php echo isset($details['doctor'])?$details['doctor']:''; ?></span></td>
 	  </tr>
+	  
 	  
 		<tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Bill Info</th>

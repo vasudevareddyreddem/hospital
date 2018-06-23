@@ -150,6 +150,10 @@
 	                                    <a href="<?php echo base_url('hospital/addtreatment'); ?>" class="nav-link "> <span class="title">Add Department</span>
 	                                    </a>
 	                                </li>
+									<li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Specialist</span>
+	                                    </a>
+	                                </li>
 	                                <li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resource </span>
 	                                    </a>

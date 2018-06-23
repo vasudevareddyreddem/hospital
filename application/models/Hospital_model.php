@@ -84,9 +84,20 @@ class Hospital_model extends CI_Model
 		$this->db->insert('treament', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	public function save_addspecialist($data){
+		$this->db->insert('specialist', $data);
+		return $insert_id = $this->db->insert_id();
+	}
 	public function get_saved_treatment($name,$hos_id){
 		$this->db->select('*')->from('treament');		
 		$this->db->where('t_name',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_saved_specialist_name($d_id,$name,$hos_id){
+		$this->db->select('*')->from('specialist');		
+		$this->db->where('specialist_name',$name);
+		$this->db->where('d_id',$d_id);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
@@ -104,6 +115,25 @@ class Hospital_model extends CI_Model
 		$this->db->where('treament.t_status !=',2);
 		return $this->db->get()->result_array();
 	}
+	public function get_all_treatment_list($a_id,$hos_id){
+		$this->db->select('treament.t_id,treament.t_name,treament.t_status,treament.t_create_at')->from('treament');		
+		//$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
+
+		$this->db->where('treament.t_create_by',$a_id);
+		$this->db->where('treament.hos_id',$hos_id);
+		$this->db->where('treament.t_status',1);
+		return $this->db->get()->result_array();
+	}
+	
+	public  function get_specialist_list($a_id,$hos_id){
+		$this->db->select('specialist.*,treament.t_name')->from('specialist');		
+		$this->db->join('treament', 'treament.t_id = specialist.d_id', 'left');
+
+		$this->db->where('specialist.t_create_by',$a_id);
+		$this->db->where('specialist.hos_id',$hos_id);
+		$this->db->where('specialist.t_status !=',2);
+		return $this->db->get()->result_array();
+	}
 	public function get_doctors_list($a_id,$hos_id){
 		$this->db->select('resource_list.a_id,resource_list.resource_name')->from('resource_list');		
 		$this->db->where('resource_list.r_create_by',$a_id);
@@ -118,6 +148,21 @@ class Hospital_model extends CI_Model
     	return $this->db->update("treament",$data);
 	}
 	/*treatment*/
+	/*specilist*/
+	public  function delete_specialist_details($id){
+		$this->db->where('specialist.s_id',$id);
+		return $this->db->delete('specialist');
+	}
+	public function update_specialist_details($s_id,$data){
+		$this->db->where('s_id',$s_id);
+    	return $this->db->update("specialist",$data);
+	}
+	public function get_specialist_details($s_id,$data){
+		$this->db->select('specialist.*')->from('specialist');		
+		$this->db->where('s_id',$s_id);
+		return $this->db->get()->row_array();
+	}
+	/*specilist*/
 	/*add treament*/
 		public function save_addtreatment($data){
 		$this->db->insert('treatmentwise_doctors', $data);

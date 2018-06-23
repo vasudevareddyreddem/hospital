@@ -1159,6 +1159,71 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function addspecialist()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$data['tab']=base64_decode($this->uri->segment(3));
+				$admindetails=$this->session->userdata('userdetails');
+				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['treatment_list'] =$this->Hospital_model->get_all_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
+				$data['specialist_list'] =$this->Hospital_model->get_specialist_list($hos_ids['a_id'],$hos_ids['hos_id']);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('hospital/addspecialist',$data);
+				$this->load->view('html/footer');
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function specialistpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				//echo '<pre>';print_r($post);exit;
+					$exits_treatment = $this->Hospital_model->get_saved_specialist_name($post['department'],$post['specialist_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"Specialist name already exists .please use another name");
+						redirect('hospital/addspecialist/'.base64_encode(1));
+					}
+				$spc_details=array(
+					'hos_id'=>$hos_ids['hos_id'],
+					'd_id'=>$post['department'],
+					'specialist_name'=>$post['specialist_name'],
+					't_status'=>1,
+					't_create_at'=>date('Y-m-d H:i:s'),
+					't_create_by'=>$hos_ids['a_id']
+					);
+					//echo '<pre>';print_r($treatment_details);exit;
+				$treatment = $this->Hospital_model->save_addspecialist($spc_details);
+				if(count($treatment)>0){
+					$this->session->set_flashdata('success',"specialist added successfully");
+					redirect('hospital/addspecialist/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/addspecialist');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function treatmentpost()
 	{
 		if($this->session->userdata('userdetails'))
@@ -1442,6 +1507,127 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	
+	/*specialist*/
+	public function specialistdelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$specialist_id=$this->uri->segment(3);
+					if($specialist_id!=''){
+						$deletedata= $this->Hospital_model->delete_specialist_details(base64_decode($specialist_id));
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Specialist successfully removed.");
+								redirect('hospital/addspecialist/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/addspecialist/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/addspecialist/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function specialisttstatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$specialist_id=$this->uri->segment(3);
+					$status =base64_decode($this->uri->segment(4));
+					if($status ==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					$statu;
+					if($specialist_id!=''){
+						$stusdetails=array(
+							't_status'=>$statu,
+							't_updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata= $this->Hospital_model->update_specialist_details(base64_decode($specialist_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Specialist successfully deactivated.");
+								}else{
+									$this->session->set_flashdata('success',"Specialist successfully activated.");
+								}
+									redirect('hospital/addspecialist/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('hospital/addspecialist/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('hospital/addspecialist/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function specialisteditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+				
+				//echo '<pre>';print_r($post);exit;
+				$editdata_check= $this->Hospital_model->get_specialist_details($post['specialistid']);
+				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+
+				if($editdata_check['specialist_name']!=$post['specialist_name'] || $editdata_check['department']!=$post['d_id']){
+					$exits_treatment = $this->Hospital_model->get_saved_specialist_name($post['department'],$post['specialist_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"Specialist name already exists .please use another name");
+						redirect('hospital/addspecialist/'.base64_encode(1));
+					}
+				}
+				$edittreatment_details=array(
+					'd_id'=>$post['department'],
+					'specialist_name'=>$post['specialist_name'],
+					't_updated_at'=>date('Y-m-d H:i:s'),
+					);
+					//echo '<pre>';print_r($post);exit;
+				$editdata= $this->Hospital_model->update_specialist_details($post['specialistid'],$edittreatment_details);
+				if(count($editdata)>0){
+					$this->session->set_flashdata('success',"Specialist details successfully updated");
+					redirect('hospital/addspecialist/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('hospital/addspecialist');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	/*specialist*/
 	public function labdetails()
 	{
 		if($this->session->userdata('userdetails'))
