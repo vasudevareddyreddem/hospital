@@ -47,9 +47,6 @@
                                        <li class="nav-item <?php if(isset($tab) && $tab==3){ echo "active";}?>">
                                           <a href="#tab_6_3" data-toggle="tab"> Next of kin details </a>
                                        </li>
-                                       <li class="nav-item <?php if( isset($tab) && $tab==4){ echo "active";}?>">
-                                          <a href="#tab_6_4" data-toggle="tab"> Referral </a>
-                                       </li>
                                        <li class="nav-item  <?php if( isset($tab) && $tab==5){ echo "active";}?>">
                                           <a href="#tab_6_5" data-toggle="tab"> Guardian </a>
                                        </li>
@@ -59,15 +56,17 @@
                                        <li class="nav-item  <?php if( isset($tab) && $tab==7){ echo "active";}?>">
                                           <a href="#tab_6_7" data-toggle="tab"> Socio- economic details </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
-                                          <a href="#tab_6_8" data-toggle="tab"> Billing Information </a>
-                                       </li>
+									   
                                        <li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
                                           <a href="#tab_6_9" data-toggle="tab"> Vitals </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
+									   <li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
                                           <a href="#tab_6_10" data-toggle="tab"> Assign  </a>
                                        </li>
+                                       <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
+                                          <a href="#tab_6_8" data-toggle="tab"> Billing Information </a>
+                                       </li>
+                                       
                                     </ul>
                                  </div>
                                  <div class="col-md-9 col-sm-9 col-xs-9">
@@ -179,16 +178,31 @@
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Nationality</label>
                                                    <div class="row">
-                                                      <div class="col-md-3 row">
+                                                      <div class="col-md-6 ">
                                                          <input type="text" id="p_c_name" name="p_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['p_c_name'])?$patient_detailes['p_c_name']:''; ?>">
                                                       </div>
-                                                      <div class="col-md-3">
-                                                         <input type="text" id="p_s_name" name="p_s_name"  class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['p_s_name'])?$patient_detailes['p_s_name']:''; ?>">
-                                                      </div>
-                                                      <div class="col-md-3">
+                                                      <div class="col-md-6">
+                                                       <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+														  <select class="form-control" required="required" name="p_s_name" id="p_s_name">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['p_s_name'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+													  </div>
+													  </div>
+													  <br>
+													  <div class="row">
+                                                      <div class="col-md-6">
                                                          <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
-                                                      <div class="col-md-3 row">
+                                                      <div class="col-md-6 ">
                                                          <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>" >
                                                       </div>
                                                    </div>
@@ -199,20 +213,35 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Nationality</label>
-                                                   <div class="row">
-                                                      <div class="col-md-3 row">
-                                                         <input type="text" id="t_c_name" name="t_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['t_c_name'])?$patient_detailes['t_c_name']:''; ?>">
-                                                      </div>
-                                                      <div class="col-md-3 row">
-                                                         <input type="text" id="t_s_name" name="t_s_name" class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['t_s_name'])?$patient_detailes['t_s_name']:''; ?>">
-                                                      </div>
-                                                      <div class="col-md-3">
-                                                         <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
-                                                      </div>
-                                                      <div class="col-md-3 row">
-                                                         <input type="text" id="t_country_name" name="t_country_name" class="form-control" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>"  placeholder="Country" >
-                                                      </div>
-                                                   </div>
+													<div class="row">
+														  <div class="col-md-6 ">
+															 <input type="text" id="t_c_name" name="t_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['t_c_name'])?$patient_detailes['t_c_name']:''; ?>">
+														  </div>
+														  <div class="col-md-6 ">
+														   <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+														  <select class="form-control" required="required" name="t_s_name" id="t_s_name">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['t_s_name'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+														  </div>
+													  </div>
+													  <br>
+													  <div class="row">
+														  <div class="col-md-6">
+															 <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
+														  </div>
+														  <div class="col-md-6 ">
+															 <input type="text" id="t_country_name" name="t_country_name" class="form-control" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>"  placeholder="Country" >
+														  </div>
+                                                    </div>
                                                 </div>
                                              </div>
                                              <button class="btn btn-praimry" id="firstform" type="submit">Next</button>
@@ -239,13 +268,7 @@
                                                    <label for="Name">Caste</label>
                                                    <input type="text" class="form-control" id="caste"  name="caste"  value="<?php echo isset($patient_detailes['caste'])?$patient_detailes['caste']:''; ?>">
                                                 </div>
-												
-												
-												
-												
-												
-												
-                                                <div class="form-group col-md-6">
+												<div class="form-group col-md-6">
                                                    <label for="mobile">Language</label>
                                                    <select id="language" name="language" class="form-control" >
                                                       <option value="">Select</option>
@@ -254,9 +277,7 @@
                                                       <option value="Hindi"<?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
                                                    </select>
                                                 </div>
-                                               
-                                                
-                                                <div class="form-group col-md-6">
+                                               <div class="form-group col-md-6">
                                                    <label for="Name">Occupation</label>
                                                    <input type="text" class="form-control" id="occupation"  name="occupation"  value="<?php echo isset($patient_detailes['occupation'])?$patient_detailes['occupation']:''; ?>">
                                                 </div>
@@ -264,8 +285,6 @@
                                                    <label for="Name">Education</label>
                                                    <input type="text" class="form-control" id="education"  name="education"  value="<?php echo isset($patient_detailes['education'])?$patient_detailes['education']:''; ?>">
                                                 </div>
-                                                
-                                                
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Mobile Number</label>
                                                    <input type="text" class="form-control" id="home_phone"  name="home_phone"  value="<?php echo isset($patient_detailes['home_phone'])?$patient_detailes['home_phone']:''; ?>">
@@ -323,8 +342,20 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">State</label>
-                                                   <input type="text" class="form-control" id="next_state"  name="next_state"  value="<?php echo isset($patient_detailes['next_state'])?$patient_detailes['next_state']:''; ?>">
-                                                </div>
+                                                <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+														  <select class="form-control" required="required" name="next_state" id="next_state">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['next_state'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+												</div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Country</label>
                                                    <input type="text" class="form-control" id="next_country"  name="next_country"  value="<?php echo isset($patient_detailes['next_country'])?$patient_detailes['next_country']:''; ?>">
@@ -374,16 +405,8 @@
                                                    <input type="text" class="form-control" id="relationship"  name="relationship"  value="<?php echo isset($patient_detailes['relationship'])?$patient_detailes['relationship']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="Name">First name</label>
+                                                   <label for="Name">Name</label>
                                                    <input type="text" class="form-control" id="g_first_name"  name="g_first_name"  value="<?php echo isset($patient_detailes['g_first_name'])?$patient_detailes['g_first_name']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Middle name</label>
-                                                   <input type="text" class="form-control" id="g_middel_name"  name="g_middel_name"  value="<?php echo isset($patient_detailes['g_middel_name'])?$patient_detailes['g_middel_name']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Last name</label>
-                                                   <input type="text" class="form-control" id="g_last_name"  name="g_last_name"  value="<?php echo isset($patient_detailes['g_last_name'])?$patient_detailes['g_last_name']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Gender</label>
@@ -410,11 +433,11 @@
                                               
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Address1</label>
-                                                   <textarea type="textarea" id="g_address1" name="g_address1" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['g_address1'])?$patient_detailes['g_address1']:''; ?></textarea>
+                                                   <input type="text" id="g_address1" name="g_address1" class="form-control"  placeholder="Enter Address" value="<?php echo isset($patient_detailes['g_address1'])?$patient_detailes['g_address1']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Address2</label>
-                                                   <textarea type="textarea" id="g_address2" name="g_address2" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['g_address2'])?$patient_detailes['g_address2']:''; ?></textarea>
+                                                   <input type="text" id="g_address2" name="g_address2" class="form-control"  placeholder="Enter Address" value="<?php echo isset($patient_detailes['g_address2'])?$patient_detailes['g_address2']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Pincode</label>
@@ -426,8 +449,20 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">State</label>
-                                                   <input type="text" class="form-control" id="g_state"  name="g_state"  value="<?php echo isset($patient_detailes['g_state'])?$patient_detailes['g_state']:''; ?>">
-                                                </div>
+                                                <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+														  <select class="form-control" required="required" name="g_state" id="g_state">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['g_state'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+												</div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Country</label>
                                                    <input type="text" class="form-control" id="g_country"  name="g_country"  value="<?php echo isset($patient_detailes['g_country'])?$patient_detailes['g_country']:''; ?>">
@@ -800,7 +835,7 @@
 													</li>
 												<?php } ?>
                                                 <li>
-                                                   <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(8).'/'.base64_encode('reschedule')); ?>">
+                                                   <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(0).'/'.base64_encode('reschedule')); ?>">
                                                    <i class="icon-docs"></i> Repeated </a>
                                                 </li>
                                              </ul>
@@ -830,16 +865,16 @@
                                        <li class="nav-item">
                                           <a href="#tab_6_11" data-toggle="tab" class="<?php if(isset($tab) && $tab !=11 && $tab!=12 && $tab!=13){ echo "active";}?>"> Basic Details </a>
                                        </li>
-									   
+									    <li class="nav-item ">
+                                          <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Assign </a>
+                                       </li>
 									   <li class="nav-item ">
-                                          <a href="#tab_6_224" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Vitals </a>
+                                          <a href="#tab_6_224" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Vitals </a>
                                        </li>
                                        <li class="nav-item ">
                                           <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==13){ echo "active";}?>"> Billing Information </a>
                                        </li>
-									   <li class="nav-item ">
-                                          <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Assign </a>
-                                       </li>
+									  
                                       
                                     </ul>
                                  </div>
@@ -957,16 +992,30 @@
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Nationality</label>
                                                    <div class="row">
-                                                      <div class="col-md-3 row">
+                                                      <div class="col-md-6">
                                                          <input type="text" id="p_c_name" name="p_c_name" class="form-control"  placeholder="City" value="<?php echo isset($patient_detailes['p_c_name'])?$patient_detailes['p_c_name']:''; ?>">
                                                       </div>
-                                                      <div class="col-md-3">
-                                                         <input type="text" id="p_s_name" name="p_s_name"  class="form-control"  placeholder="State" value="<?php echo isset($patient_detailes['p_s_name'])?$patient_detailes['p_s_name']:''; ?>">
-                                                      </div>
-                                                      <div class="col-md-3">
+                                                      <div class="col-md-6">
+                                                      <select class="form-control" required="required" name="p_s_name" id="p_s_name">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['p_s_name'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+													  </div>
+													  </div>
+													  </br>
+													  <div class="row">
+                                                      <div class="col-md-6">
                                                          <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
-                                                      <div class="col-md-3 row">
+                                                      <div class="col-md-6">
                                                          <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['p_country_name'])?$patient_detailes['p_country_name']:''; ?>" >
                                                       </div>
                                                    </div>
@@ -976,7 +1025,7 @@
                                           </div>
 										</form>
                                        </div>
-									   <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_224">
+									   <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_224">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals_1">
                                               <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -1037,7 +1086,7 @@
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==13){ echo "active";}?>" id="tab_6_22">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="opbills" name="opbills" enctype="multipart/form-data">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billcompleted'); ?> " method="post"  id="opbills" name="opbills" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
@@ -1087,19 +1136,26 @@
 																	<button type="button" onclick="apply_couponcode1();" id="">Apply</button>
 																	</div>
 																	</div>
+																	
 															   
 															   
                                              </div>
                                              <button class="btn btn-praimry " type="submit">Next</button>
-                                          </form>
+											 <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']==1){ ?>
+                                             <a target="_blank" href="<?php echo base_url('resources/op_print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry " type="bitton">Print</a>
+                                             <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-praimry " type="bitton">Completed</a>
+											 <?php } ?>
+										  </form>
                                        </div> 
 									   
-									   <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_223">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/desk'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
+									   <div class="tab-pane <?php if(isset($tab) && $tab==11){ echo "active";}?>" id="tab_6_223">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="demographic" name="demographic" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+                                             <input type="hidden" id="op" name="op" value="1">
                                              <div class="row">
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">Doctor  Department</label>
+                                                   <label for="email">Consultant  Department</label>
                                                    <select id="department_name1" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
                                                       <option value="">Select</option>
                                                       <?php foreach($departments_list as $lis){ ?>
@@ -1108,15 +1164,10 @@
                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">Doctor name</label>
+                                                   <label for="email">Consultant name</label>
                                                    <select id="department_doctors1" name="department_doctors" class="form-control" >
-                                                      <option value="">Select Doctor</option>
+                                                      <option value="">Select Consultant</option>
                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">&nbsp;</label>
-                                                   <a href="javascript:void(0);" onclick="assign_doctore1();" class="btn btn-praimry " >Assign</a>
-                                                   <a target="_blank" href="<?php echo base_url('resources/op_print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry">Print</a>
                                                 </div>
                                              </div>
                                              <button class="btn btn-praimry " type="submit">Next</button>
@@ -1788,28 +1839,11 @@ function apply_couponcode1(){
                },g_first_name: {
                     validators: {
    					notEmpty: {
-   						message: 'First Name is required'
+   						message: 'Name is required'
    					},
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'First Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },g_middel_name: {
-                    validators: {
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Middle Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },g_last_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Last Name is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Last Name can only consist of alphanumeric, space and dot'
+   					message: 'Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },g_address1: {
@@ -1916,47 +1950,6 @@ function apply_couponcode1(){
         
    });
    
-   	$(document).ready(function() {
-    
-       $('#referral').bootstrapValidator({
-   		fields: {
-             
-                referred: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Referred by is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Referred by can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },
-   			internal_external: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Internal external is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Internal external can only consist of alphanumeric, space and dot'
-   					}
-   				}
-   			},search_doctor: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Search doctor is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Search doctor can only consist of alphanumeric, space and dot'
-   					}
-   				}
-   			}
-   			}
-   		      })
-        
-   });
    $(document).ready(function() {
     
        $('#next').bootstrapValidator({
@@ -1980,23 +1973,6 @@ function apply_couponcode1(){
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'First Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },middel_name: {
-                    validators: {
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Middle Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },last_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Last Name is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Last Name can only consist of alphanumeric, space and dot'
    					}
    				}
                },next_address1: {
@@ -2142,18 +2118,6 @@ function apply_couponcode1(){
    						message: 'Language is required'
    					}
    				}
-               },primarylanguage: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Primary Language is required'
-   					}
-   				}
-               },preferred_language: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Preferred Language is required'
-   					}
-   				}
                },
                occupation: {
                    validators: {
@@ -2187,35 +2151,16 @@ function apply_couponcode1(){
    					message: 'Birth place  can only consist of alphanumeric, space and dot'
    					}
    				}
-               },
-   			work_phone: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Work phone is required'
-   					},
-   					regexp: {
-   					regexp:  /^[0-9]{10,14}$/,
-   					message:'Work Phone must be 10 to 14 digits'
-   					}
-   				}
                },home_phone: {
                    validators: {
    					notEmpty: {
-   						message: 'Home phone is required'
+   						message: 'Mobile Number is required'
    					},
    					regexp: {
    					regexp:  /^[0-9]{10,14}$/,
-   					message:'Home Phone must be 10 to 14 digits'
+   					message:'Mobile Number must be 10 to 14 digits'
    					}
    				}
-               },
-   			
-   			bloodgroup: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Blood group is required'
-   					}
-					}
                },
    			citizen_proof: {
                     validators: {

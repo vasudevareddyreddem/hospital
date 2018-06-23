@@ -121,7 +121,7 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					//echo '<pre>';print_r($post);
+					//echo '<pre>';print_r($post);exit;
 					$tab1=array(
 					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 					'card_number'=>isset($post['patient_card_number'])?$post['patient_card_number']:'',
@@ -276,12 +276,8 @@ class Resources extends CI_Controller {
 					'caste'=>isset($post['caste'])?$post['caste']:'',
 					'mothername'=>isset($post['mothername'])?$post['mothername']:'',
 					'language'=>isset($post['language'])?$post['language']:'',
-					'primarylanguage'=>isset($post['primarylanguage'])?$post['primarylanguage']:'',
-					'preferred_language'=>isset($post['preferred_language'])?$post['preferred_language']:'',
 					'occupation'=>isset($post['occupation'])?$post['occupation']:'',
 					'education'=>isset($post['education'])?$post['education']:'',
-					'birth_place'=>isset($post['birth_place'])?$post['birth_place']:'',
-					'work_phone'=>isset($post['work_phone'])?$post['work_phone']:'',
 					'home_phone'=>isset($post['home_phone'])?$post['home_phone']:'',
 					'citizen_proof'=>isset($post['citizen_proof'])?$post['citizen_proof']:'',
 					'patient_identifier'=>$patient_identifier,
@@ -316,8 +312,6 @@ class Resources extends CI_Controller {
 					$tab2=array(
 					'relation'=>isset($post['relation'])?$post['relation']:'',
 					'first_name'=>isset($post['first_name'])?$post['first_name']:'',
-					'middel_name'=>isset($post['middel_name'])?$post['middel_name']:'',
-					'last_name'=>isset($post['last_name'])?$post['last_name']:'',
 					'next_address1'=>isset($post['next_address1'])?$post['next_address1']:'',
 					'next_address2'=>isset($post['next_address2'])?$post['next_address2']:'',
 					'next_pincode'=>isset($post['next_pincode'])?$post['next_pincode']:'',
@@ -333,7 +327,7 @@ class Resources extends CI_Controller {
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab2);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Next of kin details successfully Updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(4));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(3));
@@ -347,7 +341,8 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	public function referral()
+	
+	public function assign()
 	{	
 		if($this->session->userdata('userdetails'))
 		{
@@ -355,20 +350,26 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
-					$tab4=array(
-					'referred'=>isset($post['referred'])?$post['referred']:'',
-					'internal_external'=>isset($post['internal_external'])?$post['internal_external']:'',
-					'search_doctor'=>isset($post['search_doctor'])?$post['search_doctor']:'',
-					'updated_at'=>date('Y-m-d H:i:s'),
-					);
-					//echo '<pre>';print_r($tab4);exit;
-						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab4);
+					$tab11=array(
+						'treatment_id'=>$post['department_name'],
+						'doct_id'=>$post['department_doctors'],
+						);
+						
+						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$tab11);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Referral details successfully Updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5));
+							$this->session->set_flashdata('success',"Assign details successfully Updated.");
+								if(isset($post['op']) && $post['op']==1){
+										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
+									}else{
+									redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+									}
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(4));
+									if(isset($post['op']) && $post['op']==1){
+										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($post['b_id']));
+									}else{
+									redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+									}
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -575,7 +576,7 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=3){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
+					echo '<pre>';print_r($post);exit;
 					$billing=array(
 					'patient_payer_deposit_amount'=>isset($post['patient_payer_deposit_amount'])?$post['patient_payer_deposit_amount']:'',
 					'payment_mode'=>isset($post['payment_mode'])?$post['payment_mode']:'',
@@ -1360,6 +1361,42 @@ class Resources extends CI_Controller {
 					redirect('dashboard');
 				}
 			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function billcompleted()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$billing=array(
+					'patient_payer_deposit_amount'=>isset($post['patient_payer_deposit_amount'])?$post['patient_payer_deposit_amount']:'',
+					'payment_mode'=>isset($post['payment_mode'])?$post['payment_mode']:'',
+					'bill_amount'=>isset($post['bill_amount'])?$post['bill_amount']:'',
+					'received_form'=>isset($post['received_form'])?$post['received_form']:'',
+					'completed'=>1,
+					'updated_at'=>date('Y-m-d H:i:s')
+					);
+					//echo '<pre>';print_r($billing);exit;
+						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Bill details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
+							
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
+							
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
