@@ -368,7 +368,7 @@ class Resources extends CI_Controller {
 									if(isset($post['op']) && $post['op']==1){
 										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($post['b_id']));
 									}else{
-									redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+									redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));
 									}
 						}
 				}else{
@@ -732,9 +732,15 @@ class Resources extends CI_Controller {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
+					if(isset($post['op']) && $post['op']==1){
+						$billing_id=isset($post['b_id'])?$post['b_id']:'';
+					}else{
+						$billing=array('p_id'=>isset($post['pid'])?$post['pid']:'');
+						$billing_id	=$this->Resources_model->update_all_patient_billing_details($billing);
+						}
 					$updating=array(
 						'p_id'=>isset($post['pid'])?$post['pid']:'',
-						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'b_id'=>$billing_id,
 						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
 						'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
 						'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
@@ -756,7 +762,7 @@ class Resources extends CI_Controller {
 							if(isset($post['op']) && $post['op']==1){
 								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
 							}else{
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($billing_id));
 							}
 
 						}else{
@@ -765,7 +771,7 @@ class Resources extends CI_Controller {
 							if(isset($post['op']) && $post['op']==1){
 								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
 							}else{
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($post['b_id']));
+								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9));
 							}
 						}
 				}else{

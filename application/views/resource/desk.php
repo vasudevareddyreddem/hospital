@@ -57,13 +57,13 @@
                                           <a href="#tab_6_7" data-toggle="tab"> Socio- economic details </a>
                                        </li>
 									   
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
+                                       <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
                                           <a href="#tab_6_9" data-toggle="tab"> Vitals </a>
                                        </li>
-									   <li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
+									   <li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
                                           <a href="#tab_6_10" data-toggle="tab"> Assign  </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
+                                       <li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
                                           <a href="#tab_6_8" data-toggle="tab"> Billing Information </a>
                                        </li>
                                        
@@ -523,7 +523,85 @@
                                              <button class="btn btn-praimry " type="submit">Next</button>
                                           </form>
                                        </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_8">
+									   <div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_9">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
+                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+                                             <div class="row " >
+                                             <div class="table-responsive" >
+                                                <table class="table table-striped table-bordered table-hover  order-column">
+                                                   <thead>
+                                                      <tr>
+                                                         <th> Vitals </th>
+                                                         <th class="text-center" colspan="2"> Values  </th>
+                                                         <th class="text-center" colspan="2"> Others  </th>
+                                                         <th> Notes  </th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                      <tr>
+                                                         <th>Blood pressure </th>
+                                                         <td>Actuals</td>
+                                                         <td>Range</td>
+                                                         <th>Blood pressure site</th>
+                                                         <td>Positioning</td>
+                                                         <td></td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th>Temperature </th>
+                                                         <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
+                                                         <td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
+                                                         <th>Temperature site</th>
+                                                         <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
+                                                         <td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"> </td>
+                                                      </tr>
+                                                      <tr>
+                                                         <th> Pulse rate</th>
+                                                         <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
+                                                         <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
+                                                         </td>
+                                                         <th> Pulse rate site  </th>
+                                                         <td>
+                                                            <div class="row">					
+                                                               <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
+                                                               <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
+                                                            </div>
+                                                         </td>
+                                                         <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
+                                                      </tr>
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                             </div>
+                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                          </form>
+                                       </div>
+									   <div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_10">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="assign">
+                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
+                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
+                                             <div class="row">
+                                                <div class="form-group col-md-6">
+                                                   <label for="email">Consultant  Department</label>
+                                                   <select id="department_name" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
+                                                      <option value="">Select</option>
+                                                      <?php foreach($departments_list as $lis){ ?>
+                                                      <option value="<?php echo $lis['t_id']; ?>"><?php echo $lis['t_name']; ?></option>
+                                                      <?php } ?>
+                                                   </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                   <label for="email">Consultant name</label>
+                                                   <select id="department_doctors" name="department_doctors" class="form-control" >
+                                                      <option value="">Select Consultant</option>
+                                                   </select>
+                                                </div>
+                                                
+                                             </div>
+                                             <button class="btn btn-praimry" type="submit">Next</button>
+                                          </form>
+                                       </div>
+                                       <div class="tab-pane <?php if(isset($tab) && $tab==10){ echo "active";}?>" id="tab_6_8">
                                           <div class="col-md-12">
                                              <div class="panel tab-border card-topline-green">
                                                 <header class="panel-heading panel-heading-gray custom-tab ">
@@ -690,88 +768,8 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_9">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
-                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <div class="row " >
-                                             <div class="table-responsive" >
-                                                <table class="table table-striped table-bordered table-hover  order-column">
-                                                   <thead>
-                                                      <tr>
-                                                         <th> Vitals </th>
-                                                         <th class="text-center" colspan="2"> Values  </th>
-                                                         <th class="text-center" colspan="2"> Others  </th>
-                                                         <th> Notes  </th>
-                                                      </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                      <tr>
-                                                         <th>Blood pressure </th>
-                                                         <td>Actuals</td>
-                                                         <td>Range</td>
-                                                         <th>Blood pressure site</th>
-                                                         <td>Positioning</td>
-                                                         <td></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th>Temperature </th>
-                                                         <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
-                                                         <th>Temperature site</th>
-                                                         <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
-                                                         <td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"> </td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th> Pulse rate</th>
-                                                         <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
-                                                         </td>
-                                                         <th> Pulse rate site  </th>
-                                                         <td>
-                                                            <div class="row">					
-                                                               <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
-                                                               <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
-                                                            </div>
-                                                         </td>
-                                                         <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>
-                                             </div>
-                                             </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
-                                          </form>
-                                       </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==10){ echo "active";}?>" id="tab_6_10">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billing'); ?> " method="post"  id="billing">
-                                             <input type="hidden" id="patientid" name="patientid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <input type="hidden" id="billing_id" name="billing_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">Doctor  Department</label>
-                                                   <select id="department_name" name="department_name" onchange="get_doctor_list(this.value);" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <?php foreach($departments_list as $lis){ ?>
-                                                      <option value="<?php echo $lis['t_id']; ?>"><?php echo $lis['t_name']; ?></option>
-                                                      <?php } ?>
-                                                   </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">Doctor name</label>
-                                                   <select id="department_doctors" name="department_doctors" class="form-control" >
-                                                      <option value="">Select Doctor</option>
-                                                   </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">&nbsp;</label>
-                                                   <a href="javascript:void(0);" onclick="assign_doctore();" class="btn btn-praimry " >Assign</a>
-                                                   <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry">Print</a>
-                                                </div>
-                                             </div>
-                                             <a href="<?php echo base_url('resources/desk');?>" class="btn btn-praimry " >Completed</a>
-                                          </form>
-                                       </div>
+                                       
+                                       
                                        <!-- end-->
                                     </div>
                                  </div>
@@ -2758,6 +2756,28 @@ function apply_couponcode1(){
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'Notes can only consist of alphanumeric, space and dot'
+   					}
+   				}
+               }
+   			}
+   		
+   	})
+        
+   });
+   $(document).ready(function() {
+    
+       $('#assign').bootstrapValidator({
+   		fields: {
+   			department_name: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant Department is required'
+   					}
+   				}
+               },department_doctors: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Consultant name is required'
    					}
    				}
                }
