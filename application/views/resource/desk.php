@@ -608,11 +608,7 @@
                                                    <ul class="nav nav-tabs x-scrool">
                                                       <li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==''){ echo "active";}?>" href="#subtab1" data-toggle="tab" >Visit info</a>
                                                       </li>
-                                                      <li class="nav-item "><a class="<?php if(isset($subtab) && $subtab==2){ echo "active";}?>" href="#subtab2" data-toggle="tab">Order</a>
-                                                      </li>
-                                                      <li class="nav-item"><a class="<?php if(isset($subtab) && $subtab==3){ echo "active";}?>" href="#subtab3" data-toggle="tab">Bills</a>
-                                                      </li>
-                                                      <li class="nav-item"><a class=" <?php if(isset($subtab) && $subtab==4){ echo "active";}?>" href="#subtab4" data-toggle="tab">payer auth</a>
+                                                      <li class="nav-item"><a class="<?php if(isset($subtab) && $subtab==2){ echo "active";}?>" href="#subtab3" data-toggle="tab">Bills</a>
                                                       </li>
                                                    </ul>
                                                 </header>
@@ -643,37 +639,8 @@
                                                             <button class="btn btn-praimry " type="submit">Next</button>
                                                          </form>
                                                       </div>
-                                                      <div class="tab-pane <?php if(isset($subtab) && $subtab==2){ echo "active";}?>" id="subtab2">
-                                                         <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/orderinfo'); ?> " method="post"  id="orderinfo">
-                                                            <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                                            <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                                            <div class="row">
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Service type</label>
-                                                                  <input type="text" class="form-control" id="service_type"  name="service_type" placeholder="Enter Service type" value="<?php echo isset($billing_detailes['service_type'])?$billing_detailes['service_type']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Visit type</label>
-                                                                  <input type="text" class="form-control" id="visit_type"  name="visit_type" placeholder="Enter Visit type" value="<?php echo isset($billing_detailes['visit_type'])?$billing_detailes['visit_type']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Doctor</label>
-                                                                  <input type="text" class="form-control" id="doctor"  name="doctor" placeholder="Enter doctor Name" value="<?php echo isset($billing_detailes['doctor'])?$billing_detailes['doctor']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Payer</label>
-                                                                  <input type="text" class="form-control" id="payer"  name="payer" placeholder="Enter Payer" value="<?php echo isset($billing_detailes['payer'])?$billing_detailes['payer']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Price</label>
-                                                                  <input type="text" class="form-control" id="price"  name="price" placeholder="Enter Price" value="<?php echo isset($billing_detailes['price'])?$billing_detailes['price']:''; ?>">
-                                                               </div>
-                                                            </div>
-                                                            <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8)); ?>" class="btn btn-praimry ">Back</a>
-                                                            <button class="btn btn-praimry " type="submit">Next</button>
-                                                         </form>
-                                                      </div>
-                                                      <div class="tab-pane <?php if(isset($subtab) && $subtab==3){ echo "active";}?>" id="subtab3">
+                                                      
+                                                      <div class="tab-pane <?php if(isset($subtab) && $subtab==2){ echo "active";}?>" id="subtab3">
                                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="bills">
                                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -722,29 +689,17 @@
 																	</div>
 																	</div>
 																 </div>
-                                                            
+                                                            <?php if($billing_detailes['completed']!=1){ ?>
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
-                                                         </form>
+															<?php }else{ ?>
+															<a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry ">Print</a>
+                                                            <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-praimry ">Completed</a>
+                                                        
+															<?php } ?>                                                       
+														</form>
                                                       </div>
-                                                      <div class="tab-pane <?php if(isset($subtab) && $subtab==4){ echo "active";}?>" id="subtab4">
-                                                         <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/bills'); ?> " method="post"  id="bills">
-                                                            <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                                            <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                                            <div class="row">
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Sign with payer</label>
-                                                                  <input type="text" class="form-control" id="sign_with_payer"  name="sign_with_payer" placeholder="Enter Sign with payer" >
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">&nbsp;&nbsp;&nbsp;</label>
-                                                                  <a target="_blank" href="<?php echo base_url('resources/genrate_bill/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry form-control">Generate bill</a>
-                                                               </div>
-                                                            </div>
-                                                            <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(3)); ?>" class="btn btn-praimry ">Back</a>
-                                                            <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(9).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry ">Next</a>
-                                                         </form>
-                                                      </div>
+                                                      
                                                    </div>
                                                 </div>
                                              </div>
@@ -1120,11 +1075,12 @@
 															   
 															   
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
 											 <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']==1){ ?>
-                                             <a target="_blank" href="<?php echo base_url('resources/op_print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry " type="bitton">Print</a>
+                                             <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry " type="bitton">Print</a>
                                              <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-praimry " type="bitton">Completed</a>
-											 <?php } ?>
+											 <?php }else{ ?>
+											     <button class="btn btn-praimry " type="submit">Next</button>
+												<?php } ?>
 										  </form>
                                        </div> 
 									   
