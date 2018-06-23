@@ -496,7 +496,7 @@ class Resources extends CI_Controller {
 				if($admindetails['role_id']=3){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
+					//echo '<pre>';print_r($post);
 					if($post['bill_id']=='reschedule'){
 						$bill_type=$post['bill_id'];
 					}else{
@@ -506,22 +506,19 @@ class Resources extends CI_Controller {
 					'p_id'=>isset($post['pid'])?$post['pid']:'',
 					'visit_no'=>isset($post['visit_no'])?$post['visit_no']:'',
 					'visit_desc'=>isset($post['visit_desc'])?$post['visit_desc']:'',
-					'date_of_visit'=>isset($post['date_of_visit'])?$post['date_of_visit']:'',
-					'department'=>isset($post['department'])?$post['department']:'',
-					'docotr_name'=>isset($post['docotr_name'])?$post['docotr_name']:'',
-					'no_of_visits'=>isset($post['no_of_visits'])?$post['no_of_visits']:'',
-					'last_visiting_date'=>isset($post['last_visiting_date'])?$post['last_visiting_date']:'',
+					'service_type'=>isset($post['service_type'])?$post['service_type']:'',
+					'visit_type'=>isset($post['visit_type'])?$post['visit_type']:'',
 					'create_at'=>date('Y-m-d H:i:s'),
 					'type'=>isset($bill_type)?$bill_type:'new'
 					);
 					//echo '<pre>';print_r($billing);exit;
-						$update=$this->Resources_model->update_all_patient_billing_details($billing);
+						$update=$this->Resources_model->update_patient_billing_details($post['bill_id'],$billing);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Billing details successfully Updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8).'/'.base64_encode($update).'/'.base64_encode(2));
+							$this->session->set_flashdata('success',"Visit info details successfully Updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['bill_id']).'/'.base64_encode(2));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['bill_id']).'/'.base64_encode(1));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");

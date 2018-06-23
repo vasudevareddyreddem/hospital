@@ -629,33 +629,15 @@
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="email"> Visit description</label>
-                                                                  <textarea type="textarea" id="visit_desc" name="visit_desc" class="form-control"  placeholder=" Visit description" ><?php echo isset($billing_detailes['visit_desc'])?$billing_detailes['visit_desc']:''; ?></textarea>
+                                                                  <input type="text" id="visit_desc" name="visit_desc" class="form-control"  placeholder=" Visit description" value="<?php echo isset($billing_detailes['visit_desc'])?$billing_detailes['visit_desc']:''; ?>">
+                                                               </div>
+															   <div class="form-group col-md-6">
+                                                                  <label for="mobile">Service type</label>
+                                                                  <input type="text" class="form-control" id="service_type"  name="service_type" placeholder="Enter Service type" value="<?php echo isset($billing_detailes['service_type'])?$billing_detailes['service_type']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label class="">Date of visit</label>
-                                                                  <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                                     <input class="form-control" size="16" type="text" id="date_of_visit" name="date_of_visit" value="<?php echo isset($billing_detailes['date_of_visit'])?$billing_detailes['date_of_visit']:''; ?>">
-                                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                                  </div>
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Department</label>
-                                                                  <input type="text" class="form-control" id="department"  name="department" placeholder="Enter Department" value="<?php echo isset($billing_detailes['department'])?$billing_detailes['department']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">Doctor</label>
-                                                                  <input type="text" class="form-control" id="docotr_name"  name="docotr_name" placeholder="Enter Doctor Name" value="<?php echo isset($billing_detailes['docotr_name'])?$billing_detailes['docotr_name']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label for="mobile">No- of visits</label>
-                                                                  <input type="text" class="form-control" id="no_of_visits"  name="no_of_visits" placeholder="Enter No of visits" value="<?php echo isset($billing_detailes['no_of_visits'])?$billing_detailes['no_of_visits']:''; ?>">
-                                                               </div>
-                                                               <div class="form-group col-md-6">
-                                                                  <label class="">Last visit date</label>
-                                                                  <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                                     <input class="form-control" size="16" type="text" id="last_visiting_date" name="last_visiting_date" value="<?php echo isset($billing_detailes['last_visiting_date'])?$billing_detailes['last_visiting_date']:''; ?>">
-                                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                                  </div>
+                                                                  <label for="mobile">Visit type</label>
+                                                                  <input type="text" class="form-control" id="visit_type"  name="visit_type" placeholder="Enter Visit type" value="<?php echo isset($billing_detailes['visit_type'])?$billing_detailes['visit_type']:''; ?>">
                                                                </div>
                                                             </div>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
@@ -1645,35 +1627,14 @@ function apply_couponcode1(){
    					message: 'Visit Number can only consist of digits'
    					}
    				}
-               },
-   			department: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Department is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Department can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },docotr_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Doctor is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Doctor can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },no_of_visits: {
+               },service_type: {
                     validators: {	
 						notEmpty: {
-   						message: 'No- of visits is required'
+   						message: 'Service type is required'
    					},
    					regexp: {
-   					regexp: /^[0-9]*$/,
-   					message: 'No- of visits can only consist of digits'
+   					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+   					message:'Service type wont allow <> [] = % '
    					}
    				}
                },visit_desc: {
@@ -1687,14 +1648,14 @@ function apply_couponcode1(){
    					}
                    }
                },
-              payer_address: {
+              visit_type: {
                    validators: {
    					notEmpty: {
-   						message: 'Address is required'
+   						message: 'Visit type is required'
    					},
                        regexp: {
    					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-   					message:'Address wont allow <> [] = % '
+   					message:'Visit type wont allow <> [] = % '
    					}
                    }
                }
