@@ -66,6 +66,108 @@ class Users extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function addprescription()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['prescriptions_list']= $this->Users_model->get_all_prescription_lists($userdetails['hos_id'],$admindetails['a_id']);
+					$data['tab']= base64_decode($this->uri->segment(3));
+					$this->load->view('prescription/addprescription',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function view_manualprescription()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$p_id=base64_decode($this->uri->segment(3));
+					$data['prescriptions']= $this->Users_model->get_prescroption_list($p_id);
+					$patient_id= $this->Users_model->get_user_id($p_id);
+					$data['details']= $this->Users_model->get_user_details($patient_id['p_id']);
+					
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('prescription/manualprescription_view',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addpostprescription()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					$post=$this->input->post();
+					$add=array(
+						'hos_id'=>$userdetails['hos_id'],
+						'name'=>$post['name'],
+						'p_id'=>$post['id'],
+						'mobile'=>$post['mobile'],
+						'create_at'=>date('Y-m-d H:i:s'),
+						'status'=>1,
+						'create_by'=>$userdetails['a_id']
+						);
+						$save=$this->Users_model->saveprescription_details($add);
+						if(count($save)>0){
+							foreach($post['addmedicn'] as $list){
+								$addmedicines=array(
+								'p_id'=>$save,
+								'hos_id'=>$userdetails['hos_id'],
+								'medicine_name'=>$list['medicine'],
+								'dosage'=>$list['dosage'],
+								'usage_instructions'=>$list['usage_instructions'],
+								'qty'=>$list['qty'],
+								'amount'=>$list['amount'],
+								'create_at'=>date('Y-m-d H:i:s'),
+								'status'=>1,
+								'create_by'=>$userdetails['a_id']
+								);
+								//echo '<pre>';print_r($addmedicines);exit;
+								$this->Users_model->saveprescription_list($addmedicines);
+							
+							}
+								$this->session->set_flashdata('success',"prescription successfully added");
+								redirect('users/addprescription/'.base64_encode(1));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('users/addprescription');
+
+						}
+					echo '<pre>';print_r($post);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function completedprescription()
 	{	
 		if($this->session->userdata('userdetails'))

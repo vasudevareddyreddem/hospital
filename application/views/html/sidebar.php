@@ -241,6 +241,14 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('users/addprescription');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Add prescription</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('users/completedprescription');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Completed Prescription</span>

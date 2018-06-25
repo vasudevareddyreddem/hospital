@@ -73,6 +73,42 @@ class Users_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	
+	public  function saveprescription_details($data){
+		$this->db->insert('prescription_manual', $data);
+		return $insert_id = $this->db->insert_id();
+		
+	}
+	public  function saveprescription_list($data){
+		$this->db->insert('manual_prescription_list', $data);
+		return $insert_id = $this->db->insert_id();
+	}
+	
+	public  function get_all_prescription_lists($hos_id,$a_id){
+		
+		$this->db->select('prescription_manual.*,patients_list_1.pid,patients_list_1.card_number,patients_list_1.dob,,patients_list_1.mobile as mobile_number')->from('prescription_manual');	
+		$this->db->join('patients_list_1 ', 'patients_list_1.pid = prescription_manual.p_id', 'left');
+		$this->db->where('prescription_manual.hos_id', $hos_id);
+		$this->db->where('prescription_manual.create_by', $a_id);
+        return $this->db->get()->result_array();
+	}
+	
+	public  function get_prescroption_list($id){
+		$this->db->select('manual_prescription_list.*')->from('manual_prescription_list');	
+		$this->db->where('manual_prescription_list.p_id', $id);
+        return $this->db->get()->result_array();
+	}
+	public  function get_user_details($id){
+		$this->db->select('prescription_manual.*,patients_list_1.pid,patients_list_1.card_number,patients_list_1.dob,,patients_list_1.mobile as mobile_number')->from('prescription_manual');	
+		$this->db->join('patients_list_1 ', 'patients_list_1.pid = prescription_manual.p_id', 'left');
+		$this->db->where('prescription_manual.p_id', $id);
+        return $this->db->get()->row_array();
+	}
+	public  function get_user_id($id){
+		$this->db->select('prescription_manual.p_id')->from('prescription_manual');	
+		$this->db->where('prescription_manual.id', $id);
+        return $this->db->get()->row_array();
+	}
+	
 	
 
 }
