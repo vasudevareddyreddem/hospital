@@ -20,10 +20,10 @@
                <header class="panel-heading panel-heading-gray custom-tab ">
                   <ul class="nav nav-tabs x-scrool">
 				    
-					 <li class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>">OP Registration</a>
+					 <li style="border-right:2px solid #fff" class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>">OP Registration</a>
                      </li>
 					 
-                     <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13  && $tab!=0){ echo "active";}?>">IP New-Registration</a>
+                     <li style="border-right:2px solid #fff" class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13  && $tab!=0){ echo "active";}?>">IP New-Registration</a>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Reschedule/Repeated -Registration</a>
                      </li>
@@ -529,7 +529,40 @@
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <div class="row " >
                                              <div class="table-responsive" >
-                                                <table class="table table-striped table-bordered table-hover  order-column">
+											 <table class="table table-bordered ">
+						<tr>
+							<th class="text-center">Vitals</th>
+							<th class="text-center">Actuals</th>
+							<th class="text-center">Range</th>
+						</tr>
+						<tr>
+							<th class="text-center">BP</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">120/80</th>
+						</tr>
+						<tr>
+							<th class="text-center">Pulse</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-80</th>
+						</tr>
+						<tr>
+							<th class="text-center">FBS/RBS</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-110	</th>
+						</tr>
+						<tr>
+							<th class="text-center">Temp</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">98.6 F</th>
+						</tr>
+						<tr>
+							<th class="text-center">Weight</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-80</th>
+						</tr>
+						
+					</table>
+                                               <!-- <table class="table table-striped table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
                                                          <th> Vitals </th>
@@ -570,10 +603,10 @@
                                                          <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
                                                       </tr>
                                                    </tbody>
-                                                </table>
+                                                </table>-->
                                              </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-priamry pull-right " type="submit">Next</button>
                                           </form>
                                        </div>
 									   <div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_10">
@@ -722,14 +755,10 @@
                         </div>
                      </div>
                      <div class="tab-pane" id="about">
-                        <div class="card card-topline-red">
+                        <div class="card">
                            <div class="card-head">
                               <header>Patients List</header>
-                              <div class="tools">
-                                 <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-                                 <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-                                 <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
-                              </div>
+                             
                            </div>
                            <div class="card-body table-responsive ">
                               <?php if(isset($patients_list) && count($patients_list)>0){ ?>
@@ -794,7 +823,7 @@
                         </div>
                      </div>
                      <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>" id="aboutop">
-                        <div class="card card-topline-red">
+                        <div class="card ">
                            <div class="card-head">
                               <header>Patients Details</header>
                              
@@ -969,7 +998,40 @@
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row table-responsive" >
-                                                <table  class="table table-striped table-bordered table-hover  order-column">
+					<table class="table table-bordered ">
+						<tr>
+							<th class="text-center">Vitals</th>
+							<th class="text-center">Actuals</th>
+							<th class="text-center">Range</th>
+						</tr>
+						<tr>
+							<th class="text-center">BP</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">120/80</th>
+						</tr>
+						<tr>
+							<th class="text-center">Pulse</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-80</th>
+						</tr>
+						<tr>
+							<th class="text-center">FBS/RBS</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-110	</th>
+						</tr>
+						<tr>
+							<th class="text-center">Temp</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">98.6 F</th>
+						</tr>
+						<tr>
+							<th class="text-center">Weight</th>
+							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
+							<th class="text-center">70-80</th>
+						</tr>
+						
+					</table>
+                                               <!-- <table  class="table  table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
                                                          <th> Vitals </th>
@@ -1018,9 +1080,9 @@
                                                          <td><div class="form-group">  <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </div></td>
                                                       </tr>
                                                    </tbody>
-                                                </table>
+                                                </table>-->
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-primary pull-right" type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==13){ echo "active";}?>" id="tab_6_22">

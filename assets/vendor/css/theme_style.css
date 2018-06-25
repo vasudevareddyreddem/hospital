@@ -6680,9 +6680,9 @@ nav-tabs>li {
     border-radius: 4px 4px 0 0;
 }
 .nav-tabs>li a.active, .nav-tabs>li a.active:focus, .nav-tabs>li a.active:hover {
-    color: #555;
+    color: #fff;
     cursor: default;
-    background-color: #fff;
+    background-color: #003f7f;
     border-bottom-color: transparent;
 }
 /****************************************************************

@@ -16,6 +16,7 @@
    min-height:300px;
    margin-top:50px;
    }
+  
 </style>
 
 <?php //echo '<pre>';print_r($patient_details);exit; ?>
@@ -24,13 +25,12 @@
 <div class="page-content">
 <div class="row">
 <div class="col-md-12">
+
 <div class="card card-topline-aqua">
-   <div class="card-head">
-      <header>Start Consultation</header>
-   </div>
-   <div class="card-body row">
-      <div class="container">
-         <div class="row">
+<div class="card-head">
+   <header>Start Consultation</header>
+</div>
+		<div class="row py-4 px-2">
             <div class="panel-group col-md-9" id="accordion">
                <div class="panel panel-default">
                   <div class="panel-heading">
@@ -88,14 +88,6 @@
                <a target="_blank" href="<?php echo base_url('resources/patient_report_details/'.base64_encode($patient_id));?>" class="btn btn-sm btn-success" type="button">Previous Investigation Reports</a>
             </div>
          </div>
-      </div>
-   </div>
-   <div class="clearfix">&nbsp;</div>
-</div>
-<div class="card card-topline-aqua">
-<div class="card-head">
-   <header>Start Consultation</header>
-</div>
 <div class="card-body row">
    <div id="smartwizard" class="col-md-12">
       <ul>
@@ -117,7 +109,43 @@
                </div>
             </div>
             <div class="row clearfix">
-               <?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
+			
+				<div class="col-md-6 py-4">
+					<table class="table table-bordered ">
+						<tr>
+							<th class="text-center">Vitals</th>
+							<th class="text-center">Actuals</th>
+							<th class="text-center">Range</th>
+						</tr>
+						<tr>
+							<th class="text-center">BP</th>
+							<th class="text-center">111</th>
+							<th class="text-center">120/80</th>
+						</tr>
+						<tr>
+							<th class="text-center">Pulse</th>
+							<th class="text-center">75</th>
+							<th class="text-center">70-80</th>
+						</tr>
+						<tr>
+							<th class="text-center">FBS/RBS</th>
+							<th class="text-center">75</th>
+							<th class="text-center">70-110	</th>
+						</tr>
+						<tr>
+							<th class="text-center">Temp</th>
+							<th class="text-center">75</th>
+							<th class="text-center">98.6 F</th>
+						</tr>
+						<tr>
+							<th class="text-center">Weight</th>
+							<th class="text-center">75</th>
+							<th class="text-center">70-80</th>
+						</tr>
+						
+					</table>
+				</div>
+              <!-- <?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
                <?php $cnt=0;foreach($encounters_list as $list){
 									//echo "<pre>";print_r($list);exit; 
 
@@ -138,7 +166,7 @@
                </div>
                <?php } ?>
                <?php $cnt++;} ?>
-               <?php } ?>
+               <?php } ?>-->
                <div class="clearfix">&nbsp;</div>
                <div class="container">
                   <div class="control-group" id="fields">
@@ -156,7 +184,8 @@
                               </button>
                               </span>
                            </div>
-                           <button type="submit" >Send</button>
+						<div class="clearfix">&nbsp;</div>
+                           <button class="btn btn-primary " type="submit" >Send</button>
                         </form>
                         <br>
                      </div>

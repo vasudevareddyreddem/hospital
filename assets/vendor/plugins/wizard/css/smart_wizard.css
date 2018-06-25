@@ -85,7 +85,7 @@
 
 .sw-theme-default > ul.step-anchor > li > a::after {
     content: "";
-    background: #4285F4;
+    /* background: #4285F4; */
  /* #5bc0de #4285F4*/
     height: 2px;
     position: absolute;
@@ -101,8 +101,8 @@
 
 .sw-theme-default > ul.step-anchor > li.active > a {
     border: none !important;
-    color: #4285F4 !important;
-    background: transparent !important;
+    color: #fff !important;
+    background: #003f7f !important;
 }
 
 .sw-theme-default > ul.step-anchor > li.active > a::after {
@@ -113,8 +113,8 @@
 
 .sw-theme-default > ul.step-anchor > li.done > a {
     border: none !important;
-    color: #000 !important;
-    background: transparent !important;
+    color: #fff !important;
+    background: #5cb85c !important;
 }
 
 .sw-theme-default > ul.step-anchor > li.done > a::after {
