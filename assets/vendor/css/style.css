@@ -1,11 +1,7 @@
-/*
- *  Document   : style.css
- *  Author     : RedStar Theme
- *  Description: The common theme stylesheet
- */
-
-
-/* Doctor list style*/
+.nav-tabs .nav-item {
+    margin-bottom: -1px;
+    background: #ddd;
+}
 .col-sm-6{
 	  word-wrap: break-word;
 }
