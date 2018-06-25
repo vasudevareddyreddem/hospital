@@ -28,14 +28,16 @@
                                             <tr>
 												<th style="display:none"></th>
 												<th>HSN</th>
-												<th>Other Code</th>
+												<th>MFR</th>
 												<th>Medicine Name</th>
+												<th>Medicine Type</th>
+												<th>Expiry Date</th>
 												<th>Dosage</th>
 												<th>QTY</th>
 												<th>Amount</th>
 												<th>SGST</th>
 												<th>CGST</th>
-												<th>Total Amount</th>
+												<th>MRP</th>
 												<th>Action</th>
                                             </tr>
                                         </thead>
@@ -46,6 +48,8 @@
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','hsn');" value="<?php echo htmlentities($list['hsn']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','othercode');" value="<?php echo htmlentities($list['othercode']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_name');" value="<?php echo htmlentities($list['medicine_name']); ?>"></td>
+                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_type');" value="<?php echo htmlentities($list['medicine_type']); ?>"></td>
+                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','expiry_date');" value="<?php echo htmlentities($list['expiry_date']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','dosage');" value="<?php echo htmlentities($list['dosage']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','qty');" value="<?php echo htmlentities($list['qty']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','amount');" value="<?php echo htmlentities($list['amount']); ?>"></td>
@@ -111,7 +115,9 @@
 							{ "targets": 3, "orderDataType": "dom-text", "type": "string" },
 							{ "targets": 4, "orderDataType": "dom-text", "type": "string" },
 							{ "targets": 5, "orderDataType": "dom-text", "type": "string" },
-							{ "targets": 6, "orderDataType": "dom-text", "type": "string" }
+							{ "targets": 6, "orderDataType": "dom-text", "type": "string" },
+							{ "targets": 7, "orderDataType": "dom-text", "type": "string" },
+							{ "targets": 8, "orderDataType": "dom-text", "type": "string" }
 						],
 						
 				});

@@ -114,6 +114,8 @@ class Medicine extends CI_Controller {
 						'hsn'=>$list['hsn'],
 						'othercode'=>$list['othercode'],
 						'medicine_name'=>$list['medicine'],
+						'medicine_type'=>$list['medicine_type'],
+						'expiry_date'=>$list['expiry_date'],
 						'dosage'=>$list['dosage'],
 						'qty'=>$list['qty'],
 						'amount'=>$list['amount'],
@@ -245,6 +247,16 @@ class Medicine extends CI_Controller {
 					}if($post['field_name']=='dosage'){
 						$update=array(
 						'dosage'=>$post['med_name'],
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					}if($post['field_name']=='medicine_type'){
+						$update=array(
+						'medicine_type'=>$post['med_name'],
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					}if($post['field_name']=='expiry_date'){
+						$update=array(
+						'expiry_date'=>$post['med_name'],
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
 					}

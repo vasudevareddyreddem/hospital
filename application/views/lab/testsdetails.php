@@ -43,7 +43,7 @@
 								</div>
 								<div class="col-md-6">
 									<label>Type</label>
-									<select class="form-control" name="type" id="type">
+									<select class="form-control" onchange="get_labtype(this.value);" name="type" id="type">
 									<option value="">Select</option>
 									<option value="Lab">Lab</option>
 									<option value="Radiology">Radiology</option>
@@ -52,6 +52,10 @@
 								<div class="col-md-6">
 									<label>Test Name</label>
 								<input class="form-control" id="test_name" name="test_name" value="" type="text" placeholder="Test Name">
+								</div>
+								<div class="col-md-6" id="modality_id" style="display:none">
+									<label>Modality</label>
+									<input class="form-control" id="modality" name="modality" value="" type="text" placeholder="Enter Modality">
 								</div>
 								<div class="col-md-6">
 									<label> Duration</label>
@@ -87,7 +91,8 @@
                                             <tr>
 												<th>Test Type Name</th>
 												<th>Type</th>
-												<th> Test Name</th>
+												<th>Test Name</th>
+												<th>Modality</th>
 												<th>Duration</th>
 												<th>Amount</th>
 												<th>Short Form</th>
@@ -102,6 +107,7 @@
                                                 <td><?php echo htmlentities($list['type_name']); ?></td>
                                                 <td><?php echo htmlentities($list['type']); ?></td>
                                                 <td><?php echo htmlentities($list['t_name']); ?></td>
+                                                <td><?php echo htmlentities($list['modality']); ?></td>
                                                 <td><?php echo htmlentities($list['duration']); ?></td>
                                                 <td><?php echo htmlentities($list['amuont']); ?></td>
                                                 <td><?php echo htmlentities($list['t_short_form']); ?></td>
@@ -178,6 +184,15 @@
    </div>
 </div>
 <script>
+
+function get_labtype(value){
+	if(value=='Radiology'){
+		$('#modality_id').show();
+	}else{
+		$('#modality_id').hide();
+	}
+	
+}
 $(document).ready(function() {
     $('#example4').DataTable( {
         "order": [[ 2, "desc" ]]
@@ -222,6 +237,16 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Name can only consist of alphanumeric, space and dot'
+					}
+				}
+            },modality: {
+                 validators: {
+					notEmpty: {
+						message: 'Modality is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Modality can only consist of alphanumeric, space and dot'
 					}
 				}
             },duration: {

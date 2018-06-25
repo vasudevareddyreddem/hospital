@@ -41,7 +41,7 @@
 								</div>
 								<div class="col-md-6">
 									<label>Type</label>
-									<select class="form-control" name="type" id="type">
+									<select class="form-control" name="type" onchange="get_labtype(this.value);" id="type">
 									<option value="">Select</option>
 									<option value="Lab" <?php if($tet_details['type']=='Lab'){ echo "selected"; } ?>>Lab</option>
 									<option value="Radiology" <?php if($tet_details['type']=='Radiology'){ echo "selected"; } ?>>Radiology</option>
@@ -51,6 +51,15 @@
 									<label> Name</label>
 								<input class="form-control" id="test_name" name="test_name" value="<?php echo isset($tet_details['t_name'])?$tet_details['t_name']:''; ?>" type="text" placeholder="Name">
 								</div>
+								<?php if($tet_details['modality']!=''){ 
+										$show='';
+										}else{
+										$show='display:none';
+										} ?>										
+									<div class="col-md-6" id="modality_id" style="<?php echo $show; ?>">
+									<label>Modality</label>
+									<input class="form-control" id="modality" name="modality" value="<?php echo isset($tet_details['modality'])?$tet_details['modality']:''; ?>" type="text" placeholder="Enter Modality">
+									</div>
 								<div class="col-md-6">
 									<label> Duration</label>
 									<input class="form-control" id="duration" name="duration" value="<?php echo isset($tet_details['duration'])?$tet_details['duration']:''; ?>" type="text" placeholder="Duration">
@@ -86,6 +95,17 @@
    </div>
 </div>
 <script>
+
+function get_labtype(value){
+	if(value=='Radiology'){
+		$('#modality_id').show();
+		$('#modality').val('');
+	}else{
+		$('#modality_id').hide();
+		$('#modality').val('');
+	}
+	
+}
 $(document).ready(function() {
     $('#addtreatment').bootstrapValidator({
         
@@ -114,7 +134,18 @@ $(document).ready(function() {
 					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
-            },duration: {
+            },modality: {
+                 validators: {
+					notEmpty: {
+						message: 'Modality is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Modality can only consist of alphanumeric, space and dot'
+					}
+				}
+            },			
+			duration: {
                  validators: {
 					notEmpty: {
 						message: 'Duration is required'

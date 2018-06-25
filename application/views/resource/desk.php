@@ -1345,12 +1345,12 @@ function apply_couponcode1(){
    					type: 'POST',
    					success: function (data) {
 						//console.log(data);return false;
-   						$('#department_doctors').empty();
+   						$('#department_doctors1').empty();
    						$('#department_doctors2').empty();
-   						$('#department_doctors').append("<option>select</option>");
+   						$('#department_doctors1').append("<option>select</option>");
    						$('#department_doctors2').append("<option>select</option>");
    						for(i=0; i<data.list.length; i++) {
-   							$('#department_doctors').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
+   							$('#department_doctors1').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
    							$('#department_doctors2').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
                          
    						}
