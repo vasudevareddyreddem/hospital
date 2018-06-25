@@ -530,80 +530,39 @@
                                              <div class="row " >
                                              <div class="table-responsive" >
 											 <table class="table table-bordered ">
-						<tr>
-							<th class="text-center">Vitals</th>
-							<th class="text-center">Actuals</th>
-							<th class="text-center">Range</th>
-						</tr>
-						<tr>
-							<th class="text-center">BP</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">120/80</th>
-						</tr>
-						<tr>
-							<th class="text-center">Pulse</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-80</th>
-						</tr>
-						<tr>
-							<th class="text-center">FBS/RBS</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-110	</th>
-						</tr>
-						<tr>
-							<th class="text-center">Temp</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">98.6 F</th>
-						</tr>
-						<tr>
-							<th class="text-center">Weight</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-80</th>
-						</tr>
-						
-					</table>
-                                               <!-- <table class="table table-striped table-bordered table-hover  order-column">
-                                                   <thead>
-                                                      <tr>
-                                                         <th> Vitals </th>
-                                                         <th class="text-center" colspan="2"> Values  </th>
-                                                         <th class="text-center" colspan="2"> Others  </th>
-                                                         <th> Notes  </th>
-                                                      </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                      <tr>
-                                                         <th>Blood pressure </th>
-                                                         <td>Actuals</td>
-                                                         <td>Range</td>
-                                                         <th>Blood pressure site</th>
-                                                         <td>Positioning</td>
-                                                         <td></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th>Temperature </th>
-                                                         <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range"> </td>
-                                                         <th>Temperature site</th>
-                                                         <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "> </td>
-                                                         <td> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"> </td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th> Pulse rate</th>
-                                                         <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </td>
-                                                         <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"> 
-                                                         </td>
-                                                         <th> Pulse rate site  </th>
-                                                         <td>
-                                                            <div class="row">					
-                                                               <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
-                                                               <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
-                                                            </div>
-                                                         </td>
-                                                         <td> <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>-->
+													<tr>
+														<th class="text-center">Vitals</th>
+														<th class="text-center">Actuals</th>
+														<th class="text-center">Range</th>
+													</tr>
+													<tr>
+														<th class="text-center">BP</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="bp" id="bp" class="form-control" value="<?php echo isset($vitals_detailes['bp'])?$vitals_detailes['bp']:''; ?>"></th>
+														<th class="text-center">120/80</th>
+													</tr>
+													<tr>
+														<th class="text-center">Pulse</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="pulse" id="pulse" class="form-control" value="<?php echo isset($vitals_detailes['pulse'])?$vitals_detailes['pulse']:''; ?>"></th>
+														<th class="text-center">70-80</th>
+													</tr>
+													<tr>
+														<th class="text-center">FBS/RBS</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="fbs_rbs" id="fbs_rbs" class="form-control" value="<?php echo isset($vitals_detailes['fbs_rbs'])?$vitals_detailes['fbs_rbs']:''; ?>"></th>
+														<th class="text-center">70-110	</th>
+													</tr>
+													<tr>
+														<th class="text-center">Temp</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="temp" id="temp" class="form-control" value="<?php echo isset($vitals_detailes['temp'])?$vitals_detailes['temp']:''; ?>"></th>
+														<th class="text-center">98.6 F</th>
+													</tr>
+													<tr >
+														<th class="text-center">Weight</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
+														<th class="text-center">70-80</th>
+													</tr>
+													
+												</table>
+                                               
                                              </div>
                                              </div>
                                              <button class="btn btn-priamry pull-right " type="submit">Next</button>
@@ -998,39 +957,39 @@
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
                                              <div class="row table-responsive" >
-					<table class="table table-bordered ">
-						<tr>
-							<th class="text-center">Vitals</th>
-							<th class="text-center">Actuals</th>
-							<th class="text-center">Range</th>
-						</tr>
-						<tr>
-							<th class="text-center">BP</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">120/80</th>
-						</tr>
-						<tr>
-							<th class="text-center">Pulse</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-80</th>
-						</tr>
-						<tr>
-							<th class="text-center">FBS/RBS</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-110	</th>
-						</tr>
-						<tr>
-							<th class="text-center">Temp</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">98.6 F</th>
-						</tr>
-						<tr>
-							<th class="text-center">Weight</th>
-							<th class="text-center"><input style="border-radius:0px;" type="text" class="form-control"></th>
-							<th class="text-center">70-80</th>
-						</tr>
-						
-					</table>
+												<table class="table table-bordered ">
+													<tr>
+														<th class="text-center">Vitals</th>
+														<th class="text-center">Actuals</th>
+														<th class="text-center">Range</th>
+													</tr>
+													<tr>
+														<th class="text-center">BP</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="bp" id="bp" class="form-control" value="<?php echo isset($vitals_detailes['bp'])?$vitals_detailes['bp']:''; ?>"></th>
+														<th class="text-center">120/80</th>
+													</tr>
+													<tr>
+														<th class="text-center">Pulse</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="pulse" id="pulse" class="form-control" value="<?php echo isset($vitals_detailes['pulse'])?$vitals_detailes['pulse']:''; ?>"></th>
+														<th class="text-center">70-80</th>
+													</tr>
+													<tr>
+														<th class="text-center">FBS/RBS</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="fbs_rbs" id="fbs_rbs" class="form-control" value="<?php echo isset($vitals_detailes['fbs_rbs'])?$vitals_detailes['fbs_rbs']:''; ?>"></th>
+														<th class="text-center">70-110	</th>
+													</tr>
+													<tr>
+														<th class="text-center">Temp</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="temp" id="temp" class="form-control" value="<?php echo isset($vitals_detailes['temp'])?$vitals_detailes['temp']:''; ?>"></th>
+														<th class="text-center">98.6 F</th>
+													</tr>
+													<tr >
+														<th class="text-center">Weight</th>
+														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
+														<th class="text-center">70-80</th>
+													</tr>
+													
+												</table>
                                                <!-- <table  class="table  table-bordered table-hover  order-column">
                                                    <thead>
                                                       <tr>
@@ -1472,85 +1431,49 @@ function apply_couponcode1(){
     
        $('#vitals').bootstrapValidator({
    		fields: {
-   			tep_actuals: {
+   			bp: {
                     validators: {
    					notEmpty: {
-   						message: 'Actualsis required'
+   						message: 'BP required'
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Actualsis can only consist of alphanumeric, space and dot'
+					message: 'BP can only consist of alphanumeric, space and dot'
 					}
    				}
-               },tep_range: {
+               },pulse: {
                     validators: {
    					notEmpty: {
-   						message: 'Range is required'
+   						message: 'Pulse is required'
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Range can only consist of alphanumeric, space and dot'
+					message: 'Pulse can only consist of alphanumeric, space and dot'
 					}
    				}
-               },temp_site_positioning: {
+               },fbs_rbs: {
                     validators: {
    					notEmpty: {
-   						message: 'Positioning is required'
+   						message: 'FBS/RBS is required'
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Positioning can only consist of alphanumeric, space and dot'
+					message: 'FBS/RBS can only consist of alphanumeric, space and dot'
 					}
    				}
-               },notes: {
+               },temp: {
                     validators: {
    					notEmpty: {
-   						message: 'Notes is required'
+   						message: 'Temperature  is required'
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Notes can only consist of alphanumeric, space and dot'
+					message: 'Temperature can only consist of alphanumeric, space and dot'
 					}
    				}
-               },pulse_actuals: {
+               },weight: {
                     validators: {
    					notEmpty: {
-   						message: 'Actuals is required'
+   						message: 'Weight is required'
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Actuals can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },pulse_range: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Range is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Range can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },pulse_rate_rhythm: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Rhythm is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Rhythm can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },pulse_rate_vol: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Vol is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Vol can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },notes1: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Notes is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Notes can only consist of alphanumeric, space and dot'
+					message: 'Weight can only consist of alphanumeric, space and dot'
 					}
    				}
                }
@@ -2600,10 +2523,6 @@ function apply_couponcode1(){
                    validators: {
    					notEmpty: {
    						message: 'State is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumeric, space and dot'
    					}
    				
    				}
@@ -2685,95 +2604,50 @@ function apply_couponcode1(){
     
        $('#vitals_1').bootstrapValidator({
    		fields: {
-   			tep_actuals: {
+   			bp: {
                     validators: {
    					notEmpty: {
-   						message: 'Actuals is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Actuals can only consist of alphanumeric, space and dot'
-   					}
+   						message: 'BP required'
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'BP can only consist of alphanumeric, space and dot'
+					}
    				}
-               },tep_range: {
+               },pulse: {
                     validators: {
    					notEmpty: {
-   						message: 'Range is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Range can only consist of alphanumeric, space and dot'
-   					}
+   						message: 'Pulse is required'
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Pulse can only consist of alphanumeric, space and dot'
+					}
    				}
-               },temp_site_positioning: {
+               },fbs_rbs: {
                     validators: {
    					notEmpty: {
-   						message: 'Positioning is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Positioning can only consist of alphanumeric, space and dot'
-   					}
+   						message: 'FBS/RBS is required'
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'FBS/RBS can only consist of alphanumeric, space and dot'
+					}
    				}
-               },notes: {
+               },temp: {
                     validators: {
    					notEmpty: {
-   						message: 'Notes is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Notes can only consist of alphanumeric, space and dot'
-   					}
+   						message: 'Temperature  is required'
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Temperature can only consist of alphanumeric, space and dot'
+					}
    				}
-               },pulse_actuals: {
+               },weight: {
                     validators: {
    					notEmpty: {
-   						message: 'Actuals is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Actuals can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },pulse_range: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Range is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Range can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },pulse_rate_rhythm: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Rhythm is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Rhythm can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },pulse_rate_vol: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Vol is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Vol can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },notes1: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Notes is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Notes can only consist of alphanumeric, space and dot'
-   					}
+   						message: 'Weight is required'
+   					},regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Weight can only consist of alphanumeric, space and dot'
+					}
    				}
                }
    			}

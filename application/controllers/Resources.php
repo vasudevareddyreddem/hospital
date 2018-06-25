@@ -703,15 +703,11 @@ class Resources extends CI_Controller {
 					$updating=array(
 						'p_id'=>isset($post['pid'])?$post['pid']:'',
 						'b_id'=>$billing_id,
-						'tep_actuals'=>isset($post['tep_actuals'])?$post['tep_actuals']:'',
-						'tep_range'=>isset($post['tep_range'])?$post['tep_range']:'',
-						'temp_site_positioning'=>isset($post['temp_site_positioning'])?$post['temp_site_positioning']:'',
-						'notes'=>isset($post['notes'])?$post['notes']:'',
-						'pulse_actuals'=>isset($post['pulse_actuals'])?$post['pulse_actuals']:'',
-						'pulse_range'=>isset($post['pulse_range'])?$post['pulse_range']:'',
-						'pulse_rate_rhythm'=>isset($post['pulse_rate_rhythm'])?$post['pulse_rate_rhythm']:'',
-						'pulse_rate_vol'=>isset($post['pulse_rate_vol'])?$post['pulse_rate_vol']:'',
-						'notes1'=>isset($post['notes1'])?$post['notes1']:'',
+						'bp'=>isset($post['bp'])?$post['bp']:'',
+						'pulse'=>isset($post['pulse'])?$post['pulse']:'',
+						'fbs_rbs'=>isset($post['fbs_rbs'])?$post['fbs_rbs']:'',
+						'temp'=>isset($post['temp'])?$post['temp']:'',
+						'weight'=>isset($post['weight'])?$post['weight']:'',
 						'create_at'=>date('Y-m-d H:i:s'),
 						'date'=>date('Y-m-d')
 						);

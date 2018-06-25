@@ -797,7 +797,7 @@
                                     &nbsp;
                                  </div>
                                  <div class="col-md-6">
-                                    <label>Internal code</label>
+                                    <label>Test Type</label>
                                     <select onchange="labtest_serach(this.value)" id="internal_code" name="internal_code" class="form-control  select2" style="width:100%">
                                     </select>
                                  </div>
@@ -816,7 +816,9 @@
                                  <table class="table table-bordered">
                                     <thead>
                                        <tr>
-                                          <th> Test Name</th>
+                                          <th>Test Name</th>
+                                          <th>Type</th>
+                                          <th>Modality</th>
                                           <th>Short form</th>
                                           <th>Description </th>
                                           <th>Select</th>
@@ -1063,7 +1065,7 @@ function addtestlist(){
 						$('#testlist').empty();
 						for(i=0; i<data.text.length; i++) {
 						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
-						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
+						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type+"</td><td>"+data.text[i].modality+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
 
 						}
 						}
@@ -1082,6 +1084,7 @@ function addtestlist(){
 					dataType: 'json',
 					type: 'POST',
 					success: function (data) {
+						console.log(data);
 						if(data.msg==1){
 						$('#lab_test_type_list').empty();
 						for(i=0; i<data.text.length; i++) {

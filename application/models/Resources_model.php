@@ -248,7 +248,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_test_list($type,$test_type_id){
-		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.modality,lab_test_list.type,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
 		$this->db->where('lab_test_list.type',$type);
 		$this->db->where('lab_test_list.test_type',$test_type_id);
 		$this->db->where('lab_test_list.status',1);
