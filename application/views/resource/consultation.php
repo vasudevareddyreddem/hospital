@@ -104,14 +104,15 @@
                <div class="col-md-1"> 
                   <span class="btn btn-xs btn-info" data-toggle="modal" data-target="#squarespaceModal">View All</span>
                </div>
-               <div class="col-md-1"> 
-                  <span  data-toggle="modal" data-target="#addnew" class="btn btn-xs btn-info">Add New</span>
-               </div>
             </div>
             <div class="row clearfix">
-			
-				<div class="col-md-6 py-4">
+			<?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
+               <?php $cnt=0;foreach($encounters_list as $list){
+				?>
+               <?php if($cnt<=3){ ?>
+				<div class="col-md-4 py-4">
 					<table class="table table-bordered ">
+					<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
 						<tr>
 							<th class="text-center">Vitals</th>
 							<th class="text-center">Actuals</th>
@@ -119,32 +120,35 @@
 						</tr>
 						<tr>
 							<th class="text-center">BP</th>
-							<th class="text-center">111</th>
+							<th class="text-center"><?php echo isset($list['bp'])?$list['bp']:''; ?></th>
 							<th class="text-center">120/80</th>
 						</tr>
 						<tr>
 							<th class="text-center">Pulse</th>
-							<th class="text-center">75</th>
+							<th class="text-center"><?php echo isset($list['pulse'])?$list['pulse']:''; ?></th>
 							<th class="text-center">70-80</th>
 						</tr>
 						<tr>
 							<th class="text-center">FBS/RBS</th>
-							<th class="text-center">75</th>
+							<th class="text-center"><?php echo isset($list['fbs_rbs'])?$list['fbs_rbs']:''; ?></th>
 							<th class="text-center">70-110	</th>
 						</tr>
 						<tr>
 							<th class="text-center">Temp</th>
-							<th class="text-center">75</th>
+							<th class="text-center"><?php echo isset($list['temp'])?$list['temp']:''; ?></th>
 							<th class="text-center">98.6 F</th>
 						</tr>
 						<tr>
 							<th class="text-center">Weight</th>
-							<th class="text-center">75</th>
+							<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
 							<th class="text-center">70-80</th>
 						</tr>
 						
 					</table>
 				</div>
+				<?php } ?>
+               <?php $cnt++;} ?>
+               <?php } ?>
               <!-- <?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
                <?php $cnt=0;foreach($encounters_list as $list){
 									//echo "<pre>";print_r($list);exit; 
@@ -350,22 +354,6 @@
                                     <option value="High">High</option>
                                  </select>
                               </div>
-                              <!--<div class="col-md-6" id="investigation_formdates">
-                                 <label> From</label>
-                                 <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" id="datePicker11">
-                                    <input class="form-control" name="investigation_formdate" id="investigation_formdate"  type="text" value="" >
-                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                 </div>
-                                 <input class ="form-control" type="hidden" id="dtp_input2" value="" />
-                              </div>
-                              <div class="col-md-6">
-                                 <label> To</label>
-                                 <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" id="investigation_todate" name="investigation_todate"  type="text" value="">
-                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                 </div>
-                                 <input class ="form-control" type="hidden" id="dtp_input2" value="" />
-                              </div>-->
                               <div class="col-md-6">
                                  <label>  Associate diagnosis</label>
                                  <input class="form-control" type="text" id="associate_diagnosis" name="associate_diagnosis"placeholder="Enter  Associate diagnosis">
@@ -478,31 +466,81 @@
                                  <?php $cn=0;foreach($encounters_list as $list){ ?>
                                  <?php if($cn==0){ ?>
                                  <div class="tab-pane active" id="tab_6_<?php echo $list['id']; ?>">
-                                    <p>
-                                    <div class="card-head">
-                                       <header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
-                                    </div>
-                                    <div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
-                                    <div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
-                                    <div>Notes: <?php echo isset($list['notes'])?$list['notes']:''; ?></div>
-                                    <div> Pulse rate : <?php echo isset($list['pulse_actuals'])?$list['pulse_actuals']:''; ?> : <?php echo isset($list['pulse_range'])?$list['pulse_range']:''; ?></div>
-                                    <div> Pulse rate sight : <?php echo isset($list['pulse_rate_rhythm'])?$list['pulse_rate_rhythm']:''; ?> : <?php echo isset($list['pulse_rate_vol'])?$list['pulse_rate_vol']:''; ?></div>
-                                    <div>Notes: <?php echo isset($list['notes1'])?$list['notes1']:''; ?></div>
-                                    </p>
+                                    <div class="table-responsive  py-4">
+										<table class="table table-bordered ">
+										<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
+											<tr>
+												<th class="text-center">Vitals</th>
+												<th class="text-center">Actuals</th>
+												<th class="text-center">Range</th>
+											</tr>
+											<tr>
+												<th class="text-center">BP</th>
+												<th class="text-center"><?php echo isset($list['bp'])?$list['bp']:''; ?></th>
+												<th class="text-center">120/80</th>
+											</tr>
+											<tr>
+												<th class="text-center">Pulse</th>
+												<th class="text-center"><?php echo isset($list['pulse'])?$list['pulse']:''; ?></th>
+												<th class="text-center">70-80</th>
+											</tr>
+											<tr>
+												<th class="text-center">FBS/RBS</th>
+												<th class="text-center"><?php echo isset($list['fbs_rbs'])?$list['fbs_rbs']:''; ?></th>
+												<th class="text-center">70-110	</th>
+											</tr>
+											<tr>
+												<th class="text-center">Temp</th>
+												<th class="text-center"><?php echo isset($list['temp'])?$list['temp']:''; ?></th>
+												<th class="text-center">98.6 F</th>
+											</tr>
+											<tr>
+												<th class="text-center">Weight</th>
+												<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
+												<th class="text-center">70-80</th>
+											</tr>
+											
+										</table>
+									</div>
                                  </div>
                                  <?php }else{ ?>
                                  <div class="tab-pane " id="tab_6_<?php echo $list['id']; ?>">
-                                    <p>
-                                    <div class="card-head">
-                                       <header><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?></header>
-                                    </div>
-                                    <div >Temperature : <?php echo isset($list['tep_actuals'])?$list['tep_actuals']:''; ?> : <?php echo isset($list['tep_range'])?$list['tep_range']:''; ?></div>
-                                    <div>Temperature site : <?php echo isset($list['temp_site_positioning'])?$list['temp_site_positioning']:''; ?></div>
-                                    <div>Notes: <?php echo isset($list['notes'])?$list['notes']:''; ?></div>
-                                    <div> Pulse rate : <?php echo isset($list['pulse_actuals'])?$list['pulse_actuals']:''; ?> : <?php echo isset($list['pulse_range'])?$list['pulse_range']:''; ?></div>
-                                    <div> Pulse rate sight : <?php echo isset($list['pulse_rate_rhythm'])?$list['pulse_rate_rhythm']:''; ?> : <?php echo isset($list['pulse_rate_vol'])?$list['pulse_rate_vol']:''; ?></div>
-                                    <div>Notes: <?php echo isset($list['notes1'])?$list['notes1']:''; ?></div>
-                                    </p>
+                                   <div class="table-responsive  py-4">
+										<table class="table table-bordered ">
+										<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
+											<tr>
+												<th class="text-center">Vitals</th>
+												<th class="text-center">Actuals</th>
+												<th class="text-center">Range</th>
+											</tr>
+											<tr>
+												<th class="text-center">BP</th>
+												<th class="text-center"><?php echo isset($list['bp'])?$list['bp']:''; ?></th>
+												<th class="text-center">120/80</th>
+											</tr>
+											<tr>
+												<th class="text-center">Pulse</th>
+												<th class="text-center"><?php echo isset($list['pulse'])?$list['pulse']:''; ?></th>
+												<th class="text-center">70-80</th>
+											</tr>
+											<tr>
+												<th class="text-center">FBS/RBS</th>
+												<th class="text-center"><?php echo isset($list['fbs_rbs'])?$list['fbs_rbs']:''; ?></th>
+												<th class="text-center">70-110	</th>
+											</tr>
+											<tr>
+												<th class="text-center">Temp</th>
+												<th class="text-center"><?php echo isset($list['temp'])?$list['temp']:''; ?></th>
+												<th class="text-center">98.6 F</th>
+											</tr>
+											<tr>
+												<th class="text-center">Weight</th>
+												<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
+												<th class="text-center">70-80</th>
+											</tr>
+											
+										</table>
+									</div>
                                  </div>
                                  <?php } ?>
                                  <?php $cn++;} ?>
@@ -531,131 +569,7 @@
    </div>
 </div>
 <!--add new modal-->
-<div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-         <div class="modal-header bg-indigo">
-            <h5 class="modal-title" id="lineModalLabel">Add Vitals</h5>
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-         </div>
-         <div class="modal-body" >
-            <div class="">
-               <div class="">
-                  <div class=" card card-topline-red">
-                     <div class="card-head">
-                        <header>List</header>
-                     </div>
-                     <div class="card-body ">
-                        <form action="<?php echo base_url('resources/addvitals'); ?>"  method="post">
-                          <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-							<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
-                           <div class="row">
-                              <div class="col-md-4 ">
-                                 <div class="col-md-12">
-                                    <label>Assessment</label>
-                                    <select class="form-control" id="assessment_type" name="assessment_type" required>
-                                       <option value="Infection" >Infection </option>
-                                       <option value="Diabetes" >Diabetes</option>
-                                       <option value="Cough & Cold" >Cough & Cold</option>
-                                       <option value="New" >New</option>
-                                    </select>
-                                 </div>
-                                 <br>
-                                 <div class="col-md-12">
-                                    <select class="form-control" id="vitaltype" name="vitaltype" required>
-                                       <option value="Chief complaint" >Chief complaint</option>
-                                       <option value="Vitals">Vitals</option>
-                                       <option value="Allergies">Allergies</option>
-                                       <option value="Personal history">Personal history</option>
-                                       <option value="Medical history">Medical history</option>
-                                       <option value="Surgical history">Surgical history</option>
-                                       <option value="Personal history">Personal history</option>
-                                       <option value="Physical examination">Physical examination</option>
-                                       <option value="Review of systems">Review of systems</option>
-                                       <option value="Diagnosis">Diagnosis</option>
-                                       <option value="Prescription">Prescription</option>
-                                       <option value="Advice">Advice</option>
-                                       <option value="Referral">Referral</option>
-                                       <option value="Surgery request">Surgery request</option>
-                                    </select>
-                                 </div>
-                              </div>
-                              <div class="col-md-8 ">
-                                 <div class="card-head">
-                                    <header>Vitals</header>
-                                 </div>
-                                 <div class="table-scrollable">
-                                    <table class="table table-bordered">
-                                       <thead>
-                                          <tr>
-                                             <th> Vitals </th>
-                                             <th class="text-center" colspan="2"> Values  </th>
-                                             <th class="text-center" colspan="2"> Others  </th>
-                                             <th> Notes  </th>
-                                          </tr>
-                                       </thead>
-                                       <tbody>
-                                          <tr>
-                                             <th>Blood pressure </th>
-                                             <td>Actuals</td>
-                                             <td>Range</td>
-                                             <th>Blood pressure site</th>
-                                             <td>Positioning</td>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th>Temperature </th>
-                                             <td> <input type="text" class="form-control" id="tep_actuals" name="tep_actuals" value="" placeholder="Actuals" required> </td>
-                                             <td> <input type="text" id="tep_range" name="tep_range" value="" placeholder="Range" required> </td>
-                                             <th>Temperature site</th>
-                                             <td> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="" placeholder="Positioning " required> </td>
-                                             <td> <input type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes"> </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Pulse rate</th>
-                                             <td> <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="" placeholder="Actuals" required> </td>
-                                             <td> <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="" placeholder="Range" required> 
-                                             </td>
-                                             <th> Pulse rate sight  </th>
-                                             <td>
-                                                <div class="row">					
-                                                   <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="" placeholder="Rhythm" required>
-                                                   <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="" placeholder="Vol" required>
-                                                </div>
-                                             </td>
-                                             <td> <input type="text" class="form-control" id="notes1" name="notes1" value="" placeholder="Notes"> </td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="clearfix">&nbsp;</div>
-                                 <button class="btn btn-sm btn-warning">Clear</button>
-                                 <button class="btn btn-sm btn-info">Add & Continue
-                              </div>
-                              </button>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="modal-footer">
-            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-               <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
-               </div>
-               <div class="btn-group btn-delete hidden" role="group">
-                  <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal" role="button">Delete</button>
-               </div>
-               <div class="btn-group" role="group">
-                  <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+
 <!--view investigationmodel modal-->
 <div class="modal fade" id="investigationmodel" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">

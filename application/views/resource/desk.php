@@ -990,56 +990,6 @@
 													</tr>
 													
 												</table>
-                                               <!-- <table  class="table  table-bordered table-hover  order-column">
-                                                   <thead>
-                                                      <tr>
-                                                         <th> Vitals </th>
-                                                         <th class="text-center" colspan="2"> Values  </th>
-                                                         <th class="text-center" colspan="2"> Others  </th>
-                                                         <th> Notes  </th>
-                                                      </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                      <tr>
-                                                         <th>Blood pressure </th>
-                                                         <td>Actuals</td>
-                                                         <td>Range</td>
-                                                         <th>Blood pressure site</th>
-                                                         <td>Positioning</td>
-                                                         <td></td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th>Temperature </th>
-                                                         <td>
-														 <div class="form-group">
-														 <input type="text" class="form-control " id="tep_actuals" name="tep_actuals" value="<?php echo isset($vitals_detailes['tep_actuals'])?$vitals_detailes['tep_actuals']:''; ?>" placeholder="Actuals">
-															</div>														
-														</td>
-                                                         <td>
-														 <div class="form-group">
-														 <input type="text" id="tep_range" name="tep_range" value="<?php echo isset($vitals_detailes['tep_range'])?$vitals_detailes['tep_range']:''; ?>" placeholder="Range">
-														 </div>
-														 </td>
-                                                         <th>Temperature site</th>
-                                                         <td> <div class="form-group"> <input type="text" class="form-control" id="temp_site_positioning" name="temp_site_positioning" value="<?php echo isset($vitals_detailes['temp_site_positioning'])?$vitals_detailes['temp_site_positioning']:''; ?>" placeholder="Positioning "></div> </td>
-                                                         <td> <div class="form-group"> <input type="text" class="form-control" id="notes" name="notes" value="<?php echo isset($vitals_detailes['notes'])?$vitals_detailes['notes']:''; ?>" placeholder="Notes"></div> </td>
-                                                      </tr>
-                                                      <tr>
-                                                         <th> Pulse rate</th>
-                                                         <td><div class="form-group">  <input type="text" class="form-control" id="pulse_actuals" name="pulse_actuals" value="<?php echo isset($vitals_detailes['pulse_actuals'])?$vitals_detailes['pulse_actuals']:''; ?>" placeholder="Actuals"> </div></td>
-                                                         <td><div class="form-group">  <input type="text" class="form-control" id="pulse_range" name="pulse_range" value="<?php echo isset($vitals_detailes['pulse_range'])?$vitals_detailes['pulse_range']:''; ?>" placeholder="Range"></div> 
-                                                         </td>
-                                                         <th> Pulse rate site  </th>
-                                                         <td>
-                                                            <div class="row form-group">					
-                                                               <input class="col-md-6 form-control"  type="text" id="pulse_rate_rhythm" name="pulse_rate_rhythm" value="<?php echo isset($vitals_detailes['pulse_rate_rhythm'])?$vitals_detailes['pulse_rate_rhythm']:''; ?>" placeholder="Rhythm  ">
-                                                               <input class="col-md-6 form-control" type="text" id="pulse_rate_vol" name="pulse_rate_vol" value="<?php echo isset($vitals_detailes['pulse_rate_vol'])?$vitals_detailes['pulse_rate_vol']:''; ?>" placeholder="Vol ">
-                                                            </div>
-                                                         </td>
-                                                         <td><div class="form-group">  <input type="text" class="form-control" id="notes1" name="notes1" value="<?php echo isset($vitals_detailes['notes1'])?$vitals_detailes['notes1']:''; ?>" placeholder="Notes"> </div></td>
-                                                      </tr>
-                                                   </tbody>
-                                                </table>-->
                                              </div>
                                              <button class="btn btn-primary pull-right" type="submit">Next</button>
                                           </form>

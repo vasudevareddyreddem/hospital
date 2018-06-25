@@ -134,7 +134,8 @@ table, th, td {
 		</span></td>
 	
 		
-	  </tr>  
+	  </tr> 
+		<?php if($details['visit_type']!='' && $details['visit_desc']!=''){ ?>
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Visit Info</th>
 		
@@ -145,6 +146,8 @@ table, th, td {
 		<td><strong>Service type:</strong> <span><?php echo isset($details['service_type'])?$details['service_type']:''; ?></span></td>
 		<td><strong>Visit type:</strong> <span><?php echo isset($details['visit_type'])?$details['visit_type']:''; ?></span></td>
 	  </tr>
+	  
+		<?php } ?>
 	  
 	  
 		<tr style="background:#ddd;line-height:40px">
@@ -164,43 +167,36 @@ table, th, td {
 	  <tr style="background:#ddd;line-height:40px">
 		<th colspan="6">Vitals</th>
 		</tr>
-	  <tr style="line-height:40px">
-		<th >Vitals</th>
-		<th colspan="2" style="text-align:center">Values</th>
-		<th colspan="2" style="text-align:center">Others</th>
-		<th >Notes</th>
-		
-		
-	  </tr>
-	  <tr style="line-height:40px">
-		<th>Blood Press</th>
-		<td>Actuals</td>
-		<td>Range</td>
-		<th>Blood pressure site</th>
-		<td >Positioning</td>
-			<td>&nbsp;</td>
-		
-	  </tr> 
-	  <tr style="line-height:40px">
-		<th>Temperature</th>
-		<td><?php echo isset($vital_details['tep_actuals'])?$vital_details['tep_actuals']:''; ?></td>
-		<td><?php echo isset($vital_details['tep_range'])?$vital_details['tep_range']:''; ?></td>
-		<th>Temperature site</th>
-		<td><?php echo isset($vital_details['temp_site_positioning'])?$vital_details['temp_site_positioning']:''; ?></td>
-		<td><?php echo isset($vital_details['notes'])?$vital_details['notes']:''; ?></td>
-	  </tr>
-	  <tr style="line-height:40px">
-		<th>Pulse rate</th>
-		<td><?php echo isset($vital_details['pulse_actuals'])?$vital_details['pulse_actuals']:''; ?></td>
-		<td><?php echo isset($vital_details['pulse_range'])?$vital_details['pulse_range']:''; ?></td>
-		<th>Pulse rate site</th>
-		<td >
-		<span><?php echo isset($vital_details['pulse_rate_rhythm'])?$vital_details['pulse_rate_rhythm']:''; ?></span> &nbsp;  &nbsp;
-		<span><?php echo isset($vital_details['pulse_rate_vol'])?$vital_details['pulse_rate_vol']:''; ?></span> &nbsp; &nbsp; 
-		</td>
-		<td><?php echo isset($vital_details['notes1'])?$vital_details['notes1']:''; ?></td>
-		
-	  </tr>
+<tr>
+							<th class="text-center">Vitals</th>
+							<th class="text-center">Actuals</th>
+							<th class="text-center">Range</th>
+						</tr>
+						<tr>
+							<th class="text-center">BP</th>
+							<th class="text-center"><?php echo isset($vital_details['bp'])?$vital_details['bp']:''; ?></th>
+							<th class="text-center">120/80</th>
+						</tr>
+						<tr>
+							<th class="text-center">Pulse</th>
+							<th class="text-center"><?php echo isset($vital_details['pulse'])?$vital_details['pulse']:''; ?></th>
+							<th class="text-center">70-80</th>
+						</tr>
+						<tr>
+							<th class="text-center">FBS/RBS</th>
+							<th class="text-center"><?php echo isset($vital_details['fbs_rbs'])?$vital_details['fbs_rbs']:''; ?></th>
+							<th class="text-center">70-110	</th>
+						</tr>
+						<tr>
+							<th class="text-center">Temp</th>
+							<th class="text-center"><?php echo isset($vital_details['temp'])?$vital_details['temp']:''; ?></th>
+							<th class="text-center">98.6 F</th>
+						</tr>
+						<tr>
+							<th class="text-center">Weight</th>
+							<th class="text-center"><?php echo isset($vital_details['weight'])?$vital_details['weight']:''; ?></th>
+							<th class="text-center">70-80</th>
+						</tr>
 	 </table>
 	 <table style="width:100%">
 	 <tr style="background:#ddd;line-height:40px">
