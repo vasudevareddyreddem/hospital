@@ -65,16 +65,13 @@
 									<label> Amount</label>
 									<input class="form-control" id="amuont" name="amuont" value="" type="text" placeholder="Amount">
 								</div>
-								<div class="col-md-6">
-									<label>Comment</label>
-									<input type="text" class="form-control" id="short_form"  name="short_form" placeholder="Enter Comment" value="" required>
-								</div>
+								
 								
 								<div class="">
 								<label>&nbsp;</label>
 								</div>	
 							</div>
-															<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Test</button>
+								<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Test</button>
 
 							</form>
 						
@@ -95,8 +92,6 @@
 												<th>Modality</th>
 												<th>Duration</th>
 												<th>Amount</th>
-												<th>Short Form</th>
-                                                <th>Description</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -110,8 +105,6 @@
                                                 <td><?php echo htmlentities($list['modality']); ?></td>
                                                 <td><?php echo htmlentities($list['duration']); ?></td>
                                                 <td><?php echo htmlentities($list['amuont']); ?></td>
-                                                <td><?php echo htmlentities($list['t_short_form']); ?></td>
-                                                <td><?php echo htmlentities($list['t_description']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												
 												<td class="valigntop">
@@ -268,16 +261,6 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[0-9. ]*$/,
 					message: 'Amuont can only consist of digits and dot'
-					}
-				}
-            },short_form: {
-                 validators: {
-					notEmpty: {
-						message: 'Short Form is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
 					}
 				}
             }

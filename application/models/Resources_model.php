@@ -235,7 +235,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->result_array();
 	}
 	public function get_hospital_medicine_list($hos_id){
-		$this->db->select('medicine_list.medicine_name,medicine_list.id,medicine_list.qty,medicine_list.dosage')->from('medicine_list');
+		$this->db->select('medicine_list.medicine_name,medicine_list.id,medicine_list.qty,medicine_list.dosage,medicine_list.medicine_type')->from('medicine_list');
 		$this->db->where('medicine_list.hos_id',$hos_id);
 		$this->db->where('medicine_list.qty >=',1);
         return $this->db->get()->result_array();

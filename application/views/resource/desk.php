@@ -558,7 +558,7 @@
 													<tr >
 														<th class="text-center">Weight</th>
 														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
-														<th class="text-center">70-80</th>
+														<th class="text-center"></th>
 													</tr>
 													
 												</table>
@@ -986,7 +986,7 @@
 													<tr >
 														<th class="text-center">Weight</th>
 														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
-														<th class="text-center">70-80</th>
+														<th class="text-center"></th>
 													</tr>
 													
 												</table>
@@ -1386,7 +1386,7 @@ function apply_couponcode1(){
    					notEmpty: {
    						message: 'BP required'
    					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
+					regexp: /^[a-zA-Z0-9_\/\. ]+$/,
 					message: 'BP can only consist of alphanumeric, space and dot'
 					}
    				}
@@ -2559,7 +2559,7 @@ function apply_couponcode1(){
    					notEmpty: {
    						message: 'BP required'
    					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
+					regexp: /^[a-zA-Z0-9_\/\. ]+$/,
 					message: 'BP can only consist of alphanumeric, space and dot'
 					}
    				}

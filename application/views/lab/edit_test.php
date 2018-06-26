@@ -68,14 +68,6 @@
 									<label> Amount</label>
 									<input class="form-control" id="amuont" name="amuont" value="<?php echo isset($tet_details['amuont'])?$tet_details['amuont']:''; ?>" type="text" placeholder="Amount">
 								</div>
-								<div class="col-md-6">
-									<label> Short Form</label>
-									<input type="text" class="form-control" id="short_form"  name="short_form" placeholder="Enter Short Form" value="<?php echo isset($tet_details['t_short_form'])?$tet_details['t_short_form']:''; ?>" required>
-								</div>
-								<div class="col-md-6">
-									<label>Description</label>
-									<input type="text" class="form-control" id="description"  name="description" placeholder="Enter Description" value="<?php echo isset($tet_details['t_description'])?$tet_details['t_description']:''; ?>" required>
-								</div>
 								<div class="">
 								<label>&nbsp;</label>
 								</div>	
@@ -164,26 +156,6 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[0-9. ]*$/,
 					message: 'Amuont can only consist of digits and dot'
-					}
-				}
-            },short_form: {
-                 validators: {
-					notEmpty: {
-						message: 'Short Form is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
-					}
-				}
-            },description: {
-                 validators: {
-					notEmpty: {
-						message: 'Description is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Description can only consist of alphanumeric, space and dot'
 					}
 				}
             }

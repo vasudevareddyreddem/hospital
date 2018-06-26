@@ -72,11 +72,8 @@
 										<label> Pin code</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Pin code">
 									</div>
-										<div class="col-md-6">
-										<label> Other Details</label>
-										<input class="form-control" id="resource_other_details" name="resource_other_details" value="" type="text" placeholder="Other Details">
-									</div>
-									 	<div class="col-md-6">
+										
+									 <div class="col-md-6">
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Resource Contact Number">
 									</div>

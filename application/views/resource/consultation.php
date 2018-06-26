@@ -141,7 +141,7 @@
 						<tr>
 							<th class="text-center">Weight</th>
 							<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
-							<th class="text-center">70-80</th>
+							<th class="text-center"></th>
 						</tr>
 						
 					</table>
@@ -220,28 +220,15 @@
                               <div class="col-md-12 ">
                                  <div class="container">
                                     <div class="row">
-                                      
+                                      <?php //echo '<pre>';print_r($medicine_list);exit; ?>
                                        <div class="col-md-6">
                                           <label>Search for Medicine</label>									
                                           <select class="form-control  select2" id="medicine_name" name="medicine_name">
                                              <option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
-                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo $list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?></option>
+                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
                                              <?php } ?>
                                           </select>
-                                       </div>
-									   <div class="col-md-6">
-                                          <div class="row">
-                                           <div class="col-md-6">
-												<label>Substitute allowed or not allowed?</label>									
-												<select class="form-control" name="substitute_name" id="substitute_name">
-													<option value="" >Select </option>
-													<option value="Yes" >Yes </option>
-													<option value="No" >No</option>
-												</select>
-											</div>
-                                             
-                                          </div>
                                        </div>
                                        <div class="col-md-6">
                                                 <label> Qty</label>
@@ -249,15 +236,7 @@
                                             </div>
                                        <div class="col-md-6">
                                           <div class="row">
-                                             <div class="col-md-4">
-                                                <label>Route</label>
-                                                <select class="form-control" id="route" name="route">
-                                                   <option value="" >Select Route </option>
-                                                   <option value="Mouth" selected>Mouth</option>
-                                                </select>
-                                             </div>
-                                             <div class="col-md-8">
-                                                <label> Frequency </label>
+                                              <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
                                                    <option value="" >Select</option>
                                                    <option value="1 hours">1 hours</option>
@@ -286,7 +265,7 @@
                                                    <option value="24 hours">24 hours</option>
                                                    
                                                 </select>
-                                             </div>
+                                            
                                           </div>
                                        </div>
                                          
@@ -295,10 +274,6 @@
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
                                        </div>
                                        
-                                       <div class="col-md-6">
-                                          <label> Comment</label>
-                                          <textarea type="textarea" name="comments" id="comments" class="form-control"  placeholder="Enter Comment" required></textarea>
-                                       </div>
                                     </div>
                                  </div>
                                  <div class="clearfix">&nbsp;</div>
@@ -354,14 +329,7 @@
                                     <option value="High">High</option>
                                  </select>
                               </div>
-                              <div class="col-md-6">
-                                 <label>  Associate diagnosis</label>
-                                 <input class="form-control" type="text" id="associate_diagnosis" name="associate_diagnosis"placeholder="Enter  Associate diagnosis">
-                              </div>
-                              <div class="col-md-6">
-                                 <label>  Associate problems</label>
-                                 <input class="form-control" type="text" id="associate_problems" name="associate_problems"placeholder="Enter  Associate diagnosis">
-                              </div>
+                              
                            </div>
                            <br/>
                            <button class="btn btn-sm btn-success" type="submit">Add Investigation</button>
@@ -536,7 +504,7 @@
 											<tr>
 												<th class="text-center">Weight</th>
 												<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
-												<th class="text-center">70-80</th>
+												<th class="text-center"></th>
 											</tr>
 											
 										</table>
@@ -593,8 +561,6 @@
                                     <tr>
                                        <th>Investigation type</th>
                                        <th>Priority</th>
-                                       <th>Associate diagnosis </th>
-                                       <th>Associate problems</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
@@ -603,8 +569,6 @@
                                     <tr id="investigation_id_<?php echo $list['id']; ?>">
 									   <td><?php echo $list['investigation_type']; ?></td>
 										<td><?php echo $list['priority']; ?></td>
-                                       <td><?php echo $list['associate_diagnosis']; ?> </td>
-                                       <td><?php echo $list['associate_problems']; ?></td>
                                        <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
@@ -642,22 +606,20 @@
                               <table class="table table-bordered">
                                  <thead>
                                     <tr>
-                                       <th>Type of Medicine?</th>
                                        <th>Search for Medicine</th>
                                        <th>Qty</th>
                                        <th>Dosage </th>
-                                       <th>Condition</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                  <tbody>
+								 
+								 <?php //echo '<pre>';print_r($patient_medicine_list);exit; ?>
                                     <?php foreach($patient_medicine_list as $list){ ?>
                                     <tr id="medicine_id_<?php echo $list['m_id']; ?>">
-                                       <td><?php echo $list['type_of_medicine']; ?></td>
                                        <td><?php echo $list['medicine_name']; ?></td>
                                        <td><?php echo $list['qty']; ?></td>
                                        <td><?php echo $list['dosage']; ?> </td>
-                                       <td><?php echo $list['condition']; ?></td>
                                        <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
@@ -733,8 +695,6 @@
                                           <th>Test Name</th>
                                           <th>Type</th>
                                           <th>Modality</th>
-                                          <th>Short form</th>
-                                          <th>Description </th>
                                           <th>Select</th>
                                        </tr>
                                     </thead>
@@ -979,7 +939,7 @@ function addtestlist(){
 						$('#testlist').empty();
 						for(i=0; i<data.text.length; i++) {
 						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
-						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type+"</td><td>"+data.text[i].modality+"</td><td>"+data.text[i].t_short_form+"</td><td>"+data.text[i].t_description+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
+						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type+"</td><td>"+data.text[i].modality+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
 
 						}
 						}
@@ -1071,26 +1031,6 @@ function addtestlist(){
 						message: 'Priority is required'
 					}
 				}
-            },associate_diagnosis: {
-                  validators: {
-					notEmpty: {
-						message: 'Associate diagnosis is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate diagnosis can only consist of alphanumeric, space and dot'
-					}
-				}
-            },associate_problems: {
-                  validators: {
-					notEmpty: {
-						message: 'Associate  problems is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Associate  problems can only consist of alphanumeric, space and dot'
-					}
-				}
             }
 			}
 		
@@ -1115,45 +1055,10 @@ function addtestlist(){
 					}
 				}
             },
-			substitute_name: {
-                 validators: {
-					notEmpty: {
-						message: 'Substitute allowed is required'
-					}
-				}
-            },
-			condition: {
-                 validators: {
-					notEmpty: {
-						message: 'Condition is required'
-					}
-				}
-            },
-			dosage: {
-                 validators: {
-					notEmpty: {
-						message: 'Dosage is required'
-					}
-				}
-            },route: {
-                 validators: {
-					notEmpty: {
-						message: 'Route is required'
-					}
-				}
-            },
 			frequency: {
                  validators: {
 					notEmpty: {
 						message: 'Frequency is required'
-					}
-				}
-            },
-			directions: {
-                 validators: {
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Directions can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -1165,31 +1070,6 @@ function addtestlist(){
 					regexp: {
 					regexp:  /^[0-9]+$/,
 					message: 'Qty can only consist of digits'
-					}
-				}
-            },
-			units: {
-                 validators: {
-					notEmpty: {
-						message: 'Units is required'
-					}
-				}
-            },
-			comments: {
-                 validators: {
-					notEmpty: {
-						message: 'Comments is required'
-					},
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Comments can only consist of alphanumeric, space and dot'
-					}
-				}
-            },
-			type_of_medicine: {
-                 validators: {
-					notEmpty: {
-						message: 'Type of Medicine? is required'
 					}
 				}
             }

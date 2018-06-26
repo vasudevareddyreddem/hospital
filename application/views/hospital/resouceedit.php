@@ -70,10 +70,6 @@
 										<label> Zipcode</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="<?php echo isset($resouse_detail['resource_zipcode'])?$resouse_detail['resource_zipcode']:''; ?>" type="text" placeholder="State">
 									</div>
-									<div class="col-md-6">
-										<label> Other Details</label>
-										<input class="form-control" id="resource_other_details" name="resource_other_details" value="<?php echo isset($resouse_detail['resource_other_details'])?$resouse_detail['resource_other_details']:''; ?>" type="text" placeholder="Other Details">
-									</div>
 									 <div class="col-md-6">
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" value="<?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>" placeholder="Resource Contact Number">

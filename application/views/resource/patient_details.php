@@ -195,7 +195,7 @@ table, th, td {
 						<tr>
 							<th class="text-center">Weight</th>
 							<th class="text-center"><?php echo isset($vital_details['weight'])?$vital_details['weight']:''; ?></th>
-							<th class="text-center">70-80</th>
+							<th class="text-center"></th>
 						</tr>
 	 </table>
 	 <table style="width:100%">

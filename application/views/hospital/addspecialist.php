@@ -222,7 +222,7 @@ $(document).ready(function() {
 						message: 'Specialist Name is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
+					regexp: /^[a-zA-Z0-9&. ]+$/,
 					message: 'Specialist Name can only consist of alphanumeric, space and dot'
 					}
 				}
