@@ -244,7 +244,7 @@
                                                     </div>
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry" id="firstform" type="submit">Next</button>
+                                             <button class="btn btn-success " id="firstform" type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==2){ echo "active";}?>" id="tab_6_2">
@@ -302,7 +302,7 @@
                                                    <input type="file" class="form-control" id="patient_identifier"  name="patient_identifier"  value="">
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==3){ echo "active";}?>" id="tab_6_3">
@@ -373,7 +373,7 @@
                                                    <input type="text" class="form-control" id="next_occupation "  name="next_occupation"  value="<?php echo isset($patient_detailes['next_occupation'])?$patient_detailes['next_occupation']:''; ?>">
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                       <div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
@@ -393,7 +393,7 @@
                                                    <input type="text" class="form-control" id="search_doctor"  name="search_doctor"  value="<?php echo isset($patient_detailes['search_doctor'])?$patient_detailes['search_doctor']:''; ?>">
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==5){ echo "active";}?>" id="tab_6_5">
@@ -468,7 +468,7 @@
                                                    <input type="text" class="form-control" id="g_country"  name="g_country"  value="<?php echo isset($patient_detailes['g_country'])?$patient_detailes['g_country']:''; ?>">
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==6){ echo "active";}?>" id="tab_6_6">
@@ -488,7 +488,7 @@
                                                    <textarea type="textarea" id="payer_address" name="payer_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['payer_address'])?$patient_detailes['payer_address']:''; ?></textarea>
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==7){ echo "active";}?>" id="tab_6_7">
@@ -520,7 +520,7 @@
                                                    <input type="text" class="form-control" id="student"  name="student"  value="<?php echo isset($patient_detailes['student'])?$patient_detailes['student']:''; ?>">
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
 									   <div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_9">
@@ -597,7 +597,7 @@
                                                    </select>
                                                 </div>
 												</div>
-                                             <button class="btn btn-praimry" type="submit">Next</button>
+                                             <button class="btn btn-success " type="submit">Next</button>
                                           </form>
                                        </div>
                                        <div class="tab-pane <?php if(isset($tab) && $tab==10){ echo "active";}?>" id="tab_6_8">
@@ -635,7 +635,7 @@
                                                                   <input type="text" class="form-control" id="visit_type"  name="visit_type" placeholder="Enter Visit type" value="<?php echo isset($billing_detailes['visit_type'])?$billing_detailes['visit_type']:''; ?>">
                                                                </div>
                                                             </div>
-                                                            <button class="btn btn-praimry " type="submit">Next</button>
+                                                            <button class="btn btn-success  " type="submit">Next</button>
                                                          </form>
                                                       </div>
                                                       
@@ -691,9 +691,10 @@
                                                             <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']!=1){ ?>
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
+
 															<?php }else{ ?>
-															<a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry ">Print</a>
-                                                            <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-praimry ">Completed</a>
+															<a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-success  ">Print</a>
+                                                            <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  ">Completed</a>
                                                         
 															<?php } ?>                                                       
 														</form>
@@ -947,7 +948,7 @@
                                                    </div>
                                                 </div>
 												 
-												    <button class="btn btn-praimry" id="firstform1" type="submit">Next</button>
+												    <button class="btn btn-success " id="firstform1" type="submit">Next</button>
                                           </div>
 										</form>
                                        </div>
@@ -1050,10 +1051,10 @@
 															   
                                              </div>
 											 <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']==1){ ?>
-                                             <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-praimry " type="bitton">Print</a>
-                                             <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-praimry " type="bitton">Completed</a>
+                                             <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-success  " type="bitton">Print</a>
+                                             <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  " type="bitton">Completed</a>
 											 <?php }else{ ?>
-											     <button class="btn btn-praimry " type="submit">Next</button>
+											     <button class="btn btn-success  " type="submit">Next</button>
 												<?php } ?>
 										  </form>
                                        </div> 
@@ -1087,7 +1088,7 @@
                                                    </select>
                                                 </div>
                                              </div>
-                                             <button class="btn btn-praimry " type="submit">Next</button>
+                                             <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
                                        
