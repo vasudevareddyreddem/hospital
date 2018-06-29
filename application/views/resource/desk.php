@@ -688,7 +688,7 @@
 																	</div>
 																	</div>
 																 </div>
-                                                            <?php if($billing_detailes['completed']!=1){ ?>
+                                                            <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']!=1){ ?>
                                                             <a href="<?php echo base_url('resources/desk/'.base64_encode($pid).'/'.base64_encode(8).'/'.base64_encode($bill_id).'/'.base64_encode(2)); ?>" class="btn btn-praimry ">Back</a>
                                                             <button class="btn btn-praimry " type="submit">Next</button>
 															<?php }else{ ?>

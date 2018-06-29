@@ -301,9 +301,6 @@ $(document).ready(function() {
                 }
             },resource_add2: {
                  validators: {
-					notEmpty: {
-						message: 'Address 2 is required'
-					},
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'Address 2 wont allow <> [] = % '

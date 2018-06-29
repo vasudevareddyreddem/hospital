@@ -266,9 +266,7 @@ $(document).ready(function() {
                 }
             },lab_add2: {
                  validators: {
-					notEmpty: {
-						message: 'Address1 is required'
-					},
+					
                     regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'Address wont allow <> [] = % '

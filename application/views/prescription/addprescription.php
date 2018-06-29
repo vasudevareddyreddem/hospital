@@ -36,6 +36,7 @@
                               <div class="controls">
                                  <form action="<?php echo base_url('Users/addpostprescription'); ?>" method="POST" id="addpostprescription" name="addpostprescription">
                                     <div class="entry input-group ">
+									<div class="row">
                                        <div class="form-group col-md-4">
                                                    <label for="Name">Name</label>
                                                    <input type="text" class="form-control" id="name"  name="name"  value="">
@@ -47,6 +48,7 @@
 												<div class="form-group col-md-4">
                                                    <label for="Name">Mobile</label>
                                                    <input type="text" class="form-control" id="mobile"  name="mobile"  value="">
+                                                </div>
                                                 </div>
 									   <div id="education_fields">
           
@@ -195,12 +197,10 @@ $(document).ready(function() {
             
             name: {
                  validators: {
-					notEmpty: {
-   						message: 'Visit type is required'
-   					},
+					
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Visit type can only consist of alphanumeric, space and dot'
+   					message: 'Name can only consist of alphanumeric, space and dot'
    					}
 				}
             },id: {
@@ -216,9 +216,7 @@ $(document).ready(function() {
             },
 			mobile: {
                  validators: {
-					notEmpty: {
-   						message: 'Mobile Number is required'
-   					},
+					
    					regexp: {
    					regexp:  /^[0-9]{10,14}$/,
    					message:'Mobile Number must be 10 to 14 digits'
