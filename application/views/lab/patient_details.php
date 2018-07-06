@@ -59,6 +59,11 @@
 															   <option value="<?php echo $list['t_id']; ?>"><?php echo $list['t_name']; ?></option>
 													   <?php } ?>
 												   <?php } ?>
+												   <?php if(isset($direct_labtest_list) && count($direct_labtest_list)>0){ ?>
+													   <?php foreach($direct_labtest_list as $list){ ?>
+															   <option value="<?php echo $list['t_id']; ?>"><?php echo $list['t_name']; ?></option>
+													   <?php } ?>
+												   <?php } ?>
 												   </select>
                                                 </div>
                                              </div>

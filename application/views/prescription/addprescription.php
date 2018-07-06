@@ -53,16 +53,18 @@
 									   <div id="education_fields">
           
 										</div>
-										<div class="col-sm-2 nopadding">
+										<div class="col-sm-4 nopadding">
 										  <div class="form-group">
-											<input type="text" class="form-control" id="medicinename" name="addmedicn[0][medicine]" value="" placeholder="Medicine Name">
+										  
+										  <select style="width:100%;height:40px;" class="form-control" id="medicinename" name="addmedicn[0][medicine]">
+											<option value="">Select</option>
+                                             <?php foreach($medicine_list as $list){ ?>
+                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
+                                             <?php } ?>
+										  </select>
 										  </div>
 										</div>
-										<div class="col-sm-2 nopadding">
-										  <div class="form-group">
-											<input type="text" class="form-control" id="medicins" name="addmedicn[0][dosage]" value="" placeholder="Medicine dosage">
-										  </div>
-										</div>
+										
 										<div class="col-sm-2 nopadding">
 										  <div class="form-group">
 											<input type="text" class="form-control" id="qty"  name="addmedicn[0][qty]" value="" placeholder="Qty">
@@ -181,7 +183,7 @@ function education_fields() {
     var divtest = document.createElement("div");
 	divtest.setAttribute("class", "form-group removeclass"+room);
 	var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="medicinename" name="addmedicn['+room+'][medicine]" value="" placeholder="Medicine Name"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="medicins" name="addmedicn['+room+'][dosage]" value="" placeholder="Medicine dosage"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="qty"  name="addmedicn['+room+'][qty]" value="" placeholder="Qty"></div></div>	<div class="col-sm-3 nopadding"><div class="form-group"><input type="text" class="form-control" id="usage_instructions"  name="addmedicn['+room+'][usage_instructions]" value="" placeholder="Usage Instructions"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="amount0"  name="addmedicn['+room+'][amount]"  value="" placeholder="MRP"></div></div><div class="col-sm-1 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>  </div></div><div class="clearfix">&nbsp;</div>';
+    divtest.innerHTML = '<div class="col-sm-4 nopadding"><div class="form-group"><select style="width:100%;height:40px;" class="form-control" id="medicinename" name="addmedicn['+room+'][medicine]"><option value="">Select</option><?php foreach($medicine_list as $list){ ?> <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option><?php } ?></select></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="qty"  name="addmedicn['+room+'][qty]" value="" placeholder="Qty"></div></div>	<div class="col-sm-3 nopadding"><div class="form-group"><input type="text" class="form-control" id="usage_instructions"  name="addmedicn['+room+'][usage_instructions]" value="" placeholder="Usage Instructions"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="amount0"  name="addmedicn['+room+'][amount]"  value="" placeholder="MRP"></div></div><div class="col-sm-1 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>  </div></div><div class="clearfix">&nbsp;</div>';
     
     objTo.appendChild(divtest)
 }
@@ -247,9 +249,6 @@ $(document).ready(function() {
             },
 			'addmedicn[0][usage_instructions]': {
                  validators: {
-					notEmpty: {
-						message: 'Usage instructions is required'
-					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Usage instructions can only consist of alphanumeric, space and dot'

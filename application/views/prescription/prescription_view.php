@@ -48,8 +48,6 @@
 
                                                         <th>Dosage</th>
                                                         <th>Usage </th>
-                                                        <th>Usage Instructions</th>
-                                                        <th>Substitute allowed?</th>
                                                         <th>Modify Prescription Reason:</th>
                                                         <th>Total Amount</th>
                                                     </tr>
@@ -79,8 +77,6 @@
 																</select>
 															</div>
 														</td>
-                                                        <td><?php echo isset($list['directions'])?$list['directions']:''; ?></td>
-                                                        <td><?php echo isset($list['substitute_name'])?$list['substitute_name']:''; ?></td>
                                                       
 													   <td style="width:100px">
 															<div class="form-group">

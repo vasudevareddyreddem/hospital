@@ -759,12 +759,12 @@
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1)); ?>">
                                                    <i class="icon-docs"></i> Edit </a>
                                                 </li>
-												<?php if($list['patient_reschedule_date']==1){ ?>
+												<?php //if($list['patient_reschedule_date']==1){ ?>
 													<li>
-                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(1).'/'.base64_encode('verify')) ?>">
+                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(0).'/'.base64_encode('verify')) ?>">
                                                     <i class="icon-docs"></i> Reschedule </a>
 													</li>
-												<?php } ?>
+												<?php //} ?>
                                                 <li>
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(0).'/'.base64_encode('reschedule')); ?>">
                                                    <i class="icon-docs"></i> Repeated </a>
@@ -2179,9 +2179,6 @@ function apply_couponcode1(){
                },
                nationali_id: {
                     validators: {
-   					notEmpty: {
-   						message: 'National ID is required'
-   					},
    					regexp: {
    					regexp:  /^[0-9]{10,14}$/,
    					message:'National ID must be 10 to 14 digits'
@@ -2425,9 +2422,6 @@ function apply_couponcode1(){
                },
                nationali_id: {
                     validators: {
-   					notEmpty: {
-   						message: 'National ID is required'
-   					},
    					regexp: {
    					regexp:  /^[0-9]{10,14}$/,
    					message:'National ID must be 10 to 14 digits'

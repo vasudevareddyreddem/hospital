@@ -36,9 +36,15 @@ class Lab_model extends CI_Model
 	}
 	public function update_patient_billingreport_status($test_id,$p_id,$b_id,$data){
 		$this->db->where('test_id',$test_id);
-		$this->db->where('b_id',$b_id);
+		$this->db->where('p_id',$p_id);
 		$this->db->where('b_id',$b_id);
     	return $this->db->update("patient_lab_test_list",$data);
+	}
+	public function update_without_bidding_patient_billingreport_status($test_id,$p_id,$b_id,$data){
+		$this->db->where('p_l_t_id',$test_id);
+		$this->db->where('b_id',$b_id);
+		$this->db->where('p_id',$p_id);
+    	return $this->db->update("out_source_lab_test_lists",$data);
 	}
 	public function delete_labtest($t_id){
 			$sql1="DELETE FROM lab_test_list WHERE t_id = '".$t_id."'";
@@ -317,6 +323,14 @@ class Lab_model extends CI_Model
 		$this->db->where('patient_lab_reports.b_id',$bid);
 		$this->db->where('lab_test_list.out_source',$out_source);
 		$this->db->where('patient_lab_reports.create_by',$a_id);
+		return $this->db->get()->result_array();
+	}
+	public  function get_all_with_bidding_patients_out_labtest_lists($pid,$bid,$status){
+		$this->db->select('lab_test_list.t_name,lab_test_list.t_id')->from('out_source_lab_test_lists');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = out_source_lab_test_lists.p_l_t_id', 'left');
+		$this->db->where('out_source_lab_test_lists.p_id',$pid);
+		$this->db->where('out_source_lab_test_lists.b_id',$bid);
+		$this->db->where('out_source_lab_test_lists.status',$status);
 		return $this->db->get()->result_array();
 	}
 	public function get_previous_report_details($pid,$bid,$test_id){

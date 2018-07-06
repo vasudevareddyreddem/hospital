@@ -75,6 +75,8 @@ class Users extends CI_Controller {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['prescriptions_list']= $this->Users_model->get_all_prescription_lists($userdetails['hos_id'],$admindetails['a_id']);
 					$data['tab']= base64_decode($this->uri->segment(3));
+					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
+
 					$this->load->view('prescription/addprescription',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;

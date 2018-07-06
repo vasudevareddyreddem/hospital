@@ -35,7 +35,6 @@
                                                     <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
-                                                        <th>Dosage</th>
                                                         <th>Usage Instructions</th>
                                                         <th>Amount</th>
                                                     </tr>
@@ -48,9 +47,7 @@
                                                         <td>
 															<?php echo isset($list['qty'])?$list['qty']:''; ?>
 														</td>
-														<td>
-															<?php echo isset($list['dosage'])?$list['dosage']:''; ?>
-														</td>
+														
 														<td>
 															<?php echo isset($list['usage_instructions'])?$list['usage_instructions']:''; ?>
 														</td>

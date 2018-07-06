@@ -295,7 +295,7 @@
 										<li class="nav-item start ">
 											<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
 												<i class="material-icons">dashboard</i>
-												<span class="title">Bidding Lab Test List</span>
+												<span class="title">Procurement Lab Test List</span>
 												<span class="selected"></span>
 												<span class="arrow "></span>
 											</a>
@@ -360,7 +360,7 @@
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
 										<i class="material-icons">format_list_numbered</i>
-										<span class="title">Bidding Lab Test List</span>
+										<span class="title">Procurement Lab Test List</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
 									</a>

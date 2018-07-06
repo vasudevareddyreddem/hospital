@@ -182,16 +182,22 @@ class Resources extends CI_Controller {
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Basic Details successfully Updated.");
 							if(isset($post['op']) && $post['op']==1){
+								
+									if(isset($post['verifying']) && $post['verifying']=='verify'){
+										$type='Reschedule';
+									}else{
+										$type='Repeated';
+									}
 									$billing=array(
 									'p_id'=>isset($post['pid'])?$post['pid']:'',
 									'create_at'=>date('Y-m-d H:i:s'),
-									'type'=>'Reschedule'
+									'type'=>$type
 									);
 									//echo '<pre>';print_r($billing);exit;
 									$update=$this->Resources_model->update_all_patient_billing_details($billing);
 									
 									if(isset($post['verifying']) && $post['verifying']=='verify'){
-										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($update));
+										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
 									}else{
 										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
 

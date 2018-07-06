@@ -144,8 +144,6 @@ table, th, td {
 		<th>Medicine Name </th>
 		<th>Dosage </th>
 		<th>Usage </th>
-		<th>Usage Instructions</th>
-		<th>Substitute allowed? </th>
 		<th>QTY</th>
 		<th>Amount</th>
 		<th>Total Amount</th>
@@ -159,8 +157,6 @@ table, th, td {
 		<td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
 		<td><?php echo isset($list['dosage'])?$list['dosage']:''; ?></td>
 		<td><?php echo isset($list['frequency'])?$list['frequency']:''; ?></td>
-	  	<td><?php echo isset($list['directions'])?$list['directions']:''; ?></td>
-		<td><?php echo isset($list['substitute_name'])?$list['substitute_name']:''; ?></td>
 		<td><?php echo isset($list['qty'])?$list['qty']:''; ?></td>
 		<td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
 		<td><?php echo isset($list['org_amount'])?$list['org_amount']:''; ?></td>

@@ -34,8 +34,6 @@
                                                         <th>QTY</th>
                                                         <th>Dosage</th>
                                                         <th>Usage </th>
-                                                        <th>Usage Instructions</th>
-                                                        <th>Substitute allowed?</th>
                                                         <th>Amount</th>
                                                         <th>Total Amount</th>
                                                         <th>Modify medicine Reason:</th>
@@ -56,8 +54,6 @@
 															<?php echo isset($list['frequency'])?$list['frequency']:''; ?>
 														</td>
                                                         
-                                                        <td><?php echo isset($list['directions'])?$list['directions']:''; ?></td>
-                                                        <td><?php echo isset($list['substitute_name'])?$list['substitute_name']:''; ?></td>
                                                         <td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
                                                         <td><?php echo isset($list['org_amount'])?$list['org_amount']:''; ?></td>
                                                         <td><?php echo isset($list['edit_reason'])?$list['edit_reason']:''; ?></td>

@@ -446,6 +446,8 @@ class Lab extends CI_Controller {
 				$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']=5){
 					$post=$this->input->post();
+					
+					//echo '<pre>';print_r($post);exit;
 					foreach($post['lab_id'] as $List){
 						$p_l_t_id=explode('_',$List);
 						$details=array(
@@ -512,9 +514,13 @@ class Lab extends CI_Controller {
 					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$data['patient_details']=$this->Lab_model->get_billing_details($data['patient_id'],$data['billing_id']);
 					if($admindetails['out_source']==1){
+						
 						$data['labtest_list']=$this->Lab_model->get_all_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
+						$data['direct_labtest_list']=$this->Lab_model->get_all_with_bidding_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],0);
 						$data['report_lists']=$this->Lab_model->get_all_patients_out_source_lab_report_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
 					}else{
+						
+						
 						$data['labtest_list']=$this->Lab_model->get_all_patients_in_labtest_lists($data['patient_id'],$data['billing_id'],0);
 						$data['report_lists']=$this->Lab_model->get_all_patients_lab_report_lists($data['patient_id'],$data['billing_id']);
 					}
@@ -609,6 +615,10 @@ class Lab extends CI_Controller {
 									'report_completed'=>1
 									);
 									$this->Lab_model->update_patient_billingreport_status($imglist['test_id'],$post['pid'],$post['b_id'],$compledata);
+									$compledata=array(
+									'status'=>1
+									);
+									$this->Lab_model->update_without_bidding_patient_billingreport_status($imglist['test_id'],$post['pid'],$post['b_id'],$compledata);
 
 								}
 								if(count($savereports)>0){

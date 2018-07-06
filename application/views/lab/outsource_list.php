@@ -62,9 +62,9 @@
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item "><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab=='' || $tab==1){ echo "active"; } ?>" aria-expanded="false">Select One</a>
                                         </li>
-                                        <li class="nav-item"><a href="#about" data-toggle="tab" class="" aria-expanded="false">Bidding</a>
+                                        <li class="nav-item"><a href="#about" data-toggle="tab" class="" aria-expanded="false">Procurement</a>
                                         </li>
-										<li class="nav-item"><a href="#bidding_accept" data-toggle="tab" class="<?php if(isset($tab) && $tab==3){ echo "active"; } ?>" aria-expanded="false">Bidding Accept</a>
+										<li class="nav-item"><a href="#bidding_accept" data-toggle="tab" class="<?php if(isset($tab) && $tab==3){ echo "active"; } ?>" aria-expanded="false">Procurement Accept</a>
                                         </li>
                                         
                                     </ul>
@@ -130,10 +130,10 @@
 														<tr>
 														<td>
 													
-															<?php if (in_array($list['id'], $out_source_list)) {?>
-																<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+															<?php if (in_array($li['t_id'], $out_source_list)) {?>
+																<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['t_id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
 															<?php }else{ ?>
-																<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+																<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['t_id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
 															<?php } ?>
 														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name'].',':''; ?>
 														Duration : <?php echo isset($li['duration'])?$li['duration'].',':''; ?>
@@ -166,7 +166,7 @@
 												<input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 											 
 												<div class="panel-heading ">
-												<h3 class="font-weight-bold text-center">Send for Bidding</h3>
+												<h3 class="font-weight-bold text-center">Send for Procurement</h3>
 												</div>
 												<table id="myTable">
 													  <tr class="header">
