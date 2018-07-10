@@ -76,7 +76,6 @@ class Users extends CI_Controller {
 					$data['prescriptions_list']= $this->Users_model->get_all_prescription_lists($userdetails['hos_id'],$admindetails['a_id']);
 					$data['tab']= base64_decode($this->uri->segment(3));
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
-
 					$this->load->view('prescription/addprescription',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -98,6 +97,7 @@ class Users extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$p_id=base64_decode($this->uri->segment(3));
+					$data['b_id']=base64_decode($this->uri->segment(4));
 					$data['prescriptions']= $this->Users_model->get_prescroption_list($p_id);
 					$patient_id= $this->Users_model->get_user_id($p_id);
 					$data['details']= $this->Users_model->get_user_details($patient_id['p_id']);
@@ -124,6 +124,8 @@ class Users extends CI_Controller {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					
 					$post=$this->input->post();
+					
+					//echo '<pre>';print_r($post);exit;
 					$add=array(
 						'hos_id'=>$userdetails['hos_id'],
 						'name'=>$post['name'],
@@ -136,11 +138,12 @@ class Users extends CI_Controller {
 						$save=$this->Users_model->saveprescription_details($add);
 						if(count($save)>0){
 							foreach($post['addmedicn'] as $list){
+								$get_medicine=$this->Users_model->get_medicine_name($list['medicine']);
 								$addmedicines=array(
 								'p_id'=>$save,
 								'hos_id'=>$userdetails['hos_id'],
-								'medicine_name'=>$list['medicine'],
-								'dosage'=>$list['dosage'],
+								'expirydate'=>$list['expirydate'],
+								'medicine_name'=>$get_medicine['medicine_name'],
 								'usage_instructions'=>$list['usage_instructions'],
 								'qty'=>$list['qty'],
 								'amount'=>$list['amount'],
@@ -150,6 +153,10 @@ class Users extends CI_Controller {
 								);
 								//echo '<pre>';print_r($addmedicines);exit;
 								$this->Users_model->saveprescription_list($addmedicines);
+								$Updatedata=array(
+								'qty'=>$get_medicine['qty']-$list['qty'],
+								);
+								$this->Users_model->update_medicine_qty($list['medicine'],$Updatedata);
 							
 							}
 								$this->session->set_flashdata('success',"prescription successfully added");

@@ -89,7 +89,23 @@ class Users_model extends CI_Model
 		$this->db->join('patients_list_1 ', 'patients_list_1.pid = prescription_manual.p_id', 'left');
 		$this->db->where('prescription_manual.hos_id', $hos_id);
 		$this->db->where('prescription_manual.create_by', $a_id);
-        return $this->db->get()->result_array();
+        $return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$bill_id=$this->get_patient_billing_id($list['pid']);
+			$data[$list['pid']]=$list;
+			$data[$list['pid']]['b_id']=$bill_id['b_id'];
+		}
+		if(!empty($data)){
+			return $data;
+		}
+	}
+	
+	public  function get_patient_billing_id($id){
+		$this->db->select('b_id')->from('patient_billing');	
+		$this->db->where('patient_billing.p_id', $id);
+		$this->db->order_by('patient_billing.b_id','desc');
+		$this->db->limit(1);
+        return $this->db->get()->row_array();	
 	}
 	
 	public  function get_prescroption_list($id){
@@ -107,6 +123,16 @@ class Users_model extends CI_Model
 		$this->db->select('prescription_manual.p_id')->from('prescription_manual');	
 		$this->db->where('prescription_manual.id', $id);
         return $this->db->get()->row_array();
+	}
+	
+	public  function get_medicine_name($id){
+		$this->db->select('*')->from('medicine_list');	
+		$this->db->where('medicine_list.id', $id);
+        return $this->db->get()->row_array();
+	}
+	public function update_medicine_qty($id,$data){
+		$this->db->where('id',$id);
+    	return $this->db->update("medicine_list",$data);
 	}
 	
 	

@@ -28,13 +28,14 @@
                                         <div class="card-body " style="padding: 0px 24px 24px 24px;">
                                         <div class="table-responsive">
 										<form id="prescription" name="prescription" method="post" target="_blank"  action="<?php echo base_url('Users/billprescription'); ?>">
-                                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($prescriptions['information']['pid'])?$prescriptions['information']['pid']:''; ?>">
-                                            <input type="hidden" name="bid" id="bid" value="<?php echo isset($prescriptions['information']['b_id'])?$prescriptions['information']['b_id']:''; ?>">
+                                            <input type="hidden" name="pid" id="pid" value="<?php echo isset($details['pid'])?$details['pid']:''; ?>">
+                                            <input type="hidden" name="bid" id="bid" value="<?php echo isset($b_id)?$b_id:''; ?>">
 											<table class="table custom-table table-hover" style="border-top:none">
                                                 <thead >
                                                     <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
+                                                        <th>expiry date</th>
                                                         <th>Usage Instructions</th>
                                                         <th>Amount</th>
                                                     </tr>
@@ -46,6 +47,9 @@
                                                         
                                                         <td>
 															<?php echo isset($list['qty'])?$list['qty']:''; ?>
+														</td>
+														<td>
+															<?php echo isset($list['expirydate'])?$list['expirydate']:''; ?>
 														</td>
 														
 														<td>
@@ -59,7 +63,17 @@
 													<?php } ?>
 												 </tbody>
                                             </table>
-
+											<div class="pull-right">
+											<div class="pull-left form-group">
+											<select onchange="savepaymentmode(this.value,'<?php echo $b_id; ?>');" id="paymentmode" name="paymentmode" class="form-control">
+											<option value="">Select Payment </option>
+											<option value="Swipe">Swipe</option>
+											<option value="Cash Payment">Cash Payment</option>
+											<option value="Other">Other</option>
+											</select>
+											</div> &nbsp;
+											<button type="submit"  class="btn btn-success">Print Prescription</button>
+											</div>
 											</form>
                                             </div>
                                         </div>
