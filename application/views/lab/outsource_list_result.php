@@ -64,9 +64,14 @@
 											 <form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
 											 <input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 											 <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-											 <table id="myTable">
+											 <table id="myTable" class="table-bordered">
 												  <tr class="header">
-													<th style="width:100%;">Name of the test</th>
+													<th style="">Select</th>
+													<th style="">Lab Name</th>
+													<th style="">Name of the test</th>
+													<th style="">Amount</th>
+													<th style="">Duration</th>
+													<th style="">Address</th>
 												</tr>
 												<?php if(isset($test_list) && count($test_list)>0){ ?>
 													<?php foreach($test_list as $list){ 
@@ -76,16 +81,26 @@
 													<?php foreach($list['lab_adress'] as $li){ ?>
 														<tr>
 														<td>
-													
-														<?php if (in_array($list['id'], $out_source_list)) {?>
-															<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+															<?php if (in_array($list['id'], $out_source_list)) {?>
+															<input  disabled type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>">
 														<?php }else{ ?>
-															<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>"> &nbsp; Lab Name : <?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+															<input type="checkbox" id="lab_id" name="lab_id[]" value="<?php echo $li['a_id'].'_'.$list['id']; ?>">
 														<?php } ?>
-														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name'].',':''; ?>
-														Duration : <?php echo isset($li['duration'])?$li['duration'].',':''; ?>
-														Amount : <?php echo isset($li['amuont'])?$li['amuont'].',':''; ?></b>
-														Address : 
+														</td>
+														<td>
+														<?php echo isset($li['a_name'])?$li['a_name']:''; ?>
+														</td>
+														<td>
+														<?php echo isset($li['t_name'])?$li['t_name'].',':''; ?>
+														</td>
+														<td>
+														<?php echo isset($li['amuont'])?$li['amuont'].',':''; ?>
+														</td>
+														<td>
+														<?php echo isset($li['duration'])?$li['duration'].',':''; ?></b>
+														</td>
+														<td>
+													
 														<?php echo isset($li['resource_add1'])?$li['resource_add1'].',':''; ?>
 														<?php echo isset($li['resource_add2'])?$li['resource_add2'].',':''; ?>
 														<?php echo isset($li['resource_city'])?$li['resource_city'].',':''; ?>
