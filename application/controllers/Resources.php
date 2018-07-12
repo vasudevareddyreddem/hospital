@@ -91,6 +91,53 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	//appointments controller
+	public function appointments()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patients_list']= $this->Resources_model->get_all_reschedule_patients_lists($userdetails['hos_id']);
+					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit; 
+					$patient_id= base64_decode($this->uri->segment(3));
+					if(isset($patient_id) && $patient_id!=''){
+						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
+						$data['tab']= base64_decode($this->uri->segment(4));
+						$data['pid']= base64_decode($this->uri->segment(3));
+						$data['subtab']=base64_decode($this->uri->segment(6));
+						$data['bill_id']=base64_decode($this->uri->segment(5));
+						
+						
+						$billing_id=base64_decode($this->uri->segment(5));
+						if($billing_id!=''){
+							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
+							$data['vitals_detailes']= $this->Resources_model->get_billing_vitals_details($data['pid']);
+						}else{
+							$data['billing_detailes']=array();
+							$data['vitals_detailes']=array();
+						}
+					}else{
+						$data['patient_detailes']=array();
+						$data['tab']=0;
+						 $data['pid']='';
+						 $data['bill_id']='';
+					}
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/appointments',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function patient_databse()
 	{	
 		if($this->session->userdata('userdetails'))

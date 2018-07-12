@@ -210,6 +210,15 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                           
+	                        </li>   
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('resources/appointments');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Appointments</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
 	                        </li>  
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('resources/patient_databse');?>" class="nav-link nav-toggle">
