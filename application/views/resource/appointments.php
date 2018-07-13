@@ -23,7 +23,9 @@
 					 <li style="border-right:2px solid #fff" class="nav-item "><a href="#aboutop" data-toggle="tab" class="<?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>"> Book Appointments</a>
                      </li>
 					 
-                     <li style="border-right:2px solid #fff" class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13  && $tab!=0){ echo "active";}?>">App Appointments</a>
+                     <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13  && $tab!=0){ echo "active";}?>">App Appointments</a>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;">5
+					 </div>
                      </li>
                      <li class="nav-item"><a href="#about" data-toggle="tab">Appointments List</a>
                      </li>
@@ -62,10 +64,10 @@
 								   <td>Department</td>
 								   <td>Specialist</td>
 								   <td>Doctor</td>
-								   <td> <div class="form-group">
+								   <td > <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input class="form-control" size="16" type="text"  name="dob" value="2018-07-06  ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="dob" value="2018-07-06  ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -74,7 +76,7 @@
 									<div class="form-group ">
                                                    <label class="">Booking Time </label>
                                                    <div class="input-group date form_time " data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                                <input class="form-control" size="16" type="text" value="09:45">
+                                                <input class="form-control" style="width:100px;" size="16" type="text" value="09:45">
                                                
                                                 <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                                             </div>
@@ -141,7 +143,11 @@
 								   <td>
 									9.50
 								   </td>
-								   <td>Accpect</td>
+								   <td>
+									   <a href="#" class="btn btn-primary btn-xs">
+											<i class="fa fa-eye"></i>
+										</a>
+								   </td>
 								   
 								</tr>
 							 </tbody>
