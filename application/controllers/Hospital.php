@@ -725,18 +725,45 @@ class Hospital extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function adddoctor()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['resource_list']=$this->Hospital_model->get_doctor_resources_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('hospital/add_doctor',$data);
+					$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function resourcepost()
 	{
 		if($this->session->userdata('userdetails'))
 		{
 			if($admindetails['role_id']=2){
 					$post=$this->input->post();
-					//echo '<pre>';print_r($_FILES);exit;
+					//echo '<pre>';print_r($post);exit;
 					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
-									redirect('hospital/resource');
+									if($post['designation']==6){
+										redirect('hospital/adddoctor');
+									}else{
+										redirect('hospital/resource');
+									}
+									
 								}else{
 									if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 									$temp = explode(".", $_FILES["resource_photo"]["name"]);
@@ -799,10 +826,20 @@ class Hospital extends CI_Controller {
 									$saveresource =$this->Hospital_model->save_resource($resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource are successfully created");
-										redirect('hospital/resource/'.base64_encode(1));
+										if($post['designation']==6){
+											redirect('hospital/adddoctor/'.base64_encode(1));
+										}else{
+											redirect('hospital/resource/'.base64_encode(1));
+										}
+										
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-										redirect('hospital/resource');
+										if($post['designation']==6){
+											redirect('hospital/adddoctor');
+										}else{
+											redirect('hospital/resource');
+										}
+										
 									}
 								}
 								
@@ -826,6 +863,8 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=1){
 					$resourse_id=$this->uri->segment(3);
+					$resouse_detail= $this->Hospital_model->get_resourse_details(base64_decode($resourse_id));
+
 					$status=base64_decode($this->uri->segment(4));
 					$a_id=$this->uri->segment(5);
 					if($status==1){
@@ -850,10 +889,19 @@ class Hospital extends CI_Controller {
 								}else{
 									$this->session->set_flashdata('success',"Resource successfully Activate.");
 								}
-								redirect('hospital/resource/'.base64_encode(1));
+								if($resouse_detail['role_id']==6){
+									redirect('hospital/adddoctor/'.base64_encode(1));
+								}else{
+									redirect('hospital/resource/'.base64_encode(1));
+								}
+								
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('hospital/resource/'.base64_encode(1));
+									if($resouse_detail['role_id']==6){
+										redirect('hospital/adddoctor/'.base64_encode(1));
+									}else{
+										redirect('hospital/resource/'.base64_encode(1));
+									}
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -875,6 +923,8 @@ class Hospital extends CI_Controller {
 		{
 			if($admindetails['role_id']=1){
 					$resourse_id=$this->uri->segment(3);
+					$resouse_detail= $this->Hospital_model->get_resourse_details(base64_decode($resourse_id));
+
 					if($resourse_id!=''){
 						$deletdata=array(
 							'r_status'=>2,
@@ -883,10 +933,18 @@ class Hospital extends CI_Controller {
 							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"Hospital successfully removed.");
-								redirect('hospital/resource/'.base64_encode(1));
+									if($resouse_detail['role_id']==6){
+										redirect('hospital/adddoctor/'.base64_encode(1));
+									}else{
+										redirect('hospital/resource/'.base64_encode(1));
+									}
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('hospital/resource/'.base64_encode(1));
+									if($resouse_detail['role_id']==6){
+										redirect('hospital/adddoctor/'.base64_encode(1));
+									}else{
+										redirect('hospital/resource/'.base64_encode(1));
+									}
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1024,7 +1082,9 @@ class Hospital extends CI_Controller {
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully Updated");
 										if($admindetails['role_id']=2){
-										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
+											
+												redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
+
 										}else{
 											redirect('profile');
 										}

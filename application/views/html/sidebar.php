@@ -146,6 +146,14 @@
 	                                    <a href="<?php echo base_url('profile'); ?>" class="nav-link "> <span class="title">Hospital Details</span>
 	                                    </a>
 	                                </li>
+									 <li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resource </span>
+	                                    </a>
+	                                </li>
+									<li class="nav-item ">
+	                                    <a href="<?php echo base_url('hospital/adddoctor'); ?>" class="nav-link "> <span class="title">Add Doctor </span>
+	                                    </a>
+	                                </li>
 	                                <li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/addtreatment'); ?>" class="nav-link "> <span class="title">Add Department</span>
 	                                    </a>
@@ -154,10 +162,7 @@
 	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Specialist</span>
 	                                    </a>
 	                                </li>
-	                                <li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resource </span>
-	                                    </a>
-	                                </li>
+	                                
 									<li class="nav-item ">
 	                                    <a href="<?php echo base_url('hospital/treatment'); ?>" class="nav-link "> <span class="title">Assign Department to Consultant </span>
 	                                    </a>

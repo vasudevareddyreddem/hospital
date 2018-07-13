@@ -6,7 +6,7 @@
            
 		<?php if($userdetails['role_id']==2){ ?>
 		 <div class=" pull-left">
-               <div class="page-title">Edit Resourse Details</div>
+               <div class="page-title">Edit <?php echo isset($resouse_detail['resource_name'])?$resouse_detail['resource_name']:''; ?> Details</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -41,6 +41,30 @@
 						  		<input  type="hidden" class="form-control" id="admin_id" name="admin_id" value="<?php echo isset($resouse_detail['a_id'])?$resouse_detail['a_id']:''; ?>">
 
                               <div class="row">
+							  <?php if($userdetails['role_id']==2){ ?>
+									  <?php if($resouse_detail['role_id']==6){ ?>
+											<div class="col-md-6">
+											<label> Resource Designation</label>
+											<select class="form-control" id="designation" name="designation">
+												<option value="6" <?php if($resouse_detail['role_id']==6){ echo "selected"; }?> >Doctor</option>
+												
+											</select>
+											</div>
+									  <?php }else{ ?>
+											<div class="col-md-6">
+												<label> Resource Designation</label>
+												<select class="form-control" id="designation" name="designation">
+													<option value="">Select</option>
+												<option value="3" <?php if($resouse_detail['role_id']==3){ echo "selected";} ?>>Receptionist</option>
+													<option value="4" <?php if($resouse_detail['role_id']==4){ echo "selected";}?>>Pharmacy</option>
+													<option value="5" <?php if($resouse_detail['role_id']==5){ echo "selected"; }?>>lab coordinator</option>
+													
+												</select>
+											</div>
+									  <?php } ?>
+								<?php }else{ ?>
+										<input type="hidden" id="designation" name="designation" value="<?php echo $resouse_detail['role_id']; ?>">
+								<?php }	 ?>	
                                <div class="col-md-6">
 									<label> Name</label>
 										<input class="form-control" id="resource_name" name="resource_name" value="<?php echo isset($resouse_detail['resource_name'])?$resouse_detail['resource_name']:''; ?>" type="text" placeholder="Name">
@@ -74,21 +98,7 @@
 									<label> Resource Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" value="<?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>" placeholder="Resource Contact Number">
 									</div>
-									<?php if($userdetails['role_id']==2){ ?>
-									<div class="col-md-6">
-									<label> Resource Designation</label>
-									<select class="form-control" id="designation" name="designation">
-										<option value="">Select</option>
-									<option value="3" <?php if($resouse_detail['role_id']==3){ echo "selected";} ?>>Receptionist</option>
-										<option value="4" <?php if($resouse_detail['role_id']==4){ echo "selected";}?>>Pharmacy</option>
-										<option value="5" <?php if($resouse_detail['role_id']==5){ echo "selected"; }?>>lab coordinator</option>
-										<option value="6" <?php if($resouse_detail['role_id']==6){ echo "selected"; }?> >Doctor</option>
-										
-									</select>
-									</div>
-									<?php }else{ ?>
-										<input type="hidden" id="designation" name="designation" value="<?php echo $resouse_detail['role_id']; ?>">
-									<?php }	 ?>	
+									
 									<div class="col-md-6">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" value="<?php echo isset($resouse_detail['resource_email'])?$resouse_detail['resource_email']:''; ?>" type="text" placeholder="Resource Email ID">

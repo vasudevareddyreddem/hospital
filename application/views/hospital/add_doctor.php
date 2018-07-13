@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Resources List</div>
+               <div class="page-title">Doctors</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Resources</li>
+               <li class="active">Doctors</li>
             </ol>
          </div>
       </div>
@@ -17,9 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resources</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Doctor</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Resources List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Doctors List</a>
                   </li>
                </ul>
             </header>
@@ -36,10 +36,7 @@
 							  <div class="col-md-6">
 									<label> Resource Designation</label>
 									<select class="form-control" id="designation" name="designation">
-										<option value="">Select</option>
-										<option value="3">Receptionist</option>
-										<option value="4">Pharmacy</option>
-										<option value="5">lab coordinator</option>
+										<option value="6">Doctor</option>
 									</select>
 									</div>
                                  <div class="col-md-6">

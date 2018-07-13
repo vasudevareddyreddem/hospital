@@ -5,14 +5,14 @@
 						<div class="page-bar">
 						  <div class="page-title-breadcrumb">
 							 <div class=" pull-left">
-								<div class="page-title">View Resource Details</div>
+								<div class="page-title"><?php echo isset($resouse_detail['resource_name'])?$resouse_detail['resource_name']:''; ?> Details</div>
 							 </div>
 							 <ol class="breadcrumb page-breadcrumb pull-right">
 								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
 								</li>
 								<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('hospital/resource/'); ?>">Resource List</a>&nbsp;<i class="fa fa-angle-right"></i>
 								</li>
-								<li class="active">View Resource Details</li>
+								<li class="active"><?php echo isset($resouse_detail['resource_name'])?$resouse_detail['resource_name']:''; ?> Details</li>
 							 </ol>
 						  </div>
 						</div>

@@ -61,6 +61,16 @@ class Hospital_model extends CI_Model
         $this->db->join('roles', 'roles.r_id = resource_list.role_id', 'left');
 		$this->db->where('resource_list.r_create_by',$a_id);
 		$this->db->where('resource_list.hos_id',$hos_id);
+		$this->db->where('resource_list.role_id !=',6);
+		$this->db->where('resource_list.r_status !=',2);
+		return $this->db->get()->result_array();
+	}
+	public function get_doctor_resources_list($a_id,$hos_id){
+		$this->db->select('resource_list.r_id,resource_list.a_id,roles.r_name,resource_list.resource_name,resource_list.role_id,resource_list.resource_contatnumber,resource_list.r_status,resource_list.r_created_at,resource_list.resource_email')->from('resource_list');		
+        $this->db->join('roles', 'roles.r_id = resource_list.role_id', 'left');
+		$this->db->where('resource_list.r_create_by',$a_id);
+		$this->db->where('resource_list.hos_id',$hos_id);
+		$this->db->where('resource_list.role_id',6);
 		$this->db->where('resource_list.r_status !=',2);
 		return $this->db->get()->result_array();
 	}
