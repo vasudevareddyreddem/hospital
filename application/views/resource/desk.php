@@ -675,7 +675,7 @@
 															   <div class="form-group col-md-12">
                                                                  <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Privilege card ?</a>
 																 </div>
-																 <div id="demo" class="collapse in">
+																 <div id="demo" class="">
 																	<div class="form-group col-md-12">
 																		<label for="mobile">Privilege card</label>
 																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
@@ -1034,7 +1034,7 @@
 															   <div class="form-group col-md-12">
                                                                  <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Privilege card ?</a>
 																 </div>
-																 <div id="demo1" class="collapse in">
+																 <div id="demo1" class="">
 																	<div class="form-group col-md-12">
 																		<label for="mobile">Privilege card</label>
 																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
@@ -1091,7 +1091,7 @@
                                              <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
-                                       
+                                       <input type="hidden" name="hospital_id" id="hospital_id" value="<?php echo isset($patient_detailes['hos_id'])?$patient_detailes['hos_id']:''; ?>">
                                     
                                       
                                        
@@ -1194,6 +1194,7 @@ function apply_couponcode(){
    						bill_amount: amount,
    						patient_id: $('#pid').val(),
    						biling_id: $('#b_id').val(),
+   						hospital_id: $('#hospital_id').val(),
    					},
    					dataType: 'json',
    					type: 'POST',
@@ -1231,6 +1232,7 @@ function apply_couponcode1(){
    						bill_amount: amount,
    						patient_id: $('#pid').val(),
    						biling_id: $('#b_id').val(),
+   						hospital_id: $('#hospital_id').val(),
    					},
    					dataType: 'json',
    					type: 'POST',

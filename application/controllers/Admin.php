@@ -103,7 +103,7 @@ class Admin extends CI_Controller {
 				if($admindetails['role_id']=1){
 					
 					$post=$this->input->post();
-					$checkcode=$this->Admin_model->get_coupon_code_details(trim($post['coupon_code']));
+					$checkcode=$this->Admin_model->get_coupon_code_details(trim($post['coupon_code']),$post['hospital_id']);
 					if(count($checkcode)>0){
 						
 						if($checkcode['status']==1){
