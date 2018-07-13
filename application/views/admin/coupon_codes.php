@@ -46,6 +46,15 @@
 								<label> Percentage / Amount </label>
 								<input class="form-control" id="percentage_amount" name="percentage_amount" value="" type="text" placeholder="Percentage / Amount">
 								</div>
+								<div class="col-md-6">
+								<label> Hospital Name </label>
+								<select class="form-control" id="hospital_id" name="hospital_id">
+									<option value="">Select</option>
+									<?php foreach($hospital_list as $list){ ?>
+										<option value="<?php echo $list['hos_id']; ?>"><?php echo $list['hos_bas_name']; ?></select>
+									<?php } ?>
+								</select>
+								</div>
 								</div>
 								<br>
 								<div class="">
@@ -67,6 +76,7 @@
                                         <thead>
                                             <tr>
 												<th>Name</th>
+												<th>Hospital Name</th>
 												<th>Type</th>
 												<th>Percentage / Amount</th>
                                                 <th>Create date</th>
@@ -78,6 +88,7 @@
 										<?php foreach($couponcode_list as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['coupon_code']); ?></td>
+                                                <td><?php echo htmlentities($list['hos_bas_name']); ?></td>
                                                 <td><?php echo htmlentities($list['type']); ?></td>
                                                 <td><?php echo htmlentities($list['percentage_amount']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
@@ -134,6 +145,20 @@
 														<option value="">Select</option>
 														<option value="Percentage" <?php if($list['type']=='Percentage'){ echo "selected";} ?>>Percentage</option>
 														<option value="Amount" <?php if($list['type']=='Amount'){ echo "selected";} ?>>Amount</option>
+														</select>
+													</div>
+													<div class="col-md-12">
+														<label> Hospital Name </label>
+														<select class="form-control" id="hospital_id" name="hospital_id" required>
+															<option value="">Select</option>
+															<?php foreach($hospital_list as $lists){ ?>
+																<?php if($list['hospital_id']==$lists['hos_id']){ ?>
+																<option selected value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></select>
+																<?php }else{ ?>
+																	<option  value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></select>
+
+																<?php } ?>
+															<?php } ?>
 														</select>
 													</div>
 													<div class="modal-footer">
@@ -237,7 +262,15 @@ $(document).ready(function() {
 					message: ' Percentage / Amount  only consist of digits'
 					}
 				}
-            },type: {
+            },
+			hospital_id: {
+                 validators: {
+					notEmpty: {
+						message: 'Hospital Name is required'
+					}
+				}
+            },
+			type: {
                  validators: {
 					notEmpty: {
 						message: 'Type is required'

@@ -171,6 +171,8 @@ class Admin extends CI_Controller {
 					
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
+					
+					$data['hospital_list']=$this->Admin_model->get_all_Hospital_details($admindetails['a_id']);
 					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
 					$this->load->view('admin/coupon_codes',$data);
 					$this->load->view('html/footer');
@@ -193,12 +195,13 @@ class Admin extends CI_Controller {
 					$post=$this->input->post();
 					$coupon_code=array(
 					'coupon_code'=>$post['coupon_code'],
+					'hospital_id'=>$post['hospital_id'],
 					'type'=>$post['type'],
 					'percentage_amount'=>$post['percentage_amount'],
 					'create_at'=>date('Y-m-d H:i:s'),
 					'create_by'=>$admindetails['a_id']
 					);
-					$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code']);
+					$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code'],$post['hospital_id']);
 					if(count($checking)==0){
 						$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
 						if(count($addcoupon)>0){
@@ -296,6 +299,7 @@ class Admin extends CI_Controller {
 					$post=$this->input->post();
 						$coupon_code=array(
 						'coupon_code'=>$post['coupon_code'],
+						'hospital_id'=>$post['hospital_id'],
 						'type'=>$post['type'],
 						'percentage_amount'=>$post['percentage_amount'],
 						'updated_time'=>date('Y-m-d H:i:s')
@@ -303,7 +307,7 @@ class Admin extends CI_Controller {
 					//echo '<pre>';print_r($billing);exit;
 					$coupon_details=$this->Admin_model->check_coupon_exits_details($post['coupon_code_id']);
 					//echo '<pre>';print_r($coupon_details);exit;
-					if($coupon_details['coupon_code'] == $post['coupon_code']){
+					if($coupon_details['coupon_code'] == $post['coupon_code'] && $coupon_details['hospital_id'] == $post['hospital_id']){
 						
 						$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 						if(count($save)>0){
@@ -315,7 +319,7 @@ class Admin extends CI_Controller {
 						}
 						
 					}else{
-							$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code']);
+							$checking=$this->Admin_model->get_coupon_code_details($post['coupon_code'],$post['hospital_id']);
 						if(count($checking)==0){
 							$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 							if(count($save)>0){

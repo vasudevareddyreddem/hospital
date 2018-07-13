@@ -367,7 +367,9 @@ class Admin_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function get_all_coupon_code_list($id){
-		$this->db->select('*')->from('coupon_codes');
+		$this->db->select('coupon_codes.*,hospital.hos_bas_name')->from('coupon_codes');
+		$this->db->join('hospital', 'hospital.hos_id = coupon_codes.hospital_id', 'left');
+
 		$this->db->where('coupon_codes.create_by',$id);
         return $this->db->get()->result_array();
 	}
@@ -379,9 +381,10 @@ class Admin_model extends CI_Model
 		$this->db->where('id',$id);
     	return $this->db->update("coupon_codes",$data);
 	}
-	public function get_coupon_code_details($code){
+	public function get_coupon_code_details($code,$hos_id){
 		$this->db->select('*')->from('coupon_codes');
 		$this->db->where('coupon_codes.coupon_code',$code);
+		$this->db->where('coupon_codes.hospital_id',$hos_id);
         return $this->db->get()->row_array();
 	}
 	public function update_billing_details($pid,$bid,$data){
