@@ -57,21 +57,31 @@ class Resources extends CI_Controller {
 					//echo '<pre>';print_r($data);exit; 
 					$patient_id= base64_decode($this->uri->segment(3));
 					if(isset($patient_id) && $patient_id!=''){
-						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
-						$data['tab']= base64_decode($this->uri->segment(4));
-						$data['pid']= base64_decode($this->uri->segment(3));
-						$data['subtab']=base64_decode($this->uri->segment(6));
-						$data['bill_id']=base64_decode($this->uri->segment(5));
-						
-						
-						$billing_id=base64_decode($this->uri->segment(5));
-						if($billing_id!=''){
-							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
-							$data['vitals_detailes']= $this->Resources_model->get_billing_vitals_details($data['pid']);
+								
+						$appointment_tab= base64_decode($this->uri->segment(4));
+						if($appointment_tab =='appointment'){
+							$data['tab']=0;
+							$data['pid']='';
+							$data['bill_id']='';
+							$data['patient_detailes']=array();
+							$data['appointment_id']=base64_decode($this->uri->segment(5));
 						}else{
-							$data['billing_detailes']=array();
-							$data['vitals_detailes']=array();
+								$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
+								$data['tab']= base64_decode($this->uri->segment(4));
+								$data['pid']= base64_decode($this->uri->segment(3));
+								$data['subtab']=base64_decode($this->uri->segment(6));
+								$data['bill_id']=base64_decode($this->uri->segment(5));
+								$billing_id=base64_decode($this->uri->segment(5));
+								if($billing_id!=''){
+									$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
+									$data['vitals_detailes']= $this->Resources_model->get_billing_vitals_details($data['pid']);
+								}else{
+									$data['billing_detailes']=array();
+									$data['vitals_detailes']=array();
+								}
+							
 						}
+						
 					}else{
 						$data['patient_detailes']=array();
 						$data['tab']=0;
@@ -91,53 +101,7 @@ class Resources extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	//appointments controller
-	public function appointments()
-	{	
-		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=3){
-					$admindetails=$this->session->userdata('userdetails');
-					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['patients_list']= $this->Resources_model->get_all_reschedule_patients_lists($userdetails['hos_id']);
-					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
-					//echo '<pre>';print_r($data);exit; 
-					$patient_id= base64_decode($this->uri->segment(3));
-					if(isset($patient_id) && $patient_id!=''){
-						$data['patient_detailes']= $this->Resources_model->get_details_details($patient_id);
-						$data['tab']= base64_decode($this->uri->segment(4));
-						$data['pid']= base64_decode($this->uri->segment(3));
-						$data['subtab']=base64_decode($this->uri->segment(6));
-						$data['bill_id']=base64_decode($this->uri->segment(5));
-						
-						
-						$billing_id=base64_decode($this->uri->segment(5));
-						if($billing_id!=''){
-							$data['billing_detailes']= $this->Resources_model->get_billing_details($data['pid'],$billing_id);
-							$data['vitals_detailes']= $this->Resources_model->get_billing_vitals_details($data['pid']);
-						}else{
-							$data['billing_detailes']=array();
-							$data['vitals_detailes']=array();
-						}
-					}else{
-						$data['patient_detailes']=array();
-						$data['tab']=0;
-						 $data['pid']='';
-						 $data['bill_id']='';
-					}
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('resource/appointments',$data);
-					$this->load->view('html/footer');
-				}else{
-					$this->session->set_flashdata('error',"you don't have permission to access");
-					redirect('dashboard');
-				}
-			
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
+	
 	public function patient_databse()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -265,6 +229,11 @@ class Resources extends CI_Controller {
 					}else{
 							$addtab=$this->Resources_model->save_basic_details($tab1);
 							if(count($addtab)>0){
+									/* appointment*/
+									if(isset($post['appointment_id']) && $post['appointment_id']!=''){
+									$this->Resources_model->update_appointment($post['appointment_id'],$addtab);
+									}
+									/*appointment*/
 								$dta=array(
 								'pid'=>$addtab,
 								'create_at'=>date('Y-m-d H:i:s')
@@ -284,7 +253,7 @@ class Resources extends CI_Controller {
 									);
 									//echo '<pre>';print_r($billing);exit;
 									$update=$this->Resources_model->update_all_patient_billing_details($billing);
-								redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(11).'/'.base64_encode($update));
+									redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(11).'/'.base64_encode($update));
 								}else{
 								redirect('resources/desk/'.base64_encode($addtab).'/'.base64_encode(2));	
 								}

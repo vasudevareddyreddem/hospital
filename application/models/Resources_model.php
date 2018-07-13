@@ -350,5 +350,13 @@ class Resources_model extends CI_Model
 		
 	}
 	 /*lab test exits*/
+	 
+	 /* appointment update*/
+	 public  function update_appointment($id,$a_id){
+		 $data=array('patient_id'=>$a_id);
+		 $this->db->where('id',$id);
+    	return $this->db->update("appointments",$data);
+		}
+	 /* appointment update*/
 
 }

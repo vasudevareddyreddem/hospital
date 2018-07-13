@@ -75,7 +75,9 @@
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <div class="row">
+                                             <input type="hidden" id="appointment_id" name="appointment_id" value="<?php echo isset($appointment_id)?$appointment_id:'';?>">
+
+											 <div class="row">
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
                                                    <input type="hidden" class="form-control"  id="patient_old1_card_number"  name="patient_old1_card_number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" >
@@ -817,6 +819,7 @@
 											  <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
 
                                              <input type="hidden" id="op" name="op" value="1">
+                                             <input type="hidden" id="appointment_id" name="appointment_id" value="<?php echo isset($appointment_id)?$appointment_id:'';?>">
                                              <div class="row">
 												<div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
