@@ -467,7 +467,7 @@ class Hospital extends CI_Controller {
 				if($admindetails['role_id']==1 || $admindetails['role_id']==2){
 					$post=$this->input->post();
 					
-					echo '<pre>';print_r($post);
+					//echo '<pre>';print_r($post);
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
 						if($hospital_details['hos_email_id']!= $post['hos_bas_email']){
 							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_bas_email']);
@@ -630,6 +630,7 @@ class Hospital extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
+			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=1){
 					$hospital_id=$this->uri->segment(3);
 					if($hospital_id!=''){
@@ -639,6 +640,14 @@ class Hospital extends CI_Controller {
 							);
 							$deletedata= $this->Hospital_model->update_hospital_details(base64_decode($hospital_id),$deletdata);
 							if(count($deletedata)>0){
+								$hos_details=$this->Hospital_model->get_hospital_id_details(base64_decode($hospital_id));
+								$admin_stusdetails=array(
+								'a_status'=>2,
+								'a_updated_at'=>date('Y-m-d H:i:s')
+								);
+								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
+								
+								
 								$this->session->set_flashdata('success',"Hospital successfully removed.");
 								redirect('hospital');
 							}else{
@@ -663,8 +672,12 @@ class Hospital extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
+			$admindetails=$this->session->userdata('userdetails');
+			//echo '<pre>';print_r($admindetails);exit;
 			if($admindetails['role_id']=1){
 					$hospital_id=$this->uri->segment(3);
+					
+					//exit;
 					$status=base64_decode($this->uri->segment(4));
 					if($status==1){
 						$statu=0;
@@ -678,6 +691,13 @@ class Hospital extends CI_Controller {
 							);
 							$statusdata= $this->Hospital_model->update_hospital_details(base64_decode($hospital_id),$stusdetails);
 							if(count($statusdata)>0){
+								$hos_details=$this->Hospital_model->get_hospital_id_details(base64_decode($hospital_id));
+								$admin_stusdetails=array(
+								'a_status'=>$statu,
+								'a_updated_at'=>date('Y-m-d H:i:s')
+								);
+								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
+								//echo $this->db->last_query();exit;
 								if($status==1){
 								$this->session->set_flashdata('success',"Hospital successfully Deactivate.");
 								}else{

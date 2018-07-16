@@ -153,9 +153,9 @@
 															<option value="">Select</option>
 															<?php foreach($hospital_list as $lists){ ?>
 																<?php if($list['hospital_id']==$lists['hos_id']){ ?>
-																<option selected value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></select>
+																<option selected value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></option>
 																<?php }else{ ?>
-																	<option  value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></select>
+																	<option  value="<?php echo $lists['hos_id']; ?>"><?php echo $lists['hos_bas_name']; ?></option>
 
 																<?php } ?>
 															<?php } ?>

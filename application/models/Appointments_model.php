@@ -20,7 +20,7 @@ class Appointments_model extends CI_Model
 		$this->db->join('resource_list', 'resource_list.a_id = appointments.doctor_id', 'left');
 		$this->db->where('appointments.hos_id',$hos_id);
 		$this->db->where('appointments.status !=',2);
-		$this->db->where('appointments.patient_id !=','');
+		$this->db->where('appointments.patient_id =',0);
 		$this->db->order_by('appointments.id','desc');
 		return $this->db->get()->result_array();
 	}

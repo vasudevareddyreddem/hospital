@@ -57,6 +57,7 @@ class Appointments extends CI_Controller {
 					//echo '<pre>';print_r($data);exit; 
 					$data['tab']= base64_decode($this->uri->segment(3));
 					$data['appointment_list']=$this->Appointments_model->get_website_appintmenr_list($userdetails['hos_id']);
+					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');

@@ -172,7 +172,7 @@ class Admin extends CI_Controller {
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
 					
-					$data['hospital_list']=$this->Admin_model->get_all_Hospital_details($admindetails['a_id']);
+					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
 					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
 					$this->load->view('admin/coupon_codes',$data);
 					$this->load->view('html/footer');

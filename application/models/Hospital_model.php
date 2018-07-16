@@ -18,12 +18,16 @@ class Hospital_model extends CI_Model
 		return $insert_id = $this->db->insert_id();
 	}
 	public function check_email_exits($email){
-		$sql = "SELECT admin.a_id FROM admin WHERE a_email_id ='".$email."'";
+		$sql = "SELECT admin.a_id FROM admin WHERE a_email_id ='".$email."' and a_status !=2";
 		return $this->db->query($sql)->row_array();	
 	}
 	public function update_hospital_details($hos_id,$data){
 		$this->db->where('hos_id',$hos_id);
     	return $this->db->update("hospital",$data);
+	}
+	public function update_admin_detais($hos_id,$data){
+		$this->db->where('a_id',$hos_id);
+    	return $this->db->update("admin",$data);
 	}
 	public function update_adminhospital_details($a_id,$data){
 		$this->db->where('a_id',$a_id);
@@ -315,6 +319,12 @@ class Hospital_model extends CI_Model
 		
 		$this->db->where('patient_medicine_list.p_id', $p_id);
         return $this->db->get()->result_array();
+	}
+	
+	public  function get_hospital_id_details($hos_id){
+		$this->db->select('hospital.a_id')->from('hospital');		
+		$this->db->where('hospital.hos_id', $hos_id);
+        return $this->db->get()->row_array();
 	}
 	
 	
