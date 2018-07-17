@@ -70,8 +70,8 @@
 									</div>
 										
 									 <div class="col-md-6">
-									<label> Resource Contact Number</label>
-										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Resource Contact Number">
+									<label> Alternative Contact Number</label>
+										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Alternative Contact Number">
 									</div>
 										
 									<div class="col-md-6">
@@ -351,9 +351,7 @@ $(document).ready(function() {
 				}
             },resource_bank_holdername: {
                  validators: {
-					notEmpty: {
-						message: 'Bank Holder Name is required'
-					},
+					
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Bank Holder Name can only consist of alphanumeric, space and dot'
@@ -362,8 +360,7 @@ $(document).ready(function() {
             },resource_bank_accno: {
                 validators: 
 						{
-						notEmpty: { message: 'Bank Account is required'
-					    },
+						
 						regexp:{
 					     regexp:  /^[0-9]{9,16}$/,
 					     message:'Bank Account  must be 9 to 16 digits'
@@ -372,9 +369,7 @@ $(document).ready(function() {
 				},
 				resource_ifsc_code: {
                 validators: {
-					notEmpty: {
-						message: 'IFSC Code is required'
-					},
+					
 					regexp: {
 					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
 					 message: 'IFSC Code must be alphanumeric'

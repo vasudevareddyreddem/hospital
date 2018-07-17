@@ -443,8 +443,8 @@ $(document).ready(function() {
 						message: 'Mobile Number is required'
 					},
                     regexp: {
-					regexp:  /^[0-9]{10}$/,
-					message:'Mobile Number must be 10 digits'
+					regexp:  /^[0-9]{10,14}$/,
+					message:'Mobile Number must be 10 to 14 digits'
 					}
                 }
             },
