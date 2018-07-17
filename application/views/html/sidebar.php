@@ -465,7 +465,18 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-						<?php } ?>
+							<?php } else if($userdetails['role_id']==9){ ?>
+							<!--ward management-->
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">notifications</i>
+	                                <span class="title">Ward management</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<!--ward management-->
+							<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons"> power_settings_new</i>
 	                                <span class="title">Logout</span> <span class="arrow"></span>
