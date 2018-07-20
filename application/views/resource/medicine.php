@@ -256,9 +256,6 @@ $(document).ready(function() {
             },
 			'addmedicn[0][dosage]': {
                  validators: {
-					notEmpty: {
-						message: 'Medicine Dosage is required'
-					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Medicine dosage can only consist of alphanumeric, space and dot'

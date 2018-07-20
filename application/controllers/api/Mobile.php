@@ -59,11 +59,11 @@ class Mobile extends REST_Controller {
 		}if($confirmpassword==''){
 			$message = array('status'=>0,'message'=>'Confirm Password is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if(strlen($password)<6){
-			$message = array('status'=>0,'message'=>'Passwords must be at least 6 characters long');
+		}if(strlen($password)<8){
+			$message = array('status'=>0,'message'=>'Passwords must be at least 8 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if(strlen($confirmpassword)<6){
-			$message = array('status'=>0,'message'=>'Confirm passwords must be at least 6 characters long');
+		}if(strlen($confirmpassword)<8){
+			$message = array('status'=>0,'message'=>'Confirm passwords must be at least 8 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		if(md5($password) == md5($confirmpassword)){
@@ -110,11 +110,14 @@ class Mobile extends REST_Controller {
 			$message = array('status'=>0,'message'=>'Password is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-		if(strlen($password)<6){
-			$message = array('status'=>0,'message'=>'Passwords must be at least 6 characters long');
+		if(strlen($password)<8){
+			$message = array('status'=>0,'message'=>'Passwords must be at least 8 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		$select=$this->Mobile_model->check_login_details($email,$password);
+		
+		
+		//echo '<pre>';print_r($select);exit;
 		if(count($select)>0){
 			$message = array('status'=>1,'details'=>$select,'message'=>'User Successfully login');
 			$this->response($message, REST_Controller::HTTP_OK);
@@ -135,15 +138,15 @@ class Mobile extends REST_Controller {
 			$message = array('status'=>0,'message'=>'Password is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-		if(strlen($password)<6){
-			$message = array('status'=>0,'message'=>'Passwords must be at least 6 characters long');
+		if(strlen($password)<8){
+			$message = array('status'=>0,'message'=>'Passwords must be at least 8 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($confirmpassword==''){
 			$message = array('status'=>0,'message'=>'Confirm password is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-		if(strlen($confirmpassword)<6){
-			$message = array('status'=>0,'message'=>'Confirm password  must be at least 6 characters long');
+		if(strlen($confirmpassword)<8){
+			$message = array('status'=>0,'message'=>'Confirm password  must be at least 8 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		if(md5($password)==md5($confirmpassword)){
@@ -190,6 +193,314 @@ class Mobile extends REST_Controller {
 			
 				}else{
 				$message = array('status'=>0,'message'=>'Entered Email id not registered.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
+	public  function appointment_hospital_citys_post(){
+			$districts=$this->Mobile_model->get_hospital_citys_list();
+				if(count($districts)>0){
+					$message = array('status'=>1,'list'=>$districts,'message'=>'Citys List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Citys List not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
+	
+	public  function appointment_hospital_department_list_post(){
+		$city=$this->post('city');
+		if($city==''){
+			$message = array('status'=>0,'message'=>'City is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+			$department_list=$this->Mobile_model->get_hospital_department_list($city);
+				if(count($department_list)>0){
+					$message = array('status'=>1,'list'=>$department_list,'message'=>'Departments List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Departments List not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}	
+	public  function appointment_hospital_specialist_list_post(){
+		$city=$this->post('city');
+		$department_name=$this->post('department_name');
+		if($city==''){
+			$message = array('status'=>0,'message'=>'City Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($department_name==''){
+			$message = array('status'=>0,'message'=>'Department Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}$specialist_list=$this->Mobile_model->get_hospital_department_specialist_list($department_name,$city);
+				if(count($specialist_list)>0){
+					$message = array('status'=>1,'list'=>$specialist_list,'message'=>'specialist List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'specialist List not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
+	
+	public  function appointment_hospital_list_post(){
+		$specialist_name=$this->post('specialist_name');
+		$city=$this->post('city');
+		if($city==''){
+			$message = array('status'=>0,'message'=>'City Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($specialist_name==''){
+			$message = array('status'=>0,'message'=>'Specialist name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+			$hospital_list=$this->Mobile_model->get_hospital_list($specialist_name,$city);
+				if(count($hospital_list)>0){
+					$message = array('status'=>1,'list'=>$hospital_list,'message'=>'Hospital List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Hospital List not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
+	public  function appointment_hospital_doctors_list_post(){
+		$s_id=$this->post('s_id');
+		if($s_id==''){
+			$message = array('status'=>0,'message'=>'Specialist Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}$doctor_list=$this->Mobile_model->get_hospital_specialist_doctors_list($s_id);
+				if(count($doctor_list)>0){
+					$message = array('status'=>1,'list'=>$doctor_list,'message'=>'Doctors List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Doctors List not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
+	public  function appointment_add_post(){
+		$a_u_id=$this->post('a_u_id');
+		$city=$this->post('city');
+		$hos_id=$this->post('hos_ids');
+		$department_id=$this->post('department_name');
+		$s_id=$this->post('specialist_name');
+		$doctor_id=$this->post('a_id');
+		$patient_age=$this->post('patient_age');
+		$date=$this->post('date');
+		$time=$this->post('time');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($city==''){
+			$message = array('status'=>0,'message'=>'City is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($hos_id==''){
+			$message = array('status'=>0,'message'=>'Hospital Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($department_id==''){
+			$message = array('status'=>0,'message'=>'Department Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($s_id==''){
+			$message = array('status'=>0,'message'=>'Specialist Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($patient_age==''){
+			$message = array('status'=>0,'message'=>'Age is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($date==''){
+			$message = array('status'=>0,'message'=>'date is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($date!=''){
+			if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+				//return true;
+			} else {
+				$message = array('status'=>0,'message'=>'Date formate is wrog.example is 2018-06-24');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+		}if($time==''){
+			$message = array('status'=>0,'message'=>'Time is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$details=$this->Mobile_model->get_appointment_user_details($a_u_id);
+		//echo '<pre>';print_r($details);
+		if(count($details)>0){
+			
+		$hospital_ids=explode(',',$hos_id);
+		foreach($hospital_ids as $list){
+			$depart_id=$this->Mobile_model->get_department_name_id($list,$department_id);
+			$specilist_id=$this->Mobile_model->get_specilist_name_id($list,$s_id);
+			if($depart_id['t_id']!='' && $specilist_id['s_id']!=''){
+				$add=array(
+					'hos_id'=>isset($list)?$list:'',
+					'city'=>isset($city)?$city:'',
+					'patinet_name'=>isset($details['name'])?$details['name']:'',
+					'age'=>isset($patient_age)?$patient_age:'',
+					'mobile'=>isset($details['mobile'])?$details['mobile']:'',
+					'department'=>isset($depart_id['t_id'])?$depart_id['t_id']:'',
+					'specialist'=>isset($specilist_id['s_id'])?$specilist_id['s_id']:'',
+					'date'=>isset($date)?$date:'',
+					'time'=>isset($time)?$time:'',
+					'status'=>0,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'coming_through'=>0,
+					'create_by'=>$a_u_id,
+					);
+				$save_app=$this->Mobile_model->appointment_bidding_list($add);
+				//echo $this->db->last_query();
+			
+				}
+			}
+				if(count($save_app)>0){
+								$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Appointment Successfully added');
+								$this->response($message, REST_Controller::HTTP_OK);
+						}else{
+								$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Technical problem will occured. Please try again.');
+								$this->response($message, REST_Controller::HTTP_OK);
+					}
+		
+			
+			
+					
+					
+		}else{
+			$message = array('status'=>0,'message'=>'User not found. Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		
+	}
+	
+	public  function appointment_statu_list_post(){
+		$a_u_id=$this->post('a_u_id');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$aapointment_list=$this->Mobile_model->get_bidding_appointment_list($a_u_id);
+		if(count($aapointment_list)>0){
+						$message = array('status'=>1,'list'=>$aapointment_list,'a_u_id'=>$a_u_id,'message'=>'Appointment list are found');
+						$this->response($message, REST_Controller::HTTP_OK);
+				}else{
+						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Appointment list are not found');
+						$this->response($message, REST_Controller::HTTP_OK);
+			}
+	}
+	public  function appointment_user_statu_accept_post(){
+		$a_u_id=$this->post('a_u_id');
+		$b_id=$this->post('b_id');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($b_id==''){
+			$message = array('status'=>0,'message'=>'Temporary Appointment Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$appointment_details=$this->Mobile_model->get_bidding_appointment_details($b_id);
+			if(count($appointment_details)>0){
+				$add=array(
+					'hos_id'=>isset($appointment_details['hos_id'])?$appointment_details['hos_id']:'',
+					'patinet_name'=>isset($appointment_details['patinet_name'])?$appointment_details['patinet_name']:'',
+					'age'=>isset($appointment_details['age'])?$appointment_details['age']:'',
+					'mobile'=>isset($appointment_details['mobile'])?$appointment_details['mobile']:'',
+					'department'=>isset($appointment_details['department'])?$appointment_details['department']:'',
+					'specialist'=>isset($appointment_details['specialist'])?$appointment_details['specialist']:'',
+					'doctor_id'=>'',
+					'date'=>isset($appointment_details['date'])?$appointment_details['date']:'',
+					'time'=>isset($appointment_details['time'])?$appointment_details['time']:'',
+					'status'=>1,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'create_by'=>$a_u_id,
+					'coming_through'=>0,
+					);
+				$save_appointment=$this->Mobile_model->save_appointment($add);
+				if(count($save_appointment)>0){
+					
+						$remaing_temp_appoint=$this->Mobile_model->get_remaining_appointment_list($appointment_details['date'],$appointment_details['time'],$appointment_details['department'],$appointment_details['specialist']);
+							if(count($remaing_temp_appoint)>0){
+								foreach($remaing_temp_appoint as $list){
+									$this->Mobile_model->delete_temp_appointment($list['b_id']);
+								}
+							}
+								$message = array('status'=>1,'Appointment id'=>$save_appointment,'a_u_id'=>$a_u_id,'message'=>'Appointment successfully added');
+								$this->response($message, REST_Controller::HTTP_OK);
+					}else{
+								$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Technical problem will occured. Please try again.');
+								$this->response($message, REST_Controller::HTTP_OK);
+					}
+			}else{
+				$message = array('status'=>0,'a_u_id'=>$a_u_id,'b_id'=>$b_id,'message'=>'It is not accepted in hospital.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+	}
+	
+	public  function appointment_userprofile_post(){
+		
+		$a_u_id=$this->post('a_u_id');
+		$name=$this->post('name');
+		$email=$this->post('email');
+		$mobile=$this->post('mobile');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($name==''){
+			$message = array('status'=>0,'message'=>'Name is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($email==''){
+			$message = array('status'=>0,'message'=>'Email Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($mobile==''){
+			$message = array('status'=>0,'message'=>'Mobile Number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$details=$this->Mobile_model->get_appointment_user_details($a_u_id);
+		if(count($details)>0){
+			if($details['email']!=$email){
+				$check_email=$this->Mobile_model->check_email_already_already_exits($email);
+				if(count($check_email)>0){
+					$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Email Id already exists. Please use another email id');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}
+			}
+			$update=array(
+			'name'=>isset($name)?$name:'',
+			'email'=>isset($email)?$email:'',
+			'mobile'=>isset($mobile)?$mobile:'',
+			);
+			$update_details=$this->Mobile_model->udate_profile($a_u_id,$update);
+			if(count($update_details)>0){
+				$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Profile successfully updated.');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Technical problem will occured. Please try again.');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}			
+			
+			
+		}else{
+			$message = array('status'=>0,'message'=>'User not found. Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		
+	}
+	
+	public  function appointment_list_post(){
+		$a_u_id=$this->post('a_u_id');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$appoint_list=$this->Mobile_model->get_user_aapointment_list($a_u_id);
+		if(count($appoint_list)>0){
+					$message = array('status'=>1,'list'=>$appoint_list,'message'=>'Appointment List are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Appointment List not found.Please try again');
 				$this->response($message, REST_Controller::HTTP_OK);
 				}
 	}
