@@ -24,6 +24,33 @@ class Appointments_model extends CI_Model
 		$this->db->order_by('appointments.id','desc');
 		return $this->db->get()->result_array();
 	}
+	public  function get_app_appointment_list($hos_id){
+		$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->where('appointment_bidding_list.hos_id',$hos_id);
+		$this->db->where('appointment_bidding_list.status !=',2);
+		$this->db->order_by('appointment_bidding_list.b_id','desc');
+		return $this->db->get()->result_array();
+	}
+	public  function get_app_appointment_list_count($hos_id){
+		$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->where('appointment_bidding_list.hos_id',$hos_id);
+		$this->db->where('appointment_bidding_list.status',0);
+		$this->db->order_by('appointment_bidding_list.b_id','desc');
+		return $this->db->get()->result_array();
+	}
+	public  function update_appointment_status_details($id,$data){
+		$this->db->where('b_id',$id);
+		return $this->db->update('appointment_bidding_list',$data);
+	}
+	public  function get_appointment_id_details($b_id){
+		$this->db->select('*')->from('appointment_bidding_list');
+		$this->db->where('b_id',$b_id);
+		return $this->db->get()->row_array();
+	}
 	
 	
 

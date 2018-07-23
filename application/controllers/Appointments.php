@@ -57,6 +57,8 @@ class Appointments extends CI_Controller {
 					//echo '<pre>';print_r($data);exit; 
 					$data['tab']= base64_decode($this->uri->segment(3));
 					$data['appointment_list']=$this->Appointments_model->get_website_appintmenr_list($userdetails['hos_id']);
+					$data['app_appointment_list']=$this->Appointments_model->get_app_appointment_list($userdetails['hos_id']);
+					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count($userdetails['hos_id']);
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
@@ -113,6 +115,42 @@ class Appointments extends CI_Controller {
 				$this->session->set_flashdata('error','Please login to continue');
 				redirect('admin');
 			}
+		}
+		public  function accept_status(){
+			if($this->session->userdata('userdetails'))
+				{
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($admindetails);exit;
+					if($admindetails['role_id']=3){
+							$appointment_b_id=$this->uri->segment(3);
+							$status=base64_decode($this->uri->segment(4));
+							
+							if($appointment_b_id!=''){
+								$stusdetails=array(
+									'status'=>$status,
+									);
+									$statusdata= $this->Appointments_model->update_appointment_status_details(base64_decode($appointment_b_id),$stusdetails);
+									if(count($statusdata)>0){
+										$this->session->set_flashdata('success',"Appointment successfully accepted.");
+										
+										redirect('appointments/index/'.base64_encode(2));
+									}else{
+											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+											redirect('appointments/index/'.base64_encode(2));
+									}
+							}else{
+								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('appointments/index/'.base64_encode(3));
+							}
+							
+					}else{
+							$this->session->set_flashdata('error',"You have no permission to access");
+							redirect('dashboard');
+					}
+				}else{
+					$this->session->set_flashdata('error','Please login to continue');
+					redirect('admin');
+				}
 		}
 	
 	

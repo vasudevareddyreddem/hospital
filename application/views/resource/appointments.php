@@ -24,7 +24,7 @@
                      </li>
 					 
                       <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#home" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==2){ echo "active";}?>">App Appointments</a>
-					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;">5
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ echo count($app_appointment_list_count); } ?>
 					 </div>
                      </li>
                      <li class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
@@ -117,29 +117,33 @@
                              <table class="table table-striped table-bordered " id="example4">
 							 <thead>
 								<tr>
-								   <th> Patient Name </th>
+								   
+								    <th style="display:none;"> id</th>
+									<th> Patient Name </th>
 								   <th> Age</th>
 								   <th> Mobile </th>
 								   <th> Department </th>
 								   <th> Specialist </th>
-								   <th> Doctor </th>
 								   <th > Booking Date </th>
 								   <th> Booking Time </th>
+								   <th> Status</th>
 								   <th> Action </th>
 								</tr>
 							 </thead>
 							 <tbody>
+							 <?php if(isset($app_appointment_list) && count($app_appointment_list)>0){ ?>
+							 <?php foreach($app_appointment_list as $list){ ?>
 								<tr class="">
-								   <td>Bayapureddy</td>
-								   <td>24</td>
-								   <td>8500226782</td>
-								   <td>Department</td>
-								   <td>Specialist</td>
-								   <td>Doctor</td>
-								   <td > <div class="form-group">
+								  <td style="display:none;"><?php echo $list['id']; ?></td>
+								   <td><?php echo $list['patinet_name']; ?></td>
+								   <td><?php echo $list['age']; ?></td>
+								   <td><?php echo $list['mobile']; ?></td>
+								   <td><?php echo $list['t_name']; ?></td>
+								   <td><?php echo $list['specialist_name']; ?></td>
+								   <td> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="dob" value="2018-07-06  ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="dob" value="<?php echo $list['date']; ?> ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -147,32 +151,47 @@
 								   <td>
 									<div class="form-group ">
                                                    <label class="">Booking Time </label>
-                                                   <div class="input-group date form_time " data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                                <input class="form-control" style="width:100px;" size="16" type="text" value="09:45">
-                                               
-                                                <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-                                            </div>
+                                                <?php $time_list=array("12:00 am","12:30 am","01:00 am","01:30 am","02:00 am","02:30 am","03:00 am","03:30 am","04:00 am","04:30 am","05:00 am","05:30 am","06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm"); ?>
+													<select class="form-control" id="time" name="time">
+														<option value="">Select</option>
+														<?php foreach($time_list as $lists){ ?>
+														<?php if($list['time']==$lists){ ?>
+															<option selected value="<?php echo $lists; ?>"><?php echo $lists; ?></option>
+														<?php }else{ ?>
+															<option  value="<?php echo $lists; ?>"><?php echo $lists; ?></option>
+														<?php } ?>
+														<?php } ?>
+													
+													</select>
+                                           
                                                 </div>
 								   </td>
-								   <td><div class="btn-group">
+								   <td><?php if($list['status']==0){ echo "Pending";}else if($list['status']==1){  echo "Accept";}else if($list['status']==2){  echo "reject";}else if($list['status']==3){  echo "Approved";} ?></td>
+								   <td>
+								   <div class="btn-group">
                                              <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                              <i class="fa fa-angle-down"></i>
                                              </button>
                                              <ul class="dropdown-menu pull-left" role="menu">
                                                 <li>
-                                                   <a href="#">
+                                                   <a href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(1)); ?>">
                                                    <i class="icon-docs"></i> Accept </a>
                                                 </li>
 												
 													<li>
-                                                    <a href="#">
+                                                    <a href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(2)); ?>">
                                                     <i class="icon-docs"></i> Reject  </a>
 													</li>
 												
                                              </ul>
-                                          </div></td>
+                                          </div>
+										  </td>
 								   
 								</tr>
+							 <?php } ?>
+							 <?php }else{ ?>
+							 No data available
+							 <?php } ?>
 							 </tbody>
 							</table>
 									

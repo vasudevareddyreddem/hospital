@@ -56,7 +56,7 @@
 										<div class="col-sm-4 nopadding">
 										  <div class="form-group">
 										  
-										  <select style="width:100%;height:40px;" class="form-control" id="medicinename" name="addmedicn[0][medicine]">
+										  <select style="width:100%;height:40px;" class="form-control select2" id="medicinename" name="addmedicn[0][medicine]">
 											<option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
                                              <option value="<?php echo $list['id']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
