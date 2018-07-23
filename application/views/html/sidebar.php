@@ -469,8 +469,72 @@
 							<!--ward management-->
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('ward_management');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">notifications</i>
-	                                <span class="title">Ward management</span>
+	                                <i class="material-icons">dashboard</i>
+	                                <span class="title">Dashboard</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/admit');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Admit</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/discharge');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Discharge</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/transfer');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Transfer Patient</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/bed_chart');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Bed Chart</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>	
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/observation');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Observation/ Nursing </span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/admit_discharge_statistics');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Admit / Discharge Stati..</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/patient_history');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Patient History</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>	
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('ward_management/discharge_report');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">assignment</i>
+	                                <span class="title">Discharge Report</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
