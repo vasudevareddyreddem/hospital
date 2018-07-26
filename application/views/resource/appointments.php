@@ -140,6 +140,10 @@
 								   <td><?php echo $list['mobile']; ?></td>
 								   <td><?php echo $list['t_name']; ?></td>
 								   <td><?php echo $list['specialist_name']; ?></td>
+								   <form action="<?php echo base_url('appointments/change_time'); ?>" method="post">
+								   <input  type="hidden" name="app_id" id="app_id" value="<?php echo $list['b_id']; ?>">
+								   <input  type="hidden" name="b_id" id="b_id" value="<?php echo $list['b_id']; ?>">
+								   <input  type="hidden" name="status_value" id="status_value" value="1">
 								   <td> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
@@ -174,10 +178,9 @@
                                              </button>
                                              <ul class="dropdown-menu pull-left" role="menu">
                                                 <li>
-                                                   <a href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(1)); ?>">
-                                                   <i class="icon-docs"></i> Accept </a>
+                                                   <i class="icon-docs"></i>  <button type="submit" name="submit">Accept</button>
+                                                
                                                 </li>
-												
 													<li>
                                                     <a href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(2)); ?>">
                                                     <i class="icon-docs"></i> Reject  </a>
@@ -186,6 +189,7 @@
                                              </ul>
                                           </div>
 										  </td>
+										  </form>
 								   
 								</tr>
 							 <?php } ?>

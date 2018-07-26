@@ -119,7 +119,7 @@ class Mobile extends REST_Controller {
 		
 		//echo '<pre>';print_r($select);exit;
 		if(count($select)>0){
-			$message = array('status'=>1,'details'=>$select,'message'=>'User Successfully login');
+			$message = array('status'=>1,'details'=>$select,'pic_path'=>base_url('assets/adminprofilepic/'),'message'=>'User Successfully login');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}else{
 			$message = array('status'=>0,'message'=>'Invalid login details.Please try again');
@@ -391,6 +391,7 @@ class Mobile extends REST_Controller {
 	public  function appointment_user_statu_accept_post(){
 		$a_u_id=$this->post('a_u_id');
 		$b_id=$this->post('b_id');
+		$status=$this->post('status');
 		if($a_u_id==''){
 			$message = array('status'=>0,'message'=>'User Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
@@ -398,6 +399,20 @@ class Mobile extends REST_Controller {
 		if($b_id==''){
 			$message = array('status'=>0,'message'=>'Temporary Appointment Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($status==0){
+			$status_reject=array(
+			'status'=>2
+			);
+			$update=$this->Mobile_model->update_appointment_bidding_statu($b_id,$status_reject);
+			//echo $this->db->last_query();exit;
+			if(count($update)>0){
+				$message = array('status'=>1,'Appointment Temp id'=>$b_id,'a_u_id'=>$a_u_id,'message'=>'Appointment successfully rejected');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Technical problem will occured. Please try again.');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
 		}
 		$appointment_details=$this->Mobile_model->get_bidding_appointment_details($b_id);
 			if(count($appointment_details)>0){
@@ -503,6 +518,62 @@ class Mobile extends REST_Controller {
 				$message = array('status'=>0,'message'=>'Appointment List not found.Please try again');
 				$this->response($message, REST_Controller::HTTP_OK);
 				}
+	}
+	public  function uploadpic_post(){
+		$a_u_id=$this->post('a_u_id');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if(count($_FILES)==0){
+			$message = array('status'=>0,'message'=>'upload image is required');
+			$this->response($message, REST_Controller::HTTP_OK);	
+		}
+		$pic=$_FILES['profile_pic']['name'];
+		$picname = str_replace(" ", "", $pic);
+		$imagename=microtime().basename($picname);
+		$imgname = str_replace(" ", "", $imagename);
+		if(move_uploaded_file($_FILES['profile_pic']['tmp_name'], 'assets/adminprofilepic/'.$imgname)){
+			$addimg=array(
+			'profile_pic'=>$imgname,
+			);
+			$save_img=$this->Mobile_model->udate_profile($a_u_id,$addimg);
+			if(count($save_img)>0){
+					
+					$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Image successfully sent');
+					$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'message'=>'Technical problem will occurred .Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+			
+			
+			
+			
+		}else{
+			
+			$message = array('status'=>0,'message'=>'Technical problem will occurred .Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+		}
+	}
+	public  function user_details_post(){
+		$a_u_id=$this->post('a_u_id');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		
+		$details=$this->Mobile_model->get_userdetails($a_u_id);
+			if(count($details)>0){
+					
+					$message = array('status'=>1,'details'=>$details,'pic_path'=>base_url('assets/adminprofilepic/'),'message'=>'User Details are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'message'=>'User Id is  wrong.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+			
+			
 	}
 
 }

@@ -59,6 +59,7 @@
 													<option value="4" <?php if($resouse_detail['role_id']==4){ echo "selected";}?>>Pharmacy</option>
 													<option value="5" <?php if($resouse_detail['role_id']==5){ echo "selected"; }?>>lab coordinator</option>
 													<option value="9" <?php if($resouse_detail['role_id']==9){ echo "selected"; }?>>Ward management</option>
+													<option value="10" <?php if($resouse_detail['role_id']==10){ echo "selected"; }?>>Nurse</option>
 													
 												</select>
 											</div>

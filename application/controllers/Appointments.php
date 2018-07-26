@@ -152,6 +152,26 @@ class Appointments extends CI_Controller {
 					redirect('admin');
 				}
 		}
+		
+		public function change_time(){
+			
+							$post=$this->input->post();
+								$stusdetails=array(
+									'date'=>$post['dob'],
+									'time'=>$post['time'],
+									'status'=>$post['status_value'],
+									);
+									$statusdata= $this->Appointments_model->update_appointment_status_details($post['b_id'],$stusdetails);
+									if(count($statusdata)>0){
+										$this->session->set_flashdata('success',"Appointment successfully accepted.");
+										
+										redirect('appointments/index/'.base64_encode(2));
+									}else{
+											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+											redirect('appointments/index/'.base64_encode(2));
+									}
+			//echo '<pre>';print_r($post);exit;
+		}
 	
 	
 	

@@ -41,6 +41,7 @@
 										<option value="4">Pharmacy</option>
 										<option value="5">lab coordinator</option>
 										<option value="9">Ward management</option>
+										<option value="10">Nurse</option>
 									</select>
 									</div>
                                  <div class="col-md-6">

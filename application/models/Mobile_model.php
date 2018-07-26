@@ -153,11 +153,22 @@ class Mobile_model extends CI_Model
 	}
 	public  function get_user_aapointment_list($a_u_id){
 		$this->db->select('hospital.hos_bas_name,appointments.id,appointments.hos_id,appointments.patinet_name,appointments.age,appointments.mobile,appointments.date,appointments.time,appointments.status,appointments.city,treament.t_name as department,specialist.specialist_name')->from('appointments');
-			$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
-	$this->db->join('treament', 'treament.t_id = appointments.department', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
+		$this->db->join('treament', 'treament.t_id = appointments.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
 		$this->db->where('create_by',$a_u_id);
 		return $this->db->get()->result_array();
+	}
+	
+	public  function update_appointment_bidding_statu($id,$data){
+		$this->db->where('b_id',$id);
+		return $this->db->update('appointment_bidding_list',$data);
+		
+	}
+	public  function get_userdetails($a_id){
+		$this->db->select('appointment_users.*')->from('appointment_users');
+		$this->db->where('a_u_id',$a_id);
+		return $this->db->get()->row_array();
 	}
 	
 }

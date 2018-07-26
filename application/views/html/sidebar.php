@@ -476,6 +476,16 @@
 	                            </a>
 	                        </li>
 							<!--ward management-->
+							<!--nurse-->
+							<?php } else if($userdetails['role_id']==10){ ?>
+							<li class="nav-item start ">
+	                            <a href="<?php echo base_url('nurse');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">notifications</i>
+	                                <span class="title">Nurse</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
 							<?php } ?>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('dashboard/logout'); ?>" class="nav-link "> <i class="material-icons"> power_settings_new</i>
