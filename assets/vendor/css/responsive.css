@@ -326,10 +326,13 @@
         width: 235px
     }
     .sidemenu-container {
-        width: 235px;
-        float: left;
-        position: relative;
-        margin-right: -100%
+          width: 235px;
+    float: left;
+    position: fixed;
+	
+    margin-right: -100%;
+    height: 100%;
+    overflow-y: scroll;
     }
     .page-full-width .sidemenu-container {
         display: none !important
