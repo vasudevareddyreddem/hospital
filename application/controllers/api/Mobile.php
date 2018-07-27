@@ -42,6 +42,7 @@ class Mobile extends REST_Controller {
 		$name=$this->post('name');
 		$email=$this->post('email');
 		$mobile=$this->post('mobile');
+		$token=$this->post('token');
 		$password=$this->post('password');
 		$confirmpassword=$this->post('confirmpassword');
 		if($name==''){
@@ -53,7 +54,11 @@ class Mobile extends REST_Controller {
 		}if($mobile==''){
 			$message = array('status'=>0,'message'=>'Mobile Number is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if($password==''){
+		}if($token==''){
+			$message = array('status'=>0,'message'=>'token id required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($password==''){
 			$message = array('status'=>0,'message'=>'Password is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($confirmpassword==''){
@@ -85,6 +90,9 @@ class Mobile extends REST_Controller {
 					);
 					$save=$this->Mobile_model->save_appointment_user($add);
 					if(count($save)>0){
+						$token_data=array('token'=>$token);
+						$update_token=$this->Mobile_model->update_user_pushnotification_token($save,$token_data);
+			
 						$message = array('status'=>1,'a_u_id'=>$save,'message'=>'User successfully created');
 						$this->response($message, REST_Controller::HTTP_OK);
 					}else{
@@ -103,11 +111,15 @@ class Mobile extends REST_Controller {
 	public function appointment_userlogin_post(){
 		$email=$this->post('email');
 		$password=$this->post('password');
+		$token=$this->post('token');
 		if($email==''){
 			$message = array('status'=>0,'message'=>'Email Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($password==''){
 			$message = array('status'=>0,'message'=>'Password is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($token==''){
+			$message = array('status'=>0,'message'=>'token id required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		if(strlen($password)<8){
@@ -119,6 +131,8 @@ class Mobile extends REST_Controller {
 		
 		//echo '<pre>';print_r($select);exit;
 		if(count($select)>0){
+			$token_data=array('token'=>$token);
+			$update_token=$this->Mobile_model->update_user_pushnotification_token($select['a_u_id'],$token_data);
 			$message = array('status'=>1,'details'=>$select,'pic_path'=>base_url('assets/adminprofilepic/'),'message'=>'User Successfully login');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}else{
@@ -233,9 +247,24 @@ class Mobile extends REST_Controller {
 		}if($department_name==''){
 			$message = array('status'=>0,'message'=>'Department Name is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}$specialist_list=$this->Mobile_model->get_hospital_department_specialist_list($department_name,$city);
+		}
+			$specialist_list=$this->Mobile_model->get_hospital_department_specialist_list($department_name,$city);
+				
 				if(count($specialist_list)>0){
-					$message = array('status'=>1,'list'=>$specialist_list,'message'=>'specialist List are found');
+					foreach($specialist_list as $list){
+						if(isset($list['specialist_name']) && $list['specialist_name']!='')
+						{
+							$list[]=$list['specialist_name'];
+						}
+					}
+				}else{
+					$list=array();
+				}
+				//echo $this->db->last_query();
+				
+				//echo '<pre>';print_r($list);exit;
+				if(count($list)>0){
+					$message = array('status'=>1,'list'=>$list,'message'=>'specialist List are found');
 					$this->response($message, REST_Controller::HTTP_OK);
 			
 				}else{
@@ -355,6 +384,39 @@ class Mobile extends REST_Controller {
 				}
 			}
 				if(count($save_app)>0){
+					
+					/*push notification */
+					$url = "https://fcm.googleapis.com/fcm/send";
+					$token=$details['token'];
+					$serverKey = $this->config->item('server_key_push');
+					$title = "Appointment Bidding Confirmation";
+					//$body = "Hello ".$details['name']." you have an appointment booked";
+					$body = "Hello ".$details['name']." you have an appointment bidding sent";
+					$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
+					$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+					$json = json_encode($arrayToSend);
+					$headers = array();
+					$headers[] = 'Content-Type: application/json';
+					$headers[] = 'Authorization: key='. $serverKey;
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
+
+					"POST");
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+					curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+					//Send the request
+					$response = curl_exec($ch);
+					//Close request
+					if ($response === FALSE) {
+					die('FCM Send Error: ' . curl_error($ch));
+					}
+					curl_close($ch);
+					/*push notification */
+					
+					
+					
 								$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Appointment Successfully added');
 								$this->response($message, REST_Controller::HTTP_OK);
 						}else{
@@ -432,6 +494,7 @@ class Mobile extends REST_Controller {
 					'coming_through'=>0,
 					);
 				$save_appointment=$this->Mobile_model->save_appointment($add);
+				$get_coupon=$this->Mobile_model->get_hospital_counpon_code($appointment_details['hos_id']);
 				if(count($save_appointment)>0){
 					
 						$remaing_temp_appoint=$this->Mobile_model->get_remaining_appointment_list($appointment_details['date'],$appointment_details['time'],$appointment_details['department'],$appointment_details['specialist']);
@@ -440,6 +503,36 @@ class Mobile extends REST_Controller {
 									$this->Mobile_model->delete_temp_appointment($list['b_id']);
 								}
 							}
+							/*push notification */
+					$details=$this->Mobile_model->get_appointment_user_details($a_u_id);
+					$url = "https://fcm.googleapis.com/fcm/send";
+					$token=$details['token'];
+					$serverKey = $this->config->item('server_key_push');
+					$title = "Appointment Confirmation";
+					//$body = "Hello ".$details['name']." you have an appointment booked";
+					$body = "Hello ".$details['name']." you have an appointment booked from ".$appointment_details['hos_bas_name'].", on ".$appointment_details['date'].$appointment_details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+					$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
+					$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+					$json = json_encode($arrayToSend);
+					$headers = array();
+					$headers[] = 'Content-Type: application/json';
+					$headers[] = 'Authorization: key='. $serverKey;
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, $url);
+
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
+
+					"POST");
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+					curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+					//Send the request
+					$response = curl_exec($ch);
+					//Close request
+					if ($response === FALSE) {
+					die('FCM Send Error: ' . curl_error($ch));
+					}
+					curl_close($ch);
+					/*push notification */
 								$message = array('status'=>1,'Appointment id'=>$save_appointment,'a_u_id'=>$a_u_id,'message'=>'Appointment successfully added');
 								$this->response($message, REST_Controller::HTTP_OK);
 					}else{
@@ -567,6 +660,29 @@ class Mobile extends REST_Controller {
 			if(count($details)>0){
 					
 					$message = array('status'=>1,'details'=>$details,'pic_path'=>base_url('assets/adminprofilepic/'),'message'=>'User Details are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'message'=>'User Id is  wrong.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+			
+			
+	}public  function update_token_post(){
+		$a_u_id=$this->post('a_u_id');
+		$token=$this->post('token');
+		if($a_u_id==''){
+			$message = array('status'=>0,'message'=>'User is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($token==''){
+			$message = array('status'=>0,'message'=>'Token is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$token_data=array('token'=>$token);
+		$update_token=$this->Mobile_model->update_user_pushnotification_token($a_u_id,$token_data);
+			
+			if(count($update_token)>0){
+					
+					$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Token Successfully updated');
 					$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'User Id is  wrong.Please try again');

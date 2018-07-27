@@ -20,7 +20,7 @@ class Mobile_model extends CI_Model
 		
 	}
 	public  function check_login_details($email,$password){
-		$this->db->select('a_u_id,name,email,mobile')->from('appointment_users');
+		$this->db->select('a_u_id,name,email,mobile,profile_pic')->from('appointment_users');
 		$this->db->where('email',$email);
 		$this->db->where('password',md5($password));
 		$this->db->where('status',1);
@@ -33,6 +33,11 @@ class Mobile_model extends CI_Model
 	}
 	public  function update_user_password($id,$pass){
 		$data=array('password'=>md5($pass),'org_password'=>$pass);
+		$this->db->where('a_u_id',$id);
+		return $this->db->update('appointment_users',$data);
+		
+	}
+	public  function update_user_pushnotification_token($id,$data){
 		$this->db->where('a_u_id',$id);
 		return $this->db->update('appointment_users',$data);
 		
@@ -73,6 +78,33 @@ class Mobile_model extends CI_Model
 	}
 	/*testing*/
 	public  function get_hospital_department_specialist_list($department,$city){
+		$this->db->select('treament.t_name,treament.t_id')->from('treament');
+		$this->db->join('specialist', 'specialist.hos_id = treament.hos_id', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = treament.hos_id', 'left');
+		$this->db->where('treament.t_name',$department);
+		$this->db->where('hospital.hos_bas_city',$city);
+		$this->db->group_by('treament.t_id');
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			
+			$data[$list['t_id']]=$this->get_specilist_names_list($list['t_id']);
+			
+		}
+		if(!empty($data)){
+			return $data;
+		}
+		
+		//echo '<pre>';print_r($data);exit;
+	}
+	
+	
+	public function get_specilist_names_list($t_id){
+		$this->db->select('specialist.specialist_name')->from('specialist');
+		$this->db->group_by('specialist.s_id');
+		$this->db->where('specialist.d_id',$t_id);
+		return $this->db->get()->result_array();
+	}
+	public  function get_hospital_department_specialist_list_backup($department,$city){
 		$this->db->select('specialist.specialist_name')->from('specialist');
 		$this->db->join('treament', 'treament.hos_id = specialist.hos_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = specialist.hos_id', 'left');
@@ -91,7 +123,7 @@ class Mobile_model extends CI_Model
 	}
 	
 	public  function get_appointment_user_details($a_u_id){
-		$this->db->select('name,email,mobile,a_u_id')->from('appointment_users');
+		$this->db->select('name,email,mobile,a_u_id,token')->from('appointment_users');
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->get()->row_array();
 	}
@@ -116,17 +148,21 @@ class Mobile_model extends CI_Model
 		
 	}
 	public  function get_bidding_appointment_list($a_id){
-		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name')->from('appointment_bidding_list');
+		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name,hospital.hos_bas_name')->from('appointment_bidding_list');
 		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+
 		$this->db->where('appointment_bidding_list.create_by',$a_id);
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
 		return $this->db->get()->result_array();	
 	}
 	public function get_bidding_appointment_details($b_id){
-		$this->db->select('*')->from('appointment_bidding_list');
-		$this->db->where('b_id',$b_id);
-		$this->db->where('status',1);
+		$this->db->select('appointment_bidding_list.*,hospital.hos_bas_name')->from('appointment_bidding_list');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+
+		$this->db->where('appointment_bidding_list.b_id',$b_id);
+		$this->db->where('appointment_bidding_list.status',1);
 		return $this->db->get()->row_array();
 	}
 	public  function save_appointment($data){
@@ -168,6 +204,13 @@ class Mobile_model extends CI_Model
 	public  function get_userdetails($a_id){
 		$this->db->select('appointment_users.*')->from('appointment_users');
 		$this->db->where('a_u_id',$a_id);
+		return $this->db->get()->row_array();
+	}
+	public  function get_hospital_counpon_code($hos_id){
+		$this->db->select('coupon_codes.coupon_code')->from('coupon_codes');
+		$this->db->where('hospital_id',$hos_id);
+		$this->db->where('status',1);
+		$this->db->order_by('coupon_codes.id',"desc");
 		return $this->db->get()->row_array();
 	}
 	
