@@ -19,25 +19,26 @@ class Cron extends CI_Controller {
 		$this->load->library('zend');
 			
 		}
+		
 	public function index()
 	{	
 		
 		$all_appointments=$this->Cron_model->get_all_appointments();
-		foreach($all_appointments as $list){
-			
-			echo $current_date=date('Y-m-d H:i A');
-			$appoint_date=$list['date'].' '.$list['time'];
-			
-			echo date('h:i:s a m-d-y', strtotime($current_date));
-			if($current_date > $appoint_date){
-				echo "error";
-			}else{
-				echo "done";
+		if(count($all_appointments)>0){
+			foreach($all_appointments as $list){
+				
+				$curent_date=date('Y-m-d');
+				$c_time=date('H:i');
+				$current_time=date("g:i a", strtotime($c_time));
+				$current_date=$curent_date.' '.$current_time;
+				$appoint_date=$list['date'].' '.$list['time'];
+				if($current_date > $appoint_date){
+					$this->Cron_model->delete_old_pending_appointment_bidding($list['b_id']);
+					
+				}
+				
 			}
-			echo '<pre>';print_r($list);exit;
-			
 		}
-		echo '<pre>';print_r($all_appointments);exit;
 	}
 	
 

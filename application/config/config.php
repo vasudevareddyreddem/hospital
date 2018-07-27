@@ -36,7 +36,7 @@ $config['base_url'] = 'http://localhost/hospital/';
 |
 */
 $config['index_page'] = '';
-$config['server_key_push'] = 'AAAAA-eEjjM:APA91bEIlgyvVKL64q9_yUpsja1GHCHhM8-PvwIqyh5tWNtmbko3hHDHC0AHQYdhCgy22ct63fJPOjJdyysq9fd5JO2iiv1-fZWPKFU-HhaLtkNBOFCLvxXvBQ1g3iOdNIj1nhIDvK7y';
+$config['server_key_push'] = 'AAAAj_s3Cu8:APA91bHG0oi9Y4Oj67nYb2uvAUpmqx-pQhVdIHxmqomMUlRtcHBvDm4cEh0L2Ug4SdCFKO6T_Qx91Cx6rCIpWf3VEMpavB7s3d6IowY6ZpxAsaaBcu5dr_Prvg4TTZzZN5ycn8ZtEy_SQZ2ycROgmsdQLsisiz-bsg';
 
 /*
 |--------------------------------------------------------------------------
