@@ -603,8 +603,17 @@ class Mobile extends REST_Controller {
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		$appoint_list=$this->Mobile_model->get_user_aapointment_list($a_u_id);
-		if(count($appoint_list)>0){
-					$message = array('status'=>1,'list'=>$appoint_list,'message'=>'Appointment List are found');
+		if(isset($appoint_list) && count($appoint_list)>0){
+			foreach($appoint_list as $list){
+				$app_list[]=$list;
+				
+			}
+		}else{
+			$app_list=array();
+		}
+		//echo '<pre>';print_r($appoint_list);exit;
+		if(count($app_list)>0){
+					$message = array('status'=>1,'list'=>$app_list,'message'=>'Appointment List are found');
 					$this->response($message, REST_Controller::HTTP_OK);
 			
 				}else{

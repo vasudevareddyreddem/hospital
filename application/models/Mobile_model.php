@@ -193,7 +193,19 @@ class Mobile_model extends CI_Model
 		$this->db->join('treament', 'treament.t_id = appointments.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
 		$this->db->where('create_by',$a_u_id);
-		return $this->db->get()->result_array();
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$coupon_code=$this->get_hospital_counpon_code($list['hos_id']);
+			$data[$list['id']]=$list;
+			$data[$list['id']]['coupon_code']=$coupon_code['coupon_code'];
+			
+		}
+		if(!empty($data)){
+			
+			return $data;
+		}
+		//echo '<pre>';print_r($data);exit;
+		
 	}
 	
 	public  function update_appointment_bidding_statu($id,$data){

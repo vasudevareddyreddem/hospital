@@ -201,6 +201,7 @@ class Resources extends CI_Controller {
 									}
 									$billing=array(
 									'p_id'=>isset($post['pid'])?$post['pid']:'',
+									'patient_type'=>0,
 									'create_at'=>date('Y-m-d H:i:s'),
 									'type'=>$type
 									);
@@ -236,6 +237,7 @@ class Resources extends CI_Controller {
 									/*appointment*/
 								$dta=array(
 								'pid'=>$addtab,
+								'patient_type'=>0,
 								'create_at'=>date('Y-m-d H:i:s')
 								);
 								$this->zend->load('Zend/Barcode');

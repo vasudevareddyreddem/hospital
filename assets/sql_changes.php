@@ -68,3 +68,13 @@ CREATE TABLE `ward_room_beds` (
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`r_b_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+/* patient check ip or op purose
+
+ALTER TABLE `staging_ehealth`.`patient_billing`   
+  ADD COLUMN `patient_type` INT(11) NULL  COMMENT '1=ip;0=op' AFTER `p_id`;
+  
+ALTER TABLE `hospital`.`patient_billing`   
+  CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL  COMMENT '1=ip;0=op';
+
