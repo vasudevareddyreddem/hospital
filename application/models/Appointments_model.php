@@ -51,7 +51,20 @@ class Appointments_model extends CI_Model
 		$this->db->where('b_id',$b_id);
 		return $this->db->get()->row_array();
 	}
-	
+	public  function get_appointment_user_details($b_id){
+		$this->db->select('appointment_bidding_list.*,appointment_users.name,appointment_users.token,hospital.hos_bas_name')->from('appointment_bidding_list');
+		$this->db->join('appointment_users', 'appointment_users.a_u_id = appointment_bidding_list.create_by', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+		$this->db->where('appointment_bidding_list.b_id',$b_id);
+		return $this->db->get()->row_array();
+	}
+	public  function get_hospital_counpon_code($hos_id){
+		$this->db->select('coupon_codes.coupon_code')->from('coupon_codes');
+		$this->db->where('hospital_id',$hos_id);
+		$this->db->where('status',1);
+		$this->db->order_by('coupon_codes.id',"desc");
+		return $this->db->get()->row_array();
+	}
 	
 
 }

@@ -1,11 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+@include_once( APPPATH . 'controllers/In_frontend.php');
 
-class ward_management extends CI_Controller {
+class ward_management extends In_frontend {
 
 	public function __construct() 
 	{
 		parent::__construct();	
+<<<<<<< HEAD
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->library('session');
@@ -46,6 +48,10 @@ class ward_management extends CI_Controller {
 			$this->load->view('html/sidebar',$data);
 			}
 		}
+=======
+	
+	}
+>>>>>>> 36d7bf6e055e2ba5aaa20d903e1abcc5cdf71ee7
 	public function index()
 	{	
 		

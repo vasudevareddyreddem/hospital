@@ -51,7 +51,7 @@
 								<select class="form-control" id="hospital_id" name="hospital_id">
 									<option value="">Select</option>
 									<?php foreach($hospital_list as $list){ ?>
-										<option value="<?php echo $list['hos_id']; ?>"><?php echo $list['hos_bas_name']; ?></select>
+										<option value="<?php echo $list['hos_id']; ?>"><?php echo $list['hos_bas_name']; ?></option>
 									<?php } ?>
 								</select>
 								</div>

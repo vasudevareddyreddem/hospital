@@ -481,6 +481,7 @@ class Mobile extends REST_Controller {
 				$add=array(
 					'hos_id'=>isset($appointment_details['hos_id'])?$appointment_details['hos_id']:'',
 					'patinet_name'=>isset($appointment_details['patinet_name'])?$appointment_details['patinet_name']:'',
+					'city'=>isset($appointment_details['city'])?$appointment_details['city']:'',
 					'age'=>isset($appointment_details['age'])?$appointment_details['age']:'',
 					'mobile'=>isset($appointment_details['mobile'])?$appointment_details['mobile']:'',
 					'department'=>isset($appointment_details['department'])?$appointment_details['department']:'',
@@ -603,8 +604,17 @@ class Mobile extends REST_Controller {
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		$appoint_list=$this->Mobile_model->get_user_aapointment_list($a_u_id);
-		if(count($appoint_list)>0){
-					$message = array('status'=>1,'list'=>$appoint_list,'message'=>'Appointment List are found');
+		if(isset($appoint_list) && count($appoint_list)>0){
+			foreach($appoint_list as $list){
+				$app_list[]=$list;
+				
+			}
+		}else{
+			$app_list=array();
+		}
+		//echo '<pre>';print_r($appoint_list);exit;
+		if(count($app_list)>0){
+					$message = array('status'=>1,'list'=>$app_list,'message'=>'Appointment List are found');
 					$this->response($message, REST_Controller::HTTP_OK);
 			
 				}else{

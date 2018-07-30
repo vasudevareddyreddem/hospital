@@ -1,49 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+@include_once( APPPATH . 'controllers/In_frontend.php');
 
-class Appointments extends CI_Controller {
+class Appointments extends In_frontend {
 
 	public function __construct() 
 	{
 		parent::__construct();	
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-		$this->load->library('session');
-		$this->load->library('email');
-		$this->load->library('user_agent');
-		$this->load->helper('directory');
-		$this->load->helper('security');
-		$this->load->library('zend');
-		$this->load->model('Admin_model');
 		$this->load->model('Appointments_model');
-		$this->load->model('Resources_model');
-			if($this->session->userdata('userdetails'))
-			{
-			$admindetails=$this->session->userdata('userdetails');
-			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
-			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-			if($data['userdetails']['role_id']==2){
-			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
-			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
-			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
-				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
-				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
-				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
-				if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}
-			$this->load->view('html/header',$data);
-			$this->load->view('html/sidebar',$data);
-			}
 		}
 		public function index(){
 			if($this->session->userdata('userdetails'))
@@ -131,6 +95,41 @@ class Appointments extends CI_Controller {
 									);
 									$statusdata= $this->Appointments_model->update_appointment_status_details(base64_decode($appointment_b_id),$stusdetails);
 									if(count($statusdata)>0){
+										
+										/*push notification */
+											$details=$this->Appointments_model->get_appointment_user_details(base64_decode($appointment_b_id));
+											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
+
+											$url = "https://fcm.googleapis.com/fcm/send";
+											$token=$details['token'];
+											$serverKey = $this->config->item('server_key_push');
+											$title = "Appointment Confirmation";
+											//$body = "Hello ".$details['name']." you have an appointment booked";
+											$body = "Hello ".$details['name']." you have an appointment booked from ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+											$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
+											$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+											$json = json_encode($arrayToSend);
+											$headers = array();
+											$headers[] = 'Content-Type: application/json';
+											$headers[] = 'Authorization: key='. $serverKey;
+											$ch = curl_init();
+											curl_setopt($ch, CURLOPT_URL, $url);
+
+											curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
+
+											"POST");
+											curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+											curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+											//Send the request
+											$response = curl_exec($ch);
+											
+											echo '<pre>';print_r($response);exit;
+											//Close request
+											if ($response === FALSE) {
+											die('FCM Send Error: ' . curl_error($ch));
+											}
+											curl_close($ch);
+											/*push notification */
 										$this->session->set_flashdata('success',"Appointment successfully accepted.");
 										
 										redirect('appointments/index/'.base64_encode(2));
@@ -163,6 +162,42 @@ class Appointments extends CI_Controller {
 									);
 									$statusdata= $this->Appointments_model->update_appointment_status_details($post['b_id'],$stusdetails);
 									if(count($statusdata)>0){
+										/*push notification */
+											$details=$this->Appointments_model->get_appointment_user_details($post['b_id']);
+											
+											//$this->db->last_query();
+											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
+
+											$url = "https://fcm.googleapis.com/fcm/send";
+											$token=$details['token'];
+											$serverKey = $this->config->item('server_key_push');
+											$title = "Appointment Confirmation";
+											//$body = "Hello ".$details['name']." you have an appointment booked";
+											$body = "Hello ".$details['name']." you have an appointment booked from ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+											$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
+											$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+											$json = json_encode($arrayToSend);
+											$headers = array();
+											$headers[] = 'Content-Type: application/json';
+											$headers[] = 'Authorization: key='. $serverKey;
+											$ch = curl_init();
+											curl_setopt($ch, CURLOPT_URL, $url);
+
+											curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
+
+											"POST");
+											curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+											curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+											//Send the request
+											$response = curl_exec($ch);
+											
+											//echo '<pre>';print_r($response);exit;
+											//Close request
+											if ($response === FALSE) {
+											die('FCM Send Error: ' . curl_error($ch));
+											}
+											curl_close($ch);
+											/*push notification */
 										$this->session->set_flashdata('success',"Appointment successfully accepted.");
 										
 										redirect('appointments/index/'.base64_encode(2));

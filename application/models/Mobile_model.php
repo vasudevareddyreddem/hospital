@@ -148,7 +148,7 @@ class Mobile_model extends CI_Model
 		
 	}
 	public  function get_bidding_appointment_list($a_id){
-		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name,hospital.hos_bas_name')->from('appointment_bidding_list');
+		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name,hospital.hos_bas_name,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_state,hospital.hos_bas_zipcode')->from('appointment_bidding_list');
 		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
@@ -188,12 +188,24 @@ class Mobile_model extends CI_Model
 		
 	}
 	public  function get_user_aapointment_list($a_u_id){
-		$this->db->select('hospital.hos_bas_name,appointments.id,appointments.hos_id,appointments.patinet_name,appointments.age,appointments.mobile,appointments.date,appointments.time,appointments.status,appointments.city,treament.t_name as department,specialist.specialist_name')->from('appointments');
+		$this->db->select('hospital.hos_bas_name,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_state,hospital.hos_bas_zipcode,appointments.id,appointments.hos_id,appointments.patinet_name,appointments.age,appointments.mobile,appointments.date,appointments.time,appointments.status,appointments.city,treament.t_name as department,specialist.specialist_name')->from('appointments');
 		$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
 		$this->db->join('treament', 'treament.t_id = appointments.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
 		$this->db->where('create_by',$a_u_id);
-		return $this->db->get()->result_array();
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$coupon_code=$this->get_hospital_counpon_code($list['hos_id']);
+			$data[$list['id']]=$list;
+			$data[$list['id']]['coupon_code']=$coupon_code['coupon_code'];
+			
+		}
+		if(!empty($data)){
+			
+			return $data;
+		}
+		//echo '<pre>';print_r($data);exit;
+		
 	}
 	
 	public  function update_appointment_bidding_statu($id,$data){
