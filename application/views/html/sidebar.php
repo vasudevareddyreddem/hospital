@@ -175,6 +175,24 @@
 	                            </ul>
 	                        </li> 
 							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
+	                                <span class="title">Ward Details</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward'); ?>" class="nav-link "> <span class="title">Ward Name</span>
+	                                    </a>
+	                                </li>
+									 <li class="nav-item ">
+	                                    <a href="<?php echo base_url('ward/type'); ?>" class="nav-link "> <span class="title">Ward Type</span>
+	                                    </a>
+	                                </li>
+									
+	                                
+	                            </ul>
+	                        </li> 
+							<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
