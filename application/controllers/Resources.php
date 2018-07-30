@@ -1,49 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+@include_once( APPPATH . 'controllers/In_frontend.php');
 
-class Resources extends CI_Controller {
+class Resources extends In_frontend {
 
 	public function __construct() 
 	{
 		parent::__construct();	
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-		$this->load->library('session');
-		$this->load->library('email');
-		$this->load->library('user_agent');
-		$this->load->helper('directory');
-		$this->load->helper('security');
-		$this->load->library('zend');
-		$this->load->model('Admin_model');
-		$this->load->model('Lab_model');
-		$this->load->model('Resources_model');
-			if($this->session->userdata('userdetails'))
-			{
-			$admindetails=$this->session->userdata('userdetails');
-			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
-			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-			if($data['userdetails']['role_id']==2){
-			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
-			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
-			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
-				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
-				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
-				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
-				if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}
-			$this->load->view('html/header',$data);
-			$this->load->view('html/sidebar',$data);
-			}
+		
 		}
 	public function desk()
 	{	
@@ -207,7 +171,7 @@ class Resources extends CI_Controller {
 									);
 									//echo '<pre>';print_r($billing);exit;
 									$update=$this->Resources_model->update_all_patient_billing_details($billing);
-									
+									//echo $this->db->last_query();exit;
 									if(isset($post['verifying']) && $post['verifying']=='verify'){
 										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11).'/'.base64_encode($update));
 									}else{
@@ -250,6 +214,7 @@ class Resources extends CI_Controller {
 								if(isset($post['op']) && $post['op']==1){
 									$billing=array(
 									'p_id'=>isset($addtab)?$addtab:'',
+									'patient_type'=>0,
 									'create_at'=>date('Y-m-d H:i:s'),
 									'type'=>'new'
 									);
