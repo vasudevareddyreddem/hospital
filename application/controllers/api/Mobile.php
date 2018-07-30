@@ -481,6 +481,7 @@ class Mobile extends REST_Controller {
 				$add=array(
 					'hos_id'=>isset($appointment_details['hos_id'])?$appointment_details['hos_id']:'',
 					'patinet_name'=>isset($appointment_details['patinet_name'])?$appointment_details['patinet_name']:'',
+					'city'=>isset($appointment_details['city'])?$appointment_details['city']:'',
 					'age'=>isset($appointment_details['age'])?$appointment_details['age']:'',
 					'mobile'=>isset($appointment_details['mobile'])?$appointment_details['mobile']:'',
 					'department'=>isset($appointment_details['department'])?$appointment_details['department']:'',
