@@ -45,3 +45,26 @@ CREATE TABLE `ward_room_type` (
   `created_by` INT(11) DEFAULT NULL,
   PRIMARY KEY (`w_r_t_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1
+
+CREATE TABLE `ward_room_number` (
+  `w_r_n_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` INT(11) DEFAULT NULL,
+  `room_num` VARCHAR(250) DEFAULT NULL,
+  `status` INT(11) DEFAULT '1',
+  `create_at` DATETIME DEFAULT NULL,
+  `created_by` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`w_r_n_id`)
+) ENGINE=INNODB DEFAULT CHARSET=latin1
+
+
+
+CREATE TABLE `ward_room_beds` (
+  `r_b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `w_r_n_id` int(11) DEFAULT NULL,
+  `bed` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`r_b_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
