@@ -181,7 +181,7 @@
 	                            </a>
 	                            <ul class="sub-menu">
 	                                <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('ward'); ?>" class="nav-link "> <span class="title">Ward Name</span>
+	                                    <a href="<?php echo base_url('ward/wardname'); ?>" class="nav-link "> <span class="title">Ward Name</span>
 	                                    </a>
 	                                </li>
 									 <li class="nav-item ">
