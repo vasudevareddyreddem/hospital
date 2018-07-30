@@ -1312,8 +1312,10 @@ class Hospital extends CI_Controller {
 				$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				//echo '<pre>';print_r($post);exit;
+					//echo '<pre>'; print_r($hos_ids);exit;
+			//	echo '<pre>';print_r($post);exit;
 					$exits_treatment = $this->Hospital_model->get_saved_treatment($post['treatment_name'],$hos_ids['hos_id']);
+					//echo '<pre>';print_r($exits_treatment);exit;
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"Treatment name already exists .please use another name");
 						redirect('hospital/addtreatment/'.base64_encode(1));
