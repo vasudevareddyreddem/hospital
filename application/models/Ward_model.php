@@ -24,12 +24,19 @@ class Ward_model extends CI_Model
 	
 	public function get_ward_list($a_id,$hos_id){
 		$this->db->select('ward_name.w_id,ward_name.ward_name,ward_name.status,ward_name.create_at')->from('ward_name');		
-		//$this->db->join('resource_list', 'resource_list.r_id = treatmentwise_doctors.t_d_doc_id', 'left');
-
 		$this->db->where('ward_name.created_by',$a_id);
 		$this->db->where('ward_name.hos_id',$hos_id);
-		$this->db->where('ward_name.status !=',2);
 		return $this->db->get()->result_array();
+	}
+	public function get_ward_details($t_id){
+		$this->db->select('*')->from('ward_name');		
+		$this->db->where('w_id',$w_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function delete_ward_details($w_id){
+		$this->db->where('w_id',$w_id);
+    	return $this->db->delete('ward_name');
 	}
 	public function get_hospital_id($a_id,$email){
 		$this->db->select('hospital.a_id,hospital.hos_id')->from('hospital');		

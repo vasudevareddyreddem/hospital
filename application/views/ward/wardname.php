@@ -28,7 +28,7 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('Ward_management/wardnamepost'); ?>" method="post" id="addtreatment" name="ward_name" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('Ward_management/wardnamepost'); ?>" method="post" id="ward_name" name="ward_name" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6">
 									<label> Ward Name</label>
@@ -72,13 +72,13 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             
 															<li>
-                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['t_id'])).'/'.base64_encode(htmlentities($list['t_status']));?>');adminstatus('<?php echo $list['t_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/treatmentdelete/'.base64_encode($list['w_id'])); ?>">
+                                                                <a href="<?php echo base_url('ward_management/wardnamedelete/'.base64_encode($list['w_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -87,7 +87,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-											<div class="modal fade" id="foldersmallModalmove<?php echo $list['t_id']; ?>" tabindex="-1" role="dialog">
+											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_id']; ?>" tabindex="-1" role="dialog">
 										   <div class="modal-dialog modal-sm" role="document">
 											  <div class="modal-content">
 												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('hospital/treatmenteditpost'); ?>" method="post">
@@ -96,14 +96,14 @@
 													   'hash' => $this->security->get_csrf_hash()
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-													<input type="hidden" name="treamentid" id="treamentid" value="<?php echo $list['t_id']; ?>" >
+													<input type="hidden" name="treamentid" id="treamentid" value="<?php echo $list['w_id']; ?>" >
 													<div class="modal-header">
 														<h4 class="modal-title" id="smallModalLabel">Treatment rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
-														<input type="text" id="treatment_name" name="treatment_name" class="form-control" value="<?php echo htmlentities($list['t_name']);?>" />
+														<input type="text" id="treatment_name" name="treatment_name" class="form-control" value="<?php echo htmlentities($list['ward_name']);?>" />
 														</div>
 														</div>
 													</div>
@@ -181,11 +181,11 @@ function adminstatus(id){
 	}
 }
 $(document).ready(function() {
-    $('#addtreatment').bootstrapValidator({
+    $('#ward_name').bootstrapValidator({
         
         fields: {
             
-            treatment_name: {
+            ward_name: {
                  validators: {
 					notEmpty: {
 						message: 'Name is required'

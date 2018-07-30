@@ -211,8 +211,8 @@ public function index()
 				//echo '<pre>';print_r($post);exit;
 					$exits_treatment = $this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"Treatment name already exists .please use another name");
-						redirect('ward/wardname/'.base64_encode(1));
+						$this->session->set_flashdata('error',"ward name already exists .please use another name");
+						redirect('ward_management/wardname/');
 					}
 				$ward_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
@@ -222,13 +222,13 @@ public function index()
 					'created_by'=>$hos_ids['a_id']
 					);
 					//echo '<pre>';print_r($ward_details);exit;
-				$treatment = $this->Ward_model->save_wardname($ward_details);
-				if(count($treatment)>0){
+				$ward = $this->Ward_model->save_wardname($ward_details);
+				if(count($ward)>0){
 					$this->session->set_flashdata('success',"Ward added successfully");
-					redirect('hospital/addtreatment/'.base64_encode(1));
+					redirect('ward_management/wardname/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('hospital/addtreatment');
+					redirect('ward_management/wardname');
 				}
 									
 				
@@ -259,7 +259,7 @@ public function index()
 				$data['ward_list'] =$this->Ward_model->get_ward_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/wardname');
+					$this->load->view('ward/wardname',$data);
 					$this->load->view('html/footer');
 							}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -272,22 +272,32 @@ public function index()
 		}
 				
 	}
-		public function ward_name()
+		
+	
+	public function wardnamedelete()
 	{
 		if($this->session->userdata('userdetails'))
 		{
-			$admindetails=$this->session->userdata('userdetails');
-			if($admindetails['role_id']=2){
-					$data['tab']=base64_decode($this->uri->segment(3));
-					$admindetails=$this->session->userdata('userdetails');
-					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['ward_list']=$this->Ward_model->get_Ward_list($hos_ids['a_id'],$hos_ids['hos_id']);
-					//$data['doctors_list']=$this->Ward_model->get_doctors_list($hos_ids['a_id'],$hos_ids['hos_id']);
-					//echo $this->db->last_query();exit;
-					//$data['hospital_treatment_list']=$this->Hospital_model->get_all_doctor_treatment_list($hos_ids['a_id'],$hos_ids['hos_id']);
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/wardname',$data);
-					$this->load->view('html/footer');
+			if($admindetails['role_id']=1){
+					$ward_id=$this->uri->segment(3);
+					if($ward_id!=''){
+						$deletdata=array(
+							'status'=>2,
+							
+							);
+							$deletedata= $this->Ward_model->update_ward_details(base64_decode($ward_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"Treatment successfully removed.");
+								redirect('ward_management/wardname/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/wardname/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/wardname/'.base64_encode(1));
+					}
+					
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -297,7 +307,5 @@ public function index()
 			redirect('admin');
 		}
 	}
-	
-	
 	
 }
