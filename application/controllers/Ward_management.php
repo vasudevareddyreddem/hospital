@@ -623,7 +623,7 @@ public function index()
 					}
 				$floor_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
-					'ward_floor'=>$post['ward_floor'],
+					'ward_floor'=>$post['floor_number'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$hos_ids['a_id']
@@ -632,10 +632,10 @@ public function index()
 				$ward = $this->Ward_model->floornumber($floor_details);
 				if(count($ward)>0){
 					$this->session->set_flashdata('success',"Ward added successfully");
-					redirect('ward_management/wardtype/'.base64_encode(1));
+					redirect('ward_management/floornumber/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('ward_management/wardtype');
+					redirect('ward_management/floornumber');
 				}
 									
 				
@@ -665,7 +665,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				$data['wardtype_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
+				$data['floor_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/floornumber',$data);
@@ -682,6 +682,52 @@ public function index()
 				
 	}
 	
+
+	public function floornumberstatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$ward_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($ward_id!=''){
+						$stusdetails=array(
+							'status'=>$statu
+							
+							);
+							$statusdata= $this->Ward_model->update_floor_details(base64_decode($ward_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"floornumber successfully deactivated.");
+								}else{
+									$this->session->set_flashdata('success',"floornumber successfully activated.");
+								}
+									redirect('ward_management/floornumber/'.base64_encode(1));;
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/floornumber/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/floornumber/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
+	
+		
 	
 }
