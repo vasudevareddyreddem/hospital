@@ -9,12 +9,12 @@ class Ward_model extends CI_Model
 		$this->load->database("default");
 	}
 	public  function get_ip_patient_list($hos_id){
-		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile')->from('patient_billing');
+	$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patient_billing.completed_type',0);
 		return $this->db->get()->result_array();
-	}
+<}
 	public function save_wardname($data){
 		$this->db->insert('ward_name', $data);
 		return $insert_id = $this->db->insert_id();
@@ -99,7 +99,38 @@ class Ward_model extends CI_Model
 	}
 	
 	
-
+	public function floornumber($data){
+	$this->db->insert('ward_floors',$data);
+	return $insert_id = $this->db->insert_id();
+	}
+	public function get_saved_floor($name,$hos_id){
+		$this->db->select('*')->from('ward_floors');		
+		$this->db->where('ward_floor',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	
+		public function get_floor_list($a_id,$hos_id){
+		$this->db->select('ward_floors.w_f_id,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');		
+		$this->db->where('ward_floors.created_by',$a_id);
+		$this->db->where('ward_floors.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+		}
+	public function get_floor_details($w_f_id){
+		$this->db->select('*')->from('ward_floors');		
+		$this->db->where('w_f_id',$w_f_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function delete_floor_details($w_f_id){
+		$this->db->where('w_f_id',$w_f_id);
+    	return $this->db->delete('ward_floors');
+	}
+	
+	public function update_floor_details($w_f_id,$data){
+		$this->db->where('w_f_id',$w_f_id);
+		return $this->db->update("ward_floors",$data);
+	}
 	
 	
 	
