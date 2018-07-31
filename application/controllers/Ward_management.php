@@ -40,7 +40,7 @@ public function index()
 			$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==9){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['tab']=$this->uri->segment(3);
+					$data['tab']=base64_decode($this->uri->segment(4));
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($userdetails);exit;
 					$this->load->view('ward/admit-patients',$data);
