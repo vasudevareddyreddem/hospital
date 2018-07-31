@@ -72,44 +72,43 @@
                                     <table id="saveStage" class="table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>S.No</th>
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
                                                 <th>Gender </th>
                                                 <th>Age</th>
-                                                <th>Doctor</th>
                                                 <th>Diagnosis</th>
                                                 <th>Date of Admit</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxxx500</td>
-												<td>patient 1</td>
-												<td>Male</td>
-												<td>26</td>
-                                                <td>Design Doctor1</td>
-                                                <td>xxxxxx</td>
-												<td>25/06/2018 </td>
-                                                <td class="valigntop">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="fa fa-edit"></i>view </a>
-                                                            </li>
-                                                           
-                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-											
+										<?php if(isset($ip_patient_list)  && count($ip_patient_list)>0){ ?>
+											<?php foreach($ip_patient_list as $list){ ?>
+												<tr>
+													<td><?php echo $list['pid']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['gender']; ?></td>
+													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['problem']; ?></td>
+													<td><?php echo $list['create_at']; ?></td>
+													<td class="valigntop">
+														<div class="btn-group">
+															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+																<i class="fa fa-angle-down"></i>
+															</button>
+															<ul class="dropdown-menu" role="menu">
+																<li>
+																	<a href="javascript:;">
+																		<i class="fa fa-edit"></i>view </a>
+																</li>
+															   
+																
+															</ul>
+														</div>
+													</td>
+												</tr>
+											<?php } ?>
+										<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
