@@ -14,7 +14,7 @@ class Ward_model extends CI_Model
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patient_billing.completed_type',0);
 		return $this->db->get()->result_array();
-<}
+		}
 	public function save_wardname($data){
 		$this->db->insert('ward_name', $data);
 		return $insert_id = $this->db->insert_id();
