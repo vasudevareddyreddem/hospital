@@ -8,7 +8,9 @@ class Ward_model extends CI_Model
 		parent::__construct();
 		$this->load->database("default");
 	}
-
+	public  function get_ip_patient_list($hos_id){
+		
+	}
 	public function save_wardname($data){
 		$this->db->insert('ward_name', $data);
 		return $insert_id = $this->db->insert_id();

@@ -40,7 +40,7 @@ public function index()
 			$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==9){
 					
-					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list();
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($hos_id);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/admit');
 					$this->load->view('html/footer');
