@@ -62,7 +62,7 @@
                </header>
                <div class="panel-body">
                   <div class="tab-content">
-				   <div class="tab-pane active" id="aboutop">
+				   <div class="tab-pane <?php if(isset($tab)&& $tab==''){ echo "active";}?>" id="aboutop">
 						<div class="card ">
                                 <div class="card-head">
                                      <header>Patients List</header>
@@ -76,6 +76,7 @@
 												<th>Patient Name</th>
                                                 <th>Gender </th>
                                                 <th>Age</th>
+                                                <th>Doctor Name</th>
                                                 <th>Diagnosis</th>
                                                 <th>Date of Admit</th>
                                                 <th>Action</th>
@@ -89,6 +90,7 @@
 													<td><?php echo $list['name']; ?></td>
 													<td><?php echo $list['gender']; ?></td>
 													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['resource_name']; ?></td>
 													<td><?php echo $list['problem']; ?></td>
 													<td><?php echo $list['create_at']; ?></td>
 													<td class="valigntop">
@@ -98,8 +100,8 @@
 															</button>
 															<ul class="dropdown-menu" role="menu">
 																<li>
-																	<a href="javascript:;">
-																		<i class="fa fa-edit"></i>view </a>
+																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
+																		<i class="fa fa-edit"></i>Room/Bed </a>
 																</li>
 															   
 																
@@ -113,16 +115,11 @@
                                     </table>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
-												<div class="text-center">
-												<div class="col-md-12">
-                                                    <a href="financial.php" class="btn btn-info">Save</a>
-                                                    <a href="#"type="button" class="btn btn-default">Cancel</a>
-                                                </div>
-                                                </div>
+							
                             </div>			
 						
                      </div>
-                     <div class="tab-pane " id="home">
+                     <div class="tab-pane <?php if(isset($tab)&& $tab==2){ echo "active";}?>" id="home">
                         <div class="card ">
                                 <div class="card-head">
                                      <header>Ward Details</header>
