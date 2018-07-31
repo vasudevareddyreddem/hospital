@@ -39,10 +39,25 @@ public function index()
 		{
 			$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==9){
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 					
-					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list();
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($hos_id);
+=======
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+>>>>>>> 9acb005d40cca12338cc798e84f0d24b9efad88c
+=======
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+>>>>>>> 9acb005d40cca12338cc798e84f0d24b9efad88c
+=======
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+>>>>>>> 9acb005d40cca12338cc798e84f0d24b9efad88c
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/admit');
+					$this->load->view('ward/admit',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -615,20 +630,20 @@ public function index()
 					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>'; print_r($hos_ids);exit;
 				//echo '<pre>';print_r($post);exit;
-					$exits_treatment = $this->Ward_model->get_saved_wardtype($post['ward_type'],$hos_ids['hos_id']);
+					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_number'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
 						redirect('ward_management/wardtype/');
 					}
-				$ward_details=array(
+				$floor_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
-					'ward_type'=>$post['ward_type'],
+					'ward_floor'=>$post['ward_floor'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$hos_ids['a_id']
 					);
-					//echo '<pre>';print_r($ward_details);exit;
-				$ward = $this->Ward_model->save_wardtype($ward_details);
+					//echo '<pre>';print_r($floor_details);exit;
+				$ward = $this->Ward_model->floornumber($floor_details);
 				if(count($ward)>0){
 					$this->session->set_flashdata('success',"Ward added successfully");
 					redirect('ward_management/wardtype/'.base64_encode(1));
@@ -664,7 +679,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list($hos_ids['a_id'],$hos_ids['hos_id']);
+				$data['wardtype_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/floornumber',$data);
