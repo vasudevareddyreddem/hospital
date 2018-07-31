@@ -40,9 +40,10 @@ public function index()
 			$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==9){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['tab']=$this->uri->segment(3);
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/admit',$data);
+					$this->load->view('ward/admit-patients',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
