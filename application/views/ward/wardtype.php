@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Ward Name</div>
+               <div class="page-title">Ward Type</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Ward Name</li>
+               <li class="active">Ward Type</li>
             </ol>
          </div>
       </div>
@@ -17,7 +17,7 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Ward Name </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Ward Type </a>
                   </li>
                   <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Ward List</a>
                   </li>
@@ -28,15 +28,17 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('Ward_management/wardnamepost'); ?>" method="post" id="ward_name" name="ward_name" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('Ward_management/wardtypepost'); ?>" method="post" id="ward_type" name="ward_type" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6">
-									<label> Ward Name</label>
-								<input class="form-control" id="ward_name" name="ward_name" value="" type="text" placeholder="Ward Name">
+									<label> Ward Type</label>
+			<input class="form-control" id="ward_Type" name="ward_type" value="" type="text" placeholder="Ward Type">
+
+							
 								</div>
 								<div class="col-md-2">
 								<label style="visibility: hidden;">test	</label>
-								<button type="submit" class="btn btn-sm btn-success " type="button">Add Ward Name</button>
+								<button type="submit" class="btn btn-sm btn-success " type="button">Add Ward Type</button>
 								</div>	
 							</div>
 							</form>
@@ -48,20 +50,20 @@
                      <div class="container">
                         <div class="row">
                             <div class="card-body col-md-12 table-responsive">
-								<?php if(count($ward_list)>0){ ?>
+								<?php if(count($wardtype_list)>0){ ?>
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Ward Name</th>
+												<th>Ward Type</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($ward_list as $list){ ?>
+										<?php foreach($wardtype_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['ward_name']); ?></td>
+                                                <td><?php echo htmlentities($list['ward_type']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
@@ -72,13 +74,13 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             
 															<li>
-                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['ward_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
-															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
+															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['ward_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('ward_management/wardnamedelete/'.base64_encode($list['w_id'])); ?>">
+                                                                <a href="<?php echo base_url('ward_management/wardtypedelete/'.base64_encode($list['ward_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -87,23 +89,23 @@
                                                     </div>
                                                 </td>
                                             </tr>
-											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_id']; ?>" tabindex="-1" role="dialog">
+											<div class="modal fade" id="foldersmallModalmove<?php echo $list['ward_id']; ?>" tabindex="-1" role="dialog">
 										   <div class="modal-dialog modal-sm" role="document">
 											  <div class="modal-content">
-												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/wardnameeditpost'); ?>" method="post">
+												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/wardtypeeditpost'); ?>" method="post">
 													<?php $csrf = array(
 													   'name' => $this->security->get_csrf_token_name(),
 													   'hash' => $this->security->get_csrf_hash()
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-													<input type="hidden" name="wardid" id="wardid" value="<?php echo $list['w_id']; ?>" >
+													<input type="hidden" name="ward_type" id="ward_type" value="<?php echo $list['ward_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">wardname rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">wardtype rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
-														<input type="text" id="w_name" name="w_name" class="form-control" value="<?php echo htmlentities($list['ward_name']);?>" />
+														<input type="text" id="wt_name" name="wt_name" class="form-control" value="<?php echo htmlentities($list['ward_type']);?>" />
 														</div>
 														</div>
 													</div>
@@ -170,7 +172,7 @@ $(document).ready(function() {
     } );
 } );
 function admindeactive(id){
-	$(".popid").attr("href","<?php echo base_url('ward_management/wardnamestatus'); ?>"+"/"+id);
+	$(".popid").attr("href","<?php echo base_url('ward_management/wardtypestatus'); ?>"+"/"+id);
 }
 function adminstatus(id){
 	if(id==1){
@@ -181,14 +183,14 @@ function adminstatus(id){
 	}
 }
 $(document).ready(function() {
-    $('#ward_name').bootstrapValidator({
+    $('#ward_type').bootstrapValidator({
         
         fields: {
             
             ward_name: {
                  validators: {
 					notEmpty: {
-						message: 'Name is required'
+						message: 'Wardtype is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
