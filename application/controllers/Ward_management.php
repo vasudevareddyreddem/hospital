@@ -14,8 +14,9 @@ public function index()
 	{	
 		
 		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=1){
+		{	
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']==9){
 					
 					
 					//echo '<pre>';print_r($data);exit;
@@ -27,7 +28,7 @@ public function index()
 				}
 			
 		}else{
-			//$this->session->set_flashdata('error','Please login to continue');
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -36,9 +37,10 @@ public function index()
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+			$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==9){
 					
-					
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/admit');
 					$this->load->view('html/footer');

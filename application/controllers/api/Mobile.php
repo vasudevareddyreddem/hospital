@@ -379,12 +379,12 @@ class Mobile extends REST_Controller {
 					'create_by'=>$a_u_id,
 					);
 				$save_app=$this->Mobile_model->appointment_bidding_list($add);
-				//echo $this->db->last_query();
+				//echo $this->db->last_query();exit;
 			
 				}
 			}
 				if(count($save_app)>0){
-					
+					//echo "dfsd";exit;
 					/*push notification */
 					$url = "https://fcm.googleapis.com/fcm/send";
 					$token=$details['token'];
@@ -399,25 +399,18 @@ class Mobile extends REST_Controller {
 					$headers[] = 'Content-Type: application/json';
 					$headers[] = 'Authorization: key='. $serverKey;
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, $url);
+					curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($ch, CURLOPT_POST, true);
 
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST,
 
-					"POST");
 					curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 					curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
-					//Send the request
-					$response = curl_exec($ch);
-					//Close request
-					if ($response === FALSE) {
-					die('FCM Send Error: ' . curl_error($ch));
-					}
+					$output = curl_exec($ch);
+					$info = curl_getinfo($ch);
 					curl_close($ch);
 					/*push notification */
-					
-					
-					
-								$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Appointment Successfully added');
+					$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>'Appointment Successfully added');
 								$this->response($message, REST_Controller::HTTP_OK);
 						}else{
 								$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Technical problem will occured. Please try again.');
