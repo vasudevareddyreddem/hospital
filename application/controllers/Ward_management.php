@@ -728,6 +728,358 @@ public function index()
 	}
 	
 	
+		public function floornumbereditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+				$editdata_check= $this->Ward_model->get_floor_details($post['floorid']);
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+
+				if($editdata_check['ward_floor']!=$post['floor_name']){
+					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
+						redirect('ward_management/wardtype/'.base64_encode(1));
+					}
+				}
+				$editward_details=array(
+					'ward_floor'=>$post['floor_name'],
+					
+					);
+					//echo '<pre>';print_r($post);exit;
+				$editdata= $this->Ward_model->update_floor_details($post['floorid'],$editward_details);
+				//echo '<pre>';print_r($editdata);exit;
+				if(count($editdata)>0){
+					$this->session->set_flashdata('success',"floornumber successfully updated");
+					redirect('ward_management/floornumber/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/floornumber');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	public function floornumberdelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$ward_id=$this->uri->segment(3);
+					if($ward_id!=''){
+						$deletdata=array(
+							);
+							$deletedata= $this->Ward_model->delete_floor_details(base64_decode($ward_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"floornumber successfully removed.");
+								redirect('ward_management/floornumber/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/floornumber/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/floornumber/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
+	public function roomtypepost()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					//echo '<pre>'; print_r($hos_ids);exit;
+				//echo '<pre>';print_r($post);exit;
+					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"roomtype already exists .please use another name");
+						redirect('ward_management/roomtype/');
+					}
+				$floor_details=array(
+					'hos_id'=>$hos_ids['hos_id'],
+					'room_type'=>$post['room_type'],
+					'status'=>1,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$hos_ids['a_id']
+					);
+					//echo '<pre>';print_r($floor_details);exit;
+				$ward = $this->Ward_model->roomtype($floor_details);
+				if(count($ward)>0){
+					$this->session->set_flashdata('success',"roomtype added successfully");
+					redirect('ward_management/roomtype/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/roomtype');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+					
+				
+	}
+	
+	
+	
+	
+	
+	
+	public function roomtype()
+	{	
 		
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$data['tab']=base64_decode($this->uri->segment(3));
+				$admindetails=$this->session->userdata('userdetails');
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('ward/roomtype',$data);
+					$this->load->view('html/footer');
+							}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			//$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+				
+	}
+	
+	
+	
+	public function roomtypestatus()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$ward_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($ward_id!=''){
+						$stusdetails=array(
+							'status'=>$statu
+							
+							);
+							$statusdata= $this->Ward_model->update_roomtype_details(base64_decode($ward_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"roomtype successfully deactivated.");
+								}else{
+									$this->session->set_flashdata('success',"roomtype successfully activated.");
+								}
+									redirect('ward_management/roomtype/'.base64_encode(1));;
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/roomtype/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/roomtype/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	public function roomtypeeditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+				$editdata_check= $this->Ward_model->get_roomtype_details($post['rtypeid']);
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+
+				if($editdata_check['room_type']!=$post['rtype_name']){
+					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['rtype_name'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"roomtype already exists .please use another name");
+						redirect('ward_management/roomtype/'.base64_encode(1));
+					}
+				}
+				$editward_details=array(
+					'room_type'=>$post['rtype_name'],
+					
+					);
+					//echo '<pre>';print_r($post);exit;
+				$editdata= $this->Ward_model->update_roomtype_details($post['rtypeid'],$editward_details);
+				//echo '<pre>';print_r($editdata);exit;
+				if(count($editdata)>0){
+					$this->session->set_flashdata('success',"roomtype successfully updated");
+					redirect('ward_management/roomtype/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/roomtype');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	public function roomtypedelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=1){
+					$ward_id=$this->uri->segment(3);
+					if($ward_id!=''){
+						$deletdata=array(
+							);
+							$deletedata= $this->Ward_model->delete_roomtype_details(base64_decode($ward_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"roomtype successfully removed.");
+								redirect('ward_management/roomtype/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/roomtype/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/roomtype/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}	
+	
+	
+	
+	
+	public function roomnumberpost()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					//echo '<pre>'; print_r($hos_ids);exit;
+				//echo '<pre>';print_r($post);exit;
+					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"roomtype already exists .please use another name");
+						redirect('ward_management/roomtype/');
+					}
+				$floor_details=array(
+					'hos_id'=>$hos_ids['hos_id'],
+					'room_type'=>$post['room_type'],
+					'status'=>1,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$hos_ids['a_id']
+					);
+					//echo '<pre>';print_r($floor_details);exit;
+				$ward = $this->Ward_model->roomtype($floor_details);
+				if(count($ward)>0){
+					$this->session->set_flashdata('success',"roomtype added successfully");
+					redirect('ward_management/roomnumber/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/roomnumber');
+				}
+									
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+					
+				
+	}
+	
+	
+	
+	
+	
+	
+	public function roomnumber()
+	{	
+		
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=2){
+					$data['tab']=base64_decode($this->uri->segment(3));
+				$admindetails=$this->session->userdata('userdetails');
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list($hos_ids['a_id'],$hos_ids['hos_id']);
+					
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('ward/roomnumber',$data);
+					$this->load->view('html/footer');
+							}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			//$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+				
+	}
 	
 }

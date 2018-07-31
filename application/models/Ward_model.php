@@ -133,6 +133,38 @@ class Ward_model extends CI_Model
 	}
 	
 	
+	public function roomtype($data){
+	$this->db->insert('ward_room_type',$data);
+	return $insert_id = $this->db->insert_id();
+	}
+	public function get_saved_roomtype($name,$hos_id){
+		$this->db->select('*')->from('ward_room_type');		
+		$this->db->where('room_type',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	
+		public function get_roomtype_list($a_id,$hos_id){
+		$this->db->select('ward_room_type.w_r_t_id,ward_room_type.room_type,ward_room_type.status,ward_room_type.create_at')->from('ward_room_type');		
+		$this->db->where('ward_room_type.created_by',$a_id);
+		$this->db->where('ward_room_type.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+		}
+	public function get_roomtype_details($w_r_t_id){
+		$this->db->select('*')->from('ward_room_type');		
+		$this->db->where('w_r_t_id',$w_r_t_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function delete_roomtype_details($w_r_t_id){
+		$this->db->where('w_r_t_id',$w_r_t_id);
+    	return $this->db->delete('ward_room_type');
+	}
+	
+	public function update_roomtype_details($w_r_t_id,$data){
+		$this->db->where('w_r_t_id',$w_r_t_id);
+		return $this->db->update("ward_room_type",$data);
+	}
 	
 	
 	

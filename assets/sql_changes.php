@@ -78,3 +78,5 @@ ALTER TABLE `staging_ehealth`.`patient_billing`
 ALTER TABLE `hospital`.`patient_billing`   
   CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL  COMMENT '1=ip;0=op';
 
+ALTER TABLE `hospital`.`ward_room_number`   
+  ADD COLUMN `bed_count` VARCHAR(250) NULL AFTER `room_num`;
