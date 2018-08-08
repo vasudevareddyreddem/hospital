@@ -585,7 +585,7 @@ public function index()
 							);
 							$deletedata= $this->Ward_model->delete_wardtype_details(base64_decode($ward_id),$deletdata);
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Treatment successfully removed.");
+								$this->session->set_flashdata('success',"wardtype successfully removed.");
 								redirect('ward_management/wardtype/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1113,10 +1113,10 @@ public function index()
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
 				
-				//echo '<pre>';print_r($post);
+				echo '<pre>';print_r($post);
 				$editdata_check= $this->Ward_model->get_roomnumber_details($post['rnoid']);
 				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				//echo '<pre>';print_r($editdata_check);exit;
+				echo '<pre>';print_r($editdata_check);exit;
 				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['floor_number']!=$post['f_id']){
 					$exits_treatment = $this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
