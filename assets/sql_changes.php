@@ -78,6 +78,7 @@ ALTER TABLE `staging_ehealth`.`patient_billing`
 ALTER TABLE `hospital`.`patient_billing`   
   CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL  COMMENT '1=ip;0=op';
 
+<<<<<<< HEAD
   
   ALTER TABLE `education`.`issued_book`   
   ADD COLUMN `barcode_id` VARCHAR(250) NULL AFTER `s_id`;
@@ -86,3 +87,7 @@ ALTER TABLE `hospital`.`patient_billing`
 ALTER TABLE `education`.`issued_book`   
   DROP COLUMN `book_name`;
 
+=======
+ALTER TABLE `hospital`.`ward_room_number`   
+  ADD COLUMN `bed_count` VARCHAR(250) NULL AFTER `room_num`;
+>>>>>>> 2cb6907f65cba6a5b0f3ddb08414b1f2c178731b

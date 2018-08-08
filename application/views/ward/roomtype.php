@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Floor Number</div>
+               <div class="page-title">Room Type</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Floor Number</li>
+               <li class="active">Room Type</li>
             </ol>
          </div>
       </div>
@@ -17,9 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Floor Number </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Room Type </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Floor List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Room List</a>
                   </li>
                </ul>
             </header>
@@ -28,15 +28,15 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('Ward_management/floornumberpost'); ?>" method="post" id="floor_number" name="floor_number" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('Ward_management/roomtypepost'); ?>" method="post" id="room_type" name="room_type" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-6">
-									<label> Floor Number</label>
-								<input class="form-control" id="floor_number" name="floor_number" value="" type="text" placeholder="Floor Number">
+									<label> Room Type</label>
+								<input class="form-control" id="room_type" name="room_type" value="" type="text" placeholder="Room Type">
 								</div>
 								<div class="col-md-2">
 								<label style="visibility: hidden;">test	</label>
-								<button type="submit" class="btn btn-sm btn-success " type="button">Add Floor Number</button>
+								<button type="submit" class="btn btn-sm btn-success " type="button">Add Room Type</button>
 								</div>	
 							</div>
 							</form>
@@ -48,20 +48,20 @@
                      <div class="container">
                         <div class="row">
                             <div class="card-body col-md-12 table-responsive">
-								<?php if(count($floor_list)>0){ ?>
+								<?php if(count($roomtype_list)>0){ ?>
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Floor Number</th>
+												<th>Room Type</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($floor_list as $list){ ?>
+										<?php foreach($roomtype_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['ward_floor']); ?></td>
+                                                <td><?php echo htmlentities($list['room_type']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
@@ -72,13 +72,13 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             
 															<li>
-                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_f_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_r_t_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
-															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_f_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
+															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_r_t_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('ward_management/floornumberdelete/'.base64_encode($list['w_f_id'])); ?>">
+                                                                <a href="<?php echo base_url('ward_management/roomtypedelete/'.base64_encode($list['w_r_t_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -87,23 +87,23 @@
                                                     </div>
                                                 </td>
                                             </tr>
-											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_f_id']; ?>" tabindex="-1" role="dialog">
+											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_r_t_id']; ?>" tabindex="-1" role="dialog">
 										   <div class="modal-dialog modal-sm" role="document">
 											  <div class="modal-content">
-												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/floornumbereditpost'); ?>" method="post">
+												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/roomtypeeditpost'); ?>" method="post">
 													<?php $csrf = array(
 													   'name' => $this->security->get_csrf_token_name(),
 													   'hash' => $this->security->get_csrf_hash()
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-													<input type="hidden" name="floorid" id="floorid" value="<?php echo $list['w_f_id']; ?>" >
+													<input type="hidden" name="rtypeid" id="rtypeid" value="<?php echo $list['w_r_t_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Floor Number rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Room Type rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
-														<input type="text" id="floor_name" name="floor_name" class="form-control" value="<?php echo htmlentities($list['ward_floor']);?>" />
+														<input type="text" id="rtype_name" name="rtype_name" class="form-control" value="<?php echo htmlentities($list['room_type']);?>" />
 														</div>
 														</div>
 													</div>
@@ -170,7 +170,7 @@ $(document).ready(function() {
     } );
 } );
 function admindeactive(id){
-	$(".popid").attr("href","<?php echo base_url('ward_management/floornumberstatus'); ?>"+"/"+id);
+	$(".popid").attr("href","<?php echo base_url('ward_management/roomtypestatus'); ?>"+"/"+id);
 }
 function adminstatus(id){
 	if(id==1){
@@ -181,14 +181,14 @@ function adminstatus(id){
 	}
 }
 $(document).ready(function() {
-    $('#room_type').bootstrapValidator({
+    $('#floor_number').bootstrapValidator({
         
         fields: {
             
             ward_name: {
                  validators: {
 					notEmpty: {
-						message: 'Room type is required'
+						message: 'Floor number is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
