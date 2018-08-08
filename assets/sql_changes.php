@@ -78,3 +78,11 @@ ALTER TABLE `staging_ehealth`.`patient_billing`
 ALTER TABLE `hospital`.`patient_billing`   
   CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL  COMMENT '1=ip;0=op';
 
+  
+  ALTER TABLE `education`.`issued_book`   
+  ADD COLUMN `barcode_id` VARCHAR(250) NULL AFTER `s_id`;
+  
+  
+ALTER TABLE `education`.`issued_book`   
+  DROP COLUMN `book_name`;
+
