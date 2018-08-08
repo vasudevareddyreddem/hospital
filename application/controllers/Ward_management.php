@@ -1116,8 +1116,16 @@ public function index()
 				echo '<pre>';print_r($post);
 				$editdata_check= $this->Ward_model->get_roomnumber_details($post['rnoid']);
 				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+<<<<<<< HEAD
 				echo '<pre>';print_r($editdata_check);exit;
 				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['floor_number']!=$post['f_id']){
+=======
+				//echo '<pre>';print_r($post);
+				//echo '<pre>';print_r($editdata_check);
+				
+				//exit;
+				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['f_id']!=$post['floor_number']){
+>>>>>>> 72d3eac9129093ce981554910d0df54a4ec0da8c
 					$exits_treatment = $this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"Room number already exists .please use another name");
@@ -1128,42 +1136,40 @@ public function index()
 					'f_id'=>$post['floor_number'],
 					'room_num'=>$post['room_num'],
 					'bed_count'=>$post['bed_num'],
-					
 					);
 					//echo '<pre>';print_r($post);exit;
 					
 				$editdata= $this->Ward_model->update_roomnumber_details($post['rnoid'],$editroomno_details);
 				if(count($editdata)>0){
-					$deletebedno=$this->uri->segment(3);
-					if($deletebedno!=''){
-											
-							$delete= $this->Ward_model->delete_bednumber_details(base64_decode($deletebedno));
+									
+							$beds_count= $this->Ward_model->get_room_number_wise_beds_list($post['rnoid']);
+							foreach($beds_count as $list){
+								$dele_dat=array(
+								'status'=>2,
+								'updated_at'=>date('Y-m-d H:i:s'),
+								);
+								$this->Ward_model->update_room_wise_beds_list($list['r_b_id'],$dele_dat);
+								
+							}
 							//echo '<pre>';print_r($a);exit;
-							if(count($delete)>0){
+							if(count($post['bed_num'])>0){
 								      
-					for($i=1;$i<=$post['bed_num'];$i++){
-					$editbed_details=array(
+										for($i=1;$i<=$post['bed_num'];$i++){
+										
+										$bed_details=array(
+										'hos_id'=>$hos_ids['hos_id'],
+										'w_r_n_id'=>$post['rnoid'],
+										'bed'=>$i,
+										'status'=>1,
+										'create_at'=>date('Y-m-d H:i:s'),
+										'created_by'=>$hos_ids['a_id']
+										);									
+										//echo '<pre>';print_r($bed_details);exit;
+										$this->Ward_model->bednumber($bed_details);
+									}
+							}
 					
-						'hos_id'=>$hos_ids['hos_id'],
-						'w_r_n_id'=>$post['rnoid'],
-						'bed'=>$i,
-						'status'=>1,
-						'create_at'=>date('Y-m-d H:i:s'),
-						'created_by'=>$hos_ids['a_id']
-					);
-					//echo '<pre>';print_r($editbed_details);exit;
-					$editbeddata = $this->Ward_model->bednumber($editbed_details);
-
-					}
-				
-					if(count($editbeddata)>0){
 					
-					$this->session->set_flashdata('success',"bed number details successfully updated");
-					redirect('ward_management/roomnumber/'.base64_encode(1));
-				}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('ward_management/roomnumber');
-			}}}
 					
 					$this->session->set_flashdata('success',"Room number details successfully updated");
 					redirect('ward_management/roomnumber/'.base64_encode(1));

@@ -244,4 +244,15 @@ class Ward_model extends CI_Model
 		return $this->db->update("ward_room_beds",$data);
 	}
 	
+	public  function get_room_number_wise_beds_list($w_r_n_id){
+		$this->db->select('*')->from('ward_room_beds');		
+		$this->db->where('w_r_n_id',$w_r_n_id);
+		return $this->db->get()->result_array();
+	}
+	public  function update_room_wise_beds_list($r_b_id,$data){
+		$this->db->where('r_b_id',$r_b_id);
+		return $this->db->update("ward_room_beds",$data);
+	}
+	
+	
 }
