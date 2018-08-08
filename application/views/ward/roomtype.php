@@ -181,14 +181,14 @@ function adminstatus(id){
 	}
 }
 $(document).ready(function() {
-    $('#floor_number').bootstrapValidator({
+    $('#room_type').bootstrapValidator({
         
         fields: {
             
-            ward_name: {
+            room_type: {
                  validators: {
 					notEmpty: {
-						message: 'Floor number is required'
+						message: 'room type is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,

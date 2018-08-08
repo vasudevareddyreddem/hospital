@@ -28,20 +28,34 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('Ward_management/roomnumberpost'); ?>" method="post" id="room_type" name="room_type" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('Ward_management/roomnumberpost'); ?>" method="post" id="room_num" name="room_num" enctype="multipart/form-data">
 							<div class="row">
+							<div class="col-md-6">
+							<label>  Floor Number</label>
+										<select name="floor_number" id="floor_number" class="form-control">
+										<option value="">select  Floor Number</option>
+										<?php foreach($floor_list as $List){ ?>
+										<option value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
+										<?php } ?>
+										
+										</select>
+							</div>
+							
+						
 								<div class="col-md-6">
 									<label> Room Number</label>
-								<input class="form-control" id="room_type" name="room_type" value="" type="text" placeholder="Room Type">
+								<input class="form-control" id="room_num" name="room_num" value="" type="text" placeholder="Room Number">
 								</div>
 								
-								<div class="col-md-6">
+								
+	
+								<div class="col-md-6">	<br>
 									<label> Bed Number</label>
-								<input class="form-control" id="room_type" name="room_type" value="" type="text" placeholder="Room Type">
+								<input class="form-control" id="bed_num" name="bed_num" value="" type="text" placeholder="Bed Number">
 								</div>
 								
 								<div class="col-md-2">
-								<label style="visibility: hidden;">test	</label><br>
+								<label style="visibility: hidden;">test	</label><br><br>
 								<button type="submit" class="btn btn-sm btn-success " type="button">   Add </button>
 								</div>	
 							</div>
@@ -54,20 +68,25 @@
                      <div class="container">
                         <div class="row">
                             <div class="card-body col-md-12 table-responsive">
-								<?php if(count($roomtype_list)>0){ ?>
+								<?php if(count($roomnum_list)>0){ ?>
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Room Type</th>
+												<th>Floor Number</th>
+												<th>Room Number</th>
+												<th>Bed Count</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
+												
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php foreach($roomtype_list as $list){ ?>
+										<?php foreach($roomnum_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['room_type']); ?></td>
+                                                <td><?php echo htmlentities($list['ward_floor']); ?></td>
+                                               <td><?php echo htmlentities($list['room_num']); ?></td>
+												 <td><?php echo htmlentities($list['bed_count']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
@@ -78,13 +97,13 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             
 															<li>
-                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_r_t_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['w_r_n_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
-															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_r_t_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
+															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_r_n_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('ward_management/roomtypedelete/'.base64_encode($list['w_r_t_id'])); ?>">
+                                                                <a href="<?php echo base_url('ward_management/roomnumberdelete/'.base64_encode($list['w_r_n_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -93,23 +112,45 @@
                                                     </div>
                                                 </td>
                                             </tr>
-											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_r_t_id']; ?>" tabindex="-1" role="dialog">
+											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_r_n_id']; ?>" tabindex="-1" role="dialog">
 										   <div class="modal-dialog modal-sm" role="document">
 											  <div class="modal-content">
-												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/roomtypeeditpost'); ?>" method="post">
+												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/roomnumbereditpost'); ?>" method="post">
 													<?php $csrf = array(
 													   'name' => $this->security->get_csrf_token_name(),
 													   'hash' => $this->security->get_csrf_hash()
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-													<input type="hidden" name="rtypeid" id="rtypeid" value="<?php echo $list['w_r_t_id']; ?>" >
+													
+													<input type="hidden" name="rnoid" id="rnoid" value="<?php echo $list['w_r_n_id']; ?>" >
+													<input type="hidden" name="bedid" id="bedid" value="<?php echo $list['w_r_n_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Room Type rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Room Number rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
-														<input type="text" id="rtype_name" name="rtype_name" class="form-control" value="<?php echo htmlentities($list['room_type']);?>" />
+														<label> Floor Number</label>
+														
+														<select name="floor_number" id="floor_number" class="form-control">
+																<option value="">select Floor number</option>
+																<?php foreach($floor_list as $List){ ?>
+																	<?php if($List['w_f_id']==$list['f_id']){ ?>
+																		<option selected value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
+																	<?php }else{ ?>
+																	<option  value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
+																	<?php } ?>
+																<?php } ?>
+																
+																</select>
+														
+														
+														
+														<label> Room Number</label>
+														<input type="text" id="room_num" name="room_num" class="form-control" value="<?php echo htmlentities($list['room_num']);?>" />
+														<label> Bed Count</label>
+														<input type="text" id="bed_num" name="bed_num" class="form-control" value="<?php echo htmlentities($list['bed_count']);?>" />
+
 														</div>
 														</div>
 													</div>
@@ -176,7 +217,7 @@ $(document).ready(function() {
     } );
 } );
 function admindeactive(id){
-	$(".popid").attr("href","<?php echo base_url('ward_management/roomtypestatus'); ?>"+"/"+id);
+	$(".popid").attr("href","<?php echo base_url('ward_management/roomnumberstatus'); ?>"+"/"+id);
 }
 function adminstatus(id){
 	if(id==1){
@@ -187,18 +228,36 @@ function adminstatus(id){
 	}
 }
 $(document).ready(function() {
-    $('#floor_number').bootstrapValidator({
+    $('#room_num').bootstrapValidator({
         
         fields: {
-            
-            ward_name: {
+			floor_number: {
                  validators: {
 					notEmpty: {
 						message: 'Floor number is required'
+					}
+				}
+            },
+			
+            
+            room_num: {
+                 validators: {
+					notEmpty: {
+						message: 'Room number is required'
 					},
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
+					regexp: /^[a-zA-Z0-9&. ]+$/,
+					message: 'Room number can only consist of alphanumeric, space and dot'
+					}
+				}
+            },bed_num: {
+                 validators: {
+					notEmpty: {
+						message: 'Bed number is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9&. ]+$/,
+					message: 'Bed number can only consist of alphanumeric, space and dot'
 					}
 				}
             }
@@ -206,4 +265,5 @@ $(document).ready(function() {
         })
      
 });
+
 </script>

@@ -80,3 +80,9 @@ ALTER TABLE `hospital`.`patient_billing`
 
 ALTER TABLE `hospital`.`ward_room_number`   
   ADD COLUMN `bed_count` VARCHAR(250) NULL AFTER `room_num`;
+  
+ ALTER TABLE `hospital`.`ward_room_number`   
+  ADD COLUMN `f_id` INT(11) NULL AFTER `hos_id`;
+
+  
+  

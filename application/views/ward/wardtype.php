@@ -187,7 +187,7 @@ $(document).ready(function() {
         
         fields: {
             
-            ward_name: {
+            ward_type: {
                  validators: {
 					notEmpty: {
 						message: 'Wardtype is required'

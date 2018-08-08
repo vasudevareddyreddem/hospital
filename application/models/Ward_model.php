@@ -168,5 +168,80 @@ class Ward_model extends CI_Model
 	}
 	
 	
+		
+	public function roomnumber($data){
+	$this->db->insert('ward_room_number',$data);
+	return $this->db->insert_id();
+	}
+	public function get_saved_roomnumber($name,$hos_id){
+		$this->db->select('*')->from('ward_room_number');		
+		$this->db->where('room_num',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_roomnumber_list($a_id,$hos_id){
+		$this->db->select('ward_room_number.*,ward_floors.ward_floor')->from('ward_room_number');
+		$this->db->join('ward_floors','ward_floors.w_f_id=ward_room_number.f_id','left');
+		$this->db->where('ward_room_number.created_by',$a_id);
+		$this->db->where('ward_room_number.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+		}
+		
+		public  function get_specialist_list($a_id,$hos_id){
+		$this->db->select('specialist.*,treament.t_name')->from('specialist');		
+		$this->db->join('treament', 'treament.t_id = specialist.d_id', 'left');
+
+		$this->db->where('specialist.t_create_by',$a_id);
+		$this->db->where('specialist.hos_id',$hos_id);
+		$this->db->where('specialist.t_status !=',2);
+		return $this->db->get()->result_array();
+	}	
+		
+	
+
+	public function get_roomnumber_details($w_r_n_id){
+		$this->db->select('*')->from('ward_room_number');		
+		$this->db->where('w_r_n_id',$w_r_n_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function delete_roomnumber_details($w_r_n_id){
+		$this->db->where('w_r_n_id',$w_r_n_id);
+    	return $this->db->delete('ward_room_number');
+	}
+	
+	public function update_roomnumber_details($w_r_n_id,$data){
+		$this->db->where('w_r_n_id',$w_r_n_id);
+		return $this->db->update("ward_room_number",$data);
+	}
+
+	public function bednumber($data){
+	$this->db->insert('ward_room_beds',$data);
+	return $insert_id = $this->db->insert_id();
+	}
+	
+	public function get_saved_bednumber($name,$hos_id){
+		$this->db->select('*')->from('ward_room_beds');		
+		$this->db->where('bed',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function get_bednumber_details($r_b_id){
+		$this->db->select('*')->from('ward_room_beds');		
+		$this->db->where('r_b_id',$r_b_id);
+		return $this->db->get()->row_array();
+	}
+
+	
+	public function delete_bednumber_details($w_r_n_id){
+		$this->db->where('w_r_n_id',$w_r_n_id);
+    	return $this->db->delete('ward_room_beds');
+	}
+	
+	public function update_bednumber_details($w_r_n_id,$data){
+		$this->db->where('w_r_n_id',$w_r_n_id);
+		return $this->db->update("ward_room_beds",$data);
+	}
 	
 }
