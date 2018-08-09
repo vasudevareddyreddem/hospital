@@ -14,4 +14,8 @@ class Cron_model extends CI_Model
 		$this->db->where('status !=',1);
 		return $this->db->get()->result_array();
 	}
+	public  function delete_old_pending_appointment_bidding($b_id){
+		$this->db->where('b_id',$b_id);
+		return $this->db->delete('appointment_bidding_list');
+	}
 }

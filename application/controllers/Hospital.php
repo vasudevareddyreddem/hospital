@@ -1,49 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+@include_once( APPPATH . 'controllers/In_frontend.php');
 
-class Hospital extends CI_Controller {
+class Hospital extends In_frontend {
 
 	public function __construct() 
 	{
 		parent::__construct();	
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-		$this->load->library('session');
-		$this->load->library('email');
-		$this->load->library('user_agent');
-		$this->load->helper('directory');
-		$this->load->helper('security');
-		$this->load->library('zend');
-		$this->load->model('Admin_model');
-		$this->load->model('Hospital_model');
-		$this->load->library('zend');
-			if($this->session->userdata('userdetails'))
-			{
-			$admindetails=$this->session->userdata('userdetails');
-			$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
-			$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
-			if($data['userdetails']['role_id']==2){
-			$data['img']=$this->Admin_model->get_hosipital_imges($admindetails['a_id']);
-			$data['notification']=$this->Admin_model->get_all_announcement($hos_details['hos_id']);
-			$Unread_count=$this->Admin_model->get_all_announcement_unread_count($hos_details['hos_id']);
-			if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6){
-				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
-				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
-				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);
-				if(count($Unread_count)>0){
-					$data['Unread_count']=count($Unread_count);
-				}else{
-					$data['Unread_count']='';
-				}
-			}
-			$this->load->view('html/header',$data);
-			$this->load->view('html/sidebar',$data);
-			}
+				$this->load->model('Hospital_model');
+
 		}
 	public function index()
 	{	
@@ -1312,8 +1277,10 @@ class Hospital extends CI_Controller {
 				$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				//echo '<pre>';print_r($post);exit;
+					//echo '<pre>'; print_r($hos_ids);exit;
+			//	echo '<pre>';print_r($post);exit;
 					$exits_treatment = $this->Hospital_model->get_saved_treatment($post['treatment_name'],$hos_ids['hos_id']);
+					//echo '<pre>';print_r($exits_treatment);exit;
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"Treatment name already exists .please use another name");
 						redirect('hospital/addtreatment/'.base64_encode(1));

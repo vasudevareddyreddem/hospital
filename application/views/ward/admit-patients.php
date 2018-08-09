@@ -27,6 +27,8 @@
 
 </style>
 
+<?php //echo '<pre>';print_r($tab);exit; ?>
+
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -60,7 +62,7 @@
                </header>
                <div class="panel-body">
                   <div class="tab-content">
-				   <div class="tab-pane active" id="aboutop">
+				   <div class="tab-pane <?php if(isset($tab)&& $tab==''){ echo "active";}?>" id="aboutop">
 						<div class="card ">
                                 <div class="card-head">
                                      <header>Patients List</header>
@@ -70,58 +72,54 @@
                                     <table id="saveStage" class="table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>S.No</th>
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
                                                 <th>Gender </th>
                                                 <th>Age</th>
-                                                <th>Doctor</th>
+                                                <th>Doctor Name</th>
                                                 <th>Diagnosis</th>
                                                 <th>Date of Admit</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxxx500</td>
-												<td>patient 1</td>
-												<td>Male</td>
-												<td>26</td>
-                                                <td>Design Doctor1</td>
-                                                <td>xxxxxx</td>
-												<td>25/06/2018 </td>
-                                                <td class="valigntop">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="javascript:;">
-                                                                    <i class="fa fa-edit"></i>view </a>
-                                                            </li>
-                                                           
-                                                            
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                            </tr>
-											
+										<?php if(isset($ip_patient_list)  && count($ip_patient_list)>0){ ?>
+											<?php foreach($ip_patient_list as $list){ ?>
+												<tr>
+													<td><?php echo $list['pid']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['gender']; ?></td>
+													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['resource_name']; ?></td>
+													<td><?php echo $list['problem']; ?></td>
+													<td><?php echo $list['create_at']; ?></td>
+													<td class="valigntop">
+														<div class="btn-group">
+															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+																<i class="fa fa-angle-down"></i>
+															</button>
+															<ul class="dropdown-menu" role="menu">
+																<li>
+																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
+																		<i class="fa fa-edit"></i>Room/Bed </a>
+																</li>
+															   
+																
+															</ul>
+														</div>
+													</td>
+												</tr>
+											<?php } ?>
+										<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
-												<div class="text-center">
-												<div class="col-md-12">
-                                                    <a href="financial.php" class="btn btn-info">Save</a>
-                                                    <a href="#"type="button" class="btn btn-default">Cancel</a>
-                                                </div>
-                                                </div>
+							
                             </div>			
 						
                      </div>
-                     <div class="tab-pane " id="home">
+                     <div class="tab-pane <?php if(isset($tab)&& $tab==2){ echo "active";}?>" id="home">
                         <div class="card ">
                                 <div class="card-head">
                                      <header>Ward Details</header>

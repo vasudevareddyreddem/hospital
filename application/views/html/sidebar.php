@@ -175,6 +175,39 @@
 	                            </ul>
 	                        </li> 
 							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
+	                                <span class="title">Ward Details</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward_management/wardname'); ?>" class="nav-link "> <span class="title">Ward Name</span>
+	                                    </a>
+	                                </li>
+									 <li class="nav-item ">
+	                                    <a href="<?php echo base_url('ward_management/wardtype'); ?>" class="nav-link "> <span class="title">Ward Type</span>
+	                                    </a>
+	                                </li>
+									 <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward_management/floornumber'); ?>" class="nav-link "> <span class="title">Floor Number</span>
+	                                    </a>
+	                                </li>
+									 <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward_management/roomtype'); ?>" class="nav-link "> <span class="title">Room Type</span>
+	                                    </a>
+	                                </li>
+	                                 <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward_management/roomnumber'); ?>" class="nav-link "> <span class="title">Room Number</span>
+	                                    </a>
+	                                </li>
+									 <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('ward_management/ward'); ?>" class="nav-link "> <span class="title">Ward</span>
+	                                    </a>
+	                                </li>
+									
+	                            </ul>
+	                        </li> 
+							<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
