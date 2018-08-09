@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-    <!-- Bootstrap Core Css -->
-    <link href="<?php echo base_url(); ?>assets/vendor/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/vendor/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url(); ?>assets/vendor/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/vendor/css/bootstrapValidator.min.css" rel="stylesheet">
 	
 
@@ -27,7 +27,7 @@
 
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>assets/vendor/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/vendor/css/style.css" rel="stylesheet">
+
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>assets/vendor/css/themes/all-themes.css" rel="stylesheet" />
@@ -43,6 +43,16 @@ ol > li{
 	color:#337ab7
 	
 }
+.card {
+  background: #fff;
+  min-height: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-bottom: 30px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  border-radius: 2px; }
 </style>
 <body>
 	<div class="container card">
@@ -50,9 +60,9 @@ ol > li{
 		<br>
 		<a  style="position:absolute;top:20px;left:20px;" href="<?php echo base_url(); ?>" class="btn btn-primary">
 		Back</a>
-		<hr>
+		<hr style="border-bottom:1px solid #000;">
 		<br>
-		<p>Effective date: July 21, 2018</p>
+		
 		<p>ehealthinfra ("us", "we", or "our") operates the website and the ehealthinframobile application (the "Service").</p>
 		<p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. This Privacy Policy for ehealthinfra is powered by FreePrivacyPolicy.com.</p>
 		<p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
