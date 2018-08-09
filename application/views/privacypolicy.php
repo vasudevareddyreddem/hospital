@@ -70,12 +70,14 @@ ol > li{
 		<h3>Information Collection And Use</h3>
 		<p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
 		<br>
-		<h4>Types of Data Collected</h4>
+		<h4>Personal Data</h4>
 		
-		<p><strong class="text-primary">Personal Data</strong><br> While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+		<p>class="text-primary">While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
 		<ol>
-		<li>Address, State, Province, ZIP/Postal code, City</li>
-		<li>Cookies and Usage Data</li>
+		<li>Email address</li>
+		<li>First name and last name</li>
+		<li>Phone number</li>
+		<li>Phone numbers</li>
 		</ol>
 		<br>
 		<p><strong class="text-primary">Usage Data</strong> <br>We may also collect information that your browser sends whenever you visit our Service or when you access the Service by or through a mobile device ("Usage Data").</p>
@@ -144,6 +146,7 @@ ol > li{
 		<p>If you have any questions about this Privacy Policy, please contact us:</p>
 			<ol>
 			<li>By email: medspaceit@gmail.com</li>
+			<li>By phone number: 7095103103</li>
 		
 		
 		</ol>
