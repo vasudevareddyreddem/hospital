@@ -53,8 +53,8 @@ ol > li{
 		<hr>
 		<br>
 		<p>Effective date: July 21, 2018</p>
-		<p>MEDSPACE ("us", "we", or "our") operates the website and the MEDSPACE BARCODE mobile application (the "Service").</p>
-		<p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. This Privacy Policy for MEDSPACE is powered by FreePrivacyPolicy.com.</p>
+		<p>ehealthinfra ("us", "we", or "our") operates the website and the ehealthinframobile application (the "Service").</p>
+		<p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. This Privacy Policy for ehealthinfra is powered by FreePrivacyPolicy.com.</p>
 		<p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
 		<br>
 		<h3>Information Collection And Use</h3>
@@ -77,7 +77,7 @@ ol > li{
 		<p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.</p>
 		<br>
 		<h3>Information Collection And Use</h3>
-		<p>MEDSPACE uses the collected data for various purposes:</p>
+		<p>ehealthinfra uses the collected data for various purposes:</p>
 		<ol>
 			<li>To provide and maintain the Service</li>
 			<li>To notify you about changes to our Service</li>
@@ -92,14 +92,14 @@ ol > li{
 		<p>Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction.</p>	
 		<p>If you are located outside India and choose to provide information to us, please note that we transfer the data, including Personal Data, to India and process it there.</p>	
 		<p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
-		<p>MEDSPACE will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>		
+		<p>ehealthinfra will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>		
 		
 		<br>
 		<h3>Disclosure Of Data</h3>
-		<p><strong class="text-primary">Legal Requirements</strong> <br> MEDSPACE may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
+		<p><strong class="text-primary">Legal Requirements</strong> <br> ehealthinfra may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
 			<ol>
 			<li>To comply with a legal obligation</li>
-			<li>To protect and defend the rights or property of MEDSPACE</li>
+			<li>To protect and defend the rights or property of ehealthinfra</li>
 			<li>To prevent or investigate possible wrongdoing in connection with the Service</li>
 			<li>To protect the personal safety of users of the Service or the public</li>
 			<li>To protect against legal liability</li>
