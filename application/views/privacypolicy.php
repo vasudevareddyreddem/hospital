@@ -56,13 +56,14 @@ ol > li{
 </style>
 <body>
 	<div class="container card">
-		<h1 class="text-center">Privacy Policy</h1>
+		
 		<br>
+		<h1 class="text-center">Privacy Policy</h1>
+	
 		<a  style="position:absolute;top:20px;left:20px;" href="<?php echo base_url(); ?>" class="btn btn-primary">
 		Back</a>
-		<hr style="border-bottom:1px solid #000;">
-		<br>
 		
+		<hr style="border-top:2px solid #ddd;width:100%">
 		<p>ehealthinfra ("us", "we", or "our") operates the website and the ehealthinframobile application (the "Service").</p>
 		<p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. This Privacy Policy for ehealthinfra is powered by FreePrivacyPolicy.com.</p>
 		<p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
