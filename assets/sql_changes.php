@@ -72,31 +72,38 @@ CREATE TABLE `ward_room_beds` (
 
 /* patient check ip or op purose
 
-ALTER TABLE `staging_ehealth`.`patient_billing`   
+  ALTER TABLE `staging_ehealth`.`patient_billing`   
   ADD COLUMN `patient_type` INT(11) NULL  COMMENT '1=ip;0=op' AFTER `p_id`;
   
-ALTER TABLE `hospital`.`patient_billing`   
+  ALTER TABLE `hospital`.`patient_billing`   
   CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL  COMMENT '1=ip;0=op';
+ 
 
-<<<<<<< HEAD
-  
-  ALTER TABLE `education`.`issued_book`   
-  ADD COLUMN `barcode_id` VARCHAR(250) NULL AFTER `s_id`;
-  
-  
-ALTER TABLE `education`.`issued_book`   
-  DROP COLUMN `book_name`;
-
-=======
-ALTER TABLE `hospital`.`ward_room_number`   
+  ALTER TABLE `hospital`.`ward_room_number`   
   ADD COLUMN `bed_count` VARCHAR(250) NULL AFTER `room_num`;
-<<<<<<< HEAD
   
- ALTER TABLE `hospital`.`ward_room_number`   
+  ALTER TABLE `hospital`.`ward_room_number`   
   ADD COLUMN `f_id` INT(11) NULL AFTER `hos_id`;
+  
+  ALTER TABLE `hospital`.`ward_floors`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+  
+  ALTER TABLE `hospital`.`ward_name`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+  
+  ALTER TABLE `hospital`.`ward_room_beds`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+  
+  ALTER TABLE `hospital`.`ward_room_number`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+
+  ALTER TABLE `hospital`.`ward_room_type`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+  
+  ALTER TABLE `hospital`.`ward_type`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+
+ALTER TABLE `hospital`.`patient_billing`   
+  ADD COLUMN `patient_type` VARCHAR(250) NULL AFTER `bill`;
 
   
-  
-=======
->>>>>>> 2cb6907f65cba6a5b0f3ddb08414b1f2c178731b
->>>>>>> 18314a63bd831e805ea4daaaf117ba0d6ba286b2

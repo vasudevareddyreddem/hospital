@@ -126,49 +126,58 @@
                                   
                                 </div>
                                 <div class="card-body ">
-                                    <form class=" pad30 form-horizontal" action=" " method="post"  id="contact_form">
+                                    <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admit'); ?> " method="post"  id="contact_form">
                                         <div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
-											  <input type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter Ward Name" >
+												<select  class="form-control">
+												<option value="">Select Ward Number</option>
+												<?php foreach($ward_list as $List){ ?>
+												<option value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
+												<?php } ?>	
+												</select>											
 											</div>
 										</div>
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Type</strong></label>
-											 <select class="form-control">
-												<option> Select ward</option>
-												<option> Type 1</option>
-												<option> Type 2</option>
-												<option> Type 3</option>
-												<option> Type 4</option>
-												<option> Type 5</option>
-											 </select>
+												<select  class="form-control">
+												<option value="">Select Ward Type</option>
+												<?php foreach($wardtype_list as $List){ ?>
+												<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
+												<?php } ?>
+										
+										</select>
 											</div>
 										</div>
 										 <div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Floor Number</strong></label>
-											  <input type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter Floor Number" >
-											</div>
+												<select  class="form-control" onchange="get_department_list(this.value);">
+												<option value="">Select Floor Number</option>
+												<?php foreach($floor_list as $list){ ?>
+												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
+												<?php } ?>
+										
+										</select>											</div>
 										</div>
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Room Type</strong></label>
-											 <select class="form-control">
-												<option> Select Room</option>
-												<option> Type 1</option>
-												<option> Type 2</option>
-												<option> Type 3</option>
-												<option> Type 4</option>
-												<option> Type 5</option>
-											 </select>
+											 <select  class="form-control">
+												<option value="">Select Room Type </option>											
+										</select>
 											</div>
 										</div>
-										 <div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6">
+										<div class="row d-flex justify-content-center">
+											<div class="form-group col-md-6">
 											  <label ><strong>Room Number</strong></label>
-											  <input type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter Floor Number" >
+												 <select  class="form-control" id="specialist_doc" >
+												 <option value="">Select Room Number </option>
+												 <?php foreach($roomnum_list as $list){ ?>
+												 <option value="<?php echo $list['f_id'];?>"><?php echo $list['room_num'];?></option>
+												 <?php } ?>		
+												 </select>												
 											</div>
 										</div>
 										<div class="row d-flex justify-content-center">
@@ -302,6 +311,38 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+
+
+function get_department_list(id){
+	
+		if(id!=''){
+			jQuery.ajax({
+   					url: "<?php echo base_url('Ward_management/get_specialists_list');?>",
+   					data: {
+   						dep_id: id,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						//console.log(data);return false;
+   						$('#specialist_doc').empty();
+   						$('#specialist_doc').append("<option>select</option>");
+   						for(i=0; i<data.list.length; i++) {
+   							$('#specialist_doc').append("<option value="+data.list[i].s_id+">"+data.list[i].room_num+"</option>");                      
+                         
+   						}
+   						//console.log(data);return false;
+   					}
+   				
+   				});
+				
+			}
+}
+
+
+
+
+
 $(document).ready(function() {
     $('#example3').DataTable( {
         "order": [[ 0, "desc" ]]

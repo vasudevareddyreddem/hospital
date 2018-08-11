@@ -42,6 +42,15 @@ public function index()
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					//echo '<pre>';print_r($hos_ids);exit;
+					$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);
+					$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
+					$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
+					$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
+					$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_details($hos_ids['hos_id']);
+
+					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/admit-patients',$data);
 					$this->load->view('html/footer');
@@ -49,7 +58,6 @@ public function index()
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
-			
 		}else{
 			//$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -103,8 +111,7 @@ public function index()
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
-					
+
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/bed-chart');
 					$this->load->view('html/footer');
@@ -119,13 +126,10 @@ public function index()
 		}
 	}
 	public function observation()
-	{	
-		
+	{			
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
-					
-					
+				if($admindetails['role_id']=1){					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/observation');
 					$this->load->view('html/footer');
@@ -144,9 +148,7 @@ public function index()
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
-					
-					
+				if($admindetails['role_id']=1){										
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/admit-discharge-statistics');
 					$this->load->view('html/footer');
@@ -166,8 +168,7 @@ public function index()
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
-					
+			
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/patient-history');
 					$this->load->view('html/footer');
@@ -246,17 +247,14 @@ public function index()
 					
 				
 	}
-	
-	
-	
-	
+
 	public function wardname()
 	{	
 		
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=2){
-					$data['tab']=base64_decode($this->uri->segment(3));
+				$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 				$data['ward_list'] =$this->Ward_model->get_ward_list($hos_ids['a_id'],$hos_ids['hos_id']);
@@ -264,6 +262,7 @@ public function index()
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/wardname',$data);
 					$this->load->view('html/footer');
+							
 							}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
@@ -275,20 +274,21 @@ public function index()
 		}
 				
 	}
-		
 	
 	public function wardnamedelete()
 	{
+		
 		if($this->session->userdata('userdetails'))
 		{
-			if($admindetails['role_id']=1){
-					$ward_id=$this->uri->segment(3);
-					if($ward_id!=''){
+			if($admindetails['role_id']=2){
+					$treatment_id=$this->uri->segment(3);
+					if($treatment_id!=''){
 						$deletdata=array(
-							
-							
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$deletedata= $this->Ward_model->delete_ward_details(base64_decode($ward_id),$deletdata);
+							
+							$deletedata= $this->Ward_model->update_ward_details(base64_decode($treatment_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"Treatment successfully removed.");
 								redirect('ward_management/wardname/'.base64_encode(1));
@@ -310,8 +310,7 @@ public function index()
 			redirect('admin');
 		}
 	}
-	
-	
+
 	public function wardnameeditpost()
 	{
 		if($this->session->userdata('userdetails'))
@@ -331,6 +330,7 @@ public function index()
 				}
 				$editward_details=array(
 					'ward_name'=>$post['w_name'],
+					'updated_at'=>date('Y-m-d H:i:s')
 					
 					);
 					//echo '<pre>';print_r($post);exit;
@@ -355,8 +355,6 @@ public function index()
 		}
 	}
 	
-	
-	
 	public function wardnamestatus()
 	{
 		if($this->session->userdata('userdetails'))
@@ -371,8 +369,8 @@ public function index()
 					}
 					if($ward_id!=''){
 						$stusdetails=array(
-							'status'=>$statu
-							
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
 							$statusdata= $this->Ward_model->update_ward_details(base64_decode($ward_id),$stusdetails);
 							if(count($statusdata)>0){
@@ -431,26 +429,19 @@ public function index()
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('ward_management/wardtype');
-				}
-									
-				
+				 }									
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
-			}
+			 }
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
-		}
+		 }
 					
 				
 	}
-	
-	
-	
-	
-	
-	
+
 	public function wardtype()
 	{	
 		
@@ -473,7 +464,7 @@ public function index()
 		}else{
 			//$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
-		}
+		 }
 				
 	}
 	
@@ -491,7 +482,8 @@ public function index()
 					}
 					if($ward_id!=''){
 						$stusdetails=array(
-							'status'=>$statu
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
 							
 							);
 							$statusdata= $this->Ward_model->update_wardtype_details(base64_decode($ward_id),$stusdetails);
@@ -505,26 +497,21 @@ public function index()
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 									redirect('ward_management/wardtype/'.base64_encode(1));
-							}
+							 }
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('ward_management/wardtype/'.base64_encode(1));
-					}
+					 }
 					
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
-			}
+			 }
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
-		}
+		 }
 	}
-	
-	
-	
-	
-	
 	
 	public function wardtypeeditpost()
 	{
@@ -545,7 +532,7 @@ public function index()
 				}
 				$editward_details=array(
 					'ward_type'=>$post['wt_name'],
-					
+					'updated_at'=>date('Y-m-d H:i:s')
 					);
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Ward_model->update_wardtype_details($post['ward_type'],$editward_details);
@@ -569,9 +556,6 @@ public function index()
 		}
 	}
 	
-	
-	
-		
 	public function wardtypedelete()
 	{
 		if($this->session->userdata('userdetails'))
@@ -580,10 +564,11 @@ public function index()
 					$ward_id=$this->uri->segment(3);
 					if($ward_id!=''){
 						$deletdata=array(
-							
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
 							
 							);
-							$deletedata= $this->Ward_model->delete_wardtype_details(base64_decode($ward_id),$deletdata);
+							$deletedata= $this->Ward_model->update_wardtype_details(base64_decode($ward_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"wardtype successfully removed.");
 								redirect('ward_management/wardtype/'.base64_encode(1));
@@ -618,8 +603,8 @@ public function index()
 				//echo '<pre>';print_r($post);exit;
 					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_number'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
-						redirect('ward_management/wardtype/');
+						$this->session->set_flashdata('error',"floornumber already exists .please use another name");
+						redirect('ward_management/floornumber/');
 					}
 				$floor_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
@@ -631,7 +616,7 @@ public function index()
 					//echo '<pre>';print_r($floor_details);exit;
 				$ward = $this->Ward_model->floornumber($floor_details);
 				if(count($ward)>0){
-					$this->session->set_flashdata('success',"Ward added successfully");
+					$this->session->set_flashdata('success',"floornumber added successfully");
 					redirect('ward_management/floornumber/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -650,12 +635,7 @@ public function index()
 					
 				
 	}
-	
-	
-	
-	
-	
-	
+
 	public function floornumber()
 	{	
 		
@@ -681,7 +661,6 @@ public function index()
 		}
 				
 	}
-	
 
 	public function floornumberstatus()
 	{
@@ -697,7 +676,8 @@ public function index()
 					}
 					if($ward_id!=''){
 						$stusdetails=array(
-							'status'=>$statu
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
 							
 							);
 							$statusdata= $this->Ward_model->update_floor_details(base64_decode($ward_id),$stusdetails);
@@ -726,8 +706,7 @@ public function index()
 			redirect('admin');
 		}
 	}
-	
-	
+
 		public function floornumbereditpost()
 	{
 		if($this->session->userdata('userdetails'))
@@ -741,13 +720,13 @@ public function index()
 				if($editdata_check['ward_floor']!=$post['floor_name']){
 					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
-						redirect('ward_management/wardtype/'.base64_encode(1));
+						$this->session->set_flashdata('error',"floornumber already exists .please use another name");
+						redirect('ward_management/floornumber/'.base64_encode(1));
 					}
 				}
 				$editward_details=array(
 					'ward_floor'=>$post['floor_name'],
-					
+					'updated_at'=>date('Y-m-d H:i:s')
 					);
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Ward_model->update_floor_details($post['floorid'],$editward_details);
@@ -779,8 +758,10 @@ public function index()
 					$ward_id=$this->uri->segment(3);
 					if($ward_id!=''){
 						$deletdata=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$deletedata= $this->Ward_model->delete_floor_details(base64_decode($ward_id),$deletdata);
+							$deletedata= $this->Ward_model->update_floor_details(base64_decode($ward_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"floornumber successfully removed.");
 								redirect('ward_management/floornumber/'.base64_encode(1));
@@ -802,10 +783,7 @@ public function index()
 			redirect('admin');
 		}
 	}
-	
-	
-	
-	
+
 	public function roomtypepost()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -850,12 +828,7 @@ public function index()
 					
 				
 	}
-	
-	
-	
-	
-	
-	
+
 	public function roomtype()
 	{	
 		
@@ -881,9 +854,7 @@ public function index()
 		}
 				
 	}
-	
-	
-	
+
 	public function roomtypestatus()
 	{
 		if($this->session->userdata('userdetails'))
@@ -898,7 +869,8 @@ public function index()
 					}
 					if($ward_id!=''){
 						$stusdetails=array(
-							'status'=>$statu
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
 							
 							);
 							$statusdata= $this->Ward_model->update_roomtype_details(base64_decode($ward_id),$stusdetails);
@@ -946,7 +918,8 @@ public function index()
 					}
 				}
 				$editward_details=array(
-					'room_type'=>$post['rtype_name']
+					'room_type'=>$post['rtype_name'],
+					'updated_at'=>date('Y-m-d H:i:s')
 					);
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Ward_model->update_roomtype_details($post['rtypeid'],$editward_details);
@@ -978,8 +951,10 @@ public function index()
 					$ward_id=$this->uri->segment(3);
 					if($ward_id!=''){
 						$deletdata=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$deletedata= $this->Ward_model->delete_roomtype_details(base64_decode($ward_id),$deletdata);
+							$deletedata= $this->Ward_model->update_roomtype_details(base64_decode($ward_id),$deletdata);
 							if(count($deletedata)>0){
 								$this->session->set_flashdata('success',"roomtype successfully removed.");
 								redirect('ward_management/roomtype/'.base64_encode(1));
@@ -1002,9 +977,6 @@ public function index()
 		}
 	}	
 	
-	
-	
-	
 	public function roomnumberpost()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -1021,7 +993,7 @@ public function index()
 						$this->session->set_flashdata('error',"roomnumber already exists. please use another name");
 						redirect('ward_management/roomnumber/');
 					}
-					
+				
 				$roomno_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
 					'f_id'=>$post['floor_number'],
@@ -1034,9 +1006,7 @@ public function index()
 					
 					//echo '<pre>';print_r($roomno_details);exit;
 				$ward = $this->Ward_model->roomnumber($roomno_details);
-				if(count($ward)>0){
-					
-					
+				if(count($ward)>0){				
 					for($i=1;$i<=$post['bed_num'];$i++){
 						
 						$bed_details=array(
@@ -1050,22 +1020,20 @@ public function index()
 						//echo '<pre>';print_r($bed_details);exit;
 						$wards = $this->Ward_model->bednumber($bed_details);
 					}
-				if(count($wards)>0){
-					$this->session->set_flashdata('success',"bednumber added successfully");
-					redirect('ward_management/roomnumber/'.base64_encode(1));
-				}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('ward_management/roomnumber');
-					}			
+					if(count($wards)>0){
+						$this->session->set_flashdata('success',"bednumber added successfully");
+						redirect('ward_management/roomnumber/'.base64_encode(1));
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/roomnumber');
+						}			
 
-					$this->session->set_flashdata('success',"roomnumber added successfully");
-					redirect('ward_management/roomnumber/'.base64_encode(1));
+						$this->session->set_flashdata('success',"roomnumber added successfully");
+						redirect('ward_management/roomnumber/'.base64_encode(1));
 				}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('ward_management/roomnumber');
-				}
-									
-				
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/roomnumber');
+				 }	
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1077,8 +1045,7 @@ public function index()
 					
 				
 	}
-	
-	
+
 	public function roomnumber()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -1096,88 +1063,28 @@ public function index()
 							}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
-				}
-			
+				}	
 		}else{
 			//$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
-		}
-				
+		}				
 	}
 	
-	public function roomnumbereditpost()
+	
+	public function roomnumberedit()
 	{
 		if($this->session->userdata('userdetails'))
 		{
-			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
-				$post=$this->input->post();
-				
-				echo '<pre>';print_r($post);
-				$editdata_check= $this->Ward_model->get_roomnumber_details($post['rnoid']);
-				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-<<<<<<< HEAD
-				echo '<pre>';print_r($editdata_check);exit;
-				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['floor_number']!=$post['f_id']){
-=======
-				//echo '<pre>';print_r($post);
-				//echo '<pre>';print_r($editdata_check);
-				
-				//exit;
-				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['f_id']!=$post['floor_number']){
->>>>>>> 72d3eac9129093ce981554910d0df54a4ec0da8c
-					$exits_treatment = $this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
-					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"Room number already exists .please use another name");
-						redirect('ward_management/roomnumber/'.base64_encode(1));
-					}
-				}
-				$editroomno_details=array(
-					'f_id'=>$post['floor_number'],
-					'room_num'=>$post['room_num'],
-					'bed_count'=>$post['bed_num'],
-					);
-					//echo '<pre>';print_r($post);exit;
-					
-				$editdata= $this->Ward_model->update_roomnumber_details($post['rnoid'],$editroomno_details);
-				if(count($editdata)>0){
-									
-							$beds_count= $this->Ward_model->get_room_number_wise_beds_list($post['rnoid']);
-							foreach($beds_count as $list){
-								$dele_dat=array(
-								'status'=>2,
-								'updated_at'=>date('Y-m-d H:i:s'),
-								);
-								$this->Ward_model->update_room_wise_beds_list($list['r_b_id'],$dele_dat);
-								
-							}
-							//echo '<pre>';print_r($a);exit;
-							if(count($post['bed_num'])>0){
-								      
-										for($i=1;$i<=$post['bed_num'];$i++){
-										
-										$bed_details=array(
-										'hos_id'=>$hos_ids['hos_id'],
-										'w_r_n_id'=>$post['rnoid'],
-										'bed'=>$i,
-										'status'=>1,
-										'create_at'=>date('Y-m-d H:i:s'),
-										'created_by'=>$hos_ids['a_id']
-										);									
-										//echo '<pre>';print_r($bed_details);exit;
-										$this->Ward_model->bednumber($bed_details);
-									}
-							}
-					
-					
-					
-					$this->session->set_flashdata('success',"Room number details successfully updated");
-					redirect('ward_management/roomnumber/'.base64_encode(1));
-				}else{
-					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-					redirect('ward_management/roomnumber');
-				}
-									
+				$roomno = base64_decode($this->uri->segment(3));
+				$data['list']= $this->Ward_model->get_roomnumber_details($roomno);
+								$admindetails=$this->session->userdata('userdetails');
+								$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+								$data['floor_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
+
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('ward/roomnumberedit',$data);
+				$this->load->view('html/footer');
 				
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
@@ -1189,6 +1096,87 @@ public function index()
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	public function roomnumbereditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$post=$this->input->post();
+				
+				//echo '<pre>';print_r($post);
+				$editdata_check= $this->Ward_model->get_roomnumber_details($post['rnoid']);
+				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				//echo '<pre>';print_r($editdata_check);exit;			
+				if($editdata_check['room_num']!=$post['room_num'] || $editdata_check['f_id']!=$post['floor_number']){
+					$exits_treatment = $this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
+					if(count($exits_treatment)>0){
+						$this->session->set_flashdata('error',"Room number already exists .please use another name");
+						redirect('ward_management/roomnumberedit/'.base64_encode(1));
+					}
+				}
+				$editroomno_details=array(
+					'f_id'=>$post['floor_number'],
+					'room_num'=>$post['room_num'],
+					'bed_count'=>$post['bed_num'],
+					'updated_at'=>date('Y-m-d H:i:s')
+					);
+					//echo '<pre>';print_r($post);exit;
+					
+				$editdata= $this->Ward_model->update_roomnumber_details($post['rnoid'],$editroomno_details);
+				if(count($editdata)>0){
+									
+							$beds_count= $this->Ward_model->get_room_number_wise_beds_list($post['rnoid']);
+							foreach($beds_count as $list){
+								$dele_dat=array(
+								'status'=>2,
+								'updated_at'=>date('Y-m-d H:i:s')
+								);
+								$this->Ward_model->update_room_wise_beds_list($list['r_b_id'],$dele_dat);
+							}
+							//echo '<pre>';print_r($a);exit;
+							if(count($post['bed_num'])>0){								      
+										for($i=1;$i<=$post['bed_num'];$i++){
+										
+											$bed_details=array(
+											'hos_id'=>$hos_ids['hos_id'],
+											'w_r_n_id'=>$post['rnoid'],
+											'bed'=>$i,
+											'status'=>1,
+											'create_at'=>date('Y-m-d H:i:s'),
+											'created_by'=>$hos_ids['a_id']
+											);									
+											//echo '<pre>';print_r($bed_details);exit;
+											$this->Ward_model->bednumber($bed_details);
+										}
+							}					
+					$this->session->set_flashdata('success',"Room number details successfully updated");
+					redirect('ward_management/roomnumber/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/roomnumberedit');
+				}													
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
+	
+
 	public function roomnumberdelete()
 	{
 		if($this->session->userdata('userdetails'))
@@ -1197,15 +1185,17 @@ public function index()
 					$roomno_id=$this->uri->segment(3);
 					if($roomno_id!=''){
 						$deletdata=array(
-						
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
-							$deletedata= $this->Ward_model->delete_roomnumber_details(base64_decode($roomno_id),$deletdata);
+							$deletedata= $this->Ward_model->update_roomnumber_details(base64_decode($roomno_id),$deletdata);
 							if(count($deletedata)>0){
 								
 								$bedno_id=$this->uri->segment(3);
 					if($bedno_id!=''){
 						$deletdatas=array(
 						'status'=>2,
+						'updated_at'=>date('Y-m-d H:i:s')
 							);
 							$deletedatas= $this->Ward_model->update_bednumber_details(base64_decode($bedno_id),$deletdatas);
 							if(count($deletedatas)>0){
@@ -1252,7 +1242,8 @@ public function index()
 					}
 					if($ward_id!=''){
 						$stusdetails=array(
-							'status'=>$statu
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
 							$statusdata= $this->Ward_model->update_roomnumber_details(base64_decode($ward_id),$stusdetails);
 							if(count($statusdata)>0){
@@ -1267,7 +1258,8 @@ public function index()
 					}
 					if($bed_ids!=''){
 						$statusdetails=array(
-							'status'=>$statu							
+							'status'=>$statu,	
+							'updated_at'=>date('Y-m-d H:i:s')
 							);
 							$bedstatus= $this->Ward_model->update_bednumber_details(base64_decode($bed_ids),$statusdetails);
 								if(count($bedstatus)>0){
@@ -1281,9 +1273,7 @@ public function index()
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 									redirect('ward_management/roomnumber/'.base64_encode(1));
 							}
-					}
-								
-								
+					}								
 								if($status==1){
 								$this->session->set_flashdata('success',"roomnumber successfully deactivated.");
 								}else{
@@ -1310,5 +1300,20 @@ public function index()
 	}
 	
 	
-
+	public  function get_specialists_list(){
+		$post=$this->input->post();
+		$details=$this->Ward_model->get_d_id_wise_specialist_list($post['dep_id']);
+		//echo $this->db->last_query();exit;
+		if(count($details) > 0)
+				{
+				$data['msg']=1;
+				$data['list']=$details;
+				echo json_encode($data);exit;	
+				}else{
+					$data['msg']=2;
+					echo json_encode($data);exit;
+				}
+	}
+	
+	
 }

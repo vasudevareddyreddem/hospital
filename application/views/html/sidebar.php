@@ -200,11 +200,7 @@
 	                                    <a href="<?php echo base_url('ward_management/roomnumber'); ?>" class="nav-link "> <span class="title">Room Number</span>
 	                                    </a>
 	                                </li>
-									 <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('ward_management/ward'); ?>" class="nav-link "> <span class="title">Ward</span>
-	                                    </a>
-	                                </li>
-									
+							
 	                            </ul>
 	                        </li> 
 							<li class="nav-item  open ">

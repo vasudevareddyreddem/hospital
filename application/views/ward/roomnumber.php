@@ -33,7 +33,7 @@
 							<div class="col-md-6">
 							<label>  Floor Number</label>
 										<select name="floor_number" id="floor_number" class="form-control">
-										<option value="">select  Floor Number</option>
+										<option value="">Select Floor Number</option>
 										<?php foreach($floor_list as $List){ ?>
 										<option value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
 										<?php } ?>
@@ -101,8 +101,11 @@
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
-															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_r_n_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
-                                                            <li>
+													<li>
+                                                            <a href="<?php echo base_url('ward_management/roomnumberedit/'.base64_encode($list['w_r_n_id'])); ?>">
+                                                             <i class="fa fa-edit"></i>Edit</a>
+                                                    </li>
+											                                                            <li>
                                                                 <a href="<?php echo base_url('ward_management/roomnumberdelete/'.base64_encode($list['w_r_n_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
@@ -112,56 +115,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-											<div class="modal fade" id="foldersmallModalmove<?php echo $list['w_r_n_id']; ?>" tabindex="-1" role="dialog">
-										   <div class="modal-dialog modal-sm" role="document">
-											  <div class="modal-content">
-												 <form id="foldermoving" name="foldermoving" action="<?php echo base_url('ward_management/roomnumbereditpost'); ?>" method="post">
-													<?php $csrf = array(
-													   'name' => $this->security->get_csrf_token_name(),
-													   'hash' => $this->security->get_csrf_hash()
-													   ); ?>
-													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													
-													<input type="hidden" name="rnoid" id="rnoid" value="<?php echo $list['w_r_n_id']; ?>" >
-													<input type="hidden" name="bedid" id="bedid" value="<?php echo $list['w_r_n_id']; ?>" >
-													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Room Number rename</h4>
-													</div>
-													<div class="modal-body">
-														<div class="form-group">
-														<div class="form-line">
-														<label> Floor Number</label>
-														
-														<select name="floor_number" id="floor_number" class="form-control">
-																<option value="">select Floor number</option>
-																<?php foreach($floor_list as $List){ ?>
-																	<?php if($List['w_f_id']==$list['f_id']){ ?>
-																		<option selected value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
-																	<?php }else{ ?>
-																	<option  value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
-																	<?php } ?>
-																<?php } ?>
-																
-																</select>
-														
-														
-														
-														<label> Room Number</label>
-														<input type="text" id="room_num" name="room_num" class="form-control" value="<?php echo htmlentities($list['room_num']);?>" />
-														<label> Bed Count</label>
-														<input type="text" id="bed_num" name="bed_num" class="form-control" value="<?php echo htmlentities($list['bed_count']);?>" />
-
-														</div>
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="submit" class="btn btn-link waves-effect">Update </button>
-														<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-													</div>
-												 </form>
-											  </div>
-										   </div>
-										</div>
 										<?php } ?>
 											
                                             
