@@ -77,7 +77,7 @@
                             Remember me
                         </label>
 								<?php } ?>
-								<a class="pull-right" href="<?php echo base_url('privacypolicy'); ?>">Privacy policy</a>
+								<a class="pull-right" target="_blank" href="<?php echo base_url('privacypolicy'); ?>">Privacy policy</a>
                        
                     </div>
 					
