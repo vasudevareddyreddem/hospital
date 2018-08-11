@@ -77,8 +77,10 @@
                             Remember me
                         </label>
 								<?php } ?>
+								<a class="pull-right" href="<?php echo base_url('privacypolicy'); ?>">Privacy policy</a>
                        
                     </div>
+					
                 </div>
                 <button type="submit" class="btn btn-primary btn-block text-white">Login</button>
                 <div class="forgetPassword"><a href="javascript:void(0)">Forgot your password?</a>
