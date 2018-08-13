@@ -7,8 +7,8 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height:325px;
-		width:502px;
+		height:208px;
+		width:322px;
 		position:relative;
 		
 	}
@@ -18,21 +18,21 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height:325px;
-		width:502px;
+		height:208px;
+		width:322px;
 		position:relative;
 		float:right;
-		top:-335px
+		top:-217px
 	}
 	.card-number{
 	position: absolute;
     left: 50%;
     top: 70%;
     transform: translate(-50%,-50%);
-	font-size:42px;
+	font-size:30px;
 	letter-spacing:5px;
 	color:#fff;
-	width:400px;
+	width:280px;
 	
 	
 		
@@ -44,10 +44,10 @@ input[type="text"]
     border: none;
 }
 .row1{
-	margin:30px 0px;
+	margin:10px 0px;
 }
 </style>
-<body style="height:1754px;width:1240px;padding:20px ;">
+<body style="height:1122px;width:794px;padding:10px;">
 <?php foreach($card_num_list as $list){ ?>
 
 <?php //echo '<pre>';print_r($list);exit; ?>
@@ -60,8 +60,9 @@ input[type="text"]
 		</div>
 	</div>
 <?php } ?>
-	
-<a href="javascript:void(0);" onclick="myFunction()" style="background-color:red;color:#fff;padding:5px;" class="btn btn-primary btn-sm text-center">Print</a>
+<div style="margin:20px auto;">	
+	<a href="javascript:void(0);" onclick="myFunction()" style="background-color:#003f7f;color:#fff;padding:10px 20px; text-decoration: none;border-radius: 6px;" class="btn btn-primary btn-sm text-center">Print</a>
+</div>
 
 </body>
 </html>
