@@ -118,6 +118,11 @@
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('admin/cardnumbers'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
+	                                <span class="title">Card Numbers</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 						<?php }else if($userdetails['role_id']==2){ ?>
 						 <li class="nav-item start ">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">

@@ -1147,29 +1147,79 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	public function emps(){
-		
-		
-		/*test*/
-		$this->zend->load('Zend/Barcode');
-		//generate barcode
-		
-		/*test*/
-		
-		$filename = $this->security->sanitize_filename($this->input->post('name'), TRUE);
-		$data=array('d_name'=>$filename);
-		$logindatasave = $this->Doctor_model->save_doctors($data);
-		
-		
-		
-		$file = Zend_Barcode::draw('code128', 'image', array('text' => $logindatasave), array());
-		$code = time().$logindatasave;
-		 $store_image1 = imagepng($file, $this->config->item('documentroot')."assets/barcodes/{$code}.png");
-			
-		$this->Doctor_model->update_doctors_details($logindatasave,$code);
-		//echo '<pre>';print_r($test);
-		
-		
+	public function cardnumbers(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				
+				$data['tab']=base64_encode($this->uri->segment(3));
+				$data['card_numbers_list']=$this->Admin_model->get_card_numbers_list();
+				
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('cardprint',$data);
+				$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function cardnumberpost(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				$get_lastnumber =$this->Admin_model->get_lastnumbers();
+				//echo '<pre>';print_r($get_lastnumber);exit;
+				$post=$this->input->post();
+				$num=$get_lastnumber['card_number'];
+					for($i=1;$i<=$post['card_number'];$i++){
+						$numbers_list[]=$num+$i;
+					}
+					$data['card_num_list']=array_chunk($numbers_list, 2);
+				
+					//echo '<pre>';print_r($data);exit;
+					$path = rtrim(FCPATH,"/");
+					$file_name =date('Y_m_d_H_i_s_').$post['card_number'].'_Cardnumbers'.'.pdf';                
+					$data['page_title'] ='Cardnumbers'.'invoice'; // pass data to the view
+					$pdfFilePath = $path."/assets/cardnumbers/".$file_name;
+					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$html = $this->load->view('cardpdf', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
+					$this->load->library('pdf');
+					$pdf = $this->pdf->load();
+					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$pdf->SetDisplayMode('fullpage');
+					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->WriteHTML($html); // write the HTML into the PDF
+					$pdf->Output($pdfFilePath, 'F');
+					
+					foreach($numbers_list as $lis){
+					$save_data=array(
+					'card_number'=>$lis,
+					'count'=>$post['card_number'],
+					'status'=>1,
+					'print_status'=>1,
+					'created_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$admindetails['a_id'],
+					'pdf_name'=>$file_name
+					);
+					$this->Admin_model->save_cardnumbers($save_data);
+					}
+					redirect("/assets/cardnumbers/".$file_name);
+				//echo '<pre>';print_r($numbers_list);exit;
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
 	}
 	
 	

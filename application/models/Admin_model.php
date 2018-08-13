@@ -445,5 +445,26 @@ class Admin_model extends CI_Model
 	
 	/* out souce lab chating */
 	
+	/* card  numbers purpose*/
+	
+	public  function get_lastnumbers(){
+		$this->db->select('card_number')->from('card_numbers');
+		$this->db->order_by('c_id','desc');
+		$this->db->limit(1);
+		return $this->db->get()->row_array();
+	}
+	public  function save_cardnumbers($data){
+		$this->db->insert('card_numbers',$data);
+		return $this->db->insert_id();
+	}
+	public  function get_card_numbers_list(){
+		$this->db->select('*')->from('card_numbers');
+		$this->db->where('pdf_name IS NOT NULL');
+		$this->db->group_by('card_numbers.pdf_name');
+		return $this->db->get()->result_array();
+		
+	}
+	/* card  numbers purpose*/
+	
 
 }
