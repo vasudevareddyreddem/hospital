@@ -1,6 +1,6 @@
 /*
 SQLyog Community v11.52 (64 bit)
-MySQL - 10.1.21-MariaDB : Database - hospital
+MySQL - 10.1.32-MariaDB : Database - hospital
 *********************************************************************
 */
 
@@ -36,11 +36,11 @@ CREATE TABLE `admin` (
   `out_source` int(11) DEFAULT '0',
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=latin1;
 
 /*Data for the table `admin` */
 
-insert  into `admin`(`a_id`,`role_id`,`a_email_id`,`a_username`,`a_password`,`a_org_password`,`a_name`,`a_mobile`,`a_profile_pic`,`a_status`,`a_create_at`,`a_updated_at`,`out_source`,`create_by`) values (1,1,'admin@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Admin','8500050944','1527914484.jpg',1,'2018-02-21 11:15:43',NULL,0,NULL),(2,8,'team@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Software Team','8500050944','1523699376.png',1,NULL,NULL,0,NULL),(172,2,'vasu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Hospital Admin','8500050944',NULL,2,'2018-06-14 11:50:40','2018-07-16 15:07:16',0,NULL),(173,5,'outlab@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','out sources lab','8500050944',NULL,1,'2018-06-14 11:57:38',NULL,1,1),(174,5,'outlab2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','out sources lab2','8500050944',NULL,1,'2018-06-14 11:58:27',NULL,1,1),(175,3,'recp@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','recption','8500226782',NULL,1,'2018-06-14 12:01:47',NULL,0,NULL),(176,4,'phar@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Pharmacy','86785678678',NULL,1,'2018-06-14 12:02:33',NULL,0,NULL),(177,5,'lab@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','lab','1234567890123',NULL,1,'2018-06-14 12:03:12','2018-07-13 12:22:26',0,NULL),(178,6,'doct@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','vasudevareddy','8500050944',NULL,1,'2018-06-14 12:04:07',NULL,0,NULL),(179,6,'bbbb@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','tyyt','8019345212',NULL,1,'2018-07-13 12:00:07','2018-07-13 12:21:32',0,NULL),(180,2,'vasu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Hospital Admin','8500050944',NULL,2,'2018-07-16 15:09:04','2018-07-16 15:09:47',0,NULL),(181,2,'vasu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Hospital Admin','8500050944',NULL,1,'2018-07-16 15:09:57',NULL,0,NULL),(182,6,'',NULL,'d41d8cd98f00b204e9800998ecf8427e','','','',NULL,1,'2018-07-16 18:08:16',NULL,0,NULL),(183,6,'87@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','tyyt','675676576756',NULL,1,'2018-07-16 18:09:59','2018-07-16 18:10:30',0,NULL);
+insert  into `admin`(`a_id`,`role_id`,`a_email_id`,`a_username`,`a_password`,`a_org_password`,`a_name`,`a_mobile`,`a_profile_pic`,`a_status`,`a_create_at`,`a_updated_at`,`out_source`,`create_by`) values (1,1,'admin@gmail.com',NULL,'4c3531e9a3ee1e3e6b94aab960834451','qwerty@123!@#','Admin','8500050944','1527914484.jpg',1,'2018-02-21 11:15:43',NULL,0,NULL),(2,8,'team@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Software Team','8500050944','1523699376.png',1,NULL,NULL,0,NULL),(197,2,'skrnursinghome@gmail.com',NULL,'d73652e485e92342dd8a24fe9fd7f2f6','skrbasha','Hospital Admin','8584244976',NULL,1,'2018-07-16 14:43:17',NULL,0,NULL),(198,6,'skbasha@gmail.com',NULL,'5ff2ade1976f5c4e0b347d6f4a308743','skbasha','S K MAHABOOB BASHA','9440012629',NULL,1,'2018-07-16 15:17:44',NULL,0,NULL),(199,3,'jyothirecp@gmail.com',NULL,'261c9009c551ab7785ff22dc26289313','jyothi','JYOTHI','08584244976',NULL,1,'2018-07-16 15:24:52',NULL,0,NULL),(200,4,'pushpa@gmail.com',NULL,'4fabd1a9048486c0dd4e9ef91197e1a3','pushpa','PUSHPA','08584244976',NULL,1,'2018-07-16 15:28:20',NULL,0,NULL),(201,5,'danalakshmi@gmail.com',NULL,'21413bf454308b3d755d95e33c255610','danalakshmi','DANALAKSHMI','08584244976',NULL,1,'2018-07-16 15:31:20',NULL,0,NULL),(202,5,'lakshmiclinic@gmail.com',NULL,'1eaf7c068a250a38e3bab770053c14c3','lakshmi','LAKSHMI CLINICAL LAB','9985762646',NULL,1,'2018-07-16 15:35:51',NULL,1,1),(203,2,'arya@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','SUNRISE HOSPITAL','9550232384',NULL,1,'2018-07-18 16:10:56','2018-07-23 10:57:15',0,NULL),(204,2,'anu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','BLUEMOON HOSPITAL','9502710179',NULL,1,'2018-07-18 16:11:51','2018-07-23 10:57:55',0,NULL),(205,2,'bhavya@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','BGS HOSPTAL','8023642369',NULL,1,'2018-07-18 16:21:22','2018-07-23 10:56:22',0,NULL),(206,2,'sow@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','BLK HOSPITAL','9502710178',NULL,1,'2018-07-18 16:21:29','2018-07-23 10:58:36',0,NULL),(207,6,'priya@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Priya','8654123356',NULL,1,'2018-07-18 16:28:45',NULL,0,NULL),(208,6,'prema@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','prema','9502710179',NULL,1,'2018-07-18 16:28:45',NULL,0,NULL),(209,6,'kavya@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','kavya','9852365456',NULL,1,'2018-07-18 16:57:07',NULL,0,NULL),(210,6,'keerthi@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','keerthi','9502710179',NULL,1,'2018-07-18 16:57:24',NULL,0,NULL),(211,6,'prem@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','prem','9502710179',NULL,1,'2018-07-18 17:00:39',NULL,0,NULL),(212,6,'tarun@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Tarun','85610365655',NULL,1,'2018-07-18 17:00:41',NULL,0,NULL),(213,6,'arun@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Arun','9502710179',NULL,1,'2018-07-18 17:02:56',NULL,0,NULL),(214,6,'sid@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','Sid','9856324452',NULL,1,'2018-07-18 17:03:01',NULL,0,NULL),(215,3,'reddy@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','sai','9898989898',NULL,1,'2018-07-20 12:40:12','2018-07-25 11:41:31',0,NULL),(216,4,'venu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','venu','8328579782',NULL,1,'2018-07-20 12:42:17',NULL,0,NULL),(217,5,'raghu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','RAGHU','9581758358',NULL,1,'2018-07-20 12:43:58',NULL,0,NULL),(218,5,'ramu@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','ramu','9291622365',NULL,1,'2018-07-20 17:05:37',NULL,1,1),(219,9,'ward@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','raghu','9898989787',NULL,1,'2018-07-23 13:20:04',NULL,0,NULL),(220,3,'reddy1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','reddy','8988888787',NULL,1,'2018-07-23 14:18:19',NULL,0,NULL),(221,3,'recp9@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','recp','8500050944',NULL,1,'2018-07-23 17:04:20','2018-07-23 17:10:12',0,NULL),(222,3,'recp1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','raghu','7676767676',NULL,1,'2018-07-25 11:45:46',NULL,0,NULL),(223,3,'recp2@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','sai','9898767676',NULL,1,'2018-07-25 11:50:20',NULL,0,NULL),(224,9,'ward1@gmail.com',NULL,'e10adc3949ba59abbe56e057f20f883e','123456','ward','1234567890',NULL,1,'2018-07-27 17:50:49',NULL,0,NULL);
 
 /*Table structure for table `admin_chating` */
 
@@ -56,11 +56,9 @@ CREATE TABLE `admin_chating` (
   `type` enum('Replay','Replayed') DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `admin_chating` */
-
-insert  into `admin_chating`(`id`,`sender_id`,`comments`,`image`,`reciver_id`,`create_at`,`type`,`create_by`) values (36,1,'hi','','45','2018-06-04 12:21:29','Replay',1),(37,1,'hello','','45','2018-06-06 15:40:01','Replay',1),(38,160,'hi','','49','2018-06-07 12:27:29','Replayed',160),(39,1,'hi','','47','2018-06-11 14:38:12','Replay',1),(40,1,'hi','','47','2018-06-11 14:38:16','Replay',1),(41,1,'hello','','45','2018-06-11 14:58:57','Replayed',144);
 
 /*Table structure for table `announcements` */
 
@@ -75,11 +73,57 @@ CREATE TABLE `announcements` (
   `sent_by` int(11) DEFAULT NULL,
   `readcount` int(11) DEFAULT '1',
   PRIMARY KEY (`int_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `announcements` */
 
-insert  into `announcements`(`int_id`,`hos_id`,`comment`,`create_at`,`status`,`sent_by`,`readcount`) values (1,47,'hi','2018-06-11 14:39:44',1,1,1);
+/*Table structure for table `appointment_bidding_list` */
+
+DROP TABLE IF EXISTS `appointment_bidding_list`;
+
+CREATE TABLE `appointment_bidding_list` (
+  `b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
+  `patinet_name` varchar(250) DEFAULT NULL,
+  `age` varchar(45) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `specialist` varchar(250) DEFAULT NULL,
+  `date` varchar(250) DEFAULT NULL,
+  `time` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '0' COMMENT '0=pending;1=accept;2=reject',
+  `create_at` datetime DEFAULT NULL,
+  `coming_through` int(11) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`b_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+
+/*Data for the table `appointment_bidding_list` */
+
+insert  into `appointment_bidding_list`(`b_id`,`hos_id`,`city`,`patinet_name`,`age`,`mobile`,`department`,`specialist`,`date`,`time`,`status`,`create_at`,`coming_through`,`create_by`) values (49,60,'HYDERABAD','ramu','23','9951040423','132','135','2018-07-30 ','10:30 am',1,'2018-07-25 11:42:44',0,6),(50,61,'HYDERABAD','ramu','23','9951040423','133','136','2018-07-30  ','12:30 pm',1,'2018-07-25 11:42:44',0,6),(51,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:16:37',0,6),(52,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:16:50',0,6),(53,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:17:29',0,6),(54,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:18:09',0,6),(55,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:18:33',0,6),(56,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:18:48',0,6),(57,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:20:20',0,6),(58,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:21:21',0,6),(59,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:22:34',0,6),(60,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:23:08',0,6),(61,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:24:42',0,6),(62,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:24:46',0,6),(63,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:25:00',0,6),(64,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:25:08',0,6),(65,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:25:10',0,6),(66,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:25:17',0,6),(67,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:27:50',0,6),(68,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:28:03',0,6),(69,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:29:48',0,6),(70,57,'CHITTOOR','ramu','25','9951040423','119','123','2018-07-13','09:30 am',0,'2018-07-30 18:30:03',0,6);
+
+/*Table structure for table `appointment_users` */
+
+DROP TABLE IF EXISTS `appointment_users`;
+
+CREATE TABLE `appointment_users` (
+  `a_u_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `token` text,
+  PRIMARY KEY (`a_u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+/*Data for the table `appointment_users` */
+
+insert  into `appointment_users`(`a_u_id`,`name`,`email`,`mobile`,`password`,`org_password`,`profile_pic`,`status`,`create_at`,`token`) values (1,'vasudevareddy','vas@gmail.com','8500050944','fcea920f7412b5da7be0cf42b8c93759','1234567',NULL,1,'2018-07-18 12:16:43',NULL),(2,'vasu','vasu@gmail.com','8500050944','e10adc3949ba59abbe56e057f20f883e','123456',NULL,1,'2018-07-18 12:25:51',NULL),(3,'vasu','vasu1@gmail.com','8500050944','e10adc3949ba59abbe56e057f20f883e','123456','',1,'2018-07-18 12:26:28',NULL),(4,'vasu','vasu12@gmail.com','8500050944','25d55ad283aa400af464c76d713c07ad','12345678','',1,'2018-07-18 12:26:54',NULL),(5,'siva','siva@gmail.com','9951041040','25d55ad283aa400af464c76d713c07ad','12345678','',1,'2018-07-19 18:06:05',NULL),(6,'ramu','ramu@gmail.com','9951040423','25d55ad283aa400af464c76d713c07ad','12345678','0.218156001532542111IMG-20180725-WA0026.jpg',1,'2018-07-23 14:16:00','e3dA-AW0SZI:APA91bE_osLUiZy3Yc7gu3pP2LikMnmeOwPFQjndsk-zsJcQkNMME7Yz9J9r73wo3Qr9C557rntaPx_I2BhdPl3U5Pg4fa2zxQDVKrfBBStzF0yCfPlg3l3mbuoEOY1Li8z-6bf0kuwPv_ylqUsmV45z9KJFzS5hZA'),(7,'raghuram','raghuram7577@gmail.com','9581758358','433e9f75a647687387eb607c821c6fc8','raghu123','',1,'2018-07-25 15:13:57',NULL);
 
 /*Table structure for table `appointments` */
 
@@ -88,6 +132,7 @@ DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
   `patinet_name` varchar(250) DEFAULT NULL,
   `age` varchar(250) DEFAULT NULL,
   `mobile` varchar(45) DEFAULT NULL,
@@ -96,17 +141,17 @@ CREATE TABLE `appointments` (
   `doctor_id` varchar(45) DEFAULT NULL,
   `date` varchar(250) DEFAULT NULL,
   `time` varchar(250) DEFAULT NULL,
-  `status` int(11) DEFAULT '0' COMMENT '1= confirm, 0=pending,2 reject',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1= confirm, 0=pending,2 reject',
   `create_at` datetime DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   `coming_through` int(11) DEFAULT NULL,
-  `patient_id` int(11) DEFAULT NULL,
+  `patient_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `appointments` */
 
-insert  into `appointments`(`id`,`hos_id`,`patinet_name`,`age`,`mobile`,`department`,`specialist`,`doctor_id`,`date`,`time`,`status`,`create_at`,`create_by`,`coming_through`,`patient_id`) values (1,51,'vasudevareddy','27','85000050944','108','110','178','2018-07-13  ','09:30 am',1,'2018-07-13 16:10:26',175,1,NULL),(2,51,'reddem','27','8019345212','108','112','178','2018-07-13  ','02:30 pm',1,'2018-07-13 16:19:08',175,1,125);
+insert  into `appointments`(`id`,`hos_id`,`city`,`patinet_name`,`age`,`mobile`,`department`,`specialist`,`doctor_id`,`date`,`time`,`status`,`create_at`,`create_by`,`coming_through`,`patient_id`) values (1,59,NULL,'raghu','22','9898989898','131','134','210','2018-07-30  ','07:30 pm',1,'2018-07-23 16:39:35',220,1,0),(2,58,NULL,'vasu','26','8500050944','122','131','209','2018-07-23  ','01:00 am',1,'2018-07-23 17:09:10',221,1,0),(3,59,NULL,'ramu','22','9951040410','131','134','','2018-07-24','12:30 pm',1,'2018-07-24 11:35:56',6,0,0),(4,58,NULL,'ramu','22','9951040423','129','132','','2018-07-26','9:30 pm',1,'2018-07-24 11:37:07',6,0,0),(5,58,NULL,'ramu','25','9951040423','129','132','','2018-07-31','11:00 am',1,'2018-07-24 13:02:00',6,0,0),(6,59,NULL,'ramu','22','9951040423','131','134','','2018-07-25','09:00 am',1,'2018-07-24 17:08:46',6,0,0),(7,59,NULL,'ramu','22','9951040423','131','134','','2018-07-31 ','03:00 pm',1,'2018-07-25 11:40:04',6,0,0),(8,59,NULL,'ramu','23','9951040423','131','134','','2018-07-30 ','10:30 am',1,'2018-07-25 11:52:38',6,0,0),(9,58,NULL,'ramu','22','9951040423','130','133','','2018-07-29 ','10:00 am',1,'2018-07-27 11:21:22',6,0,0),(10,61,NULL,'bhavya','25','8500050944','126','124','213','2018-07-31  ','07:30 am',1,'2018-07-30 14:38:13',223,1,0);
 
 /*Table structure for table `bidding_test` */
 
@@ -125,11 +170,31 @@ CREATE TABLE `bidding_test` (
   `send_by` int(11) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
 
 /*Data for the table `bidding_test` */
 
-insert  into `bidding_test`(`id`,`b_id`,`test_id`,`p_l_t_id`,`lab_id`,`status`,`create_at`,`amount`,`duration`,`send_by`,`create_by`) values (97,181,97,172,173,4,'2018-06-14 12:54:35','140',' 10 min',173,177),(102,181,100,174,173,4,'2018-06-14 12:54:35','120','10',173,177),(104,179,98,169,173,4,'2018-06-14 15:21:32','150','555',173,177),(106,179,99,170,173,4,'2018-06-14 15:21:32','200','120',173,177),(113,181,98,173,173,1,'2018-06-15 16:36:32',NULL,NULL,NULL,177),(114,181,98,173,174,1,'2018-06-15 16:36:32',NULL,NULL,NULL,177),(115,181,100,174,173,1,'2018-06-15 16:36:32',NULL,NULL,NULL,177),(116,181,100,174,174,1,'2018-06-15 16:36:32',NULL,NULL,NULL,177);
+insert  into `bidding_test`(`id`,`b_id`,`test_id`,`p_l_t_id`,`lab_id`,`status`,`create_at`,`amount`,`duration`,`send_by`,`create_by`) values (122,231,118,201,202,1,'2018-07-16 16:40:06',NULL,NULL,NULL,201);
+
+/*Table structure for table `card_numbers` */
+
+DROP TABLE IF EXISTS `card_numbers`;
+
+CREATE TABLE `card_numbers` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_number` varchar(250) DEFAULT NULL,
+  `count` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `print_status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `pdf_name` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+/*Data for the table `card_numbers` */
+
+insert  into `card_numbers`(`c_id`,`card_number`,`count`,`status`,`print_status`,`created_at`,`created_by`,`pdf_name`) values (1,'450054021000',NULL,1,1,'2018-08-11 18:10:43',0,NULL),(4,'450054021001','2',1,1,'2018-08-13 10:53:57',1,'2018_08_13_10_53_57_2_Cardnumbers.pdf'),(5,'450054021002','2',1,1,'2018-08-13 10:53:57',1,'2018_08_13_10_53_57_2_Cardnumbers.pdf'),(9,'450054021003','3',1,1,'2018-08-13 11:00:19',1,'2018_08_13_11_00_18_3_Cardnumbers.pdf'),(10,'450054021004','3',1,1,'2018-08-13 11:00:19',1,'2018_08_13_11_00_18_3_Cardnumbers.pdf'),(11,'450054021005','3',1,1,'2018-08-13 11:00:19',1,'2018_08_13_11_00_18_3_Cardnumbers.pdf'),(12,'450054021006','2',1,1,'2018-08-13 11:04:53',1,'2018_08_13_11_04_52_2_Cardnumbers.pdf'),(13,'450054021007','2',1,1,'2018-08-13 11:04:53',1,'2018_08_13_11_04_52_2_Cardnumbers.pdf');
 
 /*Table structure for table `coupon_codes` */
 
@@ -146,11 +211,11 @@ CREATE TABLE `coupon_codes` (
   `status` int(11) DEFAULT '1',
   `updated_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `coupon_codes` */
 
-insert  into `coupon_codes`(`id`,`hospital_id`,`coupon_code`,`type`,`percentage_amount`,`create_at`,`create_by`,`status`,`updated_time`) values (25,51,'raghu','Percentage','25','2018-06-04 12:18:48',1,1,'2018-07-13 12:56:28'),(27,51,'arya','Percentage','25','2018-06-11 14:28:46',1,0,'2018-07-13 12:55:54'),(28,51,'testing','Percentage','10','2018-07-13 12:42:20',1,1,'2018-07-13 12:53:54');
+insert  into `coupon_codes`(`id`,`hospital_id`,`coupon_code`,`type`,`percentage_amount`,`create_at`,`create_by`,`status`,`updated_time`) values (1,59,'vasu','Percentage','10','2018-07-30 14:50:00',1,1,NULL);
 
 /*Table structure for table `customers` */
 
@@ -224,11 +289,11 @@ CREATE TABLE `hospital` (
   `out_source_lab` int(11) DEFAULT '0',
   `barcode` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`hos_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 /*Data for the table `hospital` */
 
-insert  into `hospital`(`hos_id`,`a_id`,`hos_con_number`,`reschedule_date`,`hos_email_id`,`hos_representative`,`hos_rep_contact`,`mob_country_code`,`hos_rep_mobile`,`hos_rep_email`,`hos_rep_nationali_id`,`hos_rep_add1`,`hos_rep_add2`,`hos_rep_zipcode`,`hos_rep_city`,`hos_rep_state`,`hos_rep_country`,`hos_bas_name`,`hos_bas_contact`,`hos_bas_email`,`hos_bas_nationali_id`,`hos_bas_add1`,`hos_bas_add2`,`hos_bas_zipcode`,`hos_bas_city`,`hos_bas_state`,`hos_bas_country`,`hos_bas_document`,`hos_bas_logo`,`bank_holder_name`,`bank_acc_no`,`bank_name`,`bank_ifsc`,`bank_document`,`kyc_doc1`,`kyc_doc2`,`kyc_doc3`,`kyc_file1`,`kyc_file2`,`kyc_file3`,`hos_status`,`hos_created`,`hos_updated_at`,`hos_curent_login`,`hos_undo`,`out_source_lab`,`barcode`) values (51,172,'8500050944',NULL,'vasu@gmail.com','Representative','8500050944','+91','8500050944','vasu@gmail.com','12345678999','hyderabad','hyderabad','516172','kadapa','Andhra Pradesh','india','vaasu Hospital','8500050944','vaasuhospital@gmail.com','1234567897','kafdapa','kadapa','516172','kadapa','Andhra Pradesh','india','',NULL,'vasudevareddy','32473655713','SBI','SBIN0002671','','another detals purpose','','','1528957609.docx','','',0,'2018-06-14 11:50:40','2018-07-16 15:07:16',1,1,0,'1528957240172.png'),(52,180,'8500050944',NULL,'vasu@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-16 15:09:04','2018-07-16 15:09:47',0,1,0,'1531733944180.png'),(53,181,'8500050944',NULL,'vasu@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'2018-07-16 15:09:57','2018-07-16 15:09:57',1,0,0,'1531733997181.png');
+insert  into `hospital`(`hos_id`,`a_id`,`hos_con_number`,`reschedule_date`,`hos_email_id`,`hos_representative`,`hos_rep_contact`,`mob_country_code`,`hos_rep_mobile`,`hos_rep_email`,`hos_rep_nationali_id`,`hos_rep_add1`,`hos_rep_add2`,`hos_rep_zipcode`,`hos_rep_city`,`hos_rep_state`,`hos_rep_country`,`hos_bas_name`,`hos_bas_contact`,`hos_bas_email`,`hos_bas_nationali_id`,`hos_bas_add1`,`hos_bas_add2`,`hos_bas_zipcode`,`hos_bas_city`,`hos_bas_state`,`hos_bas_country`,`hos_bas_document`,`hos_bas_logo`,`bank_holder_name`,`bank_acc_no`,`bank_name`,`bank_ifsc`,`bank_document`,`kyc_doc1`,`kyc_doc2`,`kyc_doc3`,`kyc_file1`,`kyc_file2`,`kyc_file3`,`hos_status`,`hos_created`,`hos_updated_at`,`hos_curent_login`,`hos_undo`,`out_source_lab`,`barcode`) values (57,197,'8584244976',NULL,'skrnursinghome@gmail.com','S.K.R HOSPITAL','08584244976','+91','8584244976','skrnursinghome@gmail.com','884937171370','D.NO.2-1715/1, S.V.Deluxe Road, Piler-517214, chittor(dt),A.P.','','517214','Chittoor','Andhra Pradesh','INDIA','SKR HOSPITAL','08584244976','skrnursinghome@gmail.com','884937171370','D.NO.2-1715/1, S.V.Deluxe Road, Piler-517214, chittor(dt),A.P.','','517214','CHITTOOR','Andhra Pradesh','INDIA','',NULL,'SKR HOSPITAL','044111100001398','ANDHRA BANK','ANDB0000441','','PANCARD','','','1531733864.docx','','',1,'2018-07-16 14:43:17','2018-07-16 15:07:43',0,0,0,'1531732397197.png'),(58,203,'9550252384','5 days','arya@gmail.com','Arya','04512488575','+91','9550232384','arya@gmail.com','856475265987','7-45','KPHB COLONY','502245','Hyderabad','Telangana','India','SUNRISE HOSPITAL','9550232384','arya@gmail.com','856974235623','7-57','KPHB COLONY','502458','HYDERABAD','Telangana','India','',NULL,'Arya','952241234567','SBI','asde1234568','','ade','bce','abc','1531910887.docx','','',1,'2018-07-18 16:10:57','2018-07-23 10:57:15',0,0,0,'1531910457203.png'),(59,204,'9502710179','4 days','anu@gmail.com','Anu','01234567894','+91','9502710179','anu@gmail.com','12345678912345','nagole','nagole','500035','warangal','Telangana','India','BLUEMOON HOSPITAL','9502710179','anu@gmail.com','12345678912345','nagole','nagole','500035','HYDERABAD','Telangana','India','',NULL,'anu','123456789','SBI','sbi12345678','','anu','','','1531910888.docx','','',1,'2018-07-18 16:11:51','2018-07-23 10:57:55',0,0,0,'1531910511204.png'),(60,205,'8019518339','2 days','bhavya@gmail.com','Bhavya','02147125587','+91','8019563771','bhavya@gmail.com','854213785412','4-25','SR NAGAR','5022474','Guntur','Andhra Pradesh','India','BGS HOSPTAL','8023642369','bhavya@gmail.com','89526652623','4-52','SR NGAR','5022481','HYDERABAD','Andhra Pradesh','India','',NULL,'Bhavya','89652323226','ICICI','sder1225553','','bhavya','fgh','klm','1531911287.docx','','',1,'2018-07-18 16:21:22','2018-07-23 10:56:22',0,0,0,'1531911082205.png'),(61,206,'9502710178','5 days','sow@gmail.com','sow','12356475555','+91','9502710178','sow@gmail.com','12345689745','kphb','kphb','500032','karimnagar','Telangana','India','BLK HOSPITAL','9502710178','sow@gmail.com','12345678912333','kphb','kphb','500032','HYDERABAD','Telangana','India','',NULL,'sow','5678912325555647','sbi','sbi78945612','','sow','','','1531911278.docx','','',1,'2018-07-18 16:21:29','2018-07-23 10:58:36',0,0,0,'1531911089206.png');
 
 /*Table structure for table `hospital_admin_chating` */
 
@@ -246,9 +311,11 @@ CREATE TABLE `hospital_admin_chating` (
   `updated_by` datetime DEFAULT NULL,
   `hos_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `hospital_admin_chating` */
+
+insert  into `hospital_admin_chating`(`id`,`user_id`,`replay_user_id`,`from`,`comment`,`image`,`type`,`create_at`,`updated_by`,`hos_id`) values (1,215,203,203,'hiii','','Replayed','2018-07-26 17:50:11','2018-07-26 17:50:11',58),(2,215,203,203,'hello','','Replayed','2018-07-26 17:50:28','2018-07-26 17:50:28',NULL);
 
 /*Table structure for table `hospital_announcements` */
 
@@ -263,11 +330,9 @@ CREATE TABLE `hospital_announcements` (
   `sent_by` int(11) DEFAULT NULL,
   `readcount` int(11) DEFAULT '1',
   PRIMARY KEY (`int_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `hospital_announcements` */
-
-insert  into `hospital_announcements`(`int_id`,`res_id`,`comment`,`create_at`,`status`,`sent_by`,`readcount`) values (1,177,'hiiii ','2018-07-16 10:50:52',1,172,1),(2,176,'hiiii ','2018-07-16 10:50:52',1,172,1),(3,175,'hiiii ','2018-07-16 10:50:52',1,172,1),(4,179,'hiiii ','2018-07-16 10:50:52',1,172,1),(5,178,'hiiii ','2018-07-16 10:50:52',1,172,1),(6,182,'ghdfghdfgh','2018-07-17 14:55:47',1,181,1),(7,183,'ghdfghdfgh','2018-07-17 14:55:47',1,181,1);
 
 /*Table structure for table `investigation_patient_list` */
 
@@ -290,11 +355,11 @@ CREATE TABLE `investigation_patient_list` (
   `create_by` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 /*Data for the table `investigation_patient_list` */
 
-insert  into `investigation_patient_list`(`id`,`p_id`,`b_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (66,115,179,'lab','','','6 hours','Medium','','','diagnois','heart','2018-06-14 12:18:46',178,'2018-06-14'),(67,117,181,'lab','','','4 hours','Medium','','','diagnois','heart','2018-06-14 12:20:31',178,'2018-06-14');
+insert  into `investigation_patient_list`(`id`,`p_id`,`b_id`,`investigation_type`,`countrycode`,`contact_number`,`frequency`,`priority`,`investigation_formdate`,`investigation_todate`,`associate_diagnosis`,`associate_problems`,`create_at`,`create_by`,`date`) values (78,134,231,'lab','','','6 hours','Medium','','','','','2018-07-16 16:37:25',198,'2018-07-16');
 
 /*Table structure for table `lab_detailes` */
 
@@ -338,11 +403,11 @@ CREATE TABLE `lab_test_list` (
   `update_by` datetime DEFAULT NULL,
   `out_source` int(11) DEFAULT '0',
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
 
 /*Data for the table `lab_test_list` */
 
-insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`test_type`,`type`,`modality`,`duration`,`amuont`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`,`out_source`) values (95,51,'blood',39,'Lab','','10 min','120','Short form','Description','','2018-06-14 12:06:29',1,177,NULL,0),(96,51,'heart check',34,'Lab','','2 hrs','5000','Short form','Description','','2018-06-14 12:06:48',1,177,NULL,0),(97,0,'heart check',39,'Lab','','20 min','120','Short form','Description','','2018-06-14 12:07:27',1,173,NULL,1),(98,0,'cbc test',39,'Lab','','10 min','563','short','desc','','2018-06-14 12:07:50',1,173,NULL,1),(99,0,'heart check',39,'Lab','','20 min','120','Short form','desc','','2018-06-14 12:08:33',1,174,NULL,1),(100,0,'cbc test',39,'Lab','','10 min','5000','Short form','Description','','2018-06-14 12:08:53',1,174,NULL,1),(101,51,'tsting',34,'Radiology','oultrasound','10','20','110','Description','','2018-06-25 10:43:05',1,177,NULL,0);
+insert  into `lab_test_list`(`t_id`,`hos_id`,`t_name`,`test_type`,`type`,`modality`,`duration`,`amuont`,`t_short_form`,`t_description`,`t_department`,`create_at`,`status`,`create_by`,`update_by`,`out_source`) values (117,57,'serum bilurubin total ',72,'Lab','','30 ','150','','','','2018-07-16 16:20:06',1,201,NULL,0),(118,58,'ELBOW',57,'Radiology','MRI','22','120','','','','2018-07-20 15:07:35',1,217,NULL,0),(119,58,'FACE',53,'Radiology','CT3D','22','125','','','','2018-07-20 15:08:43',1,217,NULL,0),(120,58,'Iron Studies',69,'Lab','','15','100','','','','2018-07-20 15:09:57',1,217,NULL,0),(121,58,'Vitamin B12',68,'Lab','','30','100','','','','2018-07-20 15:11:50',1,217,NULL,0),(122,0,'Calcium',77,'Lab','','10','120','','','','2018-07-20 17:06:53',1,218,NULL,1),(123,0,'Kidney Function Test',76,'Lab','','15','125','','','','2018-07-20 17:08:02',1,218,NULL,1),(124,0,'NECK',53,'Radiology','ULTRASOUND','15','200','','','','2018-07-20 17:09:06',1,218,NULL,1);
 
 /*Table structure for table `lab_test_type` */
 
@@ -357,11 +422,11 @@ CREATE TABLE `lab_test_type` (
   `created_by` int(11) DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 /*Data for the table `lab_test_type` */
 
-insert  into `lab_test_type`(`id`,`type_name`,`type`,`create_at`,`status`,`created_by`,`updated_time`) values (34,'heart','Lab','2018-06-04 11:04:32',1,1,NULL),(39,'CBC','Lab','2018-06-04 17:34:07',1,1,NULL);
+insert  into `lab_test_type`(`id`,`type_name`,`type`,`create_at`,`status`,`created_by`,`updated_time`) values (53,'HEAD AND NECK','Radiology','2018-07-16 14:54:20',1,1,NULL),(54,'BREAST','Radiology','2018-07-16 14:54:40',1,1,NULL),(55,'ABDOMEN','Radiology','2018-07-16 14:56:58',1,1,NULL),(56,'PELVIS','Radiology','2018-07-16 14:57:15',1,1,NULL),(57,'UPPER EXTERMITY','Radiology','2018-07-16 14:57:53',1,1,NULL),(58,'LOWER EXTERMITY','Radiology','2018-07-16 14:58:06',1,1,NULL),(59,'FINE NEEDLE ASPIRATION','Radiology','2018-07-16 14:58:42',1,1,NULL),(60,'SPINE','Radiology','2018-07-16 14:59:07',1,1,NULL),(61,'CHEST','Radiology','2018-07-16 14:59:17',1,1,NULL),(62,'COMBINATIONS EXAMINATIONS','Radiology','2018-07-16 14:59:58',1,1,NULL),(63,'CONTRAST','Radiology','2018-07-16 15:00:12',1,1,NULL),(64,'CT ANGIOGRAPHY','Radiology','2018-07-16 15:01:03',1,1,NULL),(65,'SPINE MYELOGRAM','Radiology','2018-07-16 15:02:00',1,1,NULL),(66,'BARIUM EXAMINATIONS','Radiology','2018-07-16 15:02:20',1,1,NULL),(67,'EXTREMITIES VENOGRAM','Radiology','2018-07-16 15:03:23',1,1,NULL),(68,'OTHERS','Radiology','2018-07-16 15:03:47',1,1,NULL),(69,'ANAEMIA','Lab','2018-07-16 15:16:39',1,1,NULL),(70,'HYPERTENSION','Lab','2018-07-16 15:17:01',1,1,NULL),(71,'ALLERGY','Lab','2018-07-16 15:17:20',1,1,NULL),(72,'JAUNDICE','Lab','2018-07-16 15:17:31',1,1,NULL),(73,'FEVER','Lab','2018-07-16 15:18:20',1,1,NULL),(74,'OBESITY','Lab','2018-07-16 15:18:49',1,1,NULL),(75,'THYROID','Lab','2018-07-16 15:19:20',1,1,NULL),(76,'KIDNEY','Lab','2018-07-16 15:20:06',1,1,NULL),(77,'BONE','Lab','2018-07-20 15:49:46',1,1,NULL),(78,'VITAMINS','Lab','2018-07-20 15:50:44',1,1,NULL);
 
 /*Table structure for table `manual_prescription_list` */
 
@@ -381,11 +446,9 @@ CREATE TABLE `manual_prescription_list` (
   `status` int(11) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 /*Data for the table `manual_prescription_list` */
-
-insert  into `manual_prescription_list`(`id`,`hos_id`,`p_id`,`expirydate`,`medicine_name`,`dosage`,`usage_instructions`,`qty`,`amount`,`create_at`,`status`,`create_by`) values (1,'51',1,NULL,'22','22',NULL,'2222','22','2018-06-25 15:40:20',1,176),(2,'51',1,NULL,'11','11',NULL,'11','11','2018-06-25 15:40:20',1,176),(3,'51',2,NULL,'crosine','100 mg',NULL,'12','120','2018-06-25 15:49:03',1,176),(4,'51',3,NULL,'hjfghj','100 mg',NULL,'7','11','2018-06-25 15:53:11',1,176),(5,'51',4,NULL,'crosine','120 ml','like  that','20','2580','2018-06-25 16:14:02',1,176),(6,'51',4,NULL,'test','100mg','test','12','120','2018-06-25 16:14:02',1,176),(7,'51',5,NULL,'parasitemal',NULL,'','','','2018-07-06 18:25:52',1,176),(8,'51',5,NULL,'parasitemal',NULL,'','','','2018-07-06 18:25:52',1,176),(9,'51',6,NULL,'parasitemal',NULL,'','22','200','2018-07-06 18:26:16',1,176),(10,'51',6,NULL,'crosine',NULL,'','12','120','2018-07-06 18:26:16',1,176),(11,'51',7,NULL,'crosine',NULL,'klhkl','5','120','2018-07-10 17:36:47',1,176),(12,'51',7,NULL,'parasitemal',NULL,'lkl','10','110','2018-07-10 17:36:47',1,176),(13,'51',8,NULL,'crosine',NULL,'7','10','120','2018-07-10 17:37:19',1,176),(14,'51',9,NULL,'parasitemal',NULL,'','10','130','2018-07-10 17:37:48',1,176),(15,'51',9,NULL,'crosine',NULL,'','10','120','2018-07-10 17:37:48',1,176),(16,'51',12,'11-11-2018','crosine',NULL,'10','10','120','2018-07-10 18:17:44',1,176),(17,'51',12,'',NULL,NULL,'','','','2018-07-10 18:17:44',1,176);
 
 /*Table structure for table `medicine_list` */
 
@@ -411,11 +474,11 @@ CREATE TABLE `medicine_list` (
   `added_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicine_list` */
 
-insert  into `medicine_list`(`id`,`hos_id`,`hsn`,`othercode`,`medicine_name`,`medicine_type`,`expiry_date`,`dosage`,`qty`,`amount`,`total_amount`,`sgst`,`cgst`,`other`,`create_at`,`status`,`added_by`,`updated_at`) values (70,51,'1','11','crosine','this','12/12/2020','250mg','443','10','10.3','1','2',NULL,'2018-06-14 12:05:04',1,176,'2018-06-25 11:55:37'),(71,51,'2','22','parasitemal','like','12/12/2020','100mg','360','10','11','5','5',NULL,'2018-06-14 12:05:48',1,176,'2018-06-25 11:55:36'),(72,51,'111','11','11','11','12/12/2020','11','111','11','13.2','10','10',NULL,'2018-06-25 11:44:53',1,176,'2018-06-25 11:55:39'),(73,51,'22','222','222','test','12/12/2020','22','22','2','2.08','2','2',NULL,'2018-06-25 11:44:53',1,176,'2018-06-25 11:55:40'),(74,51,'','','','','','','','','0','','',NULL,'2018-06-25 14:23:44',1,176,NULL);
+insert  into `medicine_list`(`id`,`hos_id`,`hsn`,`othercode`,`medicine_name`,`medicine_type`,`expiry_date`,`dosage`,`qty`,`amount`,`total_amount`,`sgst`,`cgst`,`other`,`create_at`,`status`,`added_by`,`updated_at`) values (85,57,'','','','','','','','','0','','',NULL,'2018-07-16 16:03:29',1,200,NULL),(86,58,'11','GG','CROCIN','TABLET','2022','150G','25','5','5.2','2','2',NULL,'2018-07-20 15:15:51',1,216,NULL),(87,58,'03','22','PRACTEMOL','TABLET','2022','250','50','5','5.2','2','2',NULL,'2018-07-20 15:18:57',1,216,NULL),(88,58,'09','12','Robitussin','syrup','2024','00','10','25','26','2','2',NULL,'2018-07-20 15:31:36',1,216,NULL),(89,58,'10','13',' Delsym','syrup','2022','','87','30','31.2','2','2',NULL,'2018-07-20 15:31:36',1,216,'2018-07-20 16:47:10');
 
 /*Table structure for table `medicine_name` */
 
@@ -429,11 +492,11 @@ CREATE TABLE `medicine_name` (
   `create_at` datetime DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicine_name` */
 
-insert  into `medicine_name`(`id`,`hos_id`,`medicine_name`,`added_by`,`create_at`,`status`) values (45,51,'crosine',176,'2018-06-14 12:05:04',1),(46,51,'parasitemal',176,'2018-06-14 12:05:48',1),(47,51,'11',176,'2018-06-25 11:44:53',1),(48,51,'222',176,'2018-06-25 11:44:53',1),(49,51,'',176,'2018-06-25 14:23:44',1);
+insert  into `medicine_name`(`id`,`hos_id`,`medicine_name`,`added_by`,`create_at`,`status`) values (60,57,'',200,'2018-07-16 16:03:29',1),(61,58,'CROCIN',216,'2018-07-20 15:15:51',1),(62,58,'PRACTEMOL',216,'2018-07-20 15:18:57',1),(63,58,'Robitussin',216,'2018-07-20 15:31:36',1),(64,58,' Delsym',216,'2018-07-20 15:31:36',1);
 
 /*Table structure for table `notifications` */
 
@@ -502,11 +565,9 @@ CREATE TABLE `out_source_lab_test_lists` (
   `create_at` datetime DEFAULT NULL,
   `create_BY` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `out_source_lab_test_lists` */
-
-insert  into `out_source_lab_test_lists`(`id`,`lab_id`,`p_l_t_id`,`p_id`,`b_id`,`status`,`create_at`,`create_BY`) values (67,173,174,117,181,0,'2018-06-14 12:59:41',177),(68,173,172,117,181,0,'2018-06-14 13:05:59',177),(69,173,169,115,179,0,'2018-06-14 15:22:02',177),(70,173,170,115,179,0,'2018-06-14 15:22:04',177),(72,173,97,123,199,1,'2018-07-06 17:47:38',177),(73,173,97,123,199,1,'2018-07-06 18:03:05',177),(74,173,97,123,199,1,'2018-07-06 18:04:08',177);
 
 /*Table structure for table `patient_billing` */
 
@@ -515,6 +576,7 @@ DROP TABLE IF EXISTS `patient_billing`;
 CREATE TABLE `patient_billing` (
   `b_id` int(11) NOT NULL AUTO_INCREMENT,
   `p_id` int(11) DEFAULT NULL,
+  `patient_type` int(11) DEFAULT '1' COMMENT '1=ip;0=op',
   `visit_no` varchar(250) DEFAULT NULL,
   `visit_desc` varchar(250) DEFAULT NULL,
   `service_type` varchar(250) DEFAULT NULL,
@@ -549,11 +611,11 @@ CREATE TABLE `patient_billing` (
   `coupon_code_amount` varchar(250) DEFAULT NULL,
   `with_out_coupon_code` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`b_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_billing` */
 
-insert  into `patient_billing`(`b_id`,`p_id`,`visit_no`,`visit_desc`,`service_type`,`service`,`visit_type`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`specialist_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`,`report_completed`,`sheet_prescription`,`sheet_prescription_file`,`coupon_code`,`coupon_code_amount`,`with_out_coupon_code`) values (179,115,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','50000','vasudevareddy','108','178',NULL,1,'2018-06-14 12:10:06','2018-06-14 12:11:27',1,0,0,2,'new',178,NULL,0,NULL,1,0,NULL,NULL,NULL,NULL),(180,116,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'50000','Cash','50000','vasudevareddy','108','178',NULL,1,'2018-06-14 12:14:14','2018-06-14 12:14:29',1,0,0,1,'new',178,'Cash Payment',176,'2018-06-14 12:21:17',0,0,NULL,NULL,NULL,NULL),(181,117,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'150','Cash','200','vasu',NULL,'178',NULL,1,'2018-06-14 12:15:32','2018-06-14 12:15:54',1,0,0,0,'new',178,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(182,117,'123','testing','fghdfgh','','fghdfgh','','','','767','Cash','6756','6756','108','178',NULL,1,'2018-06-15 16:22:51','2018-06-15 16:23:11',1,178,178,3,'reschedule',178,'Swipe',176,'2018-07-12 17:28:31',0,0,NULL,NULL,NULL,NULL),(183,118,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'675677','Cash','6767','6767','108','178',NULL,1,'2018-06-23 10:56:06','2018-06-23 11:22:37',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(184,119,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'675677','Cash','6767','6767','108','178',NULL,1,'2018-06-23 11:28:11','2018-06-23 11:28:38',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(185,119,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-06-23 11:34:00',NULL,0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(187,119,'23434','fgdffdg','ghdfghg',NULL,'ip',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'108','178',NULL,0,'2018-06-23 13:01:38',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(188,119,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'675677','Cash','6767','6767','108','178',NULL,1,'2018-06-23 12:55:13','2018-06-23 12:55:25',0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(189,120,'7657','67567','67567',NULL,'6756756',NULL,NULL,NULL,'250','Cash','667567','tyuytu','108','178',NULL,1,'2018-06-23 13:58:39','2018-06-23 14:06:46',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(190,120,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,0,NULL,NULL,0,NULL,NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(191,120,'23434','fgdffdg','ghdfghg',NULL,'ip',NULL,NULL,NULL,'250','Cash','6767','vasu','108','178',NULL,1,'2018-06-23 14:27:31','2018-06-23 14:27:40',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(192,121,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','',0,0,'2018-06-23 17:13:18',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(193,121,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',110,1,'2018-06-25 10:23:30','2018-06-25 10:26:02',0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,1,NULL,NULL,NULL,NULL),(194,122,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',110,1,'2018-06-25 12:43:36','2018-06-25 12:46:22',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(195,122,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',112,1,'2018-06-25 13:02:34','2018-06-25 13:03:01',0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(196,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',110,1,'2018-07-06 17:19:57','2018-07-06 17:20:21',1,0,0,1,'new',178,'Swipe',176,'2018-07-06 18:14:08',0,0,NULL,NULL,NULL,NULL),(197,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-06 17:22:18',NULL,0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(198,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-06 17:25:17',NULL,0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(199,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',110,1,'2018-07-06 17:27:57','2018-07-06 17:28:17',1,0,0,2,'Repeated',178,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(200,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','500','vasu','108','178',110,1,'2018-07-06 17:33:40','2018-07-06 17:34:01',0,NULL,NULL,0,'Repeated',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(201,123,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'250','Cash','6767','vasudevareddy','108','178',110,1,'2018-07-06 17:34:52','2018-07-06 17:35:08',0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(202,125,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-13 17:19:27',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(203,125,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-13 17:27:02',NULL,0,NULL,NULL,0,'Repeated',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(204,125,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-13 17:27:07',NULL,0,NULL,NULL,0,'Repeated',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL);
+insert  into `patient_billing`(`b_id`,`p_id`,`patient_type`,`visit_no`,`visit_desc`,`service_type`,`service`,`visit_type`,`qty`,`amount`,`bill`,`patient_payer_deposit_amount`,`payment_mode`,`bill_amount`,`received_form`,`treatment_id`,`doct_id`,`specialist_id`,`completed`,`create_at`,`updated_at`,`doctor_status`,`assign_doctor_to`,`assign_doctor_by`,`completed_type`,`type`,`create_by`,`medicine_payment_mode`,`payment_updated_by`,`payment_createed_by`,`report_completed`,`sheet_prescription`,`sheet_prescription_file`,`coupon_code`,`coupon_code_amount`,`with_out_coupon_code`) values (231,134,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','500','FATHER','119','198',123,1,'2018-07-16 16:23:49','2018-07-16 16:30:19',1,0,0,2,'new',198,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(232,134,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','500','FATHER','119','198',123,1,'2018-07-16 16:32:10','2018-07-16 16:32:45',1,0,0,1,'Repeated',198,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(233,135,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','500','raghu','121','208',128,1,'2018-07-26 12:21:30','2018-07-26 12:22:24',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(234,136,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Cash','500','RAGHU','129','207',132,1,'2018-07-26 17:46:29','2018-07-26 17:47:16',1,0,0,1,'new',207,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(236,138,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-30 14:33:56',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(237,139,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-30 15:53:13',NULL,0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(238,138,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2018-07-30 15:53:33',NULL,0,NULL,NULL,0,'Reschedule',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(239,138,1,'23','323','3232',NULL,'323',NULL,NULL,NULL,'500','Cash','500','vasu','124','211',125,1,'2018-07-30 15:56:34','2018-07-30 15:57:01',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(240,140,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Online','500','vas','125','212',126,1,'2018-07-31 14:29:06','2018-07-31 14:29:40',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL),(241,141,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'500','Online','500','vas','124','211',125,1,'2018-08-13 10:16:33','2018-08-13 10:17:09',0,NULL,NULL,0,'new',NULL,NULL,0,NULL,0,0,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `patient_lab_reports` */
 
@@ -572,11 +634,9 @@ CREATE TABLE `patient_lab_reports` (
   `status` int(11) DEFAULT '1',
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_lab_reports` */
-
-insert  into `patient_lab_reports`(`id`,`test_id`,`p_id`,`b_id`,`hos_id`,`problem`,`symptoms`,`image`,`create_at`,`status`,`create_by`) values (30,'95',115,179,51,'like that','vaasudevareddy','1528959158.docx','2018-06-14 12:22:38',1,177),(31,'100',117,181,0,'cbc test','serious','1528961466.docx','2018-06-14 13:01:06',1,173),(32,'97',117,181,0,'cbc test','tng','1528965731.docx','2018-06-14 14:12:10',1,173),(33,'95',117,181,51,'like that','vaasudevareddy','1528966189.docx','2018-06-14 14:19:49',1,177),(34,'98',115,179,0,'heart','tng','1528969959.docx','2018-06-14 15:22:38',1,173),(35,'99',115,179,0,'cbc test','tng','1528969968.docx','2018-06-14 15:22:48',1,173),(38,'97',123,199,0,'test','test','1530880466.docx','2018-07-06 18:04:25',1,173);
 
 /*Table structure for table `patient_lab_test_list` */
 
@@ -594,11 +654,11 @@ CREATE TABLE `patient_lab_test_list` (
   `report_completed` varchar(45) DEFAULT '0',
   `out_source` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_lab_test_list` */
 
-insert  into `patient_lab_test_list`(`id`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`,`report_completed`,`out_source`) values (168,115,179,95,'2018-06-14 12:18:29','2018-06-14',178,1,'1',0),(169,115,179,98,'2018-06-14 12:18:29','2018-06-14',178,1,'1',1),(170,115,179,99,'2018-06-14 12:18:29','2018-06-14',178,1,'1',1),(171,117,181,95,'2018-06-14 12:20:22','2018-06-14',178,1,'1',0),(172,117,181,97,'2018-06-14 12:20:22','2018-06-14',178,1,'1',1),(173,117,181,98,'2018-06-14 12:20:22','2018-06-14',178,1,'0',1),(174,117,181,100,'2018-06-14 12:20:22','2018-06-14',178,1,'1',1),(175,123,199,95,'2018-07-06 17:29:49','2018-07-06',178,1,'0',0),(176,123,199,97,'2018-07-06 17:29:49','2018-07-06',178,1,'1',1),(177,123,199,98,'2018-07-06 17:29:49','2018-07-06',178,1,'0',1),(178,123,199,99,'2018-07-06 17:29:49','2018-07-06',178,1,'0',1),(179,123,199,100,'2018-07-06 17:29:49','2018-07-06',178,1,'0',1);
+insert  into `patient_lab_test_list`(`id`,`p_id`,`b_id`,`test_id`,`create_at`,`date`,`create_by`,`status`,`report_completed`,`out_source`) values (199,134,231,117,'2018-07-16 16:35:24','2018-07-16',198,1,'0',0),(200,134,231,117,'2018-07-16 16:36:53','2018-07-16',198,1,'0',0),(201,134,231,118,'2018-07-16 16:37:15','2018-07-16',198,1,'0',1),(202,134,232,117,'2018-07-16 17:06:04','2018-07-16',198,1,'0',0);
 
 /*Table structure for table `patient_medicine_list` */
 
@@ -630,11 +690,11 @@ CREATE TABLE `patient_medicine_list` (
   `edited_by` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   PRIMARY KEY (`m_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_medicine_list` */
 
-insert  into `patient_medicine_list`(`m_id`,`p_id`,`b_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`org_amount`,`units`,`comments`,`create_at`,`date`,`create_by`,`edit_reason`,`edited`,`edited_by`,`amount`) values (52,116,180,'Generic','crosine','Yes','Chronic','250mg','Mouth','6 hours','test','','','20','200','mg','test','2018-06-14 12:17:19','2018-06-14',178,'amount changed',1,176,10),(53,116,180,'Generic','parasitemal','Yes','Chronic','100mg','Mouth','6 hours','test','','','10','110','tablet','test','2018-06-14 12:17:42','2018-06-14',178,NULL,0,NULL,11),(54,117,182,'Generic','crosine','Yes','Chronic','250mg','Mouth','6 hours','test','','','10','103','pound','test','2018-06-15 16:28:23','2018-06-15',178,NULL,0,NULL,10),(55,122,194,'','parasitemal','','','100mg','','15 hours','yutyu','','','10','110','','','2018-06-26 15:35:55','2018-06-26',178,NULL,0,NULL,11),(56,123,196,'','crosine','','','250mg','','18 hours','g','','','12','123.6','','','2018-07-06 17:21:51','2018-07-06',178,NULL,0,NULL,10);
+insert  into `patient_medicine_list`(`m_id`,`p_id`,`b_id`,`type_of_medicine`,`medicine_name`,`substitute_name`,`condition`,`dosage`,`route`,`frequency`,`directions`,`formdate`,`todate`,`qty`,`org_amount`,`units`,`comments`,`create_at`,`date`,`create_by`,`edit_reason`,`edited`,`edited_by`,`amount`) values (1,136,234,'',' Delsym','','','','','4 hours','after food','','','1','31.2','','','2018-07-26 18:03:05','2018-07-26',207,NULL,0,NULL,31);
 
 /*Table structure for table `patient_vitals_list` */
 
@@ -654,11 +714,11 @@ CREATE TABLE `patient_vitals_list` (
   `create_at` datetime DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patient_vitals_list` */
 
-insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`bp`,`pulse`,`fbs_rbs`,`temp`,`weight`,`create_at`,`date`) values (87,120,191,NULL,NULL,'1','12','1','12','121','2018-06-23 14:27:12','2018-06-23'),(88,121,193,NULL,NULL,'1','1','11','11','1','2018-06-25 10:25:51','2018-06-25'),(89,122,194,NULL,NULL,'20','220','10','20','10','2018-06-25 12:43:58','2018-06-25'),(90,122,195,NULL,NULL,'20','120','110','255','35','2018-06-25 13:02:52','2018-06-25'),(91,123,196,NULL,NULL,'2','120','10','255','10','2018-07-06 17:20:14','2018-07-06'),(92,123,199,NULL,NULL,'2','120','10','255','10','2018-07-06 17:28:06','2018-07-06'),(93,123,200,NULL,NULL,'2','120','10','255','10','2018-07-06 17:33:48','2018-07-06'),(94,123,201,NULL,NULL,'2','120','10','255','10','2018-07-06 17:35:01','2018-07-06'),(95,123,0,NULL,NULL,'2','120','10','255','10','2018-07-13 14:01:12','2018-07-13');
+insert  into `patient_vitals_list`(`id`,`p_id`,`b_id`,`assessment_type`,`vitaltype`,`bp`,`pulse`,`fbs_rbs`,`temp`,`weight`,`create_at`,`date`) values (126,134,231,NULL,NULL,'110/70','70','70','95','70','2018-07-16 16:29:55','2018-07-16'),(127,134,232,NULL,NULL,'110/70','70','70','95','70','2018-07-16 16:32:25','2018-07-16'),(128,135,233,NULL,NULL,'110/75','70','122','35','33','2018-07-26 12:22:07','2018-07-26'),(129,136,234,NULL,NULL,'110 /88','444','44','44','44','2018-07-26 17:47:01','2018-07-26'),(130,138,239,NULL,NULL,'1200','52','52','525','52','2018-07-30 15:56:20','2018-07-30'),(131,140,240,NULL,NULL,'250','120','120','120','67','2018-07-31 14:29:27','2018-07-31'),(132,141,241,NULL,NULL,'120','61','120','120','62','2018-08-13 10:17:00','2018-08-13');
 
 /*Table structure for table `patients_list_1` */
 
@@ -741,11 +801,11 @@ CREATE TABLE `patients_list_1` (
   `create_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=latin1;
 
 /*Data for the table `patients_list_1` */
 
-insert  into `patients_list_1`(`pid`,`hos_id`,`card_number`,`registrationtype`,`patient_category`,`problem`,`name`,`mobile`,`email`,`dob`,`age`,`bloodgroup`,`martial_status`,`nationali_id`,`perment_address`,`p_c_name`,`p_s_name`,`p_zipcode`,`p_country_name`,`temp_address`,`t_c_name`,`t_s_name`,`t_zipcode`,`t_country_name`,`religion`,`caste`,`mothername`,`language`,`occupation`,`education`,`birth_place`,`home_phone`,`citizen_proof`,`patient_identifier`,`relation`,`first_name`,`next_address1`,`next_address2`,`next_pincode`,`next_city`,`next_state`,`next_country`,`next_email`,`next_mobile`,`next_occupation`,`referred`,`internal_external`,`search_doctor`,`relationship`,`g_first_name`,`g_middel_name`,`g_last_name`,`gender`,`nationality`,`g_language`,`living`,`g_address1`,`g_address2`,`g_pincode`,`g_city`,`g_state`,`g_country`,`payer_name`,`payer_mobile`,`payer_address`,`dependency`,`arrangement`,`incomegroup`,`description`,`confidential`,`student`,`barcode`,`create_at`,`create_by`,`updated_at`) values (115,51,'','New','Pay Patient','heart pain','vasudevareddy','8500050944','vasudevareddy@gmail.com','2018-06-01','27','AB+','Single','1234567890','kadapa dist kothapalli village','mydukur','ap','516172','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1528958406115.png','2018-06-14 12:10:06',175,NULL),(116,51,'','New','Corporate','check up','k siva','6745674567','ksiva@gmail.com','2018-06-01','27','A+','Single','1234567890','testing','hyderabad','ts','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1528958654116.png','2018-06-14 12:14:14',175,NULL),(117,51,'1234569874566','New','Pay Patient','heart pain','bhavya','9874563214','bhavy@gmail.com','2018-06-14','20','B+','Single','1234567890','likethat','rangareddy','ts','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vasudevareddy',NULL,NULL,NULL,NULL,NULL,NULL,'Female',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1528958732117.png','2018-06-14 12:15:32',175,NULL),(118,51,'','New','Sponsor','hkhjkhjk','jkhjkhj','6867878678','chinnjhjkki@gmail.com','2018-06-23','67','AB-','Other','6756756767','jhjgj','hjghj','ghjghj','67667','bnvnvb','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1529731566118.png','2018-06-23 10:56:06',175,NULL),(119,51,'','Emergency','Pay Patient','fgf','ghdfgh','6867878678','chinni444@gmail.com','2018-06-23','67','B+','Single','6756756767','m,bnm,','jkjk','Jharkhand','767667','bnvnvb','','','','','','uiyuiui','uiyui','uiyui','Telugu','uityui','degree',NULL,'6767677777','No','','Relation','Name of Kin','Address1','Address2','516172','kadapa','Manipur','fghfgh','6546@gmail.com','6546546566','tyrty','',NULL,NULL,'yuytu','yuy','','','Male','yutyu','English','','tyutyu','yuyt','67676','ghfghfgh','Karnataka','ingfh','ghfghfgh','6546456456','645645645','tytryert','tytyrtyt','ytyety','trytryt','ytyer','tyetryrt','1529733490119.png','2018-06-23 12:55:13',175,'2018-06-23 12:31:39'),(120,51,'','New','International cash','','nnnnnn','6867878678','chinni4bnvb44@gmail.com','2018-06-23','67','O+','Single','6756756767','ghgfh','ghfg','Karnataka','67667','ghfg','fgh','ghfg','Meghalaya','67567','ghfg','fghfghgh','ghfg','ghfgh','Telugu','ghfg','ghfg',NULL,'6767677777','Yes','','ghj','hjfghj','gfjfgjh','ghjfg','516172','kadapa','Kerala','fghfgh','6546@gmail.com','6546546566','jfhgjfg','uityui',NULL,NULL,'hjfghj','fghjfgh','','','Male','jfghj','Telugu','','hjfgh','hjfgh','67765','6767','Kerala','67567','uiyui','67676767576','jfgghj','hjfghj','ghjfgh','hgjfgh','jfghj','jgfh','ghfjfghj','1529742205120.png','2018-06-23 13:53:25',175,'2018-06-23 13:54:29'),(121,51,'','Emergency','Sponsor','','chinna reddy reddem','6867878678','chinni447774@gmail.com','2018-06-23','67','A-','Married','6756756767','yytu','test','Manipur','67667','bnvnvb','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'uiuyi',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1529754198121.png','2018-06-25 10:23:30',175,NULL),(122,51,'','Emergency','Pay Patient','','yutyu','6867878678','administration@gmail.com','2018-06-25','67','A-','Married','76756756767','yuytu','ghfg','Madhya Pradesh','67667','bnvnvb','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Female',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1529910816122.png','2018-06-25 13:02:34',175,NULL),(123,51,'','New','Sponsor','','chandhu','6867878678','chandu@gmail.com','2018-07-06','67','B+','Single','6756756767','test','test','Telangana','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1530877797123.png','2018-07-06 17:34:52',175,NULL),(124,51,'','Emergency','Sponsor','','pushkar','85000050944','pushkar@gmail.com','2018-07-13','26','O-','Single','6756756767','sff','ghfg','Manipur','67667','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2018-07-13 17:17:55',175,NULL),(125,51,'','Emergency','Sponsor','','pushkar','85000050944','pushkar@gmail.com','2018-07-13','26','O-','Single','6756756767','sff','ghfg','Manipur','67667','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1531482567125.png','2018-07-13 17:27:07',175,NULL);
+insert  into `patients_list_1`(`pid`,`hos_id`,`card_number`,`registrationtype`,`patient_category`,`problem`,`name`,`mobile`,`email`,`dob`,`age`,`bloodgroup`,`martial_status`,`nationali_id`,`perment_address`,`p_c_name`,`p_s_name`,`p_zipcode`,`p_country_name`,`temp_address`,`t_c_name`,`t_s_name`,`t_zipcode`,`t_country_name`,`religion`,`caste`,`mothername`,`language`,`occupation`,`education`,`birth_place`,`home_phone`,`citizen_proof`,`patient_identifier`,`relation`,`first_name`,`next_address1`,`next_address2`,`next_pincode`,`next_city`,`next_state`,`next_country`,`next_email`,`next_mobile`,`next_occupation`,`referred`,`internal_external`,`search_doctor`,`relationship`,`g_first_name`,`g_middel_name`,`g_last_name`,`gender`,`nationality`,`g_language`,`living`,`g_address1`,`g_address2`,`g_pincode`,`g_city`,`g_state`,`g_country`,`payer_name`,`payer_mobile`,`payer_address`,`dependency`,`arrangement`,`incomegroup`,`description`,`confidential`,`student`,`barcode`,`create_at`,`create_by`,`updated_at`) values (134,57,'','New','Pay Patient','','srk','1234567891','no@gmail.com','0000-00-00','25','O+','Single','','piler','chitoor','Andhra Pradesh','517214','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1531738429134.png','2018-07-16 16:32:10',199,NULL),(135,59,'','New','Pay Patient','','raghu','98989787878','raghu@gmail.com','2018-07-02','1','A-','Single','565878787767','hyd','hyd','Telangana','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1532587890135.png','2018-07-26 12:21:30',220,NULL),(136,58,'','Emergency','Staff','','ram','98878787878','raghu@gmail.com','2018-07-26','22','A-','Single','','hyd','hyd','Telangana','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1532607389136.png','2018-07-26 17:46:29',215,NULL),(138,61,'','Emergency','Pay Patient','','testing purpose','85000509544','trsting@gmail.com','2018-07-30','26','O-','Single','1345678987878','tetsivmnm','hyd','Andhra Pradesh','516172','india','test','test','Andhra Pradesh','516172','india','Religion','Caste',' Guardian name','Telugu','Occupation','Education',NULL,'8500050944','Yes','','Relation','Name of Kin','Address1','Address2','516172','kadapa','Andhra Pradesh','inida','vasu@gmail.com','8019345212','Occupation ','test',NULL,NULL,'Relationship','Name','','','Male','Nationality','Telugu','','test','test2','516172','kadp','Andhra Pradesh','india','name','8500050944','testing','Living dependency','Living arrangement','Income group','Description','Confidential','Student','1532941436138.png','2018-07-30 15:54:08',223,'2018-07-30 15:56:08'),(139,61,'','New','VIP','','librarian','8500050944','vasu@gmail.com','2018-07-31','25','O-','Married','1345678987878','test','hyd','Andhra Pradesh','516172','125463','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'test',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1532946193139.png','2018-07-30 15:53:13',223,NULL),(140,60,'','New','VIP','','ramu','8500050944','vasu@gmail.com','2018-08-03','24','O+','Single','','test','test','Himachal Pradesh','516172','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1533027546140.png','2018-07-31 14:29:06',222,NULL),(141,61,'','Emergency','Pay Patient','','cvxcz','8500050944','reddy.55610@gmail.com','2018-08-03','24','B-','Single','12345678952','hyderabad','hyderbad','Andhra Pradesh','500072','india','','','','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,'Male',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1534135593141.png','2018-08-13 10:16:33',223,NULL);
 
 /*Table structure for table `prescription_manual` */
 
@@ -761,11 +821,9 @@ CREATE TABLE `prescription_manual` (
   `create_at` datetime DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `prescription_manual` */
-
-insert  into `prescription_manual`(`id`,`hos_id`,`name`,`p_id`,`mobile`,`status`,`create_at`,`create_by`) values (1,'51','vasu','115','85000050944',1,'2018-06-25 15:40:20',176),(2,'51','reddem','112','85000050944',1,'2018-06-25 15:49:03',176),(3,'51','chinna','112','7675467467',1,'2018-06-25 15:53:11',176),(4,'51','test','117','8019345212',1,'2018-06-25 16:14:02',176),(5,'51','','125','',1,'2018-07-06 18:25:52',176),(6,'51','','117','',1,'2018-07-06 18:26:16',176),(7,'51','','112','',1,'2018-07-10 17:36:47',176),(8,'51','','117','',1,'2018-07-10 17:37:19',176),(9,'51','','117','',1,'2018-07-10 17:37:48',176),(10,'51','','117','',1,'2018-07-10 18:16:30',176),(11,'51','','117','',1,'2018-07-10 18:16:41',176),(12,'51','','117','',1,'2018-07-10 18:17:44',176);
 
 /*Table structure for table `resource_chating` */
 
@@ -818,11 +876,11 @@ CREATE TABLE `resource_list` (
   `current_status` varchar(250) DEFAULT NULL,
   `out_source_lab` int(11) DEFAULT '0',
   PRIMARY KEY (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=latin1;
 
 /*Data for the table `resource_list` */
 
-insert  into `resource_list`(`r_id`,`a_id`,`role_id`,`hos_id`,`resource_name`,`resource_mobile`,`resource_add1`,`resource_add2`,`resource_city`,`resource_state`,`resource_zipcode`,`resource_other_details`,`resource_contatnumber`,`resource_email`,`resource_photo`,`resource_document`,`resource_bank_holdername`,`resource_bank_accno`,`resource_ifsc_code`,`resource_other_document`,`r_status`,`r_created_at`,`r_updated_at`,`r_create_by`,`current_status`,`out_source_lab`) values (124,173,5,0,'out sources lab','8500050944','hyderabad','hyderabad','hyderabad','ts','500072','ntg','8500050944','outlab@gmail.com','',NULL,NULL,NULL,NULL,NULL,1,'2018-06-14 11:57:38',NULL,1,NULL,1),(125,174,5,0,'out sources lab2','8500050944','kadapa','kadapa','kadapa','ap','516172','ntg','8019345212','outlab2@gmail.com','',NULL,NULL,NULL,NULL,NULL,1,'2018-06-14 11:58:27',NULL,1,NULL,1),(126,175,3,51,'recption','8500226782','hyderabad','hyd','kukatpalli','ts','500072','ntg','6767676577','recp@gmail.com','','','vasu','5464565767','sbin0002671','',1,'2018-06-14 12:01:47',NULL,172,NULL,0),(127,176,4,51,'Pharmacy','86785678678','test','test','kadapa','ts','516172','ntg','6767676577','phar@gmail.com','','','vasu','5464565767','sbin0002671','',1,'2018-06-14 12:02:33',NULL,172,NULL,0),(128,177,5,51,'lab','1234567890123','test','test','hyderabad','ts','500072','ntg','6767676577','lab@gmail.com','','','vasu','5464565767','sbin0002671','',1,'2018-06-14 12:03:12','2018-07-13 12:22:26',172,NULL,0),(129,178,6,51,'vasudevareddy','8500050944','test','test','kukatpalli','ts','500072','jfghj','6767676577','doct@gmail.com','','','vasu','5464565767','sbin0002671','',1,'2018-06-14 12:04:07',NULL,172,NULL,0),(130,179,6,51,'tyyt','8019345212','gh','ghdfgh','fgdfg','gfdfg','516172',NULL,'8522587411','bbbb@gmail.com','','','vasudevareddy','1234567890','SBIN0002671','',2,'2018-07-13 12:15:21','2018-07-13 12:21:38',172,NULL,0),(131,182,6,53,'','','','','','','',NULL,'','','','','','','','',1,'2018-07-16 18:08:16',NULL,181,NULL,0),(132,183,6,53,'tyyt','675676576756','jhgj','','hjfg','hj','516172',NULL,'78887887878','87@gmail.com','','','','','','',1,'2018-07-16 18:10:30',NULL,181,NULL,0);
+insert  into `resource_list`(`r_id`,`a_id`,`role_id`,`hos_id`,`resource_name`,`resource_mobile`,`resource_add1`,`resource_add2`,`resource_city`,`resource_state`,`resource_zipcode`,`resource_other_details`,`resource_contatnumber`,`resource_email`,`resource_photo`,`resource_document`,`resource_bank_holdername`,`resource_bank_accno`,`resource_ifsc_code`,`resource_other_document`,`r_status`,`r_created_at`,`r_updated_at`,`r_create_by`,`current_status`,`out_source_lab`) values (143,198,6,57,'S K MAHABOOB BASHA','9440012629','PILER','','CHITOOR','ANDHRA PRADESH','517214',NULL,'9440012629','skbasha@gmail.com','','','SKR HOSPITAL','044111100001398','ANDB0000441','',1,'2018-07-16 15:17:44',NULL,197,NULL,0),(144,199,3,57,'JYOTHI','08584244976','SKR HOSPITAL ,PILER','','CHITOOR','ANDHRA PRADESH','517214',NULL,'08584244976','jyothirecp@gmail.com','','','SKR HOSPITAL','044111100001398','ANDB0000441','',1,'2018-07-16 15:24:52',NULL,197,NULL,0),(145,200,4,57,'PUSHPA','08584244976','PILER','','CHITTOR','ANDHRAPRADESH','517214',NULL,'08584244976','pushpa@gmail.com','','','skr hospital','044111100001398','ANDB0000441','',1,'2018-07-16 15:28:20',NULL,197,NULL,0),(146,201,5,57,'DANALAKSHMI','08584244976','piler','','chitoor','andhrapradesh','517214',NULL,'08584244976','danalakshmi@gmail.com','','','skr hospital','044111100001398','ANDB0000441','',1,'2018-07-16 15:31:20',NULL,197,NULL,0),(147,202,5,0,'LAKSHMI CLINICAL LAB','9985762646','PILERU','','CHITOOR','ANDHRAPRADESH','517214','','9985762646','lakshmiclinic@gmail.com','',NULL,NULL,NULL,NULL,NULL,1,'2018-07-16 15:35:51',NULL,1,NULL,1),(148,207,6,58,'Priya','8654123356','5-47','Shanthi Nagar','Hyderabad','Telangana','5022585',NULL,'8522555662','priya@gmail.com','','','Priya','8452369974','acde4523699','',1,'2018-07-18 16:28:45',NULL,203,NULL,0),(149,208,6,59,'prema','9502710179','uppal','uppal','Hyderabad','Telangana','500035',NULL,'95275555555','prema@gmail.com','','','prema','4668523158445','sbi12345678','',1,'2018-07-18 16:28:45',NULL,204,NULL,0),(150,209,6,58,'kavya','9852365456','8-24','Ashok Nagar','Hyderabad','Telangana','5023254',NULL,'9556321456','kavya@gmail.com','','','Kavya','84662256663','ased4523366','',1,'2018-07-18 16:57:07',NULL,203,NULL,0),(151,210,6,59,'keerthi','9502710179','uppal','uppal','hyderabad','Telangana','500035',NULL,'1234567895','keerthi@gmail.com','','','keerthi','123466899','sbi45678912','',1,'2018-07-18 16:57:24',NULL,204,NULL,0),(152,211,6,61,'prem','9502710179','uppal','uppal','Hyderabad','telangana','500035',NULL,'5698456123','prem@gmail.com','','','prem','1234567894','sbi78945612','',1,'2018-07-18 17:00:39',NULL,206,NULL,0),(153,212,6,60,'Tarun','85610365655','4-23','Balnagar','Hyderabad','Telangana','502369',NULL,'9563258896','tarun@gmail.com','','','Tarun','785236669','sedf2121254','',1,'2018-07-18 17:00:41',NULL,205,NULL,0),(154,213,6,61,'Arun','9502710179','nagole','nagole','hyderabad','telangana','500035',NULL,'4567891234','arun@gmail.com','','','arun','123564789122','sbi65789122','',1,'2018-07-18 17:02:56',NULL,206,NULL,0),(155,214,6,60,'Sid','9856324452','5-75','Prashanth Nagar','Hyderabad','Telangana','5202445',NULL,'8965663662','sid@gmail.com','','','Sid','89522555555','cder1234568','',1,'2018-07-18 17:03:01',NULL,205,NULL,0),(156,215,3,58,'sai','9898989898','hyd','','hyderabad','ts','500072',NULL,'9000908978','reddy@gmail.com','','','','','','',1,'2018-07-25 11:41:31',NULL,203,NULL,0),(157,216,4,58,'venu','8328579782','hyd','','KADAPA','ts','500072',NULL,'9581758358','venu@gmail.com','','','','','','',1,'2018-07-20 12:42:17',NULL,203,NULL,0),(158,217,5,58,'RAGHU','9581758358','hyd','','hyd','telangana','500072',NULL,'88787878787','raghu@gmail.com','','','','','','',1,'2018-07-20 12:43:58',NULL,203,NULL,0),(159,218,5,0,'ramu','9291622365','tpt','tpt','tiruapthi','andhra pradesh','500072','','8328579782','ramu@gmail.com','',NULL,NULL,NULL,NULL,NULL,1,'2018-07-20 17:05:37',NULL,1,NULL,1),(160,219,9,58,'raghu','9898989787','hyd','','hyd','ts','500072',NULL,'87878778788','ward@gmail.com','','','','','','',1,'2018-07-23 13:20:04',NULL,203,NULL,0),(161,220,3,59,'reddy','8988888787','hyd','','hyd','ts','565656',NULL,'87878787787','reddy1@gmail.com','','','','','','',1,'2018-07-23 14:18:19',NULL,204,NULL,0),(162,221,3,58,'recp','8500050944','test','test','hyd','ts','516172',NULL,'8019452210','recp9@gmail.com','','','','','','',1,'2018-07-23 17:10:12',NULL,203,NULL,0),(163,222,3,60,'raghu','7676767676','hyd','','hyd','ts','500072',NULL,'98989877787','recp1@gmail.com','','','','','','',1,'2018-07-25 11:45:46',NULL,205,NULL,0),(164,223,3,61,'sai','9898767676','hyd','','hyd','ts','500072',NULL,'9887878766','recp2@gmail.com','','','','','','',1,'2018-07-25 11:50:20',NULL,206,NULL,0),(165,224,9,58,'ward','1234567890','test','test','dfds','dfsd','516172',NULL,'8019345212','ward1@gmail.com','','','','','','',1,'2018-07-27 17:50:49',NULL,203,NULL,0);
 
 /*Table structure for table `roles` */
 
@@ -833,11 +891,11 @@ CREATE TABLE `roles` (
   `r_name` varchar(250) DEFAULT NULL,
   `r_status` int(11) DEFAULT '1',
   PRIMARY KEY (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `roles` */
 
-insert  into `roles`(`r_id`,`r_name`,`r_status`) values (1,'Admin',1),(2,'Hospital Admin',1),(3,'Receptionist',1),(4,'Pharmacy',1),(5,'lab coordinator',1),(6,'Doctor',1),(7,'Patient',1),(8,'Software team',1);
+insert  into `roles`(`r_id`,`r_name`,`r_status`) values (1,'Admin',1),(2,'Hospital Admin',1),(3,'Receptionist',1),(4,'Pharmacy',1),(5,'lab coordinator',1),(6,'Doctor',1),(7,'Patient',1),(8,'Software team',1),(9,'Ward management',1),(10,'Nurse',1);
 
 /*Table structure for table `specialist` */
 
@@ -853,11 +911,11 @@ CREATE TABLE `specialist` (
   `t_updated_at` datetime DEFAULT NULL,
   `t_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
 
 /*Data for the table `specialist` */
 
-insert  into `specialist`(`s_id`,`hos_id`,`d_id`,`specialist_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (110,51,'108','vasu',1,'2018-06-23 14:49:27','2018-06-23 15:26:54',172),(112,51,'108','raghu',1,'2018-06-23 14:54:40',NULL,172),(113,51,'108','haert surgon',1,'2018-06-23 16:09:47',NULL,172);
+insert  into `specialist`(`s_id`,`hos_id`,`d_id`,`specialist_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (123,57,'119','dental',1,'2018-07-16 16:28:28',NULL,197),(124,61,'126','opthalmologist',1,'2018-07-18 17:05:17',NULL,206),(125,61,'124','oncologist',1,'2018-07-18 17:05:38',NULL,206),(126,60,'125','Paediatrician',1,'2018-07-18 17:05:52',NULL,205),(127,60,'127','Dermatologist',1,'2018-07-18 17:06:08',NULL,205),(128,59,'121','ENT specialist',1,'2018-07-18 17:08:36',NULL,204),(129,58,'120','Cardiologist',1,'2018-07-18 17:08:39',NULL,203),(130,59,'123','Nephrologist',1,'2018-07-18 17:09:09',NULL,204),(131,58,'122','Neurologist',1,'2018-07-18 17:09:11',NULL,203),(132,58,'129','URO SURGERY',1,'2018-07-20 14:05:51',NULL,203),(133,58,'130','DENTAL',1,'2018-07-20 14:29:00',NULL,203),(134,59,'131','Uro surgeon',1,'2018-07-20 14:31:45',NULL,204),(135,60,'132','Uro Surgeon',1,'2018-07-20 14:32:03',NULL,205),(136,61,'133','Uro Surgeon',1,'2018-07-20 14:35:30',NULL,206);
 
 /*Table structure for table `team_chating` */
 
@@ -891,11 +949,11 @@ CREATE TABLE `treament` (
   `t_updated_at` datetime DEFAULT NULL,
   `t_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
 
 /*Data for the table `treament` */
 
-insert  into `treament`(`t_id`,`hos_id`,`t_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (94,45,'Diabetes',1,'2018-06-04 11:37:04',NULL,144),(95,45,'BP',1,'2018-06-04 11:37:10','2018-06-08 11:04:04',144),(96,45,'TB',1,'2018-06-04 11:57:15',NULL,144),(97,45,'heart',1,'2018-06-04 12:24:22',NULL,144),(98,48,'TB',1,'2018-06-04 16:41:55',NULL,155),(99,45,'sugar',1,'2018-06-05 10:25:13',NULL,144),(100,49,'Md Genaralmedicin ',1,'2018-06-05 21:38:16',NULL,160),(101,49,'Eye surgan',1,'2018-06-05 21:39:23',NULL,160),(102,45,'fever',1,'2018-06-06 15:42:42','2018-06-08 11:06:57',144),(103,49,'low-bp',1,'2018-06-07 12:31:04','2018-06-07 12:31:19',160),(104,45,'acidity',1,'2018-06-11 14:43:49','2018-06-11 15:45:22',144),(105,45,'Malaria',1,'2018-06-11 16:56:11',NULL,144),(106,50,'likethat',1,'2018-06-12 13:03:03',NULL,167),(107,50,'jjgj',1,'2018-06-13 17:54:26',NULL,167),(108,51,'heart',1,'2018-06-14 12:11:49',NULL,172),(109,51,'hjfghjfg',1,'2018-06-23 14:36:49',NULL,172);
+insert  into `treament`(`t_id`,`hos_id`,`t_name`,`t_status`,`t_create_at`,`t_updated_at`,`t_create_by`) values (119,57,'dentist',1,'2018-07-16 16:28:13',NULL,197),(120,58,'Cardiology',2,'2018-07-18 16:53:46','2018-07-20 14:03:35',203),(121,59,'ENT',1,'2018-07-18 16:54:00',NULL,204),(122,58,'Neurology',1,'2018-07-18 16:54:14',NULL,203),(123,59,'Nephrology',1,'2018-07-18 16:54:32',NULL,204),(124,61,'oncology',1,'2018-07-18 17:03:42',NULL,206),(125,60,'Paediatrics',1,'2018-07-18 17:03:49',NULL,205),(126,61,'opthalmology',1,'2018-07-18 17:03:58',NULL,206),(127,60,'Dermatology',1,'2018-07-18 17:04:17',NULL,205),(128,58,'CARDIOLGY',1,'2018-07-20 12:54:04',NULL,203),(129,58,'UROLOGY',1,'2018-07-20 14:04:38',NULL,203),(130,58,'DENTAL',1,'2018-07-20 14:27:20',NULL,203),(131,59,'Urology',1,'2018-07-20 14:31:23',NULL,204),(132,60,'Urology',1,'2018-07-20 14:31:42',NULL,205),(133,61,'Urology',1,'2018-07-20 14:35:07',NULL,206);
 
 /*Table structure for table `treatmentwise_doctors` */
 
@@ -912,11 +970,11 @@ CREATE TABLE `treatmentwise_doctors` (
   `t_d_updated_at` datetime DEFAULT NULL,
   `t_d_create_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_d_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=latin1;
 
 /*Data for the table `treatmentwise_doctors` */
 
-insert  into `treatmentwise_doctors`(`t_d_id`,`hos_id`,`s_id`,`t_d_doc_id`,`t_d_name`,`t_d_status`,`t_d_create_at`,`t_d_updated_at`,`t_d_create_by`) values (118,51,110,178,'108',1,'2018-06-23 16:33:07','2018-06-23 16:33:07',172),(119,51,112,178,'108',1,'2018-06-23 17:02:00','2018-06-23 17:02:00',172),(120,51,113,178,'108',1,'2018-06-23 17:02:07','2018-06-23 17:02:07',172);
+insert  into `treatmentwise_doctors`(`t_d_id`,`hos_id`,`s_id`,`t_d_doc_id`,`t_d_name`,`t_d_status`,`t_d_create_at`,`t_d_updated_at`,`t_d_create_by`) values (127,57,123,198,'119',1,'2018-07-16 16:28:44','2018-07-16 16:28:44',197),(128,60,126,212,'125',1,'2018-07-18 17:06:34','2018-07-18 17:06:34',205),(129,60,127,214,'127',1,'2018-07-18 17:06:50','2018-07-18 17:06:50',205),(130,61,125,211,'124',1,'2018-07-18 17:06:50','2018-07-18 17:06:50',206),(131,61,124,213,'126',1,'2018-07-18 17:07:14','2018-07-18 17:07:14',206),(132,59,128,208,'121',1,'2018-07-18 17:09:30','2018-07-18 17:09:30',204),(133,58,129,207,'120',1,'2018-07-18 17:09:31','2018-07-18 17:09:31',203),(134,59,130,210,'123',1,'2018-07-18 17:09:39','2018-07-18 17:09:39',204),(135,58,131,209,'122',1,'2018-07-18 17:09:41','2018-07-18 17:09:41',203),(136,58,132,207,'129',1,'2018-07-20 14:09:51','2018-07-20 14:09:51',203),(137,59,134,210,'131',1,'2018-07-23 16:38:53','2018-07-23 16:38:53',204);
 
 /*Table structure for table `vital_comments` */
 
@@ -933,6 +991,118 @@ CREATE TABLE `vital_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `vital_comments` */
+
+/*Table structure for table `ward_floors` */
+
+DROP TABLE IF EXISTS `ward_floors`;
+
+CREATE TABLE `ward_floors` (
+  `w_f_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `ward_floor` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`w_f_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_floors` */
+
+insert  into `ward_floors`(`w_f_id`,`hos_id`,`ward_floor`,`status`,`create_at`,`created_by`) values (1,58,'1',1,'2018-08-08 11:49:54',203);
+
+/*Table structure for table `ward_name` */
+
+DROP TABLE IF EXISTS `ward_name`;
+
+CREATE TABLE `ward_name` (
+  `w_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `ward_name` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`w_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_name` */
+
+insert  into `ward_name`(`w_id`,`hos_id`,`ward_name`,`status`,`create_at`,`created_by`) values (1,58,'xfgsdfg',1,'2018-08-08 11:44:31',203);
+
+/*Table structure for table `ward_room_beds` */
+
+DROP TABLE IF EXISTS `ward_room_beds`;
+
+CREATE TABLE `ward_room_beds` (
+  `r_b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `w_r_n_id` int(11) DEFAULT NULL,
+  `bed` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`r_b_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_room_beds` */
+
+insert  into `ward_room_beds`(`r_b_id`,`hos_id`,`w_r_n_id`,`bed`,`status`,`create_at`,`created_by`,`updated_at`) values (28,58,3,'1',2,'2018-08-08 12:14:38',203,'2018-08-08 12:14:56'),(29,58,3,'2',2,'2018-08-08 12:14:38',203,'2018-08-08 12:14:56'),(30,58,3,'1',1,'2018-08-08 12:14:56',203,NULL),(31,58,3,'2',1,'2018-08-08 12:14:56',203,NULL),(32,58,3,'3',1,'2018-08-08 12:14:56',203,NULL);
+
+/*Table structure for table `ward_room_number` */
+
+DROP TABLE IF EXISTS `ward_room_number`;
+
+CREATE TABLE `ward_room_number` (
+  `w_r_n_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `f_id` int(11) DEFAULT NULL,
+  `room_num` varchar(250) DEFAULT NULL,
+  `bed_count` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`w_r_n_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_room_number` */
+
+insert  into `ward_room_number`(`w_r_n_id`,`hos_id`,`f_id`,`room_num`,`bed_count`,`status`,`create_at`,`created_by`) values (3,58,1,'1','3',1,'2018-08-08 12:14:38',203);
+
+/*Table structure for table `ward_room_type` */
+
+DROP TABLE IF EXISTS `ward_room_type`;
+
+CREATE TABLE `ward_room_type` (
+  `w_r_t_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `room_type` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`w_r_t_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_room_type` */
+
+insert  into `ward_room_type`(`w_r_t_id`,`hos_id`,`room_type`,`status`,`create_at`,`created_by`) values (1,58,'des',1,'2018-08-08 11:50:03',203);
+
+/*Table structure for table `ward_type` */
+
+DROP TABLE IF EXISTS `ward_type`;
+
+CREATE TABLE `ward_type` (
+  `ward_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `ward_type` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ward_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `ward_type` */
+
+insert  into `ward_type`(`ward_id`,`hos_id`,`ward_type`,`status`,`create_at`,`created_by`) values (1,58,'cvcbxcvb',1,'2018-08-08 11:48:22',203),(2,58,'gffdgdsf',1,'2018-08-08 11:49:41',203);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
