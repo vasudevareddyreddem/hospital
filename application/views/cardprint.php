@@ -28,7 +28,7 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form target="_blank" action="<?php echo base_url('admin/cardnumberpost'); ?>" method="post" id="add_typetest" name="add_typetest" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('admin/cardnumberpost'); ?>" method="post" id="add_typetest" name="add_typetest" enctype="multipart/form-data">
 								<div class="row">
 								<div class="col-md-6">
 									<label>Cards count</label>

@@ -1189,14 +1189,15 @@ class Admin extends CI_Controller {
 					$pdfFilePath = $path."/assets/cardnumbers/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
 					$html = $this->load->view('cardpdf', $data, true); // render the view into HTML
-					//echo '<pre>';print_r($html);exit;
+					/*echo '<pre>';print_r($html);exit;
 					$this->load->library('pdf');
 					$pdf = $this->pdf->load();
 					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
-					$pdf->SetDisplayMode('fullpage');
-					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->Image('back.png',10,10,-300);
+					$pdf->SetCompression(false);
+					//$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
 					$pdf->WriteHTML($html); // write the HTML into the PDF
-					$pdf->Output($pdfFilePath, 'F');
+					$pdf->Output($pdfFilePath, 'F');*/
 					
 					foreach($numbers_list as $lis){
 					$save_data=array(
@@ -1210,7 +1211,7 @@ class Admin extends CI_Controller {
 					);
 					$this->Admin_model->save_cardnumbers($save_data);
 					}
-					redirect("/assets/cardnumbers/".$file_name);
+					redirect("admin/cardnumbers/".base64_encode(1));
 				//echo '<pre>';print_r($numbers_list);exit;
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");

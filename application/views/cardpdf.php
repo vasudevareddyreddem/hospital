@@ -1,8 +1,5 @@
 	<!DOCTYPE html>
 <html>
-<?php
-    header("Content-type: text/css; charset: UTF-8");
-?>
 <style>
 	.backimg {
 		background-image: url("<?php echo base_url('assets/back.png'); ?>");
@@ -64,8 +61,14 @@ input[type="text"]
 	</div>
 <?php } ?>
 	
-
+<a href="javascript:void(0);" onclick="myFunction()" style="background-color:red;color:#fff;padding:5px;" class="btn btn-primary btn-sm text-center">Print</a>
 
 </body>
 </html>
- 
+ <script>
+function myFunction() {
+    window.print();
+}
+</script>
+
+<?php exit; ?>
