@@ -36,7 +36,7 @@ class In_frontend extends CI_Controller {
 				}else{
 					$data['Unread_count']='';
 				}
-			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6 ||$data['userdetails']['role_id']==9){
+			}else if($data['userdetails']['role_id']==3 || $data['userdetails']['role_id']==4 ||$data['userdetails']['role_id']==5 ||$data['userdetails']['role_id']==6 ||$data['userdetails']['role_id']==9 ||$data['userdetails']['role_id']==10){
 				$data['img']=$this->Admin_model->get_resource_imges($admindetails['a_id']);
 				$data['notification']=$this->Admin_model->get_all_resource_announcement($admindetails['a_id']);
 				$Unread_count=$this->Admin_model->get_all_resource_announcement_unread_count($admindetails['a_id']);

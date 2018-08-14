@@ -72,4 +72,4 @@ function myFunction() {
 }
 </script>
 
-<?php exit; ?>
+<?php //exit; ?>

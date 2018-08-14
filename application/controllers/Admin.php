@@ -1188,7 +1188,7 @@ class Admin extends CI_Controller {
 					$data['page_title'] ='Cardnumbers'.'invoice'; // pass data to the view
 					$pdfFilePath = $path."/assets/cardnumbers/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
-					$html = $this->load->view('cardpdf', $data, true); // render the view into HTML
+					echo $html = $this->load->view('cardpdf', $data, true); // render the view into HTML
 					/*echo '<pre>';print_r($html);exit;
 					$this->load->library('pdf');
 					$pdf = $this->pdf->load();
@@ -1211,6 +1211,7 @@ class Admin extends CI_Controller {
 					);
 					$this->Admin_model->save_cardnumbers($save_data);
 					}
+					exit;
 					redirect("admin/cardnumbers/".base64_encode(1));
 				//echo '<pre>';print_r($numbers_list);exit;
 			}else{
