@@ -1168,6 +1168,27 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function cardnumber_distribute(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				
+				$data['tab']=base64_encode($this->uri->segment(3));
+				$data['card_numbers_list']=$this->Admin_model->get_card_numbers_list();
+				
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('cardnumber_distribute',$data);
+				$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function cardnumberpost(){
 		if($this->session->userdata('userdetails'))
 		{

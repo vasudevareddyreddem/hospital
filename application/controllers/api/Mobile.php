@@ -391,7 +391,7 @@ class Mobile extends REST_Controller {
 					$serverKey = $this->config->item('server_key_push');
 					$title = "Appointment Bidding Confirmation";
 					//$body = "Hello ".$details['name']." you have an appointment booked";
-					$body = "Hello ".$details['name']." you have an appointment bidding sent";
+					$body = "Hello ".$details['name']." your appointment's bidding sent successfully";
 					$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
 					$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
 					$json = json_encode($arrayToSend);
@@ -504,7 +504,7 @@ class Mobile extends REST_Controller {
 					$serverKey = $this->config->item('server_key_push');
 					$title = "Appointment Confirmation";
 					//$body = "Hello ".$details['name']." you have an appointment booked";
-					$body = "Hello ".$details['name']." you have an appointment booked from ".$appointment_details['hos_bas_name'].", on ".$appointment_details['date'].$appointment_details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+					$body = "Hello ".$details['name']." you have an appointment booked for ".$appointment_details['hos_bas_name'].", on ".$appointment_details['date'].$appointment_details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
 					$notification = array('title' =>$title , 'text' => $body, 'sound' => 'default', 'badge' => '1');
 					$arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
 					$json = json_encode($arrayToSend);
