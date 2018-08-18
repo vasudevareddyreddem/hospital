@@ -271,6 +271,53 @@ class Cardnumber extends REST_Controller {
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
 	}
+	public  function cardnumbers_assign_post(){
+		$s_id=$this->post('s_id');
+		$c_id=$this->post('c_id');
+		$mobile=$this->post('mobile');
+		$whatsapp_number=$this->post('whatsapp_number');
+		$aadhar_number=$this->post('aadhar_number');
+		$email_id=$this->post('email_id');
+		$gender=$this->post('gender');
+		if($s_id==''){
+			$message = array('status'=>0,'message'=>'User Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		if($c_id==''){
+			$message = array('status'=>0,'message'=>'Card number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($mobile==''){
+			$message = array('status'=>0,'message'=>'Phone number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($whatsapp_number==''){
+			$message = array('status'=>0,'message'=>'Whatsapp Number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($aadhar_number==''){
+			$message = array('status'=>0,'message'=>'Aadhar Number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($email_id==''){
+			$message = array('status'=>0,'message'=>'Email Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($gender==''){
+			$message = array('status'=>0,'message'=>'Gender is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$update_data=array(
+		'mobile'=>isset($mobile)?$mobile:'',
+		'mobile'=>isset($whatsapp_number)?$whatsapp_number:'',
+		'mobile'=>isset($aadhar_number)?$aadhar_number:'',
+		'mobile'=>isset($email_id)?$email_id:'',
+		'mobile'=>isset($gender)?$gender:'',
+		);
+		$cards_list=$this->Cardnumber_model->get_seller_card_list($s_id);
+		if(count($cards_list)>0){
+				$message = array('status'=>1,'list'=>$cards_list,'s_id'=>$s_id,'message'=>'Card number list are found');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'s_id'=>$s_id,'message'=>'Card number list are not found');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+	}
 	
 
 }
