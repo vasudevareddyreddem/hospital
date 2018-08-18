@@ -21,7 +21,9 @@ class In_frontend extends CI_Controller {
 		$this->load->model('Users_model');
 		$this->load->model('Medicine_model');
 		$this->load->model('Lab_model');
+		$this->load->model('Ward_model');
 		$this->load->model('Chat_model');
+		$this->load->model('medicine_model');
 			if($this->session->userdata('userdetails'))
 			{
 			$admindetails=$this->session->userdata('userdetails');
