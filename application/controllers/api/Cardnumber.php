@@ -274,6 +274,7 @@ class Cardnumber extends REST_Controller {
 	public  function cardnumbers_assign_post(){
 		$s_id=$this->post('s_id');
 		$c_id=$this->post('c_id');
+		$name=$this->post('name');
 		$mobile=$this->post('mobile');
 		$whatsapp_number=$this->post('whatsapp_number');
 		$aadhar_number=$this->post('aadhar_number');
@@ -285,6 +286,9 @@ class Cardnumber extends REST_Controller {
 		}
 		if($c_id==''){
 			$message = array('status'=>0,'message'=>'Card number is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($name==''){
+			$message = array('status'=>0,'message'=>'Customer Name is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($mobile==''){
 			$message = array('status'=>0,'message'=>'Phone number is required');
@@ -302,14 +306,39 @@ class Cardnumber extends REST_Controller {
 			$message = array('status'=>0,'message'=>'Gender is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-		$update_data=array(
-		'mobile'=>isset($mobile)?$mobile:'',
-		'mobile'=>isset($whatsapp_number)?$whatsapp_number:'',
-		'mobile'=>isset($aadhar_number)?$aadhar_number:'',
-		'mobile'=>isset($email_id)?$email_id:'',
-		'mobile'=>isset($gender)?$gender:'',
-		);
-		$cards_list=$this->Cardnumber_model->get_seller_card_list($s_id);
+		$check=$this->Cardnumber_model->check_c_id_seller($s_id,$c_id);
+		if(count($check)>0){
+			$update_data=array(
+			'cust_name'=>isset($name)?$name:'',
+			'mobile'=>isset($mobile)?$mobile:'',
+			'whatsapp_number'=>isset($whatsapp_number)?$whatsapp_number:'',
+			'aadhar_number'=>isset($aadhar_number)?$aadhar_number:'',
+			'email_id'=>isset($email_id)?$email_id:'',
+			'gender'=>isset($gender)?ucwords($gender):'',
+			'assign_customer'=>1,
+			'customer_assign_time'=>date('Y-m-d H:i:s')
+			);
+			$update=$this->Cardnumber_model->update_cardnumber_assign_to_customer($s_id,$c_id,$update_data);
+			if(count($update)>0){
+					$message = array('status'=>1,'c_id'=>$c_id,'s_id'=>$s_id,'message'=>'Card number assign successfully');
+					$this->response($message, REST_Controller::HTTP_OK);
+				}else{
+					$message = array('status'=>0,'c_id'=>$c_id,'s_id'=>$s_id,'message'=>'Technical problem will occurred .Please try again');
+					$this->response($message, REST_Controller::HTTP_OK);
+				}
+			
+		}else{
+			$message = array('status'=>0,'c_id'=>$c_id,'s_id'=>$s_id,'message'=>'Seller Id and card Number not matched.Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+	}
+	public  function assign_cardnumbers_post(){
+		$s_id=$this->post('s_id');
+		if($s_id==''){
+			$message = array('status'=>0,'message'=>'User Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$cards_list=$this->Cardnumber_model->get_assign_cardnumber_list($s_id);
 		if(count($cards_list)>0){
 				$message = array('status'=>1,'list'=>$cards_list,'s_id'=>$s_id,'message'=>'Card number list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
@@ -318,6 +347,5 @@ class Cardnumber extends REST_Controller {
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
 	}
-	
 
 }

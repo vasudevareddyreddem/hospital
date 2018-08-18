@@ -33,7 +33,7 @@
 								<div class="col-md-4">
 									<label> Name</label>
 								 
-								<select class="form-control" name="seller_id" id="seller_id">
+								<select class="form-control select2" style="width:100%" name="seller_id" id="seller_id">
 									<option value="">Select</option>
 									<?php foreach($ative_card_seller_list as $s_list){ ?>
 										<?php if($seller_id==$s_list['s_id']){ ?>
@@ -45,7 +45,7 @@
 								
 								<div class="col-md-4">
 									<label>Card Numbers From</label>
-									<select class="form-control" name="card_number_from" id="card_number_from">
+									<select class="form-control select2" style="width:100%" name="card_number_from" id="card_number_from">
 										<option value="">Select</option>
 										<?php foreach($card_number_list as $s_list){ ?>
 												<?php if($s_list['card_number']==$start_num['card_number']){ ?>
@@ -58,7 +58,7 @@
 								</div>
 								<div class="col-md-4">
 									<label>Card Numbers To</label>
-									<select class="form-control" name="card_number_to" id="card_number_to">
+									<select class="form-control select2" style="width:100%" name="card_number_to" id="card_number_to">
 										<option value="">Select</option>
 										<?php foreach($card_number_list as $s_list){ ?>
 											<?php if($s_list['card_number']==$end_num['card_number']){ ?>

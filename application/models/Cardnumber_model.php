@@ -58,6 +58,23 @@ class Cardnumber_model extends CI_Model
 		$this->db->where('status',1);
 		return $this->db->get()->result_array();
 	}
+	public  function update_cardnumber_assign_to_customer($s_id,$c_id,$data){
+		$this->db->where('assign_seller',$s_id);
+		$this->db->where('c_id',$c_id);
+		return $this->db->update('card_numbers',$data);
+	}
+	public  function check_c_id_seller($s_id,$c_id){
+		$this->db->select('c_id')->from('card_numbers');
+		$this->db->where('assign_seller',$s_id);
+		$this->db->where('c_id',$c_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_assign_cardnumber_list($s_id){
+		$this->db->select('cust_name,mobile,whatsapp_number,aadhar_number,email_id,gender')->from('card_numbers');
+		$this->db->where('assign_seller',$s_id);
+		$this->db->where('assign_customer',1);
+		return $this->db->get()->result_array();
+	}
 	
 	
 	

@@ -56,7 +56,7 @@
 												<th>Card NUmbers Count</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
+                                               <!-- <th>Action</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -65,8 +65,8 @@
                                                 <td><?php echo htmlentities($list['count']); ?></td>
                                                 <td><?php echo htmlentities($list['created_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-												<td><a target="_blank" href="<?php echo base_url('assets/cardnumbers/'.$list['pdf_name']); ?>">Download</a></td>
-                                                
+												<!--<td><a target="_blank" href="<?php echo base_url('assets/cardnumbers/'.$list['pdf_name']); ?>">Download</a></td>
+                                                -->
                                             </tr>
 											
 										<?php } ?>
