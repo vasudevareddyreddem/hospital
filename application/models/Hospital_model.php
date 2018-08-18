@@ -56,7 +56,33 @@ class Hospital_model extends CI_Model
 	}
 	public function get_total_patient_list($hos_id){
 		
-		$this->db->select('patients_list_1.pid')->from('patients_list_1');		
+		$this->db->select('patients_list_1.pid')->from('patient_billing');	
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');		
+		//$this->db->where('patient_billing.patient_type',1);
+		$this->db->where('patients_list_1.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_op_total_patient_list($hos_id){
+		
+		$this->db->select('patients_list_1.pid')->from('patient_billing');	
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');		
+		$this->db->where('patient_billing.patient_type',0);
+		$this->db->where('patients_list_1.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_ip_total_patient_list($hos_id){
+		
+		$this->db->select('patients_list_1.pid')->from('patient_billing');	
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');		
+		$this->db->where('patient_billing.patient_type',1);
+		$this->db->where('patients_list_1.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+	}
+	public function get_appointment_total_patient_list($hos_id){
+		
+		$this->db->select('patients_list_1.pid')->from('appointments');	
+		$this->db->join('patients_list_1', 'patients_list_1.pid = appointments.patient_id', 'left');		
+		$this->db->where('appointments.patient_id !=',0);
 		$this->db->where('patients_list_1.hos_id',$hos_id);
 		return $this->db->get()->result_array();
 	}

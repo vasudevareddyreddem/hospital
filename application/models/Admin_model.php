@@ -465,6 +465,98 @@ class Admin_model extends CI_Model
 		
 	}
 	/* card  numbers purpose*/
-	
+	/* card  seller purpose*/
+	public  function save_sellers($data){
+		$this->db->insert('card_sellers',$data);
+		return $this->db->insert_id();
+	}
+	public  function seller_email_exits($email){
+		$this->db->select('s_id')->from('card_sellers');
+		$this->db->where('email_id',$email);
+		$this->db->where('status !=',2);
+		return $this->db->get()->row_array();
+		
+	}
+	public  function get_card_Seller_distrubutors_listss($a_id){
+		$this->db->select('*')->from('card_sellers');
+		$this->db->where('created_by',$a_id);
+		$this->db->where('status !=',2);
+		return $this->db->get()->result_array();
+		
+	}
+	public  function get_card_active_Seller_distrubutors_lists($a_id){
+		$this->db->select('name,s_id')->from('card_sellers');
+		$this->db->where('created_by',$a_id);
+		$this->db->where('status !=',2);
+		$this->db->where('status',1);
+		return $this->db->get()->result_array();
+		
+	}
+	public  function update_distrubtor_details($s_id,$data){
+		$this->db->where('s_id',$s_id);
+		return $this->db->update('card_sellers',$data);
+		
+	}
+	public  function get_card_distrubtor_details($s_id){
+		$this->db->select('*')->from('card_sellers');
+		$this->db->where('s_id',$s_id);
+		return $this->db->get()->row_array();
+	}
+	public  function get_card_number_list(){
+		$this->db->select('c_id,card_number')->from('card_numbers');
+		$this->db->where('status',1);
+		$this->db->where('assign_seller',0);
+		$this->db->order_by('card_numbers.c_id','asc');
+		return $this->db->get()->result_array();
+	}
+	public  function update_card_number_seller($num,$data){
+		$this->db->where('c_id',$num);
+		return $this->db->update('card_numbers',$data);
+	}
+	public  function get_seller_card_numbers_list(){
+		$this->db->select('card_numbers.c_id,card_numbers.assign_seller,card_numbers.updated_at,card_numbers.card_number,card_sellers.name,card_sellers.mobile,card_sellers.email_id')->from('card_numbers');
+		$this->db->join('card_sellers', 'card_sellers.s_id = card_numbers.assign_seller', 'left');
+		$this->db->group_by('card_numbers.assign_seller');
+		$this->db->where('assign_seller!=',0);
+		$return=$this->db->get()->result_array();
+		foreach($return as $lis){
+			$start_num=$this->get_card_starting_number($lis['assign_seller']);
+			$end_num=$this->get_card_ending_number($lis['assign_seller']);
+			$data[$lis['c_id']]=$lis;
+			$data[$lis['c_id']]['start_nums']=$start_num['card_number'];
+			$data[$lis['c_id']]['end_nums']=$end_num['card_number'];
+			
+		}
+		if(!empty($data)){
+			return $data;
+		}
+	}
+	public  function get_card_starting_number($s_id){
+		$this->db->select('c_id,card_number')->from('card_numbers');
+		$this->db->where('assign_seller',$s_id);
+		$this->db->order_by('card_numbers.c_id','asc');
+		$this->db->limit(1);
+		return $this->db->get()->row_array();
+	}
+	public  function get_card_ending_number($s_id){
+		$this->db->select('c_id,card_number')->from('card_numbers');
+		$this->db->where('assign_seller',$s_id);
+		$this->db->order_by('card_numbers.c_id','desc');
+		$this->db->limit(1);
+		return $this->db->get()->row_array();
+	}
+	public  function get_seller_card_number_list($s_id){
+		$this->db->select('c_id,card_number')->from('card_numbers');
+		$this->db->where('status',1);
+		$this->db->where('assign_seller',$s_id);
+		$this->db->order_by('card_numbers.c_id','asc');
+		return $this->db->get()->result_array();
+	}
+	public  function check_assing_seller_ids($c_id){
+		$this->db->select('c_id,assign_seller')->from('card_numbers');
+		$this->db->where('c_id',$c_id);
+		return $this->db->get()->row_array();
+	}
+	/* card  seller purpose*/
 
 }

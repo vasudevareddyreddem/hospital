@@ -1155,7 +1155,7 @@ class Admin extends CI_Controller {
 				
 				$data['tab']=base64_encode($this->uri->segment(3));
 				$data['card_numbers_list']=$this->Admin_model->get_card_numbers_list();
-				
+
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('cardprint',$data);
 				$this->load->view('html/footer');
@@ -1174,11 +1174,60 @@ class Admin extends CI_Controller {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=1){
 				
-				$data['tab']=base64_encode($this->uri->segment(3));
-				$data['card_numbers_list']=$this->Admin_model->get_card_numbers_list();
-				
+				$data['tab']=base64_decode($this->uri->segment(3));
+				$data['card_seller_list']=$this->Admin_model->get_card_Seller_distrubutors_listss($admindetails['a_id']);
+				$data['ative_card_seller_list']=$this->Admin_model->get_card_active_Seller_distrubutors_lists($admindetails['a_id']);
+				$data['card_number_list']=$this->Admin_model->get_card_number_list($admindetails['a_id']);
+				$data['seller_card_number_list']=$this->Admin_model->get_seller_card_numbers_list($admindetails['a_id']);
+
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('cardnumber_distribute',$data);
+				$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function cards_assign_edit(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				
+				$s_id=base64_decode($this->uri->segment(3));
+				$data['seller_id']=base64_decode($this->uri->segment(3));
+				$data['ative_card_seller_list']=$this->Admin_model->get_card_active_Seller_distrubutors_lists($admindetails['a_id']);
+				$card_number_list=$this->Admin_model->get_card_number_list($admindetails['a_id']);
+				$seller_card_number=$this->Admin_model->get_seller_card_number_list($s_id);
+				$data['end_num']=$this->Admin_model->get_card_ending_number($s_id);
+				$data['start_num']=$this->Admin_model->get_card_starting_number($s_id);
+				$data['card_number_list']=array_merge($seller_card_number,$card_number_list);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('cardnumber_assign_edit',$data);
+				$this->load->view('html/footer');
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function cards_distributor_edit(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				
+				$s_id=base64_decode($this->uri->segment(3));
+				$data['seller_details']=$this->Admin_model->get_card_distrubtor_details($s_id);
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('cardnumber_distribute_edit',$data);
 				$this->load->view('html/footer');
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
@@ -1244,7 +1293,280 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
-	
+	public function cardnumbersellerpost(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+					$post=$this->input->post();
+				$check=$this->Admin_model->seller_email_exits($post['email_id']);
+				if(count($check)>0){
+					$this->session->set_flashdata('error',"Card Number distributor email already exists. Please use another email id");
+					redirect('admin/cardnumber_distribute/');
+					
+				}
+				if(isset($_FILES['kyc']['name']) && $_FILES['kyc']['name']!=''){
+							$temp = explode(".", $_FILES["kyc"]["name"]);
+							$kyc = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/cardnumbers_sellers/" . $kyc);
+				}
+				//echo '<pre>';print_r($post);exit;
+				$add=array(
+				'name'=>isset($post['name'])?$post['name']:'',
+				'mobile'=>isset($post['mobile'])?$post['mobile']:'',
+				'email_id'=>isset($post['email_id'])?$post['email_id']:'',
+				'password'=>isset($post['password'])?md5($post['password']):'',
+				'org_password'=>isset($post['password'])?$post['password']:'',
+				'address'=>isset($post['address'])?$post['address']:'',
+				'bank_account'=>isset($post['bank_account'])?$post['bank_account']:'',
+				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
+				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
+				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
+				'kyc'=>isset($kyc)?$kyc:'',
+				'status'=>1,
+				'created_at'=>date('Y-m-d H:i:s'),
+				'created_by'=>$admindetails['a_id'],
+				'updated_at'=>date('Y-m-d H:i:s'),
+				);
+				$save=$this->Admin_model->save_sellers($add);
+				if(count($save)>0){
+					$this->session->set_flashdata('success',"Card Number distributor successfully Added.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/cardnumber_distribute');
+				}
+				
+				//echo '<pre>';print_r($numbers_list);exit;
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function cardnumbersellereditpost(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
+				$details=$this->Admin_model->get_card_distrubtor_details($post['s_id']);
+				if($details['email_id']!=$post['email_id']){
+					$check=$this->Admin_model->seller_email_exits($post['email_id']);
+					if(count($check)>0){
+						$this->session->set_flashdata('error',"Card Number distributor email already exists. Please use another email id");
+						redirect('admin/cards_distributor_edit/'.base64_encode($post['s_id']));
+						
+					}
+				}
+				if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+						unlink("assets/adminprofilepic/".$details['profile_pic']);
+							$temp = explode(".", $_FILES["image"]["name"]);
+							$image = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['image']['tmp_name'], "assets/adminprofilepic/" . $image);
+				}else{
+					$image=$details['profile_pic'];
+				}
+				if(isset($_FILES['kyc']['name']) && $_FILES['kyc']['name']!=''){
+						unlink("assets/cardnumbers_sellers/".$details['kyc']);
+							$temp = explode(".", $_FILES["kyc"]["name"]);
+							$kyc = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/cardnumbers_sellers/" . $kyc);
+				}else{
+					$kyc=$details['kyc'];
+				}
+				//echo '<pre>';print_r($post);exit;
+				$updated_details=array(
+				'name'=>isset($post['name'])?$post['name']:'',
+				'mobile'=>isset($post['mobile'])?$post['mobile']:'',
+				'email_id'=>isset($post['email_id'])?$post['email_id']:'',
+				'profile_pic'=>isset($image)?$image:'',
+				'address'=>isset($post['address'])?$post['address']:'',
+				'bank_account'=>isset($post['bank_account'])?$post['bank_account']:'',
+				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
+				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
+				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
+				'kyc'=>isset($kyc)?$kyc:'',
+				'status'=>1,
+				'created_at'=>date('Y-m-d H:i:s'),
+				'created_by'=>$admindetails['a_id'],
+				'updated_at'=>date('Y-m-d H:i:s'),
+				);
+				$updated=$this->Admin_model->update_distrubtor_details($post['s_id'],$updated_details);
+				if(count($updated)>0){
+					$this->session->set_flashdata('success',"Distributor details successfully updated.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/cards_distributor_edit/'.base64_encode($post['s_id']));
+					}
+				
+				//echo '<pre>';print_r($numbers_list);exit;
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function distributor_status()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+			if($login_details['role_id']==1){
+					$s_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($s_id!=''){
+						$stusdetails=array(
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata=$this->Admin_model->update_distrubtor_details($s_id,$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"Distributor successfully Deactivate.");
+								}else{
+									$this->session->set_flashdata('success',"Distributor successfully Activate.");
+								}
+								redirect('admin/cardnumber_distribute/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('admin/cardnumber_distribute/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('dashboard');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('home');
+		}
+		
+		
+	}
+	public function cards_distributor_delete()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+			if($login_details['role_id']==1){
+					$s_id=base64_decode($this->uri->segment(3));
+					
+					if($s_id!=''){
+						$stusdetails=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata=$this->Admin_model->update_distrubtor_details($s_id,$stusdetails);
+							if(count($statusdata)>0){
+								$this->session->set_flashdata('success',"Distributor successfully Deleted.");
+								
+								redirect('admin/cardnumber_distribute/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('admin/cardnumber_distribute/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('dashboard');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('home');
+		}
+		
+		
+	}
+	public function cardnumberassign_post(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
+				$update_data=array('assign_seller'=>$post['seller_id'],'updated_at'=>date('Y-m-d H:i:s'));
+				for($i=$post['card_number_from'];$i<=$post['card_number_to'];$i++){
+					
+					$check=$this->Admin_model->check_assing_seller_ids($i);
+						if($check['assign_seller']==0){
+							$update=$this->Admin_model->update_card_number_seller($i,$update_data);
+						}
+				}
+				if(count($update)>0){
+					$this->session->set_flashdata('success',"Distributor details successfully updated.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(3));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(2));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function cardnumber_assign_update_post(){
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
+				$update_data=array('assign_seller'=>$post['seller_id'],'updated_at'=>date('Y-m-d H:i:s'));
+				for($i=$post['card_number_from'];$i<=$post['card_number_to'];$i++){
+						$check=$this->Admin_model->check_assing_seller_ids($i);
+						if($check['assign_seller']==$post['seller_id']){
+							$update=$this->Admin_model->update_card_number_seller($i,$update_data);
+						}else if($check['assign_seller']==0){
+							$update=$this->Admin_model->update_card_number_seller($i,$update_data);
+						}
+						
+				}
+				if(count($update)>0){
+					$this->session->set_flashdata('success',"Distributor Card Number details successfully updated.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(3));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/cardnumber_distribute/'.base64_encode(2));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 }

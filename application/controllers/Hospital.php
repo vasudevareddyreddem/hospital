@@ -20,8 +20,14 @@ class Hospital extends In_frontend {
 					if(count($hospital_list)>0){
 					foreach($hospital_list as $list){
 						$patient_list=$this->Hospital_model->get_total_patient_list($list['hos_id']);
+						$op_patient_list=$this->Hospital_model->get_op_total_patient_list($list['hos_id']);
+						$ip_patient_list=$this->Hospital_model->get_ip_total_patient_list($list['hos_id']);
+						$appointment_patient_list=$this->Hospital_model->get_appointment_total_patient_list($list['hos_id']);
 						$hos_dat[$list['hos_id']]=$list;
 						$hos_dat[$list['hos_id']]['patient_list']=count($patient_list);
+						$hos_dat[$list['hos_id']]['op_patient_list']=count($op_patient_list);
+						$hos_dat[$list['hos_id']]['ip_patient_list']=count($ip_patient_list);
+						$hos_dat[$list['hos_id']]['appoint_patient_list']=count($appointment_patient_list);
 						//echo '<pre>';print_r($list);exit;
 					}
 					$data['hospital_list']=$hos_dat;
