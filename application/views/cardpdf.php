@@ -7,8 +7,8 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height:208px;
-		width:322px;
+		height:217px;
+		width:335px;
 		position:relative;
 		
 	}
@@ -18,8 +18,8 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height:208px;
-		width:322px;
+		height:217px;
+		width:335px;
 		position:relative;
 		float:right;
 		top:-217px
@@ -64,6 +64,7 @@ input[type="text"]
 		<?php } ?>
 	</div>
 <?php } ?>
+<br>
 <div style="margin:20px auto;">	
 	<a href="javascript:void(0);" onclick="myFunction()" style="background-color:#003f7f;color:#fff;padding:10px 20px; text-decoration: none;border-radius: 6px;" class="btn btn-primary btn-sm text-center">Print</a>
 </div>
