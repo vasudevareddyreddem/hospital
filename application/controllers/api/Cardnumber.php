@@ -186,7 +186,7 @@ class Cardnumber extends REST_Controller {
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		$details=$this->Cardnumber_model->get_card_seller_details($s_id);
-		if($details['kyc']!=''){
+		if($details['kyc']==''){
 				$message = array('status'=>0,'message'=>'kyc is required');
 				$this->response($message, REST_Controller::HTTP_OK);
 		}
@@ -214,7 +214,8 @@ class Cardnumber extends REST_Controller {
 		);
 		$update=$this->Cardnumber_model->update_seller_profile_details($s_id,$update_data);
 		if(count($update)>0){
-					$message = array('status'=>1,'s_id'=>$s_id,'kycpath'=>base_url('assets/cardnumbers_sellers/'),'message'=>'Profile Details successfully updated');
+			$details=$this->Cardnumber_model->get_seller_details($s_id);
+					$message = array('status'=>1,'s_id'=>$s_id,'details'=>$details,'kycpath'=>base_url('assets/cardnumbers_sellers/'),'imgpath'=>base_url('assets/adminprofilepic/'),'message'=>'Profile Details successfully updated');
 					$this->response($message, REST_Controller::HTTP_OK);
 			
 		}else{
@@ -241,9 +242,10 @@ class Cardnumber extends REST_Controller {
 			'profile_pic'=>$imgname,
 			);
 			$save_img=$this->Cardnumber_model->update_seller_profile_details($s_id,$addimg);
+			
 			if(count($save_img)>0){
-					
-					$message = array('status'=>1,'s_id'=>$s_id,'imgpath'=>base_url('assets/adminprofilepic/'),'message'=>'Image successfully sent');
+					$details=$this->Cardnumber_model->get_seller_details($s_id);
+					$message = array('status'=>1,'s_id'=>$s_id,'imgpath'=>base_url('assets/adminprofilepic/'.$details['profile_pic']),'message'=>'Image successfully sent');
 					$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Technical problem will occurred .Please try again');
