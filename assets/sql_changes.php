@@ -105,5 +105,28 @@ CREATE TABLE `ward_room_beds` (
 
 ALTER TABLE `hospital`.`patient_billing`   
   ADD COLUMN `patient_type` VARCHAR(250) NULL AFTER `bill`;
+  
+  CREATE TABLE `hospital`.`admitted_patient_list`(  
+  `a_p_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `pt_id` INT(11),
+  `bill_id` INT(11),
+  `p_name` VARCHAR(250),
+  `w_name` VARCHAR(250),
+  `w-type` VARCHAR(250),
+  `room_type` VARCHAR(250),
+  `floor_no` VARCHAR(250),
+  `room_no` VARCHAR(250),
+  `bed_no` VARCHAR(250),
+  PRIMARY KEY (`a_p_id`)
+);
+
+  
+  
+  ALTER TABLE `hospital`.`patient_billing`   
+  CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL;
+  
+  
+  
+  
 
   

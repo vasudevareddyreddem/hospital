@@ -23,8 +23,41 @@
 	<div class="card ">
 		<div class="card-head">
 			<header>Add Medicine</header>
+			</div>
 			
+			
+			
+			<html>
+<head>
+	<title>Excel Data into Database</title>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>asset/bootstrap.min.css" />
+	<script src="<?php echo base_url(); ?>asset/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<br />
+		<h3 align="center">Excel Data into Database</h3>
+		<form method="post" id="import_form" enctype="multipart/form-data">
+			<p><label>Select Excel File</label>
+			<input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+			<br />
+			<input type="submit" name="import" value="Import" class="btn btn-info" />
+		</form>
+		<br />
+		<div class="table-responsive" id="customer_data">
+
 		</div>
+	</div>
+</body>
+</html>
+
+			
+			
+			
+		
+		
+		
 		<div class="card-body">
 		<div class="row">
 			<div class="col-md-1">
@@ -85,7 +118,7 @@
 			</div>
 			
 			</div>
-			<form id="addmedicines" name="addmedicines" action="<?php echo base_url('medicine/addpost'); ?>" method="post">
+			<form id="addmedicines" name="addmedicines" action="<?php echo base_url('medicine/addpost'); ?>" method="post" enctype="multipart/form-data">
 
 			<div class="input_fields_wrap">
 			<div class="row">
@@ -162,6 +195,45 @@
    
    </div>
 </div>
+<script>
+$(document).ready(function(){
+
+	load_data();
+
+	function load_data()
+	{
+		$.ajax({
+			url:"<?php echo base_url('medicine/fetch'); ?>",
+			method:"POST",
+			success:function(data){
+				$('#customer_data').html(data);
+			}
+		})
+	}
+
+	$('#import_form').on('submit', function(event){
+		event.preventDefault();
+		$.ajax({
+			url:"<?php echo base_url('medicine/import'); ?>",
+			method:"POST",
+			data:new FormData(this),
+			contentType:false,
+			cache:false,
+			processData:false,
+			success:function(data){
+				$('#file').val('');
+				load_data();
+				alert(data);
+			}
+		})
+	});
+
+	
+	
+
+});
+</script>
+
 <script>
 
 function  amount_count(id,val){

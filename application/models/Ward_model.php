@@ -28,8 +28,7 @@ class Ward_model extends CI_Model
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
-	
-	
+
 	public function get_ward_list($a_id,$hos_id){
 		$this->db->select('ward_name.w_id,ward_name.ward_name,ward_name.status,ward_name.create_at')->from('ward_name');				
 		$this->db->where('ward_name.created_by',$a_id);
@@ -44,6 +43,7 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_name.status !=',2);
 		return $this->db->get()->result_array();
 	}
+	
 	public function get_ward_details($w_id){
 		$this->db->select('*')->from('ward_name');		
 		$this->db->where('w_id',$w_id);
@@ -79,9 +79,11 @@ class Ward_model extends CI_Model
 	return $insert_id = $this->db->insert_id();
 	}
 	
-	public function get_saved_wardtype($hos_id){
-		$this->db->select('*')->from('ward_type');				
+	public function get_saved_wardtype($name,$hos_id){
+		$this->db->select('*')->from('ward_type');
+		$this->db->where('ward_type',$name);
 		$this->db->where('hos_id',$hos_id);
+		
 		return $this->db->get()->row_array();
 	}
 	
@@ -195,9 +197,10 @@ class Ward_model extends CI_Model
 	return $this->db->insert_id();
 	}
 	
-	public function get_saved_roomnumber($name,$hos_id){
+	public function get_saved_roomnumber($f_id,$name,$hos_id){
 		$this->db->select('*')->from('ward_room_number');		
 		$this->db->where('room_num',$name);
+		$this->db->where('f_id',$f_id);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
@@ -267,11 +270,19 @@ class Ward_model extends CI_Model
 	
 	
 	
-	public function get_d_id_wise_specialist_list($f_id){
+	public function get_f_id_wise_roomno_list($f_id){
 		$this->db->select('ward_room_number.w_r_n_id,ward_room_number.room_num')->from('ward_room_number');		
 		$this->db->where('f_id',$f_id);
-		$this->db->where('t_status',1);
+		$this->db->where('status',1);
 		return $this->db->get()->result_array();
 	}
+	
+	public function get_w_r_n_id_wise_bedcount($w_r_n_id){
+		$this->db->select('ward_room_beds.w_r_n_id,ward_room_beds.bed')->from('ward_room_beds');		
+		$this->db->where('w_r_n_id',$w_r_n_id);
+		$this->db->where('status',1);
+		return $this->db->get()->result_array();
+	}
+	
 	
 }

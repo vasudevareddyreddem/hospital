@@ -82,7 +82,8 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+										
+                                        <tbody>										
 										<?php if(isset($ip_patient_list)  && count($ip_patient_list)>0){ ?>
 											<?php foreach($ip_patient_list as $list){ ?>
 												<tr>
@@ -103,8 +104,7 @@
 																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
 																		<i class="fa fa-edit"></i>Room/Bed </a>
 																</li>
-															   
-																
+															   												
 															</ul>
 														</div>
 													</td>
@@ -122,8 +122,7 @@
                      <div class="tab-pane <?php if(isset($tab)&& $tab==2){ echo "active";}?>" id="home">
                         <div class="card ">
                                 <div class="card-head">
-                                     <header>Ward Details</header>
-                                  
+                                     <header>Ward Details</header>                                 
                                 </div>
                                 <div class="card-body ">
                                     <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admit'); ?> " method="post"  id="contact_form">
@@ -145,120 +144,72 @@
 												<option value="">Select Ward Type</option>
 												<?php foreach($wardtype_list as $List){ ?>
 												<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
-												<?php } ?>
-										
+												<?php } ?>										
 										</select>
 											</div>
-										</div>
-										 <div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6">
-											  <label ><strong>Floor Number</strong></label>
-												<select  class="form-control" onchange="get_department_list(this.value);">
-												<option value="">Select Floor Number</option>
-												<?php foreach($floor_list as $list){ ?>
-												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
-												<?php } ?>
-										
-										</select>											</div>
-										</div>
+										</div>										 
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Room Type</strong></label>
 											 <select  class="form-control">
-												<option value="">Select Room Type </option>											
+												<option value="">Select Room Type </option>
+												<?php foreach($roomtype_list as $list){ ?>
+												<option value="<?php echo $list['w_r_t_id'];?>"><?php echo $list['room_type'];?></option>
+												<?php } ?>
+										
 										</select>
 											</div>
+										</div>
+										
+										<div class="row d-flex justify-content-center">
+											 <div class="form-group col-md-6">
+											  <label ><strong>Floor Number</strong></label>
+												<select  class="form-control" onchange="get_floorno_list(this.value);">
+												<option value="">Select Floor Number</option>
+												<?php foreach($floor_list as $list){ ?>
+												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
+												<?php } ?>			
+										</select></div>
 										</div>
 										<div class="row d-flex justify-content-center">
 											<div class="form-group col-md-6">
 											  <label ><strong>Room Number</strong></label>
-												 <select  class="form-control" id="specialist_doc" >
+												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" >
 												 <option value="">Select Room Number </option>
-												 <?php foreach($roomnum_list as $list){ ?>
-												 <option value="<?php echo $list['f_id'];?>"><?php echo $list['room_num'];?></option>
-												 <?php } ?>		
+								
 												 </select>												
 											</div>
 										</div>
-										<div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6">
-											  <label ><strong>Room Number</strong></label>
+										
+										   <div class="row d-flex justify-content-center">
+											 <div class="form-group col-md-6">	
+												<label ><strong>Bed Number</strong></label>											 
 												<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 												  <div class="panel panel-warning">
 													<div class="panel-heading" role="tab" id="headingOne" style="border-bottom:1px solid #ddd">
 													  <h4 class="panel-title">
-														<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-														Select Room
+													  
+														<a class="collapsed"  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+														Select Bed
 														</a>
 													  </h4>
 													</div>
 													<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 													  <div class="panel-body">
-													  <div class="d-flex justify-content-center">
-															<ol class="">
-																<li class="row row--1">
-																  <ol class="seats" type="A">
-																	<li class="seat">
-																	  <input type="checkbox" id="1A" />
-																	  <label for="1A">Bed 1</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1B" />
-																	  <label for="1B">Bed 2</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1C" />
-																	  <label for="1C">Bed 3</label>
-																	</li>
-																  </ol>
-																</li>
-																<li class="row row--1">
-																  <ol class="seats" type="A">
-																	 <li class="seat">
-																	  <input type="checkbox" disabled id="1D" />
-																	  <label for="1D">Bed 4</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1E" />
-																	  <label for="1E">Bed 5</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1F" />
-																	  <label for="1F">Bed 6</label>
-																	</li>
-																  </ol>
-																</li>
-																<li class="row row--1">
-																  <ol class="seats" type="A">
-																	 <li class="seat">
-																	  <input type="checkbox" disabled id="1G" />
-																	  <label for="1G">Bed 7</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1H" />
-																	  <label for="1H">Bed 8</label>
-																	</li>
-																	<li class="seat">
-																	  <input type="checkbox" id="1I" />
-																	  <label for="1I">Bed 9</label>
-																	</li>
-																  </ol>
-																</li>
-															</ol>
+													  <div class="d-flex justify-content-center">			
+																<li class="row row--1" id="bedcount_id"></li>																														
 														</div>
 													  </div>
-													</div>
+													</div>													
 												  </div>
 												</div>
-												</div>
-										</div>
-										
+											 </div>
+												</div>																		
 										<a class="btn btn-primary pull-right" type="submit">Next</a>
 										<button class="btn btn-success pull-right" type="submit">Assign</button>
                                     </form>
                                 </div>
-								<div class="clearfix">&nbsp;</div>
-												
+								<div class="clearfix">&nbsp;</div>												
                             </div>
                      </div>
                      <div class="tab-pane <?php if(isset($tab)&& $tab==3){ echo "active";}?>" id="about">
@@ -271,6 +222,7 @@
                                     <table id="example4" class=" table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
+											
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
                                                 <th>Ward Type </th>
@@ -293,15 +245,12 @@
                                                 <td>5</td>
 												<td>25/06/2018 </td>
                                                 <td>Active</td>
-                                            </tr>
-											
+                                            </tr>										
                                         </tbody>
                                     </table>
                                 </div>
-								<div class="clearfix">&nbsp;</div>
-											
-                     </div>
-                    
+								<div class="clearfix">&nbsp;</div>											
+                     </div>                    
                   </div>
                </div>
             </div>
@@ -310,14 +259,35 @@
    </div>
 </div>
 <div id="sucessmsg" style="display:none;"></div>
+
 <script>
-
-
-function get_department_list(id){
-	
+function get_bed_count(id){	
 		if(id!=''){
 			jQuery.ajax({
-   					url: "<?php echo base_url('Ward_management/get_specialists_list');?>",
+   					url: "<?php echo base_url('Ward_management/get_bedcount_list');?>",
+   					data: {
+   						b_id: id,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {						 
+						//console.log(data);return false;
+   						$('#bedcount_id').empty();  												
+						//$('#bedcount_id').append("<option>Select</option>");
+   						for(i=0; i<data.list.length; i++) { 																																			
+							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+						}							
+   						//console.log(data);return false;
+   					}   				
+   			}); 				
+		}
+}
+
+function get_floorno_list(id){	
+
+		if(id!=''){
+			jQuery.ajax({
+   					url: "<?php echo base_url('Ward_management/get_roomno_list');?>",
    					data: {
    						dep_id: id,
    					},
@@ -325,23 +295,16 @@ function get_department_list(id){
    					type: 'POST',
    					success: function (data) {
 						//console.log(data);return false;
-   						$('#specialist_doc').empty();
-   						$('#specialist_doc').append("<option>select</option>");
+   						$('#roomno_id').empty();
+   						$('#roomno_id').append("<option>select</option>");
    						for(i=0; i<data.list.length; i++) {
-   							$('#specialist_doc').append("<option value="+data.list[i].s_id+">"+data.list[i].room_num+"</option>");                      
-                         
+   						$('#roomno_id').append("<option value="+data.list[i].w_r_n_id+">"+data.list[i].room_num+"</option>");                                               
    						}
    						//console.log(data);return false;
-   					}
-   				
-   				});
-				
+   					}  				
+   				});				
 			}
 }
-
-
-
-
 
 $(document).ready(function() {
     $('#example3').DataTable( {

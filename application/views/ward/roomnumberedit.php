@@ -10,6 +10,7 @@
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
+               </li><li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('Ward_management/roomnumber/'.base64_encode(1)); ?>">Room List</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
                <li class="active">Edit</li>
             </ol>
@@ -37,17 +38,17 @@
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />													
 													<input type="hidden" name="rnoid" id="rnoid" value="<?php echo $list['w_r_n_id']; ?>" >
-													<input type="hidden" name="bedid" id="bedid" value="<?php echo $list['w_r_n_id']; ?>" >
 													<div class="modal-header">
 														<h4 class="modal-title" id="smallModalLabel">Room Number rename</h4>
 													</div>
+													
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
 														<label> Floor Number</label>
 														
 														<select name="floor_number" id="floor_number" class="form-control">
-																<option value="">select Floor number</option>
+																<option value="">Select Floor number</option>
 																<?php foreach($floor_list as $List){ ?>
 																	<?php if($List['w_f_id']==$list['f_id']){ ?>
 																		<option selected value="<?php echo $List['w_f_id'];?>"><?php echo $List['ward_floor'];?></option>
@@ -62,13 +63,11 @@
 														<input type="text" id="room_num" name="room_num" class="form-control" value="<?php echo htmlentities($list['room_num']);?>" />
 														<label> Bed Count</label>
 														<input type="text" id="bed_num" name="bed_num" class="form-control" value="<?php echo htmlentities($list['bed_count']);?>" />
-
-														</div>
-														</div>
 													</div>
+													</div>
+														</div>
 													<div class="modal-footer">
 														<button type="submit" class="btn btn-link waves-effect">Update </button>
-														<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
 													</div>
 												 </form>
                      </div>

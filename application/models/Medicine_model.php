@@ -49,6 +49,19 @@ class Medicine_model extends CI_Model
      return $this->db->delete('medicine_list');
 	}
 	
+	function select()
+	{
+		$this->db->order_by('CustomerID', 'DESC');
+		$query = $this->db->get('medicine_list');
+		return $query;
+	}
+
+	function insert($data)
+	{
+		$this->db->insert_batch('medicine_list', $data);
+	}
+	
+	
 	
 
 }
