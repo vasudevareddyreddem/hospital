@@ -55,6 +55,7 @@ class Cardnumber_model extends CI_Model
 	public function get_seller_card_list($s_id){
 		$this->db->select('c_id,card_number')->from('card_numbers');
 		$this->db->where('assign_seller',$s_id);
+		$this->db->where('assign_customer',0);
 		$this->db->where('status',1);
 		return $this->db->get()->result_array();
 	}
@@ -70,10 +71,16 @@ class Cardnumber_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	public function get_assign_cardnumber_list($s_id){
-		$this->db->select('cust_name,mobile,whatsapp_number,aadhar_number,email_id,gender')->from('card_numbers');
+		$this->db->select('c_id,card_number,cust_name,mobile,whatsapp_number,aadhar_number,email_id,gender')->from('card_numbers');
 		$this->db->where('assign_seller',$s_id);
 		$this->db->where('assign_customer',1);
 		return $this->db->get()->result_array();
+	}
+	public function get_seller_details($s_id){
+		$this->db->select('s_id,name,email_id,mobile,profile_pic,address,bank_account,bank_name,ifsccode,bank_holder_name,kyc')->from('card_sellers');
+			$this->db->where('s_id',$s_id);
+
+		return $this->db->get()->row_array();	
 	}
 	
 	
