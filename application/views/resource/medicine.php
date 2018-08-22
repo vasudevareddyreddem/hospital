@@ -25,39 +25,14 @@
 			<header>Add Medicine</header>
 			</div>
 			
-			
-			
-			<html>
-<head>
-	<title>Excel Data into Database</title>
-	<link rel="stylesheet" href="<?php echo base_url(); ?>asset/bootstrap.min.css" />
-	<script src="<?php echo base_url(); ?>asset/jquery.min.js"></script>
-</head>
-
-<body>
-	<div class="container">
-		<br />
-		<h3 align="center">Excel Data into Database</h3>
-		<form method="post" id="import_form" enctype="multipart/form-data">
-			<p><label>Select Excel File</label>
-			<input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+		<form method="post" action="<?php echo base_url('medicine/exelupload'); ?>" enctype="multipart/form-data">
+		
+			<label>Upload excel file</label>
+			<input type="file" name="uploadfile" id="uploadfile">
 			<br />
-			<input type="submit" name="import" value="Import" class="btn btn-info" />
+			<input type="submit" name="upload" value="upload" >
 		</form>
-		<br />
-		<div class="table-responsive" id="customer_data">
-
-		</div>
-	</div>
-</body>
-</html>
-
-			
-			
-			
-		
-		
-		
+	
 		<div class="card-body">
 		<div class="row">
 			<div class="col-md-1">

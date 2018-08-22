@@ -294,112 +294,71 @@ class Medicine extends In_frontend {
 			redirect('admin');
 		}
 	}
-	public function fetch()
-	{
-		$data = $this->Medicine_model->select();
-		$output = '
-		<h3 align="center">Total Data - '.$data->num_rows().'</h3>
-		<table class="table table-striped table-bordered">
-			<tr>
-				<th>hos_id</th>
-				<th>hsn</th>
-				<th>othercode</th>
-				<th>medicine_name</th>
-				<th>dosage</th>
-				<th>qty</th>
-				<th>amount</th>
-				<th>total_amount</th>
-				<th>sgst</th>
-				<th>cgst</th>
-				<th>other</th>
-				<th>create_at</th>
-				<th>status</th>
-				<th>added_by</th>
-				<th>updated_at</th>
-			</tr>
-		';
-		foreach($data->result() as $row)
-		{
-			$output .= '
-			<tr>
-				<td>'.$row->hos_id.'</td>
-				<td>'.$row->hsn.'</td>
-				<td>'.$row->othercode.'</td>
-				<td>'.$row->medicine_name.'</td>
-				<td>'.$row->dosage.'</td>
-				<td>'.$row->qty.'</td>
-				<td>'.$row->amount.'</td>
-				<td>'.$row->total_amount.'</td>
-				<td>'.$row->sgst.'</td>
-				<td>'.$row->cgst.'</td>
-				<td>'.$row->other.'</td>
-				<td>'.$row->create_at.'</td>
-				<td>'.$row->status.'</td>
-				<td>'.$row->added_by.'</td>
-				<td>'.$row->updated_at.'</td>
-			</tr>
-			';
-		}
-		$output .= '</table>';
-		echo $output;
-	}
+	                                public function exelupload(){
+										if($this->session->userdata('userdetails'))
+		                                 {
+				                      if($admindetails['role_id']=4){
+										   //echo '<pre>';print_r($admindetails);exit;
+					                 $post=$this->input->post();
+					                      
+					                 $admindetails=$this->session->userdata('userdetails');
+					                 $userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+										
+		                                include_once('simplexlsx.class.php');
+												$getWorksheetName = array();
+												$xlsx = new SimpleXLSX( $_FILES['uploadfile']['tmp_name'] );
+												$getWorksheetName = $xlsx->getWorksheetName();
+												//echo $xlsx->sheetsCount();exit;
+														for($j=1;$j <= $xlsx->sheetsCount();$j++){
+														$cnt=$xlsx->sheetsCount()-1;
+														$arry=$xlsx->rows($j);
+														unset($arry[0]);
 
-	public function import()
-	{
-		if(isset($_FILES["file"]["name"]))
-		{
-			$path = $_FILES["file"]["tmp_name"];
-			$object = PHPExcel_IOFactory::load($path);
-			foreach($object->getWorksheetIterator() as $worksheet)
-			{
-				$highestRow = $worksheet->getHighestRow();
-				$highestColumn = $worksheet->getHighestColumn();
-				for($row=1; $row<=$highestRow; $row++)
-				{
-					$hos_id = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-					$hsn = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-					$othercode = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-					$medicine_name = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-					$dosage = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-					$qty = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-					$amount = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-					$total_amount = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-					$sgst = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-					$cgst = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-					$other = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-					$create_at = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-					$status = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-					$added_by = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-					$updated_at = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-					
-					$data[]= array(
-						'hos_id'		=>	$hos_id,
-						'hsn'			=>	$hsn,
-						'othercode'		=>	$othercode,
-						'medicine_name'	=>	$medicine_name,
-						'dosage'		=>	$dosage,
-						'qty'			=>	$qty,
-						'amount'		=>	$amount,
-						'total_amount'	=>	$total_amount,
-						'sgst'			=>	$sgst,
-						'cgst'			=>	$cgst,
-						'other'			=>	$other,
-						'create_at'		=>	date('Y-m-d H:i:s'),
-						'status'		=>	$status,
-						'added_by'		=>	$added_by,
-						'updated_at'	=>	date('Y-m-d H:i:s'),
-						
-					);
-				}
-			}
-			$this->Medicine_model->insert($data);
-			echo 'Data Imported successfully';
-		}	
-	}
+						                                 //echo "<pre>";print_r($arry);exit;
+																foreach($arry as $key=>$fields)
+																{   
+		                                                        $data=array(
+																'hos_id'=>$userdetails['hos_id'],
+																'hsn'=>$fields[1],
+																'othercode'=>$fields[2],		
+																'medicine_name'=>$fields[3],		
+																'medicine_type'=>$fields[4],		
+																'expiry_date'=>$fields[5],		
+																'dosage'=>$fields[6],		
+																'qty'=>$fields[7],		
+																'amount'=>$fields[8],		
+																'sgst'=>$fields[9],		
+																'cgst'=>$fields[10],
+                                                                'total_amount'=>$fields[8]+$fields[9]+$fields[10],																
+																'create_at'=>date('Y-m-d H:i:s'),		
+																'status'=>1,		
+																'added_by'=>$userdetails['a_id'],		
+																'updated_at'=>date('Y-m-d H:i:s'),		
+																	);
+		
+                                                     $save=$this->medicine_model->insert_data_pramacy($data);
+																}
+														}
+														//echo'<pre>';print_r($data);exit;
+														 if(count($save)>0){
+														$this->session->set_flashdata('success',"Medicine  successfully inserted.");
+														redirect('medicine');
+													}else{
+														$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+														redirect('medicine');
+													}
+												
+													}else{
+														$this->session->set_flashdata('error',"you don't have permission to access");
+														redirect('dashboard');
+													}
+											}else{
+												$this->session->set_flashdata('error','Please login to continue');
+												redirect('admin');
+											}						
+			
+                                             }
+		
+									}
+		
 	
-	
-	
-	
-	
-	
-}
