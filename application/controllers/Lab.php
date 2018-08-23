@@ -158,7 +158,7 @@ class Lab extends In_frontend {
 						't_description'=>isset($post['description'])?$post['description']:'',
 						't_department'=>isset($post['department'])?$post['department']:'',
 						);
-						echo '<pre>';print_r($adding);exit;
+						//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->update_tabtest_details($post['t_id'],$adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Updated.");
@@ -1096,7 +1096,7 @@ class Lab extends In_frontend {
 			redirect('admin');
 		}
 	}
-	public function exelsheet(){
+	public function exelsheet()
 		{	
 		if($this->session->userdata('userdetails'))
 		{
@@ -1135,13 +1135,13 @@ class Lab extends In_frontend {
          $save=$this->Lab_model->insert_data_lab_detail_value($data);
 			   //echo'<pre>';print_r($save);exit;
 		               }     
-	                      }
+	                 }
 			if(count($save)>0){
 		$this->session->set_flashdata('success',"lab details  successfully inserted.");
-	   redirect('lab');
+	    redirect('lab');
 		}else{
 		$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-	redirect('lab');
+	    redirect('lab');
 		}
 												
 		}else{
@@ -1150,11 +1150,11 @@ class Lab extends In_frontend {
 		}
 	}else{
 	$this->session->set_flashdata('error','Please login to continue');
-redirect('admin');
+    redirect('admin');
 	}						
 			
   }
 		
-}
+
 		
 }
