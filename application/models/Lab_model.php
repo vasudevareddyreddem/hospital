@@ -380,7 +380,10 @@ class Lab_model extends CI_Model
 		return $this->db->update('lab_test_list',$data);
 		
 	}
-	
+	public function insert_data_lab_detail_value($data){
+	$this->db->insert('lab_test_list', $data);
+     return  $this->db->insert_id();
+	}
 	
 
 }

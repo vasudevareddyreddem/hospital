@@ -13,7 +13,7 @@
             </ol>
          </div>
       </div>
-   
+        
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
@@ -23,6 +23,14 @@
                   </li>
                </ul>
             </header>
+			 <form method="post" action="<?php echo base_url('lab/exelsheet'); ?>" enctype="multipart/form-data">
+		
+			<label>Upload excel file</label>
+			<input type="file" name="uploadfile" id="uploadfile">
+			<br />
+			<input type="submit" name="upload" value="upload" >
+		</form>
+			
             <div class="panel-body">
                <div class="tab-content">
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">

@@ -110,7 +110,7 @@ class Lab extends In_frontend {
 						'create_by'=>$admindetails['a_id'],
 						'out_source'=>$admindetails['out_source']
 						);
-						//echo '<pre>';print_r($admindetails);exit;
+						//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Added.");
@@ -158,7 +158,7 @@ class Lab extends In_frontend {
 						't_description'=>isset($post['description'])?$post['description']:'',
 						't_department'=>isset($post['department'])?$post['department']:'',
 						);
-						//echo '<pre>';print_r($adding);exit;
+						echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->update_tabtest_details($post['t_id'],$adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test successfully Updated.");
@@ -1096,7 +1096,65 @@ class Lab extends In_frontend {
 			redirect('admin');
 		}
 	}
-	
-	
-	
+	public function exelsheet(){
+		{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=5){
+					//echo'<pre>';print_r($admindetails);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo'<pre>';print_r($userdetails);exit;
+					include_once('simplexlsx.class.php');
+					$getWorksheetName = array();
+					$xlsx = new SimpleXLSX( $_FILES['uploadfile']['tmp_name'] );
+					$getWorksheetName = $xlsx->getWorksheetName();
+					//echo $xlsx->sheetsCount();exit;
+					for($j=1;$j <= $xlsx->sheetsCount();$j++){
+					$cnt=$xlsx->sheetsCount()-1;
+					$arry=$xlsx->rows($j);
+					unset($arry[0]);
+
+		           //echo "<pre>";print_r($arry);exit;
+		           foreach($arry as $key=>$fields)
+					{   
+		         $data=array(
+			'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
+			'test_type'=>$fields[0],
+			't_name'=>$fields[1],
+			'type'=>$fields[2],
+			'duration'=>$fields[3],
+			'amuont'=>$fields[4],
+			'modality'=>$fields[5],
+            'create_at'=>date('Y-m-d H:i:s'),
+			'status'=>1,
+			'create_by'=>$admindetails['a_id'],
+			'out_source'=>$admindetails['out_source']	
+				);
+		//echo'<pre>';print_r($data);exit;
+         $save=$this->Lab_model->insert_data_lab_detail_value($data);
+			   //echo'<pre>';print_r($save);exit;
+		               }     
+	                      }
+			if(count($save)>0){
+		$this->session->set_flashdata('success',"lab details  successfully inserted.");
+	   redirect('lab');
+		}else{
+		$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+	redirect('lab');
+		}
+												
+		}else{
+		$this->session->set_flashdata('error',"you don't have permission to access");
+		redirect('dashboard');
+		}
+	}else{
+	$this->session->set_flashdata('error','Please login to continue');
+redirect('admin');
+	}						
+			
+  }
+		
+}
+		
 }
