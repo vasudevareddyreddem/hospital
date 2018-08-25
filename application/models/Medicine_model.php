@@ -52,6 +52,5 @@ class Medicine_model extends CI_Model
 	public function insert_data_pramacy($data){
 	$this->db->insert('medicine_list', $data);
      return  $this->db->insert_id();
-
 }
 }
