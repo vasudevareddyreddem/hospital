@@ -327,15 +327,15 @@ class Medicine extends In_frontend {
 																'dosage'=>$fields[5],		
 																'qty'=>$fields[6],		
 																'amount'=>$fields[7],		
-																'sgst'=>$fields[8],		
-																'cgst'=>$fields[9],
-                                                                'total_amount'=>$fields[7]+$fields[8]+$fields[9],																
+																'sgst'=>$fields[8]*$fields[7],		
+																'cgst'=>$fields[9]*$fields[7],
+                                                                'total_amount'=>$fields[8]*$fields[7]+$fields[9]*$fields[7]+$fields[7],																
 																'create_at'=>date('Y-m-d H:i:s'),		
 																'status'=>1,		
 																'added_by'=>$userdetails['a_id'],		
 																'updated_at'=>date('Y-m-d H:i:s'),		
 																	);
-		
+	
                                                      $save=$this->medicine_model->insert_data_pramacy($data);
 																}
 														}
