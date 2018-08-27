@@ -285,4 +285,21 @@ class Ward_model extends CI_Model
 	}
 	
 	
+	
+	public function admitted_patients($data){
+	$this->db->insert('admitted_patient_list',$data);
+	return $insert_id = $this->db->insert_id();
+	}
+	public function get_saved_admitted_patients($name,$hos_id){
+		$this->db->select('*')->from('admitted_patient_list');		
+		$this->db->where('p_name',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_admitted_patients_details($a_p_id){
+		$this->db->select('*')->from('admitted_patient_list');		
+		$this->db->where('a_p_id',$a_p_id);
+		return $this->db->get()->row_array();
+	}
+	
 }

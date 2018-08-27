@@ -125,7 +125,9 @@ ALTER TABLE `hospital`.`patient_billing`
   ALTER TABLE `hospital`.`patient_billing`   
   CHANGE `patient_type` `patient_type` INT(11) DEFAULT 1  NULL;
   
-  
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `hos_id` INT(11) NULL AFTER `a_p_id`;
+
   
   
 

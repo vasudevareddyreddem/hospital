@@ -29,6 +29,58 @@ public function index()
 			redirect('admin');
 		}
 	}
+	
+	public function admitdetails()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==9){
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['tab']=base64_decode($this->uri->segment(3));
+					
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($post['pid'],$userdetails['hos_id']);
+					$data['ward_list'] =$this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);					
+					echo $this->db->last_query();exit;
+					//echo '<pre>';print_r($data);exit;
+					$floor_details=array(
+					'hos_id'=>$hos_ids['hos_id'],
+					'pt_id'=>$post['pid'],
+					'bill_id'=>$post['b_id'],
+					'p_name'=>$post['name'],
+					'w_name'=>$post['ward_name'],
+					'w_type'=>$post['ward_type'],
+					'room_type'=>$post['room_type'],
+					'floor_no'=>$post['ward_floor'],
+					'room_no'=>$post['room_num'],
+					'bed_no'=>$post['bed']
+					);
+					//echo '<pre>';print_r($floor_details);exit;
+				$ward = $this->Ward_model->admitted_patients($floor_details);
+		
+				if(count($ward)>0){
+					$this->session->set_flashdata('success',"floornumber added successfully");
+					redirect('ward_management/admitdetails/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/admitdetails');
+				}
+			
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
 	public function admit()
 	{			
 		if($this->session->userdata('userdetails'))

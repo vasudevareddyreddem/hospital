@@ -125,11 +125,11 @@
                                      <header>Ward Details</header>                                 
                                 </div>
                                 <div class="card-body ">
-                                    <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admit'); ?> " method="post"  id="contact_form">
+                                    <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admitdetails'); ?> " method="post"  id="contact_form">
                                         <div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
-												<select  class="form-control">
+												<select  class="form-control" name="ward_name">
 												<option value="">Select Ward Number</option>
 												<?php foreach($ward_list as $List){ ?>
 												<option value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
@@ -234,18 +234,34 @@
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>101</td>
-												<td>patient 1</td>
-												<td>type 1</td>
-												<td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
-												<td>25/06/2018 </td>
-                                                <td>Active</td>
-                                            </tr>										
+                                         <tbody>										
+										<?php if(isset($ip_patient_list)  && count($ip_patient_list)>0){ ?>
+											<?php foreach($ip_patient_list as $list){ ?>
+												<tr>
+													<td><?php echo $list['pid']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['gender']; ?></td>
+													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['resource_name']; ?></td>
+													<td><?php echo $list['problem']; ?></td>
+													<td><?php echo $list['create_at']; ?></td>
+													<td class="valigntop">
+														<div class="btn-group">
+															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+																<i class="fa fa-angle-down"></i>
+															</button>
+															<ul class="dropdown-menu" role="menu">
+																<li>
+																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
+																		<i class="fa fa-edit"></i>Room/Bed </a>
+																</li>
+															   												
+															</ul>
+														</div>
+													</td>
+												</tr>
+											<?php } ?>
+										<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
