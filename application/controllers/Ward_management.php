@@ -38,7 +38,7 @@ public function index()
 				if($admindetails['role_id']==9){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
-					
+					$post=$this->input->post();
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($post['pid'],$userdetails['hos_id']);
 					$data['ward_list'] =$this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);					
