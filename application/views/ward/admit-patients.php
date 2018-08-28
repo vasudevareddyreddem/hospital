@@ -140,7 +140,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Type</strong></label>
-												<select  class="form-control">
+												<select  class="form-control"  name="ward_type">
 												<option value="">Select Ward Type</option>
 												<?php foreach($wardtype_list as $List){ ?>
 												<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
@@ -151,7 +151,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Room Type</strong></label>
-											 <select  class="form-control">
+											 <select  class="form-control" name="room_type">
 												<option value="">Select Room Type </option>
 												<?php foreach($roomtype_list as $list){ ?>
 												<option value="<?php echo $list['w_r_t_id'];?>"><?php echo $list['room_type'];?></option>
@@ -162,7 +162,7 @@
 										</div>
 										
 										<div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6">
+											 <div class="form-group col-md-6" name="floor_number">
 											  <label ><strong>Floor Number</strong></label>
 												<select  class="form-control" onchange="get_floorno_list(this.value);">
 												<option value="">Select Floor Number</option>
@@ -172,7 +172,7 @@
 										</select></div>
 										</div>
 										<div class="row d-flex justify-content-center">
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-6" name="room_num">
 											  <label ><strong>Room Number</strong></label>
 												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" >
 												 <option value="">Select Room Number </option>

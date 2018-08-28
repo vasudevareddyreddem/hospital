@@ -40,24 +40,31 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$post=$this->input->post();
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($post['pid'],$userdetails['hos_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_saved_ip_patient_list($post['pid'],$userdetails['hos_id']);	
+					//echo $this->db->last_query();exit;
+					echo '<pre>';print_r($data);exit;
 					$data['ward_list'] =$this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);					
-					echo $this->db->last_query();exit;
+					$data['wardtype_list'] = $this->Ward_model->get_saved_wardtype($post['ward_type'],$hos_ids['hos_id']);
+					$data['roomtype_list'] =$this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
+					$data['floor_list'] =$this->Ward_model->get_saved_floor($post['floor_number'],$hos_ids['hos_id']);
+					//echo $this->db->last_query();exit;
+					$data['roomnum_list'] =$this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
+					//echo $this->db->last_query();exit;
 					//echo '<pre>';print_r($data);exit;
-					$floor_details=array(
+					$admitted_patients_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
-					'pt_id'=>$post['pid'],
+					'pt_id'=>$list['pid'],
 					'bill_id'=>$post['b_id'],
 					'p_name'=>$post['name'],
 					'w_name'=>$post['ward_name'],
 					'w_type'=>$post['ward_type'],
 					'room_type'=>$post['room_type'],
-					'floor_no'=>$post['ward_floor'],
+					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
 					'bed_no'=>$post['bed']
 					);
-					//echo '<pre>';print_r($floor_details);exit;
-				$ward = $this->Ward_model->admitted_patients($floor_details);
+					//echo '<pre>';print_r($admitted_patients_details);exit;
+				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
 		
 				if(count($ward)>0){
 					$this->session->set_flashdata('success',"floornumber added successfully");
