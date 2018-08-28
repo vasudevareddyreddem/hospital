@@ -22,3 +22,6 @@ p{
     transition: all 300ms ease-in;
     transform: scale(1.5);
 }
+.bv-form .help-block{
+	color:red !important;
+}

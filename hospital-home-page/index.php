@@ -10,10 +10,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrapValidator.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.min.css" rel="stylesheet">
+	    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+   
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	 <script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
     <style type="text/css">
       @media (min-width: 800px) and (max-width: 850px) {
               .navbar:not(.top-nav-collapse) {
@@ -22,6 +32,7 @@
           }
     </style>
 </head>
+
 
 <body>
 
@@ -63,11 +74,13 @@
         <ul class="navbar-nav nav-flex-icons">
           
           <li class="nav-item">
-            <a href="#" class="nav-link border border-light rounded"
+            <a href="#"  data-toggle="modal" data-target="#centralModalInfo" class="nav-link border border-light rounded"
               target="_blank">
-              <i class="fa fa-user mr-2"></i>Login
+              <i class="fa fa-user mr-2"></i>Register
             </a>
-          </li>
+          </li>&nbsp;
+		
+		
         </ul>
 
       </div>
@@ -378,7 +391,69 @@ These guidelines have been prepared to facilitate and provide guidance to both t
   </main>
   <!--Main layout-->
 
-  <!--Footer-->
+ <!-- Central Modal Medium Info -->
+<div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-notify modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+            <p class="heading lead">Register</p>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">&times;</span>
+            </button>
+        </div>
+
+        <!--Body-->
+	 <form id="defaultForm" method="post"  action="index.php">
+        <div class="modal-body">
+                <form id="defaultForm" method="post" class="" action="index.php">
+							<div class="col-md-12">
+							<div class="form-group">
+								<label class=" control-label">Name of the Hospital</label>
+								<div class="">
+									<input type="text" class="form-control" name="username" placeholder="Enter Name of the Hospital" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label">Name of the Representative</label>
+								<div class="">
+									<input type="text" class="form-control" name="username" placeholder="Enter Name of the Representative" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label">Mobile Number</label>
+								<div class="">
+									<input type="text" class="form-control" name="username" placeholder="Enter Mobile Number" />
+								</div>
+							</div>	
+							<div class="form-group">
+								<label class=" control-label">Email</label>
+								<div class="">
+									<input type="email" class="form-control" name="username" placeholder="Enter Email" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class=" control-label">Message</label>
+								<div class="">
+									<textarea type="text" class="form-control" placeholder="Enter Message Here"></textarea>
+								</div>
+							</div>
+                        </div>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+            <button type="submit" class="btn btn-primary pull-right" name="signup" value="Sign up">Register</button>
+            <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, thanks</a>
+        </div>
+		</form>
+    </div>
+    <!--/.Content-->
+</div>
+</div>
+<!-- Central Modal Medium Info-->
   <footer class="bg-dark text-white py-4">
 	<div class="container">
 		<div class="row">
@@ -402,18 +477,7 @@ These guidelines have been prepared to facilitate and provide guidance to both t
 		</div>
 	</div>
   </footer>
-  <!--/.Footer-->
 
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-      <!-- Initializations -->
   <script type="text/javascript">
 
 function scrollNav() {
@@ -433,6 +497,157 @@ function scrollNav() {
 }
 scrollNav();
   </script>
+ <script type="text/javascript">
+$(document).ready(function() {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    $('#defaultForm').bootstrapValidator({
+//        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstName: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required and cannot be empty'
+                    }
+                }
+            },
+            lastName: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required and cannot be empty'
+                    }
+                }
+            },
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    },
+                    remote: {
+                        type: 'POST',
+                        url: 'remote.php',
+                        message: 'The username is not available'
+                    },
+                    different: {
+                        field: 'password,confirmPassword',
+                        message: 'The username and password cannot be the same as each other'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            birthday: {
+                validators: {
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: 'The birthday is not valid'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            'languages[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Please specify at least one language you can speak'
+                    }
+                }
+            },
+            'programs[]': {
+                validators: {
+                    choice: {
+                        min: 2,
+                        max: 4,
+                        message: 'Please choose 2 - 4 programming languages you are good at'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Validate the form manually
+    $('#validateBtn').click(function() {
+        $('#defaultForm').bootstrapValidator('validate');
+    });
+
+    $('#resetBtn').click(function() {
+        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+    });
+});
+</script>
   
 </body>
 
