@@ -39,10 +39,11 @@ public function index()
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['ip_patient_list']=$this->Ward_model->get_saved_ip_patient_list($post['pid'],$userdetails['hos_id']);	
+					$data['ip_patient_list']=$this->Ward_model->get_saved_ip_patient_list($post['p_id'],$userdetails['hos_id']);	
 					//echo $this->db->last_query();exit;
-					echo '<pre>';print_r($data);exit;
+					echo '<pre>';print_r($post);exit;
 					$data['ward_list'] =$this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);					
 					$data['wardtype_list'] = $this->Ward_model->get_saved_wardtype($post['ward_type'],$hos_ids['hos_id']);
 					$data['roomtype_list'] =$this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
@@ -53,7 +54,7 @@ public function index()
 					//echo '<pre>';print_r($data);exit;
 					$admitted_patients_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
-					'pt_id'=>$list['pid'],
+					'pt_id'=>$post['p_id'],
 					'bill_id'=>$post['b_id'],
 					'p_name'=>$post['name'],
 					'w_name'=>$post['ward_name'],
@@ -63,7 +64,7 @@ public function index()
 					'room_no'=>$post['room_num'],
 					'bed_no'=>$post['bed']
 					);
-					//echo '<pre>';print_r($admitted_patients_details);exit;
+					echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
 		
 				if(count($ward)>0){
@@ -96,7 +97,8 @@ public function index()
 				if($admindetails['role_id']==9){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['tab']=base64_decode($this->uri->segment(3));
-					
+					$data['p_id']=base64_decode($this->uri->segment(4));
+					$data['b_id']=base64_decode($this->uri->segment(5));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>';print_r($hos_ids);exit;
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);

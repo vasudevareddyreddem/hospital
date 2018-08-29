@@ -126,7 +126,10 @@
                                 </div>
                                 <div class="card-body ">
                                     <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admitdetails'); ?> " method="post"  id="contact_form">
-                                        <div class="row d-flex justify-content-center">
+                                        
+										<input type="hidden" name="p_id" id="p_id" value="<?php echo isset($p_id)?$p_id:''; ?>">
+										<input type="hidden" name="b_id" id="b_id" value="<?php echo isset($b_id)?$b_id:''; ?>">
+										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
 												<select  class="form-control" name="ward_name">

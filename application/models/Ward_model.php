@@ -17,12 +17,12 @@ class Ward_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 		
-	public  function get_saved_ip_patient_list($name,$hos_id){
+	public  function get_saved_ip_patient_list($pid,$hos_id){
 		$this->db->select('*')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
-		$this->db->where('pid',$name);
-		$this->db->where('hos_id',$hos_id);		
+		$this->db->where('patients_list_1.pid',$pid);
+		$this->db->where('patients_list_1.hos_id',$hos_id);		
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patient_billing.completed_type',0);
 		return $this->db->get()->row_array();
