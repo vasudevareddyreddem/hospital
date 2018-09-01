@@ -41,7 +41,7 @@ public function index()
 				$post=$this->input->post();
 				//echo '<pre>';print_r($post);exit;
 				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);					
-				//echo '<pre>';print_r($post);exit;				
+				echo '<pre>';print_r($post);				
 				//echo $this->db->last_query();exit;
 				//echo '<pre>';print_r($data);exit;
 				$admitted_patients_details=array(
@@ -56,7 +56,7 @@ public function index()
 					'date_of_admit'=>date('Y-m-d H:i:s'),
 					'bed_no'=>$post['bed']
 				);
-					//echo '<pre>';print_r($admitted_patients_details);exit;
+					echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
 
 				if(count($ward)>0){

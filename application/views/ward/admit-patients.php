@@ -132,7 +132,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
-												<select  class="form-control" name="ward_name">
+												<select  class="form-control" name="ward_name" id="ward_name">
 												<option value="">Select Ward Number</option>
 												<?php foreach($ward_list as $List){ ?>
 												<option value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
@@ -143,7 +143,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Type</strong></label>
-												<select  class="form-control"  name="ward_type">
+												<select  class="form-control"  name="ward_type" id="ward_type">
 												<option value="">Select Ward Type</option>
 												<?php foreach($wardtype_list as $List){ ?>
 												<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
@@ -154,7 +154,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Room Type</strong></label>
-											 <select  class="form-control" name="room_type">
+											 <select  class="form-control" name="room_type" id="room_type">
 												<option value="">Select Room Type </option>
 												<?php foreach($roomtype_list as $list){ ?>
 												<option value="<?php echo $list['w_r_t_id'];?>"><?php echo $list['room_type'];?></option>
@@ -167,7 +167,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6" >
 											  <label ><strong>Floor Number</strong></label>
-												<select  class="form-control" onchange="get_floorno_list(this.value);" name="floor_number">
+												<select  class="form-control" onchange="get_floorno_list(this.value);" name="floor_number" id="floor_number">
 												<option value="">Select Floor Number</option>
 												<?php foreach($floor_list as $list){ ?>
 												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
@@ -177,7 +177,7 @@
 										<div class="row d-flex justify-content-center">
 											<div class="form-group col-md-6" >
 											  <label ><strong>Room Number</strong></label>
-												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" name="room_num">
+												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" name="room_num" >
 												 <option value="">Select Room Number </option>
 								
 												 </select>												
@@ -291,10 +291,9 @@ function get_bed_count(id){
    					type: 'POST',
    					success: function (data) {						 
 						//console.log(data);return false;
-   						$('#bedcount_id').empty();  												
-						//$('#bedcount_id').append("<option>Select</option>");
+   						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" value="" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 						}							
    						//console.log(data);return false;
    					}   				

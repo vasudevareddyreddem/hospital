@@ -288,7 +288,7 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_w_r_n_id_wise_bedcount($w_r_n_id){
-		$this->db->select('ward_room_beds.w_r_n_id,ward_room_beds.bed')->from('ward_room_beds');		
+		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.bed')->from('ward_room_beds');		
 		$this->db->where('w_r_n_id',$w_r_n_id);
 		$this->db->where('status',1);
 		return $this->db->get()->result_array();
