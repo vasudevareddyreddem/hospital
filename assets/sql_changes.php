@@ -128,7 +128,15 @@ ALTER TABLE `hospital`.`patient_billing`
   ALTER TABLE `hospital`.`admitted_patient_list`   
   ADD COLUMN `hos_id` INT(11) NULL AFTER `a_p_id`;
 
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  DROP COLUMN `p_name`;
   
-  
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  CHANGE `w-type` `w_type` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL;
+
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `status` INT(11) DEFAULT 1  NULL AFTER `bed_no`,
+  ADD COLUMN `date_of_admit` DATETIME NULL AFTER `status`;
+
 
   

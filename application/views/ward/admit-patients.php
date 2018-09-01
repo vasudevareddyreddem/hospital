@@ -165,9 +165,9 @@
 										</div>
 										
 										<div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6" name="floor_number">
+											 <div class="form-group col-md-6" >
 											  <label ><strong>Floor Number</strong></label>
-												<select  class="form-control" onchange="get_floorno_list(this.value);">
+												<select  class="form-control" onchange="get_floorno_list(this.value);" name="floor_number">
 												<option value="">Select Floor Number</option>
 												<?php foreach($floor_list as $list){ ?>
 												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
@@ -175,9 +175,9 @@
 										</select></div>
 										</div>
 										<div class="row d-flex justify-content-center">
-											<div class="form-group col-md-6" name="room_num">
+											<div class="form-group col-md-6" >
 											  <label ><strong>Room Number</strong></label>
-												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" >
+												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" name="room_num">
 												 <option value="">Select Room Number </option>
 								
 												 </select>												
@@ -199,8 +199,8 @@
 													</div>
 													<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 													  <div class="panel-body">
-													  <div class="d-flex justify-content-center">			
-																<li class="row row--1" id="bedcount_id"></li>																														
+													  <div class="d-flex justify-content-center">												  
+																<li class="row row--1" id="bedcount_id" name="bed"  ></li>																														
 														</div>
 													  </div>
 													</div>													
@@ -228,8 +228,8 @@
 											
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
+                                                <th>Ward Name </th>
                                                 <th>Ward Type </th>
-                                                <th>Ward No </th>
                                                 <th>Room Type</th>
                                                 <th>Room No</th>
                                                 <th>Bed No</th>
@@ -238,24 +238,24 @@
                                             </tr>
                                         </thead>
                                          <tbody>										
-										<?php if(isset($ip_patient_list)  && count($ip_patient_list)>0){ ?>
-											<?php foreach($ip_patient_list as $list){ ?>
+										<?php if(isset($ip_admitted_patient_list)  && count($ip_admitted_patient_list)>0){ ?>
+											<?php foreach($ip_admitted_patient_list as $list){ ?>
 												<tr>
-													<td><?php echo $list['pid']; ?></td>
+													<td><?php echo $list['pt_id']; ?></td>
 													<td><?php echo $list['name']; ?></td>
-													<td><?php echo $list['gender']; ?></td>
-													<td><?php echo $list['age']; ?></td>
-													<td><?php echo $list['resource_name']; ?></td>
-													<td><?php echo $list['problem']; ?></td>
-													<td><?php echo $list['create_at']; ?></td>
+													<td><?php echo $list['ward_name']; ?></td>
+													<td><?php echo $list['ward_type']; ?></td>
+													<td><?php echo $list['room_type']; ?></td>
+													<td><?php echo $list['room_num']; ?></td>
+													<td><?php echo $list['bed']; ?></td>
+													<td><?php echo $list['date_of_admit']; ?></td>	
 													<td class="valigntop">
 														<div class="btn-group">
 															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
 																<i class="fa fa-angle-down"></i>
 															</button>
 															<ul class="dropdown-menu" role="menu">
-																<li>
-																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
+																<li>																	
 																		<i class="fa fa-edit"></i>Room/Bed </a>
 																</li>
 															   												

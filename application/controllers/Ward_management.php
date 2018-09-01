@@ -35,40 +35,32 @@ public function index()
 		if($this->session->userdata('userdetails'))
 		{
 			$admindetails=$this->session->userdata('userdetails');
-				if($admindetails['role_id']==9){
-					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['tab']=base64_decode($this->uri->segment(3));
-					$post=$this->input->post();
-					//echo '<pre>';print_r($post);exit;
-					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['ip_patient_list']=$this->Ward_model->get_saved_ip_patient_list($post['p_id'],$userdetails['hos_id']);	
-					//echo $this->db->last_query();exit;
-					echo '<pre>';print_r($post);exit;
-					$data['ward_list'] =$this->Ward_model->get_saved_wardname($post['ward_name'],$hos_ids['hos_id']);					
-					$data['wardtype_list'] = $this->Ward_model->get_saved_wardtype($post['ward_type'],$hos_ids['hos_id']);
-					$data['roomtype_list'] =$this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
-					$data['floor_list'] =$this->Ward_model->get_saved_floor($post['floor_number'],$hos_ids['hos_id']);
-					//echo $this->db->last_query();exit;
-					$data['roomnum_list'] =$this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
-					//echo $this->db->last_query();exit;
-					//echo '<pre>';print_r($data);exit;
-					$admitted_patients_details=array(
+			if($admindetails['role_id']==9){
+				$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+				$data['tab']=base64_decode($this->uri->segment(3));
+				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
+				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);					
+				//echo '<pre>';print_r($post);exit;				
+				//echo $this->db->last_query();exit;
+				//echo '<pre>';print_r($data);exit;
+				$admitted_patients_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
 					'pt_id'=>$post['p_id'],
 					'bill_id'=>$post['b_id'],
-					'p_name'=>$post['name'],
 					'w_name'=>$post['ward_name'],
 					'w_type'=>$post['ward_type'],
 					'room_type'=>$post['room_type'],
 					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
+					'date_of_admit'=>date('Y-m-d H:i:s'),
 					'bed_no'=>$post['bed']
-					);
-					echo '<pre>';print_r($admitted_patients_details);exit;
+				);
+					//echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
-		
+
 				if(count($ward)>0){
-					$this->session->set_flashdata('success',"floornumber added successfully");
+					$this->session->set_flashdata('success',"admitted patient details added successfully");
 					redirect('ward_management/admitdetails/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -102,6 +94,7 @@ public function index()
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>';print_r($hos_ids);exit;
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
 					//echo $this->db->last_query();exit;
 					//echo '<pre>';print_r($data);exit;
 					$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);					

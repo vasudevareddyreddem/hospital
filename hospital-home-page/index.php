@@ -404,40 +404,72 @@ These guidelines have been prepared to facilitate and provide guidance to both t
                 <span aria-hidden="true" class="white-text">&times;</span>
             </button>
         </div>
-
+		
+		
+				<span id="errormsg_1">
+				<?php
+				if(isset($_GET['message'])&& $_GET['message']=='success'){
+					?>
+					<div id="bottom" >
+				<div class="page-alert">
+					<div class="alert alert-success page-alert" id="alert-1">
+						 <strong >Your query successfully sent!</strong>
+					</div>
+					</div>
+				</div>
+				<script>
+				document.getElementById("contact").click();
+				</script>
+				<?php } ?>
+				
+				<?php if(isset($_GET['message'])&& $_GET['message']=='fail'){ ?>
+				<div id="bottom" >
+				<div class="page-alerts">
+					<div class="alert alert-warning page-alert" id="alert-2">					
+						 <strong >Technical problem will occured. Please try again. </strong>
+					</div>
+					</div>
+				</div>
+				<script>
+				document.getElementById("contact").click();
+				</script>
+				<?php } ?>
+				</span>
+				
+				
         <!--Body-->
-	 <form id="defaultForm" method="post"  action="index.php">
-        <div class="modal-body">
-                <form id="defaultForm" method="post" class="" action="index.php">
+	 <form id="defaultForm" method="post"  action="register_form.php">	 
+        <div class="modal-body">              
+				 		<input type="hidden" name="form_one" value="1">
 							<div class="col-md-12">
 							<div class="form-group">
 								<label class=" control-label">Name of the Hospital</label>
 								<div class="">
-									<input type="text" class="form-control" name="username" placeholder="Enter Name of the Hospital" />
+									<input type="text" class="form-control" name="h_name" placeholder="Enter Name of the Hospital" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class=" control-label">Name of the Representative</label>
 								<div class="">
-									<input type="text" class="form-control" name="username" placeholder="Enter Name of the Representative" />
+									<input type="text" class="form-control" name="r_name" placeholder="Enter Name of the Representative" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class=" control-label">Mobile Number</label>
 								<div class="">
-									<input type="text" class="form-control" name="username" placeholder="Enter Mobile Number" />
+									<input type="text" class="form-control" name="mobilenumber" placeholder="Enter Mobile Number" />
 								</div>
 							</div>	
 							<div class="form-group">
 								<label class=" control-label">Email</label>
 								<div class="">
-									<input type="email" class="form-control" name="username" placeholder="Enter Email" />
+									<input type="email" class="form-control" name="email" placeholder="Enter Email" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class=" control-label">Message</label>
 								<div class="">
-									<textarea type="text" class="form-control" placeholder="Enter Message Here"></textarea>
+									<textarea type="text" class="form-control" name="message" placeholder="Enter Message Here"></textarea>
 								</div>
 							</div>
                         </div>
@@ -498,155 +530,58 @@ function scrollNav() {
 scrollNav();
   </script>
  <script type="text/javascript">
+  setTimeout(function() {
+    $('#errormsg_1').fadeOut('fast');
+}, 10000);
+
 $(document).ready(function() {
     // Generate a simple captcha
-    function randomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    };
-    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+   $('#defaultForm').bootstrapValidator({
 
-    $('#defaultForm').bootstrapValidator({
-//        live: 'disabled',
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
+   
         fields: {
-            firstName: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'The first name is required and cannot be empty'
-                    }
-                }
+			h_name: {
+                 validators: {
+					notEmpty: {
+						message:  'The Hospital name is required and cannot be empty'
+					}
+				}
             },
-            lastName: {
-                group: '.col-lg-4',
-                validators: {
-                    notEmpty: {
-                        message: 'The last name is required and cannot be empty'
-                    }
-                }
-            },
-            username: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and cannot be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    },
-                    remote: {
-                        type: 'POST',
-                        url: 'remote.php',
-                        message: 'The username is not available'
-                    },
-                    different: {
-                        field: 'password,confirmPassword',
-                        message: 'The username and password cannot be the same as each other'
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required and cannot be empty'
-                    },
-                    identical: {
-                        field: 'confirmPassword',
-                        message: 'The password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'username',
-                        message: 'The password cannot be the same as username'
-                    }
-                }
-            },
-            confirmPassword: {
-                validators: {
-                    notEmpty: {
-                        message: 'The confirm password is required and cannot be empty'
-                    },
-                    identical: {
-                        field: 'password',
-                        message: 'The password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'username',
-                        message: 'The password cannot be the same as username'
-                    }
-                }
-            },
-            birthday: {
-                validators: {
-                    date: {
-                        format: 'YYYY/MM/DD',
-                        message: 'The birthday is not valid'
-                    }
-                }
-            },
-            gender: {
-                validators: {
-                    notEmpty: {
-                        message: 'The gender is required'
-                    }
-                }
-            },
-            'languages[]': {
-                validators: {
-                    notEmpty: {
-                        message: 'Please specify at least one language you can speak'
-                    }
-                }
-            },
-            'programs[]': {
-                validators: {
-                    choice: {
-                        min: 2,
-                        max: 4,
-                        message: 'Please choose 2 - 4 programming languages you are good at'
-                    }
-                }
-            },
-            captcha: {
-                validators: {
-                    callback: {
-                        message: 'Wrong answer',
-                        callback: function(value, validator) {
-                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
-                            return value == sum;
-                        }
-                    }
-                }
+			
+            
+            r_name: {
+                 validators: {
+					notEmpty: {
+						message:  'The Representative name is required and cannot be empty'
+					},
+					
+				}
+            },mobilenumber: {
+                 validators: {
+					notEmpty: {
+						message: 'Mobilenumber is required and cannot be empty'
+					},
+					regexp: {
+					regexp:/^[0-9]{10,14}$/,
+					message: 'Contact number must be 10 to 14 digits'
+					}
+				}
+            },email: {
+                 validators: {
+					notEmpty: {
+						message: 'Email Id is required and cannot be empty'
+					},
+					regexp: {
+					regexp:/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+					message:'Please enter a valid email address. For example johndoe@domain.com.'
+					}
+				}
             }
-        }
-    });
-
-    // Validate the form manually
-    $('#validateBtn').click(function() {
-        $('#defaultForm').bootstrapValidator('validate');
-    });
-
-    $('#resetBtn').click(function() {
-        $('#defaultForm').data('bootstrapValidator').resetForm(true);
-    });
+            }
+        })
+     
 });
+
 </script>
   
 </body>
