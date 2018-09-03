@@ -559,11 +559,11 @@ $(document).ready(function() {
             },mobilenumber: {
                  validators: {
 					notEmpty: {
-						message: 'Mobilenumber is required and cannot be empty'
+						message: 'Mobile number is required and cannot be empty'
 					},
 					regexp: {
 					regexp:/^[0-9]{10,14}$/,
-					message: 'Contact number must be 10 to 14 digits'
+					message: 'Mobile number must be 10 to 14 digits'
 					}
 				}
             },email: {
