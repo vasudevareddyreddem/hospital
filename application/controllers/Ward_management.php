@@ -41,7 +41,7 @@ public function index()
 				$post=$this->input->post();
 				//echo '<pre>';print_r($post);exit;
 				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);					
-				echo '<pre>';print_r($post);				
+				//echo '<pre>';print_r($post);				
 				//echo $this->db->last_query();exit;
 				//echo '<pre>';print_r($data);exit;
 				$admitted_patients_details=array(
@@ -54,9 +54,9 @@ public function index()
 					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
 					'date_of_admit'=>date('Y-m-d H:i:s'),
-					'bed_no'=>$post['bed']
+					//'bed_no'=>$post['bed']
 				);
-					echo '<pre>';print_r($admitted_patients_details);exit;
+					//echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
 
 				if(count($ward)>0){
@@ -135,18 +135,18 @@ public function index()
 							$statusdata= $this->Ward_model->update_admitted_patient_details(base64_decode($ward_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){									
-								$this->session->set_flashdata('success',"admit-patients successfully deactivated.");
+								$this->session->set_flashdata('success',"admitted_patients_details successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"admit-patients successfully activated.");
+									$this->session->set_flashdata('success',"admitted_patients_details successfully activated.");
 								}
-									redirect('ward_management/admit-patients/'.base64_encode(1));;
+									redirect('ward_management/admit/'.base64_encode(1));;
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-									redirect('ward_management/admit-patients/'.base64_encode(1));
+									redirect('ward_management/admit/'.base64_encode(1));
 							}
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-						redirect('ward_management/admit-patients/'.base64_encode(1));
+						redirect('ward_management/admit/'.base64_encode(1));
 					}
 					
 			}else{
@@ -159,7 +159,65 @@ public function index()
 		}
 	}
 	
+	public function admitpatientsdelete()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$admitted_patient_id=$this->uri->segment(3);
+					if($admitted_patient_id!=''){
+						$deletdata=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
+							
+							);
+							$deletedata= $this->Ward_model->update_admitted_patient_details(base64_decode($admitted_patient_id),$deletdata);
+							if(count($deletedata)>0){
+								$this->session->set_flashdata('success',"admitted_patients_details successfully removed.");
+								redirect('ward_management/admit/'.base64_encode(3));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/admit/'.base64_encode(3));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/admit/'.base64_encode(3));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
+	public function admittedpatientsedit()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$roomno = base64_decode($this->uri->segment(3));
+				$data['list']= $this->Ward_model->get_roomnumber_details($roomno);
+								$admindetails=$this->session->userdata('userdetails');
+								$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+								$data['floor_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
+
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('ward/roomnumberedit',$data);
+				$this->load->view('html/footer');
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 	public function discharge()

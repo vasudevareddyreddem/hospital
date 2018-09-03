@@ -138,5 +138,6 @@ ALTER TABLE `hospital`.`patient_billing`
   ADD COLUMN `status` INT(11) DEFAULT 1  NULL AFTER `bed_no`,
   ADD COLUMN `date_of_admit` DATETIME NULL AFTER `status`;
 
-
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `date_of_admit`;
   

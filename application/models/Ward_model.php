@@ -321,7 +321,7 @@ class Ward_model extends CI_Model
 		$this->db->join('ward_room_number', 'ward_room_number.w_r_n_id = admitted_patient_list.room_no', 'left');
 		$this->db->join('ward_room_beds', 'ward_room_beds.r_b_id = admitted_patient_list.bed_no', 'left');
 		$this->db->where('admitted_patient_list.hos_id',$hos_id);
-		//$this->db->where('admitted_patient_list.status !=',2);
+		$this->db->where('admitted_patient_list.status !=',2);
 		return $this->db->get()->result_array();
 	}
 	

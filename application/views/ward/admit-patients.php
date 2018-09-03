@@ -262,11 +262,11 @@
                                                             </li> 
 															
 													<li>
-                                                            <a href="<?php echo base_url('ward_management/roomnumberedit/'); ?>">
+                                                            <a href="<?php echo base_url('ward_management/admitpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
                                                              <i class="fa fa-edit"></i>Edit</a>
                                                     </li>
 											                <li>
-                                                                <a href="<?php echo base_url('ward_management/roomnumberdelete/'); ?>">
+                                                                <a href="<?php echo base_url('ward_management/admitpatientsdelete/'.base64_encode($list['a_p_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
