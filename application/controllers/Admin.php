@@ -1250,7 +1250,7 @@ class Admin extends CI_Controller {
 					for($i=1;$i<=$post['card_number'];$i++){
 						$numbers_list[]=$num+$i;
 					}
-					$data['card_num_list']=array_chunk($numbers_list, 2);
+					$data['card_num_list']=array_chunk($numbers_list, 4);
 				
 					//echo '<pre>';print_r($data);exit;
 					$path = rtrim(FCPATH,"/");
