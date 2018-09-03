@@ -66,108 +66,39 @@ input[type="text"]
 }
 </style>
 <body style="height:3900px;width:5700px;padding:0px 30px;margin-top:5px">
+<?php //echo '<pre>';print_r($card_num_list);exit; ?>
+<?php foreach($card_num_list as $list){ ?>
+	<div class="row1" >
+		<?php if(isset($list[0]) && $list[0]!=''){ ?>
+			<div class="backimg"  >
+				<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[0])?$list[0]:'', 4, ' '); ?>"></h1>
+			</div>
+		<?php } ?>
+		<?php if(isset($list[1]) && $list[1]!=''){ ?>
+		<div class="backimg"  >
+			<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[1])?$list[1]:'', 4, ' '); ?>"></h1>
+		</div>
+		<?php } ?>
+		<?php if(isset($list[2]) && $list[2]!=''){ ?>
+		<div class="backimg" >
+			<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[2])?$list[2]:'', 4, ' '); ?>"></h1>
+		</div>
+		<?php } ?>
+		<?php if(isset($list[3]) && $list[3]!=''){ ?>
+		<div class="backimg"  >
+			<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[3])?$list[3]:'', 4, ' '); ?>"></h1>
+		</div>
+		<?php } ?>
+		<?php if(isset($list[4]) && $list[4]!=''){ ?>
+		<div class="backimg" >
+			<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[4])?$list[4]:'', 4, ' '); ?>"></h1>
+		</div>
+		<?php } ?>
+	</div>
+<?php } ?>
 
-
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div><div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div><div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div><div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div><div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
-	<div class="row1" >
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-		<div class="backimg"  >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div><div class="backimg" >
-			<h1 class="card-number"><input class="card-number" type="text" style="" value="8500 2222 6782"></h1>
-		</div>
-	</div>
 
 <br>
-
 
 </body>
 </html>

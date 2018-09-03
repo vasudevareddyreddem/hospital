@@ -141,3 +141,30 @@ ALTER TABLE `hospital`.`patient_billing`
   ALTER TABLE `hospital`.`admitted_patient_list`   
   ADD COLUMN `updated_at` DATETIME NULL AFTER `date_of_admit`;
   
+  
+  /* added by vasu*/
+  for card  numbers
+  
+CREATE TABLE `card_numbers` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_number` varchar(250) DEFAULT NULL,
+  `count` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `print_status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `pdf_name` varchar(250) DEFAULT NULL,
+  `assign_seller` int(11) DEFAULT '0',
+  `updated_at` datetime DEFAULT NULL,
+  `cust_name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `whatsapp_number` varchar(45) DEFAULT NULL,
+  `aadhar_number` varchar(250) DEFAULT NULL,
+  `email_id` varchar(250) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `assign_customer` int(11) DEFAULT '0' COMMENT '0=unassign;1=assign',
+  `customer_assign_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=latin1
+
+  
