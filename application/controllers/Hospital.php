@@ -204,7 +204,7 @@ class Hospital extends In_frontend {
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
 					$twodata=array(
-							'hos_representative'=>$post['hos_representative'],
+							'hos_representative'=>strtoupper($post['hos_representative']),
 							'hos_rep_contact'=>$post['hos_rep_contact'],
 							'mob_country_code'=>$post['mob_country_code'],
 							'hos_rep_mobile'=>$post['hos_rep_mobile'],
@@ -213,9 +213,9 @@ class Hospital extends In_frontend {
 							'hos_rep_add1'=>$post['hos_rep_add1'],
 							'hos_rep_add2'=>$post['hos_rep_add2'],
 							'hos_rep_zipcode'=>$post['hos_rep_zipcode'],
-							'hos_rep_city'=>$post['hos_rep_city'],
+							'hos_rep_city'=>ucfirst($post['hos_rep_city']),
 							'hos_rep_state'=>$post['hos_rep_state'],
-							'hos_rep_country'=>$post['hos_rep_country'],
+							'hos_rep_country'=>ucfirst($post['hos_rep_country']),
 							'hos_updated_at'=>date('Y-m-d H:i:s')
 							);
 							$steptwo= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$twodata);
@@ -253,16 +253,16 @@ class Hospital extends In_frontend {
 							$hos_bas_document='';
 						}
 					$threedata=array(
-							'hos_bas_name'=>$post['hos_bas_name'],
+							'hos_bas_name'=>ucfirst($post['hos_bas_name']),
 							'hos_bas_contact'=>$post['hos_bas_contact'],
 							'hos_bas_email'=>$post['hos_bas_email'],
 							'hos_bas_nationali_id'=>$post['hos_bas_nationali_id'],
 							'hos_bas_add1'=>$post['hos_bas_add1'],
 							'hos_bas_add2'=>$post['hos_bas_add2'],
 							'hos_bas_zipcode'=>$post['hos_bas_zipcode'],
-							'hos_bas_city'=>$post['hos_bas_city'],
+							'hos_bas_city'=>ucfirst($post['hos_bas_city']),
 							'hos_bas_state'=>$post['hos_bas_state'],
-							'hos_bas_country'=>$post['hos_bas_country'],
+							'hos_bas_country'=>ucfirst($post['hos_bas_country']),
 							'hos_bas_document'=>$hos_bas_document,
 							'hos_updated_at'=>date('Y-m-d H:i:s')
 							);
@@ -797,7 +797,7 @@ class Hospital extends In_frontend {
 									'resource_mobile'=>$post['resource_mobile'],
 									'resource_add1'=>$post['resource_add1'],
 									'resource_add2'=>$post['resource_add2'],
-									'resource_city'=>$post['resource_city'],
+									'resource_city'=>ucfirst($post['resource_city']),
 									'resource_state'=>$post['resource_state'],
 									'resource_zipcode'=>$post['resource_zipcode'],
 									'resource_other_details'=>$post['resource_other_details'],

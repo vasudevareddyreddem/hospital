@@ -265,7 +265,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters'
+                        message: 'Password  must be at least 6 characters. '
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -281,7 +281,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'resource_password',
-						message: 'password and confirm Password do not match'
+						message: 'Password and confirm Password do not match'
 					}
 					}
 				},
