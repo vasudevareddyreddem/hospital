@@ -81,22 +81,7 @@
    </div>
 </div>
 <script>
-$(document).ready(function() {
-    $('#example4').DataTable( {
-        "order": [[ 1, "desc" ]]
-    } );
-} );
-function admindeactive(id){
-	$(".popid").attr("href","<?php echo base_url('ward_management/roomnumberstatus'); ?>"+"/"+id);
-}
-function adminstatus(id){
-	if(id==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
-		
-	}if(id==0){
-			$('#content1').html('Are you sure you want to activate?');
-	}
-}
+
 $(document).ready(function() {
     $('#room_num').bootstrapValidator({
         
