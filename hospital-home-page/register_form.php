@@ -1,8 +1,8 @@
  <?php
-$servername="localhost";
-$username="root";
-$password="";
-$dbname="hospital";
+$servername="43.255.154.55";
+$username="register_medspac";
+$password="register_medspace_db@123";
+$dbname="register_medspace_db";
 $conn=new mysqli($servername,$username,$password,$dbname);
 if($conn->connect_error){
 die('connection failed:'.$conn->connect_error);
@@ -31,8 +31,7 @@ if(isset($_POST['form_one']) && $_POST['form_one']==1){
 			$sql1='UPDATE contact SET status=1 WHERE id='.$id;
 		//echo $sql1;exit;
 		$result1=$conn->query($sql1);
-		}
-				else{			
+		}else{			
 			$msg='fail';
 		}
 		header("Location: " . "http://" .$_SERVER['SERVER_NAME']. $pathInfo['dirname']."?message=".$msg."#bottom"); 
