@@ -167,4 +167,41 @@ CREATE TABLE `card_numbers` (
   PRIMARY KEY (`c_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=latin1
 
+CREATE TABLE `card_sellers` (
+  `s_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
+  `email_id` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `address` text,
+  `bank_account` varchar(250) DEFAULT NULL,
+  `bank_name` varchar(250) DEFAULT NULL,
+  `ifsccode` varchar(250) DEFAULT NULL,
+  `bank_holder_name` varchar(250) DEFAULT NULL,
+  `kyc` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `token` text,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1
+
+
+
+CREATE TABLE `coupon_codes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hospital_id` int(11) DEFAULT NULL,
+  `coupon_code` varchar(250) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `percentage_amount` varchar(250) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `updated_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+
   
