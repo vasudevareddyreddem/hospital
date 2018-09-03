@@ -325,6 +325,10 @@ class Ward_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	
+	public function update_admitted_patient_details($a_p_id,$data){
+		$this->db->where('a_p_id',$a_p_id);
+		return $this->db->update("admitted_patient_list",$data);
+	}
 }
 
 

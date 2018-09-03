@@ -105,7 +105,7 @@
                                                             <a href="<?php echo base_url('ward_management/roomnumberedit/'.base64_encode($list['w_r_n_id'])); ?>">
                                                              <i class="fa fa-edit"></i>Edit</a>
                                                     </li>
-											                                                            <li>
+											                <li>
                                                                 <a href="<?php echo base_url('ward_management/roomnumberdelete/'.base64_encode($list['w_r_n_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>

@@ -13,7 +13,7 @@ if(isset($_POST['form_one']) && $_POST['form_one']==1){
 	$sql="INSERT INTO register(h_name,r_name,mobilenumber,email,message,status)
 	VALUES  ('".$_POST['h_name']."','".$_POST['r_name']."','".$_POST['mobilenumber']."','".$_POST['email']."','".$_POST['message']."','0')";
 	//echo $sql;exit;
-	$to = "banuribhavya97@gmail.com";
+	$to = "medspaceit@gmail.com";
 	$h_name = $_POST['h_name'];
 	$r_name = $_POST['r_name'];
 	$mobilenumber=$_POST['mobilenumber'];

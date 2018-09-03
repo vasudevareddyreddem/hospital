@@ -114,6 +114,54 @@ public function index()
 			redirect('admin');
 		}
 	}
+	
+	public function admitted_patients_status()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$ward_id=$this->uri->segment(3);
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+					if($ward_id!=''){
+						$stusdetails=array(
+							'status'=>$statu,
+														
+							);
+							$statusdata= $this->Ward_model->update_admitted_patient_details(base64_decode($ward_id),$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){									
+								$this->session->set_flashdata('success',"admit-patients successfully deactivated.");
+								}else{
+									$this->session->set_flashdata('success',"admit-patients successfully activated.");
+								}
+									redirect('ward_management/admit-patients/'.base64_encode(1));;
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/admit-patients/'.base64_encode(1));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/admit-patients/'.base64_encode(1));
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
 	public function discharge()
 	{			
 		if($this->session->userdata('userdetails'))

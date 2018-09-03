@@ -254,12 +254,24 @@
 															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
 																<i class="fa fa-angle-down"></i>
 															</button>
-															<ul class="dropdown-menu" role="menu">
-																<li>																	
-																		<i class="fa fa-edit"></i>Room/Bed </a>
-																</li>
-															   												
-															</ul>
+															 <ul class="dropdown-menu" role="menu">
+                                                            
+															<li>
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['a_p_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                            </li> 
+															
+													<li>
+                                                            <a href="<?php echo base_url('ward_management/roomnumberedit/'); ?>">
+                                                             <i class="fa fa-edit"></i>Edit</a>
+                                                    </li>
+											                <li>
+                                                                <a href="<?php echo base_url('ward_management/roomnumberdelete/'); ?>">
+                                                                    <i class="fa fa-trash-o"></i>Delete</a>
+                                                            </li>
+                                                            
+                                                            
+                                                        </ul>
 														</div>
 													</td>
 												</tr>
@@ -280,6 +292,24 @@
 <div id="sucessmsg" style="display:none;"></div>
 
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 1, "desc" ]]
+    } );
+} );
+function admindeactive(aid){
+	$(".popid").attr("href","<?php echo base_url('ward_management/admitted_patients_status'); ?>"+"/"+aid);
+}
+function adminstatus(aid){
+	if(aid==1){
+			$('#content1').html('Are you sure you want to Dactivate?');
+		
+	}if(aid==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
+
+
 function get_bed_count(id){	
 		if(id!=''){
 			jQuery.ajax({
@@ -293,7 +323,7 @@ function get_bed_count(id){
 						//console.log(data);return false;
    						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" value="" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" id="1A'+i+'" /> <label for="1A'+i+'value='+data.list[i].r_b_id+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 						}							
    						//console.log(data);return false;
    					}   				
@@ -324,138 +354,7 @@ function get_floorno_list(id){
 			}
 }
 
-$(document).ready(function() {
-    $('#example3').DataTable( {
-        "order": [[ 0, "desc" ]]
-    } );
-} );
-$(document).ready(function() {
-    $('#example4').DataTable( {
-        "order": [[ 3, "desc" ]]
-    } );
-} );
-function get_department_list(id){
-	
-		if(id!=''){
-			jQuery.ajax({
-   					url: "<?php echo base_url('hospital/get_specialists_list');?>",
-   					data: {
-   						dep_id: id,
-   					},
-   					dataType: 'json',
-   					type: 'POST',
-   					success: function (data) {
-						//console.log(data);return false;
-   						$('#specialist').empty();
-   						$('#specialist').append("<option>select</option>");
-   						for(i=0; i<data.list.length; i++) {
-   							$('#specialist').append("<option value="+data.list[i].s_id+">"+data.list[i].specialist_name+"</option>");                      
-                         
-   						}
-   						//console.log(data);return false;
-   					}
-   				
-   				});
-				
-			}
-			
-}
-			function get_doctor_list(id){
-   				jQuery.ajax({
-   					url: "<?php echo base_url('resources/get_spec_doctors_list');?>",
-   					data: {
-   						spec_id: id,
-   					},
-   					dataType: 'json',
-   					type: 'POST',
-   					success: function (data) {
-						//console.log(data);return false;
-   						$('#doctor_id').empty();
-   						$('#doctor_id').append("<option>select</option>");
-   						for(i=0; i<data.list.length; i++) {
-   							$('#doctor_id').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
-                         
-   						}
-   						//console.log(data);return false;
-   					}
-   				
-   				});
-   	
-   }
 
-$(document).ready(function() {
-    
-       $('#add_appointment').bootstrapValidator({
-   		fields: {
-             
-                patinet_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Patient Name is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Patient Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },age: {
-                    validators: {
-   					notEmpty: {
-   						message: 'age is required'
-   					},
-   					regexp: {
-   					regexp:  /^[0-9]*$/,
-   					message:'Age must be digits'
-   					}
-   				}
-               },mobile: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Mobile Number is required'
-   					},
-   					regexp: {
-   					regexp:  /^[0-9]{10,14}$/,
-   					message:'Mobile Number must be 10 to 14 digits'
-   					}
-   				}
-               },
-               department: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Department is required'
-   					}
-   				}
-               },
-               specialist: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Specialist is required'
-   					}
-   				}
-               },
-   			doctor_id: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Doctor is required'
-   					}
-   				}
-               },
-   			date: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Birth place is required'
-   					}
-   				}
-               },time: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Time is required'
-   					}
-   				}
-               }
-   			}
-   		      })
-        
-   });
-   
+
+
    </script>
