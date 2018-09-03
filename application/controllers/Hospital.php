@@ -253,7 +253,7 @@ class Hospital extends In_frontend {
 							$hos_bas_document='';
 						}
 					$threedata=array(
-							'hos_bas_name'=>ucfirst($post['hos_bas_name']),
+							'hos_bas_name'=>strtoupper($post['hos_bas_name']),
 							'hos_bas_contact'=>$post['hos_bas_contact'],
 							'hos_bas_email'=>$post['hos_bas_email'],
 							'hos_bas_nationali_id'=>$post['hos_bas_nationali_id'],

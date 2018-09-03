@@ -53,7 +53,7 @@
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Card NUmbers Count</th>
+												<th>Card Numbers Count</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                <!-- <th>Action</th>-->

@@ -586,10 +586,10 @@
                                                 </div>
 												
 												<div class="form-group col-md-6">
-                                                   <label for="email">Consultant  Specialist</label>
+                                                   <label for="email">Consultant  Speciality</label>
                                                    
 												<select id="specialist_doc1" name="specialist_doctor_id" onchange="get_doctor_list(this.value);" class="form-control" >
-                                                  <option value="">Select Specialist</option>
+                                                  <option value="">Select Speciality</option>
 												</select>
 												</div>
                                                 <div class="form-group col-md-6">
@@ -2570,15 +2570,6 @@ function apply_couponcode1(){
    					},regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Pulse can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },fbs_rbs: {
-                    validators: {
-   					notEmpty: {
-   						message: 'FBS/RBS is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'FBS/RBS can only consist of alphanumeric, space and dot'
 					}
    				}
                },temp: {
