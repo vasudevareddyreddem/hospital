@@ -70,7 +70,7 @@
 													</select>
 												</div>
 												<div class="form-group col-md-6">
-												   <label for="email">Specialist</label>
+												   <label for="email">Speciality</label>
 													<select class="form-control" id="specialist" name="specialist" onchange="get_doctor_list(this.value);">
 													
 													</select>
@@ -123,7 +123,7 @@
 								   <th> Age</th>
 								   <th> Mobile </th>
 								   <th> Department </th>
-								   <th> Specialist </th>
+								   <th> Speciality </th>
 								   <th > Booking Date </th>
 								   <th> Booking Time </th>
 								   <th> Status</th>
@@ -219,7 +219,7 @@
 								   <th> Age</th>
 								   <th> Mobile </th>
 								   <th> Department </th>
-								   <th> Specialist </th>
+								   <th> Speciality </th>
 								   <th> Doctor </th>
 								   <th > Booking Date </th>
 								   <th> Booking Time </th>
@@ -338,11 +338,11 @@ $(document).ready(function() {
                },age: {
                     validators: {
    					notEmpty: {
-   						message: 'age is required'
+   						message: 'Age is required'
    					},
    					regexp: {
    					regexp:  /^[0-9]*$/,
-   					message:'Age must be digits'
+   					message:'Age must be in digits'
    					}
    				}
                },mobile: {

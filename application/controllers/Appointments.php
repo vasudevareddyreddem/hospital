@@ -49,7 +49,7 @@ class Appointments extends In_frontend {
 					$post=$this->input->post();
 					$add=array(
 					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-					'patinet_name'=>isset($post['patinet_name'])?$post['patinet_name']:'',
+					'patinet_name'=>isset($post['patinet_name'])?strtoupper($post['patinet_name']):'',
 					'age'=>isset($post['age'])?$post['age']:'',
 					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
 					'department'=>isset($post['department'])?$post['department']:'',

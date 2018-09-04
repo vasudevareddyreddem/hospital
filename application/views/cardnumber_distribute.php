@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Card Number distribute</div>
+               <div class="page-title">Card Number Distribute</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Card Number distribute</li>
+               <li class="active">Card Number Distribute</li>
             </ol>
          </div>
       </div>
@@ -329,7 +329,7 @@ $(document).ready(function() {
 						message: 'Confirm Password is required'
 					},
 					identical: {
-						field: 'lab_password',
+						field: 'password',
 						message: 'Password and confirm Password do not match'
 					}
 					}

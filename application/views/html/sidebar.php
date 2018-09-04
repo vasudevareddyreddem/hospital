@@ -169,7 +169,7 @@
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Specialist</span>
+	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Speciality</span>
 	                                    </a>
 	                                </li>
 	                                
