@@ -205,3 +205,58 @@ CREATE TABLE `coupon_codes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
 
   
+  
+CREATE TABLE `appointment_bidding_list` (
+  `b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
+  `patinet_name` varchar(250) DEFAULT NULL,
+  `age` varchar(45) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `specialist` varchar(250) DEFAULT NULL,
+  `date` varchar(250) DEFAULT NULL,
+  `time` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '0' COMMENT '0=pending;1=accept;2=reject',
+  `create_at` datetime DEFAULT NULL,
+  `coming_through` int(11) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`b_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `appointment_users` (
+  `a_u_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `token` text,
+  PRIMARY KEY (`a_u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1
+
+
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
+  `patinet_name` varchar(250) DEFAULT NULL,
+  `age` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `specialist` varchar(45) DEFAULT NULL,
+  `doctor_id` varchar(45) DEFAULT NULL,
+  `date` varchar(250) DEFAULT NULL,
+  `time` varchar(250) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1= confirm, 0=pending,2 reject',
+  `create_at` datetime DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `coming_through` int(11) DEFAULT NULL,
+  `patient_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1
