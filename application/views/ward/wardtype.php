@@ -190,7 +190,7 @@ $(document).ready(function() {
             ward_type: {
                  validators: {
 					notEmpty: {
-						message: 'Wardtype is required'
+						message: 'Ward Type is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,

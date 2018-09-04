@@ -67,8 +67,22 @@
 									</div>
 										<div class="col-md-6">
 										<label> State</label>
-										<input class="form-control" id="resource_state" name="resource_state" value="" type="text" placeholder="State">
-									</div>
+													<div class="col-md-6">
+                                                       <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+														  <select class="form-control" required="required" name="p_s_name" id="p_s_name">
+														  <option value = "">Select State</option>
+															<?php foreach($states as $key=>$state):
+																	if($patient_detailes['p_s_name'] == $state):
+																	$selected ='selected=selected';
+																	else : 
+																	$selected = '';
+																	endif;
+																 ?>
+																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+															<?php endforeach; ?>
+														  </select> 
+													  </div>									
+													  </div>
 									<div class="col-md-6">
 										<label> Pin code</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Pin code">
@@ -270,7 +284,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters'
+                        message: 'Password  must be at least 6 characters. '
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -286,7 +300,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'resource_password',
-						message: 'password and confirm Password do not match'
+						message: 'Password and confirm Password do not match'
 					}
 					}
 				},

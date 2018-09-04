@@ -55,8 +55,22 @@
 									</div>
 										<div class="col-md-6">
 										<label> State</label>
-										<input class="form-control" id="lab_state" name="lab_state" value="" type="text" placeholder="State">
-									</div>
+ <div class="col-md-6">
+								  <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+
+								<select class="form-control" required="required" name="hos_bas_state" id="hos_bas_state">
+								  <option value = "">Select State</option>
+									<?php foreach($states as $key=>$state):
+											if($hospital_details['hos_bas_state'] == $state):
+											$selected ='selected=selected';
+											else : 
+											$selected = '';
+											endif;
+										 ?>
+										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+									<?php endforeach; ?>
+								  </select> 
+							  </div>									</div>
 									<div class="col-md-6">
 										<label> Zipcode</label>
 										<input class="form-control" id="lab_zipcode" name="lab_zipcode" value="" type="text" placeholder="Zipcode">
@@ -234,7 +248,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters'
+                        message: 'Password  must be at least 6 characters. '
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -250,7 +264,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'lab_password',
-						message: 'password and confirm Password do not match'
+						message: 'Password and confirm Password do not match'
 					}
 					}
 				},

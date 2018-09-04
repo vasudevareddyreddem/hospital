@@ -49,7 +49,7 @@
 								</div>
 								<div class="col-md-6">
 									<label>Password</label>
-								<input class="form-control" id="password" name="password" value="" type="password" placeholder="Confirm Password">
+								<input class="form-control" id="password" name="password" value="" type="password" placeholder="Password">
 								</div>
 								<div class="col-md-6">
 									<label> Confirm Password</label>
@@ -103,7 +103,7 @@
 												<th>Name</th>
 												<th>Mobile</th>
 												<th>Email Address</th>
-                                                <th>Create date</th>
+                                                <th>Create Date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -199,7 +199,7 @@
 												<th>Email Address</th>
                                                 <th>Card Numbers From</th>
                                                 <th>Card Numbers To</th>
-                                                <th>Create date</th>
+                                                <th>Create Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -314,7 +314,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters'
+                        message: 'Password  must be at least 6 characters. '
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -330,7 +330,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'lab_password',
-						message: 'password and confirm Password do not match'
+						message: 'Password and confirm Password do not match'
 					}
 					}
 				},
