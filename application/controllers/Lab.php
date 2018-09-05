@@ -1121,8 +1121,8 @@ class Lab extends In_frontend {
 		         $data=array(
 			'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 			'test_type'=>$fields[0],
-			't_name'=>$fields[1],
-			'type'=>$fields[2],
+			't_name'=>$fields[2],
+			'type'=>$fields[1],
 			'duration'=>$fields[3],
 			'amuont'=>$fields[4],
 			'modality'=>$fields[5],
