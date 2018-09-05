@@ -384,6 +384,6 @@ class Lab_model extends CI_Model
 	$this->db->insert('lab_test_list', $data);
      return  $this->db->insert_id();
 	}
-	
+
 
 }

@@ -358,7 +358,10 @@ class Medicine extends In_frontend {
 											}						
 			
                                              }
+											 
+											 
+											
 		
-									}
+			}
 		
 	
