@@ -125,7 +125,7 @@
 	                        </li>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('admin/cardnumber_distribute'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
-	                                <span class="title">Card Numbers distribute</span> <span class="arrow"></span>
+	                                <span class="title">Card Numbers Distribute</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 						<?php }else if($userdetails['role_id']==2){ ?>
@@ -169,7 +169,7 @@
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Specialist</span>
+	                                    <a href="<?php echo base_url('hospital/addspecialist'); ?>" class="nav-link "> <span class="title">Add Speciality</span>
 	                                    </a>
 	                                </li>
 	                                

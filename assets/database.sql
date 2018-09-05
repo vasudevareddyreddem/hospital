@@ -1148,3 +1148,119 @@ insert  into `ward_type`(`ward_id`,`hos_id`,`ward_type`,`status`,`create_at`,`cr
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+CREATE TABLE `card_numbers` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_number` varchar(250) DEFAULT NULL,
+  `count` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `print_status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `pdf_name` varchar(250) DEFAULT NULL,
+  `assign_seller` int(11) DEFAULT '0',
+  `updated_at` datetime DEFAULT NULL,
+  `cust_name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `whatsapp_number` varchar(45) DEFAULT NULL,
+  `aadhar_number` varchar(250) DEFAULT NULL,
+  `email_id` varchar(250) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `assign_customer` int(11) DEFAULT '0' COMMENT '0=unassign;1=assign',
+  `customer_assign_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=latin1
+
+CREATE TABLE `card_sellers` (
+  `s_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
+  `email_id` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `address` text,
+  `bank_account` varchar(250) DEFAULT NULL,
+  `bank_name` varchar(250) DEFAULT NULL,
+  `ifsccode` varchar(250) DEFAULT NULL,
+  `bank_holder_name` varchar(250) DEFAULT NULL,
+  `kyc` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `token` text,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1
+
+
+
+CREATE TABLE `coupon_codes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hospital_id` int(11) DEFAULT NULL,
+  `coupon_code` varchar(250) DEFAULT NULL,
+  `type` varchar(250) DEFAULT NULL,
+  `percentage_amount` varchar(250) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `updated_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `appointment_bidding_list` (
+  `b_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
+  `patinet_name` varchar(250) DEFAULT NULL,
+  `age` varchar(45) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `specialist` varchar(250) DEFAULT NULL,
+  `date` varchar(250) DEFAULT NULL,
+  `time` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '0' COMMENT '0=pending;1=accept;2=reject',
+  `create_at` datetime DEFAULT NULL,
+  `coming_through` int(11) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`b_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1
+
+
+CREATE TABLE `appointment_users` (
+  `a_u_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `create_at` datetime DEFAULT NULL,
+  `token` text,
+  PRIMARY KEY (`a_u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1
+
+
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hos_id` int(11) DEFAULT NULL,
+  `city` varchar(250) DEFAULT NULL,
+  `patinet_name` varchar(250) DEFAULT NULL,
+  `age` varchar(250) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `department` varchar(250) DEFAULT NULL,
+  `specialist` varchar(45) DEFAULT NULL,
+  `doctor_id` varchar(45) DEFAULT NULL,
+  `date` varchar(250) DEFAULT NULL,
+  `time` varchar(250) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1= confirm, 0=pending,2 reject',
+  `create_at` datetime DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `coming_through` int(11) DEFAULT NULL,
+  `patient_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1

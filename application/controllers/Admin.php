@@ -865,7 +865,7 @@ class Admin extends CI_Controller {
 									'resource_mobile'=>$post['lab_mobile'],
 									'resource_add1'=>$post['lab_add1'],
 									'resource_add2'=>$post['lab_add2'],
-									'resource_city'=>$post['lab_city'],
+									'resource_city'=>ucfirst($post['lab_city']),
 									'resource_state'=>$post['lab_state'],
 									'resource_zipcode'=>$post['lab_zipcode'],
 									'resource_other_details'=>$post['lab_other_details'],
@@ -1250,7 +1250,7 @@ class Admin extends CI_Controller {
 					for($i=1;$i<=$post['card_number'];$i++){
 						$numbers_list[]=$num+$i;
 					}
-					$data['card_num_list']=array_chunk($numbers_list, 2);
+					$data['card_num_list']=array_chunk($numbers_list, 4);
 				
 					//echo '<pre>';print_r($data);exit;
 					$path = rtrim(FCPATH,"/");

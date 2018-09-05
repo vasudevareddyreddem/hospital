@@ -418,7 +418,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters'
+                        message: 'Password  must be at least 6 characters. '
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -434,7 +434,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'hos_password',
-						message: 'password and confirm Password do not match'
+						message: 'Password and confirm Password do not match'
 					}
 					}
 				}
@@ -460,11 +460,11 @@ $(document).ready(function() {
 			 hos_rep_contact: {
                 validators: {
 					notEmpty: {
-						message: 'landline Number is required'
+						message: 'Landline Number is required'
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'landline Number must be 10 to 14 digits'
+					message:'Landline Number must be 10 to 14 digits'
 					}
 				
 				}
@@ -584,11 +584,11 @@ $(document).ready(function() {
 			 hos_bas_contact: {
                 validators: {
 					notEmpty: {
-						message: 'landline Number is required'
+						message: 'Contact Number is required'
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'landline Number must be 10 to 14 digits'
+					message:'Contact Number must be 10 to 14 digits'
 					}
 				
 				}
@@ -718,11 +718,11 @@ $(document).ready(function() {
             },bank_name: {
                 validators: {
 					notEmpty: {
-						message: 'BankName is required'
+						message: 'Bank Name is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z ]+$/,
-					message: 'BankName can only consist  of alphabets and Space'
+					message: 'Bank Name can only consist  of alphabets and Space'
 					}
 				}
             },bank_ifsc: {

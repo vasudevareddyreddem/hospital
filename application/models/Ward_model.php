@@ -9,7 +9,7 @@ class Ward_model extends CI_Model
 		$this->load->database("default");
 	}
 	public  function get_ip_patient_list($hos_id){
-	$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
@@ -17,6 +17,16 @@ class Ward_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 		
+	public  function get_saved_ip_patient_list($pid,$hos_id){
+		$this->db->select('*')->from('patient_billing');
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
+		$this->db->where('patients_list_1.pid',$pid);
+		$this->db->where('patients_list_1.hos_id',$hos_id);		
+		$this->db->where('patient_billing.patient_type',1);
+		$this->db->where('patient_billing.completed_type',0);
+		return $this->db->get()->row_array();
+	}
 	public function save_wardname($data){
 		$this->db->insert('ward_name', $data);
 		return $insert_id = $this->db->insert_id();
@@ -278,11 +288,49 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_w_r_n_id_wise_bedcount($w_r_n_id){
-		$this->db->select('ward_room_beds.w_r_n_id,ward_room_beds.bed')->from('ward_room_beds');		
+		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.bed')->from('ward_room_beds');		
 		$this->db->where('w_r_n_id',$w_r_n_id);
 		$this->db->where('status',1);
 		return $this->db->get()->result_array();
 	}
 	
 	
+	
+	public function admitted_patients($data){
+	$this->db->insert('admitted_patient_list',$data);
+	return $insert_id = $this->db->insert_id();
+	}
+	public function get_saved_admitted_patients($name,$hos_id){
+		$this->db->select('*')->from('admitted_patient_list');		
+		$this->db->where('p_name',$name);
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_admitted_patients_details($a_p_id){
+		$this->db->select('*')->from('admitted_patient_list');		
+		$this->db->where('a_p_id',$a_p_id);
+		return $this->db->get()->row_array();
+	}
+	
+	public function get_admitted_patient_list($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,patients_list_1.name,ward_name.ward_name,ward_type.ward_type,ward_room_type.room_type,ward_room_number.room_num,ward_room_beds.bed,admitted_patient_list.date_of_admit,admitted_patient_list.status')->from('admitted_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
+		$this->db->join('ward_name', 'ward_name.w_id = admitted_patient_list.w_name', 'left');
+		$this->db->join('ward_type', 'ward_type.ward_id = admitted_patient_list.w_type', 'left');
+		$this->db->join('ward_room_type', 'ward_room_type.w_r_t_id = admitted_patient_list.room_type', 'left');
+		$this->db->join('ward_room_number', 'ward_room_number.w_r_n_id = admitted_patient_list.room_no', 'left');
+		$this->db->join('ward_room_beds', 'ward_room_beds.r_b_id = admitted_patient_list.bed_no', 'left');
+		$this->db->where('admitted_patient_list.hos_id',$hos_id);
+		$this->db->where('admitted_patient_list.status !=',2);
+		return $this->db->get()->result_array();
+	}
+	
+	public function update_admitted_patient_details($a_p_id,$data){
+		$this->db->where('a_p_id',$a_p_id);
+		return $this->db->update("admitted_patient_list",$data);
+	}
 }
+
+
+
+

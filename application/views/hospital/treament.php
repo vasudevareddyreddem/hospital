@@ -43,7 +43,7 @@
 									   <?php } ?>
 									   </select>&nbsp;
 										<select id="specialist_doc" name="specialist_doctor_id" class="form-control" >
-                                                  <option value="">Select specialist</option>
+                                                  <option value="">Select Speciality</option>
                                          </select>
 										<select  class="form-control" id="assign_doctor" name="assign_doctor" required>
 									   <?php if(count($doctors_list)>0){ ?>
@@ -75,7 +75,7 @@
                                         <thead>
                                             <tr>
 												<th>Treatment Name</th>
-												<th>Specialist Name</th>
+												<th>Speciality Name</th>
 												<th>consultant Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>

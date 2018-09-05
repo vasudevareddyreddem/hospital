@@ -125,11 +125,14 @@
                                      <header>Ward Details</header>                                 
                                 </div>
                                 <div class="card-body ">
-                                    <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admit'); ?> " method="post"  id="contact_form">
-                                        <div class="row d-flex justify-content-center">
+                                    <form class=" pad30 form-horizontal" action="<?php echo base_url('Ward_management/admitdetails'); ?> " method="post"  id="contact_form">
+                                        
+										<input type="hidden" name="p_id" id="p_id" value="<?php echo isset($p_id)?$p_id:''; ?>">
+										<input type="hidden" name="b_id" id="b_id" value="<?php echo isset($b_id)?$b_id:''; ?>">
+										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
-												<select  class="form-control">
+												<select  class="form-control" name="ward_name" id="ward_name">
 												<option value="">Select Ward Number</option>
 												<?php foreach($ward_list as $List){ ?>
 												<option value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
@@ -140,7 +143,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Type</strong></label>
-												<select  class="form-control">
+												<select  class="form-control"  name="ward_type" id="ward_type">
 												<option value="">Select Ward Type</option>
 												<?php foreach($wardtype_list as $List){ ?>
 												<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
@@ -151,7 +154,7 @@
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Room Type</strong></label>
-											 <select  class="form-control">
+											 <select  class="form-control" name="room_type" id="room_type">
 												<option value="">Select Room Type </option>
 												<?php foreach($roomtype_list as $list){ ?>
 												<option value="<?php echo $list['w_r_t_id'];?>"><?php echo $list['room_type'];?></option>
@@ -162,9 +165,9 @@
 										</div>
 										
 										<div class="row d-flex justify-content-center">
-											 <div class="form-group col-md-6">
+											 <div class="form-group col-md-6" >
 											  <label ><strong>Floor Number</strong></label>
-												<select  class="form-control" onchange="get_floorno_list(this.value);">
+												<select  class="form-control" onchange="get_floorno_list(this.value);" name="floor_number" id="floor_number">
 												<option value="">Select Floor Number</option>
 												<?php foreach($floor_list as $list){ ?>
 												<option value="<?php echo $list['w_f_id'];?>"><?php echo $list['ward_floor'];?></option>
@@ -172,9 +175,9 @@
 										</select></div>
 										</div>
 										<div class="row d-flex justify-content-center">
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-6" >
 											  <label ><strong>Room Number</strong></label>
-												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" >
+												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" name="room_num" >
 												 <option value="">Select Room Number </option>
 								
 												 </select>												
@@ -196,8 +199,8 @@
 													</div>
 													<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 													  <div class="panel-body">
-													  <div class="d-flex justify-content-center">			
-																<li class="row row--1" id="bedcount_id"></li>																														
+													  <div class="d-flex justify-content-center">												  
+																<li class="row row--1" id="bedcount_id" name="bed"  ></li>																														
 														</div>
 													  </div>
 													</div>													
@@ -225,8 +228,8 @@
 											
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
+                                                <th>Ward Name </th>
                                                 <th>Ward Type </th>
-                                                <th>Ward No </th>
                                                 <th>Room Type</th>
                                                 <th>Room No</th>
                                                 <th>Bed No</th>
@@ -234,18 +237,46 @@
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>101</td>
-												<td>patient 1</td>
-												<td>type 1</td>
-												<td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
-												<td>25/06/2018 </td>
-                                                <td>Active</td>
-                                            </tr>										
+                                         <tbody>										
+										<?php if(isset($ip_admitted_patient_list)  && count($ip_admitted_patient_list)>0){ ?>
+											<?php foreach($ip_admitted_patient_list as $list){ ?>
+												<tr>
+													<td><?php echo $list['pt_id']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['ward_name']; ?></td>
+													<td><?php echo $list['ward_type']; ?></td>
+													<td><?php echo $list['room_type']; ?></td>
+													<td><?php echo $list['room_num']; ?></td>
+													<td><?php echo $list['bed']; ?></td>
+													<td><?php echo $list['date_of_admit']; ?></td>	
+													<td class="valigntop">
+														<div class="btn-group">
+															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+																<i class="fa fa-angle-down"></i>
+															</button>
+															 <ul class="dropdown-menu" role="menu">
+                                                            
+															<li>
+                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['a_p_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                            </li> 
+															
+													<li>
+                                                            <a href="<?php echo base_url('ward_management/admitpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
+                                                             <i class="fa fa-edit"></i>Edit</a>
+                                                    </li>
+											                <li>
+                                                                <a href="<?php echo base_url('ward_management/admitpatientsdelete/'.base64_encode($list['a_p_id'])); ?>">
+                                                                    <i class="fa fa-trash-o"></i>Delete</a>
+                                                            </li>
+                                                            
+                                                            
+                                                        </ul>
+														</div>
+													</td>
+												</tr>
+											<?php } ?>
+										<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -261,6 +292,24 @@
 <div id="sucessmsg" style="display:none;"></div>
 
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 1, "desc" ]]
+    } );
+} );
+function admindeactive(aid){
+	$(".popid").attr("href","<?php echo base_url('ward_management/admitted_patients_status'); ?>"+"/"+aid);
+}
+function adminstatus(aid){
+	if(aid==1){
+			$('#content1').html('Are you sure you want to Dactivate?');
+		
+	}if(aid==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
+
+
 function get_bed_count(id){	
 		if(id!=''){
 			jQuery.ajax({
@@ -272,10 +321,9 @@ function get_bed_count(id){
    					type: 'POST',
    					success: function (data) {						 
 						//console.log(data);return false;
-   						$('#bedcount_id').empty();  												
-						//$('#bedcount_id').append("<option>Select</option>");
+   						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" id="1A'+i+'" /> <label for="1A'+i+'value='+data.list[i].r_b_id+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 						}							
    						//console.log(data);return false;
    					}   				
@@ -306,138 +354,7 @@ function get_floorno_list(id){
 			}
 }
 
-$(document).ready(function() {
-    $('#example3').DataTable( {
-        "order": [[ 0, "desc" ]]
-    } );
-} );
-$(document).ready(function() {
-    $('#example4').DataTable( {
-        "order": [[ 3, "desc" ]]
-    } );
-} );
-function get_department_list(id){
-	
-		if(id!=''){
-			jQuery.ajax({
-   					url: "<?php echo base_url('hospital/get_specialists_list');?>",
-   					data: {
-   						dep_id: id,
-   					},
-   					dataType: 'json',
-   					type: 'POST',
-   					success: function (data) {
-						//console.log(data);return false;
-   						$('#specialist').empty();
-   						$('#specialist').append("<option>select</option>");
-   						for(i=0; i<data.list.length; i++) {
-   							$('#specialist').append("<option value="+data.list[i].s_id+">"+data.list[i].specialist_name+"</option>");                      
-                         
-   						}
-   						//console.log(data);return false;
-   					}
-   				
-   				});
-				
-			}
-			
-}
-			function get_doctor_list(id){
-   				jQuery.ajax({
-   					url: "<?php echo base_url('resources/get_spec_doctors_list');?>",
-   					data: {
-   						spec_id: id,
-   					},
-   					dataType: 'json',
-   					type: 'POST',
-   					success: function (data) {
-						//console.log(data);return false;
-   						$('#doctor_id').empty();
-   						$('#doctor_id').append("<option>select</option>");
-   						for(i=0; i<data.list.length; i++) {
-   							$('#doctor_id').append("<option value="+data.list[i].t_d_doc_id+">"+data.list[i].resource_name+"</option>");                      
-                         
-   						}
-   						//console.log(data);return false;
-   					}
-   				
-   				});
-   	
-   }
 
-$(document).ready(function() {
-    
-       $('#add_appointment').bootstrapValidator({
-   		fields: {
-             
-                patinet_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Patient Name is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Patient Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },age: {
-                    validators: {
-   					notEmpty: {
-   						message: 'age is required'
-   					},
-   					regexp: {
-   					regexp:  /^[0-9]*$/,
-   					message:'Age must be digits'
-   					}
-   				}
-               },mobile: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Mobile Number is required'
-   					},
-   					regexp: {
-   					regexp:  /^[0-9]{10,14}$/,
-   					message:'Mobile Number must be 10 to 14 digits'
-   					}
-   				}
-               },
-               department: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Department is required'
-   					}
-   				}
-               },
-               specialist: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Specialist is required'
-   					}
-   				}
-               },
-   			doctor_id: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Doctor is required'
-   					}
-   				}
-               },
-   			date: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Birth place is required'
-   					}
-   				}
-               },time: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Time is required'
-   					}
-   				}
-               }
-   			}
-   		      })
-        
-   });
-   
+
+
    </script>

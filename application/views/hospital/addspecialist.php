@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Specialist List</div>
+               <div class="page-title">Speciality List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Specialist List</li>
+               <li class="active">Speciality List</li>
             </ol>
          </div>
       </div>
@@ -17,9 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Specialist </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Speciality </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Specialist  List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Speciality  List</a>
                   </li>
                </ul>
             </header>
@@ -41,12 +41,12 @@
 										</select>
 										</div>
 								<div class="col-md-6">
-									<label> Specialist Name</label>
-								<input class="form-control" id="specialist_name" name="specialist_name" value="" type="text" placeholder="Specialist Name">
+									<label> Speciality Name</label>
+								<input class="form-control" id="specialist_name" name="specialist_name" value="" type="text" placeholder="Speciality Name">
 								</div>
 								<div class="col-md-2">
 								<label style="visibility: hidden;">test	</label>
-								<button type="submit" class="btn btn-sm btn-success " type="button">Add Specialist</button>
+								<button type="submit" class="btn btn-sm btn-success " type="button">Add Speciality</button>
 								</div>	
 							</div>
 							</form>
@@ -63,7 +63,7 @@
                                         <thead>
                                             <tr>
 												<th>Department</th>
-												<th>Specialist </th>
+												<th>Speciality </th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -110,7 +110,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="specialistid" id="specialistid" value="<?php echo $list['s_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Specialist rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Speciality rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="col-md-12">
@@ -128,7 +128,7 @@
 																</select>
 																</div>
 															<div class="col-md-12">
-																<label> Specialist Name</label>
+																<label> Speciality Name</label>
 															<input class="form-control" id="specialist_name" name="specialist_name" value="<?php echo htmlentities($list['specialist_name']);?>" type="text" placeholder="Specialist Name">
 															</div>
 													</div>
