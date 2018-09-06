@@ -128,6 +128,11 @@
 	                                <span class="title">Card Numbers Distribute</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item  ">
+	                            <a  href="<?php echo base_url('executive/index'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
+	                                <span class="title">executive</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
 						<?php }else if($userdetails['role_id']==2){ ?>
 						 <li class="nav-item start ">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">

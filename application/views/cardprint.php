@@ -32,7 +32,7 @@
 								<div class="row">
 								<div class="col-md-6">
 									<label>Cards count</label>
-								<input class="form-control" id="card_number" name="card_number" value="" type="text" placeholder="Ex:20">
+								<input class="form-control" id="card_number" name="card_number" value="" type="text" placeholder="30">
 								</div>
 								</div><br>
 								<div class="">
