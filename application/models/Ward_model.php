@@ -93,7 +93,6 @@ class Ward_model extends CI_Model
 		$this->db->select('*')->from('ward_type');
 		$this->db->where('ward_type',$name);
 		$this->db->where('hos_id',$hos_id);
-		
 		return $this->db->get()->row_array();
 	}
 	
@@ -261,6 +260,21 @@ class Ward_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 
+	
+public function get_bed_list_details($hos_id){
+		$this->db->select('ward_room_beds.w_r_n_id,ward_room_beds.bed,ward_room_beds.status,ward_room_beds.create_at')->from('ward_room_beds');			
+		$this->db->where('ward_room_beds.hos_id',$hos_id);
+		$this->db->where('ward_room_beds.status !=',2);
+		return $this->db->get()->result_array();
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public function update_bednumber_details($w_r_n_id,$data){
 		$this->db->where('w_r_n_id',$w_r_n_id);
