@@ -44,10 +44,10 @@
 	}-->
 	.card-number{
 	position: absolute;
-    left: 58%;
+    left: 55%;
     top: 70%;
     transform: translate(-50%,-50%);
-	font-size:80px;
+	font-size:100px;
 	letter-spacing:5px;
 	color:#fff;
 	width:990px;
