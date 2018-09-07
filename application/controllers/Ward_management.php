@@ -201,15 +201,17 @@ public function index()
 		{
 			if($admindetails['role_id']=2){
 				$roomno = base64_decode($this->uri->segment(3));
+				
 				$data['list']= $this->Ward_model->get_admitted_patients_details($roomno);
+				$a=$this->Ward_model->get_admitted_patients_details($roomno);
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 				$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);	
 				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
 				$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
 				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
-				$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_details($hos_ids['hos_id']);	
-				$data['bed_list'] =$this->Ward_model->get_bed_list_details($hos_ids['hos_id']);				
+				$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_detailss($a['floor_no'],$hos_ids['hos_id']);	
+				$data['bed_list'] =$this->Ward_model->get_bed_list_details($a['room_no'],$hos_ids['hos_id']);	
 									//echo $this->db->last_query();exit;
 
 				//echo '<pre>';print_r($data);exit;
