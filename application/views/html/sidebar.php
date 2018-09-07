@@ -603,9 +603,25 @@
 	                            </a>
 	                        </li>
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('nurse/patient_follow_ups');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('nurse/bed_transfer');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">notifications</i>
 	                                <span class="title">Bed Transfer</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item start ">
+	                            <a href="<?php echo base_url('nurse/patient_discharge');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">notifications</i>
+	                                <span class="title">Patient Discharge</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item start ">
+	                            <a href="<?php echo base_url('nurse/reports');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">notifications</i>
+	                                <span class="title">Reports</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
