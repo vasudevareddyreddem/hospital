@@ -235,6 +235,7 @@
                                                 <th>Bed No</th>
                                                 <th>Date of Admit</th>
                                                 <th>Status</th>
+												<th>Action</th>
                                             </tr>
                                         </thead>
                                          <tbody>										
@@ -249,6 +250,7 @@
 													<td><?php echo $list['room_num']; ?></td>
 													<td><?php echo $list['bed']; ?></td>
 													<td><?php echo $list['date_of_admit']; ?></td>	
+													<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 													<td class="valigntop">
 														<div class="btn-group">
 															<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -261,16 +263,15 @@
                                                                     <i class="fa fa-edit"></i><?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															
-													<li>
-                                                            <a href="<?php echo base_url('ward_management/admitpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
-                                                             <i class="fa fa-edit"></i>Edit</a>
-                                                    </li>
+															<li>
+																<a href="<?php echo base_url('ward_management/admittedpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
+																	<i class="fa fa-edit"></i>Edit</a>
+															</li>
 											                <li>
                                                                 <a href="<?php echo base_url('ward_management/admitpatientsdelete/'.base64_encode($list['a_p_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
-                                                            
-                                                            
+                                                           
                                                         </ul>
 														</div>
 													</td>
@@ -280,7 +281,35 @@
                                         </tbody>
                                     </table>
                                 </div>
-								<div class="clearfix">&nbsp;</div>											
+								<div class="clearfix">&nbsp;</div>		
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>								
                      </div>                    
                   </div>
                </div>
@@ -288,7 +317,8 @@
          </div>
       </div>
    </div>
-</div>
+</div></div>
+
 <div id="sucessmsg" style="display:none;"></div>
 
 <script>
@@ -302,7 +332,7 @@ function admindeactive(aid){
 }
 function adminstatus(aid){
 	if(aid==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
+			$('#content1').html('Are you sure you want to Deactivate?');
 		
 	}if(aid==0){
 			$('#content1').html('Are you sure you want to activate?');
@@ -323,7 +353,7 @@ function get_bed_count(id){
 						//console.log(data);return false;
    						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" id="1A'+i+'" /> <label for="1A'+i+'value='+data.list[i].r_b_id+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 						}							
    						//console.log(data);return false;
    					}   				
