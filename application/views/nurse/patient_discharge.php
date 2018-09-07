@@ -1,38 +1,35 @@
-
-
+<?php //echo '<pre>';print_r($hospital_details);exit; ?>
 <div class="page-content-wrapper">
-    <div class="page-content">
-        <div class="page-bar">
-            <div class="page-title-breadcrumb">
-                <div class=" pull-left">
-                    <div class="page-title">Patient Discharge </div>
-                </div>
-                <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Nurse</a>&nbsp;<i class="fa fa-angle-right"></i>
-                    </li>
-                    <li class="active">Patient Discharge</li>
-                </ol>
+   <div class="page-content" >
+      <div class="page-bar">
+         <div class="page-title-breadcrumb">
+            <div class=" pull-left">
+               <div class="page-title">Patient Discharge</div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel tab-border card-topline-green">
-                    <header class="panel-heading panel-heading-gray custom-tab ">
-                        Patient List
-                    </header>
-                    <div class="panel-body">
-                        <div id="smartwizard" class="col-md-12">
-                            <ul>
-                                <li><a href="#step-1">Patient List </a></li>
-                                <li><a href="#step-2">Discharge List</a></li>
-                            </ul>
-                            <div>
-                                <div id="step-1" class="">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="">
-                    <div class="panel-body">
-                        <div class="table-responsive">
+            <ol class="breadcrumb page-breadcrumb pull-right">
+               <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Nurse</a>&nbsp;<i class="fa fa-angle-right"></i>
+               </li>
+               <li class="active">Patient Discharge</li>
+            </ol>
+         </div>
+      </div>
+   
+         <div class="panel tab-border card-topline-green">
+            <header class="panel-heading panel-heading-gray custom-tab ">
+               <ul class="nav nav-tabs">
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Doctor</a>
+                  </li>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="">Doctors List</a>
+                  </li>
+               </ul>
+            </header>
+            <div class="panel-body">
+               <div class="tab-content">
+                  <div class="tab-pane active" id="home">
+				  <div class="container">
+                     <div class="row">
+							<div class="col-md-12">
+								<div class="table-responsive">
                             <table id="" class="table table-bordered" style="width:100%;">
                                 <thead>
                                     <tr>
@@ -57,7 +54,7 @@
                                         <td>Paid</td>
                                         <td class="valigntop">
                                             <div class="btn-group">
-                                                <a href="#step-2" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
+                                                <a href="" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
                                                 </a>
                                             </div>
                                         </td>
@@ -72,7 +69,7 @@
                                         <td>Unpaid </td>
                                         <td class="valigntop">
                                             <div class="btn-group">
-                                                <a href="#step-2" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
+                                                <a href="" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
                                                 </a>
                                             </div>
                                         </td>
@@ -80,14 +77,17 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-                                </div>
-                                <div id="step-2" class="">
-        <div class="row">
-            <div class="col-md-12">
+                           </div>
+						   <div class="clearfix">&nbsp;</div>
+                        </div>
+                        </div>
+						
+                     </div>
+                 
+                  <div class="tab-pane " id="about">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
                 <div class="">
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -115,11 +115,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
+                       
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
+            <div class="clearfix">&nbsp;</div>
+       
+      </div>
+   </div>
+</div>

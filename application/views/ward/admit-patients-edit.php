@@ -106,7 +106,7 @@
 											<div class="form-group col-md-6" >
 											  <label ><strong>Room Number</strong></label>
 												 <select  class="form-control" id="roomno_id" onchange="get_bed_count(this.value);" name="room_num" >
-												 <option value="">Select Room Number </option>
+												
 												<?php foreach($roomnum_list as $List){ ?>
 												<?php if($List['w_r_n_id']==$list['room_no']){ ?>
 													<option selected value="<?php echo $List['w_r_n_id'];?>"><?php echo $List['room_num'];?></option>
@@ -135,12 +135,25 @@
 										
 													<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 													  <div class="panel-body">
-													  <div class="d-flex justify-content-center">
-													  <?php foreach($bed_list as $List){ ?>
-													<li class="row row--1" id="bedcount_id" name="bed"  value=""><?php echo $List['bed'];?></li>																														
-																<?php } ?>
-														
-														
+													  <div class="d-flex justify-content-center">	
+												<?php foreach($bed_list as $List){ ?>
+													<li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>">
+													<div class="panel-body"> 
+													<ol class="seats" type="A">
+													<li class="seat">
+													<?php if($List['r_b_id']==$list['bed_no']){ ?>
+														<input type="checkbox" id="1A" checked />
+														<label for="1A">bed <?php echo $List['bed'];?></label>
+													<?php }else{ ?>
+														<input type="checkbox" id="1A" />
+														<label for="1A">bed <?php echo $List['bed'];?></label>
+													<?php } ?>	
+													</li>
+													</ol>
+													</div>
+													</li>	
+												<?php } ?>																													
+										
 														</div>
 													  </div>
 													</div>													

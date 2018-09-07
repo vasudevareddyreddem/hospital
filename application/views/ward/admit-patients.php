@@ -231,6 +231,7 @@
                                                 <th>Ward Name </th>
                                                 <th>Ward Type </th>
                                                 <th>Room Type</th>
+												<th>Floor No</th>
                                                 <th>Room No</th>
                                                 <th>Bed No</th>
                                                 <th>Date of Admit</th>
@@ -247,6 +248,7 @@
 													<td><?php echo $list['ward_name']; ?></td>
 													<td><?php echo $list['ward_type']; ?></td>
 													<td><?php echo $list['room_type']; ?></td>
+													<td><?php echo $list['ward_floor']; ?></td>
 													<td><?php echo $list['room_num']; ?></td>
 													<td><?php echo $list['bed']; ?></td>
 													<td><?php echo $list['date_of_admit']; ?></td>	
