@@ -22,7 +22,7 @@
                 <form class=" pad30 form-horizontal" action=" " method="post"  id="contact_form">
 					<div class="row d-flex justify-content-center">
 						 <div class="form-group col-md-6">
-						  <label ><strong>Enter Patient ID:</strong></label>
+						  <label><strong>Enter Patient ID:</strong></label>
 						  <input style="border-radius:0px;height:40px;" type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter patient ID " >
 						</div> 
 						<div class="form-group col-md-2">
