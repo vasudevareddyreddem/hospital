@@ -218,6 +218,25 @@
 							
 	                            </ul>
 	                        </li> 
+							
+							
+							<li class="nav-item  open ">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
+	                                <span class="title">Agent Flow</span>  <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                            <ul class="sub-menu">
+	                                <li class="nav-item  ">
+	                                    <a href="<?php echo base_url('agent/patientlist'); ?>" class="nav-link "> <span class="title">Patient History</span>
+	                                    </a>
+	                                </li>
+									<li class="nav-item  ">
+	                                    <a href="<?php echo base_url('agent/patient'); ?>" class="nav-link "> <span class="title">Patient List</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </li> 
+							
 							<li class="nav-item  open ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
