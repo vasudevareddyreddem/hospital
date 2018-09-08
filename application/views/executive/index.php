@@ -32,52 +32,52 @@
 								<div class="row">
 								<div class="col-md-6">
 									<label> Name</label>
-								<input class="form-control" id="name" name="name" value="" type="text" placeholder="Name">
+								<input class="form-control" id="name" name="name" value="" type="text" placeholder=" Enter Name">
 								</div>
 								
 								<div class="col-md-6">
 									<label>Mobile</label>
-								<input class="form-control" id="mobile" name="mobile" value="" type="text" placeholder="Mobile">
+								<input class="form-control" id="mobile" name="mobile" value="" type="text" placeholder="Enter Mobile">
 								</div>
 								<div class="col-md-6">
 									<label>Email Address</label>
-								<input class="form-control" id="email_id" name="email_id" value="" type="text" placeholder="Email Address">
+								<input class="form-control" id="email_id" name="email_id" value="" type="text" placeholder=" Enter Email Address">
 								</div>
 								<div class="col-md-6">
 									<label>Password</label>
-								<input class="form-control" id="password" name="password" value="" type="password" placeholder="Password">
+								<input class="form-control" id="password" name="password" value="" type="password" placeholder=" Enter Password">
 								</div>
 								<div class="col-md-6">
 									<label> Confirm Password</label>
-								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Confirm Password">
+								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Enter Confirm Password">
 								</div>
 								<div class="col-md-6">
 									<label> Address</label>
-								<input class="form-control" id="address" name="address" value="" type="text" placeholder="Address">
+								<input class="form-control" id="address" name="address" value="" type="text" placeholder="Enter Address">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Number</label>
-									<input class="form-control" id="bank_account" name="bank_account" value="" type="text" placeholder="Bank Account Number">
+									<input class="form-control" id="bank_account" name="bank_account" value="" type="text" placeholder="Enter Bank Account Number">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Name</label>
-									<input class="form-control" id="bank_name" name="bank_name" value="" type="text" placeholder="Bank Name">
+									<input class="form-control" id="bank_name" name="bank_name" value="" type="text" placeholder="Enter Bank Name">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Ifsc Code</label>
-									<input class="form-control" id="ifsccode" name="ifsccode" value="" type="text" placeholder="Bank Ifsc Code">
+									<input class="form-control" id="ifsccode" name="ifsccode" value="" type="text" placeholder="Enter Bank Ifsc Code">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Holder Name</label>
-									<input class="form-control" id="bank_holder_name" name="bank_holder_name" value="" type="text" placeholder="Bank Account Holder Name">
+									<input class="form-control" id="bank_holder_name" name="bank_holder_name" value="" type="text" placeholder="Enter Bank Account Holder Name">
 								</div>
 								<div class="col-md-6">
 									<label> Kyc</label>
-									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name">
+									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Enter Bank Account Holder Name">
 								</div>
 								<div class="col-md-6">
 									<label>Location</label>
-									<input class="form-control" id="" name="" value="" type="text" placeholder="enter Location">
+									<input class="form-control" id="location" name="location" value="" type="text" placeholder="Enter Location">
 								</div>
 								
 								</div><br>
@@ -189,36 +189,7 @@
    </div>
 </div>
 <script>
-$(document).ready(function() {
-    $('#assign_seller').bootstrapValidator({
-        
-        fields: {
-            
-            seller_id: {
-                 validators: {
-					notEmpty: {
-						message: 'Seller Name is required'
-					}
-				}
-            },
-			 card_number_from: {
-                validators: {
-					notEmpty: {
-						message: 'Card Numbers From is required'
-					}
-				
-				}
-            },card_number_to: {
-                   validators: {
-					 notEmpty: {
-						message: 'Card Numbers To is required'
-					}
-				}
-				}
-            }
-        })
-     
-});
+
 $(document).ready(function() {
     $('#add_seller').bootstrapValidator({
         
@@ -294,52 +265,23 @@ $(document).ready(function() {
 					message:'Address wont allow <> [] = % '
 					}
                 }
-            },bank_name: {
+            },
+			bank_account:{
                  validators: {
-					
-                    regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Bank Account Number wont allow <> [] = % '
+					notEmpty: {
+						message: 'bank account is required'
 					}
-                }
-            },bank_holder_name: {
-                 validators: {
-					
-                    regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Bank Account Holder Name wont allow <> [] = % '
-					}
-                }
-            },bank_account:
-          {
-            validators: 
-            {
 				
-              regexp: 
-              {
-					     regexp:  /^[0-9]{9,16}$/,
-					     message:'Bank Account  must be 9 to 16 digits'
-					    }
-            }
-          },
-         account_name: {
-          validators: {
-					
-					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Account Name can only consist of alphanumaric, space and dot'
-					}
 				}
-        }, 
-		ifsccode: {
-          validators: {
-					
-					regexp: {
-					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
-					 message: 'IFSC Code must be alphanumaric'
-					}
-				}
-        },
+            },
+			
+			
+			
+			
+			
+		
+		
+		
 			kyc: {
                    validators: {
 					 
@@ -349,14 +291,14 @@ $(document).ready(function() {
 					}
 				}
             }
+			
+			
+			
+			
+			
+			
+			
             }
         })
      
 });
-</script>
-<script>
-  $(function () {
-    $("#example5").DataTable();
-  
-  });
-</script>
