@@ -990,6 +990,7 @@ class Admin extends CI_Controller {
 					if($lab_id!=''){
 						
 						$data['lab_detils']= $this->Admin_model->get_get_out_sources_details(base64_decode($this->uri->segment(3)));
+						//echo "<pre>";print_r($data);exit; 
 							$this->load->view('admin/edit_outsource',$data);
 							$this->load->view('html/footer');
 						

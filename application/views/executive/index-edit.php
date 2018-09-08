@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Executive</div>
+               <div class="page-title">Edit Executive</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Executive</li>
+               <li class="active">Edit Executive</li>
             </ol>
          </div>
       </div>
@@ -17,10 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Executive</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Edit Executive</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
-                  </li>
+                 
                </ul>
             </header>
             <div class="panel-body">
@@ -28,58 +27,53 @@
                   <div class="tab-pane active" id="home">
 				  <div class="container">
                      
-					 <form id="defaultForm" method="post" class="" action="<?php echo base_url('Executive/indexpost');  ?>"  enctype="multipart/form-data">
+					 <form id="defaultForm" method="post" class="" action="<?php echo base_url('Executive/edit_indexpost');  ?>"  enctype="multipart/form-data">
+					 	<input type="hidden" id="e_id" name="e_id" value="<?php echo $edit_executive_list['e_id'] ?>">
 								<div class="row">
 								<div class="col-md-6">
 									<label> Name</label>
-								<input class="form-control" id="name" name="name" type="text" placeholder=" Enter Name">
+								<input class="form-control" id="name" name="name" type="text" placeholder=" Enter Name" value="<?php echo isset($edit_executive_list['name'])?$edit_executive_list['name']:''; ?>">
 								</div>
 								
 								<div class="col-md-6">
 									<label>Mobile</label>
-								<input class="form-control" id="mobile" name="mobile" type="text" placeholder="Enter Mobile">
+								<input class="form-control" id="mobile" name="mobile" type="text" placeholder="Enter Mobile" value="<?php echo isset($edit_executive_list['mobile'])?$edit_executive_list['mobile']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label>Email Address</label>
-								<input class="form-control" id="email_id" name="email_id"  type="text" placeholder=" Enter Email Address">
+								<input class="form-control" id="email_id" name="email_id"  type="text" placeholder=" Enter Email Address" value="<?php echo isset($edit_executive_list['email_id'])?$edit_executive_list['email_id']:''; ?>">
 								</div>
-								<div class="col-md-6">
-									<label>Password</label>
-								<input class="form-control" id="password" name="password"  type="password" placeholder=" Enter Password">
-								</div>
-								<div class="col-md-6">
-									<label> Confirm Password</label>
-								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Enter Confirm Password">
-								</div>
+								
+								
 								<div class="col-md-6">
 									<label> Address</label>
-								<input class="form-control" id="address" name="address"  type="text" placeholder="Enter Address">
+								<input class="form-control" id="address" name="address"  type="text" placeholder="Enter Address" value="<?php echo isset($edit_executive_list['address'])?$edit_executive_list['address']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Number</label>
-									<input class="form-control" id="bank_account" name="bank_account"  type="text" placeholder="Enter Bank Account Number">
+									<input class="form-control" id="bank_account" name="bank_account"  type="text" placeholder="Enter Bank Account Number" value="<?php echo isset($edit_executive_list['bank_account'])?$edit_executive_list['bank_account']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Name</label>
-									<input class="form-control" id="bank_name" name="bank_name"  type="text" placeholder="Enter Bank Name">
+									<input class="form-control" id="bank_name" name="bank_name"  type="text" placeholder="Enter Bank Name" value="<?php echo isset($edit_executive_list['bank_name'])?$edit_executive_list['bank_name']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Ifsc Code</label>
-									<input class="form-control" id="ifsccode" name="ifsccode"  type="text" placeholder="Enter Bank Ifsc Code">
+									<input class="form-control" id="ifsccode" name="ifsccode"  type="text" placeholder="Enter Bank Ifsc Code" value="<?php echo isset($edit_executive_list['ifsccode'])?$edit_executive_list['ifsccode']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Holder Name</label>
-									<input class="form-control" id="bank_holder_name" name="bank_holder_name"  type="text" placeholder="Enter Bank Account Holder Name">
+									<input class="form-control" id="bank_holder_name" name="bank_holder_name"  type="text" placeholder="Enter Bank Account Holder Name" value="<?php echo isset($edit_executive_list['bank_holder_name'])?$edit_executive_list['bank_holder_name']:''; ?>">
 								</div>
 								<div class="col-md-6">
 									<label> Kyc</label>
-									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name">
+									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name" value="<?php echo isset($edit_executive_list['kyc'])?$edit_executive_list['kyc']:''; ?>">
 								</div>
 								
 								
 								<div class="col-md-6">
 									<label>Location</label>
-									<input class="form-control" id="location" name="location" type="text" placeholder="Enter Location">
+									<input class="form-control" id="location" name="location" type="text" placeholder="Enter Location" value="<?php echo isset($edit_executive_list['location'])?$edit_executive_list['location']:''; ?>">
 								</div>
 								
 								</div><br>
@@ -97,85 +91,9 @@
                      <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-								<div class="row">
-                                    <div class="col-md-6">
-                                         <div class="form-group">
-										<label class=" control-label">Executive Name</label>
-									<div class="">
-									<select id="name" name="name" class="form-control" >
-										<option value="">Select</option>
-										<?php if(isset($executive_name) && count($executive_name)>0){ ?>
-											<?php foreach($executive_name as $list){ ?>
-												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['name']; ?></option>
-												
-											<?php } ?>
-								<?php } ?>
-									</select>
-									</div>
-								</div>
-                                        </div>
-
-                                         <div class="col-md-6">
-                                         <div class="form-group">
-										<label class=" control-label">Location</label>
-									<div class="">
-									<select id="location" name="location" class="form-control" >
-										<option value="">Select</option>
-										<?php if(isset($executive_location) && count($executive_location)>0){ ?>
-											<?php foreach($executive_location as $list){ ?>
-												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['location']; ?></option>
-												
-											<?php } ?>
-										<?php } ?>
-									</select>
-									</div>
-								</div>
-                                        </div>
-                                </div>
+							
                             <div class="card card-topline-aqua">
                                 
-                                <div class="card-body ">
-                                    <table id="saveStage" class="display" style="width:100%;">
-                                        <thead>
-										
-                                            <tr>
-											    <th>S.no</th>
-                                                <th>Name</th>
-                                                <th>Mobile</th>
-												<th>Email Address</th>
-                                                <th>Address</th>
-                                                <th>Location<th>
-                                                <th>Status<th>
-												<th>Action</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-										<?php $cnt=1;foreach($executive_list as $list){ ?>
-				                            <tr>
-                                              <td><?php echo $cnt; ?></td>
-                                                <td><?php echo $list['name']; ?></td>
-                                                <td><?php echo $list['mobile']; ?></td>
-                                                <td><?php echo $list['email_id']; ?></td>
-                                                <td><?php echo $list['address']; ?></td>
-                                                <td><?php echo $list['location']; ?></td>
-												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-												<td>
-						                         <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
-									            <a href="<?php echo base_url('Executive/status/'.$list['e_id'].'/'.$list['status']);?>"data-toggle="tooltip" title="Status"><i class="fa fa-pencil btn btn-success"></i></a>
-
-									               <a href="<?php echo base_url('Executive/delete/'.$list['e_id']);?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-pencil btn btn-success"></i></a>
-
-					                             </td>
-												
-                                           
-											
-										<?php $cnt++;} ?>
-										 </tr>
-                                        </tbody>
-										
-                                    </table>
-                                </div>
 								<div class="clearfix">&nbsp;</div>
                                 <div class="text-center">
                                     <div class="col-md-12">
