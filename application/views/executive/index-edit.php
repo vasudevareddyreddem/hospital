@@ -67,7 +67,7 @@
 								</div>
 								<div class="col-md-6">
 									<label> Kyc</label>
-									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name" value="<?php echo isset($edit_executive_list['kyc'])?$edit_executive_list['kyc']:''; ?>">
+									<input class="form-control" id="kyc" name="kyc" type="file" placeholder="Bank Account Holder Name" value="<?php echo isset($edit_executive_list['kyc'])?$edit_executive_list['kyc']:''; ?>">
 								</div>
 								
 								

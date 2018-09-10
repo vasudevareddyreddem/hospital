@@ -177,7 +177,7 @@ class Executive extends In_frontend {
 				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
 				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
 				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
-				'kyc'=>isset($post['kyc'])?$post['kyc']:'',
+				'kyc'=>$file1,
 				'location'=>isset($post['location'])?$post['location']:'',
 				'status'=>1,
 				'create_at'=>date('Y-m-d H:i:s'),

@@ -73,16 +73,10 @@
 									<label> Bank Account Holder Name</label>
 									<input class="form-control" id="bank_holder_name" name="bank_holder_name"  type="text" placeholder="Enter Bank Account Holder Name">
 								</div>
-                 <div class="form-group col-md-6">
-                           <label for="email"> KYC Details</label>
-                           <input type="text" class="form-control"  value="" id="kyc" name="kyc" placeholder="Document Name" >
-                        </div>
-                        <div class="form-group col-md-6">
-                           <label for="email">Upload </label>
-                           <div class="compose-editor">
-                              <input type="file" id="kyc" name="kyc" class="default" >
-                           </div>
-                        </div>
+                                     <div class="col-md-6">
+									<label> Kyc</label>
+									<input class="form-control" id="kyc" name="kyc"  type="file" placeholder="Bank Account Holder Name" >
+								</div>
 								
 								<div class="col-md-6">
 									<label>Location</label>

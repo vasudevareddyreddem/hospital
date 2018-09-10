@@ -40,6 +40,7 @@ class Lab extends In_frontend {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id'],$admindetails['a_id']);
 					$data['test_type_list']=$this->Lab_model->get_lab_test_type_details();
+					//echo '<pre>';print_r($data['test_type_list']);exit;
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/testsdetails',$data);
 					$this->load->view('html/footer');
@@ -1105,6 +1106,7 @@ class Lab extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					//echo'<pre>';print_r($userdetails);exit;
+					
 					include_once('simplexlsx.class.php');
 					$getWorksheetName = array();
 					$xlsx = new SimpleXLSX( $_FILES['uploadfile']['tmp_name'] );
@@ -1116,11 +1118,25 @@ class Lab extends In_frontend {
 					unset($arry[0]);
 
 		           //echo "<pre>";print_r($arry);exit;
+				   
+				  
+				   $test_type_list=$this->Lab_model->get_lab_test_type_details();
+					//echo'<pre>';print_r($test_type_list);exit;
 		           foreach($arry as $key=>$fields)
-					{   
-		         $data=array(
+					{ 
+				
+                    foreach($test_type_list as $list){
+					
+						if($fields[0]=$list['type_name']){
+							$fields[0]=$list['id'];
+							
+						}
+					
+					}
+					
+		    $data=array(
 			'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-			'test_type'=>$fields[0],
+			'test_type'=>$list['id'],
 			't_name'=>$fields[2],
 			'type'=>$fields[1],
 			'duration'=>$fields[3],
@@ -1158,4 +1174,4 @@ class Lab extends In_frontend {
 
 		
 		
-}
+  }
