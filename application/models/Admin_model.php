@@ -570,18 +570,20 @@ class Admin_model extends CI_Model
 		return $this->db->get()->row_array(); 
 	 }
 	  public function executive_list_data($id){
-		$this->db->select('*')->from('executive_list');
+		$this->db->select('executive_list.*')->from('executive_list');
 		$this->db->where('executive_list.added_by',$id);
+		$this->db->where('executive_list.status !=',2);
         return $this->db->get()->result_array();
 	}
 		public function executive_name_list_data($e_id){
 		$this->db->select('executive_list.e_id,executive_list.name')->from('executive_list');
 		$this->db->where('executive_list.added_by',$e_id);
+		$this->db->where('executive_list.added_by',$e_id);
         return $this->db->get()->result_array();
 	}	
 	public function executive_location_list_data($e_id){
 	$this->db->select('executive_list.e_id,executive_list.location')->from('executive_list');
-		$this->db->where('executive_list.added_by',$e_id);
+		$this->db->where('executive_list.status',1);
         return $this->db->get()->result_array();
 	}	
 	public function edit_executive_list_data($e_id){
@@ -594,12 +596,21 @@ class Admin_model extends CI_Model
 		return $this->db->update('executive_list',$data);
 	}
 	public function delete_details_data($e_id){
-	$this->db->where('e_id',$e_id);
+	    $this->db->where('e_id',$e_id);
 		return $this->db->delete('executive_list');
 	}	
-
 	
-	
+       public function saver_user($e_id){
+	$this->db->select('*')->from('executive_list');
+		$this->db->where('e_id',$e_id);
+		return $this->db->get()->row_array();
+			  
+}
+  public function saver_user_details($email_id){
+		$this->db->select('*')->from('executive_list');
+		$this->db->where('executive_list.email_id',$email_id);
+		return $this->db->get()->row_array();
+			  }
 	
 	
   }

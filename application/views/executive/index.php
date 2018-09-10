@@ -1,4 +1,4 @@
-<?php //echo '<pre>';print_r($hospital_details);exit; ?>
+<?php //echo '<pre>';print_r($executive_list);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -17,15 +17,17 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Executive</a>
+                  <li class="nav-item"><a href="#tab1" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Executive</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
+                  <li class="nav-item"><a href="#tab2" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
                   </li>
+				  
+				  
                </ul>
             </header>
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane active" id="home">
+                    <div class="tab-pane <?php if(isset($tab) && $tab==''){  echo "active";} ?>" id="tab1">
 				  <div class="container">
                      
 					 <form id="defaultForm" method="post" class="" action="<?php echo base_url('Executive/indexpost');  ?>"  enctype="multipart/form-data">
@@ -71,11 +73,16 @@
 									<label> Bank Account Holder Name</label>
 									<input class="form-control" id="bank_holder_name" name="bank_holder_name"  type="text" placeholder="Enter Bank Account Holder Name">
 								</div>
-								<div class="col-md-6">
-									<label> Kyc</label>
-									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name">
-								</div>
-								
+                 <div class="form-group col-md-6">
+                           <label for="email"> KYC Details</label>
+                           <input type="text" class="form-control"  value="" id="kyc" name="kyc" placeholder="Document Name" >
+                        </div>
+                        <div class="form-group col-md-6">
+                           <label for="email">Upload </label>
+                           <div class="compose-editor">
+                              <input type="file" id="kyc" name="kyc" class="default" >
+                           </div>
+                        </div>
 								
 								<div class="col-md-6">
 									<label>Location</label>
@@ -93,7 +100,7 @@
 					
                      </div>
                   </div>
-                  <div class="tab-pane" id="about">
+                   <div class="tab-pane  <?php if(isset($tab) && $tab==1){  echo "active";} ?>" id="tab2">
                      <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -132,7 +139,7 @@
 								</div>
                                         </div>
                                 </div>
-                            <div class="card card-topline-aqua">
+                            <div class="card card-topline-aqua active">
                                 
                                 <div class="card-body ">
                                     <table id="saveStage" class="display" style="width:100%;">
@@ -153,7 +160,7 @@
                                         <tbody>
 										<?php $cnt=1;foreach($executive_list as $list){ ?>
 				                            <tr>
-                                              <td><?php echo $cnt; ?></td>
+                                                 <td><?php echo $cnt; ?></td>
                                                 <td><?php echo $list['name']; ?></td>
                                                 <td><?php echo $list['mobile']; ?></td>
                                                 <td><?php echo $list['email_id']; ?></td>
@@ -161,14 +168,12 @@
                                                 <td><?php echo $list['location']; ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td>
-						                         <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
-									            <a href="<?php echo base_url('Executive/status/'.$list['e_id'].'/'.$list['status']);?>"data-toggle="tooltip" title="Status"><i class="fa fa-pencil btn btn-success"></i></a>
-
-									               <a href="<?php echo base_url('Executive/delete/'.$list['e_id']);?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-pencil btn btn-success"></i></a>
-
+						                       <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
+									           <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id'].'/'.$list['status']));?>"data-toggle="tooltip" title="Status"><i class="fa fa-info-circle btn btn-warning"></i></a>
+						                       <a href="<?php echo base_url('Executive/delete/'.base64_encode($list['e_id']));?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-trash btn btn-danger"></i></a>
 					                             </td>
 												
-                                           
+                                     
 											
 										<?php $cnt++;} ?>
 										 </tr>
@@ -199,6 +204,7 @@
 
 
  <script>
+  
 $(document).ready(function() {
  
    $('#defaultForm').bootstrapValidator({
@@ -323,10 +329,9 @@ $(document).ready(function() {
 			
 			kyc: {
                    validators: {
-					 
-					 regexp: {
-					regexp: /\.(jpe?g|png|gif|pdf|doc|docx)$/i,
-					message: 'Uploaded file is not a valid image. Only pdf,doc,docx,JPG,PNG and GIF files are allowed'
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
 					}
 				}
             },
