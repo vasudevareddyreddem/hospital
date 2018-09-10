@@ -44,7 +44,7 @@
 									<div class="row">
 										<div class="form-group col-md-3 card">
 									
-											<h3>Selected Out source labs</h3>
+											<h3>Selected Out Source Labs</h3>
 											<textarea readonly="true" id="example-console" type="textarea" class="form-control"  placeholder="Selected Hospitals" ></textarea>
 											<br>
 											 <form class="dat-help" id="frm-example" action="" method="POST">
@@ -52,7 +52,7 @@
                                              <thead>
                                                 <tr>
                                                    <th><input name="select_all" value="1" type="checkbox"></th>
-                                                   <th>Out source lab Name</th>
+                                                   <th>Out Source Lab Name</th>
                                                 </tr>
                                              </thead>
                                               <tbody>
@@ -77,7 +77,7 @@
 										<div class="col-md-9 chat-help">
 											<div class="panel ">
 												<div class="panel-heading bg-indigo">
-													<span class="glyphicon glyphicon-comment"></span> Out source lab Name
+													<span class="glyphicon glyphicon-comment"></span> Out Source Lab Name
 												</div>
 												<div class="panel-body">
 												

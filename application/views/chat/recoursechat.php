@@ -35,7 +35,7 @@
                         <div class="container">
 						<div class="panel ">
 												<div class="panel-heading bg-indigo">
-													<span class="glyphicon glyphicon-comment"></span> Resources chat list
+													<span class="glyphicon glyphicon-comment"></span> Resources Chat List
 													
 												</div>
 												<div class="panel-body" style="height:300px;overflow-y: scroll;">

@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Privilege card List</div>
+               <div class="page-title">Coupon Code</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Privilege card List</li>
+               <li class="active">Coupon Code</li>
             </ol>
          </div>
       </div>
@@ -17,9 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Privilege card </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Coupon Code </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Privilege card List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Coupon Code List</a>
                   </li>
                </ul>
             </header>
@@ -32,7 +32,7 @@
 								<div class="row">
 								<div class="col-md-6">
 								<label> Name</label>
-								<input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Privilege card">
+								<input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Coupon Code">
 								</div>
 								<div class="col-md-6">
 									<label>Type</label>
@@ -79,7 +79,7 @@
 												<th>Hospital Name</th>
 												<th>Type</th>
 												<th>Percentage / Amount</th>
-                                                <th>Create date</th>
+                                                <th>Created Date&Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -106,7 +106,7 @@
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
 
                                                             <li>
-                                                                <a href="<?php echo base_url('admin/delete_couponcode/'.base64_encode($list['id'])); ?>">
+                                                                <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -126,7 +126,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="coupon_code_id" id="coupon_code_id" value="<?php echo $list['id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Privilege card Rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Coupon Code Rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">
@@ -230,12 +230,21 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Deactivate?');
+			$('#content1').html('Are you sure you want to deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
 	}
 }
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('admin/delete_couponcode'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
 $(document).ready(function() {
     $('#coupon_post').bootstrapValidator({
         
@@ -244,11 +253,11 @@ $(document).ready(function() {
             coupon_code: {
                  validators: {
 					notEmpty: {
-						message: 'Privilege card is required'
+						message: 'Coupon Code is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Privilege card can only consist of alphanumeric, space and dot'
+					message: 'Coupon Code can only consist of alphanumeric, space and dot'
 					}
 				}
             },

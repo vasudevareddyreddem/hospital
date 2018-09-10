@@ -29,8 +29,8 @@
 												<th>Patient Id</th>
 												<th>Patient Card Number</th>
 												<th>Name</th>
-                                                <th>Registration type</th>
-                                                <th>Date</th>
+                                                <th>Registration Type</th>
+                                                <th>Date & Time</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

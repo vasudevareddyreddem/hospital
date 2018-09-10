@@ -205,7 +205,7 @@ class Admin extends CI_Controller {
 					if(count($checking)==0){
 						$addcoupon=$this->Admin_model->save_coupon_codes($coupon_code);
 						if(count($addcoupon)>0){
-							$this->session->set_flashdata('success',"Privilage card successfully Added");
+							$this->session->set_flashdata('success',"Coupon Code successfully added");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -213,7 +213,7 @@ class Admin extends CI_Controller {
 						}
 					
 					}else{
-							$this->session->set_flashdata('error',"Privilage card already exists. Please try again.");
+							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
 							redirect('admin/couponcodes');
 					}
 				}else{
@@ -234,7 +234,7 @@ class Admin extends CI_Controller {
 					$coupon_id=base64_decode($this->uri->segment(3));
 					$delete=$this->Admin_model->delete_coupon_code($coupon_id);
 						if(count($delete)>0){
-							$this->session->set_flashdata('success',"Privilage card successfully Deleted.");
+							$this->session->set_flashdata('success',"Coupon Code successfully deleted.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -270,9 +270,9 @@ class Admin extends CI_Controller {
 						$updated=$this->Admin_model->update_coupon_code_details($test_id,$details);
 						if(count($updated)>0){
 							if($status==1){
-							$this->session->set_flashdata('success',"Privilage card successfully Deactivate.");
+							$this->session->set_flashdata('success',"Coupon Code successfully deactivated.");
 							}else{
-								$this->session->set_flashdata('success',"Privilage card successfully Activate.");
+								$this->session->set_flashdata('success',"Coupon Code successfully activated.");
 							}
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
@@ -311,7 +311,7 @@ class Admin extends CI_Controller {
 						
 						$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 						if(count($save)>0){
-							$this->session->set_flashdata('success',"Privilage card successfully Updated.");
+							$this->session->set_flashdata('success',"Coupon Code successfully updated.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -323,7 +323,7 @@ class Admin extends CI_Controller {
 						if(count($checking)==0){
 							$save=$this->Admin_model->update_coupon_code_details($post['coupon_code_id'],$coupon_code);
 							if(count($save)>0){
-								$this->session->set_flashdata('success',"Privilage card successfully Updated.");
+								$this->session->set_flashdata('success',"Coupon Code successfully updated.");
 								redirect('admin/couponcodes/'.base64_encode(1));
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -331,7 +331,7 @@ class Admin extends CI_Controller {
 							}
 							
 						}else{
-							$this->session->set_flashdata('error',"Privilage card already exists. Please try again.");
+							$this->session->set_flashdata('error',"Coupon Code already exists. Please try again.");
 							redirect('admin/couponcodes/'.base64_encode(1));
 						}
 					}
@@ -375,7 +375,7 @@ class Admin extends CI_Controller {
 					 $this->email->message($body);
 					if ($this->email->send())
 					{
-						$this->session->set_flashdata('success',"Password sent to your registered email address. Please Check your registered email address");
+						$this->session->set_flashdata('success',"Password sent to your registered email address. Please check your registered email address");
 						redirect('admin');
 					}else{
 						$this->session->set_flashdata('error'," In Localhost mail  didn't sent");
@@ -503,7 +503,7 @@ class Admin extends CI_Controller {
 									);
 								$update= $this->Admin_model->update_admin_details($admindetails['a_id'],$details);
 								if(count($update)>0){
-										$this->session->set_flashdata('success',"Profile details successfully Updated.");
+										$this->session->set_flashdata('success',"Profile details successfully updated.");
 										redirect('profile');
 									}else{
 											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -527,7 +527,7 @@ class Admin extends CI_Controller {
 						);
 						$update= $this->Admin_model->update_admin_details($admindetails['a_id'],$details);
 						if(count($update)>0){
-								$this->session->set_flashdata('success',"Profile details successfully Updated.");
+								$this->session->set_flashdata('success',"Profile details successfully updated.");
 								redirect('profile');
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -666,7 +666,7 @@ class Admin extends CI_Controller {
 					);
 					$saveNotification=$this->Admin_model->save_notification($addnotification);
 					if(count($saveNotification)>0){
-						$this->session->set_flashdata('success',"Notification successfully Sent");
+						$this->session->set_flashdata('success',"Notification successfully sent");
 						redirect('admin/notificationlist');
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -804,7 +804,7 @@ class Admin extends CI_Controller {
 				}
 				
 				if(count($saveNotification)>0){
-					$this->session->set_flashdata('success',"Notification successfully Sent.");
+					$this->session->set_flashdata('success',"Notification successfully sent.");
 					redirect('admin/announcement');
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -879,7 +879,7 @@ class Admin extends CI_Controller {
 									//echo '<pre>';print_r($onedata);exit;
 									$saveresource =$this->Admin_model->save_out_source_lab($resourcedata);
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Our source lab are successfully created");
+										$this->session->set_flashdata('success',"Out Source Lab successfully created");
 										redirect('lab/oursource/'.base64_encode(1));
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -927,9 +927,9 @@ class Admin extends CI_Controller {
 							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Out source Lab successfully Deactivate.");
+								$this->session->set_flashdata('success',"Out Source Lab successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Out source Lab successfully Activate.");
+									$this->session->set_flashdata('success',"Out Source Lab successfully activated.");
 								}
 								redirect('lab/oursource/'.base64_encode(1));
 							}else{
@@ -961,7 +961,7 @@ class Admin extends CI_Controller {
 							$this->Admin_model->delete_out_sources($r_details['a_id']);
 							$deletedata= $this->Admin_model->delete_resourse_details(base64_decode($resourse_id));
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Out source Lab successfully removed.");
+								$this->session->set_flashdata('success',"Out Source Lab successfully removed.");
 								redirect('lab/oursource/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1091,7 +1091,7 @@ class Admin extends CI_Controller {
 									//echo '<pre>';print_r($onedata);exit;
 									$saveresource =$this->Admin_model->update_lab_resourse_details($post['lab_id'],$resourcedata);
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Out source lab details are successfully Updated");
+										$this->session->set_flashdata('success',"Out Source Lab details are successfully updated");
 										redirect('lab/oursource/'.base64_encode(1));
 										
 									}else{
@@ -1127,7 +1127,7 @@ class Admin extends CI_Controller {
 							);
 							$saveresource =$this->Admin_model->update_lab_resourse_details($post['lab_id'],$resourcedata);
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Out source lab details are successfully Updated");
+										$this->session->set_flashdata('success',"Out Source Lab details are successfully updated");
 										redirect('lab/oursource/'.base64_encode(1));
 										
 									}else{
@@ -1331,7 +1331,7 @@ class Admin extends CI_Controller {
 				);
 				$save=$this->Admin_model->save_sellers($add);
 				if(count($save)>0){
-					$this->session->set_flashdata('success',"Card Number distributor successfully Added.");
+					$this->session->set_flashdata('success',"Card Number distributor successfully added.");
 					redirect('admin/cardnumber_distribute/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1438,9 +1438,9 @@ class Admin extends CI_Controller {
 							$statusdata=$this->Admin_model->update_distrubtor_details($s_id,$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Distributor successfully Deactivate.");
+								$this->session->set_flashdata('success',"Distributor successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Distributor successfully Activate.");
+									$this->session->set_flashdata('success',"Distributor successfully activated.");
 								}
 								redirect('admin/cardnumber_distribute/'.base64_encode(1));
 							}else{
@@ -1479,7 +1479,7 @@ class Admin extends CI_Controller {
 							);
 							$statusdata=$this->Admin_model->update_distrubtor_details($s_id,$stusdetails);
 							if(count($statusdata)>0){
-								$this->session->set_flashdata('success',"Distributor successfully Deleted.");
+								$this->session->set_flashdata('success',"Distributor successfully deleted.");
 								
 								redirect('admin/cardnumber_distribute/'.base64_encode(1));
 							}else{

@@ -93,7 +93,7 @@ class Hospital extends In_frontend {
 								$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$onedata1);
 								$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
 								if(count($stepone)>0){
-									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
+									$this->session->set_flashdata('success',"Hospital Representative Details are successfully updated");
 									redirect('hospital/add/'.base64_encode(2).'/'.$post['hospital_id']);
 								}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -103,7 +103,7 @@ class Hospital extends In_frontend {
 							
 								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
 								}else{
 									$hospital_id= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
@@ -120,7 +120,7 @@ class Hospital extends In_frontend {
 									$this->Hospital_model->update_adminhospital_details($hospital_id['a_id'],$onedata1);
 									$stepone= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$onedata);
 									if(count($stepone)>0){
-									$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
+									$this->session->set_flashdata('success',"Hospital Representative Details are successfully updated");
 									redirect('hospital/add/'.base64_encode(2).'/'.$post['hospital_id']);
 									}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -135,7 +135,7 @@ class Hospital extends In_frontend {
 							if(md5($post['hos_password'])==md5($post['hos_confirmpassword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/add/'.base64_encode(1));
 								}else{
 									
@@ -220,7 +220,7 @@ class Hospital extends In_frontend {
 							);
 							$steptwo= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$twodata);
 							if(count($steptwo)>0){
-								$this->session->set_flashdata('success',"Hospital Representative details are successfully updated");
+								$this->session->set_flashdata('success',"Hospital Representative Details are successfully updated");
 								redirect('hospital/add/'.base64_encode(3).'/'.$post['hospital_id']);
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -371,7 +371,7 @@ class Hospital extends In_frontend {
 							);
 							$stepfive= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$fivedata);
 							if(count($stepfive)>0){
-								$this->session->set_flashdata('success',"Hospital Details are successfully Saved");
+								$this->session->set_flashdata('success',"Hospital Details are successfully saved");
 								redirect('hospital');
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -443,7 +443,7 @@ class Hospital extends In_frontend {
 						if($hospital_details['hos_email_id']!= $post['hos_bas_email']){
 							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_bas_email']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/edit/'.$post['hospital_id']);
 								}
 						}
@@ -560,21 +560,21 @@ class Hospital extends In_frontend {
 							//echo '<pre>';print_r($editdata);exit;
 							$editdetails= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$editdata);
 							if(count($editdetails)>0){
-									$this->session->set_flashdata('success',"Hospital Details are successfully Saved");
+									$this->session->set_flashdata('success',"Hospital Details are successfully saved");
 									if($post['tab_id']==2){
-										$this->session->set_flashdata('success',"Hospital Credentials details are successfully Updated");
+										$this->session->set_flashdata('success',"Hospital Credentials Details are successfully updated");
 										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
 									}elseif($post['tab_id']==3){
-										$this->session->set_flashdata('success',"Hospital Representative details are successfully Updated");
+										$this->session->set_flashdata('success',"Hospital Representative Details are successfully updated");
 										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
 									}else if($post['tab_id']==4){
-										$this->session->set_flashdata('success',"Hospital Basic Details are successfully Updated");
+										$this->session->set_flashdata('success',"Hospital Basic Details are successfully updated");
 										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
 									}else if($post['tab_id']==5){
-										$this->session->set_flashdata('success'," Hospital Financial Details  are successfully Updated");
+										$this->session->set_flashdata('success'," Hospital Financial Details  are successfully updated");
 											redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));	
 									}else if($post['tab_id']==6){
-										$this->session->set_flashdata('success'," Hospital Other Details are successfully Updated");
+										$this->session->set_flashdata('success'," Hospital Other Details are successfully updated");
 											if($admindetails['role_id']==2){
 												redirect('profile');
 											}else {
@@ -670,9 +670,9 @@ class Hospital extends In_frontend {
 								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
 								//echo $this->db->last_query();exit;
 								if($status==1){
-								$this->session->set_flashdata('success',"Hospital successfully Deactivate.");
+								$this->session->set_flashdata('success',"Hospital successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Hospital successfully Activate.");
+									$this->session->set_flashdata('success',"Hospital successfully activated.");
 								}
 								redirect('hospital');
 							}else{
@@ -748,7 +748,7 @@ class Hospital extends In_frontend {
 					if(md5($post['resource_password'])==md5($post['resource_cinformpaswword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									if($post['designation']==6){
 										redirect('hospital/adddoctor');
 									}else{
@@ -780,7 +780,7 @@ class Hospital extends In_frontend {
 									//echo '<pre>';print_r($statusdata);exit;
 									$admindetails=array(
 									'role_id'=>$post['designation'],
-									'a_name'=>$post['resource_name'],
+									'a_name'=>strtoupper($post['resource_name']),
 									'a_email_id'=>$post['resource_email'],
 									'a_password'=>md5($post['resource_cinformpaswword']),
 									'a_org_password'=>$post['resource_cinformpaswword'],
@@ -793,7 +793,7 @@ class Hospital extends In_frontend {
 									'a_id'=>$addresourcedmin,
 									'role_id'=>$post['designation'],
 									'hos_id'=>$hos_ids['hos_id'],
-									'resource_name'=>$post['resource_name'],
+									'resource_name'=>strtoupper($post['resource_name']),
 									'resource_mobile'=>$post['resource_mobile'],
 									'resource_add1'=>$post['resource_add1'],
 									'resource_add2'=>$post['resource_add2'],
@@ -816,7 +816,7 @@ class Hospital extends In_frontend {
 									//echo '<pre>';print_r($onedata);exit;
 									$saveresource =$this->Hospital_model->save_resource($resourcedata);
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Resource are successfully created");
+										$this->session->set_flashdata('success',"Resource  successfully created");
 										if($post['designation']==6){
 											redirect('hospital/adddoctor/'.base64_encode(1));
 										}else{
@@ -876,9 +876,9 @@ class Hospital extends In_frontend {
 							$this->Admin_model->update_resourse_details(base64_decode($a_id),$admin_stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Resource successfully Deactivate.");
+								$this->session->set_flashdata('success',"Resource successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Resource successfully Activate.");
+									$this->session->set_flashdata('success',"Resource successfully activated.");
 								}
 								if($resouse_detail['role_id']==6){
 									redirect('hospital/adddoctor/'.base64_encode(1));
@@ -923,7 +923,7 @@ class Hospital extends In_frontend {
 							);
 							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Hospital successfully removed.");
+								$this->session->set_flashdata('success',"Resource successfully removed.");
 									if($resouse_detail['role_id']==6){
 										redirect('hospital/adddoctor/'.base64_encode(1));
 									}else{
@@ -1009,7 +1009,7 @@ class Hospital extends In_frontend {
 					if($resouse_email['resource_email'] !=$post['resource_email']){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 								}else{
 											if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
@@ -1071,7 +1071,7 @@ class Hospital extends In_frontend {
 									//echo '<pre>';print_r($onedata);exit;
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Resource details are successfully Updated");
+										$this->session->set_flashdata('success',"Resource details are successfully updated");
 										if($admindetails['role_id']=2){
 											
 												redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
@@ -1148,7 +1148,7 @@ class Hospital extends In_frontend {
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
-										$this->session->set_flashdata('success',"Resource details are successfully Updated");
+										$this->session->set_flashdata('success',"Resource details are successfully updated");
 										if($admindetails['role_id']=2){
 										redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 										}else{
@@ -1244,7 +1244,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($post);exit;
 					$exits_treatment = $this->Hospital_model->get_saved_specialist_name($post['department'],$post['specialist_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"Specialist name already exists .please use another name");
+						$this->session->set_flashdata('error',"Speciality name already exists .please use another name");
 						redirect('hospital/addspecialist/'.base64_encode(1));
 					}
 				$spc_details=array(
@@ -1258,7 +1258,7 @@ class Hospital extends In_frontend {
 					//echo '<pre>';print_r($treatment_details);exit;
 				$treatment = $this->Hospital_model->save_addspecialist($spc_details);
 				if(count($treatment)>0){
-					$this->session->set_flashdata('success',"specialist added successfully");
+					$this->session->set_flashdata('success',"Speciality added successfully");
 					redirect('hospital/addspecialist/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1301,7 +1301,7 @@ class Hospital extends In_frontend {
 					//echo '<pre>';print_r($treatment_details);exit;
 				$treatment = $this->Hospital_model->save_treatment($treatment_details);
 				if(count($treatment)>0){
-					$this->session->set_flashdata('success',"Treatment added successfully");
+					$this->session->set_flashdata('success',"Department added successfully");
 					redirect('hospital/addtreatment/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1341,7 +1341,7 @@ class Hospital extends In_frontend {
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Hospital_model->update_treatment_details($post['treamentid'],$edittreatment_details);
 				if(count($editdata)>0){
-					$this->session->set_flashdata('success',"Treatment successfully updated");
+					$this->session->set_flashdata('success',"Department successfully updated");
 					redirect('hospital/addtreatment/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1371,7 +1371,7 @@ class Hospital extends In_frontend {
 							);
 							$deletedata= $this->Hospital_model->update_treatment_details(base64_decode($treatment_id),$deletdata);
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Treatment successfully removed.");
+								$this->session->set_flashdata('success',"Department successfully removed.");
 								redirect('hospital/addtreatment/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1411,9 +1411,9 @@ class Hospital extends In_frontend {
 							$statusdata= $this->Hospital_model->update_treatment_details(base64_decode($treament_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Treatment successfully deactivated.");
+								$this->session->set_flashdata('success',"Department successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Treatment successfully activated.");
+									$this->session->set_flashdata('success',"Department successfully activated.");
 								}
 									redirect('hospital/addtreatment/'.base64_encode(1));;
 							}else{
@@ -1464,7 +1464,7 @@ class Hospital extends In_frontend {
 						$treatment = $this->Hospital_model->save_addtreatment($addtreatment_details);
 						
 						if(count($treatment)>0){
-							$this->session->set_flashdata('success',"Treatment are successfully added");
+							$this->session->set_flashdata('success',"Department assigned to consultant successfully");
 							redirect('hospital/treatment/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1501,9 +1501,9 @@ class Hospital extends In_frontend {
 							$statusdata= $this->Hospital_model->update_addtreatment_details(base64_decode($treament_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Treatment wise doctor successfully deactivated.");
+								$this->session->set_flashdata('success',"Department wise doctor successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Treatment wise doctor successfully activated.");
+									$this->session->set_flashdata('success',"Department wise doctor successfully activated.");
 								}
 									redirect('hospital/treatment/'.base64_encode(1));
 							}else{
@@ -1537,7 +1537,7 @@ class Hospital extends In_frontend {
 							);
 							$deletedata= $this->Hospital_model->update_addtreatment_details(base64_decode($treatment_id),$deletdata);
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Treatment successfully removed.");
+								$this->session->set_flashdata('success',"Department assigned to consultant successfully removed.");
 								redirect('hospital/treatment/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1568,7 +1568,7 @@ class Hospital extends In_frontend {
 					if($specialist_id!=''){
 						$deletedata= $this->Hospital_model->delete_specialist_details(base64_decode($specialist_id));
 							if(count($deletedata)>0){
-								$this->session->set_flashdata('success',"Specialist successfully removed.");
+								$this->session->set_flashdata('success',"Speciality successfully removed.");
 								redirect('hospital/addspecialist/'.base64_encode(1));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1609,9 +1609,9 @@ class Hospital extends In_frontend {
 							$statusdata= $this->Hospital_model->update_specialist_details(base64_decode($specialist_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Specialist successfully deactivated.");
+								$this->session->set_flashdata('success',"Speciality successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Specialist successfully activated.");
+									$this->session->set_flashdata('success',"Speciality successfully activated.");
 								}
 									redirect('hospital/addspecialist/'.base64_encode(1));
 							}else{
@@ -1647,7 +1647,7 @@ class Hospital extends In_frontend {
 				if($editdata_check['specialist_name']!=$post['specialist_name'] || $editdata_check['department']!=$post['d_id']){
 					$exits_treatment = $this->Hospital_model->get_saved_specialist_name($post['department'],$post['specialist_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
-						$this->session->set_flashdata('error',"Specialist name already exists .please use another name");
+						$this->session->set_flashdata('error',"Speciality name already exists .please use another name");
 						redirect('hospital/addspecialist/'.base64_encode(1));
 					}
 				}
@@ -1659,7 +1659,7 @@ class Hospital extends In_frontend {
 					//echo '<pre>';print_r($post);exit;
 				$editdata= $this->Hospital_model->update_specialist_details($post['specialistid'],$edittreatment_details);
 				if(count($editdata)>0){
-					$this->session->set_flashdata('success',"Specialist details successfully updated");
+					$this->session->set_flashdata('success',"Speciality Details successfully updated");
 					redirect('hospital/addspecialist/'.base64_encode(1));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1780,9 +1780,9 @@ class Hospital extends In_frontend {
 							$statusdata= $this->Hospital_model->update_lab_details(base64_decode($lab_id),$stusdetails);
 							if(count($statusdata)>0){
 								if($status==1){
-								$this->session->set_flashdata('success',"Lab Assistent successfully Deactivate.");
+								$this->session->set_flashdata('success',"Lab Assistent successfully deactivated.");
 								}else{
-									$this->session->set_flashdata('success',"Lab Assistent successfully Activate.");
+									$this->session->set_flashdata('success',"Lab Assistent successfully activated.");
 								}
 									redirect('hospital/labdetails/'.base64_encode(1));
 							}else{
@@ -1885,7 +1885,7 @@ class Hospital extends In_frontend {
 				}
 				
 				if(count($saveNotification)>0){
-					$this->session->set_flashdata('success',"Notification successfully Send.");
+					$this->session->set_flashdata('success',"Notification successfully send.");
 					redirect('hospital/announcement');
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

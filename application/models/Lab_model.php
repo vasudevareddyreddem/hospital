@@ -97,11 +97,13 @@ class Lab_model extends CI_Model
 		$this->db->select('*')->from('lab_test_type');
 		$this->db->where('lab_test_type.type_name',$name);
 		$this->db->where('lab_test_type.type',$type);
+		$this->db->where('lab_test_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	public function check_get_lab_test_type_details($id){
 		$this->db->select('*')->from('lab_test_type');
 		$this->db->where('lab_test_type.id',$id);
+		$this->db->where('lab_test_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	public function get_all_test_list($a_id){

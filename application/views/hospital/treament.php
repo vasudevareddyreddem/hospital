@@ -18,7 +18,7 @@
             <ul class="nav nav-tabs">
                <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>"> Add Department </a>
                </li>
-               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Department wise consultant Names</a>
+               <li class="nav-item"><a href="#about" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>" data-toggle="tab">Department Wise Consultant Names</a>
                </li>
             </ul>
          </header>
@@ -74,9 +74,9 @@
                                     <table id="saveStage" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>Treatment Name</th>
+												<th>Department Name</th>
 												<th>Speciality Name</th>
-												<th>consultant Name</th>
+												<th>Consultant Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -172,7 +172,7 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
+			$('#content1').html('Are you sure you want to deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');

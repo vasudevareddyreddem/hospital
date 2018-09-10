@@ -64,7 +64,7 @@ class Appointments extends In_frontend {
 					);
 					$save=$this->Appointments_model->save_appointments($add);
 					if(count($save)>0){
-							$this->session->set_flashdata('success',"Appintment Successfully added");
+							$this->session->set_flashdata('success',"Appointment successfully added");
 							redirect('appointments/index/'.base64_encode(3));
 						}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

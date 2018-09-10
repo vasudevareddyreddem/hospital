@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Edit out source lab Details</div>
+               <div class="page-title">Edit Out Source Lab Details</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Edit source lab Details</li>
+               <li class="active">Edit Out Source Lab Details</li>
             </ol>
          </div>
       </div>
@@ -49,8 +49,19 @@
 									</div>
 										<div class="col-md-6">
 										<label> State</label>
-										<input class="form-control" id="lab_state" name="lab_state"  type="text" placeholder="State" value="<?php echo isset($lab_detils['resource_state'])?$lab_detils['resource_state']:''; ?>">
-									</div>
+<?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+								  <select class="form-control" required="required" name="lab_state" id="lab_state">
+								  <option value = "">Select State</option>
+									<?php foreach($states as $key=>$state):
+											if($lab_detils['lab_state'] == $state):
+											$selected ='selected=selected';
+											else : 
+											$selected = '';
+											endif;
+										 ?>
+										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+									<?php endforeach; ?>
+								  </select>									</div>
 									<div class="col-md-6">
 										<label> Zipcode</label>
 										<input class="form-control" id="lab_zipcode" name="lab_zipcode"  type="text" placeholder="Zipcode" value="<?php echo isset($lab_detils['resource_zipcode'])?$lab_detils['resource_zipcode']:''; ?>">

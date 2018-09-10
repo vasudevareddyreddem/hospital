@@ -64,10 +64,10 @@
 										<label> State</label>
 												<div class="col-md-6">
                                                     <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
-										 <select class="form-control" required="required" name="p_s_name" id="p_s_name">
+										 <select class="form-control" required="required" name="resource_state" id="resource_state">
 											<option value = "">Select State</option>
 												<?php foreach($states as $key=>$state):
-															if($patient_detailes['p_s_name'] == $state):
+															if($patient_detailes['resource_state'] == $state):
 																$selected ='selected=selected';
 																else : 
 																$selected = '';
@@ -167,8 +167,7 @@
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status']).'/'.base64_encode($list['a_id'])); ?>">
+                                                            <li><a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']).'/'.base64_encode($list['a_id']));?>');adminstatus('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															<li>
@@ -179,8 +178,8 @@
                                                                 <a href="<?php echo base_url('hospital/resourceedit/'.base64_encode($list['r_id'])); ?>">
                                                                     <i class="fa fa-edit"></i>Edit</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="<?php echo base_url('hospital/resourcedelete/'.base64_encode($list['r_id'])); ?>">
+                                                            <li>															    
+															<a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']));?>');adminstatus2('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -206,7 +205,34 @@
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>
-       
+       <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
       </div>
    </div>
 </div>
@@ -216,6 +242,28 @@ $(document).ready(function() {
         "order": [[ 4, "desc" ]]
     } );
 } );
+
+function admindeactive(id){
+	$(".popid").attr("href","<?php echo base_url('hospital/resourcestatus'); ?>"+"/"+id);
+}
+function adminstatus(id){
+	if(id==1){
+			$('#content1').html('Are you sure you want to deactivate?');
+		
+	}if(id==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('hospital/resourcedelete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
+
 $(document).ready(function() {
     $('#addresource').bootstrapValidator({
         
@@ -239,7 +287,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'Mobile number must be 10 to 14 digits'
+					message:'Mobile Number must be 10 to 14 digits'
 					}
 				
 				}
@@ -295,7 +343,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'resource_password',
-						message: 'Password and confirm Password do not match'
+						message: 'Password and Confirm Password do not match'
 					}
 					}
 				},
@@ -377,7 +425,7 @@ $(document).ready(function() {
 						
 						regexp:{
 					     regexp:  /^[0-9]{9,16}$/,
-					     message:'Bank Account  must be 9 to 16 digits'
+					     message:'Bank Acc Number must be 9 to 16 digits'
 					    }
 					}
 				},

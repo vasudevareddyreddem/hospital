@@ -3,12 +3,12 @@
                     <div class="page-bar">
 			  <div class="page-title-breadcrumb">
 				 <div class=" pull-left">
-					<div class="page-title">Patient Medicine details</div>
+					<div class="page-title">Patient Medicine Details</div>
 				 </div>
 				 <ol class="breadcrumb page-breadcrumb pull-right">
 					<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
 					</li>
-					<li><a class="parent-item active" >Patient details</a>&nbsp;</i>
+					<li><a class="parent-item active" >Patient Details</a>&nbsp;</i>
 					</li>
 				 </ol>
 			  </div>
@@ -18,7 +18,7 @@
                             <div class="card card-topline-aqua">
 							
                                 <div class="card-head">
-                                     <header>Patient Medicine details</header>
+                                     <header>Patient Medicine Details</header>
                                    
                                 </div>
                                 <div class="card-body ">

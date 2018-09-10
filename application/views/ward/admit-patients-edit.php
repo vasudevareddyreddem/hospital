@@ -136,25 +136,32 @@
 													<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 													  <div class="panel-body">
 													  <div class="d-flex justify-content-center">	
+												<div id="beds">
 												<?php foreach($bed_list as $List){ ?>
 													<li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>">
 													<div class="panel-body"> 
 													<ol class="seats" type="A">
 													<li class="seat">
 													<?php if($List['r_b_id']==$list['bed_no']){ ?>
-														<input type="checkbox" id="1A" checked />
-														<label for="1A">bed <?php echo $List['bed'];?></label>
+														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" checked />
+														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
 													<?php }else{ ?>
-														<input type="checkbox" id="1A" />
-														<label for="1A">bed <?php echo $List['bed'];?></label>
+														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" />
+														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
 													<?php } ?>	
 													</li>
 													</ol>
 													</div>
-													</li>	
+													</li>
+													
 												<?php } ?>																													
-										
-														</div>
+												</div>
+													</div>
+													  </div>
+													 <div class="panel-body">
+													  <div class="d-flex justify-content-center">
+													<li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>"></li>
+													</div>
 													  </div>
 													</div>													
 												  </div>
@@ -179,6 +186,7 @@
 
 <script>
 function get_bed_count(id){	
+		
 		if(id!=''){
 			jQuery.ajax({
    					url: "<?php echo base_url('Ward_management/get_bedcount_list');?>",
@@ -189,7 +197,8 @@ function get_bed_count(id){
    					type: 'POST',
    					success: function (data) {						 
 						//console.log(data);return false;
-   						$('#bedcount_id').empty();  																		
+   						$('#beds').empty();
+						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) { 																																			
 							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 						}							

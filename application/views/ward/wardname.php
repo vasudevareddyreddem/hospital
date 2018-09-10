@@ -78,7 +78,7 @@
 															
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['w_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('ward_management/wardnamedelete/'.base64_encode($list['w_id'])); ?>">
+                                                                <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -174,12 +174,21 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Deactivate?');
+			$('#content1').html('Are you sure you want to deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
 	}
 }
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('ward_management/wardnamedelete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
 $(document).ready(function() {
     $('#ward_name').bootstrapValidator({
         
