@@ -559,4 +559,58 @@ class Admin_model extends CI_Model
 	}
 	/* card  seller purpose*/
 
+	/* executive purpose */
+	public function executive_details($data){
+		$this->db->insert('executive_list', $data);
+		return $this->db->insert_id();
+	}
+	 public  function executive_check_email_exits($email_id){
+		$this->db->select('*')->from('executive_list');
+		$this->db->where('email_id',$email_id);
+		return $this->db->get()->row_array(); 
+	 }
+	  public function executive_list_data($id){
+		$this->db->select('executive_list.*')->from('executive_list');
+		$this->db->where('executive_list.added_by',$id);
+		$this->db->where('executive_list.status !=',2);
+        return $this->db->get()->result_array();
+	}
+		public function executive_name_list_data($e_id){
+		$this->db->select('executive_list.e_id,executive_list.name')->from('executive_list');
+		$this->db->where('executive_list.added_by',$e_id);
+		$this->db->where('executive_list.added_by',$e_id);
+        return $this->db->get()->result_array();
+	}	
+	public function executive_location_list_data($e_id){
+	$this->db->select('executive_list.e_id,executive_list.location')->from('executive_list');
+		$this->db->where('executive_list.status',1);
+        return $this->db->get()->result_array();
+	}	
+	public function edit_executive_list_data($e_id){
+		$this->db->select('*')->from('executive_list');
+		$this->db->where('executive_list.e_id',$e_id);
+        return $this->db->get()->row_array();
+	}	
+		public function update_executive_details($e_id,$data){
+		$this->db->where('e_id',$e_id);
+		return $this->db->update('executive_list',$data);
+	}
+	public function delete_details_data($e_id){
+	    $this->db->where('e_id',$e_id);
+		return $this->db->delete('executive_list');
+	}	
+	
+       public function saver_user($e_id){
+	$this->db->select('*')->from('executive_list');
+		$this->db->where('e_id',$e_id);
+		return $this->db->get()->row_array();
+			  
 }
+  public function saver_user_details($email_id){
+		$this->db->select('*')->from('executive_list');
+		$this->db->where('executive_list.email_id',$email_id);
+		return $this->db->get()->row_array();
+			  }
+	
+	
+  }

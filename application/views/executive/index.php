@@ -1,4 +1,4 @@
-<?php //echo '<pre>';print_r($hospital_details);exit; ?>
+<?php //echo '<pre>';print_r($executive_list);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -17,67 +17,76 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Executive</a>
+                  <li class="nav-item"><a href="#tab1" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Executive</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
+                  <li class="nav-item"><a href="#tab2" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
                   </li>
+				  
+				  
                </ul>
             </header>
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane active" id="home">
+                    <div class="tab-pane <?php if(isset($tab) && $tab==''){  echo "active";} ?>" id="tab1">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('admin/cardnumbersellerpost'); ?>" method="post" id="add_seller" name="add_seller" enctype="multipart/form-data">
+					 <form id="defaultForm" method="post" class="" action="<?php echo base_url('Executive/indexpost');  ?>"  enctype="multipart/form-data">
 								<div class="row">
 								<div class="col-md-6">
 									<label> Name</label>
-								<input class="form-control" id="name" name="name" value="" type="text" placeholder="Name">
+								<input class="form-control" id="name" name="name" type="text" placeholder=" Enter Name">
 								</div>
 								
 								<div class="col-md-6">
 									<label>Mobile</label>
-								<input class="form-control" id="mobile" name="mobile" value="" type="text" placeholder="Mobile">
+								<input class="form-control" id="mobile" name="mobile" type="text" placeholder="Enter Mobile">
 								</div>
 								<div class="col-md-6">
 									<label>Email Address</label>
-								<input class="form-control" id="email_id" name="email_id" value="" type="text" placeholder="Email Address">
+								<input class="form-control" id="email_id" name="email_id"  type="text" placeholder=" Enter Email Address">
 								</div>
 								<div class="col-md-6">
 									<label>Password</label>
-								<input class="form-control" id="password" name="password" value="" type="password" placeholder="Password">
+								<input class="form-control" id="password" name="password"  type="password" placeholder=" Enter Password">
 								</div>
 								<div class="col-md-6">
 									<label> Confirm Password</label>
-								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Confirm Password">
+								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Enter Confirm Password">
 								</div>
 								<div class="col-md-6">
 									<label> Address</label>
-								<input class="form-control" id="address" name="address" value="" type="text" placeholder="Address">
+								<input class="form-control" id="address" name="address"  type="text" placeholder="Enter Address">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Number</label>
-									<input class="form-control" id="bank_account" name="bank_account" value="" type="text" placeholder="Bank Account Number">
+									<input class="form-control" id="bank_account" name="bank_account"  type="text" placeholder="Enter Bank Account Number">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Name</label>
-									<input class="form-control" id="bank_name" name="bank_name" value="" type="text" placeholder="Bank Name">
+									<input class="form-control" id="bank_name" name="bank_name"  type="text" placeholder="Enter Bank Name">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Ifsc Code</label>
-									<input class="form-control" id="ifsccode" name="ifsccode" value="" type="text" placeholder="Bank Ifsc Code">
+									<input class="form-control" id="ifsccode" name="ifsccode"  type="text" placeholder="Enter Bank Ifsc Code">
 								</div>
 								<div class="col-md-6">
 									<label> Bank Account Holder Name</label>
-									<input class="form-control" id="bank_holder_name" name="bank_holder_name" value="" type="text" placeholder="Bank Account Holder Name">
+									<input class="form-control" id="bank_holder_name" name="bank_holder_name"  type="text" placeholder="Enter Bank Account Holder Name">
 								</div>
-								<div class="col-md-6">
-									<label> Kyc</label>
-									<input class="form-control" id="kyc" name="kyc" value="" type="file" placeholder="Bank Account Holder Name">
-								</div>
+                 <div class="form-group col-md-6">
+                           <label for="email"> KYC Details</label>
+                           <input type="text" class="form-control"  value="" id="kyc" name="kyc" placeholder="Document Name" >
+                        </div>
+                        <div class="form-group col-md-6">
+                           <label for="email">Upload </label>
+                           <div class="compose-editor">
+                              <input type="file" id="kyc" name="kyc" class="default" >
+                           </div>
+                        </div>
+								
 								<div class="col-md-6">
 									<label>Location</label>
-									<input class="form-control" id="" name="" value="" type="text" placeholder="enter Location">
+									<input class="form-control" id="location" name="location" type="text" placeholder="Enter Location">
 								</div>
 								
 								</div><br>
@@ -91,81 +100,85 @@
 					
                      </div>
                   </div>
-                  <div class="tab-pane" id="about">
+                   <div class="tab-pane  <?php if(isset($tab) && $tab==1){  echo "active";} ?>" id="tab2">
                      <div class="container">
                         <div class="row">
                             <div class="col-md-12">
 								<div class="row">
                                     <div class="col-md-6">
-                                            <label>Executive Name</label>
-                                            <select class="form-control">
-                                                <option>XXXXX</option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
+                                         <div class="form-group">
+										<label class=" control-label">Executive Name</label>
+									<div class="">
+									<select id="name" name="name" class="form-control" >
+										<option value="">Select</option>
+										<?php if(isset($executive_name) && count($executive_name)>0){ ?>
+											<?php foreach($executive_name as $list){ ?>
+												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['name']; ?></option>
+												
+											<?php } ?>
+								<?php } ?>
+									</select>
+									</div>
+								</div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <label>Location</label>
-                                            <select class="form-control">
-                                                <option>XXXXX</option>
-                                                <option></option>
-                                                <option></option>
-                                            </select>
+                                         <div class="col-md-6">
+                                         <div class="form-group">
+										<label class=" control-label">Location</label>
+									<div class="">
+									<select id="location" name="location" class="form-control" >
+										<option value="">Select</option>
+										<?php if(isset($executive_location) && count($executive_location)>0){ ?>
+											<?php foreach($executive_location as $list){ ?>
+												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['location']; ?></option>
+												
+											<?php } ?>
+										<?php } ?>
+									</select>
+									</div>
+								</div>
                                         </div>
                                 </div>
-                            <div class="card card-topline-aqua">
+                            <div class="card card-topline-aqua active">
                                 
                                 <div class="card-body ">
                                     <table id="saveStage" class="display" style="width:100%;">
                                         <thead>
+										
                                             <tr>
-                                                <th>S.No</th>
-                                                <th>Date</th>
-												<th>Total Patients</th>
-                                                <th>Total Hospitals</th>
-                                                <th>Received Patients</th>
-                                                <th>Not Received Patients</th>
-                                                <th>Login Time</th>
-                                                <th>Logout Time</th>
-                                                <th>Patient List</th>
+											    <th>S.no</th>
+                                                <th>Name</th>
+                                                <th>Mobile</th>
+												<th>Email Address</th>
+                                                <th>Address</th>
+                                                <th>Location<th>
+                                                <th>Status<th>
+												<th>Action</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                            </tr>
-											<tr>
-                                                <td>2</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                                <td>xxxxx</td>
-                                            </tr>
+										<?php $cnt=1;foreach($executive_list as $list){ ?>
+				                            <tr>
+                                                 <td><?php echo $cnt; ?></td>
+                                                <td><?php echo $list['name']; ?></td>
+                                                <td><?php echo $list['mobile']; ?></td>
+                                                <td><?php echo $list['email_id']; ?></td>
+                                                <td><?php echo $list['address']; ?></td>
+                                                <td><?php echo $list['location']; ?></td>
+												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
+												<td>
+						                       <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
+									           <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id'].'/'.$list['status']));?>"data-toggle="tooltip" title="Status"><i class="fa fa-info-circle btn btn-warning"></i></a>
+						                       <a href="<?php echo base_url('Executive/delete/'.base64_encode($list['e_id']));?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-trash btn btn-danger"></i></a>
+					                             </td>
+												
+                                     
+											
+										<?php $cnt++;} ?>
+										 </tr>
                                         </tbody>
+										
                                     </table>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
@@ -188,44 +201,17 @@
       </div>
    </div>
 </div>
-<script>
+
+
+ <script>
+  
 $(document).ready(function() {
-    $('#assign_seller').bootstrapValidator({
-        
+ 
+   $('#defaultForm').bootstrapValidator({
+//       
         fields: {
-            
-            seller_id: {
-                 validators: {
-					notEmpty: {
-						message: 'Seller Name is required'
-					}
-				}
-            },
-			 card_number_from: {
-                validators: {
-					notEmpty: {
-						message: 'Card Numbers From is required'
-					}
-				
-				}
-            },card_number_to: {
-                   validators: {
-					 notEmpty: {
-						message: 'Card Numbers To is required'
-					}
-				}
-				}
-            }
-        })
-     
-});
-$(document).ready(function() {
-    $('#add_seller').bootstrapValidator({
-        
-        fields: {
-            
             name: {
-                 validators: {
+                validators: {
 					notEmpty: {
 						message: 'Name is required'
 					},
@@ -235,18 +221,8 @@ $(document).ready(function() {
 					}
 				}
             },
-			 mobile: {
-                validators: {
-					notEmpty: {
-						message: 'Mobile Number is required'
-					},
-					regexp: {
-					regexp:  /^[0-9]{10,14}$/,
-					message:'Mobile number must be 10 to 14 digits'
-					}
-				
-				}
-            },email_id: {
+			
+            email_id: {
                 validators: {
 					notEmpty: {
 						message: 'Email is required'
@@ -257,6 +233,18 @@ $(document).ready(function() {
 					}
 				}
             },
+			mobile: {
+                 validators: {
+					notEmpty: {
+						message: 'Mobile Number is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]{10}$/,
+					message:'Mobile Number must be 10 digits'
+					}
+				
+				}
+            },
 			password: {
                 validators: {
 					notEmpty: {
@@ -264,7 +252,7 @@ $(document).ready(function() {
 					},
 					stringLength: {
                         min: 6,
-                        message: 'Password  must be at least 6 characters. '
+                        message: 'Password  must be at least 6 characters'
                     },
 					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~'"\\|=^?$%*)(_+-]*$/,
@@ -273,14 +261,14 @@ $(document).ready(function() {
 				}
             },
            
-            confirmpassword: {
+           confirmpassword: {
 					 validators: {
 						 notEmpty: {
 						message: 'Confirm Password is required'
 					},
 					identical: {
 						field: 'password',
-						message: 'Password and confirm Password do not match'
+						message: 'password and confirm Password do not match'
 					}
 					}
 				},
@@ -289,74 +277,85 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Address is required'
 					},
-                    regexp: {
+					regexp: {
 					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
 					message:'Address wont allow <> [] = % '
 					}
-                }
-            },bank_name: {
-                 validators: {
-					
-                    regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Bank Account Number wont allow <> [] = % '
-					}
-                }
-            },bank_holder_name: {
-                 validators: {
-					
-                    regexp: {
-					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-					message:'Bank Account Holder Name wont allow <> [] = % '
-					}
-                }
-            },bank_account:
-          {
-            validators: 
-            {
 				
-              regexp: 
-              {
+				}
+            },
+			
+			bank_account: {
+                 validators: 
+					{
+					    
+						regexp: 
+						{
 					     regexp:  /^[0-9]{9,16}$/,
 					     message:'Bank Account  must be 9 to 16 digits'
 					    }
-            }
-          },
-         account_name: {
-          validators: {
+				}
+            },
+			
+			bank_name: {
+                 validators: {
 					
 					regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Account Name can only consist of alphanumaric, space and dot'
+					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
+					message:' Name of the bank wont allow <> [] = % '
 					}
+				
 				}
-        }, 
-		ifsccode: {
-          validators: {
+            },
+			
+			ifsccode: {
+                 validators: {
 					
 					regexp: {
 					 regexp: /^[A-Za-z0-9]{4}\d{7}$/,
-					 message: 'IFSC Code must be alphanumaric'
+					message: 'IFSC Code must be alphanumeric'
 					}
 				}
-        },
+            },
+			bank_holder_name:{
+			 validators: {
+					
+					regexp: {
+					regexp: /^[a-zA-Z ]+$/,
+					message: 'Bank Holder Name can only consist of alphabets and space'
+					}
+				}
+            },
+			
 			kyc: {
                    validators: {
-					 
-					 regexp: {
-					regexp: /\.(jpe?g|png|gif|pdf|doc|docx)$/i,
-					message: 'Uploaded file is not a valid image. Only pdf,doc,docx,JPG,PNG and GIF files are allowed'
+					regexp: {
+					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
+					}
+				}
+            },
+			location:{
+			validators: {
+					notEmpty: {
+						message: 'location is required'
 					}
 				}
             }
-            }
-        })
-     
+		   
+			
+        }
+    });
+    // Validate the form manually
+    $('#validateBtn').click(function() {
+        $('#defaultForm').bootstrapValidator('validate');
+    });
+
+    $('#resetBtn').click(function() {
+        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+    });
+	
 });
-</script>
-<script>
-  $(function () {
-    $("#example5").DataTable();
-  
-  });
+
+
 </script>

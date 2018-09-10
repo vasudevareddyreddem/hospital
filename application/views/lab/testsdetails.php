@@ -29,6 +29,7 @@
 			<input type="file" name="uploadfile" id="uploadfile">
 			<br />
 			<input type="submit" name="upload" value="upload" >
+			<a target="_blank" href="<?php echo base_url('assets/modality_list.xlsx'); ?>">Download  sample  sheet</a>
 		</form>
 			
             <div class="panel-body">

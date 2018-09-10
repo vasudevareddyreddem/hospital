@@ -8,15 +8,10 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		height:635px;
-		width:1004px;
+		height:53.76mm;
+		width:85mm;
 		position:relative;
-		margin-left:10px;
-		float:right;
-		right:80px;
-		margin-top:3px;
-		
-		
+		float:left;
 	}
 	<!--.backimg1 {
 		background-image: url("<?php echo base_url('assets/back.png'); ?>");
@@ -44,13 +39,13 @@
 	}-->
 	.card-number{
 	position: absolute;
-    left: 55%;
-    top: 70%;
+    left: 52%;
+    top: 65%;
     transform: translate(-50%,-50%);
-	font-size:100px;
+	font-size:30px;
 	letter-spacing:5px;
 	color:#fff;
-	width:990px;
+	width:8.2cm;
 	
 	
 		
@@ -62,13 +57,16 @@ input[type="text"]
     border: none;
 }
 .row1{
-	margin:0px 0px;
+	text-algin:center
 }
 </style>
-<body style="height:3900px;width:5700px;padding:0px 30px;margin-top:5px">
+<body>
+<div style="height:330.2mm;width:482.6mm;border:1px solid red;">
+
 <?php //echo '<pre>';print_r($card_num_list);exit; ?>
 <?php foreach($card_num_list as $list){ ?>
 	<div class="row1" >
+	<div style="margin:3.764mm 28.707mm;">
 		<?php if(isset($list[0]) && $list[0]!=''){ ?>
 			<div class="backimg"  >
 				<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[0])?$list[0]:'', 4, ' '); ?>"></h1>
@@ -93,13 +91,13 @@ input[type="text"]
 		<div class="backimg" >
 			<h1 class="card-number"><input class="card-number" type="text" style="" value="<?php echo chunk_split(isset($list[4])?$list[4]:'', 4, ' '); ?>"></h1>
 		</div>
+		</div>
 		<?php } ?>
 	</div>
 <?php } ?>
 
 
-<br>
-
+</div>
 </body>
 </html>
  <script>
