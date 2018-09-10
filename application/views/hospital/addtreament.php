@@ -78,7 +78,7 @@
 															
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['t_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/treatmentdelete/'.base64_encode($list['t_id'])); ?>">
+															    <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['t_id'])).'/'.base64_encode(htmlentities($list['t_status']));?>');adminstatus2('<?php echo $list['t_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -174,12 +174,24 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
+			$('#content1').html('Are you sure you want to deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
 	}
 }
+
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('hospital/treatmentdelete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
+
+
 $(document).ready(function() {
     $('#addtreatment').bootstrapValidator({
         

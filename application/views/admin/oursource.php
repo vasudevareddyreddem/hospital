@@ -147,7 +147,7 @@
                                                                     <i class="fa fa-eye"></i>View</a>
                                                             </li> 
 															<li>
-                                                                <a href="<?php echo base_url('admin/resourcestatus/'.base64_encode($list['r_id']).'/'.base64_encode($list['r_status'])); ?>">
+															    <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']));?>');adminstatus('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-line-chart"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															<li>
@@ -156,7 +156,7 @@
                                                             </li> 
 															
                                                             <li>
-                                                                <a href="<?php echo base_url('admin/resourcedelete/'.base64_encode($list['r_id'])); ?>">
+															    <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']));?>');adminstatus2('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
@@ -182,7 +182,34 @@
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>
-       
+       <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
       </div>
    </div>
 </div>
@@ -192,6 +219,41 @@ $(document).ready(function() {
         "order": [[ 3, "desc" ]]
     } );
 } );
+function admindeactive(id){
+	$(".popid").attr("href","<?php echo base_url('admin/resourcestatus'); ?>"+"/"+id);
+}
+function adminstatus(id){
+	if(id==1){
+			$('#content1').html('Are you sure you want to deactivate?');
+		
+	}if(id==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('admin/resourcedelete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function() {
     $('#addlab').bootstrapValidator({
         
