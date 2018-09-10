@@ -1121,22 +1121,26 @@ class Lab extends In_frontend {
 				   
 				  
 				   $test_type_list=$this->Lab_model->get_lab_test_type_details();
-					//echo'<pre>';print_r($test_type_list);exit;
+				   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
+				   foreach($test_type_list as $Lists){
+					  $lidss[]=$Lists['type_name']; 
+				   }
+					//echo'<pre>';print_r($lidss);exit;
 		           foreach($arry as $key=>$fields)
-					{ 
-				
-                    foreach($test_type_list as $list){
+					{
+						
+					if (in_array(trim($fields[0]), $lidss))
+					  {
+					  $type_id=$this->Lab_model->get_labtest_type_id(trim($fields[0]));
+					  }else{
+						$type_id['id']='';
+					  }					  
 					
-						if($fields[0]=$list['type_name']){
-							$fields[0]=$list['id'];
-							
-						}
 					
-					}
 					
 		    $data=array(
 			'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-			'test_type'=>$list['id'],
+			'test_type'=>isset($type_id['id'])?$type_id['id']:'',
 			't_name'=>$fields[2],
 			'type'=>$fields[1],
 			'duration'=>$fields[3],
@@ -1147,18 +1151,20 @@ class Lab extends In_frontend {
 			'create_by'=>$admindetails['a_id'],
 			'out_source'=>$admindetails['out_source']	
 				);
-		//echo'<pre>';print_r($data);exit;
-         $save=$this->Lab_model->insert_data_lab_detail_value($data);
+					//echo'<pre>';print_r($data);
+					$save=$this->Lab_model->insert_data_lab_detail_value($data);
 			   //echo'<pre>';print_r($save);exit;
 		               }     
 	                 }
+					 
+					 exit;
 			if(count($save)>0){
-		$this->session->set_flashdata('success',"Lab details  successfully inserted.");
-	    redirect('lab');
-		}else{
-		$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-	    redirect('lab');
-		}
+				$this->session->set_flashdata('success',"Lab details  successfully inserted.");
+				redirect('lab');
+			}else{
+			$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+			redirect('lab');
+			}
 												
 		}else{
 		$this->session->set_flashdata('error',"you don't have permission to access");
