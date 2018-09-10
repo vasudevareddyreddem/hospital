@@ -32,6 +32,7 @@
 			<br />
 			<input type="submit" name="upload" value="upload" >
 		</form>
+		<a href="<?php echo base_url('assets/med.xlsx'); ?>">Download  sample  File</a>
 	
 		<div class="card-body">
 		<div class="row">
