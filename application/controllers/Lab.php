@@ -1125,7 +1125,7 @@ class Lab extends In_frontend {
 			'type'=>$fields[1],
 			'duration'=>$fields[3],
 			'amuont'=>$fields[4],
-			'modality'=>$fields[5],
+			'modality'=>isset($fields[5])?$fields[5]:'',
             'create_at'=>date('Y-m-d H:i:s'),
 			'status'=>1,
 			'create_by'=>$admindetails['a_id'],
