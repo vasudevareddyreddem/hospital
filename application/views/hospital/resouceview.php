@@ -96,15 +96,6 @@
 													</div><div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
-														 <strong>Other Details</strong>
-														 </div>
-														<div class=" col-sm-6">
-														  <?php echo isset($resouse_detail['resource_other_details'])?$resouse_detail['resource_other_details']:''; ?>
-														 </div>
-													 </div>
-													</div><div class="col-md-6">
-													<div class="row">												  
-														 <div class=" col-sm-6">
 														 <strong>Resource Contact Number</strong>
 														 </div>
 														<div class=" col-sm-6">

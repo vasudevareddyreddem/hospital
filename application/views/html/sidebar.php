@@ -70,7 +70,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('admin/couponcodes');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">list</i>
-	                                <span class="title">Privilege card List</span>
+	                                <span class="title">Coupon Code</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -86,7 +86,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">track_changes</i>
-	                                <span class="title">Out source </span>
+	                                <span class="title">Out Source </span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -102,7 +102,7 @@
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
-	                                    <a href="<?php echo base_url('admin/outsourcelabgropchat'); ?>" class="nav-link "> <span class="title">Group of Outsource Lab</span>
+	                                    <a href="<?php echo base_url('admin/outsourcelabgropchat'); ?>" class="nav-link "> <span class="title">Group of Out Source Lab</span>
 	                                    </a>
 	                                </li>
 	                                <li class="nav-item ">
@@ -245,7 +245,7 @@
 	                        </li>
 							<li class="nav-item  ">
 	                            <a  href="<?php echo base_url('hospital/modified_prescription'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
-	                                <span class="title">Modified prescription List</span> <span class="arrow"></span>
+	                                <span class="title">Modified Prescription List</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 							

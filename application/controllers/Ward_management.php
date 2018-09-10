@@ -201,7 +201,6 @@ public function index()
 		{
 			if($admindetails['role_id']=2){
 				$roomno = base64_decode($this->uri->segment(3));
-				
 				$data['list']= $this->Ward_model->get_admitted_patients_details($roomno);
 				$a=$this->Ward_model->get_admitted_patients_details($roomno);
 				$admindetails=$this->session->userdata('userdetails');
@@ -212,8 +211,7 @@ public function index()
 				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
 				$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_detailss($a['floor_no'],$hos_ids['hos_id']);	
 				$data['bed_list'] =$this->Ward_model->get_bed_list_details($a['room_no'],$hos_ids['hos_id']);	
-									//echo $this->db->last_query();exit;
-
+				//echo $this->db->last_query();exit;
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('ward/admit-patients-edit',$data);
 				$this->load->view('html/footer');
@@ -252,7 +250,7 @@ public function index()
 					//echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->update_admitted_patient_details($post['wardname'],$admitted_patients_details);
 				if(count($ward)>0){
-					$this->session->set_flashdata('success',"admitted patient details added successfully");
+					$this->session->set_flashdata('success',"admitted patient details updated successfully");
 					redirect('ward_management/admit/'.base64_encode(3));
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

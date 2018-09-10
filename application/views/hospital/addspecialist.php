@@ -64,7 +64,7 @@
                                             <tr>
 												<th>Department</th>
 												<th>Speciality </th>
-                                                <th>Create date</th>
+                                                <th>Created Date&Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -110,7 +110,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="specialistid" id="specialistid" value="<?php echo $list['s_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Speciality rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Speciality Rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="col-md-12">
@@ -199,7 +199,7 @@ function admindeactive(id){
 }
 function adminstatus(id){
 	if(id==1){
-			$('#content1').html('Are you sure you want to Dactivate?');
+			$('#content1').html('Are you sure you want to deactivate?');
 		
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
@@ -219,11 +219,11 @@ $(document).ready(function() {
             },specialist_name: {
                  validators: {
 					notEmpty: {
-						message: 'Specialist Name is required'
+						message: 'Speciality Name is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9&. ]+$/,
-					message: 'Specialist Name can only consist of alphanumeric, space and dot'
+					message: 'Speciality Name can only consist of alphanumeric, space and dot'
 					}
 				}
             }

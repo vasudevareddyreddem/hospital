@@ -64,10 +64,10 @@
 										<label> State</label>
 												<div class="col-md-6">
                                                     <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
-										 <select class="form-control" required="required" name="p_s_name" id="p_s_name">
+										 <select class="form-control" required="required" name="resource_state" id="resource_state">
 											<option value = "">Select State</option>
 												<?php foreach($states as $key=>$state):
-															if($patient_detailes['p_s_name'] == $state):
+															if($patient_detailes['resource_state'] == $state):
 																$selected ='selected=selected';
 																else : 
 																$selected = '';
@@ -239,7 +239,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp:  /^[0-9]{10,14}$/,
-					message:'Mobile number must be 10 to 14 digits'
+					message:'Mobile Number must be 10 to 14 digits'
 					}
 				
 				}
@@ -295,7 +295,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'resource_password',
-						message: 'Password and confirm Password do not match'
+						message: 'Password and Confirm Password do not match'
 					}
 					}
 				},
@@ -377,7 +377,7 @@ $(document).ready(function() {
 						
 						regexp:{
 					     regexp:  /^[0-9]{9,16}$/,
-					     message:'Bank Account  must be 9 to 16 digits'
+					     message:'Bank Acc Number must be 9 to 16 digits'
 					    }
 					}
 				},

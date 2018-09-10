@@ -113,7 +113,7 @@ class Lab extends In_frontend {
 						//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
-							$this->session->set_flashdata('success',"Test successfully Added.");
+							$this->session->set_flashdata('success',"Test Type successfully added.");
 							redirect('lab/index/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -161,7 +161,7 @@ class Lab extends In_frontend {
 						//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->update_tabtest_details($post['t_id'],$adding);
 						if(count($saveing)>0){
-							$this->session->set_flashdata('success',"Test successfully Updated.");
+							$this->session->set_flashdata('success',"Test Type successfully updated.");
 							redirect('lab/index/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -198,9 +198,9 @@ class Lab extends In_frontend {
 						$updated=$this->Lab_model->update_labtest_details($test_id,$details);
 						if(count($updated)>0){
 							if($status==1){
-							$this->session->set_flashdata('success',"Test successfully Deactivate.");
+							$this->session->set_flashdata('success',"Test Type successfully deactivated.");
 							}else{
-								$this->session->set_flashdata('success',"Test successfully Activate.");
+								$this->session->set_flashdata('success',"Test Type successfully activated.");
 							}
 							redirect('lab/index/'.base64_encode(1));
 						}else{
@@ -226,7 +226,7 @@ class Lab extends In_frontend {
 					$test_id=base64_decode($this->uri->segment(3));
 					$delete=$this->Lab_model->delete_labtest($test_id);
 						if(count($delete)>0){
-							$this->session->set_flashdata('success',"Test successfully Deleted.");
+							$this->session->set_flashdata('success',"Test Type successfully deleted.");
 							redirect('lab/index/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -427,7 +427,7 @@ class Lab extends In_frontend {
 
 					}
 					if(count($out_source_list)>0){
-						$this->session->set_flashdata('success',"Lab test are successfully added");
+						$this->session->set_flashdata('success',"Lab Test successfully added");
 						redirect('lab/patient_list');
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -662,7 +662,7 @@ class Lab extends In_frontend {
 					$post=$this->input->post();
 					$check=$this->Lab_model->check_lab_test_type($post['test_type'],$post['type']);
 					if(count($check)>0){
-						$this->session->set_flashdata('error',"Test Type name already exists .please use another name.");
+						$this->session->set_flashdata('error',"Test Type name already exists. Please use another name.");
 						redirect('lab/testtype/'.base64_encode(1));
 					}
 					//echo '<pre>';print_r($post);exit;
@@ -714,7 +714,7 @@ class Lab extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$save=$this->Lab_model->update_testtype_details($post['test_id'],$add);
 						if(count($save)>0){
-							$this->session->set_flashdata('success',"Test Type successfully Updated.");
+							$this->session->set_flashdata('success',"Test Type successfully updated.");
 							redirect('lab/testtype/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -740,7 +740,7 @@ class Lab extends In_frontend {
 					$detail=array('status'=>2);
 					$delete=$this->Lab_model->delete_test_type($test_id,$detail);
 						if(count($delete)>0){
-							$this->session->set_flashdata('success',"Test type successfully Deleted.");
+							$this->session->set_flashdata('success',"Test Type successfully deleted.");
 							redirect('lab/testtype/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -777,9 +777,9 @@ class Lab extends In_frontend {
 						$updated=$this->Lab_model->update_testtype_details($test_id,$details);
 						if(count($updated)>0){
 							if($status==1){
-							$this->session->set_flashdata('success',"Test successfully Deactivate.");
+							$this->session->set_flashdata('success',"Test Type successfully deactivated.");
 							}else{
-								$this->session->set_flashdata('success',"Test successfully Activate.");
+								$this->session->set_flashdata('success',"Test Type successfully activated.");
 							}
 							redirect('lab/testtype/'.base64_encode(1));
 						}else{
@@ -936,7 +936,7 @@ class Lab extends In_frontend {
 							}
 					}
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully Sent.");
+							$this->session->set_flashdata('success',"Bid successfully sent.");
 							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']).'/'.base64_encode(3));
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -992,7 +992,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($post['bid_id'],$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully Updated.");
+							$this->session->set_flashdata('success',"Bid successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1025,7 +1025,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($b_id,$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully Updated.");
+							$this->session->set_flashdata('success',"Bid successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1137,7 +1137,7 @@ class Lab extends In_frontend {
 		               }     
 	                 }
 			if(count($save)>0){
-		$this->session->set_flashdata('success',"lab details  successfully inserted.");
+		$this->session->set_flashdata('success',"Lab details  successfully inserted.");
 	    redirect('lab');
 		}else{
 		$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

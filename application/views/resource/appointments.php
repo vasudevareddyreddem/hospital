@@ -49,7 +49,7 @@
                                             <div class="row">
 												<div class="form-group col-md-6">
 												   <label for="email">Patient Name</label>
-													<input type="text" name="patinet_name" id="patinet_name" class="form-control" placeholder="Enter name" >
+													<input type="text" name="patinet_name" id="patinet_name" class="form-control" placeholder="Enter Name" >
 												</div>
 												<div class="form-group col-md-6">
 												   <label for="email">Age</label>
@@ -109,7 +109,7 @@
                      <div class="tab-pane <?php if(isset($tab)&& $tab==2){ echo "active";}?>" id="home">
                         <div class="card ">
                            <div class="card-head">
-                              <header>App Patients Details</header>
+                              <header>App Patient Details</header>
                              
                            </div>
                            <div class="card-body ">
@@ -147,7 +147,7 @@
 								   <td> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="dob" value="<?php echo $list['date']; ?> ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date" value="<?php echo $list['date']; ?> ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -366,7 +366,7 @@ $(document).ready(function() {
                specialist: {
                    validators: {
    					notEmpty: {
-   						message: 'Specialist is required'
+   						message: 'Speciality is required'
    					}
    				}
                },
@@ -380,13 +380,13 @@ $(document).ready(function() {
    			date: {
                    validators: {
    					notEmpty: {
-   						message: 'Birth place is required'
+   						message: 'Booking Date is required'
    					}
    				}
                },time: {
                    validators: {
    					notEmpty: {
-   						message: 'Time is required'
+   						message: 'Booking Time is required'
    					}
    				}
                }

@@ -53,7 +53,7 @@
                                         <thead>
                                             <tr>
 												<th>Department</th>
-                                                <th>Create date</th>
+                                                <th>Created Date&Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -98,7 +98,7 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="treamentid" id="treamentid" value="<?php echo $list['t_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Treatment rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Department Rename</h4>
 													</div>
 													<div class="modal-body">
 														<div class="form-group">

@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Test type List</div>
+               <div class="page-title">Add Test Type</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Test type List</li>
+               <li class="active">Add Test Type</li>
             </ol>
          </div>
       </div>
@@ -17,9 +17,9 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Test type </a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Test Type </a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Test type  List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Test Type List</a>
                   </li>
                </ul>
             </header>
@@ -61,9 +61,9 @@
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th> Test Name</th>
+												<th>Test Name</th>
 												<th>Type</th>
-                                                <th>Create date</th>
+                                                <th>Created Date&Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>

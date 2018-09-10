@@ -53,7 +53,7 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/edit/'.base64_encode($list['hos_id'])); ?>">
-                                                                    <i class="fa fa-edit"></i>EDit </a>
+                                                                    <i class="fa fa-edit"></i>Edit </a>
                                                             </li>
                                                             <li>
                                                                 <a href="<?php echo base_url('hospital/deletes/'.base64_encode($list['hos_id'])); ?>">

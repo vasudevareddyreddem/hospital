@@ -44,10 +44,9 @@
                                                     <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
-														 <th>Amount</th>
-
+														<th>Amount</th>
                                                         <th>Dosage</th>
-                                                        <th>Substitute allowed?</th>
+                                                        <th>Substitute Allowed?</th>
                                                         <th>Modify Prescription Reason:</th>
                                                     </tr>
                                                 </thead>

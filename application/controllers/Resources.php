@@ -155,7 +155,7 @@ class Resources extends In_frontend {
 						
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab1);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Basic Details successfully Updated.");
+							$this->session->set_flashdata('success',"Basic Details successfully updated.");
 							if(isset($post['op']) && $post['op']==1){
 								
 									if(isset($post['verifying']) && $post['verifying']=='verify'){
@@ -210,7 +210,7 @@ class Resources extends In_frontend {
 								$store_image1 = imagepng($file, $this->config->item('documentroot')."assets/patient_barcode/{$code}");
 
 								$this->Resources_model->update_patient_details($addtab,$code);
-								$this->session->set_flashdata('success',"Basic Details successfully Added.");
+								$this->session->set_flashdata('success',"Basic Details successfully added.");
 								if(isset($post['op']) && $post['op']==1){
 									$billing=array(
 									'p_id'=>isset($addtab)?$addtab:'',
@@ -275,7 +275,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($tab2);exit;
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab2);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Demographic Details successfully Updated.");
+							$this->session->set_flashdata('success',"Demographic Details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(3));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -315,7 +315,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($tab2);exit;
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab2);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Next of kin details successfully Updated.");
+							$this->session->set_flashdata('success',"Next of kin details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -347,7 +347,7 @@ class Resources extends In_frontend {
 						
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$tab11);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Assign details successfully Updated.");
+							$this->session->set_flashdata('success',"Assign details successfully updated.");
 								if(isset($post['op']) && $post['op']==1){
 										redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
 									}else{
@@ -398,7 +398,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($tab5);exit;
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab5);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Guardian details successfully Updated.");
+							$this->session->set_flashdata('success',"Guardian details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(6));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -430,7 +430,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($tab5);exit;
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab6);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Payer details successfully Updated.");
+							$this->session->set_flashdata('success',"Payer details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -465,7 +465,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($tab5);exit;
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab7);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Socio- economic details successfully Updated.");
+							$this->session->set_flashdata('success',"Socio- economic details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(8));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -504,7 +504,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['bill_id'],$billing);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Visit info details successfully Updated.");
+							$this->session->set_flashdata('success',"Visit info details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['bill_id']).'/'.base64_encode(2));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -538,7 +538,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Bill details successfully Updated.");
+							$this->session->set_flashdata('success',"Bill details successfully updated.");
 							if(isset($post['op'])&& $post['op']==1){
 									redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
 							}else{
@@ -703,7 +703,7 @@ class Resources extends In_frontend {
 						//echo '<pre>';print_r($updating);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($updating);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Vitals details successfully Updated.");
+							$this->session->set_flashdata('success',"Vitals details successfully updated.");
 							//redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
 							
 							if(isset($post['op']) && $post['op']==1){
@@ -925,7 +925,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->saving_patient_vital_details($billing);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Vitals successfully Added.");
+							$this->session->set_flashdata('success',"Vitals successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -961,7 +961,7 @@ class Resources extends In_frontend {
 					}
 				
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Vitals Commets successfully Added.");
+							$this->session->set_flashdata('success',"Vitals Commets successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1014,7 +1014,7 @@ class Resources extends In_frontend {
 						$qty=(($qtys['qty'])-($post['qty']));
 						$data=array('qty'=>$qty);
 							$this->Resources_model->update_medicine_details($qtys['id'],$data);
-							$this->session->set_flashdata('success',"Medicine successfully Added.");
+							$this->session->set_flashdata('success',"Medicine successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1054,7 +1054,7 @@ class Resources extends In_frontend {
 						);
 					$investigation=$this->Resources_model->saving_patient_investigation($addmedicine);
 					if(count($investigation)>0){
-							$this->session->set_flashdata('success',"Investigation successfully Added.");
+							$this->session->set_flashdata('success',"Investigation successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1352,7 +1352,7 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Bill details successfully Updated.");
+							$this->session->set_flashdata('success',"Bill details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
 							
 						}else{

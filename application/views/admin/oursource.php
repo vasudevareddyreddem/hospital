@@ -4,21 +4,21 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Out source lab </div>
+               <div class="page-title">Out Source Lab </div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Out source lab </li>
+               <li class="active">Out Source Lab </li>
             </ol>
          </div>
       </div>
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Out source Lab</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Out Source Lab</a>
                   </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Out source Lab List</a>
+                  <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Out Source Lab List</a>
                   </li>
                </ul>
             </header>
@@ -122,7 +122,7 @@
 												<th>Name</th>
 												<th>Email Address</th>
                                                 <th>Contact Number </th>
-                                                <th>Created date</th>
+                                                <th>Created Date&Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -264,7 +264,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'lab_password',
-						message: 'Password and confirm Password do not match'
+						message: 'Password and Confirm Password do not match'
 					}
 					}
 				},

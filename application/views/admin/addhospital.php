@@ -51,7 +51,7 @@
 					<div class="row">
                         <div class="form-group col-md-6">
                            <label for="email">Hospital Contact Number</label>
-                           <input type="text" id="hos_con_number" name="hos_con_number" value="<?php echo isset($hospital_details['hos_con_number'])?$hospital_details['hos_con_number']:''; ?>" class="form-control"  placeholder="Enter Contact no" >
+                           <input type="text" id="hos_con_number" name="hos_con_number" value="<?php echo isset($hospital_details['hos_con_number'])?$hospital_details['hos_con_number']:''; ?>" class="form-control"  placeholder="Enter Contact No" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Email Id</label>
@@ -136,7 +136,7 @@
                            <label for="email">Pin code</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_rep_zipcode" name="hos_rep_zipcode" value="<?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>" class="form-control"  placeholder="Enter pin Code" >
+                                 <input type="text" id="hos_rep_zipcode" name="hos_rep_zipcode" value="<?php echo isset($hospital_details['hos_rep_zipcode'])?$hospital_details['hos_rep_zipcode']:''; ?>" class="form-control"  placeholder="Enter Pin code" >
                               </div>
                               <div class="col-md-6 row">
                                  <input type="text" id="hos_rep_city" name="hos_rep_city" value="<?php echo isset($hospital_details['hos_rep_city'])?$hospital_details['hos_rep_city']:''; ?>" class="form-control"  placeholder="Enter City" >
@@ -224,7 +224,7 @@
                            <label for="email">Pin code</label>
                            <div class="row">
                               <div class="col-md-6">
-                                 <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter pin Code" >
+                                 <input type="text" id="hos_bas_zipcode" name="hos_bas_zipcode" value="<?php echo isset($hospital_details['hos_bas_zipcode'])?$hospital_details['hos_bas_zipcode']:''; ?>" class="form-control"  placeholder="Enter Pin code" >
                               
 							  </div>
                               <div class="col-md-6 row">
@@ -434,7 +434,7 @@ $(document).ready(function() {
 					},
 					identical: {
 						field: 'hos_password',
-						message: 'Password and confirm Password do not match'
+						message: 'Password and Confirm Password do not match'
 					}
 					}
 				}
@@ -707,12 +707,12 @@ $(document).ready(function() {
 					{
 					    notEmpty: 
 						{
-						    message: 'Bank Account is required'
+						    message: 'Bank Acc No is required'
 					    },
 						regexp: 
 						{
 					     regexp:  /^[0-9]{9,16}$/,
-					     message:'Bank Account  must be 9 to 16 digits'
+					     message:'Bank Acc No  must be 9 to 16 digits'
 					    }
 				}
             },bank_name: {

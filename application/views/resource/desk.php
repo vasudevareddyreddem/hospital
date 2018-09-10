@@ -146,7 +146,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Blood Group</label>
-												   <?php $modes = array('O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
+												   <?php $modes = array('No'=>'Unknown','O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
 																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
@@ -161,7 +161,7 @@
 																	  </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="mobile">Marital status</label>
+                                                   <label for="mobile">Marital Status</label>
                                                    <select id="martial_status" name="martial_status" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="Single" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
@@ -202,7 +202,7 @@
 													  <br>
 													  <div class="row">
                                                       <div class="col-md-6">
-                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
+                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Pin code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
                                                       <div class="col-md-6 ">
                                                          <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>" >
@@ -238,7 +238,7 @@
 													  <br>
 													  <div class="row">
 														  <div class="col-md-6">
-															 <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Pin Code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
+															 <input type="text" id="t_zipcode" name="t_zipcode"  class="form-control"  placeholder="Pin code" value="<?php echo isset($patient_detailes['t_zipcode'])?$patient_detailes['t_zipcode']:''; ?>" >
 														  </div>
 														  <div class="col-md-6 ">
 															 <input type="text" id="t_country_name" name="t_country_name" class="form-control" value="<?php echo isset($patient_detailes['t_country_name'])?$patient_detailes['t_country_name']:''; ?>"  placeholder="Country" >
@@ -593,7 +593,7 @@
 												</select>
 												</div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">Consultant name</label>
+                                                   <label for="email">Consultant Name</label>
                                                    <select id="department_doctors2" name="department_doctors" class="form-control" >
                                                       <option value="">Select Consultant</option>
                                                    </select>
@@ -651,7 +651,7 @@
                                                                   <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Total Amount" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Payment mode</label>
+                                                                  <label for="mobile">Payment Mode</label>
 																   <?php $modes = array('Cash'=>'Cash','Online'=>'Online','Other'=>'Other'); ?>
 																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
 																	  <option value = "">Select</option>
@@ -675,12 +675,12 @@
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Privilege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo"> Have a Coupon Code ?</a>
 																 </div>
 																 <div id="demo" class="">
 																	<div class="form-group col-md-12">
-																		<label for="mobile">Privilege card</label>
-																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<label for="mobile">Coupon Code</label>
+																		<input type="text" class="form-control" id="coupon_code" autocomplete="off"  name="coupon_code" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg" style="color:green;"></span>
 																	<span id="errormsg" style="color:red;"></span>
@@ -787,7 +787,7 @@
                      <div class="tab-pane  <?php if(isset($tab) && $tab==11 || $tab==12 || $tab==13 || $tab==0){ echo "active";}?>" id="aboutop">
                         <div class="card ">
                            <div class="card-head">
-                              <header>Patients Details</header>
+                              <header>Patient Details</header>
                              
                            </div>
                            <div class="card-body ">
@@ -888,7 +888,7 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Blood Group</label>
-												   <?php $modes = array('O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
+												   <?php $modes = array('No'=>'Unknown','O-'=>'O-','O+'=>'O+','A-'=>'A-','A+'=>'A+','B-'=>'B-','B+'=>'B+','AB-'=>'AB-','AB+'=>'AB+'); ?>
 																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
@@ -903,7 +903,7 @@
 																	  </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="mobile">Marital status</label>
+                                                   <label for="mobile">Marital Status</label>
                                                    <select id="martial_status" name="martial_status" class="form-control" >
                                                       <option value="">Select</option>
                                                       <option value="Single" <?php if(isset($patient_detailes['martial_status']) &&  $patient_detailes['martial_status']=='Single'){ echo "Selected"; } ?>>Single</option>
@@ -943,7 +943,7 @@
 													  </br>
 													  <div class="row">
                                                       <div class="col-md-6">
-                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="pin Code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
+                                                         <input type="text" id="p_zipcode" name="p_zipcode"  class="form-control"  placeholder="Pin code" value="<?php echo isset($patient_detailes['p_zipcode'])?$patient_detailes['p_zipcode']:''; ?>">
                                                       </div>
                                                       <div class="col-md-6">
                                                          <input type="text" id="p_country_name" name="p_country_name" class="form-control"  placeholder="Country" value="<?php echo isset($patient_detailes['p_country_name'])?$patient_detailes['p_country_name']:''; ?>" >
@@ -1010,7 +1010,7 @@
                                                                   <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Total Amount" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
                                                                </div>
                                                                <div class="form-group col-md-6">
-                                                                  <label for="mobile">Payment mode</label>
+                                                                  <label for="mobile">Payment Mode</label>
 																   <?php $modes = array('Cash'=>'Cash','Online'=>'Online','Other'=>'Other'); ?>
 																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
 																	  <option value = "">Select</option>
@@ -1035,12 +1035,12 @@
                                                                </div>
 															   
 															   <div class="form-group col-md-12">
-                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Privilege card ?</a>
+                                                                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Coupon Code ?</a>
 																 </div>
 																 <div id="demo1" class="">
 																	<div class="form-group col-md-12">
-																		<label for="mobile">Privilege card</label>
-																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Privilege card Number" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<label for="mobile">Coupon Code</label>
+																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg1" style="color:green;"></span>
 																	<span id="errormsg1" style="color:red;"></span>
@@ -1085,7 +1085,7 @@
 												</select>
 												</div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="email">Consultant name</label>
+                                                   <label for="email">Consultant Name</label>
                                                    <select id="department_doctors1" name="department_doctors" class="form-control" >
                                                       <option value="">Select Consultant</option>
                                                    </select>
@@ -1204,16 +1204,16 @@ function apply_couponcode(){
    					success: function (data) {
 						$('#sucessmsg').show();
 						if(data.msg==1){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Coupon Code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount').val(data.amt);
-							document.getElementById("successmsg").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Coupon Code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
@@ -1242,16 +1242,16 @@ function apply_couponcode1(){
    					success: function (data) {
 						$('#sucessmsg').show();
 						if(data.msg==1){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Privilege code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Coupon Code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount1').val(data.amt);
-							document.getElementById("successmsg1").innerHTML="Privilege code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
-							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Privilege code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Privilege code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Coupon Code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}
@@ -1354,7 +1354,7 @@ function apply_couponcode1(){
                },payment_mode: {
                     validators: {
    					notEmpty: {
-   						message: 'Payment mode is required'
+   						message: 'Payment Mode is required'
    					}
    				}
                },bill_amount: {
@@ -1457,7 +1457,7 @@ function apply_couponcode1(){
    			payment_mode: {
                     validators: {
    					notEmpty: {
-   						message: 'Payment mode is required'
+   						message: 'Payment Mode is required'
    					}
    				}
                },bill_amount: {
@@ -1827,7 +1827,7 @@ function apply_couponcode1(){
    			gender: {
                  validators: {
    					notEmpty: {
-   						message: 'gender is required'
+   						message: 'Gender is required'
    					}
    				}
    			},
@@ -2100,7 +2100,7 @@ function apply_couponcode1(){
    			patient_category: {
                    validators: {
                          notEmpty: {
-                           message: 'Please select Patient category '
+                           message: 'Please select Patient Category '
                        }
                    }
                },
@@ -2169,7 +2169,7 @@ function apply_couponcode1(){
    			bloodgroup: {
                     validators: {
    					notEmpty: {
-   						message: 'Blood group is required'
+   						message: 'Blood Group is required'
    					}
 					}
    				
@@ -2177,7 +2177,7 @@ function apply_couponcode1(){
    			martial_status: {
                     validators: {
    					 notEmpty: {
-                           message: 'Please select Marital status'
+                           message: 'Please select Marital Status'
                        }
    				
    				}
@@ -2334,14 +2334,14 @@ function apply_couponcode1(){
    			patient_category: {
                    validators: {
                          notEmpty: {
-                           message: 'Please select Patient category '
+                           message: 'Please select Patient Category '
                        }
                    }
                },
 			   gender: {
                    validators: {
                          notEmpty: {
-                           message: 'Please select gender '
+                           message: 'Please select Gender '
                        }
                    }
                },
@@ -2413,14 +2413,14 @@ function apply_couponcode1(){
    			bloodgroup: {
                     validators: {
    					notEmpty: {
-   						message: 'Blood group is required'
+   						message: 'Blood Group is required'
    					}
    				}
                },
    			martial_status: {
                     validators: {
    					 notEmpty: {
-                           message: 'Please select Marital status'
+                           message: 'Please select Marital Status'
                        }
    				
    				}
@@ -2617,7 +2617,7 @@ function apply_couponcode1(){
 			   department_doctors: {
                     validators: {
    					notEmpty: {
-   						message: 'Consultant name is required'
+   						message: 'Consultant Name is required'
    					}
    				}
                }
@@ -2647,7 +2647,7 @@ function apply_couponcode1(){
 			   department_doctors: {
                     validators: {
    					notEmpty: {
-   						message: 'Consultant name is required'
+   						message: 'Consultant Name is required'
    					}
    				}
                }
