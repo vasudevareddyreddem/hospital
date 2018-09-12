@@ -195,9 +195,10 @@ class Mobile_model extends CI_Model
 		$this->db->where('create_by',$a_u_id);
 		$return=$this->db->get()->result_array();
 		foreach($return as $list){
-			$coupon_code=$this->get_hospital_counpon_code($list['hos_id']);
+			$coupon_code = $this->get_hospital_counpon_code($list['hos_id']);
+			//echo '<pre>';print_r($coupon_code);exit;
 			$data[$list['id']]=$list;
-			$data[$list['id']]['coupon_code']=$coupon_code['coupon_code'];
+			$data[$list['id']]['coupon_code']=isset($coupon_code)?$coupon_code:'';
 			
 		}
 		if(!empty($data)){
@@ -223,7 +224,7 @@ class Mobile_model extends CI_Model
 		$this->db->where('hospital_id',$hos_id);
 		$this->db->where('status',1);
 		$this->db->order_by('coupon_codes.id',"desc");
-		return $this->db->get()->row_array();
+		return $this->db->get()->result_array();
 	}
 	
 }
