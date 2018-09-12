@@ -59,14 +59,14 @@ class Executive extends In_frontend {
 					$this->session->set_flashdata('error',"Email already exits");
 					redirect('executive/index/');
 				}
-			if(isset($_FILES['kyc']['name']) && $_FILES['kyc']['name']!=''){
-							unlink("assets/kyc_documents/".$hospital_details['kyc']);
-							$temp = explode(".", $_FILES["kyc"]["name"]);
-							$file1 = round(microtime(true)) . '.' . end($temp);
-							move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/kyc_documents/" . $file1);
-						}else{
-							$file1='';
-						}
+			if($_FILES['kyc']['name']!=''){
+					$catimg=$_FILES['kyc']['name'];
+					move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/kyc_documents/" . $_FILES['kyc']['name']);
+
+					}else{
+					$catimg='';
+					}
+			
 			
 				$save_data=array(
 				'name'=>isset($post['name'])?$post['name']:'',
@@ -79,7 +79,7 @@ class Executive extends In_frontend {
 				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
 				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
 				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
-				'kyc'=>$file1,
+				'kyc'=>$catimg,
 				'location'=>isset($post['location'])?$post['location']:'',
 				'status'=>1,
 				'create_at'=>date('Y-m-d H:i:s'),
@@ -150,7 +150,7 @@ class Executive extends In_frontend {
 				$user_save=$this->Admin_model->saver_user($post['e_id']);
 			//echo'<pre>';print_r($user_save);exit;
 			
-			if($user_save['email_id']=$post['email_id']){
+			if($user_save['email_id']!=$post['email_id']){
 			$check=$this->Admin_model->saver_user_details($post['email_id']);
 			//echo'<pre>';print_r($check);exit;
 			if(count($check)>0){
@@ -159,14 +159,16 @@ class Executive extends In_frontend {
 			      }	
 			}
 				
-				 if(isset($_FILES['kyc']['name']) && $_FILES['kyc']['name']!=''){
-							unlink("assets/kyc_documents/".$hospital_details['kyc']);
-							$temp = explode(".", $_FILES["kyc"]["name"]);
-							$file1 = round(microtime(true)) . '.' . end($temp);
-							move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/kyc_documents/" . $file1);
-						}else{
-							$file1='';
-						}
+				
+			if($_FILES['kyc']['name']!=''){
+					$catimg=$_FILES['kyc']['name'];
+					move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/kyc_documents/" . $_FILES['kyc']['name']);
+
+					}else{
+					$catimg='';
+					}
+			
+			
 			
 				$update_data=array(
 				'name'=>isset($post['name'])?$post['name']:'',
@@ -177,7 +179,7 @@ class Executive extends In_frontend {
 				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
 				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
 				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
-				'kyc'=>$file1,
+				'kyc'=>$catimg,
 				'location'=>isset($post['location'])?$post['location']:'',
 				'status'=>1,
 				'create_at'=>date('Y-m-d H:i:s'),

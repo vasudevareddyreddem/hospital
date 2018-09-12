@@ -391,5 +391,11 @@ class Lab_model extends CI_Model
 		$this->db->where('lab_test_type.type_name',$type_name);
 		return $this->db->get()->row_array();
 	}
+	
+	public function get_lab_get_type_name($data){
+	$this->db->insert('lab_test_list', $data);
+     return  $this->db->insert_id();
+	}
+	
 
 }

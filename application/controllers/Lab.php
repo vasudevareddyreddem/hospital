@@ -1116,16 +1116,36 @@ class Lab extends In_frontend {
 					$cnt=$xlsx->sheetsCount()-1;
 					$arry=$xlsx->rows($j);
 					unset($arry[0]);
-
-		           //echo "<pre>";print_r($arry);exit;
+					$res = array();
+					echo "<pre>";
+					print_r($arry);
+					$people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
+					  $test_type_list=$this->Lab_model->get_lab_test_type_details();
+                     foreach($test_type_list as $Lists){
+					  $lidss[]=$Lists['type_name']; 
+				   }
+							if (in_array("ALLERGY", $lidss))
+							  {
+							  echo "Match found";
+							  }
+							else
+							  {
+							  echo "Match not found";
+							  }
+					
+					die;
+				  
 				   
 				  
 				   $test_type_list=$this->Lab_model->get_lab_test_type_details();
+				   
 				   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
 				   foreach($test_type_list as $Lists){
 					  $lidss[]=$Lists['type_name']; 
 				   }
 					//echo'<pre>';print_r($lidss);exit;
+					
+					
 		           foreach($arry as $key=>$fields)
 					{
 						
@@ -1157,7 +1177,7 @@ class Lab extends In_frontend {
 		               }     
 	                 }
 					 
-					 exit;
+					 
 			if(count($save)>0){
 				$this->session->set_flashdata('success',"Lab details  successfully inserted.");
 				redirect('lab');
