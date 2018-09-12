@@ -27,7 +27,7 @@
                                         <thead>
                                             <tr>
 												<th>PURN</th>
-												<th>Patient card number</th>
+												<th>Patient Card Number</th>
 												<th>Slot</th>
 												<th>Patient Name </th>
                                                 <th>Age</th>

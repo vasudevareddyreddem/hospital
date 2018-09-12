@@ -30,6 +30,17 @@
                      
 					  <form action="<?php echo base_url('Ward_management/floornumberpost'); ?>" method="post" id="floor_number" name="floor_number" enctype="multipart/form-data">
 							<div class="row">
+							<div class="col-md-6">
+							<label>Ward Room Type</label>
+										<select name="room_type" id="room_type" class="form-control">
+										<option value="">Select Ward Room Type</option>
+										<?php foreach($roomtype_list as $List){ ?>
+										<option value="<?php echo $List['w_r_t_id'];?>"><?php echo $List['room_type'];?></option>
+										<?php } ?>
+										
+										</select>
+							</div>
+							
 								<div class="col-md-6">
 									<label> Floor Number</label>
 								<input class="form-control" id="floor_number" name="floor_number" value="" type="text" placeholder="Floor Number">
@@ -52,6 +63,7 @@
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
+												<th>Ward Room Type</th>
 												<th>Floor Number</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
@@ -61,7 +73,8 @@
                                         <tbody>
 										<?php foreach($floor_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['ward_floor']); ?></td>
+                                                <td><?php echo htmlentities($list['room_type']); ?></td>
+												<td><?php echo htmlentities($list['ward_floor']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
@@ -80,9 +93,7 @@
                                                             <li>
                                                                 <a href="<?php echo base_url('ward_management/floornumberdelete/'.base64_encode($list['w_f_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
-                                                            </li>
-                                                            
-                                                            
+                                                            </li>                                   
                                                         </ul>
                                                     </div>
                                                 </td>

@@ -98,13 +98,13 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_wardtype_list($a_id,$hos_id){
-		$this->db->select('ward_type.ward_id,ward_type.ward_type,ward_type.status,ward_type.create_at')->from('ward_type');		
+		$this->db->select('ward_type.ward_id,ward_name.ward_name,ward_type.ward_type,ward_type.status,ward_type.create_at')->from('ward_type');		
+		$this->db->join('ward_name', 'ward_name.w_id = ward_type.wid', 'left');
 		$this->db->where('ward_type.created_by',$a_id);
 		$this->db->where('ward_type.hos_id',$hos_id);
 		$this->db->where('ward_type.status !=',2);
 		return $this->db->get()->result_array();
 	}
-	
 	
 	public function get_wardtype_list_details($hos_id){
 		$this->db->select('ward_type.ward_id,ward_type.ward_type,ward_type.status,ward_type.create_at')->from('ward_type');				
@@ -138,7 +138,8 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_floor_list($a_id,$hos_id){
-		$this->db->select('ward_floors.w_f_id,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');		
+		$this->db->select('ward_floors.w_f_id,ward_room_type.room_type,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');		
+		$this->db->join('ward_room_type', 'ward_room_type.w_r_t_id = ward_floors.w_r_type_id', 'left');
 		$this->db->where('ward_floors.created_by',$a_id);
 		$this->db->where('ward_floors.hos_id',$hos_id);
 		$this->db->where('ward_floors.status !=',2);
@@ -177,7 +178,8 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_roomtype_list($a_id,$hos_id){
-		$this->db->select('ward_room_type.w_r_t_id,ward_room_type.room_type,ward_room_type.status,ward_room_type.create_at')->from('ward_room_type');		
+		$this->db->select('ward_room_type.w_r_t_id,ward_type.ward_type,ward_room_type.room_type,ward_room_type.status,ward_room_type.create_at')->from('ward_room_type');		
+		$this->db->join('ward_type', 'ward_type.ward_id = ward_room_type.w_type_id', 'left');
 		$this->db->where('ward_room_type.created_by',$a_id);
 		$this->db->where('ward_room_type.hos_id',$hos_id);
 		$this->db->where('ward_room_type.status !=',2);
@@ -339,7 +341,7 @@ class Ward_model extends CI_Model
 		$this->db->where('admitted_patient_list.status !=',2);
 		return $this->db->get()->result_array();
 	}
-	
+
 	public function update_admitted_patient_details($a_p_id,$data){
 		$this->db->where('a_p_id',$a_p_id);
 		return $this->db->update("admitted_patient_list",$data);

@@ -54,7 +54,8 @@ public function index()
 					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
 					'date_of_admit'=>date('Y-m-d H:i:s'),
-					'bed_no'=>$post['bed']
+					'bed_no'=>$post['bed'],
+					'created_by'=>$userdetails['r_id']
 				);
 					//echo '<pre>';print_r($admitted_patients_details);exit;
 				$ward = $this->Ward_model->admitted_patients($admitted_patients_details);
@@ -289,10 +290,14 @@ public function index()
 		
 		if($this->session->userdata('userdetails'))
 		{
+				$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']=1){
-					
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
+					//echo $this->db->last_query();exit;
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/transfer');
+					$this->load->view('ward/transfer',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -304,6 +309,87 @@ public function index()
 			redirect('admin');
 		}
 	}
+
+	public function transferpatientsedit()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+				$roomno = base64_decode($this->uri->segment(3));
+				$data['list']= $this->Ward_model->get_admitted_patients_details($roomno);
+				$a=$this->Ward_model->get_admitted_patients_details($roomno);
+				$admindetails=$this->session->userdata('userdetails');
+				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);	
+				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
+				$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
+				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
+				$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_detailss($a['floor_no'],$hos_ids['hos_id']);	
+				$data['bed_list'] =$this->Ward_model->get_bed_list_details($a['room_no'],$hos_ids['hos_id']);	
+				//echo $this->db->last_query();exit;
+				//echo '<pre>';print_r($data);exit;
+				$this->load->view('ward/transfer_patients_edit',$data);
+				$this->load->view('html/footer');
+				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
+	public function transferpatientseditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$post=$this->input->post();
+					//echo '<pre>';print_r($hos_ids);exit;					
+					//echo '<pre>';print_r($data);exit;	
+					$admitted_patients_details=array(
+					'w_name'=>$post['ward_name'],
+					'w_type'=>$post['ward_type'],
+					'room_type'=>$post['room_type'],
+					'floor_no'=>$post['floor_number'],
+					'room_no'=>$post['room_num'],
+					'bed_no'=>$post['bed'],
+					'updated_at'=>date('Y-m-d H:i:s')
+				);
+					//echo '<pre>';print_r($admitted_patients_details);exit;
+				$ward = $this->Ward_model->update_admitted_patient_details($post['wardname'],$admitted_patients_details);
+				if(count($ward)>0){
+					$this->session->set_flashdata('success',"admitted patient details updated successfully");
+					redirect('ward_management/transfer/'.base64_encode(3));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/transfer');
+				}											
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	public function bed_chart()
 	{			
 		if($this->session->userdata('userdetails'))
@@ -609,6 +695,7 @@ public function index()
 					}
 				$ward_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
+					'wid'=>$post['ward_name'],
 					'ward_type'=>$post['ward_type'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
@@ -644,7 +731,10 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list($hos_ids['a_id'],$hos_ids['hos_id']);					
+						
+				$data['ward_list'] =$this->Ward_model->get_ward_list($hos_ids['a_id'],$hos_ids['hos_id']);		
+				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list($hos_ids['a_id'],$hos_ids['hos_id']);				
+					//echo $this->db->last_query();exit;
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/wardtype',$data);
 					$this->load->view('html/footer');
@@ -800,6 +890,7 @@ public function index()
 					}
 				$floor_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
+					'w_r_type_id'=>$post['room_type'],
 					'ward_floor'=>$post['floor_number'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
@@ -836,6 +927,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list($hos_ids['a_id'],$hos_ids['hos_id']);
 				$data['floor_list'] =$this->Ward_model->get_floor_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					
 					//echo '<pre>';print_r($data);exit;
@@ -991,6 +1083,7 @@ public function index()
 					}
 				$floor_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
+					'w_type_id'=>$post['ward_type'],
 					'room_type'=>$post['room_type'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
@@ -1024,6 +1117,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list($hos_ids['a_id'],$hos_ids['hos_id']);				
 				$data['roomtype_list'] =$this->Ward_model->get_roomtype_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					
 					//echo '<pre>';print_r($data);exit;

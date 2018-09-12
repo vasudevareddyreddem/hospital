@@ -260,3 +260,18 @@ CREATE TABLE `appointments` (
   `patient_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1
+
+ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `created_by` INT(11) NULL AFTER `updated_at`;
+
+  ALTER TABLE `hospital`.`ward_type`   
+  ADD COLUMN `wid` INT(11) NULL AFTER `hos_id`;
+  
+ ALTER TABLE `hospital`.`ward_room_type`   
+  ADD COLUMN `w_type_id` INT(11) NULL AFTER `hos_id`;
+  
+  
+  ALTER TABLE `hospital`.`ward_floors`   
+  ADD COLUMN `w_r_type_id` INT(11) NULL AFTER `hos_id`;
+
+ 

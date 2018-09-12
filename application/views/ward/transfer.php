@@ -27,29 +27,36 @@
                                             <tr>
                                                 <th>Patient ID</th>
 												<th>Patient Name</th>
-                                                <th>Ward Type </th>
-                                                <th>Ward No </th>
+                                                <th>Ward Name </th>
+                                                <th>Ward Type</th>
                                                 <th>Room Type</th>
+												<th>Floor No</th>
                                                 <th>Room No</th>
                                                 <th>Bed No</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+										<?php if(isset($ip_admitted_patient_list)  && count($ip_admitted_patient_list)>0){ ?>
+											<?php foreach($ip_admitted_patient_list as $list){ ?>
                                             <tr>
-                                                <td>101</td>
-												<td>patient 1</td>
-												<td>type 1</td>
-												<td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
+													
+													<td><?php echo $list['pt_id']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['ward_name']; ?></td>
+													<td><?php echo $list['ward_type']; ?></td>
+													<td><?php echo $list['room_type']; ?></td>
+													<td><?php echo $list['ward_floor']; ?></td>
+													<td><?php echo $list['room_num']; ?></td>
+													<td><?php echo $list['bed']; ?></td>
+													
                                                 <td>
 													<a class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Accept</a>
 													<a class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > Reject</a>
 												</td>
                                             </tr>
-											
+											<?php } ?>
+										<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

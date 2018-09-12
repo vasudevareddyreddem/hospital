@@ -31,7 +31,7 @@
                   <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
 				  <div class="container">
                      
-					  <form action="<?php echo base_url('Ward_management/admitpatientseditpost'); ?>" method="post" id="room_num" name="room_num" enctype="multipart/form-data">
+					  <form action="<?php echo base_url('Ward_management/transferpatientseditpost'); ?>" method="post" id="room_num" name="room_num" enctype="multipart/form-data">
 							<?php $csrf = array(
 													   'name' => $this->security->get_csrf_token_name(),
 													   'hash' => $this->security->get_csrf_hash()
@@ -170,7 +170,7 @@
 												</div>
 													
 													<div class="modal-footer">
-														<button type="submit" class="btn btn-link waves-effect">Update </button>
+														<button type="submit" class="btn btn-link waves-effect">Transfer </button>
 													</div>
 												 </form>
                      </div>
