@@ -173,7 +173,7 @@ $(document).ready(function() {
 				}
             },
            
-           confirmpassword: {
+           org_password: {
 					 validators: {
 						 notEmpty: {
 						message: 'Confirm Password is required'
