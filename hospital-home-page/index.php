@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>MedSpace</title>
+    <link rel="icon" href="img/fav.png" >
+    <meta name="description" content=""/>
+	<meta name="keywords" content=""/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -56,7 +59,7 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto nav" >
-			<li class="nav-item active">
+            <li class="nav-item active">
             <a class="nav-link" href="#home-section">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -491,10 +494,10 @@ These guidelines have been prepared to facilitate and provide guidance to both t
 		<div class="row">
 			<div class="col-md-6">
 				<h3 class="h4">Registered Address</h3>
-				<p>6-2-102,Thyagaraja Nagar Area,Revenue Ward No 6,
-				Old Maternity Road,Tirupati,
-				Chittor- 517501
-				Andhra Pradesh - India</p>
+				<p>6-2-102, Thyagaraja Nagar Area, Revenue Ward No 6,
+				 Old Maternity Road, Tirupati,
+				 Chittor- 517501,
+				 Andhra Pradesh - India.</p>
 			</div>
 			<div class="col-md-2">&nbsp;
 			</div>
@@ -515,10 +518,10 @@ These guidelines have been prepared to facilitate and provide guidance to both t
 function scrollNav() {
   $('.nav a').click(function(){  
     //Toggle Class
-    $(".active").removeClass("active");      
+    $("li.active").removeClass("active");      
     $(this).closest('li').addClass("active");
-    var theClass = $(this).attr("class");
-    $('.'+theClass).parent('li').addClass('active');
+//    var theClass = $(this).attr("class");
+//    $('.'+theClass).parent('li').addClass('active');
     //Animate
     $('html, body').stop().animate({
         scrollTop: $( $(this).attr('href') ).offset().top - 160
