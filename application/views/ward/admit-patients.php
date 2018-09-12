@@ -269,6 +269,10 @@
 																<a href="<?php echo base_url('ward_management/admittedpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
 																	<i class="fa fa-edit"></i>Edit</a>
 															</li>
+															<li>
+																<a href="<?php echo base_url('ward_management/transferpatientsedit/'.base64_encode($list['a_p_id'])); ?>">
+																	<i class="fa fa-edit"></i>Transfer</a>
+															</li>
 											                <li>
                                                                 <a href="<?php echo base_url('ward_management/admitpatientsdelete/'.base64_encode($list['a_p_id'])); ?>">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>

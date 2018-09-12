@@ -30,6 +30,17 @@
                      
 					  <form action="<?php echo base_url('Ward_management/roomtypepost'); ?>" method="post" id="room_type" name="room_type" enctype="multipart/form-data">
 							<div class="row">
+							<div class="col-md-6">
+							<label>Ward Type</label>
+										<select name="ward_type" id="ward_type" class="form-control">
+										<option value="">Select Ward Type</option>
+										<?php foreach($wardtype_list as $List){ ?>
+										<option value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
+										<?php } ?>
+										
+										</select>
+							</div>
+							
 								<div class="col-md-6">
 									<label> Room Type</label>
 								<input class="form-control" id="room_type" name="room_type" value="" type="text" placeholder="Room Type">
@@ -52,6 +63,7 @@
                                     <table id="example4" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
                                         <thead>
                                             <tr>
+												<th>Ward Type</th>
 												<th>Room Type</th>
                                                 <th>Create date</th>
                                                 <th>Status</th>
@@ -61,6 +73,7 @@
                                         <tbody>
 										<?php foreach($roomtype_list as $list){ ?>
                                             <tr>
+												<td><?php echo htmlentities($list['ward_type']); ?></td>
                                                 <td><?php echo htmlentities($list['room_type']); ?></td>
                                                 <td><?php echo htmlentities($list['create_at']); ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>

@@ -6,7 +6,7 @@
          <div class="page-title-breadcrumb">
 		 <?php if($userdetails['role_id']==2){ ?>
             <div class=" pull-left">
-               <div class="page-title">Admitted patient edit</div>
+               <div class="page-title">Admitted Patient Edit</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
