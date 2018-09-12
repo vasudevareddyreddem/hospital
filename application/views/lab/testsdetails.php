@@ -1,4 +1,5 @@
 <?php //echo '<pre>';print_r($hospital_details);exit; ?>
+
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
@@ -23,14 +24,23 @@
                   </li>
                </ul>
             </header>
-			 <form method="post" action="<?php echo base_url('lab/exelsheet'); ?>" enctype="multipart/form-data">
-		
+			<?php if($this->session->flashdata('adderror')){ ?>
+					<?php foreach($this->session->flashdata('adderror') as $error){?>
+					<div class="alert_msg1 animated slideInUp bg-warn">
+					<?php echo $error.'<br/>'; ?>&nbsp; <i class="fa fa-exclamation-triangle text-success ico_bac" aria-hidden="true"></i>
+					</div>
+					
+					<?php } ?>
+				<?php } ?>
+			 <form id="uploadexcel_sheet" name="uploadexcel_sheet" method="post" action="<?php echo base_url('lab/exelsheet'); ?>" enctype="multipart/form-data">
+			<div class="form-group col-md-6">
 			<label>Upload excel file</label>
-			<input type="file" name="uploadfile" id="uploadfile">
+			<input type="file" class="form-control" name="uploadfile" id="uploadfile">
+			</div>
 			<br />
 			<input type="submit" name="upload" value="upload" >
 			<a target="_blank" href="<?php echo base_url('assets/modality_list.xlsx'); ?>">Download  sample  sheet</a>
-		</form>
+			</form>
 			
             <div class="panel-body">
                <div class="tab-content">
@@ -275,6 +285,25 @@ $(document).ready(function() {
             }
             }
         })
+     
+});  
+
+$(document).ready(function() {
+    $('#uploadexcel_sheet').bootstrapValidator({
+        fields: {
+            uploadfile: {
+                 validators: {
+					notEmpty: {
+						message: 'Upload  Sheet is required'
+					},
+					regexp: {
+					regexp: "(.*?)\.(xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only xlsx files are allowed'
+					}
+				}
+            }
+            }
+       })
      
 });
 </script>

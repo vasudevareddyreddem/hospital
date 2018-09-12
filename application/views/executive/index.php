@@ -51,7 +51,7 @@
 								</div>
 								<div class="col-md-6">
 									<label> Confirm Password</label>
-								<input class="form-control" id="confirmpassword" name="confirmpassword" value="" type="password" placeholder="Enter Confirm Password">
+								<input class="form-control" id="org_password" name="org_password" value="" type="password" placeholder="Enter Confirm Password">
 								</div>
 								<div class="col-md-6">
 									<label> Address</label>
@@ -255,7 +255,7 @@ $(document).ready(function() {
 				}
             },
            
-           confirmpassword: {
+           org_password: {
 					 validators: {
 						 notEmpty: {
 						message: 'Confirm Password is required'

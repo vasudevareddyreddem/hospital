@@ -1112,70 +1112,69 @@ class Lab extends In_frontend {
 					$xlsx = new SimpleXLSX( $_FILES['uploadfile']['tmp_name'] );
 					$getWorksheetName = $xlsx->getWorksheetName();
 					//echo $xlsx->sheetsCount();exit;
+					/* start*/
+					
 					for($j=1;$j <= $xlsx->sheetsCount();$j++){
 					$cnt=$xlsx->sheetsCount()-1;
 					$arry=$xlsx->rows($j);
 					unset($arry[0]);
-					$res = array();
-					echo "<pre>";
-					print_r($arry);
-					$people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
-					  $test_type_list=$this->Lab_model->get_lab_test_type_details();
-                     foreach($test_type_list as $Lists){
-					  $lidss[]=$Lists['type_name']; 
-				   }
-							if (in_array("ALLERGY", $lidss))
-							  {
-							  echo "Match found";
-							  }
-							else
-							  {
-							  echo "Match not found";
-							  }
-					
-					die;
-				  
-				   
-				  
-				   $test_type_list=$this->Lab_model->get_lab_test_type_details();
-				   
-				   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
-				   foreach($test_type_list as $Lists){
-					  $lidss[]=$Lists['type_name']; 
-				   }
-					//echo'<pre>';print_r($lidss);exit;
-					
-					
+					$test_type_list=$this->Lab_model->get_lab_test_type_details();
+					   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
+					   foreach($test_type_list as $Lists){
+						  $lidss[]=$Lists['type_name']; 
+					   }
+					//echo'<pre>';print_r($arry);
 		           foreach($arry as $key=>$fields)
 					{
+						$totalfields[] = $fields;
+						if(in_array(trim($fields[0]), $lidss))
+						  {
+						   $type_id=$this->Lab_model->get_labtest_type_id(trim($fields[0]));
+						   $error=0;
+						  }else{
+							$type_id['id']='';
+							$data['val_errors'][]="Test Type Name not matched .Please try again once. Row Id is :  ".$key.'<br>';
+							$error=1;
+						  }	
+												  
+					}
+					if(isset($data['val_errors']) && count($data['val_errors'])>0){
+						$this->session->set_flashdata('adderror',$data['val_errors']);
+						redirect('lab/index/');
+					}
+					
+					if(count($data['val_errors'])<=0){
+						$type_id='';
+					foreach($totalfields as $data){
+						$type_id=$this->Lab_model->get_labtest_type_id(trim($data[0]));
+
+						$data=array(
+						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
+						'test_type'=>isset($type_id['id'])?$type_id['id']:'',
+						't_name'=>$data[2],
+						'type'=>$data[1],
+						'duration'=>$data[3],
+						'amuont'=>$data[4],
+						'modality'=>isset($data[5])?$data[5]:'',
+						'create_at'=>date('Y-m-d H:i:s'),
+						'status'=>1,
+						'create_by'=>$admindetails['a_id'],
+						'out_source'=>isset($admindetails['out_source'])?$admindetails['out_source']:''	
+						);
+						$save=$this->Lab_model->insert_data_lab_detail_value($data);
 						
-					if (in_array(trim($fields[0]), $lidss))
-					  {
-					  $type_id=$this->Lab_model->get_labtest_type_id(trim($fields[0]));
-					  }else{
-						$type_id['id']='';
-					  }					  
+					}
 					
 					
 					
-		    $data=array(
-			'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-			'test_type'=>isset($type_id['id'])?$type_id['id']:'',
-			't_name'=>$fields[2],
-			'type'=>$fields[1],
-			'duration'=>$fields[3],
-			'amuont'=>$fields[4],
-			'modality'=>isset($fields[5])?$fields[5]:'',
-            'create_at'=>date('Y-m-d H:i:s'),
-			'status'=>1,
-			'create_by'=>$admindetails['a_id'],
-			'out_source'=>$admindetails['out_source']	
-				);
-					//echo'<pre>';print_r($data);
-					$save=$this->Lab_model->insert_data_lab_detail_value($data);
-			   //echo'<pre>';print_r($save);exit;
-		               }     
-	                 }
+					}
+					
+					
+					
+					}
+					
+					
+					/* end*/
 					 
 					 
 			if(count($save)>0){

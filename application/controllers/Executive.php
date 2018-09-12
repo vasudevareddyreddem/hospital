@@ -72,8 +72,8 @@ class Executive extends In_frontend {
 				'name'=>isset($post['name'])?$post['name']:'',
 				'mobile'=>isset($post['mobile'])?$post['mobile']:'',
 				'email_id'=>isset($post['email_id'])?$post['email_id']:'',
-				'password'=>isset($post['password'])?$post['password']:'',
-				'confirmpassword'=>isset($post['confirmpassword'])?$post['confirmpassword']:'',
+		        'password'=>isset($post['org_password'])?md5($post['org_password']):'',	
+				'org_password'=>isset($post['org_password'])?$post['org_password']:'',
 				'address'=>isset($post['address'])?$post['address']:'',
 				'bank_account'=>isset($post['bank_account'])?$post['bank_account']:'',
 				'bank_name'=>isset($post['bank_name'])?$post['bank_name']:'',
@@ -90,7 +90,7 @@ class Executive extends In_frontend {
 				$save=$this->Admin_model->executive_details($save_data);	
 					//echo'<pre>';print_r($save);exit;
 					if(count($save)>0){
-					$this->session->set_flashdata('success',"executive details are successfully register");	
+					$this->session->set_flashdata('success',"executive details are successfully added");	
 					redirect('executive/index/'.base64_encode(1));	
 					}else{
 						$this->session->set_flashdata('error',"techechal probelem occur ");
@@ -190,7 +190,7 @@ class Executive extends In_frontend {
 				$update=$this->Admin_model->update_executive_details($post['e_id'],$update_data);	
 					//echo'<pre>';print_r($update);exit;
 					if(count($update)>0){
-					$this->session->set_flashdata('success',"executive details are successfully register");	
+					$this->session->set_flashdata('success',"executive details are successfully updated");	
 					redirect('executive/index/'.base64_encode(1));	
 					}else{
 						$this->session->set_flashdata('error',"techechal probelem occur ");
@@ -266,11 +266,11 @@ class Executive extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$e_id=base64_decode($this->uri->segment(3));
 						//echo'<pre>';print_r($e_id);exit;
-					$delete_details =$this->Admin_model->delete_details_data($e_id);
+					$delete=$this->Admin_model->delete_details_data($e_id);
 						 //echo'<pre>';print_r($delete_details);exit;  	
                     	//echo $this->db->last_query();exit;					 
-				if(count($delete_details)>0){
-		$this->session->set_flashdata('sucess'," delete successfully");
+				if(count($delete)>0){
+		$this->session->set_flashdata('sucess',"executive details sucessfully deleted");
 	    redirect('executive/index/'.base64_encode(1));			
 		}else{
 			$this->session->set_flashdata('error',"problem is occurs");
