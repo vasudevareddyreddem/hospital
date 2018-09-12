@@ -163,11 +163,11 @@
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td>
 						                       <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
-									           <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id'].'/'.$list['status']));?>"data-toggle="tooltip" title="Status"><i class="fa fa-info-circle btn btn-warning"></i></a>
+									          <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id']).'/'.base64_encode($list['status'])); ?>" data-toggle="tooltip" title="status"><i class="fa fa-info-circle btn btn-warning"></i></a> 
 						                       <a href="<?php echo base_url('Executive/delete/'.base64_encode($list['e_id']));?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-trash btn btn-danger"></i></a>
 					                             </td>
 												
-                                     
+                
 											
 										<?php $cnt++;} ?>
 										 </tr>
@@ -324,7 +324,7 @@ $(document).ready(function() {
 			kyc: {
                    validators: {
 					regexp: {
-					regexp: "(.*?)\.(docx|doc|pdf|xlsx|xls)$",
+					regexp: /\.(docx|doc|pdf|xlsx|xls)$/i,
 					message: 'Uploaded file is not a valid. Only docx,doc,xlsx,pdf files are allowed'
 					}
 				}
