@@ -90,15 +90,16 @@ class Ward_model extends CI_Model
 	return $insert_id = $this->db->insert_id();
 	}
 	
-	public function get_saved_wardtype($name,$hos_id){
+	public function get_saved_wardtype($wid,$name,$hos_id){
 		$this->db->select('*')->from('ward_type');
+		$this->db->where('wid',$wid);
 		$this->db->where('ward_type',$name);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
 	
 	public function get_wardtype_list($a_id,$hos_id){
-		$this->db->select('ward_type.ward_id,ward_name.ward_name,ward_type.ward_type,ward_type.status,ward_type.create_at')->from('ward_type');		
+		$this->db->select('ward_type.ward_id,ward_type.wid,ward_name.ward_name,ward_type.ward_type,ward_type.status,ward_type.create_at')->from('ward_type');		
 		$this->db->join('ward_name', 'ward_name.w_id = ward_type.wid', 'left');
 		$this->db->where('ward_type.created_by',$a_id);
 		$this->db->where('ward_type.hos_id',$hos_id);
@@ -130,15 +131,16 @@ class Ward_model extends CI_Model
 	return $insert_id = $this->db->insert_id();
 	}
 	
-	public function get_saved_floor($name,$hos_id){
+	public function get_saved_floor($w_r_type_id,$name,$hos_id){
 		$this->db->select('*')->from('ward_floors');		
+		$this->db->where('w_r_type_id',$w_r_type_id);
 		$this->db->where('ward_floor',$name);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
 	
 	public function get_floor_list($a_id,$hos_id){
-		$this->db->select('ward_floors.w_f_id,ward_room_type.room_type,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');		
+		$this->db->select('ward_floors.w_f_id,ward_floors.w_r_type_id,ward_room_type.room_type,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');		
 		$this->db->join('ward_room_type', 'ward_room_type.w_r_t_id = ward_floors.w_r_type_id', 'left');
 		$this->db->where('ward_floors.created_by',$a_id);
 		$this->db->where('ward_floors.hos_id',$hos_id);
@@ -170,15 +172,16 @@ class Ward_model extends CI_Model
 	return $insert_id = $this->db->insert_id();
 	}
 	
-	public function get_saved_roomtype($name,$hos_id){
+	public function get_saved_roomtype($w_type_id,$name,$hos_id){
 		$this->db->select('*')->from('ward_room_type');		
+		$this->db->where('w_type_id',$w_type_id);
 		$this->db->where('room_type',$name);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
 	
 	public function get_roomtype_list($a_id,$hos_id){
-		$this->db->select('ward_room_type.w_r_t_id,ward_type.ward_type,ward_room_type.room_type,ward_room_type.status,ward_room_type.create_at')->from('ward_room_type');		
+		$this->db->select('ward_room_type.w_r_t_id,ward_room_type.w_type_id,ward_type.ward_type,ward_room_type.room_type,ward_room_type.status,ward_room_type.create_at')->from('ward_room_type');		
 		$this->db->join('ward_type', 'ward_type.ward_id = ward_room_type.w_type_id', 'left');
 		$this->db->where('ward_room_type.created_by',$a_id);
 		$this->db->where('ward_room_type.hos_id',$hos_id);

@@ -688,7 +688,7 @@ public function index()
 					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>'; print_r($hos_ids);exit;
 				//echo '<pre>';print_r($post);exit;
-					$exits_treatment = $this->Ward_model->get_saved_wardtype($post['ward_type'],$hos_ids['hos_id']);
+					$exits_treatment = $this->Ward_model->get_saved_wardtype($post['ward_name'],$post['ward_type'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
 						redirect('ward_management/wardtype/');
@@ -730,8 +730,7 @@ public function index()
 				if($admindetails['role_id']=2){
 					$data['tab']=base64_decode($this->uri->segment(3));
 				$admindetails=$this->session->userdata('userdetails');
-				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-						
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);	
 				$data['ward_list'] =$this->Ward_model->get_ward_list($hos_ids['a_id'],$hos_ids['hos_id']);		
 				$data['wardtype_list'] =$this->Ward_model->get_wardtype_list($hos_ids['a_id'],$hos_ids['hos_id']);				
 					//echo $this->db->last_query();exit;
@@ -804,15 +803,17 @@ public function index()
 				$post=$this->input->post();
 				$editdata_check= $this->Ward_model->get_wardtype_details($post['ward_type']);
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-
-				if($editdata_check['ward_type']!=$post['wt_name']){
-					$exits_treatment = $this->Ward_model->get_saved_wardtype($post['wt_name'],$hos_ids['hos_id']);
+				//echo '<pre>';print_r($editdata_check);exit;
+				if($editdata_check['ward_type']!=$post['wt_name'] || $editdata_check['ward_name']!=$post['wid']){
+					$exits_treatment = $this->Ward_model->get_saved_wardtype($post['ward_name'],$post['wt_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"wardtype already exists .please use another name");
 						redirect('ward_management/wardtype/'.base64_encode(1));
 					}
 				}
+				
 				$editward_details=array(
+					'wid'=>$post['ward_name'],
 					'ward_type'=>$post['wt_name'],
 					'updated_at'=>date('Y-m-d H:i:s')
 					);
@@ -883,7 +884,7 @@ public function index()
 					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>'; print_r($hos_ids);exit;
 				//echo '<pre>';print_r($post);exit;
-					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_number'],$hos_ids['hos_id']);
+					$exits_treatment = $this->Ward_model->get_saved_floor($post['room_type'],$post['floor_number'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"floornumber already exists .please use another name");
 						redirect('ward_management/floornumber/');
@@ -998,15 +999,17 @@ public function index()
 				$post=$this->input->post();
 				$editdata_check= $this->Ward_model->get_floor_details($post['floorid']);
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-
-				if($editdata_check['ward_floor']!=$post['floor_name']){
-					$exits_treatment = $this->Ward_model->get_saved_floor($post['floor_name'],$hos_ids['hos_id']);
+				//echo '<pre>';print_r($editdata_check);exit;
+				
+				if($editdata_check['ward_floor']!=$post['floor_name'] || $editdata_check['room_type']!=$post['w_r_type_id']){
+					$exits_treatment = $this->Ward_model->get_saved_floor($post['room_type'],$post['floor_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"floornumber already exists .please use another name");
 						redirect('ward_management/floornumber/'.base64_encode(1));
 					}
 				}
 				$editward_details=array(
+					'w_r_type_id'=>$post['room_type'],
 					'ward_floor'=>$post['floor_name'],
 					'updated_at'=>date('Y-m-d H:i:s')
 					);
@@ -1076,7 +1079,7 @@ public function index()
 					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>'; print_r($hos_ids);exit;
 				//echo '<pre>';print_r($post);exit;
-					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['room_type'],$hos_ids['hos_id']);
+					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['ward_type'],$post['room_type'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"roomtype already exists .please use another name");
 						redirect('ward_management/roomtype/');
@@ -1189,14 +1192,17 @@ public function index()
 				$editdata_check= $this->Ward_model->get_roomtype_details($post['rtypeid']);
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 
-				if($editdata_check['room_type']!=$post['rtype_name']){
-					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['rtype_name'],$hos_ids['hos_id']);
+				//echo '<pre>';print_r($editdata_check);exit;
+			
+				if($editdata_check['room_type']!=$post['rtype_name'] || $editdata_check['wardtype']!=$post['w_type_id']){
+					$exits_treatment = $this->Ward_model->get_saved_roomtype($post['wardtype'],$post['rtype_name'],$hos_ids['hos_id']);
 					if(count($exits_treatment)>0){
 						$this->session->set_flashdata('error',"roomtype already exists .please use another name");
 						redirect('ward_management/roomtype/'.base64_encode(1));
 					}
 				}
 				$editward_details=array(
+					'w_type_id'=>$post['wardtype'],
 					'room_type'=>$post['rtype_name'],
 					'updated_at'=>date('Y-m-d H:i:s')
 					);
@@ -1267,7 +1273,6 @@ public function index()
 					$exits_roomnumber = $this->Ward_model->get_saved_roomnumber($post['floor_number'],$post['room_num'],$hos_ids['hos_id']);
 					//echo '<pre>';print_r($exits_roomnumber);exit;
 					if(count($exits_roomnumber)>0){
-						
 						$this->session->set_flashdata('error',"roomnumber already exists. please use another name");
 						redirect('ward_management/roomnumber/');
 					}

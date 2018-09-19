@@ -993,7 +993,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($post['bid_id'],$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully updated.");
+							$this->session->set_flashdata('success',"Procurement successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1026,7 +1026,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($b_id,$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Bid successfully updated.");
+							$this->session->set_flashdata('success',"Procurement successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

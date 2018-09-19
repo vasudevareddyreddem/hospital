@@ -4,12 +4,12 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Procurement lab Test List</div>
+               <div class="page-title">Procurement Lab Test List</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Procurement Test List</li>
+               <li class="active">Procurement Lab Test List</li>
             </ol>
          </div>
       </div>
@@ -31,7 +31,7 @@
 					<th> Test Name </th>
 					<th> Date & TIme </th>
 					<th> Amount</th>
-					<th> Duartion </th>
+					<th> Duration </th>
 					<th> Status </th>
 					<th> Action </th>
 					
@@ -52,7 +52,7 @@
 					<?php if($list['status']!=4){ ?>
 					<button type="submit">Accept | </button>
 					</form>
-					<a href="<?php echo base_url('lab/bidding_decline/'.base64_encode($list['id'])); ?>">decline 
+					<a href="<?php echo base_url('lab/bidding_decline/'.base64_encode($list['id'])); ?>">Decline 
 					<?php } ?>
 					</td>
 					

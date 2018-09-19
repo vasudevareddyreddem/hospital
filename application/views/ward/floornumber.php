@@ -109,8 +109,29 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="floorid" id="floorid" value="<?php echo $list['w_f_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Floor Number rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Floor Number Rename</h4>
 													</div>
+													<div class="col-md-6">
+							<label>Ward Room Type</label>
+										<select name="room_type" id="room_type" class="form-control">
+										<option value="">Select Ward Room Type</option>
+										<?php foreach($roomtype_list as $List){ ?>
+											<?php if($List['w_r_t_id']==$list['w_r_type_id']){ ?>
+											<option selected value="<?php echo $List['w_r_t_id'];?>"><?php echo $List['room_type'];?></option>
+											<?php }else{ ?>
+											<option  value="<?php echo $List['w_r_t_id'];?>"><?php echo $List['room_type'];?></option>
+											<?php } ?>
+										<?php } ?>
+										
+								
+										
+										
+										
+										
+										
+										</select>
+							</div>
+													
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
@@ -132,7 +153,7 @@
                                         </tbody>
                                     </table>
 								<?php }else{ ?>
-								<div>No data Available</div>
+								<div>No data available</div>
 								<?php } ?>
 								
                                 </div>
@@ -195,15 +216,21 @@ $(document).ready(function() {
     $('#floor_number').bootstrapValidator({
         
         fields: {
-            
+            room_type: {
+                 validators: {
+					notEmpty: {
+						message: 'Room Type is required'
+					}
+				}
+            },
             floor_number: {
                  validators: {
 					notEmpty: {
-						message: 'floor number is required'
+						message: 'Floor Number is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
+					message: 'Floor Number can only consist of alphanumeric, space and dot'
 					}
 				}
             }

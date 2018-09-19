@@ -204,11 +204,11 @@
 	                                    </a>
 	                                </li>
 									 <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('ward_management/floornumber'); ?>" class="nav-link "> <span class="title">Floor Number</span>
+	                                    <a href="<?php echo base_url('ward_management/roomtype'); ?>" class="nav-link "> <span class="title">Room Type</span>
 	                                    </a>
 	                                </li>
 									 <li class="nav-item  ">
-	                                    <a href="<?php echo base_url('ward_management/roomtype'); ?>" class="nav-link "> <span class="title">Room Type</span>
+	                                    <a href="<?php echo base_url('ward_management/floornumber'); ?>" class="nav-link "> <span class="title">Floor Number</span>
 	                                    </a>
 	                                </li>
 	                                 <li class="nav-item  ">
@@ -388,7 +388,7 @@
 										<li class="nav-item start ">
 									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
 										<i class="material-icons">format_color_fill</i>
-										<span class="title">Lab Test details</span>
+										<span class="title">Lab Test Details</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
 									</a>
@@ -421,7 +421,7 @@
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
 										<i class="material-icons">format_color_fill</i>
-										<span class="title">Lab Test details</span>
+										<span class="title">Lab Test Details</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
 									</a>
@@ -429,7 +429,7 @@
 								<li class="nav-item start ">
 									<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
 										<i class="material-icons">details</i>
-										<span class="title">Out Sources Lab Test details</span>
+										<span class="title">Out Sources Lab Test Details</span>
 										<span class="selected"></span>
 										<span class="arrow "></span>
 									</a>

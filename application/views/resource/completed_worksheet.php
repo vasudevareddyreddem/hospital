@@ -26,7 +26,7 @@
                                     <table id="example4" class="table table-striped table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>PURN</th>
+												<th>Patient Id</th>
 												<th>Patient Card Number</th>
 												<th>Slot</th>
 												<th>Patient Name </th>
@@ -52,7 +52,7 @@
                                         </tbody>
                                     </table>
 										<?php }else{ ?>
-										<div>No data Available</div>
+										<div>No data available</div>
 										<?php } ?>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
