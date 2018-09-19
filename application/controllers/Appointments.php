@@ -21,8 +21,11 @@ class Appointments extends In_frontend {
 					//echo '<pre>';print_r($data);exit; 
 					$data['tab']= base64_decode($this->uri->segment(3));
 					$data['appointment_list']=$this->Appointments_model->get_website_appintmenr_list($userdetails['hos_id']);
+					
 					$data['app_appointment_list']=$this->Appointments_model->get_app_appointment_list($userdetails['hos_id']);
+					//echo '<pre>';print_r($data['app_appointment_list']);exit; 
 					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count($userdetails['hos_id']);
+					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
