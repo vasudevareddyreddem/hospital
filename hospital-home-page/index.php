@@ -185,7 +185,7 @@
               </div>
               <div class="col-10">
                 
-                <p class="grey-text">E-Health Card (MedSpace) OP Appointment Requested 
+                <p class="">E-Health Card (MedSpace) OP Appointment Requested 
 to particular Department Hospitals with Date & time Slot.
                 </p>
                 <div style="height:15px"></div>
@@ -200,7 +200,7 @@ to particular Department Hospitals with Date & time Slot.
               </div>
               <div class="col-10">
                 
-                <p class="grey-text">Hospital Authorized Person should  Send Date and Time 
+                <p class="">Hospital Authorized Person should  Send Date and Time 
 Slot Accept Confirmation Message received by patient in 
 Medspace Mobile App.	</p>
                 <div style="height:15px"></div>
@@ -215,7 +215,7 @@ Medspace Mobile App.	</p>
               </div>
               <div class="col-10">
                
-                <p class="grey-text">Medspace Patient Visit the Hospital at Scheduled Time,
+                <p class="">Medspace Patient Visit the Hospital at Scheduled Time,
 				Receptionist Enter Full Patient Details & send to Concern Assigned Doctor.</p>
                 <div style="height:15px"></div>
               </div>
@@ -226,7 +226,7 @@ Medspace Mobile App.	</p>
               </div>
               <div class="col-10">
                 
-                <p class="grey-text">First Doctor Confirm The patient was new or old.
+                <p class="">First Doctor Confirm The patient was new or old.
 					<ol>
 					<li><p>If old Patient, Doctor Check Previous History of patient.</p></li>
 					<li><p>If New Patient Direct Start Consultancy.</p></li>
@@ -255,7 +255,7 @@ Medspace Mobile App.	</p>
               </div>
               <div class="col-10">
                 
-                <p class="grey-text">Doctor Having Three Options 
+                <p class="">Doctor Having Three Options 
 	
 					<ol>
 					<li><p>Pharmacy</p></li>
@@ -275,7 +275,7 @@ Medspace Mobile App.	</p>
               </div>
               <div class="col-10">
                
-                <p class="grey-text"><strong>Pharmacy:</strong> Doctor Simply Choose Medicines In Drop Down 
+                <p class=""><strong>Pharmacy:</strong> Doctor Simply Choose Medicines In Drop Down 
     (if Doctor Type one letter of medicine name it will automatically shows).	
 	If selected Medicine Not Available & Chooses 
 	another  Combination of  Medicine.</p>
@@ -287,7 +287,7 @@ Medspace Mobile App.	</p>
 				  </div>
 				  <div class="col-10">
 				   
-					<p class="grey-text"><strong> Lab:</strong> Doctor Simply Choose Diagnostics in
+					<p class=""><strong> Lab:</strong> Doctor Simply Choose Diagnostics in
 						Drop Down, to  select any lab test and send to 
 						laboratory concern person.</p>
 					<div style="height:15px"></div>
@@ -299,7 +299,7 @@ Medspace Mobile App.	</p>
 				  </div>
 				  <div class="col-10">
 				   
-					<p class="grey-text"><strong> IP:</strong> if patient has any Emergency issue, Doctor
+					<p class=""><strong> IP:</strong> if patient has any Emergency issue, Doctor
 	Send full details  to IP Authorized Person.</p>
 					<div style="height:15px"></div>
 				  </div>
