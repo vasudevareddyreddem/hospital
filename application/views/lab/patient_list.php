@@ -34,10 +34,10 @@
 					<th> Name </th>
 					<th> Mobile </th>
 					<th> Address </th>
-					<th> Date </th>
+					<th> Date&Time</th>
 					<th> Consultant</th>
 					<th> Out Lab portal </th>
-					<th> In lab portal </th>
+					<th> In Lab portal </th>
 				</tr>
 			</thead>
 			<tbody>

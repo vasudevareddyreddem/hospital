@@ -68,7 +68,7 @@
 												  <tr class="header">
 													<th style="">Select</th>
 													<th style="">Lab Name</th>
-													<th style="">Name of the test</th>
+													<th style="">Name of the Test</th>
 													<th style="">Amount</th>
 													<th style="">Duration</th>
 													<th style="">Address</th>

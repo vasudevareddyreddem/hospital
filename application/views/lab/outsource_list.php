@@ -121,7 +121,7 @@
 												  <tr class="header">
 													<th style="">Select</th>
 													<th style="">Lab Name</th>
-													<th style="">Name of the test</th>
+													<th style="">Name of the Test</th>
 													<th style="">Amount</th>
 													<th style="">Duration</th>
 													<th style="">Address</th>
@@ -205,7 +205,7 @@
 													</table>
 													
 													<div class="clearfix">&nbsp;</div>
-													<button class="btn btn-primary "> Send for Bidding</button>
+													<button class="btn btn-primary "> Send for Procurement</button>
 													</form>
 												</div>
                                         </div>

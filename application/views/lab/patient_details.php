@@ -35,7 +35,7 @@
 								 <?php if(isset($report_lists) && count($report_lists)>0){ ?>
 								 <?php foreach($report_lists as $Lis){ ?>
 									 <div class="">
-										<header><?php echo $Lis['t_name']; ?> : &nbsp;<span><a  target="_blank" href="<?php echo base_url('assets/patient_reports/'.$Lis['image']); ?>">download</a></span>
+										<header><?php echo $Lis['t_name']; ?> : &nbsp;<span><a  target="_blank" href="<?php echo base_url('assets/patient_reports/'.$Lis['image']); ?>">Download</a></span>
 									</div>
 								 <?php } ?>
 								 <?php } ?>
