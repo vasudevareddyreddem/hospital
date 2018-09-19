@@ -111,8 +111,21 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="rtypeid" id="rtypeid" value="<?php echo $list['w_r_t_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Room Type rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Room Type Rename</h4>
 													</div>
+													<div class="col-md-6">
+							<label>Ward Type</label>
+										<select name="wardtype" id="wardtype" class="form-control">
+										<option value="">Select Ward Type</option>
+										<?php foreach($wardtype_list as $List){ ?>
+										<?php if($List['ward_id']==$list['w_type_id']){ ?>
+											<option selected value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
+											<?php }else{ ?>
+											<option  value="<?php echo $List['ward_id'];?>"><?php echo $List['ward_type'];?></option>
+											<?php } ?>
+										<?php } ?>
+										</select>
+							</div>
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
@@ -197,15 +210,22 @@ $(document).ready(function() {
     $('#room_type').bootstrapValidator({
         
         fields: {
-            
+            ward_type: {
+                 validators: {
+					notEmpty: {
+						message: 'Ward Type is required'
+					}
+				}
+            },
+			
             room_type: {
                  validators: {
 					notEmpty: {
-						message: 'room type is required'
+						message: 'Room Type is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
+					message: 'Room Type can only consist of alphanumeric, space and dot'
 					}
 				}
             }

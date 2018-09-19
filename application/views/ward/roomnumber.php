@@ -122,7 +122,7 @@
                                         </tbody>
                                     </table>
 								<?php }else{ ?>
-								<div>No data Available</div>
+								<div>No data available</div>
 								<?php } ?>
 								
                                 </div>

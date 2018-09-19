@@ -232,7 +232,7 @@
                                        </div>
                                        <div class="col-md-6">
                                                 <label> Qty</label>
-                                                <input class="form-control" name="qty" id="qty" type="text" placeholder="enter Qty">
+                                                <input class="form-control" name="qty" id="qty" type="text" placeholder="Enter Qty">
                                             </div>
                                        <div class="col-md-6">
                                           <div class="row">

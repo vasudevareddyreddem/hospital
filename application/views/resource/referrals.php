@@ -26,7 +26,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Slot</th>
-												<th>PURN</th>
+												<th>Patient Id</th>
 												 <th>Patient Card Number </th>
 												<th>Patient Name </th>
                                                 <th>Age</th>
@@ -48,8 +48,7 @@
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php echo htmlentities($list['assignbydoctor']); ?></td>
 												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
-                                                <td>
-                                                  <button class="btn btn-xs bg-success no-margin" type="button">Call</button>
+                                                <td> 
 												  <a href="<?php echo base_url('resources/consultation/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>" class="btn btn-xs bg-primary no-margin" type="button">Start Consultation</a>
 												  <button class="btn btn-xs bg-danger no-margin" type="button">Close</button>
                                                 </td>

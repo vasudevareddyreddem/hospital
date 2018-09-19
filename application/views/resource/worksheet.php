@@ -26,7 +26,7 @@
                                     <table id="example4" class="table table-striped table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
-												<th>PURN</th>
+												<th>Patient Id</th>
 												<th>Patient Card Number</th>
 												<th>Slot</th>
 												<th>Patient Name </th>
@@ -45,7 +45,7 @@
                                                 <td> <?php echo htmlentities($list['age']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
                                                 <td>
-                                                  <button class="btn btn-xs bg-success no-margin" type="button">Call</button>
+                                                  
 												  <a href="<?php echo base_url('resources/consultation/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>" class="btn btn-xs bg-primary no-margin" type="button">Start Consultation</a>
 												  <!--<button class="btn btn-xs bg-danger no-margin" type="button">Close</button>-->
                                                 </td>

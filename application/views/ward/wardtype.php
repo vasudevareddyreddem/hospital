@@ -113,8 +113,24 @@
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 													<input type="hidden" name="ward_type" id="ward_type" value="<?php echo $list['ward_id']; ?>" >
 													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">wardtype rename</h4>
+														<h4 class="modal-title" id="smallModalLabel">Ward Type Rename</h4>
 													</div>
+												
+													<div class="col-md-6">
+														<label>Ward Name</label>
+														<select name="ward_name" id="ward_name" class="form-control">
+														<option value="">Select Ward Name</option>
+														<?php foreach($ward_list as $List){ ?>
+																<?php if($List['w_id']==$list['wid']){ ?>
+																	<option selected value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
+																<?php }else{ ?>
+																	<option  value="<?php echo $List['w_id'];?>"><?php echo $List['ward_name'];?></option>
+																<?php } ?>
+														<?php } ?>
+										
+														</select>
+													</div>
+									
 													<div class="modal-body">
 														<div class="form-group">
 														<div class="form-line">
@@ -136,7 +152,7 @@
                                         </tbody>
                                     </table>
 								<?php }else{ ?>
-								<div>No data Available</div>
+								<div>No data available</div>
 								<?php } ?>
 								
                                 </div>
@@ -199,7 +215,15 @@ $(document).ready(function() {
     $('#ward_type').bootstrapValidator({
         
         fields: {
-            
+			
+			ward_name: {
+                 validators: {
+					notEmpty: {
+						message: 'Ward Name is required'
+					}
+				}
+            },
+			
             ward_type: {
                  validators: {
 					notEmpty: {
@@ -207,7 +231,7 @@ $(document).ready(function() {
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
+					message: 'Ward Type can only consist of alphanumeric, space and dot'
 					}
 				}
             }

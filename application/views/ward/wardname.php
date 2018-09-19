@@ -121,7 +121,7 @@
                                         </tbody>
                                     </table>
 								<?php }else{ ?>
-								<div>No data Available</div>
+								<div>No data available</div>
 								<?php } ?>
 								
                                 </div>
@@ -197,11 +197,11 @@ $(document).ready(function() {
             ward_name: {
                  validators: {
 					notEmpty: {
-						message: 'Name is required'
+						message: 'Ward Name is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Name can only consist of alphanumeric, space and dot'
+					message: 'Ward Name can only consist of alphanumeric, space and dot'
 					}
 				}
             }

@@ -380,7 +380,7 @@ $(document).ready(function() {
             },no_of_visits: {
                  validators: {
 					notEmpty: {
-						message: 'No- of visits is required'
+						message: 'No of visits is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,

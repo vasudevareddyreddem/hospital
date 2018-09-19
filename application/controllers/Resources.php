@@ -961,7 +961,7 @@ class Resources extends In_frontend {
 					}
 				
 						if(count($update)>0){
-							$this->session->set_flashdata('success',"Vitals Commets successfully added.");
+							$this->session->set_flashdata('success',"Vitals Comments successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

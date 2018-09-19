@@ -135,28 +135,14 @@ $(document).ready(function() {
             'test_id[]': {
                 validators: {
                       notEmpty: {
-                        message: 'Test name is required'
-                    }
-                }
-            },
-			'problem_name[]': {
-                validators: {
-                      notEmpty: {
-                        message: 'Problem is required'
-                    }
-                }
-            },
-			'symptoms[]': {
-                validators: {
-                      notEmpty: {
-                        message: 'Symptoms is required'
+                        message: 'Test Name is required'
                     }
                 }
             },
 			'document[]': {
                 validators: {
                       notEmpty: {
-                        message: 'document is required'
+                        message: 'Document is required'
                     },
 					regexp: {
 					regexp: "(.*?)\.(docx|doc|xlsx|xls)$",
