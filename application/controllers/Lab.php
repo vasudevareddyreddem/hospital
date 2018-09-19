@@ -1119,6 +1119,7 @@ class Lab extends In_frontend {
 					$arry=$xlsx->rows($j);
 					unset($arry[0]);
 					$test_type_list=$this->Lab_model->get_lab_test_type_details();
+					//echo'<pre>';print_r($test_type_list);exit;
 					   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
 					   foreach($test_type_list as $Lists){
 						  $lidss[]=$Lists['type_name']; 
@@ -1130,6 +1131,7 @@ class Lab extends In_frontend {
 						if(in_array(trim($fields[0]), $lidss))
 						  {
 						   $type_id=$this->Lab_model->get_labtest_type_id(trim($fields[0]));
+						   
 						   $error=0;
 						  }else{
 							$type_id['id']='';
@@ -1142,13 +1144,14 @@ class Lab extends In_frontend {
 						$this->session->set_flashdata('adderror',$data['val_errors']);
 						redirect('lab/index/');
 					}
-					
+					}
 					if(count($data['val_errors'])<=0){
 						$type_id='';
+						
 					foreach($totalfields as $data){
 						$type_id=$this->Lab_model->get_labtest_type_id(trim($data[0]));
-
-						$data=array(
+                       //echo'<pre>';print_r($type_id);exit;
+						$save_data=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 						'test_type'=>isset($type_id['id'])?$type_id['id']:'',
 						't_name'=>$data[2],
@@ -1161,18 +1164,17 @@ class Lab extends In_frontend {
 						'create_by'=>$admindetails['a_id'],
 						'out_source'=>isset($admindetails['out_source'])?$admindetails['out_source']:''	
 						);
-						$save=$this->Lab_model->insert_data_lab_detail_value($data);
+					
+						$save=$this->Lab_model->insert_data_lab_detail_value($save_data);
+						//echo'<pre>';print_r($save);exit;
 						
+					  }
 					}
 					
 					
 					
-					}
 					
-					
-					
-					}
-					
+					//exit;
 					
 					/* end*/
 					 
