@@ -30,7 +30,7 @@
 			<label>Upload excel file</label>
 			<input type="file" name="uploadfile" id="uploadfile">
 			<br />
-			<input type="submit" name="upload" value="upload" >
+			<input type="submit" name="upload" value="Upload" >
 		</form>
 		<a href="<?php echo base_url('assets/med.xlsx'); ?>">Download  sample  File</a>
 	
@@ -272,22 +272,22 @@ $(document).ready(function() {
              'addmedicn[0][hsn]': {
                  validators: {
 					notEmpty: {
-						message: 'Hsn is required'
+						message: 'HSN is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Hsn can only consist of alphanumeric, space and dot'
+					message: 'HSN can only consist of alphanumeric, space and dot'
 					}
 				}
             },
 			'addmedicn[0][othercode]': {
                  validators: {
 					notEmpty: {
-						message: 'Othercode is required'
+						message: 'MFR is required'
 					},
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Othercode can only consist of alphanumeric, space and dot'
+					message: 'MFR can only consist of alphanumeric, space and dot'
 					}
 				}
             },
@@ -335,24 +335,24 @@ $(document).ready(function() {
 			'addmedicn[0][sgst]': {
                  validators: {
 					notEmpty: {
-						message: 'sgst is required'
+						message: 'SGST is required'
 					},
 					  between: {
                             min: 0,
                             max: 100,
-                            message: 'The percentage of sgst must be between 0 and 100'
+                            message: 'The percentage of SGST must be between 0 and 100'
                         }
 				}
             },
 			'addmedicn[0][cgst]': {
                  validators: {
 					notEmpty: {
-						message: 'cgst is required'
+						message: 'CGST is required'
 					},
 					 between: {
                             min: 0,
                             max: 100,
-                            message: 'The percentage of cst must be between 0 and 100'
+                            message: 'The percentage of CGST must be between 0 and 100'
                         }
 				}
             },

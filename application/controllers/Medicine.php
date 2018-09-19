@@ -109,7 +109,7 @@ class Medicine extends In_frontend {
 									}else{
 										$this->medicine_model->save_medicine_name($medicines);
 									}
-									$this->session->set_flashdata('success',"Medicine details successfully Added.");
+									$this->session->set_flashdata('success',"Medicine details successfully added.");
 									redirect('medicine');
 								}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -133,7 +133,7 @@ class Medicine extends In_frontend {
 						
 					}
 					if(isset($save_medicine) && count($save_medicine)>0){
-						$this->session->set_flashdata('success',"Medicine details successfully Added.");
+						$this->session->set_flashdata('success',"Medicine details successfully added.");
 						redirect('medicine');
 					}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -272,7 +272,7 @@ class Medicine extends In_frontend {
 					if($m_id!=''){
 						$Delete=$this->medicine_model->delete_medicine($m_id);
 						if(count($Delete)>0){
-								$this->session->set_flashdata('success',"Medicine  successfully Deleted.");
+								$this->session->set_flashdata('success',"Medicine successfully deleted.");
 								redirect('medicine/lists');
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -341,7 +341,7 @@ class Medicine extends In_frontend {
 														}
 														//echo'<pre>';print_r($data);exit;
 														 if(count($save)>0){
-														$this->session->set_flashdata('success',"Medicine  successfully inserted.");
+														$this->session->set_flashdata('success',"Medicine successfully added.");
 														redirect('medicine');
 													}else{
 														$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");

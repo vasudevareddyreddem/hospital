@@ -320,7 +320,7 @@
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('users/addprescription');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
-	                                <span class="title">Add prescription</span>
+	                                <span class="title">Add Prescription</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>

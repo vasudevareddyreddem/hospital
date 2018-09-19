@@ -93,7 +93,7 @@
 								$('#sucessmsg').show();
 								$('#total_amt'+id).val(data.t_amt);
 								if(data.msg==1){
-									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Details Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Details successfully updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(data.msg==2){
 									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(data.msg==3){
