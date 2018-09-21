@@ -474,6 +474,7 @@ class Lab extends In_frontend {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo'<pre>';print_r($userdetails);exit;
 					$data['patient_id']=base64_decode($this->uri->segment(3));
 					$data['billing_id']=base64_decode($this->uri->segment(4));
 					$data['patient_details']=$this->Lab_model->get_billing_details($data['patient_id'],$data['billing_id']);
@@ -937,7 +938,7 @@ class Lab extends In_frontend {
 							}
 					}
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Procurement successfully sent.");
+							$this->session->set_flashdata('success',"Bid successfully sent.");
 							redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']).'/'.base64_encode(3));
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -993,7 +994,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($post['bid_id'],$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Procurement successfully updated.");
+							$this->session->set_flashdata('success',"Bid successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1026,7 +1027,7 @@ class Lab extends In_frontend {
 								);
 								$bidding=$this->Lab_model->update_bidding_details($b_id,$details);
 					if(count($bidding)>0){
-							$this->session->set_flashdata('success',"Procurement successfully updated.");
+							$this->session->set_flashdata('success',"Bid successfully updated.");
 							redirect('lab/bidding_list');
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1081,7 +1082,7 @@ class Lab extends In_frontend {
 							$out_source_list = $this->Lab_model->save_lab_tests($details);
 							}
 						
-							$this->session->set_flashdata('success',"Procurement successfully approved.");
+							$this->session->set_flashdata('success',"Bid successfully approved.");
 							redirect('lab/outsource/'.$p_id.'/'.$billing_id.'/'.base64_encode(3));
 					}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -1170,9 +1171,6 @@ class Lab extends In_frontend {
 						
 					  }
 					}
-					
-					
-					
 					
 					//exit;
 					
