@@ -36,7 +36,7 @@
                                                         <th>Usage </th>
                                                         <th>Amount</th>
                                                         <th>Total Amount</th>
-                                                        <th>Modify medicine Reason:</th>
+                                                        <th>Modify Medicine Reason:</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

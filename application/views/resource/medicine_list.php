@@ -56,7 +56,9 @@
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','sgst');" value="<?php echo htmlentities($list['sgst']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','cgst');" value="<?php echo htmlentities($list['cgst']); ?>"></td>
                                                 <td><input readonly="true" type="text" id="total_amt<?php echo $list['id']; ?>" value="<?php echo htmlentities($list['total_amount']); ?>"></td>
-                                                <td><a href="<?php echo base_url('medicine/delete/'.base64_encode($list['id'])); ?>">Delete</a></td>
+                                                <td>
+												  <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Delete</a>
+												</td>
                                                 
                                             </tr>
 										<?php } ?>
@@ -67,7 +69,34 @@
 								<?php } ?>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
-							
+							 <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
                             </div>
                         </div>
                     </div>
@@ -78,6 +107,27 @@
 			<div id="sucessmsg" style="display:none;"></div>
 
 			<script>
+			
+			
+			
+			
+			
+			
+			
+			
+	function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('medicine/delete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}		
+			
+			
+			
+			
+			
 			function autosavefields(val,id,name){
 				if(val!='' && id!='' && name!=''){
 					jQuery.ajax({
@@ -93,7 +143,7 @@
 								$('#sucessmsg').show();
 								$('#total_amt'+id).val(data.t_amt);
 								if(data.msg==1){
-									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Details Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Details successfully updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(data.msg==2){
 									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(data.msg==3){

@@ -121,7 +121,7 @@ function savepaymentmode(payment,id){
    					success: function (data) {
 						$('#sucessmsg').show();
 							if(data.msg==1){
-								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Payment Mode Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Payment Mode successfully updated <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								
 							}else{
 								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
@@ -146,9 +146,9 @@ function changeqty(qty,id,reason){
 						$('#sucessmsg').show();
 							if(data.msg==1){
 								if(qty!=''){
-								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Quantity Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Quantity successfully updated <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}else if(reason!=''){
-									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Reason Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+									$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Reason successfully updated <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								}
 							}else{
 								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
@@ -169,7 +169,7 @@ function changeamount(amount,id){
    					success: function (data) {
 						$('#sucessmsg').show();
 							if(data.msg==1){
-								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Amount Successfully Updated<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Amount successfully updated <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 								
 							}else{
 								$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  

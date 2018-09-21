@@ -26,6 +26,11 @@
 	                            </a>
 	                        </li>
                             <li class="nav-item  ">
+	                            <a href="final-app-list.php" class="nav-link "> <i class="material-icons">person</i>
+	                                <span class="title">Finalized Appointment List</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+                            <li class="nav-item  ">
 	                            <a href="patient-history.php" class="nav-link "> <i class="material-icons">person</i>
 	                                <span class="title">Patient History</span> <span class="arrow"></span>
 	                            </a>
