@@ -95,6 +95,7 @@ class Ward_model extends CI_Model
 		$this->db->where('wid',$wid);
 		$this->db->where('ward_type',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -136,6 +137,7 @@ class Ward_model extends CI_Model
 		$this->db->where('w_r_type_id',$w_r_type_id);
 		$this->db->where('ward_floor',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_floors.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -177,6 +179,7 @@ class Ward_model extends CI_Model
 		$this->db->where('w_type_id',$w_type_id);
 		$this->db->where('room_type',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_room_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -217,6 +220,7 @@ class Ward_model extends CI_Model
 		$this->db->where('room_num',$name);
 		$this->db->where('f_id',$f_id);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_room_number.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	public function get_roomnumber_list($a_id,$hos_id){

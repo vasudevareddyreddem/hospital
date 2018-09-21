@@ -93,8 +93,8 @@
 															
 															<li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['ward_id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></a></li>
                                                             <li>
-                                                                <a href="<?php echo base_url('ward_management/wardtypedelete/'.base64_encode($list['ward_id'])); ?>">
-                                                                    <i class="fa fa-trash-o"></i>Delete</a>
+												                <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['ward_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                               <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             
                                                             
@@ -210,6 +210,14 @@ function adminstatus(id){
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
 	}
+}
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('ward_management/wardtypedelete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
 }
 $(document).ready(function() {
     $('#ward_type').bootstrapValidator({

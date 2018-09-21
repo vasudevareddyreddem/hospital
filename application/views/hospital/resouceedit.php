@@ -90,7 +90,19 @@
 									</div>
 									<div class="col-md-6">
 										<label> State</label>
-										<input class="form-control" id="resource_state" name="resource_state" value="<?php echo isset($resouse_detail['resource_state'])?$resouse_detail['resource_state']:''; ?>" type="text" placeholder="State">
+										<?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
+								  <select class="form-control" required="required" name="resource_state" id="resource_state">
+								  <option value = "">Select State</option>
+									<?php foreach($states as $key=>$state):
+											if($resouse_detail['resource_state'] == $state):
+											$selected ='selected=selected';
+											else : 
+											$selected = '';
+											endif;
+									 ?>
+										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
+									<?php endforeach; ?>
+								  </select>
 									</div>
 									<div class="col-md-6">
 										<label> Zipcode</label>

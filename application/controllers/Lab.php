@@ -642,9 +642,10 @@ class Lab extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$data['out_sourcelab_list']=$this->Lab_model->out_sourcelab_list($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/oursource',$data);
 					$this->load->view('html/footer');
-					//echo '<pre>';print_r($data);exit;
+					
 					}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

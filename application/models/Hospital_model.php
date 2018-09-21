@@ -132,6 +132,7 @@ class Hospital_model extends CI_Model
 		$this->db->select('*')->from('treament');		
 		$this->db->where('t_name',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('treament.t_status !=',2);
 		return $this->db->get()->row_array();
 	}
 	public function get_saved_specialist_name($d_id,$name,$hos_id){
@@ -139,6 +140,7 @@ class Hospital_model extends CI_Model
 		$this->db->where('specialist_name',$name);
 		$this->db->where('d_id',$d_id);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('specialist.t_status !=',2);
 		return $this->db->get()->row_array();
 	}
 	public function get_treatment_details($t_id){
@@ -234,6 +236,7 @@ class Hospital_model extends CI_Model
 		$this->db->where('t_d_doc_id',$t_id);
 		$this->db->where('t_d_name',$d_id);
 		$this->db->where('s_id',$s_id);
+		$this->db->where('treatmentwise_doctors.t_d_status !=',2);
 		return $this->db->get()->row_array();
 	}
 	

@@ -118,14 +118,12 @@
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td>
 													<a class="fa fa-pencil btn btn-success" href="<?php echo base_url('admin/cards_distributor_edit/'.base64_encode($list['s_id'])); ?>" ></a>  
-													<a class="fa fa-info-circle btn btn-warning" href="<?php echo base_url('admin/distributor_status/'.base64_encode ($list['s_id']).'/'.base64_encode($list['status']));?>" ></a> 
-													<a class="fa fa-trash btn btn-danger" href="<?php echo base_url('admin/cards_distributor_delete/'.base64_encode($list['s_id']));?>" ></a> 
+													<a class="fa fa-info-circle btn btn-warning" href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['s_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal"></a>
+													<a class="fa fa-trash btn btn-danger" href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['s_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal"></a>
 												</td>
 												</tr>
 											
-										<?php } ?>
-											
-                                            
+										<?php } ?>	  
                                         </tbody>
                                     </table>
 								<?php }else{ ?>
@@ -133,7 +131,38 @@
 								<?php } ?>
 								
                                 </div>
-                        </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+			
+			<div style="padding:10px">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 style="pull-left" class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+			<div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
+			  <div class="row">
+				<div id="content1" class="col-xs-12 col-xl-12 form-group">
+				Are you sure ? 
+				</div>
+				<div class="col-xs-6 col-md-6">
+				  <button type="button" aria-label="Close" data-dismiss="modal" class="btn  blueBtn">Cancel</button>
+				</div>
+				<div class="col-xs-6 col-md-6">
+                <a href="?id=value" class="btn  blueBtn popid" style="text-decoration:none;float:right;"> <span aria-hidden="true">Ok</span></a>
+				</div>
+			 </div>
+		  </div>
+      </div>
+      
+    </div>
+  </div>
+						
+						
+						
+						</div>
                        
                      </div>
                   </div>
@@ -239,6 +268,34 @@
    </div>
 </div>
 <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 1, "desc" ]]
+    } );
+} );
+function admindeactive(id){
+	$(".popid").attr("href","<?php echo base_url('admin/distributor_status'); ?>"+"/"+id);
+}
+function adminstatus(id){
+	if(id==1){
+			$('#content1').html('Are you sure you want to deactivate?');
+		
+	}if(id==0){
+			$('#content1').html('Are you sure you want to activate?');
+	}
+}
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('admin/cards_distributor_delete'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
+}
+
+
+
+
 $(document).ready(function() {
     $('#assign_seller').bootstrapValidator({
         

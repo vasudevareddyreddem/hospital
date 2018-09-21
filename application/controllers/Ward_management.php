@@ -384,12 +384,6 @@ public function index()
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
 	public function bed_chart()
 	{			
 		if($this->session->userdata('userdetails'))
