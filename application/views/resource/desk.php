@@ -1383,61 +1383,6 @@ function apply_couponcode1(){
    	})
         
    }); 
-   $(document).ready(function() {
-    
-       $('#vitals').bootstrapValidator({
-   		fields: {
-   			bp: {
-                    validators: {
-   					notEmpty: {
-   						message: 'BP required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9_\/\. ]+$/,
-					message: 'BP can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },pulse: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Pulse is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Pulse can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },fbs_rbs: {
-                    validators: {
-   					notEmpty: {
-   						message: 'FBS/RBS is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'FBS/RBS can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },temp: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Temperature  is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Temperature can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },weight: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Weight is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Weight can only consist of alphanumeric, space and dot'
-					}
-   				}
-               }
-   			}
-   		
-   	})
-        
-   });
    	$(document).ready(function() {
     
        $('#bills').bootstrapValidator({
@@ -2375,17 +2320,7 @@ function apply_couponcode1(){
    					}
    				}
                },
-               email: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Email is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-   					message: 'Please enter a valid email address. For example johndoe@domain.com.'
-   					}
-   				}
-               },
+               
                mobile: {
                     validators: {
    					notEmpty: {
@@ -2550,52 +2485,7 @@ function apply_couponcode1(){
            })
         
    });
-    $(document).ready(function() {
     
-       $('#vitals_1').bootstrapValidator({
-   		fields: {
-   			bp: {
-                    validators: {
-   					notEmpty: {
-   						message: 'BP required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9_\/\. ]+$/,
-					message: 'BP can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },pulse: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Pulse is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Pulse can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },temp: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Temperature  is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Temperature can only consist of alphanumeric, space and dot'
-					}
-   				}
-               },weight: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Weight is required'
-   					},regexp: {
-					regexp: /^[a-zA-Z0-9. ]+$/,
-					message: 'Weight can only consist of alphanumeric, space and dot'
-					}
-   				}
-               }
-   			}
-   		
-   	})
-        
-   });
    $(document).ready(function() {
     
        $('#assign').bootstrapValidator({

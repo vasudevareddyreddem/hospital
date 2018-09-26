@@ -29,6 +29,7 @@
 												<th style="display:none"></th>
 												<th>HSN</th>
 												<th>MFR</th>
+												<th>Batch No</th>
 												<th>Medicine Name</th>
 												<th>Medicine Type</th>
 												<th>Expiry Date</th>
@@ -47,7 +48,8 @@
                                                 <td style="display:none"><input type="text" value="<?php echo htmlentities($list['id']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','hsn');" value="<?php echo htmlentities($list['hsn']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','othercode');" value="<?php echo htmlentities($list['othercode']); ?>"></td>
-                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_name');" value="<?php echo htmlentities($list['medicine_name']); ?>"></td>
+                                                <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','batchno');" value="<?php echo htmlentities($list['batchno']); ?>"></td>
+												<td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_name');" value="<?php echo htmlentities($list['medicine_name']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','medicine_type');" value="<?php echo htmlentities($list['medicine_type']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','expiry_date');" value="<?php echo htmlentities($list['expiry_date']); ?>"></td>
                                                 <td><input type="text" onkeyup="autosavefields(this.value,'<?php echo $list['id']; ?>','dosage');" value="<?php echo htmlentities($list['dosage']); ?>"></td>

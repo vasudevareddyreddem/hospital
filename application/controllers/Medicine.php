@@ -78,6 +78,7 @@ class Medicine extends In_frontend {
 						'hos_id'=>$userdetails['hos_id'],
 						'hsn'=>$list['hsn'],
 						'othercode'=>$list['othercode'],
+						'batchno'=>$list['batchno'],
 						'medicine_name'=>$list['medicine'],
 						'medicine_type'=>$list['medicine_type'],
 						'expiry_date'=>$list['expiry_date'],
@@ -87,7 +88,7 @@ class Medicine extends In_frontend {
 						'total_amount'=>$total_amount,
 						'sgst'=>$list['sgst'],
 						'cgst'=>$list['cgst'],
-						'other'=>$list['other'],
+						'other'=>isset($list['other'])?$list['other']:'',
 						'create_at'=>date('Y-m-d H:i:s'),
 						'status'=>1,
 						'added_by'=>$userdetails['a_id']
@@ -163,6 +164,12 @@ class Medicine extends In_frontend {
 					}if($post['field_name']=='othercode'){
 						$update=array(
 						'othercode'=>$post['med_name'],
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					}
+					if($post['field_name']=='batchno'){
+						$update=array(
+						'batchno'=>$post['med_name'],
 						'updated_at'=>date('Y-m-d H:i:s')
 						);
 					}if($post['field_name']=='medicine_name'){

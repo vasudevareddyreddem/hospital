@@ -41,13 +41,14 @@ public function index()
 				$post=$this->input->post();
 				//echo '<pre>';print_r($post);exit;
 				$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);					
-				//echo '<pre>';print_r($post);				
+				//echo '<pre>';print_r($post);exit;				
 				//echo $this->db->last_query();exit;
 				//echo '<pre>';print_r($data);exit;
 				$admitted_patients_details=array(
 					'hos_id'=>$hos_ids['hos_id'],
 					'pt_id'=>$post['p_id'],
 					'bill_id'=>$post['b_id'],
+					'd_id'=>$post['d_id'],
 					'w_name'=>$post['ward_name'],
 					'w_type'=>$post['ward_type'],
 					'room_type'=>$post['room_type'],
@@ -92,12 +93,13 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$data['p_id']=base64_decode($this->uri->segment(4));
 					$data['b_id']=base64_decode($this->uri->segment(5));
+					$data['d_id']=base64_decode($this->uri->segment(6));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>';print_r($hos_ids);exit;
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
 					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
 					//echo $this->db->last_query();exit;
-					//echo '<pre>';print_r($data);exit;
+				    //echo '<pre>';print_r($data);exit;
 					$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);					
 					$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
 					$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
@@ -270,10 +272,13 @@ public function index()
 	public function discharge()
 	{			
 		if($this->session->userdata('userdetails'))
-		{
+		{	$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']=1){
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/discharge');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['discharge_patient_list'] =$this->Ward_model->get_discharge_patient_list($hos_ids['hos_id']);
+					// echo '<pre>';print_r($data);exit;
+					$this->load->view('ward/discharge',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -439,15 +444,54 @@ public function index()
 			redirect('admin');
 		}
 	}
+	
+	public function patient_history_post()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=1){
+				$post=$this->input->post();
+				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+				$admitted_patientid=$this->uri->segment(3);
+					if($admitted_patientid!=''){
+						$updatedata=array(
+							'completed'=>1,
+					'discharge_date'=>date('Y-m-d H:i:s')	
+							);
+							$editdata= $this->Ward_model->update_discharge_patient_list(base64_decode($admitted_patientid),$updatedata);
+				if(count($editdata)>0){
+								$this->session->set_flashdata('success',"patient successfully dicharged.");
+								redirect('ward_management/patient_history/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('ward_management/patient_history/'.base64_encode(1));
+							}
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	}
+	
 	public function patient_history()
 	{	
 		
 		if($this->session->userdata('userdetails'))
 		{
+				$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']=1){
-			
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['patient_history'] =$this->Ward_model->get_discharge_patient_history($hos_ids['hos_id']);
+					
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/patient-history');
+					$this->load->view('ward/patient-history',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");

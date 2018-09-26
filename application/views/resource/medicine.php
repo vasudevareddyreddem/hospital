@@ -46,7 +46,12 @@
 					<label >MFR</label>
 			  </div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
+			  <div class="form-group">
+					<label >Batch No</label>
+			  </div>
+			</div>
+			<div class="col-md-1">
 			  <div class="form-group">
 					<label >Medicine Name</label>
 			  </div>
@@ -108,7 +113,12 @@
 				<input type="text" id="othercode" name="addmedicn[0][othercode]" class="form-control hero-demo"  placeholder="MFR">
 			  </div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
+			  <div class="form-group">
+				<input type="text" id="batchno" name="addmedicn[0][batchno]" class="form-control hero-demo"  placeholder="Batch No">
+			  </div>
+			</div>
+			<div class="col-md-1">
 			  <div class="form-group">
 				<input type="text" id="medicins" name="addmedicn[0][medicine]" class="form-control searchingmedicine"  placeholder="Medicine Name">
 			  </div>
@@ -151,7 +161,7 @@
 			
 			<div class="col-md-1">
 			  <div class="form-group">
-				<input type="text" id="total0" readonly="true" name="addmedicn[0][total]" class="form-control hero-demo"  placeholder="total">
+				<input type="text" id="total0" readonly="true" name="addmedicn[0][total]" class="form-control hero-demo"  placeholder="Total">
 			  </div>
 			</div>
 			
@@ -245,7 +255,7 @@ function  amount_count(id,val){
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='MFR'></div></div><div class='col-md-2'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine_type]' class='form-control searchng'  placeholder='Medicine Type'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][expiry_date]' class='form-control searchng'  placeholder='Expiry Date'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][dosage]' class='form-control searchng'  placeholder='Medicine dosage'></div></div><div class='col-md-1'><div class='form-group'><input type='text' pattern='[0-9]' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY' required></div></div>   <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='amount"+x+"' pattern='[0-9]' name='addmedicn["+x+"][amount]' class='form-control'  placeholder='Amount'></div></div>    <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='sgst"+x+"' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value); id='cgst"+x+"' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='total"+x+"' name='addmedicn["+x+"][total]' value='' class='form-control '  placeholder='total'></div></div></div>"); 
+		   $(wrapper).append("<div id='addr"+x+"' class='row'><div class='col-md-1'><div class='form-group'><input type='text' id='hsn[]' name='addmedicn["+x+"][hsn]' class='form-control'  placeholder='HSN'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='othercode' name='addmedicn["+x+"][othercode]' class='form-control'  placeholder='MFR'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='batchno[]' name='addmedicn["+x+"][batchno]' class='form-control'  placeholder='Batch No'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine]' class='form-control searchng'  placeholder='Medicine Name'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][medicine_type]' class='form-control searchng'  placeholder='Medicine Type'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][expiry_date]' class='form-control searchng'  placeholder='Expiry Date'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='autocomplete' name='addmedicn["+x+"][dosage]' class='form-control searchng'  placeholder='Medicine dosage'></div></div><div class='col-md-1'><div class='form-group'><input type='text' pattern='[0-9]' id='qty' name='addmedicn["+x+"][qty]' class='form-control'  placeholder='QTY' required></div></div>   <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='amount"+x+"' pattern='[0-9]' name='addmedicn["+x+"][amount]' class='form-control'  placeholder='Amount'></div></div>    <div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value);  id='sgst"+x+"' name='addmedicn["+x+"][sgst]' class='form-control hero-demo'  placeholder='SGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' onkeyup=amount_count("+x+",this.value); id='cgst"+x+"' name='addmedicn["+x+"][cgst]' class='form-control' placeholder='CGST'></div></div><div class='col-md-1'><div class='form-group'><input type='text' id='total"+x+"' name='addmedicn["+x+"][total]' value='' class='form-control '  placeholder='total'></div></div></div>"); 
             
             $(wrapper).find('.searchng').autocomplete({
                 source: availableAttributes
@@ -288,6 +298,17 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'MFR can only consist of alphanumeric, space and dot'
+					}
+				}
+            },
+			'addmedicn[0][batchno]': {
+                 validators: {
+					notEmpty: {
+						message: 'Batch No is required'
+					},
+					regexp: {
+					regexp: /^[a-zA-Z0-9. ]+$/,
+					message: 'Batch No can only consist of alphanumeric, space and dot'
 					}
 				}
             },

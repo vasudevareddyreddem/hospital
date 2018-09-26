@@ -268,7 +268,18 @@
                                             
                                           </div>
                                        </div>
-                                         
+									   
+                                          <div class="col-md-6">
+                                          <div class="row">
+                                              <label> Food </label>
+                                                <select class="form-control" name="food" id="food">
+                                                   <option value="" >Select</option>
+                                                   <option value="Before">Before</option>
+                                                   <option value="After">After</option>
+                                                </select>
+                                          </div>
+                                       </div> 
+										 
                                        <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
@@ -742,26 +753,25 @@
                            	<table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
 								<thead>
 									<tr>
-										<th> Type of Medicine? </th>
-										<th> Search for Medicine </th>
-										<th> Qty </th>
-										<th> Dosage  </th>
-										<th> Condition </th>
-										<th> Modified Prescription Reason</th>
-										<th> Date </th>
+										<th> Medicine Name </th>
+										<th> Batch No </th>
+										<th> Expiry Date </th>
+										<th> Qty  </th>
+										<th> Usage </th>
+										<th> Amount</th>
+										<th> Total Amount </th>
 									</tr>
 								</thead>
 								<tbody>
 								<?php foreach($patient_privious_medicine_list as $list){ ?>
 									<tr class="odd gradeX">
-										
-										<td> <?php echo $list['type_of_medicine']; ?> </td>
-										<td><?php echo $list['medicine_name']; ?></td>
+										<td><?php echo $list['medicine_name']; ?> </td>
+										<td><?php echo $list['batchno']; ?></td>
+										<td><?php echo date('M-j-Y',strtotime(htmlentities($list['expiry_date'])));?></td>
 										<td><?php echo $list['qty']; ?></td>
-										<td><?php echo $list['dosage']; ?></td>
-										<td><?php echo $list['condition']; ?> </td>
-										<td><?php echo $list['edit_reason']; ?></td>
-										<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+										<td><?php echo $list['frequency']; ?> </td>
+										<td><?php echo $list['amount']; ?></td>
+										<td><?php echo $list['org_amount']; ?></td>
 									</tr>
 									
 								<?php } ?>

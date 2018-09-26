@@ -43,11 +43,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Medicine Name</th>
-                                                        <th>QTY</th>
+														<th>Batch No</th>
+														<th>Expiry Date</th>
+														<th>QTY</th>
 														<th>Amount</th>
-                                                        <th>Dosage</th>
                                                         <th>Usage </th>
-                                                        <th>Modify Prescription Reason:</th>
                                                         <th>Total Amount</th>
                                                     </tr>
                                                 </thead>
@@ -55,7 +55,9 @@
 												<?php foreach($prescriptions['medicine'] as $list){ ?>
                                                     <tr>
                                                         <td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
-                                                        <td style="width:100px">
+                                                        <td><?php echo isset($list['batchno'])?$list['batchno']:''; ?></td>
+														 <td><?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?></td>
+														<td style="width:100px">
 															<div class="form-group">
 															<input autocomplete="off" onkeyup="changeqty(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>','');change_qtys('<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value);" name="qty" id="qty<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['qty'])?$list['qty']:''; ?>" placeholder="Enter Qty">
 															</div>
@@ -66,35 +68,20 @@
 															</div>
 														</td>
                                                         <td>
-															<?php echo isset($list['dosage'])?$list['dosage']:''; ?>
-														</td>
-                                                        <td>
 															<div class="form-group">
-																
 																<select class="form-control">
 																	<option value="<?php echo isset($list['frequency'])?$list['frequency']:''; ?>"><?php echo isset($list['frequency'])?$list['frequency']:''; ?></option>
 																</select>
 															</div>
 														</td>
-                                                      
-													   <td style="width:100px">
-															<div class="form-group">
-															<input name="reason" id="reason" onkeyup="changeqty('','<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value)" type="text" class="form-control" value="<?php echo isset($list['edit_reason'])?$list['edit_reason']:''; ?>" placeholder="Enter Reason">
-															</div>
-														</td>
+                                                     
 														<td>
 														<div class="form-group">
 															<input name="total_amt" id="total_amt<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['org_amount'])?$list['org_amount']:''; ?>" placeholder="Enter Total Amount">
 															</div>
-															
 														</td>
                                                     </tr>
-													
 													<?php } ?>
-													
-                                                    
-                                                   
-                                                    
                                                 </tbody>
                                             </table>
 											<div class="pull-right">
@@ -106,7 +93,7 @@
 											<option value="Other">Other</option>
 											</select>
 											</div> &nbsp;
-											<a target="_blank" href="<?php echo base_url('Users/viewprescription/'.base64_encode($prescriptions['information']['pid']).'/'.base64_encode($prescriptions['information']['b_id']));?>" class="btn btn-warning">View Prescription</a>
+											<a href="<?php echo base_url('Users/');?>" class="btn btn-warning">Submit</a>
 											<button type="submit"  class="btn btn-success">Print Prescription</button>
 											</div>
 
