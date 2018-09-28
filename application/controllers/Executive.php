@@ -280,38 +280,47 @@ class Executive extends In_frontend {
 		
 		
 	}
+	
+	
 	public function delete()
 	{	
-		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
-					//echo'<pre>';print_r($admindetails);exit;
-					$admindetails=$this->session->userdata('userdetails');
+		$login_details=$this->session->userdata('userdetails');
+
+			if($login_details['role_id']==1){
 					$e_id=base64_decode($this->uri->segment(3));
-						//echo'<pre>';print_r($e_id);exit;
-					$delete=$this->Admin_model->delete_details_data($e_id);
-						 //echo'<pre>';print_r($delete_details);exit;  	
-                    	//echo $this->db->last_query();exit;					 
-				if(count($delete)>0){
-		$this->session->set_flashdata('sucess',"executive details sucessfully deleted");
-	    redirect('executive/index/'.base64_encode(1));			
-		}else{
-			$this->session->set_flashdata('error',"problem is occurs");
-			redirect('executive/index/'.base64_encode($e_id));
-		}			
 					
-				}else{
-						$this->session->set_flashdata('error',"you don't have permission to access");
+					if($e_id!=''){
+						$stusdetails=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata=$this->Admin_model->update_executive_details($e_id,$stusdetails);
+							if(count($statusdata)>0){
+								$this->session->set_flashdata('success',"executive details successfully deleted.");
+								
+								 redirect('executive/index/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('executive/index/'.base64_encode($e_id));
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('dashboard');
-				}
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
 		}else{
-			$this->session->set_flashdata('error',"you don't have permission to access");
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('home');
 		}
-	}	
-	
-	
+		
+		
+	}
 	
 	
 	
