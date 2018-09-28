@@ -21,6 +21,8 @@
                   </li>
                   <li class="nav-item"><a href="#tab2" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
                   </li>
+                   <li class="nav-item"><a href="#tab3" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive Table</a>
+                  </li>
 				  
 				  
                </ul>
@@ -94,6 +96,7 @@
 					
                      </div>
                   </div>
+                   
                    <div class="tab-pane  <?php if(isset($tab) && $tab==1){  echo "active";} ?>" id="tab2">
                      <div class="container">
                         <div class="row">
@@ -188,6 +191,70 @@
                        
                      </div>
                   </div>
+                   
+                   <div class="tab-pane  <?php if(isset($tab) && $tab==1){  echo "active";} ?>" id="tab3">
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+								<div class="row">
+                                    <div class="col-md-6">
+                                         <div class="form-group">
+										<label class=" control-label">Agent Name</label>
+									<div class="">
+									<select id="name" name="name" class="form-control" >
+										<option value="">Select</option>
+										<option value="">xxxxx</option>
+										<option value="">xxxxx</option>
+										<option value="">xxxxx</option>
+										<option value="">xxxxx</option>
+									</select>
+									</div>
+								</div>
+                                        </div>
+                                </div>
+                            <div class="">
+                                
+                                <div class="card-body ">
+                                    <table id="saveStage" class="table table-bordered display" style="width:100%;">
+                                        <thead>
+                                            <tr>
+											    <th>S.no</th>
+                                                <th>Date</th>
+                                                <th>Total Patients</th>
+												<th>Received Patients</th>
+                                                <th>Not Received Patients</th>
+                                                <th>Login Time</th>
+                                                <th>Logout Time</th>
+												<th>Patient List</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td class="valigntop">
+                                                    <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal1">View</button>
+                                                </td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td class="valigntop">
+                                                    <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal2">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+										
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                       
+                     </div>
+                  </div>
+                   
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>
@@ -195,6 +262,104 @@
       </div>
    </div>
 </div>
+
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog" style="max-width:600px;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header" style="padding:10px">
+                <h4 style="pull-left" class="modal-title">Not Received Ptients Reason</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table id="saveStage" class="table table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>xxxxxxx</td>
+                                <td>xxxxxx</td>
+                                <td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                            </tr>
+                            <tr>
+                                <td>xxxxxxx</td>
+                                <td>xxxxxx</td>
+                                <td>xxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                    xxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog" style="max-width:700px;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header" style="padding:10px">
+                <h4 style="pull-left" class="modal-title">Patient List</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table id="saveStage" class="table table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Patient Name</th>
+                                <th>Mobile No </th>
+                                <th>Hospital Name</th>
+                                <th>Coupon Code</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>xxxxx</td>
+                                <td>xxxxxx</td>
+                                <td>xxxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>Received</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>xxxxx</td>
+                                <td>xxxxxx</td>
+                                <td>xxxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>xxxx</td>
+                                <td>Received</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
  <script>
