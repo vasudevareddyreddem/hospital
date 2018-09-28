@@ -179,12 +179,7 @@
                                     </table>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
-                                <div class="text-center">
-                                    <div class="col-md-12">
-                                        <a href="financial.php" class="btn btn-info">Save</a>
-                                        <a href="#"type="button" class="btn btn-default">Cancel</a>
-                                    </div>
-                                </div>
+                               
                             </div>
                             </div>
                         </div>
