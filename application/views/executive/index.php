@@ -168,8 +168,7 @@
                                                 <td><?php echo $list['location']; ?></td>
 												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												
-												
-                                             <td>
+                                                  <td>
 													<a class="fa fa-pencil btn btn-success" href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>" ></a>  
 													<a class="fa fa-info-circle btn btn-warning" href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['e_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal"></a>
 													<a class="fa fa-trash btn btn-danger" href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['e_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal"></a>
