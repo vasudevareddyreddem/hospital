@@ -75,7 +75,10 @@
 									<label>Location</label>
 									<input class="form-control" id="location" name="location" type="text" placeholder="Enter Location" value="<?php echo isset($edit_executive_list['location'])?$edit_executive_list['location']:''; ?>">
 								</div>
-								
+									<div class="form-group">
+                            <label class=" control-label">Profile Image</label>
+							<input type="file" id="profile_pic" name="profile_pic" class="form-control">
+                        </div> 
 								</div><br>
 								<div class="">
 								<label>&nbsp;</label>
@@ -252,6 +255,14 @@ $(document).ready(function() {
 			validators: {
 					notEmpty: {
 						message: 'location is required'
+					}
+				}
+            },
+			profile_pic: {
+                validators: {
+					regexp: {
+					regexp: "(.*?)\.(png|jpeg|jpg|gif)$",
+					message: 'Uploaded file is not a valid. Only png,jpg,jpeg,gif files are allowed'
 					}
 				}
             }
