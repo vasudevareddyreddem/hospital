@@ -56,7 +56,7 @@
                                                                     <i class="fa fa-edit"></i>Edit </a>
                                                             </li>
                                                             <li>
-                                                                <a href="<?php echo base_url('hospital/deletes/'.base64_encode($list['hos_id'])); ?>">
+															    <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['hos_id'])).'/'.base64_encode(htmlentities($list['hos_status']));?>');adminstatus2('<?php echo $list['hos_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
                                                             </li>
                                                             <li>
@@ -136,5 +136,13 @@ function adminstatus(id){
 	}if(id==0){
 			$('#content1').html('Are you sure you want to activate?');
 	}
+}
+function admindelete(id){
+	$(".popid").attr("href","<?php echo base_url('hospital/deletes'); ?>"+"/"+id);
+}
+function adminstatus2(id){
+	
+			$('#content1').html('Are you sure you want to delete?');
+
 }
   </script>

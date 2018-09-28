@@ -293,7 +293,7 @@ class Resources_model extends CI_Model
     	return $this->db->update("patient_billing",$data);
 	}
 	public function get_patient_previous_medicine_details_list($pid){
-		$this->db->select('patient_medicine_list.type_of_medicine,patient_medicine_list.medicine_name,patient_medicine_list.substitute_name,patient_medicine_list.dosage,patient_medicine_list.frequency,patient_medicine_list.directions,patient_medicine_list.comments,patient_medicine_list.create_at,patient_medicine_list.condition,patient_medicine_list.edit_reason')->from('patient_medicine_list');
+		$this->db->select('patient_medicine_list.type_of_medicine,patient_medicine_list.medicine_name,patient_medicine_list.batchno,patient_medicine_list.expiry_date,patient_medicine_list.amount,patient_medicine_list.org_amount,patient_medicine_list.qty,patient_medicine_list.substitute_name,patient_medicine_list.dosage,patient_medicine_list.frequency,patient_medicine_list.directions,patient_medicine_list.comments,patient_medicine_list.create_at,patient_medicine_list.condition,patient_medicine_list.edit_reason')->from('patient_medicine_list');
 		$this->db->where('patient_medicine_list.p_id',$pid);
         return $this->db->get()->result_array();
 	}
@@ -326,7 +326,7 @@ class Resources_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	public function get_medicine_list_details($name){
-		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.qty,medicine_list.cgst,medicine_list.amount,medicine_list.dosage')->from('medicine_list');		
+		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.batchno,medicine_list.expiry_date,medicine_list.qty,medicine_list.medicine_type,medicine_list.cgst,medicine_list.amount,medicine_list.dosage')->from('medicine_list');		
 		$this->db->where('medicine_list.medicine_name',$name);
         return $this->db->get()->row_array();	
 	}

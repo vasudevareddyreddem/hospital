@@ -163,41 +163,7 @@ table, th, td {
 	
 		
 	</table>
-	<table style="width:100%">
-	  <tr style="background:#ddd;line-height:40px">
-		<th colspan="6">Vitals</th>
-		</tr>
-<tr>
-							<th class="text-center">Vitals</th>
-							<th class="text-center">Actuals</th>
-							<th class="text-center">Range</th>
-						</tr>
-						<tr>
-							<th class="text-center">BP</th>
-							<th class="text-center"><?php echo isset($vital_details['bp'])?$vital_details['bp']:''; ?></th>
-							<th class="text-center">120/80</th>
-						</tr>
-						<tr>
-							<th class="text-center">Pulse</th>
-							<th class="text-center"><?php echo isset($vital_details['pulse'])?$vital_details['pulse']:''; ?></th>
-							<th class="text-center">70-80</th>
-						</tr>
-						<tr>
-							<th class="text-center">FBS/RBS</th>
-							<th class="text-center"><?php echo isset($vital_details['fbs_rbs'])?$vital_details['fbs_rbs']:''; ?></th>
-							<th class="text-center">70-110	</th>
-						</tr>
-						<tr>
-							<th class="text-center">Temp</th>
-							<th class="text-center"><?php echo isset($vital_details['temp'])?$vital_details['temp']:''; ?></th>
-							<th class="text-center">98.6 F</th>
-						</tr>
-						<tr>
-							<th class="text-center">Weight</th>
-							<th class="text-center"><?php echo isset($vital_details['weight'])?$vital_details['weight']:''; ?></th>
-							<th class="text-center"></th>
-						</tr>
-	 </table>
+	
 	 <table style="width:100%">
 	 <tr style="background:#ddd;line-height:40px">
 		<th colspan="4">Doctor Name and Department</th>

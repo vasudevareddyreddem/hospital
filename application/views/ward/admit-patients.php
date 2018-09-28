@@ -101,7 +101,7 @@
 															</button>
 															<ul class="dropdown-menu" role="menu">
 																<li>
-																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">
+																	<a href="<?php echo base_url('ward_management/admit/'.base64_encode(2).'/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id']).'/'.base64_encode($list['a_id'])); ?>">
 																		<i class="fa fa-edit"></i>Room/Bed </a>
 																</li>
 															   												
@@ -129,6 +129,9 @@
                                         
 										<input type="hidden" name="p_id" id="p_id" value="<?php echo isset($p_id)?$p_id:''; ?>">
 										<input type="hidden" name="b_id" id="b_id" value="<?php echo isset($b_id)?$b_id:''; ?>">
+										<input type="hidden" name="d_id" id="d_id" value="<?php echo isset($d_id)?$d_id:''; ?>">
+
+										
 										<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>

@@ -9,7 +9,7 @@ class Ward_model extends CI_Model
 		$this->load->database("default");
 	}
 	public  function get_ip_patient_list($hos_id){
-		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name')->from('patient_billing');
+		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
@@ -72,6 +72,7 @@ class Ward_model extends CI_Model
 		$this->db->where('hos_email_id',$email);
         return $this->db->get()->row_array();
 	}
+	
 	public function get_resources_hospital_id($a_id,$email){
 		$this->db->select('resource_list.a_id,resource_list.hos_id')->from('resource_list');		
 		$this->db->where('a_id',$a_id);
@@ -86,8 +87,8 @@ class Ward_model extends CI_Model
 	}
 	 
 	public function save_wardtype($data){
-	$this->db->insert('ward_type',$data);
-	return $insert_id = $this->db->insert_id();
+		$this->db->insert('ward_type',$data);
+		return $insert_id = $this->db->insert_id();
 	}
 	
 	public function get_saved_wardtype($wid,$name,$hos_id){
@@ -95,6 +96,7 @@ class Ward_model extends CI_Model
 		$this->db->where('wid',$wid);
 		$this->db->where('ward_type',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -114,7 +116,6 @@ class Ward_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	
-	
 	public function get_wardtype_details($ward_id){
 		$this->db->select('*')->from('ward_type');		
 		$this->db->where('ward_id',$ward_id);
@@ -127,8 +128,8 @@ class Ward_model extends CI_Model
 	}
 	
 	public function floornumber($data){
-	$this->db->insert('ward_floors',$data);
-	return $insert_id = $this->db->insert_id();
+		$this->db->insert('ward_floors',$data);
+		return $insert_id = $this->db->insert_id();
 	}
 	
 	public function get_saved_floor($w_r_type_id,$name,$hos_id){
@@ -136,6 +137,7 @@ class Ward_model extends CI_Model
 		$this->db->where('w_r_type_id',$w_r_type_id);
 		$this->db->where('ward_floor',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_floors.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -147,7 +149,6 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_floors.status !=',2);
 		return $this->db->get()->result_array();
 	}
-	
 	
 	public function get_floor_list_details($hos_id){
 		$this->db->select('ward_floors.w_f_id,ward_floors.ward_floor,ward_floors.status,ward_floors.create_at')->from('ward_floors');			
@@ -168,8 +169,8 @@ class Ward_model extends CI_Model
 	}
 	
 	public function roomtype($data){
-	$this->db->insert('ward_room_type',$data);
-	return $insert_id = $this->db->insert_id();
+		$this->db->insert('ward_room_type',$data);
+		return $insert_id = $this->db->insert_id();
 	}
 	
 	public function get_saved_roomtype($w_type_id,$name,$hos_id){
@@ -177,6 +178,7 @@ class Ward_model extends CI_Model
 		$this->db->where('w_type_id',$w_type_id);
 		$this->db->where('room_type',$name);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_room_type.status !=',2);
 		return $this->db->get()->row_array();
 	}
 	
@@ -208,8 +210,8 @@ class Ward_model extends CI_Model
 	}
 	
 	public function roomnumber($data){
-	$this->db->insert('ward_room_number',$data);
-	return $this->db->insert_id();
+		$this->db->insert('ward_room_number',$data);
+		return $this->db->insert_id();
 	}
 	
 	public function get_saved_roomnumber($f_id,$name,$hos_id){
@@ -217,8 +219,10 @@ class Ward_model extends CI_Model
 		$this->db->where('room_num',$name);
 		$this->db->where('f_id',$f_id);
 		$this->db->where('hos_id',$hos_id);
+		$this->db->where('ward_room_number.status !=',2);
 		return $this->db->get()->row_array();
 	}
+	
 	public function get_roomnumber_list($a_id,$hos_id){
 		$this->db->select('ward_room_number.*,ward_floors.ward_floor')->from('ward_room_number');
 		$this->db->join('ward_floors','ward_floors.w_f_id=ward_room_number.f_id','left');
@@ -226,7 +230,7 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_room_number.hos_id',$hos_id);
 		$this->db->where('ward_room_number.status !=',2);
 		return $this->db->get()->result_array();
-		}
+	}
 		
 	public function get_roomnumber_list_details($hos_id){
 		$this->db->select('ward_room_number.*,ward_floors.ward_floor')->from('ward_room_number');
@@ -234,7 +238,7 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_room_number.hos_id',$hos_id);
 		$this->db->where('ward_room_number.status !=',2);
 		return $this->db->get()->result_array();
-		}	
+	}	
 		
 	public function get_roomnumber_list_detailss($f_id,$hos_id){
 		$this->db->select('ward_room_number.*,ward_floors.ward_floor')->from('ward_room_number');
@@ -243,7 +247,8 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_room_number.hos_id',$hos_id);
 		$this->db->where('ward_room_number.status !=',2);
 		return $this->db->get()->result_array();
-		}	
+	}
+	
 	public function get_roomnumber_details($w_r_n_id){
 		$this->db->select('*')->from('ward_room_number');		
 		$this->db->where('w_r_n_id',$w_r_n_id);
@@ -256,8 +261,8 @@ class Ward_model extends CI_Model
 	}
 
 	public function bednumber($data){
-	$this->db->insert('ward_room_beds',$data);
-	return $insert_id = $this->db->insert_id();
+		$this->db->insert('ward_room_beds',$data);
+		return $insert_id = $this->db->insert_id();
 	}
 	
 	public function get_saved_bednumber($name,$hos_id){
@@ -297,8 +302,6 @@ class Ward_model extends CI_Model
 		return $this->db->update("ward_room_beds",$data);
 	}
 	
-	
-	
 	public function get_f_id_wise_roomno_list($f_id){
 		$this->db->select('ward_room_number.w_r_n_id,ward_room_number.room_num')->from('ward_room_number');		
 		$this->db->where('f_id',$f_id);
@@ -313,18 +316,18 @@ class Ward_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	
-	
-	
 	public function admitted_patients($data){
-	$this->db->insert('admitted_patient_list',$data);
-	return $insert_id = $this->db->insert_id();
+		$this->db->insert('admitted_patient_list',$data);
+		return $insert_id = $this->db->insert_id();
 	}
+	
 	public function get_saved_admitted_patients($name,$hos_id){
 		$this->db->select('*')->from('admitted_patient_list');		
 		$this->db->where('p_name',$name);
 		$this->db->where('hos_id',$hos_id);
 		return $this->db->get()->row_array();
 	}
+	
 	public function get_admitted_patients_details($a_p_id){
 		$this->db->select('*')->from('admitted_patient_list');		
 		$this->db->where('a_p_id',$a_p_id);
@@ -344,13 +347,38 @@ class Ward_model extends CI_Model
 		$this->db->where('admitted_patient_list.status !=',2);
 		return $this->db->get()->result_array();
 	}
+	
+	public function get_discharge_patient_list($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,patients_list_1.name,patients_list_1.mobile,resource_list.resource_name,patient_billing.create_at,admitted_patient_list.status')->from('admitted_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admitted_patient_list.d_id', 'left');
+		$this->db->join('patient_billing', 'patient_billing.p_id = admitted_patient_list.pt_id', 'left');
+		$this->db->where('admitted_patient_list.hos_id',$hos_id);
+		$this->db->where('admitted_patient_list.status !=',2);
+		$this->db->where('admitted_patient_list.completed',0);
+		return $this->db->get()->result_array();
+	}
 
+	public function get_discharge_patient_history($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,patients_list_1.name,patients_list_1.mobile,resource_list.resource_name,patient_billing.create_at,admitted_patient_list.status,admitted_patient_list.discharge_date')->from('admitted_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admitted_patient_list.d_id', 'left');
+		$this->db->join('patient_billing', 'patient_billing.p_id = admitted_patient_list.pt_id', 'left');
+		$this->db->where('admitted_patient_list.hos_id',$hos_id);
+		$this->db->where('admitted_patient_list.status !=',2);
+		$this->db->where('admitted_patient_list.completed!=',0);
+		return $this->db->get()->result_array();
+	}
+	
+	public function update_discharge_patient_list($a_p_id,$data){
+		$this->db->where('a_p_id',$a_p_id);
+		return $this->db->update("admitted_patient_list",$data);
+	}
+	
 	public function update_admitted_patient_details($a_p_id,$data){
 		$this->db->where('a_p_id',$a_p_id);
 		return $this->db->update("admitted_patient_list",$data);
 	}
 }
 
-
-
-
+	

@@ -822,7 +822,6 @@ class Resources extends In_frontend {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					
 					$data['worksheet']=$this->Resources_model->get_completed_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/completed_worksheet',$data);
@@ -879,6 +878,7 @@ class Resources extends In_frontend {
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
 					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,$data['billing_id']);
 					$data['patient_privious_medicine_list']=$this->Resources_model->get_patient_previous_medicine_details_list($patient_id);
+					//echo '<pre>';print_r($data);exit;
 					$data['patient_privious_alternate_medicine_list']=$this->Resources_model->get_patient_previous_alternate_medicine_details_list($patient_id);
 					$data['patient_investigation_list']=$this->Resources_model->get_patient_investigation_details_list($patient_id,$data['billing_id']);
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
@@ -990,11 +990,15 @@ class Resources extends In_frontend {
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
 							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
 							'medicine_name'=>isset($post['medicine_name'])?$post['medicine_name']:'',
+							'medicine_type'=>isset($qtys['medicine_type'])?$qtys['medicine_type']:'',
+							'batchno'=>isset($qtys['batchno'])?$qtys['batchno']:'',
 							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
 							'condition'=>isset($post['condition'])?$post['condition']:'',
 							'dosage'=>isset($qtys['dosage'])?$qtys['dosage']:'',
+							'expiry_date'=>isset($qtys['expiry_date'])?$qtys['expiry_date']:'',
 							'route'=>isset($post['route'])?$post['route']:'',
 							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
+							'food'=>isset($post['food'])?$post['food']:'',
 							'directions'=>isset($post['directions'])?$post['directions']:'',
 							'formdate'=>isset($post['formdate'])?$post['formdate']:'',
 							'todate'=>isset($post['todate'])?$post['todate']:'',

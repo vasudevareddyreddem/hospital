@@ -484,7 +484,7 @@ class Admin extends CI_Controller {
 					if($admin_detail['a_email_id']!= $post['email_id']){
 						$emailcheck= $this->Admin_model->check_email_exits($post['email_id']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email id already exists.please use another Email Id');
 									redirect('admin/edit/'.base64_encode($admindetails['a_id']));
 								}else{
 										if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
@@ -831,7 +831,7 @@ class Admin extends CI_Controller {
 					if(md5($post['lab_password'])==md5($post['lab_cinformpaswword'])){
 								$emailcheck= $this->Admin_model->check_email_exits($post['lab_email']);
 								if(count($emailcheck)>0){
-									$this->session->set_flashdata('error','Email id already exists.please use another Email id');
+									$this->session->set_flashdata('error','Email id already exists.please use another Email Id');
 									redirect('lab/oursource');
 								}else{
 									if(isset($_FILES['lab_photo']['name']) && $_FILES['lab_photo']['name']!=''){

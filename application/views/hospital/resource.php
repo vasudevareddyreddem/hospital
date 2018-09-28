@@ -72,7 +72,7 @@
 														  <select class="form-control" required="required" name="resource_state" id="resource_state">
 														  <option value = "">Select State</option>
 															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['resource_state'] == $state):
+																	if($resource_list['resource_state'] == $state):
 																	$selected ='selected=selected';
 																	else : 
 																	$selected = '';

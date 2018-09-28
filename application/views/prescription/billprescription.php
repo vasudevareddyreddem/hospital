@@ -142,12 +142,12 @@ table, th, td {
 	  </tr>
 	   <tr>
 		<th>Medicine Name </th>
-		<th>Dosage </th>
+		<th>Batch No </th>
+		<th>Expiry Date </th>
 		<th>Usage </th>
 		<th>QTY</th>
 		<th>Amount</th>
 		<th>Total Amount</th>
-		<th>Modify medicine Reason</th>
 	  </tr>
 	  <?php 
 	  
@@ -155,12 +155,12 @@ table, th, td {
 	  foreach($details['medicine'] as $list){?>
 	  <tr>
 		<td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
-		<td><?php echo isset($list['dosage'])?$list['dosage']:''; ?></td>
+		<td><?php echo isset($list['batchno'])?$list['batchno']:''; ?></td>
+		<td><?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?></td>
 		<td><?php echo isset($list['frequency'])?$list['frequency']:''; ?></td>
 		<td><?php echo isset($list['qty'])?$list['qty']:''; ?></td>
 		<td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
 		<td><?php echo isset($list['org_amount'])?$list['org_amount']:''; ?></td>
-		<td><?php echo isset($list['edit_reason'])?$list['edit_reason']:''; ?></td>
 	  </tr>
 	  <?php } ?>
 	  <?php } ?>

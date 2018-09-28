@@ -274,4 +274,34 @@ ALTER TABLE `hospital`.`admitted_patient_list`
   ALTER TABLE `hospital`.`ward_floors`   
   ADD COLUMN `w_r_type_id` INT(11) NULL AFTER `hos_id`;
 
+  
+  
+  
+  
+  
+  
+ ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `d_id` INT(11) NULL AFTER `bill_id`;
  
+  
+  ALTER TABLE `hospital`.`admitted_patient_list`   
+  ADD COLUMN `discharge_date` DATETIME NULL AFTER `updated_at`,
+  ADD COLUMN `completed` INT(0) NULL AFTER `discharge_date`;
+
+  ALTER TABLE `hospital`.`patient_medicine_list`   
+  ADD COLUMN `food` VARCHAR(250) NULL AFTER `frequency`;
+
+  
+ ALTER TABLE `hospital`.`medicine_list`   
+  ADD COLUMN `batchno` VARCHAR(250) NULL AFTER `othercode`;
+  
+  ALTER TABLE `hospital`.`patient_medicine_list`   
+  ADD COLUMN `medicine_type` VARCHAR(250) NULL AFTER `medicine_name`;
+  
+ALTER TABLE `hospital`.`patient_medicine_list`   
+  ADD COLUMN `batchno` VARCHAR(250) NULL AFTER `medicine_type`,
+  ADD COLUMN `expiry_date` VARCHAR(250) NULL AFTER `org_amount`;
+
+  
+  
+  
