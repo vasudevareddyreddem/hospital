@@ -613,4 +613,34 @@ class Admin_model extends CI_Model
 			  }
 	
 	
+	/*agent*/
+	public function get_app_appointment_patient_history(){
+	$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name,hospital.hos_bas_name')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+	    $this->db->where('appointment_bidding_list.status',1);
+	    return $this->db->get()->result_array();
+	}
+	
+	public function get_total_patients_accept_list(){
+	$this->db->select('appointment_bidding_list.date,count(appointment_bidding_list.patinet_name)as total')->from('appointment_bidding_list');
+	    $this->db->where('appointment_bidding_list.status',1);
+	    return $this->db->get()->row_array();
+	}
+	
+	public function agent_not_recived_patient(){
+	$this->db->select('*')->from('appointment_bidding_list');
+   $this->db->where('appointment_bidding_list.event_status',2);
+	return $this->db->get()->result_array();
+	 }
+	public function get_recived_patients_accept_list(){
+	$this->db->select('count(appointment_bidding_list.patinet_name)as recived')->from('appointment_bidding_list');
+	$this->db->where('appointment_bidding_list.event_status',1);
+	return $this->db->get()->row_array();
+	}
+	
+	
+	
+	
   }

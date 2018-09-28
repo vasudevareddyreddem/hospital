@@ -18,16 +18,24 @@ class Executive extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					//echo'<pre>';print_r($userdetails);exit;
+					
 					$data['executive_name']=$this->Admin_model->executive_name_list_data($admindetails['a_id']);
-					//echo'<pre>';print_r($data);exit;
+					
 					$data['executive_location']=$this->Admin_model->executive_location_list_data($admindetails['a_id']);
-					//echo'<pre>';print_r($data);exit;
+					
 					
 				 $data['executive_list']=$this->Admin_model->executive_list_data($admindetails['a_id']);
-				//echo'<pre>';print_r($data);exit;
+				
 						
-					//echo '<pre>';print_r($admindetails);exit;
+	$data['app_appointment_patient_history']=$this->Admin_model->get_app_appointment_patient_history();
+	
+	
+	$data['agent_not_recived']=$this->Admin_model->agent_not_recived_patient();
+	
+		$data['total_patients']=$this->Admin_model->get_total_patients_accept_list();
+	
+		$data['recived_patient']=$this->Admin_model->get_recived_patients_accept_list();			
+			//echo '<pre>';print_r($data);exit; 		
 				
 					$this->load->view('executive/index',$data);
 					$this->load->view('html/footer');

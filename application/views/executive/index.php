@@ -21,7 +21,7 @@
                   </li>
                   <li class="nav-item"><a href="#tab2" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive List</a>
                   </li>
-                   <li class="nav-item"><a href="#tab3" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Executive Table</a>
+                   <li class="nav-item"><a href="#tab3" data-toggle="tab" class="<?php if(isset($tab) && $tab ==2){ echo "active"; } ?>">Executive Table</a>
                   </li>
 				  
 				  
@@ -190,7 +190,7 @@
                      </div>
                   </div>
                    
-                   <div class="tab-pane  <?php if(isset($tab) && $tab==1){  echo "active";} ?>" id="tab3">
+                    <div class="tab-pane <?php if(isset($tab) && $tab==2){  echo "active";} ?>" id="tab3">
                      <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -201,47 +201,50 @@
 									<div class="">
 									<select id="name" name="name" class="form-control" >
 										<option value="">Select</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
+										<?php if(isset($executive_name) && count($executive_name)>0){ ?>
+											<?php foreach($executive_name as $list){ ?>
+												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['name']; ?></option>
+												
+											<?php } ?>
+								<?php } ?>
 									</select>
 									</div>
 								</div>
-                                        </div>
+								
+                                  </div>
                                 </div>
+								
                             <div class="">
                                 
                                 <div class="card-body ">
                                     <table id="saveStage" class="table table-bordered display" style="width:100%;">
                                         <thead>
                                             <tr>
-											    <th>S.no</th>
+											    
                                                 <th>Date</th>
                                                 <th>Total Patients</th>
 												<th>Received Patients</th>
                                                 <th>Not Received Patients</th>
-                                                <th>Login Time</th>
-                                                <th>Logout Time</th>
 												<th>Patient List</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
+										
                                             <tr>
-                                                <td>1</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
+                                               
+                                                <td><?php echo $total_patients['date']?></td>
+                                                <td><?php echo $total_patients['total']; ?></td>
+                                                <td><?php echo $recived_patient['recived'];?></td>
                                                 <td class="valigntop">
                                                     <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal1">View</button>
                                                 </td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
+                                                
                                                 <td class="valigntop">
                                                     <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal2">View</button>
                                                 </td>
                                             </tr>
+										
                                         </tbody>
 										
                                     </table>
@@ -268,7 +271,7 @@
         <div class="modal-content">
 
             <div class="modal-header" style="padding:10px">
-                <h4 style="pull-left" class="modal-title">Not Received Ptients Reason</h4>
+                <h4 style="pull-left" class="modal-title">Not Received Patients Reason</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -282,18 +285,14 @@
                             </tr>
                         </thead>
                         <tbody>
+						<?php  foreach($agent_not_recived as $list){?>
                             <tr>
-                                <td>xxxxxxx</td>
-                                <td>xxxxxx</td>
-                                <td>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                                <td><?php echo $list['patinet_name'];?></td>
+                                <td><?php echo $list['mobile'];?></td>
+                                <td><?php echo $list['reason'];?></td>
                             </tr>
-                            <tr>
-                                <td>xxxxxxx</td>
-                                <td>xxxxxx</td>
-                                <td>xxxxxxxxxxxxxxxxxxxxxxxxxxx
-                                    xxxxxxxxxxxxxxxxxxxxxxxxxxx
-                                </td>
-                            </tr>
+                            
+						<?php }?>
                         </tbody>
                     </table>
                 </div>
@@ -317,39 +316,32 @@
                 <div class="table-responsive">
                     <table id="saveStage" class="table table-bordered" style="width:100%;">
                         <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Patient Name</th>
-                                <th>Mobile No </th>
-                                <th>Hospital Name</th>
-                                <th>Coupon Code</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                                            <tr>
+                                                <th>S.No</th>
+												<th>Patient Name</th>
+                                                <th>Mobile No </th>
+                                                <th>Hospital Name</th>
+                                                <th>Department</th>
+                                               <th>Appointment Date&Time </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>xxxxx</td>
-                                <td>xxxxxx</td>
-                                <td>xxxxx</td>
-                                <td>xxxx</td>
-                                <td>xxxx</td>
-                                <td>xxxx</td>
-                                <td>Received</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>xxxxx</td>
-                                <td>xxxxxx</td>
-                                <td>xxxxx</td>
-                                <td>xxxx</td>
-                                <td>xxxx</td>
-                                <td>xxxx</td>
-                                <td>Received</td>
-                            </tr>
-                        </tbody>
+										<?php $cnt=1; foreach($app_appointment_patient_history as $list){?>
+                                            <tr>
+                                                <td><?php echo $cnt;?></td>
+                                               <td><?php echo $list['patinet_name']; ?></td>
+                                                <td><?php echo $list['mobile']; ?></td>
+                                                <td><?php echo $list['hos_bas_name']; ?></td>
+                                                 <td><?php echo $list['t_name']; ?></td> 
+                                                <td><?php echo $list['date']; ?>&nbsp;<?php echo $list['time']; ?></td>
+                                                <td><?php if($list['event_status']==1){ echo "Received";}else{ echo "Not Received"; } ?></td>
+                                            </tr>
+                                           
+                                            
+                                           
+										<?php $cnt++;} ?>
+                                        </tbody>
                     </table>
                 </div>                
             </div>
