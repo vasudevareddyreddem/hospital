@@ -579,6 +579,7 @@ class Admin_model extends CI_Model
 		$this->db->select('executive_list.e_id,executive_list.name')->from('executive_list');
 		$this->db->where('executive_list.added_by',$e_id);
 		$this->db->where('executive_list.added_by',$e_id);
+		$this->db->where('executive_list.status',1);
         return $this->db->get()->result_array();
 	}	
 	public function executive_location_list_data($e_id){

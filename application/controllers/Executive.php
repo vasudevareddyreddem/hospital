@@ -20,7 +20,7 @@ class Executive extends In_frontend {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					
 					$data['executive_name']=$this->Admin_model->executive_name_list_data($admindetails['a_id']);
-					
+					//echo'<pre>';print_r($data);exit;
 					$data['executive_location']=$this->Admin_model->executive_location_list_data($admindetails['a_id']);
 					
 					
