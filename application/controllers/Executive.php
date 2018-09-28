@@ -67,6 +67,13 @@ class Executive extends In_frontend {
 					}else{
 					$catimg='';
 					}
+			    if($_FILES['profile_pic']['name']!=''){
+					$cat=$_FILES['profile_pic']['name'];
+					move_uploaded_file($_FILES['profile_pic']['tmp_name'], "assets/adminprofilepic/" . $_FILES['profile_pic']['name']);
+
+					}else{
+					$cat='';
+					}
 			
 			
 				$save_data=array(
@@ -81,6 +88,7 @@ class Executive extends In_frontend {
 				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
 				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
 				'kyc'=>$catimg,
+				'profile_pic'=>$cat,
 				'location'=>isset($post['location'])?$post['location']:'',
 				'status'=>1,
 				'create_at'=>date('Y-m-d H:i:s'),
@@ -168,7 +176,13 @@ class Executive extends In_frontend {
 					}else{
 					$catimg='';
 					}
-			
+			  if($_FILES['profile_pic']['name']!=''){
+					$cat=$_FILES['profile_pic']['name'];
+					move_uploaded_file($_FILES['profile_pic']['tmp_name'], "assets/adminprofilepic/" . $_FILES['profile_pic']['name']);
+
+					}else{
+					$cat='';
+					}
 			
 			
 				$update_data=array(
@@ -181,6 +195,7 @@ class Executive extends In_frontend {
 				'ifsccode'=>isset($post['ifsccode'])?$post['ifsccode']:'',
 				'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:'',
 				'kyc'=>$catimg,
+				'profile_pic'=>$cat,
 				'location'=>isset($post['location'])?$post['location']:'',
 				'status'=>1,
 				'create_at'=>date('Y-m-d H:i:s'),
