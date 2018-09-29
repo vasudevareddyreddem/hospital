@@ -291,13 +291,9 @@ class Executive extends In_frontend {
 			if($login_details['role_id']==1){
 					$e_id=base64_decode($this->uri->segment(3));
 					
-					if($e_id!=''){
-						$stusdetails=array(
-							'status'=>2,
-							'updated_at'=>date('Y-m-d H:i:s')
-							);
-							$statusdata=$this->Admin_model->update_executive_details($e_id,$stusdetails);
-							if(count($statusdata)>0){
+					
+							$delete_data=$this->Admin_model->delete_executive_details($e_id);
+							if(count($delete_data)>0){
 								$this->session->set_flashdata('success',"executive details successfully deleted.");
 								
 								 redirect('executive/index/'.base64_encode(1));
@@ -314,13 +310,10 @@ class Executive extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 			}
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('home');
-		}
 		
 		
 	}
+	
 	
 	
 	

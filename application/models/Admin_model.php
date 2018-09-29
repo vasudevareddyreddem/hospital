@@ -641,6 +641,10 @@ class Admin_model extends CI_Model
 	return $this->db->get()->row_array();
 	}
 	
+	public function delete_executive_details($e_id){
+	    $this->db->where('e_id',$e_id);
+		return $this->db->delete('executive_list');
+	}	
 	
 	
 	
