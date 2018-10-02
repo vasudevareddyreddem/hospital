@@ -625,7 +625,7 @@ class Admin_model extends CI_Model
 	}
 	
 	public function get_total_patients_accept_list(){
-	$this->db->select('appointment_bidding_list.date,count(appointment_bidding_list.patinet_name)as total')->from('appointment_bidding_list');
+	$this->db->select('appointment_bidding_list.city,count(appointment_bidding_list.patinet_name)as total')->from('appointment_bidding_list');
 	    $this->db->where('appointment_bidding_list.status',1);
 	    return $this->db->get()->row_array();
 	}
