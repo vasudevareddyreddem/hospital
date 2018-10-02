@@ -33,10 +33,10 @@ class Executive extends In_frontend {
 	$data['agent_not_recived']=$this->Admin_model->agent_not_recived_patient();
 	
 		$data['total_patients']=$this->Admin_model->get_total_patients_accept_list();
-	
+	//echo '<pre>';print_r($data);exit; 
 		$data['recived_patient']=$this->Admin_model->get_recived_patients_accept_list();			
 			//echo '<pre>';print_r($data);exit; 		
-				
+			
 					$this->load->view('executive/index',$data);
 					$this->load->view('html/footer');
 				}else{

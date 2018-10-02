@@ -305,3 +305,27 @@ ALTER TABLE `hospital`.`patient_medicine_list`
   
   
   
+/* executive_list */
+
+CREATE TABLE `executive_list` (
+  `e_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `mobile` varchar(250) DEFAULT NULL,
+  `email_id` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `org_password` varchar(250) DEFAULT NULL,
+  `address` varchar(250) DEFAULT NULL,
+  `bank_account` varchar(250) DEFAULT NULL,
+  `bank_name` varchar(250) DEFAULT NULL,
+  `ifsccode` varchar(250) DEFAULT NULL,
+  `bank_holder_name` varchar(250) DEFAULT NULL,
+  `kyc` varchar(250) DEFAULT NULL,
+  `profile_pic` varchar(250) DEFAULT NULL,
+  `location` varchar(250) DEFAULT NULL,
+  `status` int(11) DEFAULT '1' COMMENT 'status=1;delete=2;',
+  `create_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `added_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`e_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1
+

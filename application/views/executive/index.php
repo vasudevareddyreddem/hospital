@@ -252,7 +252,7 @@
                                         <thead>
                                             <tr>
 											    
-                                                <th>Date</th>
+                                                <th>Location</th>
                                                 <th>Total Patients</th>
 												<th>Received Patients</th>
                                                 <th>Not Received Patients</th>
@@ -264,7 +264,7 @@
 										
                                             <tr>
                                                
-                                                <td><?php echo $total_patients['date']?></td>
+                                                <td><?php echo $total_patients['city']?></td>
                                                 <td><?php echo $total_patients['total']; ?></td>
                                                 <td><?php echo $recived_patient['recived'];?></td>
                                                 <td class="valigntop">
