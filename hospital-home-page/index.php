@@ -110,10 +110,7 @@
                     <div class="col-md-6">
                         
                         <h3 class="h3 mb-3">About Medspace</h3>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
+                        <p>Medspace Softtech Pvt. Ltd. is a software company located in Hyderabad and Tirupathi with regional branches in Guntur and Bangalore. It provides management software like hospital management and biomedical waste management. It helps people find online medical services like choosing right hospitals, book appointments, book diagnostics, storing medical records. </p>
                         
                     </div>
                     <!--/First column-->
