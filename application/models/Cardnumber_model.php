@@ -83,6 +83,45 @@ class Cardnumber_model extends CI_Model
 		return $this->db->get()->row_array();	
 	}
 	
+	/* seller different flow  purpose*/
+	public  function save_seller_card_limit($data){
+		$this->db->insert('seller_card_count',$data);
+		return $this->db->insert_id();
+	}
+	public  function save_card_number_details($data){
+		$this->db->insert('seller_card_assign_munber_list',$data);
+		return $this->db->insert_id();
+	}
+	
+	public  function get_opt_details($s_id,$card_assign_number){
+		
+		$this->db->select('card_id,s_id,card_number,otp,mobile_num')->from('seller_card_assign_munber_list');
+		$this->db->where('s_id',$s_id);
+		$this->db->where('card_id',$card_assign_number);
+		return $this->db->get()->row_array();
+	}
+	public function update_otp_verification($s_id,$card_assign_number,$data){
+		$this->db->where('s_id',$s_id);
+		$this->db->where('card_id',$card_assign_number);
+		return $this->db->update('seller_card_assign_munber_list',$data);
+	}
+	public function get_Card_number_count($s_id){
+		$this->db->select("COUNT(seller_card_assign_munber_list.card_id) as c_count")->from('seller_card_assign_munber_list');
+		$this->db->where('s_id',$s_id);
+		return $this->db->get()->row_array();
+	}
+	public function get_seller_count_limit($s_id){
+		$this->db->select("SUM(seller_card_count.limit)as total_limit,s_id")->from('seller_card_count');
+		$this->db->where('s_id',$s_id);
+		return $this->db->get()->row_array();
+	}
+	public  function get_card_number(){
+		$this->db->select("card_number")->from('seller_card_assign_munber_list');
+		$this->db->order_by('card_id','desc');
+		$this->db->limit(1);
+		return $this->db->get()->row_array();
+	}
+	
 	
 	
 }

@@ -194,6 +194,7 @@ $dat = explode("-", $cri['create_at']);
     	},
 		legend:{
 		cursor:"pointer",
+		showInLegend: true,
 		dockInsidePlotArea: true,
 		itemclick: toogleDataSeries
 		},
