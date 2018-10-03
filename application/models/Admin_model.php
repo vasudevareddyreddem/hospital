@@ -644,6 +644,11 @@ class Admin_model extends CI_Model
 	public function delete_executive_details($e_id){
 	    $this->db->where('e_id',$e_id);
 		return $this->db->delete('executive_list');
+	}
+	public  function get_assign_card_number_list(){
+		$this->db->select('seller_card_assign_munber_list.patient_name,seller_card_assign_munber_list.card_number,seller_card_assign_munber_list.mobile_num,seller_card_assign_munber_list.whatsapp_num,seller_card_assign_munber_list.city,seller_card_assign_munber_list.email_id,seller_card_assign_munber_list.gender,seller_card_assign_munber_list.mobile_verified,seller_card_assign_munber_list.created_at,card_sellers.s_id,card_sellers.name as s_name')->from('seller_card_assign_munber_list');
+		$this->db->join('card_sellers', 'card_sellers.s_id = seller_card_assign_munber_list.s_id', 'left');
+		return $this->db->get()->result_array();
 	}	
 	
 	

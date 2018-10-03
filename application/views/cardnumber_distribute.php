@@ -23,7 +23,9 @@
                   </li>
 				  <li class="nav-item"><a href="#card_seller" data-toggle="tab" class="<?php if(isset($tab) && $tab ==2){ echo "active"; } ?>">Card Numbers Assign</a>
                   </li>
-				  <li class="nav-item"><a href="#assign_seller_add" data-toggle="tab" class="<?php if(isset($tab) && $tab ==3){ echo "active"; } ?>">Assigned Card Numbers List</a>
+				  <li class="nav-item"><a href="#assign_seller_add" data-toggle="tab" class="<?php if(isset($tab) && $tab ==3){ echo "active"; } ?>">Seller Assigned Card Numbers List</a>
+                  </li>
+				  <li class="nav-item"><a href="#patient_assign_seller_add" data-toggle="tab" class="<?php if(isset($tab) && $tab ==4){ echo "active"; } ?>">Patient Assigned Card Numbers List</a>
                   </li>
                </ul>
             </header>
@@ -260,6 +262,52 @@
                        
                      </div>
 				   </div>
+				   <div class="tab-pane <?php if(isset($tab) && $tab ==4){ echo "active"; } ?>" id="patient_assign_seller_add">
+				     <div class="container">
+                        <div class="row">
+                            <div class="card-body col-md-12 table-responsive">
+								<?php if(count($assign_card_number_list)>0){ ?>
+                                    <table id="example6" class="table table-striped table-bordered table-hover  order-column" style="width:100%;">
+                                        <thead>
+                                            <tr>
+												<th>Distributor Name</th>
+												<th>Patient Name</th>
+												<th>Card Number</th>
+												<th>Mobile Number </th>
+												<th>Whatsapp Number </th>
+												<th>Email Address</th>
+                                                <th>City</th>
+                                                <th>Created Date & Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+										<?php foreach($assign_card_number_list as $list){ ?>
+                                            <tr>
+                                                <td><?php echo htmlentities($list['s_name']); ?></td>
+                                                <td><?php echo htmlentities($list['patient_name']); ?></td>
+                                                <td><?php echo htmlentities($list['card_number']); ?></td>
+                                                <td><?php echo htmlentities($list['mobile_num']); ?></td>
+                                                <td><?php echo htmlentities($list['whatsapp_num']); ?></td>
+                                                <td><?php echo htmlentities($list['email_id']); ?></td>
+                                                <td><?php echo htmlentities($list['city']); ?></td>
+                                                <td><?php echo htmlentities($list['created_at']); ?></td>
+												
+												</tr>
+											
+										<?php } ?>
+											
+                                            
+                                        </tbody>
+                                    </table>
+								<?php }else{ ?>
+								<div>No data Available</div>
+								<?php } ?>
+								
+                                </div>
+                        </div>
+                       
+                     </div>
+				   </div>
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>
@@ -271,6 +319,11 @@
 $(document).ready(function() {
     $('#example4').DataTable( {
         "order": [[ 1, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#example6').DataTable( {
+        "order": [[ 7, "desc" ]]
     } );
 } );
 function admindeactive(id){
