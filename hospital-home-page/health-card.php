@@ -1,5 +1,6 @@
 <?php include("header.php"); ?>
 
+
     <!--Main layout-->
     <main class="mt-5">
         <div class="container">
@@ -154,7 +155,8 @@
                             </div>
                             <div class="col-10">
 
-                                <p class="">First Doctor Confirm The patient was new or old.
+                                <span class="">
+                                    <p>First Doctor Confirm The patient was new or old.</p>
                                     <ol>
                                         <li>
                                             <p>If old Patient, Doctor Check Previous History of patient.</p>
@@ -163,7 +165,7 @@
                                             <p>If New Patient Direct Start Consultancy.</p>
                                         </li>
                                     </ol>
-                                </p>
+                                </span>
                                 <div style="height:15px"></div>
                             </div>
                         </div>
@@ -187,7 +189,8 @@
                             </div>
                             <div class="col-10">
 
-                                <p class="">Doctor Having Three Options
+                                <span class="">
+                                    <p>Doctor Having Three Options</p>
                                     <ol>
                                         <li>
                                             <p>Pharmacy</p>
@@ -199,7 +202,7 @@
                                             <p> IP</p>
                                         </li>
                                     </ol>
-                                </p>
+                                </span>
                                 <div style="height:15px"></div>
                             </div>
                         </div>
@@ -218,32 +221,33 @@
                                     another Combination of Medicine.</p>
                                 <div style="height:15px"></div>
                             </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fa fa-check-circle fa-2x indigo-text"></i>
-                                </div>
-                                <div class="col-10">
-
-                                    <p class=""><strong> Lab:</strong> Doctor Simply Choose Diagnostics in
-                                        Drop Down, to select any lab test and send to
-                                        laboratory concern person.</p>
-                                    <div style="height:15px"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <i class="fa fa-check-circle fa-2x indigo-text"></i>
-                                </div>
-                                <div class="col-10">
-
-                                    <p class=""><strong> IP:</strong> if patient has any Emergency issue, Doctor
-                                        Send full details to IP Authorized Person.</p>
-                                    <div style="height:15px"></div>
-                                </div>
-                            </div>
-                            <!--/Second row-->
                         </div>
-                        <!--/First row-->
+                
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class=""><strong> Lab:</strong> Doctor Simply Choose Diagnostics in
+                                    Drop Down, to select any lab test and send to
+                                    laboratory concern person.</p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class=""><strong> IP:</strong> if patient has any Emergency issue, Doctor
+                                    Send full details to IP Authorized Person.</p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        <!--/Second row-->
                     </div>
                 </div>
             </section>
