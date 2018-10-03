@@ -12,7 +12,7 @@
                 <div class="row mt-1">
 
                     <!--First column-->
-                    <div class="col-md-6">
+                    <div class="col-md-8">
 
                         <p>Medspace is an advanced hospital information management system mainly focuses on the clinical, administration and financial needs of the hospital. </p>
                         <p>It is designed to track patient health flow and can be accessed by doctors and health care providers. It is easy to track patient information, prescriptions, laboratory test results, operations, medical history etc.</p>
@@ -22,7 +22,7 @@
                     <!--/First column-->
 
                     <!--Second column-->
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <img src="img/hospital-process.png" class="img-fluid" alt="">
                     </div>
                     <!--/Second column-->

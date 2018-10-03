@@ -107,7 +107,7 @@
                 <div class="row features-small mb-5 mt-3 wow fadeIn">
 
                     <!--First column-->
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         
                         <h3 class="h3 mb-3">About Medspace</h3>
                         <p>Medspace Softtech Pvt. Ltd. is a software company located in Hyderabad and Tirupathi with regional branches in Guntur and Bangalore. It provides management software like hospital management and biomedical waste management. It helps people find online medical services like choosing right hospitals, book appointments, book diagnostics, storing medical records. </p>
@@ -116,7 +116,7 @@
                     <!--/First column-->
 
                     <!--Second column-->
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <img src="img/about.png" alt="" class="img-fluid">
                     </div>
                     <!--/Second column-->
