@@ -530,6 +530,7 @@ public function index()
 		{
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>'; print_r($hos_ids);exit;
@@ -636,6 +637,7 @@ public function index()
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
 				$editdata_check= $this->Ward_model->get_ward_details($post['wardid']);
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 
@@ -839,6 +841,7 @@ public function index()
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
+				//echo '<pre>';print_r($post);exit;
 				$editdata_check= $this->Ward_model->get_wardtype_details($post['ward_type']);
 				$hos_ids =$this->Ward_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 				//echo '<pre>';print_r($editdata_check);exit;

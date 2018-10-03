@@ -104,7 +104,6 @@ table, th, td {
 		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>
 		</div>
         <div><?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
-        <div><a href="mailto:company@example.com"><?php echo isset($details['hos_bas_email'])?$details['hos_bas_email']:''; ?></a></div>
       </div>
       
     </header>

@@ -94,14 +94,12 @@
                                                       <option value="">Select</option>
                                                       <option value="New" <?php if(isset($patient_detailes['registrationtype']) && $patient_detailes['registrationtype']=='New'){ echo "Selected"; } ?>>New</option>
                                                       <option value="Emergency" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Emergency'){ echo "Selected"; } ?>>Emergency</option>
-                                                      <option value="Temporary" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Temporary'){ echo "Selected"; } ?>>Temporary</option>
                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Patient Category</label>
                                                    <select id="patient_category" name="patient_category" class="form-control" >
                                                       <option value="">Select</option>
-                                                      <option value="VIP" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
                                                       <option value="Pay Patient" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Pay Patient'){ echo "Selected"; } ?>>pay patient</option>
                                                       <option value="Staff" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff'){ echo "Selected"; } ?>>Staff</option>
                                                       <option value="Staff dependent" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff dependent'){ echo "Selected"; } ?>>Staff dependent</option>
@@ -696,7 +694,7 @@
 
 															<?php }else{ ?>
 															<a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-success  ">Print</a>
-                                                            <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  ">Completed</a>
+                                                            <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  ">Submit</a>
                                                         
 															<?php } ?>                                                       
 														</form>
@@ -837,14 +835,12 @@
                                                       <option value="">Select</option>
                                                       <option value="New" <?php if(isset($patient_detailes['registrationtype']) && $patient_detailes['registrationtype']=='New'){ echo "Selected"; } ?>>New</option>
                                                       <option value="Emergency" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Emergency'){ echo "Selected"; } ?>>Emergency</option>
-                                                      <option value="Temporary" <?php if(isset($patient_detailes['registrationtype']) &&  $patient_detailes['registrationtype']=='Temporary'){ echo "Selected"; } ?>>Temporary</option>
                                                    </select>
                                                 </div>
 												<div class="form-group col-md-6">
                                                    <label for="email">Patient Category</label>
                                                    <select id="patient_category" name="patient_category" class="form-control" >
                                                       <option value="">Select</option>
-                                                      <option value="VIP" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='VIP'){ echo "Selected"; } ?>>VIP</option>
                                                       <option value="Pay Patient" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Pay Patient'){ echo "Selected"; } ?>>pay patient</option>
                                                       <option value="Staff" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff'){ echo "Selected"; } ?>>Staff</option>
                                                       <option value="Staff dependent" <?php if(isset($patient_detailes['patient_category']) &&  $patient_detailes['patient_category']=='Staff dependent'){ echo "Selected"; } ?>>Staff dependent</option>
@@ -1055,7 +1051,7 @@
                                              </div>
 											 <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']==1){ ?>
                                              <a target="_blank" href="<?php echo base_url('resources/print_patient_details/'.base64_encode($pid).'/'.base64_encode($bill_id)); ?>" class="btn btn-success  " type="bitton">Print</a>
-                                             <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  " type="bitton">Completed</a>
+                                             <a href="<?php echo base_url('resources/desk'); ?>" class="btn btn-success  " type="bitton">Submit</a>
 											 <?php }else{ ?>
 											     <button class="btn btn-success  " type="submit">Next</button>
 												<?php } ?>

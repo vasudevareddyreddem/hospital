@@ -33,6 +33,7 @@
                                                         <th>Medicine Name</th>
 														<th>Batch No</th>
 														<th>Expiry Date</th>
+														<th>No of Days</th>
                                                         <th>QTY</th>
                                                         <th>Usage </th>
                                                         <th>Amount</th>
@@ -49,6 +50,9 @@
 														</td>
 														<td>
 															<?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?>
+														</td>
+														<td>
+															<?php echo isset($list['no_of_days'])?$list['no_of_days']:''; ?>
 														</td>
                                                         <td>
 															<?php echo isset($list['qty'])?$list['qty']:''; ?>

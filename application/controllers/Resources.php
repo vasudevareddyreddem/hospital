@@ -999,6 +999,7 @@ class Resources extends In_frontend {
 							'route'=>isset($post['route'])?$post['route']:'',
 							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
 							'food'=>isset($post['food'])?$post['food']:'',
+							'no_of_days'=>isset($post['days'])?$post['days']:'',
 							'directions'=>isset($post['directions'])?$post['directions']:'',
 							'formdate'=>isset($post['formdate'])?$post['formdate']:'',
 							'todate'=>isset($post['todate'])?$post['todate']:'',

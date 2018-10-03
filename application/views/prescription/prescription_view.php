@@ -45,6 +45,7 @@
                                                         <th>Medicine Name</th>
 														<th>Batch No</th>
 														<th>Expiry Date</th>
+														<th>No of Days</th>
 														<th>QTY</th>
 														<th>Amount</th>
                                                         <th>Usage </th>
@@ -57,6 +58,7 @@
                                                         <td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
                                                         <td><?php echo isset($list['batchno'])?$list['batchno']:''; ?></td>
 														 <td><?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?></td>
+														 <td><?php echo isset($list['no_of_days'])?$list['no_of_days']:''; ?></td>
 														<td style="width:100px">
 															<div class="form-group">
 															<input autocomplete="off" onkeyup="changeqty(this.value,'<?php echo isset($list['m_id'])?$list['m_id']:''; ?>','');change_qtys('<?php echo isset($list['m_id'])?$list['m_id']:''; ?>',this.value);" name="qty" id="qty<?php echo isset($list['m_id'])?$list['m_id']:''; ?>" type="text" class="form-control" value="<?php echo isset($list['qty'])?$list['qty']:''; ?>" placeholder="Enter Qty">
