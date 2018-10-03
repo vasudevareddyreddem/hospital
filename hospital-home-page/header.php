@@ -40,7 +40,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark indigo">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top indigo">
         <div class="container">
 
             <!-- Brand -->

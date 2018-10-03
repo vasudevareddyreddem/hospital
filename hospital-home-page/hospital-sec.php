@@ -6,25 +6,24 @@
         <div class="container">
 
             <!--Section: Not enough-->
-            <section class="pt-3 wow fadeIn">
-                <hr>
-                <h2 class=" h3 text-center py-2">Our Hospital Process</h2>
-
-                <p class="text-center ">Online Doctor Appointment with Using MedSpace App and Hospital Management Software.</p>
+            <section class="pt-5 wow fadeIn">
+                <h2 class=" h3 text-center py-2">Hospital Managment Software</h2>
                 <br>
-                <div class="row mt-5">
+                <div class="row mt-1">
 
                     <!--First column-->
                     <div class="col-md-6">
 
-                        <p>Medspace is an advanced hospital information management system mainly focuses on the clinical, administration and financial needs of the hospital. It is designed to track patient health flow and can be accessed by doctors and health care providers. It is easy to track patient information, prescriptions, laboratory test results, operations, medical history etc. Medspace also provides health cards to the patients (customers), these health cards will benefit the patient to access medical history.</p>
+                        <p>Medspace is an advanced hospital information management system mainly focuses on the clinical, administration and financial needs of the hospital. </p>
+                        <p>It is designed to track patient health flow and can be accessed by doctors and health care providers. It is easy to track patient information, prescriptions, laboratory test results, operations, medical history etc.</p>
+                        <p> Medspace also provides health cards to the patients (customers), these health cards will benefit the patient to access medical history.</p>
                         
                     </div>
                     <!--/First column-->
 
                     <!--Second column-->
                     <div class="col-md-6">
-                        <img src="img/" alt="MDB Magazine Template displayed on iPhone" class="img-fluid"/>
+                        <img src="img/hospital-process.png" class="img-fluid" alt="">
                     </div>
                     <!--/Second column-->
                 </div>
@@ -105,100 +104,5 @@
     </main>
     <!--Main layout-->
 
-    <!-- Central Modal Medium Info -->
-    <div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-info" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header">
-                    <p class="heading lead">Register</p>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>
-                    </button>
-                </div>
-
-
-                <span id="errormsg_1">
-                    <?php
-				if(isset($_GET['message'])&& $_GET['message']=='success'){
-					?>
-                    <div id="bottom">
-                        <div class="page-alert">
-                            <div class="alert alert-success page-alert" id="alert-1">
-                                <strong>Your query successfully sent!</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById("contact").click();
-				</script>
-                    <?php } ?>
-
-                    <?php if(isset($_GET['message'])&& $_GET['message']=='fail'){ ?>
-                    <div id="bottom">
-                        <div class="page-alerts">
-                            <div class="alert alert-warning page-alert" id="alert-2">
-                                <strong>Technical problem will occured. Please try again. </strong>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById("contact").click();
-				</script>
-                    <?php } ?>
-                </span>
-
-
-                <!--Body-->
-                <form id="defaultForm" method="post" action="register_form.php">
-                    <div class="modal-body">
-                        <input type="hidden" name="form_one" value="1">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class=" control-label">Name of the Hospital</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="h_name" placeholder="Enter Name of the Hospital" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Name of the Representative</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="r_name" placeholder="Enter Name of the Representative" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Mobile Number</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="mobilenumber" placeholder="Enter Mobile Number" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Email</label>
-                                <div class="">
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Message</label>
-                                <div class="">
-                                    <textarea type="text" class="form-control" name="message" placeholder="Enter Message Here"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Footer-->
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary pull-right" name="signup" value="Sign up">Register</button>
-                        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, thanks</a>
-                    </div>
-                </form>
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
-    <!-- Central Modal Medium Info-->
     
 <?php include("footer.php"); ?>

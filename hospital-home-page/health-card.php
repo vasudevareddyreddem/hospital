@@ -9,17 +9,9 @@
 
                 <!--Grid row-->
                 <div class="row mt-5">
-
+                    
                     <!--Grid column-->
-                    <div class="col-md-6 mb-5">
-
-                        <img src="img/card.png" class="img-fluid " alt="">
-
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-md-6 mb-5">
+                    <div class="col-md-6">
 
                         <!-- Main heading -->
                         <h3 class="h3 mb-3">Medspace Health Card</h3>
@@ -31,6 +23,20 @@
                         <!-- Main heading -->
                     </div>
                     <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+
+                        <img src="img/card.png" class="img-fluid " alt="">
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                
+                <hr class="my-5">
+                    
+                <div class="row">
                     
                     <!--Grid column-->
                     <div class="col-md-12 mb-3">
@@ -51,7 +57,7 @@
                     <!--Grid column-->
                     
                     <!--Grid column-->
-                    <div class="col-md-12 mb-5">
+                    <div class="col-md-12">
 
                         <!-- Main heading -->
                         <h3 class="h3 mb-3">Medspace Online Appointment / Pharmacy / Lab Tests App</h3>
@@ -84,105 +90,167 @@
 
             </section>
             <!--Section: Main info-->
+            
+            <hr class="my-5">
+            
+            <section class="mt-5 wow fadeIn">
 
+                <h2 class=" h3 text-center py-2">Our Hospital Process</h2>
+
+                <p class="text-center ">Online Doctor Appointment with Using MedSpace App and Hospital Management Software.</p>
+                <br>
+
+                <!--First row-->
+                <div class="row features-small mb-5 mt-3 wow fadeIn">
+
+                    <!--First column-->
+                    <div class="col-md-4">
+
+                        <!--Second row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class="">E-Health Card (MedSpace) OP Appointment Requested
+                                    to particular Department Hospitals with Date & time Slot.
+                                </p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        <!--/Second row-->
+
+                        <!--Third row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class="">Hospital Authorized Person should Send Date and Time
+                                    Slot Accept Confirmation Message received by patient in
+                                    Medspace Mobile App. </p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        <!--/Third row-->
+
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class="">Medspace Patient Visit the Hospital at Scheduled Time,
+                                    Receptionist Enter Full Patient Details & send to Concern Assigned Doctor.</p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class="">First Doctor Confirm The patient was new or old.
+                                    <ol>
+                                        <li>
+                                            <p>If old Patient, Doctor Check Previous History of patient.</p>
+                                        </li>
+                                        <li>
+                                            <p>If New Patient Direct Start Consultancy.</p>
+                                        </li>
+                                    </ol>
+                                </p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        <!--/Fourth row-->
+                    </div>
+                    <!--/First column-->
+
+                    <!--Second column-->
+                    <div class="col-md-4 flex-center">
+                        <img src="img/hospital-process.png" alt="MDB Magazine Template displayed on iPhone" class="z-depth-0 img-fluid">
+                    </div>
+                    <!--/Second column-->
+
+                    <!--Third column-->
+                    <div class="col-md-4 mt-2">
+                        
+                        <!--First row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class="">Doctor Having Three Options
+                                    <ol>
+                                        <li>
+                                            <p>Pharmacy</p>
+                                        </li>
+                                        <li>
+                                            <p> Lab</p>
+                                        </li>
+                                        <li>
+                                            <p> IP</p>
+                                        </li>
+                                    </ol>
+                                </p>
+                                <div style="height:15px"></div>
+                            </div>
+                        </div>
+                        <!--/First row-->
+
+                        <!--Second row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                            </div>
+                            <div class="col-10">
+
+                                <p class=""><strong>Pharmacy:</strong> Doctor Simply Choose Medicines In Drop Down
+                                    (if Doctor Type one letter of medicine name it will automatically shows).
+                                    If selected Medicine Not Available & Chooses
+                                    another Combination of Medicine.</p>
+                                <div style="height:15px"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                </div>
+                                <div class="col-10">
+
+                                    <p class=""><strong> Lab:</strong> Doctor Simply Choose Diagnostics in
+                                        Drop Down, to select any lab test and send to
+                                        laboratory concern person.</p>
+                                    <div style="height:15px"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">
+                                    <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                </div>
+                                <div class="col-10">
+
+                                    <p class=""><strong> IP:</strong> if patient has any Emergency issue, Doctor
+                                        Send full details to IP Authorized Person.</p>
+                                    <div style="height:15px"></div>
+                                </div>
+                            </div>
+                            <!--/Second row-->
+                        </div>
+                        <!--/First row-->
+                    </div>
+                </div>
+            </section>
+            
         </div>
     </main>
     <!--Main layout-->
 
-    <!-- Central Modal Medium Info -->
-    <div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-info" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header">
-                    <p class="heading lead">Register</p>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>
-                    </button>
-                </div>
-
-
-                <span id="errormsg_1">
-                    <?php
-				if(isset($_GET['message'])&& $_GET['message']=='success'){
-					?>
-                    <div id="bottom">
-                        <div class="page-alert">
-                            <div class="alert alert-success page-alert" id="alert-1">
-                                <strong>Your query successfully sent!</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById("contact").click();
-				</script>
-                    <?php } ?>
-
-                    <?php if(isset($_GET['message'])&& $_GET['message']=='fail'){ ?>
-                    <div id="bottom">
-                        <div class="page-alerts">
-                            <div class="alert alert-warning page-alert" id="alert-2">
-                                <strong>Technical problem will occured. Please try again. </strong>
-                            </div>
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById("contact").click();
-				</script>
-                    <?php } ?>
-                </span>
-
-
-                <!--Body-->
-                <form id="defaultForm" method="post" action="register_form.php">
-                    <div class="modal-body">
-                        <input type="hidden" name="form_one" value="1">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class=" control-label">Name of the Hospital</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="h_name" placeholder="Enter Name of the Hospital" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Name of the Representative</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="r_name" placeholder="Enter Name of the Representative" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Mobile Number</label>
-                                <div class="">
-                                    <input type="text" class="form-control" name="mobilenumber" placeholder="Enter Mobile Number" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Email</label>
-                                <div class="">
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label">Message</label>
-                                <div class="">
-                                    <textarea type="text" class="form-control" name="message" placeholder="Enter Message Here"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Footer-->
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary pull-right" name="signup" value="Sign up">Register</button>
-                        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, thanks</a>
-                    </div>
-                </form>
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
-    <!-- Central Modal Medium Info-->
     
 <?php include("footer.php"); ?>

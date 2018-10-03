@@ -1,14 +1,20 @@
 <?php include("header.php"); ?>
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
+        
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+            <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+        </ol>
+        
+        <div class="carousel-inner" role="listbox">
             <div class="carousel-item active view">
-                <img class="d-block w-100" src="img/ban2.png" alt="First slide" height="80%">
-                <div class="mask rgba-black-light d-flex justify-content-center align-items-center" style="height:80%;">
+                <img class="d-block w-100" src="img/img-1.jpg" alt="First slide">
+                <div class="mask d-flex justify-content-center align-items-center">
                     <!-- Content -->
                     <div class="text-center white-text mx-5 wow fadeIn">
                         <h1 class=" h1 h1-style-caption">
-
                             Welcome To Medspace
                         </h1>
                     </div>
@@ -16,12 +22,23 @@
                 </div>
             </div>
             <div class="carousel-item view">
-                <img class="d-block w-100" src="img/ban1.png" alt="First slide" height="80%">
-                <div class="mask rgba-black-light d-flex justify-content-center align-items-center" style="height:80%;">
+                <img class="d-block w-100" src="img/img-2.jpg" alt="Second slide">
+                <div class="mask d-flex justify-content-center align-items-center" >
                     <!-- Content -->
                     <div class="text-center white-text mx-5 wow fadeIn">
                         <h1 class=" h1 h1-style-caption">
-
+                            Welcome To Medspace
+                        </h1>
+                    </div>
+                    <!-- Content -->
+                </div>
+            </div>
+            <div class="carousel-item view">
+                <img class="d-block w-100" src="img/img-4.jpg" alt="Third slide">
+                <div class="mask d-flex justify-content-center align-items-center" >
+                    <!-- Content -->
+                    <div class="text-center white-text mx-5 wow fadeIn">
+                        <h1 class=" h1 h1-style-caption">
                             Welcome To Medspace
                         </h1>
                     </div>
@@ -41,11 +58,11 @@
 
 
     <!--Main layout-->
-    <main>
-        <div class="container">
+    <main class="mt-5">
+        <div class="container pt-5">
 
             <!--Section: Main info-->
-            <section class="wow fadeIn">
+            <section class="wow fadeIn pt-5">
 
                 <!--Grid row-->
                 <div class="row">
@@ -84,32 +101,26 @@
             <hr class="my-5">
 
             <!--Section: Not enough-->
-            <section id="hospital-section">
-
-                <h2 class=" h3 text-center py-2">Our Hospital Process</h2>
-
-                <p class="text-center ">Online Doctor Appointment with Using MedSpace App and Hospital Management Software.</p>
-                <br>
-
+            <section id="hospital-section" class="mt-5 wow fadeIn">
+                
                 <!--First row-->
                 <div class="row features-small mb-5 mt-3 wow fadeIn">
 
                     <!--First column-->
                     <div class="col-md-6">
-
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
-                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
                         
-                        <a href="hospital-sec.php" class="btn btn-primary btn-md">View more</a>
+                        <h3 class="h3 mb-3">About Medspace</h3>
+                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
+                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
+                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
+                        <p>Lorem ipsum dollor site amet the best  consectuer adipiscing elites sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat insignia the consectuer adipiscing elit.</p>
                         
                     </div>
                     <!--/First column-->
 
                     <!--Second column-->
                     <div class="col-md-6">
-                        <img src="img/" alt="MDB Magazine Template displayed on iPhone" class="img-fluid"/>
+                        <img src="img/about.png" alt="" class="img-fluid">
                     </div>
                     <!--/Second column-->
                 </div>
