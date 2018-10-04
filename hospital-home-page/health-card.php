@@ -110,7 +110,7 @@
                         <!--Second row-->
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -125,7 +125,7 @@
                         <!--Third row-->
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -139,7 +139,7 @@
 
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -151,7 +151,7 @@
                         
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -185,7 +185,7 @@
                         <!--First row-->
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -211,7 +211,7 @@
                         <!--Second row-->
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -225,7 +225,7 @@
                 
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 
@@ -238,7 +238,7 @@
                 
                         <div class="row">
                             <div class="col-2">
-                                <i class="fa fa-check-circle fa-2x indigo-text"></i>
+                                <i class="fa fa-check-circle fa-2x nav-color"></i>
                             </div>
                             <div class="col-10">
 

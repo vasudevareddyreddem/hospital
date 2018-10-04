@@ -87,7 +87,7 @@
                         <p>When a patient visits the hospital, patient’s information, medical records can be accessed directly through Medspace card. At the end of the process it has the capability to update patient’s information.</p>
                         <!-- Main heading -->
 
-                        <a href="health-card.php" class="btn btn-primary btn-md">View more</a>
+                        <a href="health-card.php" class="btn btn-primary btn-md navbar-color darken-3">View more</a>
 
                     </div>
                     <!--Grid column-->
@@ -149,7 +149,7 @@
                             These guidelines have been prepared to facilitate and provide guidance to both the Occupier as well as Operator of CBWTF to establish bar code system and also to have uniformity in adoption of the bar code system throughout the country, thereby ensuring effective enforcement of the BMWM Rules, 2016. </p>
 
                         <!-- Main heading -->
-                        <a href="waste-mang.php" class="btn btn-primary btn-md">View more</a>
+                        <a href="waste-mang.php" class="btn btn-primary btn-md navbar-color">View more</a>
 
                     </div>
                     <!--Grid column-->
@@ -191,8 +191,6 @@
                         </p>
                     </li>
                 </ol>
-
-
 
 
             </section>

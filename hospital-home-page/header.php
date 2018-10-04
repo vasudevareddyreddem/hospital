@@ -33,6 +33,12 @@
                 background: #345ef2 !important;
             }
         }
+        .navbar-color{
+            background-color: #083c64!important;
+        }
+        .nav-color{
+            color: #083c64!important;
+        }
     </style>
 </head>
 
@@ -40,7 +46,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top indigo">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-color">
         <div class="container">
 
             <!-- Brand -->
