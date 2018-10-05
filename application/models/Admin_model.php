@@ -615,13 +615,14 @@ class Admin_model extends CI_Model
 	
 	
 	/*agent*/
-	public function get_app_appointment_patient_history(){
-	$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name,hospital.hos_bas_name')->from('appointment_bidding_list');
-		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
-		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
-		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
-	    $this->db->where('appointment_bidding_list.status',1);
-	    return $this->db->get()->result_array();
+		public function patient_history_list(){
+	
+$this->db->select('appointments.id,appointments.city,appointments.hos_id,appointments.department,appointments.specialist,appointments.patinet_name,appointments.mobile,appointments.date,appointments.time,treament.t_name,specialist.specialist_name,hospital.hos_bas_name,appointments.create_by')->from('appointments');
+    $this->db->join('treament', 'treament.t_id = appointments.department', 'left');
+    $this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
+	$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
+    $this->db->where('appointments.patient_id !=',0);
+    return $this->db->get()->result_array();
 	}
 	
 	public function get_total_patients_accept_list(){
