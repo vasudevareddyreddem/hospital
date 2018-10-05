@@ -302,7 +302,8 @@ ALTER TABLE `hospital`.`patient_medicine_list`
   ADD COLUMN `batchno` VARCHAR(250) NULL AFTER `medicine_type`,
   ADD COLUMN `expiry_date` VARCHAR(250) NULL AFTER `org_amount`;
 
-  
+   ALTER TABLE `hospital`.`patient_medicine_list`   
+  ADD COLUMN `no_of_days` VARCHAR(250) NULL AFTER `food`;
   
   
 /* executive_list */

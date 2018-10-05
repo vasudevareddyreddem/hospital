@@ -144,6 +144,7 @@ table, th, td {
 		<th>Medicine Name </th>
 		<th>Batch No </th>
 		<th>Expiry Date </th>
+		<th>No of Days </th>
 		<th>Usage </th>
 		<th>QTY</th>
 		<th>Amount</th>
@@ -157,6 +158,7 @@ table, th, td {
 		<td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
 		<td><?php echo isset($list['batchno'])?$list['batchno']:''; ?></td>
 		<td><?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?></td>
+		<td><?php echo isset($list['no_of_days'])?$list['no_of_days']:''; ?></td>
 		<td><?php echo isset($list['frequency'])?$list['frequency']:''; ?></td>
 		<td><?php echo isset($list['qty'])?$list['qty']:''; ?></td>
 		<td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
@@ -165,7 +167,7 @@ table, th, td {
 	  <?php } ?>
 	  <?php } ?>
 	  	<tr>
-		<th colspan="4"  style="background:#ddd;">Prescription  Billing Mode</th>
+		<th colspan="4"  style="background:#ddd;">Prescription Billing Mode</th>
 		
 		<?php if(isset($details['information']['medicine_payment_mode']) && $details['information']['medicine_payment_mode']!=''){ ?>
 				<td colspan="4">
