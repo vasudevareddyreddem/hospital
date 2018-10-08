@@ -615,13 +615,14 @@ class Admin_model extends CI_Model
 	
 	
 	/*agent*/
-	public function get_app_appointment_patient_history(){
-	$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name,hospital.hos_bas_name')->from('appointment_bidding_list');
-		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
-		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
-		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
-	    $this->db->where('appointment_bidding_list.status',1);
-	    return $this->db->get()->result_array();
+		public function patient_history_list(){
+	
+$this->db->select('appointments.id,appointments.city,appointments.hos_id,appointments.department,appointments.specialist,appointments.patinet_name,appointments.mobile,appointments.date,appointments.time,treament.t_name,specialist.specialist_name,hospital.hos_bas_name,appointments.create_by')->from('appointments');
+    $this->db->join('treament', 'treament.t_id = appointments.department', 'left');
+    $this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
+	$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
+    $this->db->where('appointments.patient_id !=',0);
+    return $this->db->get()->result_array();
 	}
 	
 	public function get_total_patients_accept_list(){
@@ -644,6 +645,11 @@ class Admin_model extends CI_Model
 	public function delete_executive_details($e_id){
 	    $this->db->where('e_id',$e_id);
 		return $this->db->delete('executive_list');
+	}
+	public  function get_assign_card_number_list(){
+		$this->db->select('seller_card_assign_munber_list.patient_name,seller_card_assign_munber_list.card_number,seller_card_assign_munber_list.mobile_num,seller_card_assign_munber_list.whatsapp_num,seller_card_assign_munber_list.city,seller_card_assign_munber_list.email_id,seller_card_assign_munber_list.gender,seller_card_assign_munber_list.mobile_verified,seller_card_assign_munber_list.created_at,card_sellers.s_id,card_sellers.name as s_name')->from('seller_card_assign_munber_list');
+		$this->db->join('card_sellers', 'card_sellers.s_id = seller_card_assign_munber_list.s_id', 'left');
+		return $this->db->get()->result_array();
 	}	
 	
 	

@@ -27,11 +27,13 @@ class Executive extends In_frontend {
 				 $data['executive_list']=$this->Admin_model->executive_list_data($admindetails['a_id']);
 				
 						
-	$data['app_appointment_patient_history']=$this->Admin_model->get_app_appointment_patient_history();
+	$data['patient_history']=$this->Admin_model->patient_history_list();
+	//echo'<pre>';print_r($data['patient_history']);exit;
+	
 	
 	
 	$data['agent_not_recived']=$this->Admin_model->agent_not_recived_patient();
-	
+	//echo '<pre>';print_r($data['agent_not_recived']);exit; 
 		$data['total_patients']=$this->Admin_model->get_total_patients_accept_list();
 	//echo '<pre>';print_r($data);exit; 
 		$data['recived_patient']=$this->Admin_model->get_recived_patients_accept_list();			

@@ -284,7 +284,14 @@
                                          
                                        </div> 
                                        </div> 
+
 										 <div class="row"> 
+
+										 <div class="col-md-6">
+                                                <label> No of Days</label>
+                                                <input class="form-control" name="days" id="days" type="text" placeholder="Enter No of Days">
+                                            </div>
+
                                        <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
@@ -1085,6 +1092,17 @@ function addtestlist(){
 					regexp: {
 					regexp:  /^[0-9]+$/,
 					message: 'Qty can only consist of digits'
+					}
+				}
+            },
+			days: {
+                 validators: {
+					notEmpty: {
+						message: 'No of Days is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]+$/,
+					message: 'No of Days can only consist of digits'
 					}
 				}
             }

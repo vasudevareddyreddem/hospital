@@ -32,30 +32,33 @@
                            
 						  
                               <div class="row">
-                                 <div class="col-md-6">
+                                 <div class="col-md-4">
 									<label> Name</label>
 										<input class="form-control" id="lab_name" name="lab_name" value="" type="text" placeholder="Name">
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 									<label> Mobile Number</label>
 										<input class="form-control" id="lab_mobile" name="lab_mobile" value="" type="text" placeholder=" Mobile Number">
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<label> Address1</label>
-											<textarea type="textarea" id="lab_add1" name="lab_add1" value="" class="form-control"  placeholder="Address1" ></textarea>
+											<textarea type="textarea" id="lab_add1" name="lab_add1" value="" class="form-control"  placeholder="Address1" rows="1"></textarea>
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 										<label> Address2</label>
-											<textarea type="textarea" id="lab_add2" name="lab_add2" value="" class="form-control"  placeholder="Address2" ></textarea>
+											<textarea type="textarea" id="lab_add2" name="lab_add2" value="" class="form-control"  placeholder="Address2" rows="1"></textarea>
 									</div>
 									
-									<div class="col-md-6">
+									<div class="col-md-4">
 									<label> City</label>
 										<input class="form-control" id="lab_city" name="lab_city" value="" type="text" placeholder="City">
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 										<label> State</label>
+<<<<<<< HEAD
 									<div class="">
+=======
+>>>>>>> 1cd02f605d0cd60b112bc37e31d6d91bb12b836b
 								  <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
 
 								<select class="form-control" required="required" name="lab_state" id="lab_state">
@@ -70,33 +73,33 @@
 										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
 									<?php endforeach; ?>
 								  </select> 
-							  </div>									</div>
-									<div class="col-md-6">
+							  </div>
+									<div class="col-md-4">
 										<label> Zipcode</label>
 										<input class="form-control" id="lab_zipcode" name="lab_zipcode" value="" type="text" placeholder="Zipcode">
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 										<label> Other Details</label>
 										<input class="form-control" id="lab_other_details" name="lab_other_details" value="" type="text" placeholder="Other Details">
 									</div>
-									 	<div class="col-md-6">
+									 	<div class="col-md-4">
 									<label> Lab Contact Number</label>
 										<input class="form-control" id="lab_contatnumber" name="lab_contatnumber" type="text" placeholder="Lab Contact Number">
 									</div>
 										
-									<div class="col-md-6">
+									<div class="col-md-4">
 									<label> Lab Email ID</label>
 										<input class="form-control" id="lab_email" name="lab_email" type="text" placeholder="Lab Email ID">
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 									<label> Lab Password</label>
 										<input class="form-control" id="lab_password" name="lab_password" type="password" placeholder="Password">
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 									<label> Lab Confirm Password</label>
 										<input class="form-control" id="lab_cinformpaswword" name="lab_cinformpaswword" type="password" placeholder="Confirm Password">
 									</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 									<label> Lab Photo</label>
 										<input class="form-control" id="lab_photo" name="lab_photo" type="file" placeholder="lab Photo">
 									</div>

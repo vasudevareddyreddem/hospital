@@ -35,6 +35,8 @@ $config['base_url'] = 'http://localhost/hospital/';
 | variable so that it is blank.
 |
 */
+$config['smsusername']	= "cartinhour";
+$config['smspassword']	= "qwerty";
 $config['index_page'] = '';
 $config['server_key_push'] = 'AAAAtBFTrGs:APA91bGv65yqEap8GuziGzhIGoxfwiZ0NavRfPpsgEa2LkhKfP-1JGEdcVco-KXD8pyWl0T8OQHtrGWvGFPUQokwiHzUn75Uc8EmfaQfVoXjKcryrp_ayx_n_tRw6zR_IQ3w5I3S7SW3a-O5l0qU3Gy8J9UUWsXYvg';
 

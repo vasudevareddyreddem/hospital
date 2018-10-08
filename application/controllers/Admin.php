@@ -1180,8 +1180,9 @@ class Admin extends CI_Controller {
 				$data['ative_card_seller_list']=$this->Admin_model->get_card_active_Seller_distrubutors_lists($admindetails['a_id']);
 				$data['card_number_list']=$this->Admin_model->get_card_number_list($admindetails['a_id']);
 				$data['seller_card_number_list']=$this->Admin_model->get_seller_card_numbers_list($admindetails['a_id']);
+				$data['assign_card_number_list']=$this->Admin_model->get_assign_card_number_list();
 
-				//echo '<pre>';print_r($data);exit;
+				//echo '<pre>';print_r($data['assign_card_number_list']);exit;
 				$this->load->view('cardnumber_distribute',$data);
 				$this->load->view('html/footer');
 			}else{
@@ -1568,6 +1569,8 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	
+	
 	
 	
 }

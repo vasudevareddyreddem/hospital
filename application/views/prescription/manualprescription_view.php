@@ -35,7 +35,7 @@
                                                     <tr>
                                                         <th>Medicine Name</th>
                                                         <th>QTY</th>
-                                                        <th>expiry date</th>
+                                                        <th>Expiry Date</th>
                                                         <th>Usage Instructions</th>
                                                         <th>Amount</th>
                                                     </tr>
