@@ -125,7 +125,7 @@
 								   <th> Department </th>
 								   <th> Speciality </th>
 								   <th > Booking Date </th>
-								   <th> Booking Time </th>
+								   <th colspan="2"> Booking Time </th>
 								   <th> Status</th>
 								   <th> Action </th>
 								</tr>
@@ -144,7 +144,7 @@
 								   <input  type="hidden" name="app_id" id="app_id" value="<?php echo $list['b_id']; ?>">
 								   <input  type="hidden" name="b_id" id="b_id" value="<?php echo $list['b_id']; ?>">
 								   <input  type="hidden" name="status_value" id="status_value" value="1">
-								   <td> <div class="form-group">
+								   <td colspan="2"> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                                       <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date" value="<?php echo $list['date']; ?> ">
@@ -152,7 +152,7 @@
                                                    </div>
                                                 </div>
 									</td>
-								   <td>
+								   <td >
 									<div class="form-group ">
                                                    <label class="">Booking Time </label>
                                                 <?php $time_list=array("12:00 am","12:30 am","01:00 am","01:30 am","02:00 am","02:30 am","03:00 am","03:30 am","04:00 am","04:30 am","05:00 am","05:30 am","06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm"); ?>
@@ -176,14 +176,14 @@
                                              <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                              <i class="fa fa-angle-down"></i>
                                              </button>
-                                             <ul class="dropdown-menu pull-left" role="menu">
+                                             <ul class="dropdown-menu pull-left" role="menu" style="padding:5px;">
                                                 <li>
-                                                   <i class="icon-docs"></i>  <button type="submit" name="submit">Accept</button>
+                                                     <button type="submit" class="btn btn-success btn-block" name="submit">Accept</button>
                                                 
                                                 </li>
 													<li>
-                                                    <a href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(2)); ?>">
-                                                    <i class="icon-docs"></i> Reject  </a>
+                                                    <a  class= "btn btn-danger btn-block" href="<?php echo base_url('appointments/accept_status/'.base64_encode($list['b_id']).'/'.base64_encode(2)); ?>">
+                                                     Reject  </a>
 													</li>
 												
                                              </ul>

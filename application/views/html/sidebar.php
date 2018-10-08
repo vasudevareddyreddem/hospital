@@ -374,7 +374,7 @@
 												<i class="material-icons">dashboard</i>
 												<span class="title">Procurement Lab Test List</span>
 												<span class="selected"></span>
-												<span class="arrow "></span>
+												
 											</a>
 										</li> 
 										<li class="nav-item start ">
@@ -439,7 +439,7 @@
 										<i class="material-icons">format_list_numbered</i>
 										<span class="title">Procurement Lab Test List</span>
 										<span class="selected"></span>
-										<span class="arrow "></span>
+										
 									</a>
 								</li> 
 							<li class="nav-item start ">

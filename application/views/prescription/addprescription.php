@@ -50,6 +50,7 @@
                                                    <input type="text" class="form-control" id="mobile"  name="mobile"  value="">
                                                 </div>
                                                 </div>
+												<div class="row">
 									   <div id="education_fields">
           
 										</div>
@@ -89,6 +90,7 @@
 										  <div class="input-group-btn">
 											<button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
 										  </div>
+										</div>
 										</div>
 										  
 
