@@ -716,13 +716,13 @@ public  function get_appointment_list_data_patient_overall(){
 			$city_wise_list=$this->get_city_wise_list($list['city']);
 			$recived_count=$this->get_recived_count($list['city']);
 			$not_recived_count=$this->get_not_recived_count($list['city']);
-			$patient_history_list=$this->get_patient_history_list_data($list['city']);
+			//$patient_history_list=$this->get_patient_history_list_data($list['city']);
 			$data[$list['city']]=$list;
 			$data[$list['city']]['city_wise_list']=isset($city_wise_list['cnt'])?$city_wise_list['cnt']:'';
 			$data[$list['city']]['recived_count']=isset($recived_count['cnt'])?$recived_count['cnt']:'';
-			$data[$list['city']]['not_recived_count']=$not_recived_count;
-			$data[$list['city']]['patient_history_list']=$patient_history_list;
-			
+			$data[$list['city']]['not_recived_count']=isset($not_recived_count['cnt'])?$not_recived_count['cnt']:'';
+			//$data[$list['city']]['patient_history_list']=$patient_history_list;
+			//echo '<pre>';print_r($not_recived_count);exit;
 			
 		}
 		if(!empty($data)){
@@ -746,11 +746,12 @@ public  function get_recived_count($city){
 		return $this->db->get()->row_array();
 }
  public  function get_not_recived_count($city){
-		$this->db->select('*')->from('appointment_bidding_list');
+		$this->db->select('count(appointment_bidding_list.b_id) as cnt')->from('appointment_bidding_list');
 		$this->db->where('appointment_bidding_list.city',$city);
 		$this->db->where('appointment_bidding_list.event_status',2);
+		$this->db->or_where('appointment_bidding_list.event_status',0);
 		$this->db->where('appointment_bidding_list.status',1);
-		return $this->db->get()->result_array();
+		return $this->db->get()->row_array();
 }
 	
 	public function get_patient_history_list_data($city){
@@ -764,6 +765,14 @@ $this->db->select('hospital.hos_bas_name,appointments.id,appointments.city,appoi
     $this->db->where('appointments.patient_id !=',0);
     return $this->db->get()->result_array();
 	}
+	 public  function get_city_wise_not_recived_count($city){
+		$this->db->select('*')->from('appointment_bidding_list');
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.event_status',2);
+		$this->db->or_where('appointment_bidding_list.event_status',0);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->result_array();
+}
 	
 	
 	

@@ -22,29 +22,12 @@ class Executive extends In_frontend {
 					$data['executive_name']=$this->Admin_model->executive_name_list_data($admindetails['a_id']);
 					//echo'<pre>';print_r($data);exit;
 					$data['executive_location']=$this->Admin_model->executive_location_list_data($admindetails['a_id']);
-					
-					
-				 $data['executive_list']=$this->Admin_model->executive_list_data($admindetails['a_id']);
-				
+					$data['executive_list']=$this->Admin_model->executive_list_data($admindetails['a_id']);
+					$user_details=$this->Admin_model->get_basic_agent_details_location($admindetails['a_id']);
+						//echo'<pre>';print_r($user_details);exit;
 						
-	
-	
-	
-	$data['agent_not_recived']=$this->Admin_model->agent_not_recived_patient();
-	//echo '<pre>';print_r($data['agent_not_recived']);exit; 
-	
-	
-		$data['location_wise']=$this->Admin_model->get_total_location_accept_list();
-	//echo '<pre>';print_r($data['location_wise']);exit; 
-		$data['total_patient']=$this->Admin_model->get_total_patients_accept_list();	
-	
-		$data['recived_patient']=$this->Admin_model->get_recived_patients_accept_list();			
-				//echo '<pre>';print_r($data);exit; 
-	$user_details=$this->Admin_model->get_basic_agent_details_location($admindetails['a_id']);
-	//echo'<pre>';print_r($user_details);exit;
-	
-	  $data['appointments']=$this->Admin_model->get_appointment_list_data_patient_overall($user_details['location']);
-	//echo'<pre>';print_r($data['appointments']);exit;
+						  $data['appointments']=$this->Admin_model->get_appointment_list_data_patient_overall($user_details['location']);
+						//echo'<pre>';print_r($data['appointments']);exit;
 			
 	
 			
@@ -315,6 +298,62 @@ class Executive extends In_frontend {
 									redirect('executive/index/'.base64_encode($e_id));
 							}
 					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('dashboard');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		
+		
+	}
+	public function patientlist()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+				if($login_details['role_id']==1){
+					$city=base64_decode($this->uri->segment(3));
+					$data['patient_list']=$this->Admin_model->get_patient_history_list_data(base64_decode($this->uri->segment(3)));
+					//echo $this->db->last_query();exit;
+					//echo '<pre>';print_r($data);exit;
+				
+					$this->load->view('executive/patient_list',$data);
+					$this->load->view('html/footer');
+					//echo $city;exit;
+					
+				}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('dashboard');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		
+		
+	}
+	public function notreceived_patientlist()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+				if($login_details['role_id']==1){
+					$city=base64_decode($this->uri->segment(4));
+					$data['patient_list']=$this->Admin_model->get_city_wise_not_recived_count(base64_decode($this->uri->segment(4)));
+					//echo $this->db->last_query();exit;
+					//echo '<pre>';print_r($data);exit;
+				
+					$this->load->view('executive/not_patient_list',$data);
+					$this->load->view('html/footer');
+					//echo $city;exit;
+					
+				}else{
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('dashboard');
 					}

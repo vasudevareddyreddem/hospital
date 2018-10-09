@@ -102,90 +102,48 @@
                      <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-								<div class="row">
-                                    <div class="col-md-6">
-                                         <div class="form-group">
-										<label class=" control-label">Executive Name</label>
-									<div class="">
-									<select id="name" name="name" class="form-control" >
-										<option value="">Select</option>
-										<?php if(isset($executive_name) && count($executive_name)>0){ ?>
-											<?php foreach($executive_name as $list){ ?>
-												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['name']; ?></option>
-												
-											<?php } ?>
-								<?php } ?>
-									</select>
-									</div>
-								</div>
-                                        </div>
-
-                                         <div class="col-md-6">
-                                         <div class="form-group">
-										<label class=" control-label">Location</label>
-									<div class="">
-									<select id="location" name="location" class="form-control" >
-										<option value="">Select</option>
-										<?php if(isset($executive_location) && count($executive_location)>0){ ?>
-											<?php foreach($executive_location as $list){ ?>
-												<option value="<?php echo $list['e_id']; ?>"><?php echo $list['location']; ?></option>
-												
-											<?php } ?>
-										<?php } ?>
-									</select>
-									</div>
-								</div>
-                                        </div>
-                                </div>
-                            <div class="card card-topline-aqua active">
+								
+                            <div class="">
                                 
                                 <div class="card-body ">
-                                    <table id="saveStage" class="display" style="width:100%;">
+                                    <table id="example4" class="table table-striped table-bordered table-hover table-checkable order-column" >
                                         <thead>
-										
                                             <tr>
-											    <th>S.no</th>
-                                                <th>Name</th>
+                                               <th>Name</th>
                                                 <th>Mobile</th>
 												<th>Email Address</th>
                                                 <th>Address</th>
-                                                <th>Location<th>
-                                                <th>Status<th>
+                                                <th>Location</th>
+                                                <th>Status</th>
 												<th>Action</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php $cnt=1;foreach($executive_list as $list){ ?>
-				                            <tr>
-                                                 <td><?php echo $cnt; ?></td>
+											<?php $cnt=1;foreach($executive_list as $list){ ?>
+				                             <tr>
                                                 <td><?php echo $list['name']; ?></td>
                                                 <td><?php echo $list['mobile']; ?></td>
                                                 <td><?php echo $list['email_id']; ?></td>
                                                 <td><?php echo $list['address']; ?></td>
                                                 <td><?php echo $list['location']; ?></td>
-												<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
+                                                <td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td>
-						                       <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
-									          <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id']).'/'.base64_encode($list['status'])); ?>" data-toggle="tooltip" title="status"><i class="fa fa-info-circle btn btn-warning"></i></a> 
-						                       <a href="<?php echo base_url('Executive/delete/'.base64_encode($list['e_id']));?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-trash btn btn-danger"></i></a>
-					                             </td>
-												
-                
+												   <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
+												  <a href="<?php echo base_url('Executive/executivestatus/'.base64_encode($list['e_id']).'/'.base64_encode($list['status'])); ?>" data-toggle="tooltip" title="status"><i class="fa fa-info-circle btn btn-warning"></i></a> 
+												   <a href="<?php echo base_url('Executive/delete/'.base64_encode($list['e_id']));?>"  data-toggle="tooltip" title="Delete"><i class="fa fa-trash btn btn-danger"></i></a>
+												 </td>
+                                              
+                                            </tr>
 											
-										<?php $cnt++;} ?>
-										 </tr>
+											<?php } ?>
+											
+                                            
                                         </tbody>
-										
                                     </table>
                                 </div>
 								<div class="clearfix">&nbsp;</div>
-                                <div class="text-center">
-                                    <div class="col-md-12">
-                                        <a href="financial.php" class="btn btn-info">Save</a>
-                                        <a href="#"type="button" class="btn btn-default">Cancel</a>
-                                    </div>
-                                </div>
+                               
                             </div>
                             </div>
                         </div>
@@ -195,63 +153,38 @@
                    
                    <div class="tab-pane  <?php if(isset($tab) && $tab==2){  echo "active";} ?>" id="tab3">
                      <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-								<div class="row">
-                                    <div class="col-md-6">
-                                         <div class="form-group">
-										<label class=" control-label">Agent Name</label>
-									<div class="">
-									<select id="name" name="name" class="form-control" >
-										<option value="">Select</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
-										<option value="">xxxxx</option>
-									</select>
-									</div>
-								</div>
-                                        </div>
-                                </div>
-                            <div class="">
-                                
-                                <div class="card-body ">
-                                    <table id="saveStage" class="table table-bordered display" style="width:100%;">
+                        <div class="row ">
+						 <div class="col-md-12">
+                           <table id="example5" class="table table-striped table-bordered table-hover table-checkable order-column" >
                                         <thead>
-                                            <tr>
-											    <th>S.no</th>
-                                                <th>Date</th>
+                                             <tr>
+                                                <th>Location</th>
                                                 <th>Total Patients</th>
 												<th>Received Patients</th>
                                                 <th>Not Received Patients</th>
-                                                <th>Login Time</th>
-                                                <th>Logout Time</th>
 												<th>Patient List</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td class="valigntop">
-                                                    <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal1">View</button>
-                                                </td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td class="valigntop">
-                                                    <button class="btn btn-xs deepPink-bgcolor no-margin" type="button" data-toggle="modal" data-target="#myModal2">View</button>
-                                                </td>
+											<?php $cnt=1;foreach($appointments as $lis){ ?>
+				                             <tr>
+                                                <td><?php echo $lis['city']; ?></td>
+                                                <td><?php echo $lis['city_wise_list']; ?></td>
+                                                <td><?php echo $lis['recived_count']; ?></td>
+                                                <td><a href="<?php echo base_url('executive/notreceived_patientlist/'.base64_encode(2).'/'.base64_encode($lis['city'])); ?>">View (<?php echo $lis['not_recived_count']; ?>)</a></td>
+                                                <td><a href="<?php echo base_url('executive/patientlist/'.base64_encode($lis['city'])); ?>">View</a></td>
+                                                
+                                               
+                                              
                                             </tr>
 											
+											<?php } ?>
+											
+                                            
                                         </tbody>
-										
                                     </table>
-                                </div>
-                            </div>
-                            </div>
+                        </div>
                         </div>
                        
                      </div>
@@ -266,7 +199,13 @@
 </div>
 
 
-
+  <script>
+$(document).ready(function() {
+    $('#example5').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>
 
  <script>
   
