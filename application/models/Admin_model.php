@@ -615,21 +615,8 @@ class Admin_model extends CI_Model
 	
 	
 	/*agent*/
-		public function patient_history_list(){
+		
 	
-$this->db->select('appointments.id,appointments.city,appointments.hos_id,appointments.department,appointments.specialist,appointments.patinet_name,appointments.mobile,appointments.date,appointments.time,treament.t_name,specialist.specialist_name,hospital.hos_bas_name,appointments.create_by')->from('appointments');
-    $this->db->join('treament', 'treament.t_id = appointments.department', 'left');
-    $this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
-	$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
-    $this->db->where('appointments.patient_id !=',0);
-    return $this->db->get()->result_array();
-	}
-	
-	public function get_total_patients_accept_list(){
-	$this->db->select('appointment_bidding_list.city,count(appointment_bidding_list.patinet_name)as total')->from('appointment_bidding_list');
-	    $this->db->where('appointment_bidding_list.status',1);
-	    return $this->db->get()->row_array();
-	}
 	
 	public function agent_not_recived_patient(){
 	$this->db->select('*')->from('appointment_bidding_list');
@@ -651,6 +638,134 @@ $this->db->select('appointments.id,appointments.city,appointments.hos_id,appoint
 		$this->db->join('card_sellers', 'card_sellers.s_id = seller_card_assign_munber_list.s_id', 'left');
 		return $this->db->get()->result_array();
 	}	
+	
+	public function get_total_location_accept_list(){
+	$this->db->select('appointment_bidding_list.city')->from('appointment_bidding_list');
+	    $this->db->where('appointment_bidding_list.status',1);
+		$this->db->group_by('appointment_bidding_list.city');
+	    return $this->db->get()->result_array();
+	}
+	
+	public function get_total_patients_accept_list(){
+	$this->db->select('count(appointment_bidding_list.patinet_name)as total')->from('appointment_bidding_list');
+	$this->db->where('appointment_bidding_list.status',1);
+	return $this->db->get()->row_array();
+	}
+	
+	public function get_basic_agent_details_location($e_id){
+		$this->db->select('executive_list.e_id,executive_list.location')->from('executive_list');
+		$this->db->where('executive_list.status',1);
+        return $this->db->get()->row_array();
+	}	
+	
+
+	public function get_appointment_list_data_patient($location){
+	$this->db->select('count(appointment_bidding_list.patinet_name)as total_patient ,appointment_bidding_list.city,appointment_bidding_list.b_id')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+		$this->db->where('appointment_bidding_list.status',1);
+		$this->db->group_by('appointment_bidding_list.city',$location);
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			
+			$lists=$this->get_hospital_final_appinment($list['city'],$location);
+			$los=$this->get_hospital_recived_final_appinment($list['city'],$location);
+			//echo '<pre>';print_r($lists);exit;
+			$data[$list['b_id']]=$list;
+			$data[$list['b_id']]['not_recived_list']=$lists;
+			$data[$list['b_id']]['recived_list']=$los;
+		}
+		
+		if(!empty($data)){
+			
+			return $data;
+			
+		}
+	}
+	
+	public  function get_hospital_final_appinment($city,$location){
+	$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.city,appointment_bidding_list.hos_id,appointment_bidding_list.department,appointment_bidding_list.specialist,appointment_bidding_list.patinet_name,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,treament.t_name,specialist.specialist_name,appointment_bidding_list.create_by,appointment_bidding_list.reason,appointment_bidding_list.event_status')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+		$this->db->where('appointment_bidding_list.event_status',2);
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->result_array();
+	}
+	
+	public function get_hospital_recived_final_appinment($city,$location){
+	$this->db->select('count(appointment_bidding_list.patinet_name)as recived_patient ')->from('appointment_bidding_list');
+		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+		$this->db->where('appointment_bidding_list.event_status',1);
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->result_array();
+	}
+/* appointment all*/
+
+public  function get_appointment_list_data_patient_overall(){
+		$this->db->select('appointment_bidding_list.city')->from('appointment_bidding_list');
+		$this->db->group_by('appointment_bidding_list.city');
+		$this->db->where('appointment_bidding_list.status',1);
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$city_wise_list=$this->get_city_wise_list($list['city']);
+			$recived_count=$this->get_recived_count($list['city']);
+			$not_recived_count=$this->get_not_recived_count($list['city']);
+			$patient_history_list=$this->get_patient_history_list_data($list['city']);
+			$data[$list['city']]=$list;
+			$data[$list['city']]['city_wise_list']=isset($city_wise_list['cnt'])?$city_wise_list['cnt']:'';
+			$data[$list['city']]['recived_count']=isset($recived_count['cnt'])?$recived_count['cnt']:'';
+			$data[$list['city']]['not_recived_count']=$not_recived_count;
+			$data[$list['city']]['patient_history_list']=$patient_history_list;
+			
+			
+		}
+		if(!empty($data)){
+			return $data;
+			
+		}
+		//echo '<pre>';print_r($data);exit;
+}
+
+public  function get_city_wise_list($city){
+		$this->db->select('count(appointment_bidding_list.b_id) as cnt')->from('appointment_bidding_list');
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->row_array();
+}
+public  function get_recived_count($city){
+		$this->db->select('count(appointment_bidding_list.b_id) as cnt')->from('appointment_bidding_list');
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.event_status',1);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->row_array();
+}
+ public  function get_not_recived_count($city){
+		$this->db->select('*')->from('appointment_bidding_list');
+		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.event_status',2);
+		$this->db->where('appointment_bidding_list.status',1);
+		return $this->db->get()->result_array();
+}
+	
+	public function get_patient_history_list_data($city){
+	
+$this->db->select('hospital.hos_bas_name,appointments.id,appointments.city,appointments.hos_id,appointments.department,appointments.specialist,appointments.patinet_name,appointments.mobile,appointments.date,appointments.time,treament.t_name,specialist.specialist_name,hospital.hos_bas_name,appointments.create_by')->from('appointments');
+    $this->db->join('treament', 'treament.t_id = appointments.department', 'left');
+    $this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
+	$this->db->join('hospital', 'hospital.hos_id = appointments.hos_id', 'left');
+	$this->db->where('appointments.city',$city);
+	$this->db->where('appointments.status',1);
+    $this->db->where('appointments.patient_id !=',0);
+    return $this->db->get()->result_array();
+	}
+	
+	
 	
 	
 	

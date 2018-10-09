@@ -18,7 +18,7 @@ class Executive extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					
+					//echo'<pre>';print_r($userdetails);exit;
 					$data['executive_name']=$this->Admin_model->executive_name_list_data($admindetails['a_id']);
 					//echo'<pre>';print_r($data);exit;
 					$data['executive_location']=$this->Admin_model->executive_location_list_data($admindetails['a_id']);
@@ -27,17 +27,28 @@ class Executive extends In_frontend {
 				 $data['executive_list']=$this->Admin_model->executive_list_data($admindetails['a_id']);
 				
 						
-	$data['patient_history']=$this->Admin_model->patient_history_list();
-	//echo'<pre>';print_r($data['patient_history']);exit;
 	
 	
 	
 	$data['agent_not_recived']=$this->Admin_model->agent_not_recived_patient();
 	//echo '<pre>';print_r($data['agent_not_recived']);exit; 
-		$data['total_patients']=$this->Admin_model->get_total_patients_accept_list();
-	//echo '<pre>';print_r($data);exit; 
+	
+	
+		$data['location_wise']=$this->Admin_model->get_total_location_accept_list();
+	//echo '<pre>';print_r($data['location_wise']);exit; 
+		$data['total_patient']=$this->Admin_model->get_total_patients_accept_list();	
+	
 		$data['recived_patient']=$this->Admin_model->get_recived_patients_accept_list();			
-			//echo '<pre>';print_r($data);exit; 		
+				//echo '<pre>';print_r($data);exit; 
+	$user_details=$this->Admin_model->get_basic_agent_details_location($admindetails['a_id']);
+	//echo'<pre>';print_r($user_details);exit;
+	
+	  $data['appointments']=$this->Admin_model->get_appointment_list_data_patient_overall($user_details['location']);
+	//echo'<pre>';print_r($data['appointments']);exit;
+			
+	
+			
+			
 			
 					$this->load->view('executive/index',$data);
 					$this->load->view('html/footer');
