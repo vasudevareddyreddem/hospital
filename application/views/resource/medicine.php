@@ -26,13 +26,27 @@
 			</div>
 			
 		<form method="post" action="<?php echo base_url('medicine/exelupload'); ?>" enctype="multipart/form-data">
-		
+		<div class="row" style="padding:20px;">
+			<div class="col-md-5">
 			<label>Upload excel file</label>
-			<input type="file" name="uploadfile" id="uploadfile">
-			<br />
-			<input type="submit" name="upload" value="Upload" >
+				<div>
+					<input class="form-control" type="file" name="uploadfile" id="uploadfile">
+				</div>
+			</div>
+			<div class="col-md-3">
+			<label>Click Here to Upload</label>
+			<div>
+				<input class="btn btn-primary btn-sm" type="submit" name="upload" value="Upload" >
+			</div>
+			</div>
 		</form>
+		<div class="col-md-3">
+		<label>Downlaod</label>
+			<div>
 		<a href="<?php echo base_url('assets/med.xlsx'); ?>">Download  sample  File</a>
+		</div>
+		</div>
+		</div>
 	
 		<div class="card-body">
 		<div class="row">
@@ -169,9 +183,9 @@
 
 			</div>
 		
-			<button class="add_field_button">Add More Medicine</button>
-			<button id="remobing" class="remove_field">Remove</button>
-			<button type="submit">Submit</button>
+			<button class="add_field_button btn btn-primary">Add More Medicine</button>
+			<button id="remobing" class="remove_field btn btn-warning">Remove</button>
+			<button class="btn btn-success"  type="submit">Submit</button>
 			</form>
 			
 		</div>

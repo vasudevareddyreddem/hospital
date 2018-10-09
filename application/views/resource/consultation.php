@@ -173,7 +173,7 @@
                <?php } ?>-->
                <div class="clearfix">&nbsp;</div>
                <div class="container">
-                  <div class="control-group" id="fields">
+                  <div class="form-group" id="fields">
                      <label class="control-label" for="field1"><strong>Comments</strong></label>
                      <div class="controls">
                         <form id="vitalscomment" name="vitalscomment" role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
@@ -188,12 +188,14 @@
                               </button>
                               </span>
                            </div>
-						<div class="clearfix">&nbsp;</div>
-                           <button class="btn btn-primary " type="submit" >Send</button>
-                        </form>
+						
+                       
                         <br>
                      </div>
                   </div>
+				  <div class="clearfix">&nbsp;</div>
+				      <button class="btn btn-primary " type="submit" >Send</button>
+                        </form>
                </div>
             </div>
          </div>
@@ -234,8 +236,10 @@
                                                 <label> Qty</label>
                                                 <input class="form-control" name="qty" id="qty" type="text" placeholder="Enter Qty">
                                             </div>
+                                            </div>
+											 <div class="row">
                                        <div class="col-md-6">
-                                          <div class="row">
+                                         
                                               <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
                                                    <option value="" >Select</option>
@@ -266,23 +270,28 @@
                                                    
                                                 </select>
                                             
-                                          </div>
+                                        
                                        </div>
 									   
                                           <div class="col-md-6">
-                                          <div class="row">
+                                          
                                               <label> Food </label>
                                                 <select class="form-control" name="food" id="food">
                                                    <option value="" >Select</option>
                                                    <option value="Before">Before</option>
                                                    <option value="After">After</option>
                                                 </select>
-                                          </div>
+                                         
                                        </div> 
+                                       </div> 
+
+										 <div class="row"> 
+
 										 <div class="col-md-6">
                                                 <label> No of Days</label>
                                                 <input class="form-control" name="days" id="days" type="text" placeholder="Enter No of Days">
                                             </div>
+
                                        <div class="col-md-6">
                                           <label> Directions</label>
                                           <textarea type="textarea" name="directions" id="directions" class="form-control"  placeholder="Enter Directions" ></textarea>
@@ -702,7 +711,7 @@
 							 <div class="card-head">
                                  <header>Search results	</header>
                               </div>
-                              <div class="table-scrollable">
+                              <div class="table-scrollable" >
                                  <table class="table table-bordered">
                                     <thead>
                                        <tr>
@@ -837,7 +846,7 @@
                                           <th>Short form</th>
                                           <th>Description </th>
                                           <th>Department</th>
-                                          <th>Remove</th>
+                                          <th>Action</th>
                                        </tr>
                                     </thead>
                                     <tbody id="lab_test_type_list">

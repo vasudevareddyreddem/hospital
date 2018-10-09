@@ -32,15 +32,29 @@
 					
 					<?php } ?>
 				<?php } ?>
+				
 			 <form id="uploadexcel_sheet" name="uploadexcel_sheet" method="post" action="<?php echo base_url('lab/exelsheet'); ?>" enctype="multipart/form-data">
+			 <div class="row" style="padding:20px 25px;">
 			<div class="form-group col-md-6">
 			<label>Upload excel file</label>
 			<input type="file" class="form-control" name="uploadfile" id="uploadfile">
 			</div>
-			<br />
-			<input type="submit" name="upload" value="Upload" >
+		
+			<div class="col-md-3">
+			<label>Click here to upload</label>
+			<div>
+				<input class="btn btn-primary btn-sm" type="submit" name="upload" value="Upload" >
+				</div>
+			</div>
+			<div class="col-md-3">
+			<label>Download</label>
+			<div>
 			<a target="_blank" href="<?php echo base_url('assets/modality_list.xlsx'); ?>">Download  sample  sheet</a>
+			</div>
+			</div>
+			</div>
 			</form>
+			
 			
             <div class="panel-body">
                <div class="tab-content">

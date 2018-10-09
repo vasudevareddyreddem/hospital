@@ -103,7 +103,7 @@ $dat = explode("-", $cri['hos_created']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">New Hospital</span>
-						              <span class="info-box-number"><?php echo $sevendays_list; ?></span>
+						              <span class="info-box-number"><?php if($sevendays_list=='' || $sevendays_list==0){ echo "0";}else{ echo $sevendays_list;} ?></span>
 						              <div class="progress">
 						                <div class="progress-bar" style="width: <?php echo $sevendays_list; ?>%"></div>
 						              </div>
