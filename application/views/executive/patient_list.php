@@ -35,6 +35,7 @@
 												<th>Patient Name</th>
 												<th>Mobile  Number</th>
 												<th>Date& Time</th>
+												<th>Action</th>
                                                 
                                             </tr>
                                         </thead>
@@ -46,7 +47,7 @@
                                                 <td><?php echo $lis['patinet_name']; ?></td>
                                                 <td><?php echo $lis['mobile']; ?></td>
                                                 <td><?php echo $lis['date']; ?>&nbsp;<?php echo $lis['time']; ?></td>
-                                               
+                                                <td><?php if($lis['event_status']==1){ echo "Received";}else{ echo "Not Received"; } ?></td>
                                               
                                             </tr>
 											
