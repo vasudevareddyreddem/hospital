@@ -748,9 +748,9 @@ public  function get_recived_count($city){
  public  function get_not_recived_count($city){
 		$this->db->select('count(appointment_bidding_list.b_id) as cnt')->from('appointment_bidding_list');
 		$this->db->where('appointment_bidding_list.city',$city);
+		$this->db->where('appointment_bidding_list.status',1);
 		$this->db->where('appointment_bidding_list.event_status',2);
 		$this->db->or_where('appointment_bidding_list.event_status',0);
-		$this->db->where('appointment_bidding_list.status',1);
 		return $this->db->get()->row_array();
 }
 	
@@ -771,7 +771,7 @@ $this->db->select('hospital.hos_bas_name,appointment_bidding_list.event_status,a
 		$this->db->or_where('appointment_bidding_list.event_status',0);
 		return $this->db->get()->result_array();
 		
-}
+  }
 	
 	
 	
