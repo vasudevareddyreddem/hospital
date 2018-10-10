@@ -85,7 +85,10 @@
 									<label>Location</label>
 									<input class="form-control" id="location" name="location" type="text" placeholder="Enter Location">
 								</div>
-								
+								 <div class="form-group col-md-6">
+												   <label for="email">Profile Pic</label>
+												   <input type="file" id="profile_pic" name="profile_pic"   class="form-control"  >
+												</div>
 								</div><br>
 								<div class="">
 								<label>&nbsp;</label>
@@ -345,8 +348,15 @@ $(document).ready(function() {
 						message: 'location is required'
 					}
 				}
+            },
+		   profile_pic: {
+                 validators: {
+					regexp: {
+					regexp: "(.*?)\.(png|jpg|jpeg|gif|Png|PNG)$",
+					message: 'Uploaded file is not a valid. Only png,jpg,jpeg,gif,Png,PNG files are allowed'
+					}
+				}
             }
-		   
 			
         }
     });

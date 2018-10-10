@@ -178,14 +178,14 @@ class Executive extends In_frontend {
 					move_uploaded_file($_FILES['kyc']['tmp_name'], "assets/kyc_documents/" . $_FILES['kyc']['name']);
 
 					}else{
-					$catimg='';
+					$catimg=$user_save['kyc'];
 					}
 			  if($_FILES['profile_pic']['name']!=''){
 					$cat=$_FILES['profile_pic']['name'];
 					move_uploaded_file($_FILES['profile_pic']['tmp_name'], "assets/adminprofilepic/" . $_FILES['profile_pic']['name']);
 
 					}else{
-					$cat='';
+					$cat=$user_save['profile_pic'];
 					}
 			
 			
