@@ -24,7 +24,7 @@
                      </li>
 					 
                       <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#home" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==2){ echo "active";}?>">App Appointments</a>
-					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ echo count($app_appointment_list_count); } ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ echo count($app_appointment_list_count); } else{echo "0";}?>
 					 </div>
                      </li>
                      <li class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
@@ -147,7 +147,7 @@
 								   <td colspan="2"> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date" value="<?php echo $list['date']; ?> ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date"  value="<?php echo $list['date']; ?> ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -260,6 +260,7 @@
    </div>
 </div>
 <div id="sucessmsg" style="display:none;"></div>
+
 <script>
 $(document).ready(function() {
     $('#example3').DataTable( {

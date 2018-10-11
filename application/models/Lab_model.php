@@ -77,8 +77,9 @@ class Lab_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public function get_all_patient_reports_lists($p_id){
-		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.hos_id,patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,patient_lab_reports.*')->from('patient_lab_reports');
+		$this->db->select('patients_list_1.pid,patients_list_1.card_number,patients_list_1.hos_id,patients_list_1.pid,patients_list_1.name,patients_list_1.mobile,lab_test_list.t_name,patient_lab_reports.*')->from('patient_lab_reports');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_lab_reports.p_id', 'left');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_reports.test_id', 'left');
 		$this->db->where('patient_lab_reports.p_id',$p_id);
 		return $this->db->get()->result_array();
 	}
