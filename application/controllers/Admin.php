@@ -365,22 +365,23 @@ class Admin extends CI_Controller {
 			$post=$this->input->post();
 			$check_login=$this->Admin_model->email_check_details($post['forgot_password_email']);
 			if(count($check_login)>0){
+				$this->load->library('email');
+				$this->email->set_newline("\r\n");
+				$this->email->set_mailtype("html");
+				$this->email->to($check_login['email_id']);
+				$this->email->from('customerservice@ealthinfra.com', 'Ealthinfra'); 
+				$this->email->subject('Forgot Password'); 
+				$body = "<b> Your Account login Password is </b> : ".$check_login['a_org_password'];
+				$this->email->message($body);
+				if ($this->email->send())
+				{
+					$this->session->set_flashdata('success',"Password sent to your registered email address. Please Check your registered email address");
+					redirect('admin');
+				}else{
+					$this->session->set_flashdata('error'," In Localhost mail  didn't sent");
+					redirect('admin');
+				}
 				
-					$this->load->library('email');
-					$this->email->set_newline("\r\n");
-					$this->email->set_mailtype("html");
-					$this->email->to($check_login['a_email_id']);
-					$this->email->from('customerservice@e-healthinfra.com');
-					$body = "<b> Your Account login Password is </b> : ".$check_login['a_org_password'];
-					 $this->email->message($body);
-					if ($this->email->send())
-					{
-						$this->session->set_flashdata('success',"Password sent to your registered email address. Please check your registered email address");
-						redirect('admin');
-					}else{
-						$this->session->set_flashdata('error'," In Localhost mail  didn't sent");
-						redirect('admin');
-					}
 			}else{
 				$this->session->set_flashdata('error',"Invalid login details. Please try again once");
 				redirect('admin');
