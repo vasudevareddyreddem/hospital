@@ -170,6 +170,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+										<?php if(isset($appointments) && count($appointments)>0){ ?>
 											<?php $cnt=1;foreach($appointments as $lis){ ?>
 				                             <tr>
                                                 <td><?php echo $lis['city']; ?></td>
@@ -186,6 +187,10 @@
 											
                                             
                                         </tbody>
+										<?php } else{ ?>
+								<div>No data available</div>
+								<?php } ?>
+										
                                     </table>
                         </div>
                         </div>
