@@ -114,6 +114,7 @@
                                                         </ul>
                                                     </div>
                                                 </td>
+												
                                             </tr>
 											<div class="modal fade" id="foldersmallModalmove<?php echo $list['id']; ?>" tabindex="-1" role="dialog">
 										   <div class="modal-dialog modal-sm" role="document">

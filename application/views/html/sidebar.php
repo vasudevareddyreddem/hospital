@@ -35,13 +35,13 @@
 											<?php } ?>
 	                                </div>
 	                                <div class="pull-left info">
-	                                    <p> <?php echo isset($userdetails['a_name'])?htmlentities($userdetails['a_name']):''; ?> </p>
+	                                    <p> <?php echo isset($userdetails['r_name'])?htmlentities($userdetails['r_name']):''; ?> </p>
 	                                    <a href="#"><i class="fa fa-circle user-online"></i><span class="txtOnline"> Online</span></a>
 	                                </div>
 	                            </div>
 	                        </li>
 						<?php if($userdetails['role_id']==1){ ?>	
-	                        <li class="nav-item start ">
+	                        <li class="nav-item start <?php if($this->uri->segment(1)=='dashboard'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Dashboard</span>
@@ -51,7 +51,7 @@
 	                           
 	                        </li> 
 	                        <li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle"> <i class="material-icons"> local_hospital</i>
+	                            <a  class="nav-link nav-toggle <?php if($this->uri->segment(1)=='hospital'){ echo "active";} ?>"> <i class="material-icons"> local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -67,7 +67,7 @@
 	                                
 	                            </ul>
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='couponcodes'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('admin/couponcodes');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">list</i>
 	                                <span class="title">Coupon Code</span>
@@ -75,7 +75,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='testtype'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('lab/testtype');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment_turned_in</i>
 	                                <span class="title">Lab Test Types</span>
@@ -83,7 +83,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='oursource'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">track_changes</i>
 	                                <span class="title">Out Source </span>
@@ -91,7 +91,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item  open ">
+							<li class="nav-item  open <?php if($this->uri->segment(1)==''){ echo "active";} ?>  ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -113,28 +113,28 @@
 	                        </li>
 	                       
 							
-							<li class="nav-item  ">
+							<li class="nav-item <?php if($this->uri->segment(2)=='announcement'){ echo "active";} ?> ">
 	                            <a  href="<?php echo base_url('admin/announcement'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item <?php if($this->uri->segment(2)=='cardnumbers'){ echo "active";} ?> ">
 	                            <a  href="<?php echo base_url('admin/cardnumbers'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
 	                                <span class="title">Card Numbers</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item <?php if($this->uri->segment(2)=='cardnumber_distribute'){ echo "active";} ?> ">
 	                            <a  href="<?php echo base_url('admin/cardnumber_distribute'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
 	                                <span class="title">Card Numbers Distribute</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='index'){ echo "active";} ?>">
 	                            <a  href="<?php echo base_url('executive/index'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
-	                                <span class="title">executive</span> <span class="arrow"></span>
+	                                <span class="title">Executive</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
 						<?php }else if($userdetails['role_id']==2){ ?>
-						 <li class="nav-item start ">
+						 <li class="nav-item start <?php if($this->uri->segment(1)=='dashboard'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Dashboard</span>
@@ -143,7 +143,7 @@
 	                            </a>
 	                           
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start  <?php if($this->uri->segment(2)=='patient_list'){ echo "active";} ?>">
 									<a href="<?php echo base_url('hospital/patient_list');?>" class="nav-link nav-toggle">
 										<i class="material-icons">person_add</i>
 										<span class="title">Patient List</span>
@@ -151,18 +151,18 @@
 										<span class="arrow "></span>
 									</a>
 								</li>
-						  <li class="nav-item  open ">
+						  <li class="nav-item  open <?php if($this->uri->segment(1)==''){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
 	                            <ul class="sub-menu">
-	                                <li class="nav-item  ">
+	                                <li class="nav-item  <?php if($this->uri->segment(2)=='index'){ echo "active";} ?> ">
 	                                    <a href="<?php echo base_url('profile'); ?>" class="nav-link "> <span class="title">Hospital Details</span>
 	                                    </a>
 	                                </li>
 									 <li class="nav-item ">
-	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resource </span>
+	                                    <a href="<?php echo base_url('hospital/resource'); ?>" class="nav-link "> <span class="title">Add Resources </span>
 	                                    </a>
 	                                </li>
 									<li class="nav-item ">
@@ -189,7 +189,7 @@
 	                                
 	                            </ul>
 	                        </li> 
-							<li class="nav-item  open ">
+							<li class="nav-item  open  <?php if($this->uri->segment(2)=='index'){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
 	                                <span class="title">Ward Details</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -220,7 +220,7 @@
 	                        </li> 
 							
 							
-							<li class="nav-item  open ">
+							<li class="nav-item  open  <?php if($this->uri->segment(2)=='index'){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">local_hospital</i>
 	                                <span class="title">Agent Flow</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -237,7 +237,7 @@
 	                            </ul>
 	                        </li> 
 							
-							<li class="nav-item  open ">
+							<li class="nav-item  open  <?php if($this->uri->segment(2)==''){ echo "active";} ?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
@@ -257,12 +257,12 @@
 	                                </li>
 	                            </ul>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='announcement'){ echo "active";} ?> ">
 	                            <a  href="<?php echo base_url('hospital/announcement'); ?>" class="nav-link "> <i class="material-icons">announcement</i>
 	                                <span class="title">Release Announcement</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item  ">
+							<li class="nav-item  <?php if($this->uri->segment(2)=='modified_prescription'){ echo "active";} ?> ">
 	                            <a  href="<?php echo base_url('hospital/modified_prescription'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
 	                                <span class="title">Modified Prescription List</span> <span class="arrow"></span>
 	                            </a>
@@ -270,7 +270,7 @@
 							
 						<?php } else if($userdetails['role_id']==3){ ?>
 						 
-						 <li class="nav-item start ">
+						 <li class="nav-item start <?php if($this->uri->segment(2)=='desk'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('resources/desk');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Front desk</span>
@@ -279,7 +279,7 @@
 	                            </a>
 	                           
 	                        </li>   
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(1)=='appointments'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('appointments');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Appointments</span>
@@ -288,7 +288,7 @@
 	                            </a>
 	                           
 	                        </li>  
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='patient_databse'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('resources/patient_databse');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">sd_storage</i>
 	                                <span class="title">Patient Registration Database </span>
@@ -297,7 +297,7 @@
 	                            </a>
 	                           
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(1)=='chat'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat </span>

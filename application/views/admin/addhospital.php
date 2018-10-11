@@ -489,18 +489,8 @@ $(document).ready(function() {
 					message: 'Please enter a valid email address. For example johndoe@domain.com.'
 					}
 				}
-            },hos_rep_nationali_id: {
-                validators: {
-					notEmpty: {
-						message: 'National ID is required'
-					},
-					regexp: {
-					regexp:  /^[0-9]{10,14}$/,
-					message:'National ID must be 10 to 14 digits'
-					}
-				
-				}
-            },hos_rep_add1: {
+            },
+			hos_rep_add1: {
                 validators: {
 					notEmpty: {
 						message: 'Address1 is required'
@@ -748,7 +738,7 @@ $(document).ready(function() {
         })
      
 });$(document).ready(function() {
-    $('#otherdetails').bootstrapValidator({
+    $('#other').bootstrapValidator({
         
         fields: {
             

@@ -33,7 +33,7 @@ class Dashboard extends In_frontend {
 				$data['patients_list']=$this->Admin_model->get_hospitals_patient_list_monthwise($hos_details['hos_id'],date('Y'));
 				$data['new_patients_list']=$this->Admin_model->get_hospitals_new_patient_list_monthwise($hos_details['hos_id'],date('Y'));
 				$data['reschudle_patients_list']=$this->Admin_model->get_hospitals_reschudle_patient_list_monthwise($hos_details['hos_id'],date('Y'));
-
+                 //echo'<pre>';print_r($data);exit;
 				$new_patient_sevendays_list=$this->Admin_model->get_last_sevendays_hospital_new_patient_list($hos_details['hos_id']);
 				$new_all_patient_list=$this->Admin_model->get_hospital_new_patient_list($hos_details['hos_id']);
 
@@ -42,6 +42,8 @@ class Dashboard extends In_frontend {
 				$reschedule_all_patient_list=$this->Admin_model->get_hospital_reschedule_patient_list($hos_details['hos_id']);
 
 				$edit_prescriptions_list=$this->Admin_model->get_hospital_edit_prescriptions_list($hos_details['hos_id']);
+				
+				
 				if(count($new_patient_sevendays_list)>0){
 				$data['newpatient_last_seven']=count($new_patient_sevendays_list);
 				}else{

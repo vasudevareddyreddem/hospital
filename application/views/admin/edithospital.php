@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Email Id</label>
-                           <input type="text" id="hos_email_id" name="hos_email_id" value="<?php echo isset($hospital_details['hos_email_id'])?$hospital_details['hos_email_id']:''; ?>"  class="form-control"  placeholder="Enter Email Id" >
+                           <input type="text" id="hos_bas_email" name="hos_bas_email" value="<?php echo isset($hospital_details['hos_bas_email'])?$hospital_details['hos_bas_email']:''; ?>"  class="form-control"  placeholder="Enter Email Id" >
                         </div>
 						
                      </div>
@@ -448,7 +448,7 @@ $(document).ready(function() {
 					}
                 }
             },
-			 hos_email_id: {
+			 hos_bas_email: {
                 validators: {
 					notEmpty: {
 						message: 'Email is required'

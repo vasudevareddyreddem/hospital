@@ -397,6 +397,7 @@ class Hospital extends In_frontend {
 					$data['hospital_id']=$this->uri->segment(3);
 					$hospital_id=base64_decode($this->uri->segment(3));
 					$data['hospital_details']= $this->Hospital_model->get_hospital_details($hospital_id);
+					//echo '<pre>';print_r($data['hospital_details']);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
 					//echo '<pre>';print_r($data);exit;
@@ -703,6 +704,7 @@ class Hospital extends In_frontend {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					//echo '<pre>';print_r($hos_ids);exit;
 					$data['resource_list']=$this->Hospital_model->get_resources_list($hos_ids['a_id'],$hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('hospital/resource',$data);
@@ -813,7 +815,7 @@ class Hospital extends In_frontend {
 									'r_create_by'=>$hos_ids['a_id'],
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
-									//echo '<pre>';print_r($onedata);exit;
+									//echo '<pre>';print_r($resourcedata);exit;
 									$saveresource =$this->Hospital_model->save_resource($resourcedata);
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource  successfully created");
