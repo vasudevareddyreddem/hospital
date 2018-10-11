@@ -224,7 +224,7 @@ class Mobile_model extends CI_Model
 		$this->db->where('hospital_id',$hos_id);
 		$this->db->where('status',1);
 		$this->db->order_by('coupon_codes.id',"desc");
-		return $this->db->get()->result_array();
+		return $this->db->get()->row_array();
 	}
 	
 }
