@@ -258,9 +258,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">New Patient Registration</span>
-						              <span class="info-box-number"><?php echo isset($newpatient_last_seven)?$newpatient_last_seven:''; ?></span>
+						              <span class="info-box-number"><?php if($newpatient_last_seven>0){ echo $newpatient_last_seven; }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($newpatient_last_seven)?$newpatient_last_seven:''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if($newpatient_last_seven>0){ echo $newpatient_last_seven; }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description">Last 7 days</span>
 						            </div>
@@ -273,9 +273,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total New Patient Registration</span>
-						              <span class="info-box-number"><?php echo isset($total_newpatient_list)?$total_newpatient_list:''; ?></span>
+						              <span class="info-box-number"><?php if($total_newpatient_list>0){ echo $total_newpatient_list; }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($total_newpatient_list)?$total_newpatient_list:''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if($total_newpatient_list>0){ echo $total_newpatient_list; }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description"><?php echo date('d-m-Y'); ?></span>
 						            </div>
@@ -288,9 +288,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">New Reschedule Patients</span>
-						              <span class="info-box-number"><?php echo isset($reschedule_last_seven)?$reschedule_last_seven:''; ?></span>
+						              <span class="info-box-number"><?php if($reschedule_last_seven>0){ echo $reschedule_last_seven; }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($reschedule_last_seven)?$reschedule_last_seven:''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if($reschedule_last_seven>0){ echo $reschedule_last_seven; }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description">Last 7 days</span>
 						            </div>
@@ -308,9 +308,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">person</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total Reschedule patients</span>
-						              <span class="info-box-number"><?php echo isset($total_reschudle_patient_list)?$total_reschudle_patient_list:''; ?></span>
+						              <span class="info-box-number"><?php if($total_reschudle_patient_list>0){ echo $total_reschudle_patient_list; }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($total_reschudle_patient_list)?$total_reschudle_patient_list:''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if($total_reschudle_patient_list>0){ echo $total_reschudle_patient_list; }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description">&nbsp;</span>
 						            </div>
@@ -323,9 +323,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total Patients</span>
-						              <span class="info-box-number"><?php echo isset($patients_list)?count($patients_list):''; ?></span>
+						              <span class="info-box-number"><?php if(count($patients_list)>0){ echo count($patients_list); }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($patients_list)?count($patients_list):''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if(count($patients_list)>0){ echo count($patients_list); }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description">&nbsp;</span>
 						            </div>
@@ -338,9 +338,9 @@ $dat = explode("-", $cri['create_at']);
 						            <span class="info-box-icon push-bottom"><i class="material-icons">group</i></span>
 						            <div class="info-box-content">
 						              <span class="info-box-text">Total Modified prescriptions</span>
-						              <span class="info-box-number"><?php echo isset($prescriptions_list)?$prescriptions_list:''; ?></span>
+						              <span class="info-box-number"><?php if($prescriptions_list>0){ echo $prescriptions_list; }else{ echo "0"; }  ?></span>
 						              <div class="progress">
-						                <div class="progress-bar" style="width: <?php echo isset($prescriptions_list)?$prescriptions_list:''; ?>%"></div>
+						                <div class="progress-bar" style="width: <?php if($prescriptions_list>0){ echo $prescriptions_list; }else{ echo "0"; }  ?>%"></div>
 						              </div>
 						              <span class="progress-description">&nbsp;</span>
 						            </div>
