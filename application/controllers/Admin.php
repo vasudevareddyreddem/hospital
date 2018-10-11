@@ -174,6 +174,7 @@ class Admin extends CI_Controller {
 					
 					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
 					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/coupon_codes',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -702,6 +703,7 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('userdetails'))
 		{
 				$post=$this->input->post();
+                if(isset($post['id']) && count($post['id'])>0){
 				foreach($post['id'] as $list){
 					$lab_name=$this->Admin_model->get_outsource_lab_name($list);
 					$names[]=$lab_name['resource_name'];
@@ -710,7 +712,14 @@ class Admin extends CI_Controller {
 				$data['msg']=1;
 				$data['names_list']=$tt;
 				$data['ids']=$post['id'];
-				echo json_encode($data);exit;	
+				echo json_encode($data);exit;
+
+                }else{
+					$data['msg']=1;
+					$data['names_list']='';
+					$data['ids']='';
+					echo json_encode($data);exit;	
+				}  
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');

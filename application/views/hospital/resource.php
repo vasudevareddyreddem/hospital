@@ -17,7 +17,7 @@
          <div class="panel tab-border card-topline-green">
             <header class="panel-heading panel-heading-gray custom-tab ">
                <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resource</a>
+                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Add Resources</a>
                   </li>
                   <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo "active"; } ?>">Resources List</a>
                   </li>
@@ -136,7 +136,7 @@
                            </div>
                            <div class="clearfix">&nbsp;</div>
 						   <div class="col-sm-10">
-                           <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Resource</button>
+                           <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add Resources</button>
                            </div><div class="clearfix">&nbsp;</div>
                         </div>
 						</form>

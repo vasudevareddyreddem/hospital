@@ -103,7 +103,7 @@ class Executive extends In_frontend {
 				$save=$this->Admin_model->executive_details($save_data);	
 					//echo'<pre>';print_r($save);exit;
 					if(count($save)>0){
-					$this->session->set_flashdata('success',"executive details are successfully added");	
+					$this->session->set_flashdata('success',"Executive details are successfully added");	
 					redirect('executive/index/'.base64_encode(1));	
 					}else{
 						$this->session->set_flashdata('error',"techechal probelem occur ");
@@ -210,7 +210,7 @@ class Executive extends In_frontend {
 				$update=$this->Admin_model->update_executive_details($post['e_id'],$update_data);	
 					//echo'<pre>';print_r($update);exit;
 					if(count($update)>0){
-					$this->session->set_flashdata('success',"executive details are successfully updated");	
+					$this->session->set_flashdata('success',"Executive details are successfully updated");	
 					redirect('executive/index/'.base64_encode(1));	
 					}else{
 						$this->session->set_flashdata('error',"techechal probelem occur ");

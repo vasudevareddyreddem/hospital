@@ -24,7 +24,7 @@
                      </li>
 					 
                       <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#home" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==2){ echo "active";}?>">App Appointments</a>
-					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ echo count($app_appointment_list_count); } ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ echo count($app_appointment_list_count); } else{echo "0";}?>
 					 </div>
                      </li>
                      <li class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
@@ -44,7 +44,7 @@
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
                              
 									
-									 <form name="add_appointment" id="add_appointment" action="<?php echo base_url('appointments/add'); ?>" method="post" class="pad30 form-horizontal" >
+									 <form name="add_appointment" id="add_appointment" action="<?php echo base_url('appointments/add'); ?>" method="post" class="pad30 form-horizontal" onsubmit="return validateDate()" >
                                            
                                             <div class="row">
 												<div class="form-group col-md-6">
@@ -85,7 +85,7 @@
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                                       <input class="form-control" size="16" type="text" id="date" name="date" value="">
-                                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                      <span class="input-group-addon"><span class="fa fa-calendar"><span style="color:red" id="check"></span></span></span>
                                                    </div>
                                                 </div> 
 												<div class="form-group col-md-6">
@@ -100,7 +100,7 @@
 													</select>
                                                 </div>
 											</div>
-											<button type="submit" class="btn btn-primary">Book Appointment</button>
+											<button type="submit" class="btn btn-primary"   >Book Appointment</button>
 											</form>
                            </div>
                            </div>
@@ -147,7 +147,7 @@
 								   <td colspan="2"> <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date" value="<?php echo $list['date']; ?> ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date"  value="<?php echo $list['date']; ?> ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -261,6 +261,17 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+function validateDate() {
+    var userdate = new Date(document.getElementById("date").value).toJSON().slice(0,10);
+    var today = new Date().toJSON().slice(0,10);
+    if(userdate < today){
+    alert("Date must be in future");
+	 return false;
+    }
+}
+</script>
+<script>
+ 
 $(document).ready(function() {
     $('#example3').DataTable( {
         "order": [[ 0, "desc" ]]

@@ -29,7 +29,7 @@
 			<thead>
 				<tr>
 					<th> Test Name </th>
-					<th> Date & TIme </th>
+					<th> Date & Time </th>
 					<th> Amount</th>
 					<th> Duration </th>
 					<th> Status </th>
