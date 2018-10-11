@@ -28,7 +28,7 @@
                                             <tr>
                                                 <th>Problem</th>
                                                 <th>Symptom</th>
-                                                <th>Date</th>
+                                                <th>Date& Time</th>
                                                 <th>Download</th>
                                             </tr>
                                         </thead>

@@ -156,7 +156,7 @@ function returnvalidation(){
 	if(ids!='' && msg!=''){
 		document.getElementById("addnotifications").submit();
 	}else if(ids==''){
-		alert('please  select and submit hospital list in any one');
+		alert('Please select & submit atleast one hospital');
 		return false;
 	}else if(msg==''){
 		alert('Comment is required');

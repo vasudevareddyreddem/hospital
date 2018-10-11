@@ -150,7 +150,9 @@
 										 <img src="<?php echo base_url();?>assets/vendor/img/dp.jpg" class="img-circle" alt="User Image" />
 										<?php } ?>
 								<?php } ?>
-                                <span class="username username-hide-on-mobile">  <?php echo isset($userdetails['a_name'])?htmlentities($userdetails['a_name']):''; ?> </span>
+							
+								
+                                <span class="username username-hide-on-mobile">  <?php echo isset($userdetails['r_name'])?htmlentities($userdetails['r_name']):''; ?> </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
