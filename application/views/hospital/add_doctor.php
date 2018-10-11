@@ -170,7 +170,8 @@
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']).'/'.base64_encode($list['a_id']));?>');adminstatus('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                            <li>
+																<a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode($list['r_id']).'/'.base64_encode($list['r_status']).'/'.base64_encode($list['a_id']);?>');adminstatus('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i><?php if($list['r_status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li> 
 															<li>

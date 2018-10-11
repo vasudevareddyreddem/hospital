@@ -85,7 +85,7 @@
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                                                       <input class="form-control" size="16" type="text" id="date" name="date" value="">
-                                                      <span class="input-group-addon"><span class="fa fa-calendar"><br><br><span id="check"></span></span></span>
+                                                      <span class="input-group-addon"><span class="fa fa-calendar"><span style="color:red" id="check"></span></span></span>
                                                    </div>
                                                 </div> 
 												<div class="form-group col-md-6">
@@ -265,7 +265,7 @@ function validateDate() {
     var userdate = new Date(document.getElementById("date").value).toJSON().slice(0,10);
     var today = new Date().toJSON().slice(0,10);
     if(userdate < today){
-     document.getElementById("check").innerHTML= "message";
+    alert("Date must be in future");
 	 return false;
     }
 }

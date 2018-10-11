@@ -876,6 +876,8 @@ class Hospital extends In_frontend {
 							);
 							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
 							$this->Admin_model->update_resourse_details(base64_decode($a_id),$admin_stusdetails);
+							
+							//echo $this->db->last_query();exit;
 							if(count($statusdata)>0){
 								if($status==1){
 								$this->session->set_flashdata('success',"Resource successfully deactivated.");
@@ -917,7 +919,7 @@ class Hospital extends In_frontend {
 			if($admindetails['role_id']=1){
 					$resourse_id=$this->uri->segment(3);
 					$resouse_detail= $this->Hospital_model->get_resourse_details(base64_decode($resourse_id));
-
+					//echo '<pre>';print_r($resouse_detail);exit;
 					if($resourse_id!=''){
 						$deletdata=array(
 							'r_status'=>2,
@@ -925,6 +927,13 @@ class Hospital extends In_frontend {
 							);
 							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
 							if(count($deletedata)>0){
+								
+								$admin_stusdetails=array(
+									'a_status'=>2,
+									'a_updated_at'=>date('Y-m-d H:i:s')
+									);
+								$this->Admin_model->update_resourse_details($resouse_detail['a_id'],$admin_stusdetails);
+							
 								$this->session->set_flashdata('success',"Resource successfully removed.");
 									if($resouse_detail['role_id']==6){
 										redirect('hospital/adddoctor/'.base64_encode(1));
