@@ -31,6 +31,7 @@
 					<th> Patient Id </th>
 					<th> Billing Id </th>
 					<th> Name </th>
+					<th> Test Name </th>
 					<th> Problem </th>
 					<th> Symptoms </th>
 					<th> Date </th>
@@ -44,6 +45,7 @@
 					<td> <?php echo $list['pid']; ?> </td>
 					<td> <?php echo $list['b_id']; ?> </td>
 					<td><?php echo $list['name']; ?></td>
+					<td><?php echo $list['t_name']; ?></td>
 					<td><?php echo $list['problem']; ?></td>
 					<td><?php echo $list['symptoms']; ?></td>
 					<td><?php echo date('M-j-Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>

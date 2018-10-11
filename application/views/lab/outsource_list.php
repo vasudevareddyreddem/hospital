@@ -117,7 +117,7 @@
 											 <form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
 											 <input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 											 <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-											 <table id="myTable" class="table-bordered">
+											 <table  class="table-bordered">
 												  <tr class="header">
 													<th style="">Select</th>
 													<th style="">Lab Name</th>
@@ -182,7 +182,7 @@
 												<div class="panel-heading ">
 												<h3 class="font-weight-bold text-center">Send for Procurement</h3>
 												</div>
-												<table id="myTable">
+												<table >
 													  <tr class="header">
 														<th style="width:100%;"><input type="checkbox" name="checkall" class="select-checkall" onchange="checkAll(this)" value="" value="">&nbsp;Name of the test</th>
 														
@@ -194,7 +194,7 @@
 														<tr>
 														<td>
 													
-														<input type="checkbox" class="checkcheckbox" id="test_id" name="test_id[]" value="<?php echo $li['t_id'].'_'.$li['id']; ?>"> &nbsp; 
+														<input type="checkbox" class="checkcheckbox" id="test_id" name="test_id[]" value="<?php echo $li['t_id'].'_'.$li['id']; ?>">
 														<b>Test Name : <?php echo isset($li['t_name'])?$li['t_name']:''; ?></b>
 														</td>
 													   </tr>
@@ -216,9 +216,9 @@
 			<thead>
 				<tr>
 					<th> Test Name </th>
-					<th> Date & TIme </th>
+					<th> Date & Time </th>
 					<th> Amount</th>
-					<th> Duartion </th>
+					<th> Duration </th>
 					<th> Status </th>
 					<th> Action </th>
 					

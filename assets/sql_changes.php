@@ -330,3 +330,7 @@ CREATE TABLE `executive_list` (
   PRIMARY KEY (`e_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1
 
+
+
+ALTER TABLE `hospital`.`appointment_bidding_list`   
+  ADD COLUMN `event_status` INT(11) DEFAULT 0  NULL AFTER `status`;
