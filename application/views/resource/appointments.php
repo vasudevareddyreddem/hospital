@@ -265,7 +265,7 @@ function validateDate() {
     var userdate = new Date(document.getElementById("date").value).toJSON().slice(0,10);
     var today = new Date().toJSON().slice(0,10);
     if(userdate < today){
-     document.getElementById("check").innerHTML= "Date must be in future";
+    alert("Date must be in future");
 	 return false;
     }
 }
