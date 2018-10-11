@@ -363,13 +363,13 @@ class Admin extends CI_Controller {
 		if(!$this->session->userdata('userdetails'))
 		{
 			$post=$this->input->post();
-			$check_login=$this->Admin_model->email_check_details($post['forgot_password_email']);
+			$check_login=$this->Admin_model->email_check_details_check($post['forgot_password_email']);
 			if(count($check_login)>0){
 				$this->load->library('email');
 				$this->email->set_newline("\r\n");
 				$this->email->set_mailtype("html");
 				$this->email->to($check_login['email_id']);
-				$this->email->from('customerservice@ealthinfra.com', 'Ealthinfra'); 
+				$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
 				$this->email->subject('Forgot Password'); 
 				$body = "<b> Your Account login Password is </b> : ".$check_login['a_org_password'];
 				$this->email->message($body);

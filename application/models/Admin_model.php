@@ -43,6 +43,12 @@ class Admin_model extends CI_Model
 		$sql = "SELECT * FROM admin WHERE a_email_id ='".$email."'";
 		return $this->db->query($sql)->row_array();	
 	}
+	public function email_check_details_check($a_email_id){
+		$this->db->select('*')->from('admin');		
+		$this->db->where('a_email_id', $a_email_id);
+		$this->db->where('a_status !=', 2);
+        return $this->db->get()->row_array();	
+	}
 	public function get_admin_details($admin_id){
 		$this->db->select('admin.a_id,admin.role_id,admin.a_email_id,admin.out_source')->from('admin');		
 		$this->db->where('a_id', $admin_id);
