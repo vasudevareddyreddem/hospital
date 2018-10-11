@@ -35,13 +35,13 @@
                               <div class="row">
 							  <div class="col-md-4">
 									<label> Resource Designation</label>
-									<select class="form-control" id="designation" name="designation">
+									<select class="form-control" id="designation" name="designation" >
 										<option value="6">Doctor</option>
 									</select>
 									</div>
                                  <div class="col-md-4">
 									<label> Name</label>
-										<input class="form-control" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
+										<input class="form-control" autofocus="autofocus" id="resource_name" name="resource_name" value="" type="text" placeholder="Name">
 									</div>
 									<div class="col-md-4">
 									<label> Mobile Number</label>
