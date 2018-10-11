@@ -369,7 +369,7 @@ class Admin extends CI_Controller {
 				$this->load->library('email');
 				$this->email->set_newline("\r\n");
 				$this->email->set_mailtype("html");
-				$this->email->to($check_login['email_id']);
+				$this->email->to($check_login['a_email_id']);
 				$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
 				$this->email->subject('Forgot Password'); 
 				$body = "<b> Your Account login Password is </b> : ".$check_login['a_org_password'];
