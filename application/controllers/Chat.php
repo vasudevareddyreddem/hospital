@@ -333,7 +333,7 @@ class Chat extends In_frontend {
 			}
 			foreach(explode(",",$post['hospitals_ids']) as $List){
 				
-				if($List !=''){
+				if($List!=''){
 					$msg=array(
 					'sender_id'=>$admindetails['a_id'],	
 					'comments'=>isset($post['comment'])?$post['comment']:'',
@@ -377,6 +377,7 @@ class Chat extends In_frontend {
 			}else{
 				$img='';
 			}
+          if(isset($post['labs_ids']) && $post['labs_ids']!=''){
 			foreach(explode(",",$post['labs_ids']) as $List){
 				if($List!=''){
 					$msg=array(
@@ -415,11 +416,17 @@ class Chat extends In_frontend {
 					
 			}
 
-			
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
+		            }else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/outsourcelabgropchat/');
+				}
+
+          }else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
 		}
+
+
 	}
 	public function adminchating()
 	{	
