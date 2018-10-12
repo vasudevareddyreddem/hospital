@@ -1252,7 +1252,13 @@ class Resources extends In_frontend {
 						'out_source'=>$test_details['out_source'],
 						'status'=>1
 						);
-				$addtest=$this->Resources_model->add_addpatient_test($test_list);
+				$check=$this->Resources_model->check_test_already_exist($lists,$post['patinet_id'],$post['patinet_bid'],date('Y-m-d'));
+				if(count($check)>0){
+					
+				}else{
+					$addtest=$this->Resources_model->add_addpatient_test($test_list);
+				}
+				
 				}
 				$testcount=$this->Resources_model->get_patient_test_count($post['patinet_id'],date('Y-m-d'));
 
