@@ -221,6 +221,7 @@
    			type: "POST",
    			format:"Json",
    					success:function(data){
+						alert(data);
 					$('#notification_count1').empty();
    					$('#notification_count').empty();
    					$('#notification_time').empty();

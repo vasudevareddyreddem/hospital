@@ -1,4 +1,7 @@
-<style>
+  
+  <?php //echo'<pre>';print_r($chat_list);exit; ?>
+  
+  <style>
    .dat-help div.dataTables_wrapper div.dataTables_filter input {
     margin-left: 0.5em;
     display: inline-block;

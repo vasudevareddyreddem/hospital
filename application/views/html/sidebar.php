@@ -50,8 +50,8 @@
 	                            </a>
 	                           
 	                        </li> 
-	                        <li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle <?php if($this->uri->segment(1)=='hospital'){ echo "active";} ?>"> <i class="material-icons"> local_hospital</i>
+	                        <li class="nav-item  open <?php if($this->uri->segment(1)=='hospital||add'){ echo "active";} ?>">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons"> local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -91,12 +91,12 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item  open <?php if($this->uri->segment(1)==''){ echo "active";} ?>  ">
+							<li class="nav-item  open <?php if($this->uri->segment(2)=='gropchat||outsourcelabgropchat||admin_softwareteam'){ echo "active";}else{'deactive';}?> ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                            <ul class="sub-menu">
+	                            <ul class="sub-menu ">
 	                               <li class="nav-item ">
 	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
 	                                    </a>
