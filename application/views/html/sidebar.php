@@ -410,7 +410,7 @@
 	                            </ul>
 	                        </li>
 								<?php  }else{ ?>
-								<li class="nav-item start ">
+								<li class="nav-item start <?php if($this->uri->segment(2)=='patient_list'){ echo "active";} ?>">
 									<a href="<?php echo base_url('lab/patient_list');?>" class="nav-link nav-toggle">
 										<i class="material-icons">person_add</i>
 										<span class="title">Patient List</span>
@@ -418,7 +418,7 @@
 										<span class="arrow "></span>
 									</a>
 								</li>
-								<li class="nav-item start ">
+								<li class="nav-item start <?php if($this->uri->segment(1)=='lab'){ echo "active";}else{ echo "deactive";}?>">
 									<a href="<?php echo base_url('lab');?>" class="nav-link nav-toggle">
 										<i class="material-icons">format_color_fill</i>
 										<span class="title">Lab Test Details</span>
@@ -426,7 +426,7 @@
 										<span class="arrow "></span>
 									</a>
 								</li>
-								<li class="nav-item start ">
+								<li class="nav-item start <?php if($this->uri->segment(2)=='outsources_labtests'){ echo "active";} ?>">
 									<a href="<?php echo base_url('lab/outsources_labtests');?>" class="nav-link nav-toggle">
 										<i class="material-icons">details</i>
 										<span class="title">Out Source Lab Test Details</span>
@@ -434,7 +434,7 @@
 										<span class="arrow "></span>
 									</a>
 								</li> 
-								<li class="nav-item start ">
+								<li class="nav-item start <?php if($this->uri->segment(2)=='bidding_list'){ echo "active";} ?>">
 									<a href="<?php echo base_url('lab/bidding_list');?>" class="nav-link nav-toggle">
 										<i class="material-icons">format_list_numbered</i>
 										<span class="title">Procurement Lab Test List</span>
@@ -442,7 +442,7 @@
 										
 									</a>
 								</li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='patient_database'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('lab/patient_database');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">sd_storage</i>
 	                                <span class="title">Patient Database</span>
@@ -450,7 +450,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-									<li class="nav-item start ">
+									<li class="nav-item start <?php if($this->uri->segment(1)=='chat'){ echo "active";} ?> ">
 										<a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 											<i class="material-icons">email</i>
 											<span class="title">Chat</span>
