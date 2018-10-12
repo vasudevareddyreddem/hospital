@@ -109,7 +109,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
 			<?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
                <?php $cnt=0;foreach($encounters_list as $list){
 				?>
-               <?php if($cnt<=3){ ?>
+               <?php if($cnt<=2){ ?>
 				<div class="col-md-4 py-4">
 					<table class="table table-bordered ">
 					<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
@@ -367,7 +367,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
 				<div class="col-md-6">
 				<div class="row">
 				<div class="col">
-				<form action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
+				<form class="pharm" id="pharm" action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
 				  <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 					<input type="hidden" name="type" id="type" value="1">
 					<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
@@ -661,6 +661,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
             <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
+		 
             <div class="">
                <div class="">
                   <div class=" card card-topline-red">
@@ -860,10 +861,10 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
          
       </div>
    </div>
-</div>
+
 <!-- patient_lab_test_list_model-->
 <script>
- 
+
 function check_lab_test(){
 	var count=$('#test_list_count').val();
 	if(count==''){
@@ -910,6 +911,8 @@ function addtestlist(){
 							 $('#testcount').append(data.count);
 							 $('#test_list_count').val(data.count);
 							 $('#popupclose').click();
+							 alert('Test added successfully');
+	
 						}
 					}
 			});
@@ -1121,6 +1124,36 @@ function addtestlist(){
 	})
      
 });	
+
+
+
+
+$(document).ready(function() {
+	$('#pharm').bootstrapValidator({
+		fields: {
+          
+             add_medicines: {
+                 validators: {
+					notEmpty: {
+						message: 'Comment is required'
+					}
+				}
+            }
+			}
+		
+	})
+     
+});	
+
+
+
+
+
+
+
+
+
+
    function removemedicine(id){
    	if(id!=''){
    		 jQuery.ajax({
