@@ -317,18 +317,10 @@
 
 							<div class="container">
                            <div class="row">
-                              <div class="col-md-6">
-                                 <label>Investigation type</label>									
-                                 <select class="form-control" id="investigation_type" name="investigation_type">
-                                    <option value="">Select</option>
-                                    <option value="lab">lab  </option>
-                                    <option value="Radiology">Radiology</option>
-                                 </select>
-                              </div>
                               <div class="form-group col-md-6">
-                                 <label for="email">Search</label><br>
+                                 <label for="email">Select Tests</label><br>
                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#searchmodal" class="btn btn-sm btn-warning">Search</a>
-								<span id="countdisplaying" style="display:none">Patinet test count : <span id="testcount" ></span></span>
+								<span id="countdisplaying" style="display:none">Patient test count : <span id="testcount" ></span></span>
 							  </div>
 							  
 							  <input type="hidden" name="test_list_count" id="test_list_count" value="">
