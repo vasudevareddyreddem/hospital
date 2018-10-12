@@ -863,6 +863,21 @@
    </div>
 
 <!-- patient_lab_test_list_model-->
+    <script type="text/javascript">
+      $(document).ready(function() {
+               $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+				   if(stepNumber==1){
+					   if($('#frequency').val()=='' && $('#priority').val()==''){
+						   alert('Medication/Investigation details required');return false;
+					   }
+					   
+				   }
+				   //alert());
+					//return confirm("Do you want to leave the step "+frequency+"?");
+		});
+          
+      }); 
+    </script>
 <script>
 
 function check_lab_test(){
