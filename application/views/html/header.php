@@ -221,12 +221,11 @@
    			type: "POST",
    			format:"Json",
    					success:function(data){
-						alert(data);
 					$('#notification_count1').empty();
    					$('#notification_count').empty();
    					$('#notification_time').empty();
+   					$('#notification_msg').empty();
    					var parsedData = JSON.parse(data);
-   					$('#notification_msg').append(parsedData.names_list);
    					$('#notification_msg').append(parsedData.names_list);
    					$('#notification_time').append(parsedData.time);
    					$('#notification_count1').append(parsedData.Unread_count);
