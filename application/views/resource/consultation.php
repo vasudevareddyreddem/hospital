@@ -173,6 +173,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
                <?php } ?>-->
                <div class="clearfix">&nbsp;</div>
                <div class="container">
+			    <form id="vitalscomment" name="vitalscomment" role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
                   <div class="form-group" id="fields">
                      <label class="control-label" for="field1"><strong>Comments</strong></label>
                      <div class="controls">
@@ -442,11 +443,11 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
                                  <?php $c=0;foreach($encounters_list as $lists){ ?>
                                  <?php if($c==0){?>
                                  <li class="nav-item">
-                                    <a href="#tab_6_<?php echo $lists['id']; ?>" class="active" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?></a>
+                                    <a href="#tab_6_<?php echo $lists['id']; ?>" class="active" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?>(<?php echo $lists['date']; ?>)</a>
                                  </li>
                                  <?php }else{ ?>
                                  <li class="nav-item">
-                                    <a href="#tab_6_<?php echo $lists['id']; ?>" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?></a>
+                                    <a href="#tab_6_<?php echo $lists['id']; ?>" data-toggle="tab"><?php echo isset($lists['vitaltype'])?$lists['vitaltype']:'Vitals'; ?>(<?php echo $lists['date']; ?>)</a>
                                  </li>
                                  <?php } ?>
                                  <?php $c++;} ?>
