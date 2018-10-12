@@ -27,7 +27,8 @@
                                         </div>
                                         <div class="card-body " style="padding: 0px 24px 24px 24px;">
                                         <div class="table-responsive">
-										<form id="prescription" name="prescription" method="post" target="_blank"  action="<?php echo base_url('Users/billprescription'); ?>">
+										<form id="prescription" name="prescription" method="post" target="_blank"  action="<?php echo base_url('Users/manualbillprescription'); ?>">
+                                            <input type="hidden" name="id" id="id" value="<?php echo isset($details['id'])?$details['id']:''; ?>">
                                             <input type="hidden" name="pid" id="pid" value="<?php echo isset($details['pid'])?$details['pid']:''; ?>">
                                             <input type="hidden" name="bid" id="bid" value="<?php echo isset($b_id)?$b_id:''; ?>">
 											<table class="table custom-table table-hover" style="border-top:none">
