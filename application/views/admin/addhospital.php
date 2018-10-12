@@ -51,7 +51,7 @@
 					<div class="row">
                         <div class="form-group col-md-6">
                            <label for="email">Hospital Contact Number</label>
-                           <input type="text" id="hos_con_number" name="hos_con_number" value="<?php echo isset($hospital_details['hos_con_number'])?$hospital_details['hos_con_number']:''; ?>" class="form-control"  placeholder="Enter Contact No" >
+                           <input type="text" id="hos_con_number" name="hos_con_number" autofocus="autofocus" value="<?php echo isset($hospital_details['hos_con_number'])?$hospital_details['hos_con_number']:''; ?>" class="form-control"  placeholder="Enter Contact No" >
                         </div>
                         <div class="form-group col-md-6">
                            <label for="email">Email Id</label>

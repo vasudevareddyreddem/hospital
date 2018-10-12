@@ -50,8 +50,8 @@
 	                            </a>
 	                           
 	                        </li> 
-	                        <li class="nav-item  open ">
-	                            <a  class="nav-link nav-toggle <?php if($this->uri->segment(1)=='hospital'){ echo "active";} ?>"> <i class="material-icons"> local_hospital</i>
+	                        <li class="nav-item  open <?php if($this->uri->segment(1)=='hospital||add'){ echo "active";} ?>">
+	                            <a  class="nav-link nav-toggle"> <i class="material-icons"> local_hospital</i>
 	                                <span class="title">Hospital</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
@@ -91,12 +91,12 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item  open <?php if($this->uri->segment(1)==''){ echo "active";} ?>  ">
+							<li class="nav-item  open <?php if($this->uri->segment(2)=='gropchat||outsourcelabgropchat||admin_softwareteam'){ echo "active";}else{'deactive';}?> ">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>  <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                            <ul class="sub-menu">
+	                            <ul class="sub-menu ">
 	                               <li class="nav-item ">
 	                                    <a href="<?php echo base_url('admin/gropchat'); ?>" class="nav-link "> <span class="title">Group of Hospital</span>
 	                                    </a>
@@ -309,7 +309,7 @@
 							
 						<?php } else if($userdetails['role_id']==4){ ?>
 						 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(1)=='users' && $this->uri->segment(2)=='' ){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('users');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Prescription</span>
@@ -317,7 +317,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='addprescription' || $this->uri->segment(2)=='view_manualprescription'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('users/addprescription');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Add Prescription</span>
@@ -325,7 +325,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='completedprescription' ||  $this->uri->segment(2)=='viewprescription'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('users/completedprescription');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Completed Prescription</span>
@@ -334,7 +334,7 @@
 	                            </a>
 	                        </li> 
 							
-						 <li class="nav-item start ">
+						 <li class="nav-item start <?php if($this->uri->segment(1)=='medicine' && $this->uri->segment(2)=='' ){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('medicine');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Upload medicine</span>
@@ -342,7 +342,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(1)=='medicine' && $this->uri->segment(2)=='lists' ){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('medicine/lists');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Medicine List</span>
@@ -350,7 +350,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							  <li class="nav-item start ">
+							  <li class="nav-item start <?php if($this->uri->segment(1)=='chat' ){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>

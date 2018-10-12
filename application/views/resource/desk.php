@@ -999,6 +999,8 @@
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <input type="hidden" id="op" name="op" value="1">
+											 <input type="hidden" name="already_coupon_code_used" id="already_coupon_code_used" value="0">
+
 
 											  <div class="row">
                                                <div class="form-group col-md-6">
@@ -1185,6 +1187,7 @@ function checkpatient_number(num){
 function apply_couponcode(){
 	var amount=$('#bill_amount').val();
 	if(amount !=''){
+		
 		document.getElementById("errormsg").innerHTML="";
 				jQuery.ajax({
    				url: "<?php echo base_url('admin/checking_coupon_code');?>",
@@ -1202,6 +1205,7 @@ function apply_couponcode(){
 						if(data.msg==1){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ"> Coupon Code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount').val(data.amt);
+							
 							document.getElementById("successmsg").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
@@ -1223,6 +1227,10 @@ function apply_couponcode(){
 function apply_couponcode1(){
 	var amount=$('#bill_amount1').val();
 	if(amount !=''){
+		if($('#already_coupon_code_used').val()==1){
+		 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon Code already used. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+			return false;
+		}
 		document.getElementById("errormsg1").innerHTML="";
 				jQuery.ajax({
    				url: "<?php echo base_url('admin/checking_coupon_code');?>",
@@ -1240,6 +1248,7 @@ function apply_couponcode1(){
 						if(data.msg==1){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Coupon Code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount1').val(data.amt);
+							$('#already_coupon_code_used').val(1);
 							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
 						}
 						if(data.msg==2){
