@@ -1,4 +1,4 @@
-<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
+a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
 <style>
    .entry:not(:first-of-type)
    {
@@ -672,7 +672,7 @@
                <div class="">
                   <div class=" card card-topline-red">
                      <div class="card-head">
-                        <header>List</header>
+                        <header>Select Test</header>
                      </div>
                      <div class="card-body ">
                         <div class="row">
@@ -1111,6 +1111,7 @@ function addtestlist(){
 	})
      
 });
+
 	$(document).ready(function() {
 	$('#vitalscomment').bootstrapValidator({
 		fields: {

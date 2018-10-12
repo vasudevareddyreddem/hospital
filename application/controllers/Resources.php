@@ -1259,8 +1259,9 @@ class Resources extends In_frontend {
 				{
 				$data['msg']=1;
 				$data['count']=count($testcount);
-				echo json_encode($data);exit;	
+				echo json_encode($data);exit;
 				}
+				
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -1325,6 +1326,7 @@ class Resources extends In_frontend {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['patient']=base64_decode($this->uri->segment(3));
 					$data['report_list']=$this->Lab_model->get_all_patient_reports_lists($data['patient']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/patient_report_list',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;

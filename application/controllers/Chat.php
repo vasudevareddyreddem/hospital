@@ -370,6 +370,7 @@ class Chat extends In_frontend {
 			$userdetails=$this->Admin_model->get_hospital_details($admindetails['a_id']);
 			$post=$this->input->post();
 			//echo '<pre>';print_r($post);
+			  if(isset($post['labs_ids']) && $post['labs_ids']!=''){
 			if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
 				$temp = explode(".", $_FILES["image"]["name"]);
 				$img = round(microtime(true)) . '.' . end($temp);
@@ -377,9 +378,10 @@ class Chat extends In_frontend {
 			}else{
 				$img='';
 			}
-          if(isset($post['labs_ids']) && $post['labs_ids']!=''){
+        
 			foreach(explode(",",$post['labs_ids']) as $List){
 				if($List!=''){
+					//echo '<pre>';print_r($List);
 					$msg=array(
 					'user_id'=>$List,	
 					'comment'=>$post['comment'],
@@ -391,13 +393,13 @@ class Chat extends In_frontend {
 					'updated_by'=>date('Y-m-d H:i:s'),
 					'lab_id'=>$List,
 					);
-					//echo '<pre>';print_r($msg);exit;
+					
 					$comments=$this->Chat_model->adding_adminchating_with_outsource_lab_chating($msg);
 				}
 			}
 			
 			
-			//exit;
+			exit;
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
