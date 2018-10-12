@@ -114,7 +114,7 @@
 																			</ul>
 												</div>
 												<div class="panel-footer"><br>
-													<form id="admin_grou_chat" action="<?php echo base_url('chat/adminlabchatingpost'); ?>" method="post" enctype="multipart/form-data">
+													<form onsubmit="return returnvalidation();" id="admin_grou_chat" action="<?php echo base_url('chat/adminlabchatingpost'); ?>" method="post" enctype="multipart/form-data">
 													<div class="panel-footer"><br>
 														<div class="input-group input-chat-des">
 															 <input type="hidden" name="labs_ids" id="labs_ids" value="">
@@ -156,11 +156,14 @@ $(document).ready(function(){
 function returnvalidation(){
 	var ids=$('#labs_ids').val();
 	var msg =$('#admin_comment').val();
+	
+	//alert(ids);
+	//alert(msg); return false;
 	if(ids!='' && msg!=''){
 		document.getElementById("admin_grou_chat").submit();
 		return true;
 	}else if(ids==''){
-		alert('Please select & submit atleast one hospital');
+		alert('Please select & submit atleast one Out source lab');
 		return false;
 	}else if(msg==''){
 		alert('Comment is required');

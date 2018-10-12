@@ -398,8 +398,6 @@ class Chat extends In_frontend {
 				}
 			}
 			
-			
-			exit;
 			if(count($comments)>0){
 					$this->session->set_flashdata('success',"Message sent successfully.");
 					if(isset($post['replaying']) && $post['replaying']==1){
