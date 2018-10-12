@@ -109,7 +109,7 @@
 			<?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
                <?php $cnt=0;foreach($encounters_list as $list){
 				?>
-               <?php if($cnt<=3){ ?>
+               <?php if($cnt<=2){ ?>
 				<div class="col-md-4 py-4">
 					<table class="table table-bordered ">
 					<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
@@ -367,7 +367,7 @@
 				<div class="col-md-6">
 				<div class="row">
 				<div class="col">
-				<form action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
+				<form class="pharm" id="pharm" action="<?php echo base_url('resources/patient_completed'); ?>" method="post">
 				  <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 					<input type="hidden" name="type" id="type" value="1">
 					<input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
@@ -661,6 +661,7 @@
             <button type="button" id="popupclose" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
          </div>
          <div class="modal-body" style="height:400px;overflow:hidden; overflow-y: scroll;">
+		 
             <div class="">
                <div class="">
                   <div class=" card card-topline-red">
@@ -858,7 +859,7 @@
          
       </div>
    </div>
-</div>
+
 <!-- patient_lab_test_list_model-->
     <script type="text/javascript">
       $(document).ready(function() {
@@ -902,10 +903,16 @@ function check_qty(){
 	
 }
 function addtestlist(){
+	
 	var favorite = [];
             $.each($("input[name='testlistid']:checked"), function(){            
                 favorite.push($(this).val());
             });
+			
+			if(favorite==''){
+				alert('Please choose atleast one test');
+				return false;
+			}
 			jQuery.ajax({
 					url: "<?php echo base_url('resources/selected_test');?>",
 					data: {
@@ -923,7 +930,11 @@ function addtestlist(){
 							 $('#testcount').append(data.count);
 							 $('#test_list_count').val(data.count);
 							 $('#popupclose').click();
+							 alert('Test added successfully');
+	
 						}
+						
+						
 					}
 			});
        //+ favorite.join("/");
@@ -968,10 +979,13 @@ function addtestlist(){
 						for(i=0; i<data.text.length; i++) {
 						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
 						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type+"</td><td>"+data.text[i].modality+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
-
+						
 						}
+						
 						}
+					
 				 }
+				 
 			});
 		}
 	}
@@ -1008,7 +1022,7 @@ function addtestlist(){
 					type: 'POST',
 					success: function (data) {
 						if(data.msg==1){
-   						jQuery('#td_id'+id).hide();
+   						jQuery('#td_id'+t_id).hide();
    					}
 				 }
 			});
@@ -1134,6 +1148,7 @@ function addtestlist(){
 	})
      
 });	
+
    function removemedicine(id){
    	if(id!=''){
    		 jQuery.ajax({

@@ -275,6 +275,15 @@ class Resources_model extends CI_Model
 		$this->db->insert('patient_lab_test_list', $data);
 		return $insert_id = $this->db->insert_id();
 	}
+	
+	public  function check_test_already_exist($test_id,$p_id,$b_id,$date){
+		$this->db->select('*')->from('patient_lab_test_list');
+		$this->db->where('test_id',$test_id);
+		$this->db->where('p_id',$p_id);
+		$this->db->where('b_id',$b_id);
+		$this->db->where('date',$date);
+        return $this->db->get()->row_array();
+	}
 	public function saving_patient_investigation($data){
 		$this->db->insert('investigation_patient_list', $data);
 		return $insert_id = $this->db->insert_id();
