@@ -1,4 +1,3 @@
-a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
 <style>
    .entry:not(:first-of-type)
    {
@@ -18,6 +17,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
    }
   
 </style>
+
 
 <?php //echo '<pre>';print_r($patient_details);exit; ?>
 
@@ -91,7 +91,7 @@ a<script src="//oss.maxcdn.com/momentjs/2.8.2/moment.min.js"></script>
 <div class="card-body row">
    <div id="smartwizard" class="col-md-12">
       <ul>
-         <li><a href="#step-1">Diagnosis<br /><small>This is step description</small></a></li>
+         <li><a href="#step-1" >Diagnosis<br /><small>This is step description</small></a></li>
          <li><a href="#step-2">Medication/Investigation<br /><small>This is step description</small></a></li>
          <li><a href="#step-3">Assign<br /><small>This is step description</small></a></li>
       </ul>
