@@ -763,8 +763,7 @@
 										<th> Expiry Date </th>
 										<th> Qty  </th>
 										<th> Usage </th>
-										<th> Amount</th>
-										<th> Total Amount </th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -775,8 +774,7 @@
 										<td><?php echo date('M-j-Y',strtotime(htmlentities($list['expiry_date'])));?></td>
 										<td><?php echo $list['qty']; ?></td>
 										<td><?php echo $list['frequency']; ?> </td>
-										<td><?php echo $list['amount']; ?></td>
-										<td><?php echo $list['org_amount']; ?></td>
+										
 									</tr>
 									
 								<?php } ?>
