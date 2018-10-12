@@ -32,7 +32,6 @@
                                                 <th>Age</th>
                                                 <th>Visit-Type</th>
                                                 <th>Referred By</th>
-                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -47,7 +46,6 @@
 												<td> <?php echo htmlentities($list['age']); ?></td>
 												<td><?php echo htmlentities($list['visit_type']); ?></td>
 												<td><?php echo htmlentities($list['assignbydoctor']); ?></td>
-												<td><?php if($list['doctor_status']==1){ echo "Completed"; }else{ echo "pending"; } ?></td>
                                                 <td> 
 												  <a href="<?php echo base_url('resources/consultation/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>" class="btn btn-xs bg-primary no-margin" type="button">Start Consultation</a>
 												  <button class="btn btn-xs bg-danger no-margin" type="button">Close</button>
