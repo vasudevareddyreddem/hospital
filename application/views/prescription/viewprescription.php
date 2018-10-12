@@ -1,3 +1,6 @@
+
+<?php //echo'<pre>';print_r($prescriptions);exit;?>
+
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">

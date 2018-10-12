@@ -27,7 +27,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Medicine Name</th>
-                                                <th>Dosage</th>
+                                                
                                                 <th>Usage</th>
                                                 <th>Qty</th>
                                                 <th>Total Amount</th>
@@ -39,7 +39,7 @@
 										<?php foreach($patient_details as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['medicine_name']); ?></td>
-                                                <td><?php echo htmlentities($list['dosage']); ?></td>
+                                               
                                                 <td><?php echo htmlentities($list['frequency']); ?></td>
                                                 <td><?php echo htmlentities($list['qty']); ?></td>
                                                 <td><?php echo htmlentities($list['org_amount']); ?></td>
