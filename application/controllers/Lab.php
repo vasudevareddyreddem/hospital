@@ -290,6 +290,7 @@ class Lab extends In_frontend {
 						foreach($datapatient_list as $list){
 							//echo '<pre>';print_r($list);exit;
 							$tests_list=$this->Lab_model->get_all_patients_test_lists($list['pid'],$list['b_id']);
+							//echo '<pre>';print_r($tests_list);exit;
 							$lis[$list['b_id']]=$list;
 							$lis[$list['b_id']]['tests']=$tests_list;
 						
