@@ -905,12 +905,16 @@ function check_qty(){
 	
 }
 function addtestlist(){
-	alert('Please choose atleast one test');
-	return false;
+	
 	var favorite = [];
             $.each($("input[name='testlistid']:checked"), function(){            
                 favorite.push($(this).val());
             });
+			
+			if(favorite==''){
+				alert('Please choose atleast one test');
+				return false;
+			}
 			jQuery.ajax({
 					url: "<?php echo base_url('resources/selected_test');?>",
 					data: {
@@ -1020,7 +1024,7 @@ function addtestlist(){
 					type: 'POST',
 					success: function (data) {
 						if(data.msg==1){
-   						jQuery('#td_id'+id).hide();
+   						jQuery('#td_id'+t_id).hide();
    					}
 				 }
 			});
