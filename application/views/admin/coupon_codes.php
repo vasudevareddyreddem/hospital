@@ -31,6 +31,16 @@
 					  <form action="<?php echo base_url('admin/coupon_post'); ?>" method="post" id="coupon_post" name="coupon_post" enctype="multipart/form-data">
 								<div class="row">
 								<div class="col-md-6">
+								<label> Hospital Name </label>
+								<select class="form-control" id="hospital_id" name="hospital_id">
+									<option value="">Select</option>
+									<?php foreach($hospital_list as $list){ ?>
+										<option value="<?php echo $list['hos_id']; ?>"><?php echo $list['hos_bas_name']; ?></option>
+									<?php } ?>
+								</select>
+								</div>
+								
+								<div class="col-md-6">
 								<label> Name</label>
 								<input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Coupon Code">
 								</div>
@@ -46,15 +56,7 @@
 								<label> Percentage / Amount </label>
 								<input class="form-control" id="percentage_amount" name="percentage_amount" value="" type="text" placeholder="Percentage / Amount">
 								</div>
-								<div class="col-md-6">
-								<label> Hospital Name </label>
-								<select class="form-control" id="hospital_id" name="hospital_id">
-									<option value="">Select</option>
-									<?php foreach($hospital_list as $list){ ?>
-										<option value="<?php echo $list['hos_id']; ?>"><?php echo $list['hos_bas_name']; ?></option>
-									<?php } ?>
-								</select>
-								</div>
+								
 								</div>
 								<br>
 								<div class="">

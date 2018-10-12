@@ -375,7 +375,6 @@ class Admin_model extends CI_Model
 	public function get_all_coupon_code_list($id){
 		$this->db->select('coupon_codes.*,hospital.hos_bas_name')->from('coupon_codes');
 		$this->db->join('hospital', 'hospital.hos_id = coupon_codes.hospital_id', 'left');
-
 		$this->db->where('coupon_codes.create_by',$id);
         return $this->db->get()->result_array();
 	}
