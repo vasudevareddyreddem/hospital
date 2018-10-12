@@ -890,6 +890,8 @@ function check_qty(){
 	
 }
 function addtestlist(){
+	alert('Please choose atleast one test');
+	return false;
 	var favorite = [];
             $.each($("input[name='testlistid']:checked"), function(){            
                 favorite.push($(this).val());
@@ -914,6 +916,8 @@ function addtestlist(){
 							 alert('Test added successfully');
 	
 						}
+						
+						
 					}
 			});
        //+ favorite.join("/");
@@ -958,10 +962,13 @@ function addtestlist(){
 						for(i=0; i<data.text.length; i++) {
 						//$('#testlist').append("<option value="+data.text[i].l_assistent_id+">"+data.text[i].l_code+"</option>");                      
 						$('#testlist').append("<tr><td>"+data.text[i].t_name+"</td><td>"+data.text[i].type+"</td><td>"+data.text[i].modality+"</td><td><input type='checkbox' id='testlistid' name='testlistid' value="+data.text[i].t_id+"></td></tr>");                      
-
+						
 						}
+						
 						}
+					
 				 }
+				 
 			});
 		}
 	}
@@ -1124,35 +1131,6 @@ function addtestlist(){
 	})
      
 });	
-
-
-
-
-$(document).ready(function() {
-	$('#pharm').bootstrapValidator({
-		fields: {
-          
-             add_medicines: {
-                 validators: {
-					notEmpty: {
-						message: 'Comment is required'
-					}
-				}
-            }
-			}
-		
-	})
-     
-});	
-
-
-
-
-
-
-
-
-
 
    function removemedicine(id){
    	if(id!=''){

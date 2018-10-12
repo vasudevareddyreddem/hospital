@@ -1238,6 +1238,7 @@ class Resources extends In_frontend {
 				}
 				
 			}*/
+			
 			foreach($post['ids'] as $lists){
 				
 				$test_details=$this->Resources_model->get_test_details($lists);
