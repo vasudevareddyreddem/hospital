@@ -324,26 +324,27 @@ class Medicine extends In_frontend {
 						                                 //echo "<pre>";print_r($arry);exit;
 																foreach($arry as $key=>$fields)
 																{   
-		                                                        $data=array(
+		                                                         $data=array(
 																'hos_id'=>$userdetails['hos_id'],
 																'hsn'=>$fields[0],
 																'othercode'=>$fields[1],		
 																'medicine_name'=>$fields[2],		
 																'medicine_type'=>$fields[3],		
-																'expiry_date'=>$fields[4],		
-																'dosage'=>$fields[5],		
-																'qty'=>$fields[6],		
-																'amount'=>$fields[7],		
-																'sgst'=>$fields[8]*$fields[7],		
-																'cgst'=>$fields[9]*$fields[7],
-                                                                'total_amount'=>$fields[8]*$fields[7]+$fields[9]*$fields[7]+$fields[7],																
+																'batchno'=>$fields[4],		
+																'expiry_date'=>$fields[5],		
+																'dosage'=>$fields[6],		
+																'qty'=>$fields[7],		
+																'amount'=>$fields[8],		
+																'sgst'=>$fields[9]*$fields[8],		
+																'cgst'=>$fields[10]*$fields[8],
+                                                                'total_amount'=>$fields[9]*$fields[8]+$fields[10]*$fields[8]+$fields[8],																
 																'create_at'=>date('Y-m-d H:i:s'),		
 																'status'=>1,		
 																'added_by'=>$userdetails['a_id'],		
 																'updated_at'=>date('Y-m-d H:i:s'),		
-																	);
+																);
 	
-                                                     $save=$this->medicine_model->insert_data_pramacy($data);
+																	$save=$this->medicine_model->insert_data_pramacy($data);
 																}
 														}
 														//echo'<pre>';print_r($data);exit;

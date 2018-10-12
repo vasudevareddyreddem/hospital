@@ -354,7 +354,59 @@ class Users extends In_frontend {
 					$data['page_title'] = $data['details']['information']['name'].'invoice'; // pass data to the view
 					$pdfFilePath = $path."/assets/patient_medical_bill/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
-					$html = $this->load->view('prescription/billprescription', $data, true); // render the view into HTML
+					$html = $this->load->view('prescription/manualbillprescriptionpdf', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
+					$this->load->library('pdf');
+					$pdf = $this->pdf->load();
+					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$pdf->SetDisplayMode('fullpage');
+					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->WriteHTML($html); // write the HTML into the PDF
+					$pdf->Output($pdfFilePath, 'F');
+					redirect("assets/patient_medical_bill/".$file_name);
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function manualbillprescription()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					
+					
+					
+					$post=$this->input->post();
+					
+					//echo '<pre>';print_r($post);
+					//exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					
+					if($this->uri->segment(3)!=''){
+					$patient_id=base64_decode($this->uri->segment(3));
+					$billing_id=base64_decode($this->uri->segment(4));
+					}else{
+						$patient_id=$post['pid'];
+						$billing_id=$post['bid'];
+					}
+					$data['details']= $this->Users_model->get_patient_prescription_details($patient_id,$billing_id);
+					$data['medicine']= $this->Users_model->get_manualbillprescription_list($post['id'],$post['pid'],$post['bid']);
+					
+					//echo '<pre>';print_r($data);exit;
+					$path = rtrim(FCPATH,"/");
+					$file_name = $patient_id.'_'.$billing_id.'.pdf';                
+					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view
+					$pdfFilePath = $path."/assets/patient_medical_bill/".$file_name;
+					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$html = $this->load->view('prescription/manualbillprescriptionpdf', $data, true); // render the view into HTML
 					//echo '<pre>';print_r($html);exit;
 					$this->load->library('pdf');
 					$pdf = $this->pdf->load();
