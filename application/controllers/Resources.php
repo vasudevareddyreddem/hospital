@@ -984,12 +984,13 @@ class Resources extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
 					$qtys=$this->Resources_model->get_medicine_list_details($post['medicine_name']);
-						//echo '<pre>';print_r($qtys);exit;
+						//echo '<pre>';print_r($post);
+						$m_name=explode("_",$post['medicine_name']);
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
 							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
-							'medicine_name'=>isset($post['medicine_name'])?$post['medicine_name']:'',
+							'medicine_name'=>isset($m_name[0])?$m_name[0]:'',
 							'medicine_type'=>isset($qtys['medicine_type'])?$qtys['medicine_type']:'',
 							'batchno'=>isset($qtys['batchno'])?$qtys['batchno']:'',
 							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
@@ -1212,6 +1213,8 @@ class Resources extends In_frontend {
 					//echo $this->db->last_query();exit;
 					if(count($removedattch) > 0)
 					{
+					$testcount=$this->Resources_model->get_patient_test_count($post['patinet_id'],date('Y-m-d'));
+					$data['count']=count($testcount);
 					$data['msg']=1;
 					echo json_encode($data);exit;	
 					}
@@ -1254,7 +1257,7 @@ class Resources extends In_frontend {
 						);
 				$check=$this->Resources_model->check_test_already_exist($lists,$post['patinet_id'],$post['patinet_bid'],date('Y-m-d'));
 				if(count($check)>0){
-					
+					$addtest=array(1);
 				}else{
 					$addtest=$this->Resources_model->add_addpatient_test($test_list);
 				}

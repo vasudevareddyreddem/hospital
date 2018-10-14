@@ -16,6 +16,7 @@ class Profile extends In_frontend {
 		{
 				$admindetails=$this->session->userdata('userdetails');
 				$data['userdetails']=$this->Admin_model->get_all_admin_details($admindetails['a_id']);
+				//echo '<pre>';print_r($data);exit;
 				if($admindetails['role_id']==1 || $admindetails['role_id']==8){
 					$data['admin_detail']= $this->Admin_model->get_admin_details_data($admindetails['a_id']);
 					//echo '<pre>';print_r($data);exit;
