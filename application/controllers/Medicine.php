@@ -18,6 +18,7 @@ class Medicine extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$medicine_list=$this->medicine_model->get_all_medicine_list($userdetails['hos_id']);
+					
 					if(count($medicine_list)>0){
 							foreach($medicine_list as $lists){
 							$list[]=$lists["medicine_name"];
@@ -46,7 +47,7 @@ class Medicine extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['medicine_list']=$this->medicine_model->get_all_medicine_lists($userdetails['hos_id']);
-					
+					//echo'<pre>';print_r($data['medicine_list']);exit;
 					$this->load->view('resource/medicine_list',$data);
 					$this->load->view('html/footer');
 				}else{
