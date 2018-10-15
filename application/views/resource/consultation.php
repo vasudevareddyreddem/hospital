@@ -845,7 +845,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
                $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-				   if(stepNumber==1){
+				   if(stepNumber==1 && stepDirection=='forward'){
 					   if($('#frequency').val()=='' && $('#priority').val()==''){
 						   alert('Medication/Investigation details required');return false;
 					   }
@@ -874,13 +874,13 @@ function check_qty(){
 	var qty=$('#qty').val();
 	var or_qty = med_name.split("_");
 	var av_qty=or_qty[1];
+	//document.write(Number.isInteger(qty));
 	if(qty!=''){
-		if(av_qty>=qty){
+		 
+		if(Number(av_qty)> Number(qty)){
 			
-		
+			//alert('done');return false;
 		}else{
-			
-			
 			alert('medicine quantity is greater than available quantity');return false;
 		}
 	}
