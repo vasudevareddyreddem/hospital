@@ -339,3 +339,8 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   /* appointment user changes purpose*/
   ALTER TABLE `ehealthinfra_db`.`appointment_users`   
   ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;
+
+  
+  /* aapoinment fee purpose*/
+  ALTER TABLE `staging_ehealthinfra_db`.`hospital`   
+  ADD COLUMN `appointment_fee` VARCHAR(250) NULL AFTER `barcode`;
