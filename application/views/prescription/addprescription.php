@@ -53,10 +53,11 @@
 									   <div id="education_fields">
           
 										</div>
+										
 										<div class="col-sm-4 nopadding">
 										  <div class="form-group">
 										  
-										  <select style="width:100%;height:40px;" class="form-control select2" id="medicinename" name="addmedicn[0][medicine]">
+										  <select style="width:100%;height:40px;" onchange="get_medicin_amount_list(this.value)" class="form-control select2" id="medicinename" name="addmedicn[0][medicine]">
 											<option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
                                              <option value="<?php echo $list['id']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
@@ -65,26 +66,31 @@
 										  </div>
 										</div>
 										
+										
 										<div class="col-sm-1 nopadding">
 										  <div class="form-group">
 											<input type="text" class="form-control" id="qty"  name="addmedicn[0][qty]" value="" placeholder="Qty">
 										  </div>
 										</div>
+										
 										<div class="col-sm-2 nopadding">
 										  <div class="form-group">
 											<input type="text" class="form-control" id="expirydate"  name="addmedicn[0][expirydate]" value="" placeholder="Expiry Date">
 										  </div>
 										</div>
+										
 										<div class="col-sm-2 nopadding">
 										  <div class="form-group">
 											<input type="text" class="form-control" id="usage_instructions"  name="addmedicn[0][usage_instructions]" value="" placeholder="Usage Instructions">
 										  </div>
 										</div>
+										
 										<div class="col-sm-2 nopadding">
 										  <div class="form-group">
 											<input type="text" class="form-control" id="amount0"  name="addmedicn[0][amount]"  value="" placeholder="Total Amount">
 										  </div>
 										</div>
+										
 										<div class="col-sm-1 nopadding">
 										  <div class="input-group-btn">
 											<button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
@@ -175,6 +181,39 @@
    </div>
 </div>
 <script>
+function get_medicin_amount_list(addmedicn[0][medicine]){
+	if(addmedicn[0][medicine]!=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('Users/get_medicin_amount_list');?>",
+   			data: {
+				addmedicn[0][medicine]: addmedicn[0][medicine],
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+						
+						if(data.msg=1){
+							var parsedData = JSON.parse(data);
+							//alert(parsedData);
+							$('#addmedicn[0][expirydate]').empty();
+							$('#addmedicn[0][amount]').empty();
+							$('#addmedicn[0][expirydate]').append("<option>select</option>");
+							$('#addmedicn[0][amount]').append("<option>select</option>");
+							for(i=0; i < parsedData.list.length; i++) {
+								$('#addmedicn[0][expirydate]').append("<option value="+parsedData.list[i].medicinename+">"+parsedData.list[i].addmedicn[0][medicine]+"</option>");                      
+								$('#addmedicn[0][amount]').append("<option value="+parsedData.list[i].medicinename+">"+parsedData.list[i].addmedicn[0][medicine]+"</option>");                      
+
+							}
+						}
+						
+   					}
+           });
+	   }
+}
+
+
+
+
  function form_submittion(){
 	 
 	 if($('#medicinename').val()!=''){

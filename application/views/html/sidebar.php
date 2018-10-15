@@ -447,7 +447,7 @@
 						
 						<?php } else if($userdetails['role_id']==6){ ?>	
 							
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='worksheet'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">description</i>
 	                                <span class="title">My WorkSheet</span>
@@ -455,7 +455,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='completed_worksheet'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('resources/completed_worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons"> done_all</i>
 	                                <span class="title">Completed WorkSheet</span>
@@ -463,7 +463,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='worksheet'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('resources/worksheet');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Appointments</span>
@@ -471,7 +471,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='referrals'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('resources/referrals');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">border_all</i>
 	                                <span class="title">Referrals </span>
@@ -479,7 +479,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<li class="nav-item start ">
+							<li class="nav-item start <?php if($this->uri->segment(1)=='chat' && $this->uri->segment(2)=='' ){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">email</i>
 	                                <span class="title">Chat</span>
