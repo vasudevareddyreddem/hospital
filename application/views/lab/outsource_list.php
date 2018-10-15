@@ -18,7 +18,7 @@
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #ddd;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 #myTable th, #myTable td {
@@ -117,7 +117,7 @@
 											 <form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
 											 <input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 											 <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-											 <table  class="table-bordered">
+											 <table  class="table-bordered" id="myTable">
 												  <tr class="header">
 													<th style="">Select</th>
 													<th style="">Lab Name</th>
@@ -182,7 +182,7 @@
 												<div class="panel-heading ">
 												<h3 class="font-weight-bold text-center">Send for Procurement</h3>
 												</div>
-												<table >
+												<table id="myTable">
 													  <tr class="header">
 														<th style="width:100%;"><input type="checkbox" name="checkall" class="select-checkall" onchange="checkAll(this)" value="" value="">&nbsp;Name of the test</th>
 														
