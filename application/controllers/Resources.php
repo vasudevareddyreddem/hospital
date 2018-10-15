@@ -1021,7 +1021,7 @@ class Resources extends In_frontend {
 						$data=array('qty'=>$qty);
 							$this->Resources_model->update_medicine_details($qtys['id'],$data);
 							$this->session->set_flashdata('success',"Medicine successfully added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
+							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');

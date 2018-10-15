@@ -196,6 +196,14 @@ class Admin extends CI_Controller {
 				if($admindetails['role_id']=1){
 					$admindetails=$this->session->userdata('userdetails');
 					$post=$this->input->post();
+
+					$coupon_count=$this->Admin_model->get_coupon_code_count($post['hospital_id']);
+					if(count($coupon_count)>=4){
+						$this->session->set_flashdata('error',"This hospital coupon code generation exceeded");
+						redirect('admin/couponcodes');
+					}
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($coupon_count);exit;
 					$coupon_code=array(
 					'coupon_code'=>$post['coupon_code'],
 					'hospital_id'=>$post['hospital_id'],

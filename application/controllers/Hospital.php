@@ -609,6 +609,7 @@ class Hospital extends In_frontend {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=1){
 					$hospital_id=$this->uri->segment(3);
+					
 					if($hospital_id!=''){
 						$deletdata=array(
 							'hos_undo'=>1,
@@ -622,7 +623,15 @@ class Hospital extends In_frontend {
 								'a_updated_at'=>date('Y-m-d H:i:s')
 								);
 								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
-								
+								$resources_list=$this->Hospital_model->get_hos_resources_list(base64_decode($hospital_id));
+								if(isset($resources_list) &&count($resources_list)>0){
+									foreach($resources_list as $lis){
+										$da=array('r_status'=>2);
+										$a_da=array('a_status'=>2);
+										$this->Hospital_model->resouces_status_update($lis['r_id'],$da);
+										$this->Hospital_model->resouces_login_status_update($lis['a_id'],$a_da);
+									}
+								}
 								
 								$this->session->set_flashdata('success',"Hospital successfully removed.");
 								redirect('hospital');
@@ -652,8 +661,6 @@ class Hospital extends In_frontend {
 			//echo '<pre>';print_r($admindetails);exit;
 			if($admindetails['role_id']=1){
 					$hospital_id=$this->uri->segment(3);
-					
-					//exit;
 					$status=base64_decode($this->uri->segment(4));
 					if($status==1){
 						$statu=0;
@@ -673,6 +680,22 @@ class Hospital extends In_frontend {
 								'a_updated_at'=>date('Y-m-d H:i:s')
 								);
 								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
+								
+								
+								/* resouces list*/
+								$resources_list=$this->Hospital_model->get_hos_resources_list(base64_decode($hospital_id));
+								//echo $this->db->last_query();exit;
+								//echo '<pre>';print_r($resources_list);exit;
+								if(isset($resources_list) &&count($resources_list)>0){
+									foreach($resources_list as $lis){
+										$da=array('r_status'=>$statu);
+										$a_da=array('a_status'=>$statu);
+										$this->Hospital_model->resouces_status_update($lis['r_id'],$da);
+										//echo $this->db->last_query();exit;
+										$this->Hospital_model->resouces_login_status_update($lis['a_id'],$a_da);
+									}
+								}
+								/* resouces list*/
 								//echo $this->db->last_query();exit;
 								if($status==1){
 								$this->session->set_flashdata('success',"Hospital successfully deactivated.");

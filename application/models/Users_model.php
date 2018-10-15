@@ -152,6 +152,12 @@ class Users_model extends CI_Model
     	return $this->db->update("medicine_list",$data);
 	}
 	
+	public  function get_medicine_details($m_id){
+		$this->db->select('expiry_date,amount,total_amount')->from('medicine_list');	
+		$this->db->where('medicine_list.id', $m_id);
+        return $this->db->get()->row_array();
+	}
+	
 	
 
 }

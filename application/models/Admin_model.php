@@ -777,6 +777,13 @@ $this->db->select('hospital.hos_bas_name,appointment_bidding_list.event_status,a
 		return $this->db->get()->result_array();
 		
   }
+  /* coupon code count*/
+  public  function get_coupon_code_count($hos_id){
+	$this->db->select('*')->from('coupon_codes');
+	$this->db->where('hospital_id',$hos_id);
+	$this->db->where('status !=',2);
+	return $this->db->get()->result_array(); 
+  }
 	
 	
 	

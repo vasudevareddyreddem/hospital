@@ -429,6 +429,32 @@ class Users extends In_frontend {
 			redirect('admin');
 		}
 	}
+	public function get_medicin_amount_list(){
+		if($this->session->userdata('userdetails'))
+		{
+				$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$details=$this->Users_model->get_medicine_details($post['m_id']);
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['expiry_date']=$details['expiry_date'];
+					$data['total_amount']=$details['total_amount'];
+					$data['amount']=$details['amount'];
+					echo json_encode($data);exit;	
+					}else{
+						$data['msg']=1;
+						$data['expiry_date']='';
+						$data['total_amount']='';
+						$data['amount']='';
+						echo json_encode($data);exit;
+					}
+				
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 }

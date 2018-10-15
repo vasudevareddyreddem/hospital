@@ -847,9 +847,11 @@
       $(document).ready(function() {
                $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
 				   if(stepNumber==1 && stepDirection=='forward'){
+					   	<?php if(isset($patient_medicine_list) && count($patient_medicine_list)<=0){?>
 					   if($('#frequency').val()=='' && $('#priority').val()==''){
 						   alert('Medication/Investigation details required');return false;
 					   }
+						<?php } ?>
 					   
 				   }
 				   //alert());
