@@ -245,31 +245,11 @@
                                               <label> Frequency </label>
                                                 <select class="form-control" name="frequency" id="frequency">
                                                    <option value="" >Select</option>
-                                                   <option value="1 hours">1 hours</option>
-                                                   <option value="2 hours">2 hours</option>
-                                                   <option value="3 hours">3 hours</option>
-                                                   <option value="4 hours">4 hours</option>
-                                                   <option value="5 hours">5 hours</option>
-                                                   <option value="6 hours">6 hours</option>
-                                                   <option value="7 hours">7 hours</option>
-                                                   <option value="8 hours">8 hours</option>
-                                                   <option value="9 hours">9 hours</option>
-                                                   <option value="10 hours">10 hours</option>
-                                                   <option value="11 hours">11 hours</option>
-                                                   <option value="12 hours">12 hours</option>
-                                                   <option value="13 hours">13 hours</option>
-                                                   <option value="14 hours">14 hours</option>
-                                                   <option value="15 hours">15 hours</option>
-                                                   <option value="16 hours">16 hours</option>
-                                                   <option value="17 hours">17 hours</option>
-                                                   <option value="18 hours">18 hours</option>
-                                                   <option value="19 hours">19 hours</option>
-                                                   <option value="20 hours">20 hours</option>
-                                                   <option value="21 hours">21 hours</option>
-                                                   <option value="22 hours">22 hours</option>
-                                                   <option value="23 hours">23 hours</option>
-                                                   <option value="24 hours">24 hours</option>
-                                                   
+                                                   <option value="Once in morning">Once in morning</option>
+                                                   <option value="Once in afternoon">Once in afternoon</option>
+                                                   <option value="Once in night">Once in night</option>
+                                                   <option value="Twice in a day">Twice in a day</option>
+                                                   <option value="Thrice in a day">Thrice in a day</option>
                                                 </select>
                                             
                                         
