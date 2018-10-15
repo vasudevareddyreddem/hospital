@@ -255,8 +255,9 @@ class Lab extends In_frontend {
 					
 					if(isset($datalabtest_list) && count($datalabtest_list)>0){
 						foreach($datalabtest_list as $list){
+							//echo $list['pid'];
 							$tests_list=$this->Lab_model->get_all_patients_test_lists($list['pid'],$list['b_id']);
-							
+							//echo '<pre>';print_r($tests_list);
 							$lis[$list['b_id']]=$list;
 							$lis[$list['b_id']]['tests']=$tests_list;
 						
@@ -269,7 +270,8 @@ class Lab extends In_frontend {
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/patient_list',$data);
 					$this->load->view('html/footer');
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);
+					//exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
@@ -491,7 +493,7 @@ class Lab extends In_frontend {
 						$data['labtest_list']=$this->Lab_model->get_all_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
 						$data['direct_labtest_list']=$this->Lab_model->get_all_with_bidding_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],0);
 						$data['report_lists']=$this->Lab_model->get_all_patients_out_source_lab_report_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
-					//echo '<pre>';print_r($data['labtest_list']);exit;
+						//echo '<pre>';print_r($data['labtest_list']);exit;
 					}else{
 						
 						
