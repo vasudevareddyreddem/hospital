@@ -895,10 +895,12 @@ function check_qty(){
 	var or_qty = med_name.split("_");
 	var av_qty=or_qty[1];
 	if(qty!=''){
-		if(av_qty > qty){
+		if(av_qty>=qty){
 			
-			
+		
 		}else{
+			
+			
 			alert('medicine quantity is greater than available quantity');return false;
 		}
 	}
