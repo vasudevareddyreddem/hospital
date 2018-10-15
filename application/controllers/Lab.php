@@ -433,7 +433,7 @@ class Lab extends In_frontend {
 						redirect('lab/patient_list');
 					}else{
 						$this->session->set_flashdata('error',"Select atleast one Lab Test");
-						redirect('lab/patient_list');
+						redirect('lab/outsource/'.base64_encode($post['patient_id']).'/'.base64_encode($post['billing_id']));
 					}
 					
 				}else{
