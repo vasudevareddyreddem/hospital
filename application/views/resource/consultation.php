@@ -225,11 +225,12 @@
                                     <div class="row">
                                       <?php //echo '<pre>';print_r($medicine_list);exit; ?>
                                        <div class="col-md-6">
-                                          <label>Search for Medicine</label>									
-                                          <select class="form-control  select2" id="medicine_name" name="medicine_name">
+                                          <label>Search for Medicine</label>
+											<input type="hidden" name="qtav_check" id="qtav_check" value="">										  
+                                          <select class="form-control  select2" id="medicine_name"  name="medicine_name">
                                              <option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
-                                             <option value="<?php echo $list['medicine_name']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
+                                             <option value="<?php echo $list['medicine_name'].'_'.$list['qty']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
                                              <?php } ?>
                                           </select>
                                        </div>
@@ -889,14 +890,16 @@ function check_lab_test(){
 }
 
 function check_qty(){
-	var med_name = $('#medicine_name').text();
+	var med_name = $('#medicine_name').val();
 	var qty=$('#qty').val();
-	var or_qty = med_name.split(":");
+	var or_qty = med_name.split("_");
+	var av_qty=or_qty[1];
 	if(qty!=''){
-		if(qty > or_qty[1]){
+		if(av_qty > qty){
 			
-			alert('medicine quantity is greater than available quantity');
-			return false;
+			
+		}else{
+			alert('medicine quantity is greater than available quantity');return false;
 		}
 	}
 	
@@ -1017,11 +1020,17 @@ function addtestlist(){
 					url: "<?php echo base_url('resources/remove_patient_treatment_id');?>",
 					data: {
 						t_id: t_id,
+						patinet_id: $('#test_patient_id').val(),
 					},
 					dataType: 'json',
 					type: 'POST',
 					success: function (data) {
 						if(data.msg==1){
+							 $('#countdisplaying').show();
+							 $('#testcount').empty();
+							 $('#test_list_count').empty();
+							 $('#testcount').append(data.count);
+							 $('#test_list_count').append(data.count);
    						jQuery('#td_id'+t_id).hide();
    					}
 				 }

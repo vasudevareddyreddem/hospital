@@ -441,8 +441,8 @@ class Hospital extends In_frontend {
 					
 					//echo '<pre>';print_r($post);
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
-						if($hospital_details['hos_email_id']!= $post['hos_bas_email']){
-							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_bas_email']);
+						if($hospital_details['hos_email_id']!= $post['hos_email_id']){
+							$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/edit/'.$post['hospital_id']);
@@ -508,14 +508,12 @@ class Hospital extends In_frontend {
 						}
 						
 						
-						//echo '<pre>';print_r($post);exit;
+						//echo '<pre>';print_r($post);
 						$onedata1=array(
-							'a_name'=>$post['hos_bas_name'],
+							'a_name'=>isset($post['hos_bas_name'])?$post['hos_bas_name']:$hospital_details['hos_bas_name'],
 							'a_mobile'=>isset($post['hos_bas_contact'])?$post['hos_bas_contact']:$hospital_details['hos_bas_contact'],
 							'a_updated_at'=>date('Y-m-d H:i:s')
 							);
-							
-							//echo '<pre>';print_r($onedata1);exit;
 							$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$onedata1);
 						$editdata=array(
 							'reschedule_date'=>isset($post['reschedule_date'])?$post['reschedule_date']:$hospital_details['reschedule_date'],
@@ -561,6 +559,12 @@ class Hospital extends In_frontend {
 							//echo '<pre>';print_r($editdata);exit;
 							$editdetails= $this->Hospital_model->update_hospital_details(base64_decode($post['hospital_id']),$editdata);
 							if(count($editdetails)>0){
+								$email_details=array(
+								'a_email_id'=>isset($post['hos_email_id'])?$post['hos_email_id']:$hospital_details['hos_bas_name'],
+								'a_updated_at'=>date('Y-m-d H:i:s')
+								);
+							$this->Hospital_model->update_adminhospital_details($hospital_details['a_id'],$email_details);
+							//echo $this->db->last_query();exit;
 									$this->session->set_flashdata('success',"Hospital Details are successfully saved");
 									if($post['tab_id']==2){
 										$this->session->set_flashdata('success',"Hospital Credentials Details are successfully updated");

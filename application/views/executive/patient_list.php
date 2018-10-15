@@ -34,7 +34,7 @@
                                                 <th>Hospital Name</th>
 												<th>Patient Name</th>
 												<th>Mobile  Number</th>
-												<th>Date&Time</th>
+												<th>Date & Time</th>
 												<th>Patient Appointment</th>
                                                 
                                             </tr>
