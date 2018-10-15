@@ -745,14 +745,14 @@
 										<th> Batch No </th>
 										<th> Expiry Date </th>
 										<th> Qty  </th>
-										<th> Usage </th>
+										<th> Frequency </th>
 										
 									</tr>
 								</thead>
 								<tbody>
 								<?php foreach($patient_privious_medicine_list as $list){ ?>
 									<tr class="odd gradeX">
-										<td><?php echo isset($list['medicine_name'])?$list['medicine_name']." - dosage ".$list['dosage']." - type ".$list['type_of_medicine']:''; ?></td>
+										<td><?php echo isset($list['medicine_name'])?$list['medicine_name']." - dosage ".$list['dosage']." - type ".$list['medicine_type']:''; ?></td>
 										<td><?php echo $list['batchno']; ?></td>
 										<td><?php echo date('M-j-Y',strtotime(htmlentities($list['expiry_date'])));?></td>
 										<td><?php echo $list['qty']; ?></td>

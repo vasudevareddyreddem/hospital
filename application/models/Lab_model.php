@@ -88,7 +88,7 @@ class Lab_model extends CI_Model
 		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
 		$this->db->where('patient_lab_test_list.p_id',$p_id);
 		$this->db->where('patient_lab_test_list.b_id',$b_id);
-		$this->db->where('patient_lab_test_list.out_source',1);
+		//$this->db->where('patient_lab_test_list.out_source',1);
 		return $this->db->get()->result_array();
 	}
 	public function add_lab_test_type($add){
@@ -152,7 +152,7 @@ class Lab_model extends CI_Model
 		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 		$this->db->where('lab_test_list.t_name',$test_name);
-		$this->db->where('lab_test_list.out_source',1);
+		//$this->db->where('lab_test_list.out_source',1);
 		return $this->db->get()->result_array();
 	}
 	public function get_test_locaton_list($test_name){
