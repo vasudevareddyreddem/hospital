@@ -54,6 +54,7 @@ class Users extends In_frontend {
 			redirect('admin');
 		}
 	}
+	
 	public function view_manualprescription()
 	{	
 		if($this->session->userdata('userdetails'))
