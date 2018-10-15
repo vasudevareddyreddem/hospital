@@ -114,7 +114,8 @@
 												<div class="clearfix">&nbsp;</div>
 											 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 											 
-											 <form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
+											
+							<form action="<?php echo base_url('lab/select_out_source_test'); ?>" method="POST">
 											 <input type="hidden" name="patient_id" id="patient_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
 											 <input type="hidden" name="billing_id" id="billing_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
 											 <table  class="table-bordered" id="myTable">
@@ -126,6 +127,9 @@
 													<th style="">Duration</th>
 													<th style="">Address</th>
 												</tr>
+												
+												
+												
 												<?php if(isset($test_list) && count($test_list)>0){ ?>
 													<?php foreach($test_list as $list){ 
 													

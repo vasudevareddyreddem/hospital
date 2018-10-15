@@ -354,6 +354,7 @@ class Lab extends In_frontend {
 							foreach($li as $l){
 								$data['test_list'][$l['id']]=$l;
 								$data['test_list'][$l['id']]['lab_adress']=$this->Lab_model->get_all_patients_all_out_souces_test_lists($l['t_name']);
+							//echo '<pre>';print_r($data['test_list']);exit;
 							}
 						}else{
 							$data['test_list']=array();
