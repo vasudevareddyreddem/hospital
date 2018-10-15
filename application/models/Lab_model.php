@@ -152,7 +152,7 @@ class Lab_model extends CI_Model
 		$this->db->join('admin', 'admin.a_id = lab_test_list.create_by', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 		$this->db->where('lab_test_list.t_name',$test_name);
-		$this->db->where('lab_test_list.out_source',1);
+		//$this->db->where('lab_test_list.out_source',1);
 		return $this->db->get()->result_array();
 	}
 	public function get_test_locaton_list($test_name){
