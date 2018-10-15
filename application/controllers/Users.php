@@ -237,9 +237,9 @@ class Users extends In_frontend {
 					$patient_id=base64_decode($this->uri->segment(3));
 					$billing_id=base64_decode($this->uri->segment(4));
 					$data['prescriptions']= $this->Users_model->get_prescription_details($patient_id,$billing_id);
-					//echo '<pre>';print_r($data);exit;
-					$data['previous_alter_medication_list']= $this->Users_model->get_alternate_prescription_details($patient_id,$billing_id);
 					
+					$data['previous_alter_medication_list']= $this->Users_model->get_alternate_prescription_details($patient_id,$billing_id);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('prescription/viewprescription',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;

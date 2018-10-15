@@ -1,3 +1,6 @@
+
+<?php //echo'<pre>';print_r($patient_details);exit; ?>
+
 <div class="page-content-wrapper">
                 <div class="page-content">
                     <div class="page-bar">
@@ -38,8 +41,7 @@
                                         <tbody>
 										<?php foreach($patient_details as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['medicine_name']); ?></td>
-                                               
+                                                <td><?php echo isset($list['medicine_name'])?$list['medicine_name']." - dosage ".$list['dosage']." - type ".$list['type_of_medicine']:''; ?></td>
                                                 <td><?php echo htmlentities($list['frequency']); ?></td>
                                                 <td><?php echo htmlentities($list['qty']); ?></td>
                                                 <td><?php echo htmlentities($list['org_amount']); ?></td>

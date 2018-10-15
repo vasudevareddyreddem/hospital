@@ -334,3 +334,8 @@ CREATE TABLE `executive_list` (
 
 ALTER TABLE `hospital`.`appointment_bidding_list`   
   ADD COLUMN `event_status` INT(11) DEFAULT 0  NULL AFTER `status`;
+
+  
+  /* appointment user changes purpose*/
+  ALTER TABLE `ehealthinfra_db`.`appointment_users`   
+  ADD COLUMN `updated_at` DATETIME NULL AFTER `create_at`;

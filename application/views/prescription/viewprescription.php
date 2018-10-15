@@ -38,7 +38,7 @@
 														<th>Expiry Date</th>
 														<th>No of Days</th>
                                                         <th>QTY</th>
-                                                        <th>Usage </th>
+                                                        <th>Frequency</th>
                                                         <th>Amount</th>
                                                         <th>Total Amount</th>
                                                        

@@ -19,7 +19,7 @@
 </style>
 
 
-<?php //echo '<pre>';print_r($patient_details);exit; ?>
+<?php //echo '<pre>';print_r($patient_privious_medicine_list);exit; ?>
 
 <div class="page-content-wrapper">
 <div class="page-content">
@@ -771,7 +771,7 @@
 								<tbody>
 								<?php foreach($patient_privious_medicine_list as $list){ ?>
 									<tr class="odd gradeX">
-										<td><?php echo $list['medicine_name']; ?> </td>
+										<td><?php echo isset($list['medicine_name'])?$list['medicine_name']." - dosage ".$list['dosage']." - type ".$list['type_of_medicine']:''; ?></td>
 										<td><?php echo $list['batchno']; ?></td>
 										<td><?php echo date('M-j-Y',strtotime(htmlentities($list['expiry_date'])));?></td>
 										<td><?php echo $list['qty']; ?></td>

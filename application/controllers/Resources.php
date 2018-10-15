@@ -878,7 +878,7 @@ class Resources extends In_frontend {
 					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
 					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,$data['billing_id']);
 					$data['patient_privious_medicine_list']=$this->Resources_model->get_patient_previous_medicine_details_list($patient_id);
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data['patient_privious_medicine_list']);exit;
 					$data['patient_privious_alternate_medicine_list']=$this->Resources_model->get_patient_previous_alternate_medicine_details_list($patient_id);
 					$data['patient_investigation_list']=$this->Resources_model->get_patient_investigation_details_list($patient_id,$data['billing_id']);
 					$data['medicine_list']=$this->Resources_model->get_hospital_medicine_list($userdetails['hos_id']);
