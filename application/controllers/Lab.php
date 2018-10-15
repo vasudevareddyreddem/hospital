@@ -256,11 +256,13 @@ class Lab extends In_frontend {
 					if(isset($datalabtest_list) && count($datalabtest_list)>0){
 						foreach($datalabtest_list as $list){
 							$tests_list=$this->Lab_model->get_all_patients_test_lists($list['pid'],$list['b_id']);
+							
 							$lis[$list['b_id']]=$list;
 							$lis[$list['b_id']]['tests']=$tests_list;
 						
 						}
 						$data['labtest_list']=$lis;
+						
 					}else{
 						$data['labtest_list']=array();
 					}
@@ -286,6 +288,7 @@ class Lab extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$datapatient_list=$this->Lab_model->get_all_labreports_lists($userdetails['hos_id']);
+					//echo '<pre>';print_r($datapatient_list);exit;
 					if(isset($datapatient_list) && count($datapatient_list)>0){
 						foreach($datapatient_list as $list){
 							//echo '<pre>';print_r($list);exit;
@@ -296,8 +299,10 @@ class Lab extends In_frontend {
 						
 						}
 						$data['patient_list']=$lis;
+						//echo '<pre>';print_r($data['patient_list']);exit;
 					}else{
 						$data['patient_list']=array();
+						//echo '<pre>';print_r($data['patient_list']);exit;
 					}
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$this->load->view('lab/patient_database',$data);
@@ -486,6 +491,7 @@ class Lab extends In_frontend {
 						$data['labtest_list']=$this->Lab_model->get_all_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
 						$data['direct_labtest_list']=$this->Lab_model->get_all_with_bidding_patients_out_labtest_lists($data['patient_id'],$data['billing_id'],0);
 						$data['report_lists']=$this->Lab_model->get_all_patients_out_source_lab_report_lists($data['patient_id'],$data['billing_id'],1,$admindetails['a_id']);
+					//echo '<pre>';print_r($data['labtest_list']);exit;
 					}else{
 						
 						
@@ -494,7 +500,7 @@ class Lab extends In_frontend {
 					}
 					$this->load->view('lab/patient_details',$data);
 					$this->load->view('html/footer');
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data['labtest_list']);exit;
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
