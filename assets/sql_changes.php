@@ -72,7 +72,7 @@ CREATE TABLE `ward_room_beds` (
 
 /* patient check ip or op purose
 
-  ALTER TABLE `staging_ehealth`.`patient_billing`   
+  ALTER TABLE `ehealthinfra_db`.`patient_billing`   
   ADD COLUMN `patient_type` INT(11) NULL  COMMENT '1=ip;0=op' AFTER `p_id`;
   
   ALTER TABLE `hospital`.`patient_billing`   
@@ -342,5 +342,5 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
 
   
   /* aapoinment fee purpose*/
-  ALTER TABLE `staging_ehealthinfra_db`.`hospital`   
+  ALTER TABLE `ehealthinfra_dbinfra_db`.`hospital`   
   ADD COLUMN `appointment_fee` VARCHAR(250) NULL AFTER `barcode`;
