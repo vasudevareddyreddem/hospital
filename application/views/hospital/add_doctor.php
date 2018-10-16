@@ -68,7 +68,7 @@
 										 <select class="form-control" required="required" name="resource_state" id="resource_state">
 											<option value = "">Select State</option>
 												<?php foreach($states as $key=>$state):
-                                            if($resource_list['resource_state'] == $state):
+                                            if(isset($resource_list['resource_state']) && $resource_list['resource_state'] == $state):
                                                 $selected ='selected=selected';
                                                 else : 
                                                 $selected = '';
@@ -78,7 +78,8 @@
                                         <?php endforeach; ?>
                                       </select> 
                                       </div>		
-                                      </div>		
+                                      </div>
+								    
 									<div class="col-md-4">
 										<label> Pin code</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="" type="text" placeholder="Pin code">
@@ -88,7 +89,42 @@
 									<label> Alternative Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" placeholder="Alternative Contact Number">
 									</div>
-										
+									<div class="col-md-4">
+										<label>In Time</label>
+										<div class="">
+										<?php $time_list=array("06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm","12:00 am","12:30 am","1:00 am","1:30 am","2:00 am","2:30 am","3:00 am","3:30 am","4:00 am","4:30 am","5:00 am","5:30 am"); ?>
+										<select class="form-control" id="in_time" name="in_time">
+										<option value="">Select</option>
+										<?php foreach($time_list as $key=>$list):
+                                            if(isset($resource_list['in_time']) && $resource_list['in_time'] == $list):
+                                                $selected ='selected=selected';
+                                                else : 
+                                                $selected = '';
+                                                endif;
+                                         ?>
+										 <option value="<?php echo $list; ?>"<?php echo $selected;?> ><?php echo $list; ?></option>
+										 <?php endforeach; ?>
+										 </select>
+                                         </div>
+									</div>
+								    <div class="col-md-4">
+										<label>Out Time</label>
+										<div class="">
+										<?php $time_list=array("06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm","12:00 am","12:30 am","1:00 am","1:30 am","2:00 am","2:30 am","3:00 am","3:30 am","4:00 am","4:30 am","5:00 am","5:30 am"); ?>
+										<select class="form-control" id="out_time" name="out_time">
+										<option value="">Select</option>
+										<?php foreach($time_list as $key=>$list):
+                                            if(isset($resource_list['out_time']) && $resource_list['out_time'] == $list):
+                                                $selected ='selected=selected';
+                                                else : 
+                                                $selected = '';
+                                                endif;
+                                        ?>
+										<option value="<?php echo $list; ?>"<?php echo $selected;?> ><?php echo $list; ?></option>
+										<?php endforeach; ?>
+										</select>
+                                        </div>
+									</div>
 									<div class="col-md-4">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" type="text" placeholder="Resource Email ID">

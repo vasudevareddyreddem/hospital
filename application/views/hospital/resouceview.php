@@ -84,7 +84,9 @@
 														  <?php echo isset($resouse_detail['resource_state'])?$resouse_detail['resource_state']:''; ?>
 														 </div>
 													 </div>
-													</div><div class="col-md-6">
+													</div>
+													 
+													<div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
 														 <strong> Zipcode</strong>
@@ -102,7 +104,32 @@
 														  <?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>
 														 </div>
 													 </div>
-													</div><div class="col-md-6">
+													</div>
+													 <?php if($resouse_detail['role_id']==6){ ?>
+													<div class="col-md-6">
+													<div class="row">												  
+														 <div class=" col-sm-6">
+														 <strong>In Time</strong>
+														 </div>
+														<div class=" col-sm-6">
+														  <?php echo isset($resouse_detail['in_time'])?$resouse_detail['in_time']:''; ?>
+														 </div>
+													 </div>
+													</div>
+													  <?php } ?>
+													    <?php if($resouse_detail['role_id']==6){ ?>
+													<div class="col-md-6">
+													<div class="row">												  
+														 <div class=" col-sm-6">
+														 <strong>Out Time</strong>
+														 </div>
+														<div class=" col-sm-6">
+														  <?php echo isset($resouse_detail['out_time'])?$resouse_detail['out_time']:''; ?>
+														 </div>
+													 </div>
+													</div>
+														<?php } ?>
+													<div class="col-md-6">
 													<div class="row">												  
 														 <div class=" col-sm-6">
 														 <strong>Resource Designation</strong>
