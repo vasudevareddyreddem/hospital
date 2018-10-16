@@ -543,6 +543,7 @@ class Hospital extends In_frontend {
 							'hos_bas_country'=>isset($post['hos_bas_country'])?$post['hos_bas_country']:$hospital_details['hos_bas_country'],
 							'hos_bas_document'=>$hos_bas_document,
 							'hos_bas_logo'=>$hos_bas_logo,
+							'appointment_fee'=>isset($post['appointment_fee'])?$post['appointment_fee']:$hospital_details['appointment_fee'],
 							'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:$hospital_details['bank_holder_name'],
 							'bank_acc_no'=>isset($post['bank_acc_no'])?$post['bank_acc_no']:$hospital_details['bank_acc_no'],
 							'bank_name'=>isset($post['bank_name'])?$post['bank_name']:$hospital_details['bank_name'],
