@@ -39,6 +39,7 @@ class Lab extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id'],$admindetails['a_id']);
+					//echo '<pre>';print_r($data['labtest_list']);exit;
 					$data['test_type_list']=$this->Lab_model->get_lab_test_type_details();
 					//echo '<pre>';print_r($data['test_type_list']);exit;
 					$data['tab']=base64_decode($this->uri->segment(3));
@@ -62,12 +63,14 @@ class Lab extends In_frontend {
 				if($admindetails['role_id']=4){
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id'],$admindetails['a_id']);
+					$data['labtest_list']=$this->Lab_model->get_lab_test_details($userdetails['hos_id']);
+					//echo '<pre>';print_r($data['labtest_list']);exit;
 					$data['test_type_list']=$this->Lab_model->get_lab_test_type_details();
+					//echo '<pre>';print_r($data['test_type_list']);exit;
 					$test_id=base64_decode($this->uri->segment(3));
 					$data['tet_details']=$this->Lab_model->get_test_details($test_id);
 					
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data['tet_details']);exit;
 					$this->load->view('lab/edit_test',$data);
 					$this->load->view('html/footer');
 					//echo '<pre>';print_r($data);exit;
@@ -95,6 +98,7 @@ class Lab extends In_frontend {
 						redirect('lab');
 					}
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo '<pre>';print_r($userdetails);exit;
 					$adding=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 						't_name'=>isset($post['test_name'])?$post['test_name']:'',
@@ -111,7 +115,7 @@ class Lab extends In_frontend {
 						'create_by'=>$admindetails['a_id'],
 						'out_source'=>$admindetails['out_source']
 						);
-						//echo '<pre>';print_r($adding);exit;
+					//echo '<pre>';print_r($adding);exit;
 						$saveing=$this->Lab_model->save_tabtest_details($adding);
 						if(count($saveing)>0){
 							$this->session->set_flashdata('success',"Test Type successfully added.");
@@ -134,6 +138,7 @@ class Lab extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=5){
+					//echo'<pre>';print_r($admindetails);exit;
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
@@ -1131,53 +1136,26 @@ class Lab extends In_frontend {
 					$cnt=$xlsx->sheetsCount()-1;
 					$arry=$xlsx->rows($j);
 					unset($arry[0]);
-					$test_type_list=$this->Lab_model->get_lab_test_type_details();
-					//echo'<pre>';print_r($test_type_list);exit;
-					   $people = array("ALLERGY", "Joe", "Glenn", "Cleveland");
-					   foreach($test_type_list as $Lists){
-						  $lidss[]=$Lists['type_name']; 
-					   }
-					//echo'<pre>';print_r($arry);
-		           foreach($arry as $key=>$fields)
-					{
-						$totalfields[] = $fields;
-						if(in_array(trim($fields[0]), $lidss))
-						  {
-						   $type_id=$this->Lab_model->get_labtest_type_id(trim($fields[0]));
-						   
-						   $error=0;
-						  }else{
-							$type_id['id']='';
-							$data['val_errors'][]="Test Type Name not matched .Please try again once. Row Id is :  ".$key.'<br>';
-							$error=1;
-						  }	
-												  
-					}
-					if(isset($data['val_errors']) && count($data['val_errors'])>0){
-						$this->session->set_flashdata('adderror',$data['val_errors']);
-						redirect('lab/index/');
-					}
-					}
-					if(count($data['val_errors'])<=0){
-						$type_id='';
-						
-					foreach($totalfields as $data){
-						$type_id=$this->Lab_model->get_labtest_type_id(trim($data[0]));
-                       //echo'<pre>';print_r($type_id);exit;
+					 //echo "<pre>";print_r($arry);exit;
+					
+					
+					foreach($arry as $key=>$fields)
+					{   
 						$save_data=array(
 						'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-						'test_type'=>isset($type_id['id'])?$type_id['id']:'',
-						't_name'=>$data[2],
-						'type'=>$data[1],
-						'duration'=>$data[3],
-						'amuont'=>$data[4],
-						'modality'=>isset($data[5])?$data[5]:'',
+						'test_type'=>$fields[0],
+						't_name'=>$fields[2],
+						'type'=>$fields[1],
+						'duration'=>$fields[3],
+						'amuont'=>$fields[4],
+						'modality'=>isset($fields[5])?$fields[5]:'',
 						'create_at'=>date('Y-m-d H:i:s'),
 						'status'=>1,
 						'create_by'=>$admindetails['a_id'],
 						'out_source'=>isset($admindetails['out_source'])?$admindetails['out_source']:''	
 						);
-					
+					//echo'<pre>';print_r($save_data);exit;
+						
 						$save=$this->Lab_model->insert_data_lab_detail_value($save_data);
 						//echo'<pre>';print_r($save);exit;
 						

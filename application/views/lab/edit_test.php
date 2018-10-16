@@ -23,22 +23,11 @@
 					  <form action="<?php echo base_url('lab/updatetest'); ?>" method="post" id="addtreatment" name="addtreatment" enctype="multipart/form-data">
 							<div class="row">
 							<input type="hidden" name="t_id" id="t_id" value="<?php echo isset($tet_details['t_id'])?$tet_details['t_id']:''; ?>">
-								<div class="col-md-6">
-									<label> Test Type</label>
-									<select class="form-control" name="test_type" id="test_type">
-									<option value="">Select</option>
-									<?php if(isset($test_type_list) && count($test_type_list)>0){ ?>
-										<?php foreach($test_type_list as $list){ ?>
-											<?php if($list['id']==$tet_details['test_type']){ ?>
-												<option value="<?php echo $list['id']; ?> " selected><?php echo $list['type_name']; ?> </option>
-											<?php }else{?>
-												<option value="<?php echo $list['id']; ?> "><?php echo $list['type_name']; ?> </option>
-											<?php } ?>
-											
-										<?php } ?>
-									<?php } ?>
-									</select>
+							<div class="col-md-6">
+							<label> Test Type</label>
+								<input class="form-control" id="test_type" name="test_type" value="<?php echo isset($tet_details['test_type'])?$tet_details['test_type']:''; ?>" type="text" placeholder="Test Type">
 								</div>
+							
 								<div class="col-md-6">
 									<label>Type</label>
 									<select class="form-control" name="type" onchange="get_labtype(this.value);" id="type">
@@ -71,11 +60,12 @@
 								<div class="">
 								<label>&nbsp;</label>
 								</div>	
-							</div>
+									</div>
+							
 							<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Update Test</button>
 
 							</form>
-						
+						</div>
 					
                      </div>
                   </div>
