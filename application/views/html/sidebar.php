@@ -75,15 +75,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li> 
-							<!--
-							<li class="nav-item start <?php if($this->uri->segment(2)=='testtype'){ echo "active";} ?> ">
-	                            <a href="<?php echo base_url('lab/testtype');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">assignment_turned_in</i>
-	                                <span class="title">Lab Test Types</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li> -->
+							
 							
 							<li class="nav-item start <?php if($this->uri->segment(2)=='oursource'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('lab/oursource');?>" class="nav-link nav-toggle">
