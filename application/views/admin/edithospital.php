@@ -266,7 +266,7 @@
 								<?php } ?> 
 								</div>
                         </div>
-						<div class="form-group col-md-6">
+					       <div class="col-md-4">
                            <label for="email">Hospital Logo</label>
                            <div class="compose-editor">
                               <input type="file" id="hos_bas_logo" name="hos_bas_logo"class="default">
@@ -275,9 +275,8 @@
 								<?php } ?>
                            </div>
                         </div>
-						  <div class="form-group col-md-6">
+						 <div class="col-md-4">
                            <label for="email">Reschedule Patient Time</label>
-                           <div class="row">
 									<?php $days =array ('1' => '1 day', '2' => '2 days', '3' => '3 days', '4' => '4 days', '5' => '5 days', '6' => '6 days', '7' => '7 days'); ?>
 								  <select class="form-control" required="required" name="reschedule_date" id="reschedule_date">
 								  <option value = "">Select days</option>
@@ -291,9 +290,11 @@
 										<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
 									<?php endforeach; ?>
 								  </select> 
-								
-                           </div>
-                        </div>
+						  </div>
+						 <div class="col-md-4">
+                           <label for="email">Consultation Fee</label>
+                           <input type="text" id="appointment_fee" name="appointment_fee" value="<?php echo isset($hospital_details['appointment_fee'])?$hospital_details['appointment_fee']:''; ?>" class="form-control"  placeholder="Enter Consultation Fee" >
+						 </div>
                      </div>
                      <div class="form-actions">
                         <div class="row">
@@ -737,7 +738,20 @@ $(document).ready(function() {
 						message: 'Reschedule Patient Time is required'
 					}
 				}
-            },hos_bas_logo: {
+            },
+			appointment_fee: {
+                validators: {
+					notEmpty: {
+						message: 'Consultation Fee is required'
+					},
+					regexp: {
+					regexp:  /^[0-9]*$/,
+					message:'Consultation Fee must be in digits'
+					}
+				
+				}
+            },
+			hos_bas_logo: {
                 validators: {
 					regexp: {
 					regexp: "(.*?)\.(png|jpg|jpeg)$",

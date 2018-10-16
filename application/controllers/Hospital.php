@@ -543,6 +543,7 @@ class Hospital extends In_frontend {
 							'hos_bas_country'=>isset($post['hos_bas_country'])?$post['hos_bas_country']:$hospital_details['hos_bas_country'],
 							'hos_bas_document'=>$hos_bas_document,
 							'hos_bas_logo'=>$hos_bas_logo,
+							'appointment_fee'=>isset($post['appointment_fee'])?$post['appointment_fee']:$hospital_details['appointment_fee'],
 							'bank_holder_name'=>isset($post['bank_holder_name'])?$post['bank_holder_name']:$hospital_details['bank_holder_name'],
 							'bank_acc_no'=>isset($post['bank_acc_no'])?$post['bank_acc_no']:$hospital_details['bank_acc_no'],
 							'bank_name'=>isset($post['bank_name'])?$post['bank_name']:$hospital_details['bank_name'],
@@ -832,6 +833,8 @@ class Hospital extends In_frontend {
 									'resource_other_details'=>$post['resource_other_details'],
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
+									'in_time'=>$post['in_time'],
+									'out_time'=>$post['out_time'],
 									'resource_photo'=>$photo,
 									'resource_document'=>$resource_document,
 									'resource_bank_holdername'=>$post['resource_bank_holdername'],
@@ -1108,6 +1111,7 @@ class Hospital extends In_frontend {
 									);
 									//echo '<pre>';print_r($onedata);exit;
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
+									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully updated");
 										if($admindetails['role_id']=2){
@@ -1171,7 +1175,9 @@ class Hospital extends In_frontend {
 									'resource_city'=>$post['resource_city'],
 									'resource_state'=>$post['resource_state'],
 									'resource_zipcode'=>$post['resource_zipcode'],
-									'resource_other_details'=>$post['resource_other_details'],
+									'in_time'=>$post['in_time'],
+									'out_time'=>$post['out_time'],
+									'resource_other_details'=>isset($post['resource_other_details'])?$post['resource_other_details']:'',
 									'resource_contatnumber'=>$post['resource_contatnumber'],
 									'resource_email'=>$post['resource_email'],
 									'resource_photo'=>$photo,
@@ -1197,10 +1203,7 @@ class Hospital extends In_frontend {
 										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 									}
 					}
-								
 						
-					
-			
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');

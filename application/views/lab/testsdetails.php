@@ -65,14 +65,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<label> Test Type</label>
-									<select class="form-control" name="test_type" id="test_type">
-									<option value="">Select</option>
-									<?php if(isset($test_type_list) && count($test_type_list)>0){ ?>
-										<?php foreach($test_type_list as $list){ ?>
-										<option value="<?php echo $list['id']; ?> "><?php echo $list['type_name']; ?> </option>
-										<?php } ?>
-									<?php } ?>
-									</select>
+									<input class="form-control" id="test_type" name="test_type" value="" type="text" placeholder="Test Type">
 								</div>
 								<div class="col-md-6">
 									<label>Type</label>
@@ -132,7 +125,7 @@
                                         <tbody>
 										<?php foreach($labtest_list as $list){ ?>
                                             <tr>
-                                                <td><?php echo htmlentities($list['type_name']); ?></td>
+                                                <td><?php echo htmlentities($list['test_type']); ?></td>
                                                 <td><?php echo htmlentities($list['type']); ?></td>
                                                 <td><?php echo htmlentities($list['t_name']); ?></td>
                                                 <td><?php echo htmlentities($list['modality']); ?></td>
@@ -175,6 +168,9 @@
                        
                      </div>
                   </div>
+				  
+				  
+				  
                </div>
             </div>
             <div class="clearfix">&nbsp;</div>

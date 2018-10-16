@@ -189,9 +189,7 @@
                                                             <li>
 															    <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['r_id'])).'/'.base64_encode(htmlentities($list['r_status']));?>');adminstatus2('<?php echo $list['r_status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-trash-o"></i>Delete</a>
-                                                            </li>
-                                                            
-                                                            
+                                                            </li> 
                                                         </ul>
                                                     </div>
                                                 </td>
