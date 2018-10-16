@@ -344,3 +344,11 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   /* aapoinment fee purpose*/
   ALTER TABLE `staging_ehealthinfra_db`.`hospital`   
   ADD COLUMN `appointment_fee` VARCHAR(250) NULL AFTER `barcode`;
+
+  
+  
+  
+  
+  /* lab_test_list */
+  ALTER TABLE `hospital`.`lab_test_list`   
+  CHANGE `test_type` `test_type` VARCHAR(250) NULL;
