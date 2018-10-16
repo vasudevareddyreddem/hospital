@@ -31,10 +31,9 @@
                                             <tr>
                                                 <th>Medicine Name</th>
                                                 
-                                                <th>Usage</th>
+                                                <th>Frequency</th>
                                                 <th>Qty</th>
                                                 <th>Total Amount</th>
-                                                <th>Modify Prescription Reason</th>
                                                 <th>Date</th>
                                             </tr>
                                         </thead>
@@ -45,7 +44,6 @@
                                                 <td><?php echo htmlentities($list['frequency']); ?></td>
                                                 <td><?php echo htmlentities($list['qty']); ?></td>
                                                 <td><?php echo htmlentities($list['org_amount']); ?></td>
-                                                <td><?php echo htmlentities($list['edit_reason']); ?></td>
                                                 <td><?php echo date('M j Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
                                                
                                             </tr>
