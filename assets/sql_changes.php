@@ -344,7 +344,7 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   /* aapoinment fee purpose*/
   ALTER TABLE `staging_ehealthinfra_db`.`hospital`   
   ADD COLUMN `appointment_fee` VARCHAR(250) NULL AFTER `barcode`;
-<<<<<<< HEAD
+
   
   
   
@@ -352,19 +352,8 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   ALTER TABLE `hospital`.`resource_list`   
   ADD COLUMN `in_time` VARCHAR(250) NULL AFTER `out_source_lab`,
   ADD COLUMN `out_time` VARCHAR(250) NULL AFTER `in_time`;
-=======
->>>>>>> 705f01a7fd108cc0de1718e5b500c5d09f57f6fd
 
-  
-  
-  
-  
-<<<<<<< HEAD
-  
-  
-  
-=======
+
   /* lab_test_list */
   ALTER TABLE `hospital`.`lab_test_list`   
   CHANGE `test_type` `test_type` VARCHAR(250) NULL;
->>>>>>> 705f01a7fd108cc0de1718e5b500c5d09f57f6fd
