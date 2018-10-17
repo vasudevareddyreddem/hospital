@@ -368,3 +368,9 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   ALTER TABLE `hospital`.`lab_test_list`   
   CHANGE `test_type` `test_type` VARCHAR(250) NULL;
 >>>>>>> 705f01a7fd108cc0de1718e5b500c5d09f57f6fd
+
+
+/* appointment  changes */
+ALTER TABLE `hospital`.`appointment_bidding_list`   
+  ADD COLUMN `doctor_id` VARCHAR(250) NULL AFTER `specialist`;
+

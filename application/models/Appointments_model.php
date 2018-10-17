@@ -65,6 +65,12 @@ class Appointments_model extends CI_Model
 		$this->db->order_by('coupon_codes.id',"desc");
 		return $this->db->get()->row_array();
 	}
+	public  function get_apapointment_user_email($u_id){
+		$this->db->select('*')->from('appointment_users');
+		$this->db->where('a_u_id',$u_id);
+		return $this->db->get()->row_array();
+		
+	}
 	
 
 }

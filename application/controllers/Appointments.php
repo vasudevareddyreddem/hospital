@@ -103,7 +103,7 @@ class Appointments extends In_frontend {
 											$details=$this->Appointments_model->get_appointment_user_details(base64_decode($appointment_b_id));
 											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
 
-											$url = "https://fcm.googleapis.com/fcm/send";
+											/*$url = "https://fcm.googleapis.com/fcm/send";
 											$token=$details['token'];
 											$serverKey = $this->config->item('server_key_push');
 											$title = "Appointment Confirmation";
@@ -131,9 +131,17 @@ class Appointments extends In_frontend {
 											if ($response === FALSE) {
 											die('FCM Send Error: ' . curl_error($ch));
 											}
-											curl_close($ch);
+											curl_close($ch);*/
 											/*push notification */
-										$this->session->set_flashdata('success',"Appointment successfully accepted.");
+											
+											//echo $status;exit;
+											if($status==2){
+												$this->session->set_flashdata('success',"Appointment successfully rejected.");
+
+												}else{
+												$this->session->set_flashdata('success',"Appointment successfully accepted.");
+
+												}
 										
 										redirect('appointments/index/'.base64_encode(2));
 									}else{
@@ -158,20 +166,35 @@ class Appointments extends In_frontend {
 		public function change_time(){
 			
 							$post=$this->input->post();
+							//echo '<pre>';print_r($post);exit; 
 								$stusdetails=array(
-									'date'=>$post['dob'],
+									'date'=>$post['date'],
 									'time'=>$post['time'],
 									'status'=>$post['status_value'],
 									);
 									$statusdata= $this->Appointments_model->update_appointment_status_details($post['b_id'],$stusdetails);
 									if(count($statusdata)>0){
-										/*push notification */
-											$details=$this->Appointments_model->get_appointment_user_details($post['b_id']);
+										$details=$this->Appointments_model->get_appointment_user_details($post['b_id']);
+										$user_details=$this->Appointments_model->get_apapointment_user_email($details['create_by']);
 											
 											//$this->db->last_query();
 											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
 
-											$url = "https://fcm.googleapis.com/fcm/send";
+											$this->load->library('email');
+											$this->email->set_newline("\r\n");
+											$this->email->set_mailtype("html");
+											$this->email->to($user_details['email']);
+											$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
+											$this->email->subject('Appointment Confirmation'); 
+											$body = "Hello ".$details['name']." you have an appointment booked from ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+											//echo $body;exit;
+											$this->email->message($body);
+											$this->email->send();
+										//echo '<pre>';print_r($user_details);
+										//echo '<pre>';print_r($details);exit;
+										/*push notification */
+											
+											/*$url = "https://fcm.googleapis.com/fcm/send";
 											$token=$details['token'];
 											$serverKey = $this->config->item('server_key_push');
 											$title = "Appointment Confirmation";
@@ -199,7 +222,7 @@ class Appointments extends In_frontend {
 											if ($response === FALSE) {
 											die('FCM Send Error: ' . curl_error($ch));
 											}
-											curl_close($ch);
+											curl_close($ch*/
 											/*push notification */
 										$this->session->set_flashdata('success',"Appointment successfully accepted.");
 										
