@@ -618,7 +618,7 @@
                                        <td><?php echo $list['medicine_name']; ?></td>
                                        <td><?php echo $list['qty']; ?></td>
                                        <td><?php echo $list['dosage']; ?> </td>
-                                       <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" >Remove</span></td>
+                                       <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" class="btn btn-danger btn-sm" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
                                  </tbody>
