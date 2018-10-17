@@ -1164,7 +1164,6 @@ class Lab extends In_frontend {
 					
 					/* end*/
 					 
-					 
 			if(count($save)>0){
 				$this->session->set_flashdata('success',"Lab details  successfully inserted.");
 				redirect('lab');
