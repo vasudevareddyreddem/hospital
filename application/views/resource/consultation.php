@@ -567,7 +567,7 @@
                                     <tr id="investigation_id_<?php echo $list['id']; ?>">
 									   <td><?php echo $list['investigation_type']; ?></td>
 										<td><?php echo $list['priority']; ?></td>
-                                       <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" >Remove</span></td>
+                                       <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" class="btn btn-sm btn-danger" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
                                  </tbody>
