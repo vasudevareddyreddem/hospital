@@ -71,7 +71,7 @@
 															<input  type="text" name="comment" id="comment" class="form-control input-sm" placeholder="Type your message here..." required>
 															</div>
 															<div class="col-md-4" style="margin-top:5px;">
-															<input  type="file" name="image" id="image" class="form-control col-md-3" />
+															<input  type="file" name="image" id="image" class="form-control" />
 															</div>
 															<div class="col-md-3" style="margin-top:5px;">
 															<span class="input-group-btn">

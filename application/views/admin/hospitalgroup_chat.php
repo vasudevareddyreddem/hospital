@@ -100,7 +100,13 @@
 																<p>
 																	<?php echo isset($List['comments'])?$List['comments']:''; ?>
 																</p>
-															</div>
+
+																<span class="pull-right">
+																<strong class="primary-font"><?php echo isset($List['reciver_name'])?$List['reciver_name']:''; ?></strong> 
+																<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($List['reciver_name'], 0, 2)); ?></b></span>
+																</span>
+																
+															</div>&nbsp;
 														</li>
 													<?php }else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">

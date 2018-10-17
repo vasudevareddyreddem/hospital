@@ -398,9 +398,10 @@ class Lab_model extends CI_Model
      return  $this->db->insert_id();
 	}
 	
-	public  function check_test_name_exits($t_name){
-		$this->db->select('lab_test_list.t_name')->from('lab_test_list');
+	public  function check_test_name_exits($t_name,$type){
+		$this->db->select('t_name,type')->from('lab_test_list');
 		$this->db->where('lab_test_list.t_name',$t_name);
+		$this->db->where('lab_test_list.type',$type);
 		return $this->db->get()->row_array();
 	}
 	

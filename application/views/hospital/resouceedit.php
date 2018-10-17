@@ -104,6 +104,7 @@
 									<?php endforeach; ?>
 								  </select>
 									</div>
+									
 									<div class="col-md-6">
 										<label> Zipcode</label>
 										<input class="form-control" id="resource_zipcode" name="resource_zipcode" value="<?php echo isset($resouse_detail['resource_zipcode'])?$resouse_detail['resource_zipcode']:''; ?>" type="text" placeholder="State">
@@ -112,7 +113,42 @@
 									<label> Alternative Contact Number</label>
 										<input class="form-control" id="resource_contatnumber" name="resource_contatnumber" type="text" value="<?php echo isset($resouse_detail['resource_contatnumber'])?$resouse_detail['resource_contatnumber']:''; ?>" placeholder="Alternative Contact Number">
 									</div>
-									
+									<?php if($resouse_detail['role_id']==6){ ?>
+									<div class="col-md-6">
+										<label>In Time</label>
+										<?php $time_list=array("06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm","12:00 am","12:30 am","1:00 am","1:30 am","2:00 am","2:30 am","3:00 am","3:30 am","4:00 am","4:30 am","5:00 am","5:30 am"); ?>
+										<select class="form-control" id="in_time" name="in_time">
+										<option value="">Select</option>
+										<?php foreach($time_list as $key=>$list):
+                                       if($resouse_detail['in_time'] == $list):
+                                                $selected ='selected=selected';
+                                                else : 
+                                                $selected = '';
+                                                endif;
+                                        ?>
+											<option value="<?php echo $list; ?>"<?php echo $selected;?> ><?php echo $list; ?></option>
+										<?php endforeach; ?>
+										</select>
+                                    </div>
+								    <?php } ?>
+									<?php if($resouse_detail['role_id']==6){ ?> 
+									<div class="col-md-6">
+										<label>Out Time</label>
+										<?php $time_list=array("06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm","12:00 am","12:30 am","1:00 am","1:30 am","2:00 am","2:30 am","3:00 am","3:30 am","4:00 am","4:30 am","5:00 am","5:30 am"); ?>
+										<select class="form-control" id="out_time" name="out_time">
+										<option value="">Select</option>
+										<?php foreach($time_list as $key=>$list):
+                                         if(isset($resouse_detail['out_time']) && $resouse_detail['out_time'] == $list):
+                                                $selected ='selected=selected';
+                                                else : 
+                                                $selected = '';
+                                                endif;
+                                        ?>
+											<option value="<?php echo $list; ?>"<?php echo $selected;?> ><?php echo $list; ?></option>
+										<?php endforeach; ?>
+										</select>
+                                    </div>			
+									<?php } ?>
 									<div class="col-md-6">
 									<label> Resource Email ID</label>
 										<input class="form-control" id="resource_email" name="resource_email" value="<?php echo isset($resouse_detail['resource_email'])?$resouse_detail['resource_email']:''; ?>" type="text" placeholder="Resource Email ID">

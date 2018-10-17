@@ -64,9 +64,17 @@
 																<?php if(isset($list['image']) && $list['image']!=''){ ?>
 																<p><a target="_blank" href="<?php echo base_url('assets/chating_file/'.$list['image']);?>">download</a>
 																<?php } ?>
-															</div>
+																
+																<div class="header">
+																<span class="pull-right">
+																	<strong class="primary-font"><?php echo isset($list['resourcename'])?$list['resourcename']:''; ?></strong> 
+																	<span class="bg-indigo" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['resourcename'], 0, 2)); ?></b></span>
+																</span>
+																</div>
+																
+															</div>&nbsp;
 														</li>
-														<?php }else{ ?>
+														<?php } else{ ?>
 														<li class="right clearfix"><span class="chat-img pull-right">
 														<span class="bg-success" style="padding:15px;border-radius:50%" ><b><?php echo ucfirst(substr($list['sendername'], 0, 2)); ?></b></span>
 
