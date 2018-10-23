@@ -29,7 +29,7 @@ class Appointments_model extends CI_Model
 		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
 		$this->db->where('appointment_bidding_list.hos_id',$hos_id);
-		$this->db->where('appointment_bidding_list.status !=',2);
+		$this->db->where('appointment_bidding_list.status',0);
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
 		return $this->db->get()->result_array();
 	}
