@@ -27,7 +27,7 @@ class Appointments extends In_frontend {
 					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count($userdetails['hos_id']);
 					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
-					echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');
 				}else{
@@ -173,6 +173,7 @@ class Appointments extends In_frontend {
 									'status'=>$post['status_value'],
 									);
 									$statusdata= $this->Appointments_model->update_appointment_status_details($post['b_id'],$stusdetails);
+									//echo $this->db->last_query();exit;
 									if(count($statusdata)>0){
 										$details=$this->Appointments_model->get_appointment_user_details($post['b_id']);
 										$user_details=$this->Appointments_model->get_apapointment_user_email($details['create_by']);
