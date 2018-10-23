@@ -1,5 +1,5 @@
 
-<?php //echo '<pre>';print_r($executive_list);exit; ?>
+<?php //echo '<pre>';print_r($patient_list);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
