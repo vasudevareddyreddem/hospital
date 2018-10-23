@@ -117,6 +117,7 @@
 												<th>Email Address</th>
                                                 <th>Address</th>
                                                 <th>Location</th>
+                                                <th>Date & Time</th>
                                                 <th>Status</th>
 												<th>Action</th>
                                                 
@@ -130,6 +131,7 @@
                                                 <td><?php echo $list['email_id']; ?></td>
                                                 <td><?php echo $list['address']; ?></td>
                                                 <td><?php echo $list['location']; ?></td>
+												<td><?php echo $list['create_at']; ?></td>
                                                 <td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
 												<td>
 												   <a href="<?php echo base_url('Executive/edit/'.base64_encode($list['e_id'])); ?>"  data-toggle="tooltip" title="Edit"><i class="fa fa-pencil btn btn-success"></i></a>
