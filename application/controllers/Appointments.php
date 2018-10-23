@@ -18,16 +18,16 @@ class Appointments extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['departments_list']=$this->Resources_model->get_hospital_deportments($userdetails['hos_id']);
-					//echo '<pre>';print_r($data);exit; 
+					
 					$data['tab']= base64_decode($this->uri->segment(3));
 					$data['appointment_list']=$this->Appointments_model->get_website_appintmenr_list($userdetails['hos_id']);
-					
+					//echo '<pre>';print_r($data['appointment_list']);exit; 
 					$data['app_appointment_list']=$this->Appointments_model->get_app_appointment_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data['app_appointment_list']);exit; 
 					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count($userdetails['hos_id']);
 					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
-					echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');
 				}else{
@@ -40,6 +40,51 @@ class Appointments extends In_frontend {
 			redirect('admin');
 		}
 		}
+		
+		public function reasonpost()
+				
+			 {
+				
+			 if($this->session->userdata('userdetails'))
+					{
+					$admindetails=$this->session->userdata('userdetails');
+					
+					$post=$this->input->post();
+					///echo'<pre>';print_r($post);
+					$explode=explode('/',$post['b_id']);
+					//echo'<pre>';print_r($explode);exit;
+					$b_id=base64_decode($explode[0]);
+					$add=array(
+					'rea_son'=>isset($post['rea_son'])?$post['rea_son']:'',
+					'status'=>2,
+					);
+					//echo'<pre>';print_r($add);exit;
+					$update=$this->Appointments_model->update_app_reason($b_id,$add);
+					//echo $this->db->last_query();exit;
+					if(count($update)>0){
+						 $this->session->set_flashdata('success','successfully sent');
+						redirect('appointments/index/');
+					}else{
+							$this->session->set_flashdata('error','Technical problem will occured. try again once');
+						redirect('appointments/index/');
+					}
+					
+			
+			
+			
+		
+		}
+		
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		public  function add(){
 			
@@ -83,24 +128,33 @@ class Appointments extends In_frontend {
 				redirect('admin');
 			}
 		}
-		public  function accept_status(){
-			if($this->session->userdata('userdetails'))
-				{
-					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($admindetails);exit;
-					if($admindetails['role_id']=3){
-							$appointment_b_id=$this->uri->segment(3);
-							$status=base64_decode($this->uri->segment(4));
-							
-							if($appointment_b_id!=''){
-								$stusdetails=array(
-									'status'=>$status,
-									);
-									$statusdata= $this->Appointments_model->update_appointment_status_details(base64_decode($appointment_b_id),$stusdetails);
-									if(count($statusdata)>0){
-										
-										/*push notification */
-											$details=$this->Appointments_model->get_appointment_user_details(base64_decode($appointment_b_id));
+		
+		public function accept_status()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+             $post=$this->input->post();
+			if($login_details['role_id']==3){
+					$b_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=2;
+					}else{
+						$statu=1;
+					}
+					if($b_id!=''){
+						$stusdetails=array(
+							'status'=>$statu,
+							'create_at'=>date('Y-m-d H:i:s')
+							);
+							//echo'<pre>';print_r($stusdetails);exit;
+									$statusdata= $this->Appointments_model->update_appointment_status_details($b_id,$stusdetails);
+							//echo $this->db->last_query();exit;
+                        						
+							if(count($statusdata)>0){
+								/*push notification */
+											$details=$this->Appointments_model->get_appointment_user_details(base64_decode($b_id));
 											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
 
 											/*$url = "https://fcm.googleapis.com/fcm/send";
@@ -135,33 +189,34 @@ class Appointments extends In_frontend {
 											/*push notification */
 											
 											//echo $status;exit;
-											if($status==2){
-												$this->session->set_flashdata('success',"Appointment successfully rejected.");
-
-												}else{
-												$this->session->set_flashdata('success',"Appointment successfully accepted.");
-
-												}
-										
-										redirect('appointments/index/'.base64_encode(2));
-									}else{
-											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-											redirect('appointments/index/'.base64_encode(2));
-									}
+								if($status==1){
+								$this->session->set_flashdata('success',"Patient details successfully  accepted.");
+								}else{
+									$this->session->set_flashdata('success',"Patient details successfully rejected.");
+								}
+								redirect('appointments/index/'.base64_encode(2));
 							}else{
-								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-								redirect('appointments/index/'.base64_encode(3));
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('appointments/index/'.base64_encode(2));
 							}
-							
 					}else{
-							$this->session->set_flashdata('error',"You have no permission to access");
-							redirect('dashboard');
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('dashboard');
 					}
-				}else{
-					$this->session->set_flashdata('error','Please login to continue');
-					redirect('admin');
-				}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('home');
 		}
+		
+		
+	}
+	
+	
 		
 		public function change_time(){
 			

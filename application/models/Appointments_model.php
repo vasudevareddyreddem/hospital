@@ -25,11 +25,12 @@ class Appointments_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	public  function get_app_appointment_list($hos_id){
-		$this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name')->from('appointment_bidding_list');
+		$this->db->select('appointment_bidding_list.*,appointment_bidding_list.b_id,appointment_bidding_list.status,treament.t_name,specialist.specialist_name,resource_list.resource_name')->from('appointment_bidding_list');
 		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = appointment_bidding_list.doctor_id', 'left');
 		$this->db->where('appointment_bidding_list.hos_id',$hos_id);
-		$this->db->where('appointment_bidding_list.status !=',2);
+		$this->db->where('appointment_bidding_list.status!=',2);
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
 		return $this->db->get()->result_array();
 	}
@@ -42,8 +43,8 @@ class Appointments_model extends CI_Model
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
 		return $this->db->get()->result_array();
 	}
-	public  function update_appointment_status_details($id,$data){
-		$this->db->where('b_id',$id);
+	public  function update_appointment_status_details($b_id,$data){
+		$this->db->where('b_id',$b_id);
 		return $this->db->update('appointment_bidding_list',$data);
 	}
 	public  function get_appointment_id_details($b_id){
@@ -71,6 +72,18 @@ class Appointments_model extends CI_Model
 		return $this->db->get()->row_array();
 		
 	}
+	public function update_app_reason($b_id,$data){
+		$this->db->where('b_id',$b_id);
+		return $this->db->update('appointment_bidding_list',$data);
 	
+	}
+public function update_app_acept_data($b_id,$data){
+$this->db->where('b_id',$b_id);
+return $this->db->update('appointment_bidding_list',$data);	
+	
+	
+}
+
+
 
 }
