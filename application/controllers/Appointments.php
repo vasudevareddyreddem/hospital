@@ -27,7 +27,7 @@ class Appointments extends In_frontend {
 					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count($userdetails['hos_id']);
 					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
-					//echo '<pre>';print_r($data);exit;
+					echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');
 				}else{

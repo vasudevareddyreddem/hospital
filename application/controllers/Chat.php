@@ -23,7 +23,6 @@ class Chat extends In_frontend {
 					$data['resources_list']=$this->Chat_model->get_resource_list($userdetails['hos_id']);
 					$data['resources_chating']=$this->Chat_model->get_resource_chating_list($admindetails['a_id']);
 					$data['hospitaladmin_chat_list']=$this->Chat_model->get_hospitaladmin_replay_message_list($admindetails['a_id']);
-					//echo '<pre>';print_r($data['resources_chating']);exit;
 					if($admindetails['out_source']==1){
 						$data['tab']=1;
 					}else{

@@ -371,9 +371,10 @@
 										<span class="arrow "></span>
 									</a>
 								</li>
-										<li class="nav-item  open <?php if($this->uri->segment(1)=='chat' && $this->uri->segment(2)=='' ){ echo "active";} ?>">
+										<li class="nav-item start <?php if($this->uri->segment(2)=='adminchat' || $this->uri->segment(2)=='admin_softwareteam'){ echo "active";}else{'deactive';}?>">
 	                            <a  class="nav-link nav-toggle"> <i class="material-icons">email</i>
-	                                <span class="title">Chat</span>  <span class="selected"></span>
+	                                <span class="title">Chat</span>
+                                       <span class="selected"></span>									
                                 	<span class="arrow "></span>
 	                            </a>
 	                            <ul class="sub-menu">

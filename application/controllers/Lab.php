@@ -1137,8 +1137,7 @@ class Lab extends In_frontend {
 					$arry=$xlsx->rows($j);
 					unset($arry[0]);
 					 //echo "<pre>";print_r($arry);exit;
-					
-					
+					 
 					foreach($arry as $key=>$fields)
 					{   
 						$save_data=array(
@@ -1155,7 +1154,6 @@ class Lab extends In_frontend {
 						'out_source'=>isset($admindetails['out_source'])?$admindetails['out_source']:''	
 						);
 					//echo'<pre>';print_r($save_data);exit;
-						
 						$save=$this->Lab_model->insert_data_lab_detail_value($save_data);
 						//echo'<pre>';print_r($save);exit;
 						
@@ -1165,7 +1163,6 @@ class Lab extends In_frontend {
 					//exit;
 					
 					/* end*/
-					 
 					 
 			if(count($save)>0){
 				$this->session->set_flashdata('success',"Lab details  successfully inserted.");

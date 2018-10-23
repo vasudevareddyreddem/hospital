@@ -567,7 +567,7 @@
                                     <tr id="investigation_id_<?php echo $list['id']; ?>">
 									   <td><?php echo $list['investigation_type']; ?></td>
 										<td><?php echo $list['priority']; ?></td>
-                                       <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" >Remove</span></td>
+                                       <td><span onclick="removeinvestigation(<?php echo $list['id']; ?>);" class="btn btn-sm btn-danger" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
                                  </tbody>
@@ -618,7 +618,7 @@
                                        <td><?php echo $list['medicine_name']; ?></td>
                                        <td><?php echo $list['qty']; ?></td>
                                        <td><?php echo $list['dosage']; ?> </td>
-                                       <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" >Remove</span></td>
+                                       <td><span onclick="removemedicine(<?php echo $list['m_id']; ?>);" class="btn btn-danger btn-sm" >Remove</span></td>
                                     </tr>
                                     <?php }?>											
                                  </tbody>

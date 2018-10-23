@@ -33,12 +33,10 @@
 								<div class="col-md-6">
 									<label>Cards count</label>
 								<input class="form-control" id="card_number" name="card_number" value="" type="text" placeholder="30">
+                                    <br>
+                                    <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add</button>
 								</div>
-								</div><br>
-								<div class="">
-								<label>&nbsp;</label>
-								<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add</button>
-								</div>	
+								</div>
 							
 							</form>
 						
