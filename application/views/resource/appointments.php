@@ -151,7 +151,7 @@
 								   <td > <div class="form-group">
                                                    <label class="">Booking Date </label>
                                                    <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd  " data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date"  value="<?php echo $list['date']; ?> ">
+                                                      <input style="width:100px;" class="form-control" size="16" type="text"  name="date" id="date<?php echo $list['b_id']; ?>"  value="<?php echo $list['date']; ?> ">
                                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                    </div>
                                                 </div>
@@ -160,7 +160,7 @@
 									<div class="form-group ">
                                                    <label class="">Booking Time </label>
                                                 <?php $time_list=array("06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm"); ?>
-													<select class="form-control" id="time" name="time">
+													<select class="form-control" id="time<?php echo $list['b_id']; ?>" name="time">
 														<option value="">Select</option>
 														<?php foreach($time_list as $lists){ ?>
 														<?php if($list['time']==$lists){ ?>
@@ -173,7 +173,7 @@
 													</select>
                                            
                                                 </div>
-												<td><?php  if($list['status']==1){  echo "accept";}else if($list['status']==2){  echo "reject";}?></td>
+												<td><?php  if($list['status']==1){  echo "accept";}else if($list['status']==2){  echo "reject";}else{  echo "Pending"; } ?></td>
 												<td>
 								   <div class="btn-group">
                                              <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -184,14 +184,14 @@
                                                    
 															  <li>
 															
-                                                                <a class="btn btn-success btn-block" href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['b_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal2">
+                                                                <a class="btn btn-success btn-block" href="javascript;void(0);" onclick="admindeactive('<?php echo htmlentities($list['b_id']).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal2">
                                                                 Accept</a>
                                                            </li>
 
 															 
 													           <li>
 															   
-                                                                <a class= "btn btn-danger btn-block" href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['b_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Reject</a>
+                                                                <a class= "btn btn-danger btn-block" href="javascript;void(0);" onclick="admindeactive('<?php echo htmlentities($list['b_id']).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus1('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">Reject</a>
                                                                 
 															
                                                             </li>
@@ -230,7 +230,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form id="defaultForm" method="post" action="<?php echo base_url('appointments/reasonpost'); ?>">
-                            <div id="content1" class="col-lg-12 form-group">
+                            <div id="content2" class="col-lg-12 form-group">
                                 Are you sure  Accept?
                             </div>
 
@@ -239,7 +239,10 @@
                             </div>
                             <br>
                             <div class="col-lg-12">
-						<input type="hidden" name="b_id" id="b_id1" class="popid" value="">
+							<input type="hidden" name="b_id" id="b_id1" class="popid" value="">
+							<input type="hidden" name="time_val" id="time_val1"  value="">
+							<input type="hidden" name="date_val" id="date_val1"  value="">
+							<input type="hidden" name="link" id="link2" class="popid"  value="">
                                 <button type="button" aria-label="Close" data-dismiss="modal" class="btn blueBtn float-right">Cancel</button>
                             </div>
 							<button type="submit" class="btn btn-primary" name="Submit" value="Submit">Submit</button>
@@ -269,14 +272,17 @@
                 <div class="alert alert-danger alert-dismissible" id="errormsg" style="display:none;"></div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="defaultForm" method="post" action="">
+                        <form id="defaultForm" method="post" action="<?php echo base_url('appointments/change_time/'); ?>">
                             <div id="content1" class="col-lg-12 form-group">
                                 Are you sure ?
                             </div>
 
                              <div class="col-lg-12">
 							<input type="hidden" name="b_id" id="b_id" class="popid" value="">
-                                <a href="?id=value" class="btn blueBtn popid"><span aria-hidden="true">Ok</span></a>
+							<input type="hidden" name="time_val" id="time_val"  value="">
+							<input type="hidden" name="date_val" id="date_val"  value="">
+							<input type="hidden" name="link" id="link1" class="popid"  value="">
+                                <button type="submit" class="btn blueBtn popid"><span aria-hidden="true">Ok</span></button>
                                 <button type="button" aria-label="Close" data-dismiss="modal" class="btn blueBtn float-right">Cancel</button>
                             </div>
 
@@ -355,16 +361,24 @@
 
 function admindeactive(id){
 	$(".popid").attr("href","<?php echo base_url('appointments/accept_status/'); ?>"+"/"+id);
-	$("#b_id").val(id);
-	$("#b_id1").val(id);
+	
+	var res = id.split("/");
+	$(".popid").val(id);
+	//alert(res[0]);
+	//alert($('#date'+res[0]).val());
+	$("#time_val1").val($('#date'+res[0]).val());
+	$("#time_val").val($('#date'+res[0]).val());
+	$("#date_val").val($('#time'+res[0]).val());
+	$("#date_val1").val($('#time'+res[0]).val());
 }
 function adminstatus(id){
-	if(id==1){
-			$('#content1').html('Are you sure you want to Reject');
-		
-	}if(id==2){
-			$('#content1').html('Are you sure you want to Accept');
-	}
+	
+	$('#content1').html('Are you sure you want to Accept');
+	
+}function adminstatus1(id){
+	
+	$('#content2').html('Are you sure you want to Reject');
+	
 }
 
 

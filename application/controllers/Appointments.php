@@ -52,19 +52,35 @@ class Appointments extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					
 					$post=$this->input->post();
-					///echo'<pre>';print_r($post);
+					//echo'<pre>';print_r($post);exit;
 					$explode=explode('/',$post['b_id']);
 					//echo'<pre>';print_r($explode);exit;
-					$b_id=base64_decode($explode[0]);
+					$b_id=$explode[0];
 					$add=array(
-					'rea_son'=>isset($post['rea_son'])?$post['rea_son']:'',
+					'reason'=>isset($post['rea_son'])?$post['rea_son']:'',
 					'status'=>2,
 					);
 					//echo'<pre>';print_r($add);exit;
 					$update=$this->Appointments_model->update_app_reason($b_id,$add);
 					//echo $this->db->last_query();exit;
 					if(count($update)>0){
-						 $this->session->set_flashdata('success','successfully sent');
+						$details=$this->Appointments_model->get_appointment_user_details($b_id);
+										$user_details=$this->Appointments_model->get_apapointment_user_email($details['create_by']);
+											
+											//$this->db->last_query();
+											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
+
+											$this->load->library('email');
+											$this->email->set_newline("\r\n");
+											$this->email->set_mailtype("html");
+											$this->email->to($user_details['email']);
+											$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
+											$this->email->subject('Appointment rejected'); 
+											$body = "Hello ".$details['name']." your appointment was rejected";
+											//echo $body;exit;
+											$this->email->message($body);
+											$this->email->send();
+						 $this->session->set_flashdata('success','Appointment successfully rejected');
 						redirect('appointments/index/');
 					}else{
 							$this->session->set_flashdata('error','Technical problem will occured. try again once');
@@ -137,8 +153,12 @@ class Appointments extends In_frontend {
 		{
 		$login_details=$this->session->userdata('userdetails');
              $post=$this->input->post();
+			 $bid=explode("/",$post['b_id']);
+			// echo '<pre>';print_r($post);
+			// echo '<pre>';print_r($bid);exit;
 			if($login_details['role_id']==3){
-					$b_id=base64_decode($this->uri->segment(3));
+				
+					$b_id=$bid[0];
 					$status=base64_decode($this->uri->segment(4));
 					if($status==1){
 						$statu=2;
@@ -191,11 +211,8 @@ class Appointments extends In_frontend {
 											/*push notification */
 											
 											//echo $status;exit;
-								if($status==1){
 								$this->session->set_flashdata('success',"Patient details successfully  accepted.");
-								}else{
-									$this->session->set_flashdata('success',"Patient details successfully rejected.");
-								}
+								
 								redirect('appointments/index/'.base64_encode(2));
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
@@ -222,17 +239,26 @@ class Appointments extends In_frontend {
 		
 		public function change_time(){
 			
-							$post=$this->input->post();
+						$post=$this->input->post();
+						 $bid=explode("/",$post['b_id']);
+							
+								$b_id=$bid[0];
+								$status=base64_decode($bid[1]);
+								if($status==1){
+									$statu=2;
+								}else{
+									$statu=1;
+								}
 							//echo '<pre>';print_r($post);exit; 
 								$stusdetails=array(
-									'date'=>$post['date'],
-									'time'=>$post['time'],
-									'status'=>$post['status_value'],
+									'date'=>$post['date_val'],
+									'time'=>$post['time_val'],
+									'status'=>$statu,
 									);
-									$statusdata= $this->Appointments_model->update_appointment_status_details($post['b_id'],$stusdetails);
+									$statusdata= $this->Appointments_model->update_appointment_status_details($b_id,$stusdetails);
 									//echo $this->db->last_query();exit;
 									if(count($statusdata)>0){
-										$details=$this->Appointments_model->get_appointment_user_details($post['b_id']);
+										$details=$this->Appointments_model->get_appointment_user_details($b_id);
 										$user_details=$this->Appointments_model->get_apapointment_user_email($details['create_by']);
 											
 											//$this->db->last_query();

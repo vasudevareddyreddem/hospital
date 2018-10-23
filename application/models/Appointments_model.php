@@ -24,13 +24,13 @@ class Appointments_model extends CI_Model
 		$this->db->order_by('appointments.id','desc');
 		return $this->db->get()->result_array();
 	}
-	public  function get_app_appointment_list($hos_id){
+public  function get_app_appointment_list($hos_id){
   $this->db->select('appointment_bidding_list.*,appointment_bidding_list.b_id,appointment_bidding_list.status,treament.t_name,specialist.specialist_name,resource_list.resource_name')->from('appointment_bidding_list');
   $this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
   $this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
   $this->db->join('resource_list', 'resource_list.a_id = appointment_bidding_list.doctor_id', 'left');
   $this->db->where('appointment_bidding_list.hos_id',$hos_id);
-  $this->db->where('appointment_bidding_list.status!=',1);
+  $this->db->where('appointment_bidding_list.status',0);
   $this->db->order_by('appointment_bidding_list.b_id','desc');
   return $this->db->get()->result_array();
  }
