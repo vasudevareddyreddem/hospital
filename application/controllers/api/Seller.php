@@ -138,8 +138,22 @@ class Seller extends REST_Controller {
 		}
 			$check_email=$this->Cardnumber_model->check_email_already_already_exits($email);
 				if(count($check_email)>0){
-					$message = array('status'=>1,'s_id'=>$check_email['s_id'],'message'=>'Your login password is '.$check_email['org_password']);
+					
+					
+					
+					/*test*/
+					$this->load->library('email');
+					$this->email->set_newline("\r\n");
+					$this->email->set_mailtype("html");
+					$this->email->to($check_email['email_id']);
+					$this->email->from('admin@vasu', 'Ehealthinfra'); 
+					$this->email->subject($check_email['name'].' - Forgot password'); 
+					$body = "<b> Your Account login Password is </b> : ".$check_email['org_password'];
+					$this->email->message($body);
+					$this->email->send();
+					$message = array('status'=>1,'s_id'=>$check_email['s_id'],'message'=>'Password sent to your registered email address. Please Check your registered email address');
 					$this->response($message, REST_Controller::HTTP_OK);
+					
 			
 				}else{
 				$message = array('status'=>0,'message'=>'Entered Email id not registered.Please try again');
