@@ -366,10 +366,10 @@ function admindeactive(id){
 	$(".popid").val(id);
 	//alert(res[0]);
 	//alert($('#date'+res[0]).val());
-	$("#time_val1").val($('#date'+res[0]).val());
-	$("#time_val").val($('#date'+res[0]).val());
-	$("#date_val").val($('#time'+res[0]).val());
-	$("#date_val1").val($('#time'+res[0]).val());
+	$("#date_val1").val($('#date'+res[0]).val());
+	$("#date_val").val($('#date'+res[0]).val());
+	$("#time_val").val($('#time'+res[0]).val());
+	$("#time_val1").val($('#time'+res[0]).val());
 }
 function adminstatus(id){
 	

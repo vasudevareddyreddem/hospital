@@ -784,6 +784,17 @@ $this->db->select('hospital.hos_bas_name,appointment_bidding_list.event_status,a
 	$this->db->where('status !=',2);
 	return $this->db->get()->result_array(); 
   }
+  public  function get_not_reject_patient_list(){
+  $this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name,resource_list.resource_name,hospital.hos_bas_name')->from('appointment_bidding_list');
+  $this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
+  $this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
+  $this->db->join('resource_list', 'resource_list.a_id = appointment_bidding_list.doctor_id', 'left');
+  $this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+
+  $this->db->where('appointment_bidding_list.status',2);
+  $this->db->order_by('appointment_bidding_list.b_id','desc');
+  return $this->db->get()->result_array();
+ }
 	
 	
 	

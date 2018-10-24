@@ -127,6 +127,12 @@
 	                                <span class="title">Executive</span> <span class="arrow"></span>
 	                            </a>
 	                        </li>
+							<li class="nav-item  <?php if($this->uri->segment(2)=='rejected_patient_list' && $this->uri->segment(1)=='admin' || $this->uri->segment(2)=='patientlist'){ echo "active";} ?>">
+	                            <a  href="<?php echo base_url('admin/rejected_patient_list'); ?>" class="nav-link "> <i class="material-icons">assignment</i>
+	                                <span class="title">Rejected Patient list</span> <span class="arrow"></span>
+	                            </a>
+	                        </li>
+						
 						<?php }else if($userdetails['role_id']==2){ ?>
 						 <li class="nav-item start <?php if($this->uri->segment(1)=='dashboard'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">

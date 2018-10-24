@@ -249,7 +249,7 @@ class Appointments extends In_frontend {
 								}else{
 									$statu=1;
 								}
-							//echo '<pre>';print_r($post);exit; 
+							//echo '<pre>';print_r($post); 
 								$stusdetails=array(
 									'date'=>$post['date_val'],
 									'time'=>$post['time_val'],
@@ -259,6 +259,26 @@ class Appointments extends In_frontend {
 									//echo $this->db->last_query();exit;
 									if(count($statusdata)>0){
 										$details=$this->Appointments_model->get_appointment_user_details($b_id);
+										//echo '<pre>';print_r($details);exit;
+										$add_app=array(
+											'hos_id'=>isset($details['hos_id'])?$details['hos_id']:'',
+											'city'=>isset($details['city'])?strtoupper($details['city']):'',
+											'patinet_name'=>isset($details['patinet_name'])?strtoupper($details['patinet_name']):'',
+											'age'=>isset($details['age'])?$details['age']:'',
+											'mobile'=>isset($details['mobile'])?$details['mobile']:'',
+											'department'=>isset($details['department'])?$details['department']:'',
+											'specialist'=>isset($details['specialist'])?$details['specialist']:'',
+											'doctor_id'=>isset($details['doctor_id'])?$details['doctor_id']:'',
+											'date'=>isset($details['date'])?$details['date']:'',
+											'time'=>isset($details['time'])?$details['time']:'',
+											'status'=>1,
+											'create_at'=>date('Y-m-d H:i:s'),
+											'create_by'=>$details['create_by'],
+											'coming_through'=>0,
+											);
+										
+										$save=$this->Appointments_model->save_appointments($add_app);
+										
 										$user_details=$this->Appointments_model->get_apapointment_user_email($details['create_by']);
 											
 											//$this->db->last_query();

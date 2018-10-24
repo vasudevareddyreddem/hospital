@@ -362,4 +362,10 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
 /* appointment  changes */
 ALTER TABLE `hospital`.`appointment_bidding_list`   
   ADD COLUMN `doctor_id` VARCHAR(250) NULL AFTER `specialist`;
+  
+  24/10/2018
+  
+  ALTER TABLE `ehealthinfra_db`.`appointment_bidding_list`   
+  CHANGE `event_status` `event_status` INT(11) DEFAULT 0  NULL;
+
 

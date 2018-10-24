@@ -1589,6 +1589,25 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function rejected_patient_list()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$data['rejected_patient_list']= $this->Admin_model->get_not_reject_patient_list($admindetails['a_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('admin/rejected_patient_list',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	
 	
 	
