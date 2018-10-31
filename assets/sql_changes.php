@@ -367,5 +367,30 @@ ALTER TABLE `hospital`.`appointment_bidding_list`
   
   ALTER TABLE `ehealthinfra_db`.`appointment_bidding_list`   
   CHANGE `event_status` `event_status` INT(11) DEFAULT 0  NULL;
+  
+  25-10-2018
+  ALTER TABLE `ehealthinfra_db`.`seller_card_assign_munber_list`   
+  ADD COLUMN `a_u_id` INT(11) NULL AFTER `created_by`;
+  
+  ALTER TABLE `hospital`.`seller_card_assign_munber_list`   
+  ADD COLUMN `razorpay_payment_id` VARCHAR(250) NULL AFTER `a_u_id`,
+  ADD COLUMN `razorpay_order_id` VARCHAR(250) NULL AFTER `razorpay_payment_id`,
+  ADD COLUMN `razorpay_signature` VARCHAR(250) NULL AFTER `razorpay_order_id`,
+  ADD COLUMN `payment_statu` VARCHAR(250) NULL AFTER `razorpay_signature`;
 
+ALTER TABLE `hospital`.`seller_card_assign_munber_list`   
+  ADD COLUMN `amount` VARCHAR(250) NULL AFTER `payment_statu`,
+  ADD COLUMN `payment_date` DATETIME NULL AFTER `amount`;
+
+
+
+  
+CREATE TABLE `appointment_user_prescription` (
+  `a_p_id` int(11) NOT NULL AUTO_INCREMENT,
+  `a_u_id` int(11) DEFAULT NULL,
+  `prescription` varchar(250) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`a_p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 

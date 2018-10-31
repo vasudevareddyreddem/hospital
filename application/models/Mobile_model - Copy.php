@@ -14,32 +14,10 @@ class Mobile_model extends CI_Model
 	$this->db->where('email',$email);
 	return $this->db->get()->row_array();
 	}
-	public function check_mobile_already_already_exits($mobile){
-		$this->db->select('*')->from('appointment_users');
-		$this->db->where('mobile',$mobile);
-		return $this->db->get()->row_array();
-	}
-	public function check_email_already_exits($email){
-		$this->db->select('*')->from('appointment_users');
-		$this->db->where('email',$email);
-		return $this->db->get()->row_array();
-	}
-	public  function get_card_number_data($card_num){
-		$this->db->select('patient_name,email_id,mobile_num,whatsapp_num,card_number,card_id')->from('seller_card_assign_munber_list');
-		$this->db->where('card_number',$card_num);
-		return $this->db->get()->row_array();
-	}
 	public  function save_appointment_user($data){
 		$this->db->insert('appointment_users',$data);
 		return $this->db->insert_id();
 		
-	}
-	public  function check_login_details_with_mobile($mobile,$password){
-		$this->db->select('a_u_id,name,email,mobile,profile_pic')->from('appointment_users');
-		$this->db->where('mobile',$mobile);
-		$this->db->where('password',md5($password));
-		$this->db->where('status',1);
-		return $this->db->get()->row_array();
 	}
 	public  function check_login_details($email,$password){
 		$this->db->select('a_u_id,name,email,mobile,profile_pic')->from('appointment_users');
@@ -68,16 +46,8 @@ class Mobile_model extends CI_Model
 	public function get_hospital_citys_list(){
 		$this->db->select('hospital.hos_bas_city')->from('hospital');
 		$this->db->where('hos_status',1);
-		$this->db->where('hos_undo',0);
 		$this->db->where('hos_bas_city!=','') ;
 		$this->db->group_by('hospital.hos_bas_city') ;
-		return $this->db->get()->result_array();
-	}
-	public function get_hospital_lists($city){
-		$this->db->select('hospital.hos_bas_name,hospital.hos_id,hospital.hos_bas_city,hospital.appointment_fee as consultationfee')->from('hospital');
-		$this->db->where('hospital.hos_bas_city',$city) ;
-		$this->db->where('hos_status',1);
-		$this->db->where('hos_undo',0);
 		return $this->db->get()->result_array();
 	}
 	public function get_hospital_list($specialist_name,$city){
@@ -89,10 +59,10 @@ class Mobile_model extends CI_Model
 		$this->db->where('specialist.t_status',1);
 		return $this->db->get()->result_array();
 	}
-	public  function get_hospital_department_list($hos_id){
-		$this->db->select('hospital.hos_id,treament.t_name as department_name,treament.t_id as department_id')->from('hospital');
+	public  function get_hospital_department_list($city){
+		$this->db->select('treament.t_name as department_name')->from('hospital');
 		$this->db->join('treament', 'treament.hos_id = hospital.hos_id', 'left');
-		$this->db->where('hospital.hos_id',$hos_id);
+		$this->db->where('hospital.hos_bas_city',$city);
 		$this->db->where('hospital.hos_status',1);
 		$this->db->where('treament.t_status',1);
 		$this->db->where('hospital.hos_bas_city!=','') ;
@@ -107,12 +77,12 @@ class Mobile_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	/*testing*/
-	public  function get_hospital_department_specialist_list($hos_id,$department_id){
+	public  function get_hospital_department_specialist_list($department,$city){
 		$this->db->select('treament.t_name,treament.t_id')->from('treament');
 		$this->db->join('specialist', 'specialist.hos_id = treament.hos_id', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = treament.hos_id', 'left');
-		$this->db->where('treament.t_id',$department_id);
-		$this->db->where('hospital.hos_id',$hos_id);
+		$this->db->where('treament.t_name',$department);
+		$this->db->where('hospital.hos_bas_city',$city);
 		$this->db->group_by('treament.t_id');
 		$return=$this->db->get()->result_array();
 		foreach($return as $list){
@@ -128,11 +98,10 @@ class Mobile_model extends CI_Model
 	}
 	
 	
-	public function get_specilist_names_list($hos_id,$d_id){
-		$this->db->select('specialist.s_id as specialist_id ,specialist.specialist_name')->from('specialist');
+	public function get_specilist_names_list($t_id){
+		$this->db->select('specialist.specialist_name')->from('specialist');
 		$this->db->group_by('specialist.s_id');
-		$this->db->where('specialist.d_id',$d_id);
-		$this->db->where('specialist.hos_id',$hos_id);
+		$this->db->where('specialist.d_id',$t_id);
 		return $this->db->get()->result_array();
 	}
 	public  function get_hospital_department_specialist_list_backup($department,$city){
@@ -145,11 +114,10 @@ class Mobile_model extends CI_Model
 		$this->db->group_by('specialist.specialist_name');
 		return $this->db->get()->result_array();
 	}
-	public  function get_hospital_specialist_doctors_list($hos_id,$specialist_id){
-		$this->db->select('resource_list.a_id as doctor_id,resource_list.resource_name as doctor_name,resource_list.in_time,resource_list.out_time')->from('treatmentwise_doctors');		
+	public  function get_hospital_specialist_doctors_list($s_id){
+		$this->db->select('resource_list.a_id,resource_list.resource_name')->from('treatmentwise_doctors');		
 		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
-		$this->db->where('treatmentwise_doctors.s_id',$specialist_id);
-		$this->db->where('treatmentwise_doctors.hos_id',$hos_id);
+		$this->db->where('treatmentwise_doctors.s_id',$s_id);
 		$this->db->where('resource_list.r_status',1);
         return $this->db->get()->result_array();
 	}
@@ -174,40 +142,20 @@ class Mobile_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	
-	public  function save_appointment_bidding($data){
+	public  function appointment_bidding_list($data){
 		$this->db->insert('appointment_bidding_list',$data);
 		return $this->db->insert_id();
 		
 	}
-	public  function save_appointment_user_prescription($data){
-		$this->db->insert('appointment_user_prescription',$data);
-		return $this->db->insert_id();
-		
-	}
 	public  function get_bidding_appointment_list($a_id){
-		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name,resource_list.resource_name as doctor_name,hospital.hos_bas_name,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_state,hospital.hos_bas_zipcode')->from('appointment_bidding_list');
+		$this->db->select('appointment_bidding_list.b_id,appointment_bidding_list.hos_id,appointment_bidding_list.patinet_name,appointment_bidding_list.age,appointment_bidding_list.mobile,appointment_bidding_list.date,appointment_bidding_list.time,appointment_bidding_list.status,appointment_bidding_list.city,treament.t_name as department,specialist.specialist_name,hospital.hos_bas_name,hospital.hos_bas_add1,hospital.hos_bas_add2,hospital.hos_bas_city,hospital.hos_bas_state,hospital.hos_bas_state,hospital.hos_bas_zipcode')->from('appointment_bidding_list');
 		$this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');
-		$this->db->join('resource_list', 'resource_list.a_id = appointment_bidding_list.doctor_id', 'left');
 		$this->db->join('specialist', 'specialist.s_id = appointment_bidding_list.specialist', 'left');
 		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
+
 		$this->db->where('appointment_bidding_list.create_by',$a_id);
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
 		return $this->db->get()->result_array();	
-	}
-	public  function get_card_number(){
-		$this->db->select("card_number")->from('seller_card_assign_munber_list');
-		$this->db->order_by('card_id','desc');
-		$this->db->limit(1);
-		return $this->db->get()->row_array();
-	}
-	public  function save_card_number_details($data){
-		$this->db->insert('seller_card_assign_munber_list',$data);
-		return $this->db->insert_id();
-	}
-	public  function update_card_payment_details($a_u_id,$card_assign_number,$update){
-		$this->db->where('a_u_id',$a_u_id);
-		$this->db->where('card_id',$card_assign_number);
-		return $this->db->update('seller_card_assign_munber_list',$update);
 	}
 	public function get_bidding_appointment_details($b_id){
 		$this->db->select('appointment_bidding_list.*,hospital.hos_bas_name')->from('appointment_bidding_list');
@@ -276,36 +224,6 @@ class Mobile_model extends CI_Model
 		$this->db->where('hospital_id',$hos_id);
 		$this->db->where('status',1);
 		$this->db->order_by('coupon_codes.id',"desc");
-		return $this->db->get()->row_array();
-	}
-	
-	/* check  mobile  number exist*/
-	public  function check_mobile_number_exist($mobile){
-		$this->db->select('*')->from('seller_card_assign_munber_list');
-		$this->db->where('mobile_num',$mobile);
-		return $this->db->get()->row_array();
-	}
-	public  function get_card_details($num){
-		$this->db->select('card_number,mobile_num,patient_name as name')->from('seller_card_assign_munber_list');
-		$this->db->where('card_id',$num);
-		return $this->db->get()->row_array();
-	}
-	
-	public  function get_prescription_list($a_u_id,$hos_id){
-		$this->db->select('prescription,created_at')->from('appointment_user_prescription');
-		$this->db->where('a_u_id',$a_u_id);
-		$this->db->where('hos_id',$hos_id);
-		return $this->db->get()->result_array();
-	}
-	public  function get_user_card_details($a_u_id){
-		$this->db->select('seller_card_assign_munber_list.card_number,mobile_num,patient_name as name')->from('seller_card_assign_munber_list');
-		$this->db->where('a_u_id',$a_u_id);
-		return $this->db->get()->result_array();
-	}
-	public  function get_mobile_number($a_u_id,$card_assign_number){
-		$this->db->select('mobile_num,patient_name')->from('seller_card_assign_munber_list');
-		$this->db->where('a_u_id',$a_u_id);
-		$this->db->where('card_id',$card_assign_number);
 		return $this->db->get()->row_array();
 	}
 	

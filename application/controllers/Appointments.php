@@ -69,17 +69,31 @@ class Appointments extends In_frontend {
 											
 											//$this->db->last_query();
 											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
-
+											$hos_conatct=$this->Appointments_model->get_appoinment_hospital_details($details['hos_id']);
+											
 											$this->load->library('email');
 											$this->email->set_newline("\r\n");
 											$this->email->set_mailtype("html");
 											$this->email->to($user_details['email']);
 											$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
 											$this->email->subject('Appointment rejected'); 
-											$body = "Hello ".$details['name']." your appointment was rejected";
+											$body = "Dear ".$details['name'].", your appointment  is rejected, for the  ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Reason  ".$post['rea_son']." .Any queries call ".$hos_conatct['hos_rep_contact'];
 											//echo $body;exit;
 											$this->email->message($body);
 											$this->email->send();
+											$username=$this->config->item('smsusername');
+											$pass=$this->config->item('smspassword');
+											$msg = "Dear ".$details['name'].", your appointment  is rejected, for the  ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Reason  ".$post['rea_son']." .Any queries call ".$hos_conatct['hos_rep_contact'];
+
+											
+											$ch2 = curl_init();
+											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_POST, 1);
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$user_details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+											//echo '<pre>';print_r($ch);exit;
+											$server_output = curl_exec ($ch2);
+											curl_close ($ch2);
 						 $this->session->set_flashdata('success','Appointment successfully rejected');
 						redirect('appointments/index/');
 					}else{
@@ -283,17 +297,37 @@ class Appointments extends In_frontend {
 											
 											//$this->db->last_query();
 											$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
-
+											$hos_conatct=$this->Appointments_model->get_appoinment_hospital_details($details['hos_id']);
+											//echo '<pre>';print_r($get_coupon);exit;
 											$this->load->library('email');
 											$this->email->set_newline("\r\n");
 											$this->email->set_mailtype("html");
 											$this->email->to($user_details['email']);
-											$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
+											$this->email->from($hos_conatct['hos_bas_email'], $hos_conatct['hos_bas_name']); 
 											$this->email->subject('Appointment Confirmation'); 
-											$body = "Hello ".$details['name']." you have an appointment booked from ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].". use this  coupon code ".$get_coupon['coupon_code'];
+											$body = "Dear ".$details['name'].", your appointment  is confirmed, for the ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Use coupon code <b>".$get_coupon['coupon_code']."</b> to avail discounts.Any queries call ".$hos_conatct['hos_rep_contact'];
 											//echo $body;exit;
 											$this->email->message($body);
 											$this->email->send();
+											$mobile=$user_details['mobile'];
+											
+											
+											$username=$this->config->item('smsusername');
+											$pass=$this->config->item('smspassword');
+											$msg = "Dear ".$details['name'].", your appointment  is confirmed, for the ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Use coupon code ".ucfirst($get_coupon['coupon_code'])." to avail discounts.Any queries call ".$hos_conatct['hos_rep_contact'];
+											/* seller purpose*/
+											$ch2 = curl_init();
+											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_POST, 1);
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$mobile.'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+											//echo '<pre>';print_r($ch);exit;
+											$server_output = curl_exec ($ch2);
+											curl_close ($ch2);
+											
+											
+											
+											//echo '<pre>';print_r($server_output);exit;
 										//echo '<pre>';print_r($user_details);
 										//echo '<pre>';print_r($details);exit;
 										/*push notification */

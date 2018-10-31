@@ -146,7 +146,7 @@ class Seller extends REST_Controller {
 					$this->email->set_newline("\r\n");
 					$this->email->set_mailtype("html");
 					$this->email->to($check_email['email_id']);
-					$this->email->from('admin@vasu', 'Ehealthinfra'); 
+					$this->email->from('admin@Ehealthinfra', 'Ehealthinfra'); 
 					$this->email->subject($check_email['name'].' - Forgot password'); 
 					$body = "<b> Your Account login Password is </b> : ".$check_email['org_password'];
 					$this->email->message($body);
@@ -374,7 +374,7 @@ class Seller extends REST_Controller {
 				$ch2 = curl_init();
 				curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
 				curl_setopt($ch2, CURLOPT_POST, 1);
-				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=cartin&phone='.$mobile_num.'&text='.$msg.'&priority=ndnd&stype=normal');
+				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$mobile_num.'&text='.$msg.'&priority=ndnd&stype=normal');
 				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 				//echo '<pre>';print_r($ch);exit;
 				$server_output = curl_exec ($ch2);
@@ -450,7 +450,7 @@ class Seller extends REST_Controller {
 				$ch2 = curl_init();
 				curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
 				curl_setopt($ch2, CURLOPT_POST, 1);
-				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=cartin&phone='.$detail['mobile_num'].'&text='.$msg.'&priority=ndnd&stype=normal');
+				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$detail['mobile_num'].'&text='.$msg.'&priority=ndnd&stype=normal');
 				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 				//echo '<pre>';print_r($ch2);exit;
 				$server_output = curl_exec ($ch2);
