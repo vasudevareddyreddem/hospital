@@ -159,6 +159,12 @@ class Mobile_model extends CI_Model
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->get()->row_array();
 	}
+	public  function get_doctor_time_list($hos_id,$doctor_id){
+		$this->db->select('in_time,out_time')->from('resource_list');		
+		$this->db->where('a_id',$doctor_id);
+		$this->db->where('hos_id',$hos_id);
+        return $this->db->get()->row_array();
+	}
 	
 	
 	public  function get_department_name_id($hos_id,$department_name){
@@ -192,7 +198,37 @@ class Mobile_model extends CI_Model
 		$this->db->join('hospital', 'hospital.hos_id = appointment_bidding_list.hos_id', 'left');
 		$this->db->where('appointment_bidding_list.create_by',$a_id);
 		$this->db->order_by('appointment_bidding_list.b_id','desc');
-		return $this->db->get()->result_array();	
+		$return=$this->db->get()->result_array();
+		$couponces=$c_explode='';
+		foreach($return as $lis){
+			$c_explode='';
+			$couponces=$this->get_coupon_codes($lis['hos_id']);
+			if(count($couponces)>0){
+				$c_coes=array();
+				foreach($couponces as $li){
+					$c_coes[]=$li['coupon_code'];
+				}
+
+				$c_explode=implode(",",$c_coes);
+			}else{
+				$c_explode='';
+			}
+			$detail[$lis['b_id']]=$lis;
+			$detail[$lis['b_id']]['couponcodes']=$c_explode;
+
+		}
+			if(!empty($detail)){
+				return $detail;
+			}	
+	}
+	
+	public  function get_coupon_codes($hos_id){
+		$this->db->select("coupon_code")->from('coupon_codes');
+		$this->db->where('hospital_id',$hos_id);
+		$this->db->where('status',1);
+		$this->db->limit(4);
+		$this->db->order_by('id','desc');
+		return $this->db->get()->result_array();
 	}
 	public  function get_card_number(){
 		$this->db->select("card_number")->from('seller_card_assign_munber_list');

@@ -92,6 +92,13 @@ class Cardnumber_model extends CI_Model
 		$this->db->insert('seller_card_assign_munber_list',$data);
 		return $this->db->insert_id();
 	}
+	public  function mobile_number_exists($mobile){
+		
+		$this->db->select('*')->from('seller_card_assign_munber_list');
+		$this->db->where('mobile_num',$mobile);
+		$this->db->where('mobile_verified',1);
+		return $this->db->get()->row_array();
+	}
 	
 	public  function get_opt_details($s_id,$card_assign_number){
 		

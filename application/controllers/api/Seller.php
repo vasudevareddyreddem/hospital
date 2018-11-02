@@ -186,7 +186,8 @@ class Seller extends REST_Controller {
 		}if($address==''){
 			$message = array('status'=>0,'message'=>'Address is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if($account_number==''){
+		}
+		/*if($account_number==''){
 			$message = array('status'=>0,'message'=>' Bank Account Number is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($bank_name==''){
@@ -198,12 +199,12 @@ class Seller extends REST_Controller {
 		}if($bank_account_holder==''){
 			$message = array('status'=>0,'message'=>'Bank Account Holder Name is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}
+		}*/
 		$details=$this->Cardnumber_model->get_card_seller_details($s_id);
-		if($details['kyc']==''){
+		/*if($details['kyc']==''){
 				$message = array('status'=>0,'message'=>'kyc is required');
 				$this->response($message, REST_Controller::HTTP_OK);
-		}
+		}*/
 		if(isset($_FILES['kyc']['name']) && $_FILES['kyc']['name']!=''){
 		$pic=$_FILES['kyc']['name'];
 		$picname = str_replace(" ", "", $pic);
@@ -219,11 +220,11 @@ class Seller extends REST_Controller {
 		'email_id'=>isset($email)?$email:'',
 		'mobile'=>isset($mobile)?$mobile:'',
 		'address'=>isset($address)?$address:'',
-		'bank_account'=>isset($account_number)?$account_number:'',
-		'bank_name'=>isset($bank_name)?$bank_name:'',
-		'ifsccode'=>isset($ifsc_code)?$ifsc_code:'',
-		'bank_holder_name'=>isset($bank_account_holder)?$bank_account_holder:'',
-		'kyc'=>isset($imgname)?$imgname:'',
+		//'bank_account'=>isset($account_number)?$account_number:'',
+		//'bank_name'=>isset($bank_name)?$bank_name:'',
+		//'ifsccode'=>isset($ifsc_code)?$ifsc_code:'',
+		//'bank_holder_name'=>isset($bank_account_holder)?$bank_account_holder:'',
+		//'kyc'=>isset($imgname)?$imgname:'',
 		'updated_at'=>date('Y-m-d H:i:s'),
 		);
 		$update=$this->Cardnumber_model->update_seller_profile_details($s_id,$update_data);
@@ -274,29 +275,32 @@ class Seller extends REST_Controller {
 	}
 	public  function cardnumbers_limit_post(){
 		$s_id=$this->post('s_id');
-		$limit_count=$this->post('limit_count');
+		$amount=$this->post('amount');
 		$razorpay_payment_id=$this->post('razorpay_payment_id');
 		$razorpay_order_id=$this->post('razorpay_order_id');
 		$razorpay_signature=$this->post('razorpay_signature');
 		if($s_id==''){
 			$message = array('status'=>0,'message'=>'User Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if($limit_count==''){
-			$message = array('status'=>0,'message'=>'Limit Count is required');
+		}if($amount==''){
+			$message = array('status'=>0,'message'=>'Amount is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($razorpay_payment_id==''){
 			$message = array('status'=>0,'message'=>'Razorpay Payment Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}if($razorpay_order_id==''){
+		}/*if($razorpay_order_id==''){
 			$message = array('status'=>0,'message'=>'Razorpay Order Id is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($razorpay_signature==''){
 			$message = array('status'=>0,'message'=>'Razorpay signature is required');
 			$this->response($message, REST_Controller::HTTP_OK);
-		}
+		}*/
+		
+		$limit_count=$amount/10;
 		$add=array(
 		's_id'=>isset($s_id)?$s_id:'',
 		'limit'=>isset($limit_count)?$limit_count:'',
+		'amount'=>isset($amount)?$amount:'',
 		'razorpay_payment_id'=>isset($razorpay_payment_id)?$razorpay_payment_id:'',
 		'razorpay_order_id'=>isset($razorpay_order_id)?$razorpay_order_id:'',
 		'razorpay_signature'=>isset($razorpay_signature)?$razorpay_signature:'',
@@ -305,6 +309,7 @@ class Seller extends REST_Controller {
 		'created_by'=>isset($s_id)?$s_id:'',
 		
 		);
+		//echo '<pre>';print_r($add);exit;
 		$card_limit=$this->Cardnumber_model->save_seller_card_limit($add);
 		if(count($card_limit)>0){
 				$message = array('status'=>1,'s_id'=>$s_id,'message'=>'Seller card count successfully updated');
@@ -346,6 +351,12 @@ class Seller extends REST_Controller {
 			$this->response($message, REST_Controller::HTTP_OK);
 		}if($gender==''){
 			$message = array('status'=>0,'message'=>'Gender is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		
+		$check_mobile=$this->Cardnumber_model->mobile_number_exists($mobile_num);
+		if(count($check_mobile)>0){
+			$message = array('status'=>0,'message'=>'Mobile Number already exists. Please use another Mobile Number');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 		$six_digit_random_number = mt_rand(100000, 999999);
@@ -411,7 +422,7 @@ class Seller extends REST_Controller {
 					);
 				$update=$this->Cardnumber_model->update_otp_verification($s_id,$card_assign_number,$add);
 				if(count($update)>0){
-					$message = array('status'=>1,'card_assign_number'=>$card_assign_number,'s_id'=>$s_id,'message'=>'Card Number detrails successfully updated');
+					$message = array('status'=>1,'card_assign_number'=>$card_assign_number,'s_id'=>$s_id,'message'=>'Card Number details successfully updated');
 					$this->response($message, REST_Controller::HTTP_OK);
 				}else{
 					$message = array('status'=>0, 's_id'=>$s_id,'message'=>'Technical problem will occurred .Please try again');
@@ -496,7 +507,9 @@ class Seller extends REST_Controller {
 		
 		if($details['c_count']<=$Card_limit['total_limit']){
 			if(count($card_num)>0){
-				$num=($card_num['card_number'])+1;
+				//$num=($card_num['card_number'])+1;
+				$number=preg_replace("/[^0-9]/", "", $card_num['card_number']);
+				$num=($number)+1;
 				$message = array('status'=>1,'Cardnumber'=>$num,'s_id'=>$s_id,'message'=>'Card number successfully generated');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{

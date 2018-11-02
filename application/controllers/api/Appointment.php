@@ -329,6 +329,62 @@ class Appointment extends REST_Controller {
 				$this->response($message, REST_Controller::HTTP_OK);
 				}
 	}
+	public  function doctors_time_slot_post(){
+		$doctor_id=$this->post('doctor_id');
+		$hos_id=$this->post('hos_id');
+		if($hos_id==''){
+			$message = array('status'=>0,'message'=>'Hospital Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}if($doctor_id==''){
+			$message = array('status'=>0,'message'=>'Doctor Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$doctor_list=$this->Mobile_model->get_doctor_time_list($hos_id,$doctor_id);
+		//echo '<pre>';print_r($doctor_list);
+		if(count($doctor_list)>0){
+			$time_list=array("12:00 am","12:30 am","01:00 am","01:30 am","02:00 am","02:30 am","03:00 am","03:30 am","04:00 am","04:30 am","05:00 am","05:30 am","06:00 am","06:30 am","07:00 am","07:30 am","08:00 am","08:30 am","09:00 am","09:30 am","10:00 am","10:30 am","11:00 am","11:30 am","12:00 pm","12:30 pm","01:00 pm","01:30 pm","02:00 pm","02:30 pm","03:00 pm","03:30 pm","04:00 pm","04:30 pm","05:00 pm","05:30 pm","06:00 pm","06:30 pm","07:00 pm","07:30 pm","08:00 pm","08:30 pm","09:00 pm","09:30 pm","10:00 pm","10:30 pm","11:00 pm","11:30 pm");
+			$start_date =$doctor_list['in_time'];
+			$end_date = $doctor_list['out_time'];
+			$interval = '30 mins';
+			$format = '12';
+			$startTime = strtotime($start_date); 
+			$endTime   = strtotime($end_date);
+			$returnTimeFormat = ($format == '12')?'g:i a':'G:i:s';
+
+			$current   = time(); 
+			$addTime   = strtotime('+'.$interval, $current); 
+			$diff      = $addTime - $current;
+
+			$times = array(); 
+			while ($startTime < $endTime) { 
+			$times[] = date($returnTimeFormat, $startTime); 
+			$startTime += $diff; 
+			} 
+			$times[] = date($returnTimeFormat, $startTime);
+			
+	
+		}		
+		
+		
+				if(count($doctor_list)>0){
+					if(isset($times) && count($times)>0){
+						foreach($times as $lis){
+							$ddd[]=array('timeslot'=>$lis);
+						}
+					}else{
+						$ddd='';
+					}
+					
+					//echo '<pre>';print_r($ddd);exit;
+					
+					$message = array('status'=>1,'doctor_id'=>$doctor_id,'time_list'=>$ddd,'message'=>'Doctor time slot are found');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Doctors time slot not found.Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
 	public  function add_post(){
 		$a_u_id=$this->post('a_u_id');
 		$city=$this->post('city');
@@ -454,7 +510,17 @@ class Appointment extends REST_Controller {
 		}
 		$aapointment_list=$this->Mobile_model->get_bidding_appointment_list($a_u_id);
 		if(count($aapointment_list)>0){
-						$message = array('status'=>1,'list'=>$aapointment_list,'a_u_id'=>$a_u_id,'message'=>'Appointment list are found');
+			
+			foreach($aapointment_list as $li){
+				$a_list[]=$li;
+			}
+			
+		}else{
+			$a_list=array();
+		}
+		//echo '<pre>';print_r($aapointment_list);exit;
+		if(count($a_list)>0){
+						$message = array('status'=>1,'list'=>$a_list,'a_u_id'=>$a_u_id,'message'=>'Appointment list are found');
 						$this->response($message, REST_Controller::HTTP_OK);
 				}else{
 						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Appointment list are not found');
@@ -612,6 +678,10 @@ class Appointment extends REST_Controller {
 				$message = array('status'=>0, 'a_u_id'=>$a_u_id,'message'=>'Card number list deatils not found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
+	}
+	public  function cardamount_post(){
+		$message = array('status'=>1,'amount'=>25,'message'=>'Card amount details');
+		$this->response($message, REST_Controller::HTTP_OK);
 	}
 	
 	public  function profile_post(){
