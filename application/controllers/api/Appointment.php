@@ -86,6 +86,7 @@ class Appointment extends REST_Controller {
 			$message = array('status'=>0,'message'=>'Confirm passwords must be at least 6 characters long');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
+		
 		if(md5($password) == md5($confirmpassword)){
 				$check_email=$this->Mobile_model->check_email_already_already_exits($email);
 				$check_mobile=$this->Mobile_model->check_mobile_already_already_exits($mobile);
@@ -114,6 +115,13 @@ class Appointment extends REST_Controller {
 					if(count($save)>0){
 						$token_data=array('token'=>$token);
 						$update_token=$this->Mobile_model->update_user_pushnotification_token($save,$token_data);
+						
+						$get_userdata=$this->Mobile_model->get_user_mobile_details($mobile);
+						if(count($get_userdata)>0){
+							$update=array('a_u_id'=>$save);
+							$this->Mobile_model->update_user_mobile_data($get_userdata['card_id'],$update);
+							
+						}
 			
 						$message = array('status'=>1,'a_u_id'=>$save,'message'=>'User successfully created');
 						$this->response($message, REST_Controller::HTTP_OK);
@@ -349,7 +357,7 @@ class Appointment extends REST_Controller {
 			$format = '12';
 			$startTime = strtotime($start_date); 
 			$endTime   = strtotime($end_date);
-			$returnTimeFormat = ($format == '12')?'g:i a':'G:i:s';
+			$returnTimeFormat = ($format == '12')?'h:i a':'G:i:s';
 
 			$current   = time(); 
 			$addTime   = strtotime('+'.$interval, $current); 
@@ -634,9 +642,27 @@ class Appointment extends REST_Controller {
 		'amount'=>isset($amount)?$amount:'',
 		'payment_date'=>date('Y-m-d H:i:s'),
 		'payment_statu'=>1,
+		'mobile_verified'=>1,
 		
 		);
-		
+		$take_mobile=$this->Mobile_model->get_mobile_number_details($card_assign_number);
+		if(count($take_mobile)>0){
+			$get_details=$this->Mobile_model->get_card_number_details($take_mobile['card_number']);
+			if(count($get_details)>0){
+					$card_num=$this->Mobile_model->get_card_number();
+						if(count($card_num)>0){
+							$number=preg_replace("/[^0-9]/", "", $card_num['card_number']);
+							$num=($number)+1;
+							$a_data=array('card_number'=>$num);
+							$update_mobile=$this->Mobile_model->update_card_number($a_u_id,$card_assign_number,$a_data);
+						}else{
+							$num='450054021000';
+							$a_data=array('card_number'=>$num);
+							$update_mobile=$this->Mobile_model->update_card_number($a_u_id,$card_assign_number,$a_data);
+						}
+			}
+			
+		}
 		$card_payment=$this->Mobile_model->update_card_payment_details($a_u_id,$card_assign_number,$update);
 		if(count($card_payment)>0){
 				$get_card_mobile=$this->Mobile_model->get_mobile_number($a_u_id,$card_assign_number);
@@ -680,7 +706,7 @@ class Appointment extends REST_Controller {
 			}
 	}
 	public  function cardamount_post(){
-		$message = array('status'=>1,'amount'=>25,'message'=>'Card amount details');
+		$message = array('status'=>1,'amount'=>1,'message'=>'Card amount details');
 		$this->response($message, REST_Controller::HTTP_OK);
 	}
 	

@@ -982,10 +982,11 @@ class Resources extends In_frontend {
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
-					$qtys=$this->Resources_model->get_medicine_list_details($post['medicine_name']);
-						//echo '<pre>';print_r($post);
-						$m_name=explode("_",$post['medicine_name']);
+					//echo '<pre>';print_r($post);
+					$m_name=explode("_",$post['medicine_name']);
+					$qtys=$this->Resources_model->get_medicine_list_details($m_name[0]);
+						//echo '<pre>';print_r($qtys);exit;
+						
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
@@ -1020,6 +1021,7 @@ class Resources extends In_frontend {
 						$qty=(($qtys['qty'])-($post['qty']));
 						$data=array('qty'=>$qty);
 							$this->Resources_model->update_medicine_details($qtys['id'],$data);
+						//echo $this->db->last_query();exit;
 							$this->session->set_flashdata('success',"Medicine successfully added.");
 							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
@@ -1086,6 +1088,12 @@ class Resources extends In_frontend {
 					$removedattch=$this->Resources_model->remove_attachment($post['medicine_id']);
 					if(count($removedattch) > 0)
 					{
+						
+					$qtys=$this->Resources_model->get_medicine_list_details($post['medicine_name']);
+					$qty=(($qtys['qty'])+($post['medicine_qty']));
+					$data=array('qty'=>$qty);
+					$this->Resources_model->update_medicine_details($qtys['id'],$data);
+
 					$data['msg']=1;
 					echo json_encode($data);exit;	
 					}

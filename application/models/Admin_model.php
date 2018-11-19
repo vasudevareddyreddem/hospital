@@ -64,7 +64,8 @@ class Admin_model extends CI_Model
 	}
 	public function get_all_Hospital_details(){
 		$this->db->select('hospital.hos_id,hospital.hos_bas_name')->from('hospital');		
-		$this->db->where('hos_status !=', 2);
+		$this->db->where('hos_status', 1);
+		$this->db->where('hos_undo',0);
         return $this->db->get()->result_array();	
 	}
 	public function get_all_out_source_lab_details($a_id){

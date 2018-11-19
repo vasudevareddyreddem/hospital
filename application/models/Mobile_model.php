@@ -345,4 +345,33 @@ class Mobile_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	
+	public  function get_user_mobile_details($mobile){
+		$this->db->select('card_id,mobile_num')->from('seller_card_assign_munber_list');
+		$this->db->where('mobile_num',$mobile);
+		return $this->db->get()->row_array();
+	}
+	public  function update_user_mobile_data($id,$data){
+		$this->db->where('card_id',$id);
+		return $this->db->update('seller_card_assign_munber_list',$data);
+	}
+	
+	/* card number  unique  purpose*/
+	public  function get_mobile_number_details($card_assign_number){
+		$this->db->select('card_id,mobile_num,card_number')->from('seller_card_assign_munber_list');
+		$this->db->where('card_id',$card_assign_number);
+		return $this->db->get()->row_array();
+	}
+	public  function get_card_number_details($card_num){
+		$this->db->select('card_id,mobile_num,card_number')->from('seller_card_assign_munber_list');
+		$this->db->where('card_number',$card_num);
+		$this->db->where('mobile_verified',1);
+		return $this->db->get()->row_array();
+	}
+	public  function update_card_number($a_u_id,$card_assign_number,$data){
+		$this->db->where('card_id',$card_assign_number);
+		$this->db->where('a_u_id',$a_u_id);
+		return $this->db->update('seller_card_assign_munber_list',$data);
+	}
+	/* card number  unique  purpose*/
+	
 }

@@ -260,7 +260,7 @@ class Seller extends REST_Controller {
 			
 			if(count($save_img)>0){
 					$details=$this->Cardnumber_model->get_seller_details($s_id);
-					$message = array('status'=>1,'s_id'=>$s_id,'imgpath'=>base_url('assets/adminprofilepic/'.$details['profile_pic']),'message'=>'Image successfully sent');
+					$message = array('status'=>1,'s_id'=>$s_id,'imgpath'=>base_url('assets/adminprofilepic/'.$details['profile_pic']),'message'=>'Image successfully updated');
 					$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Technical problem will occurred .Please try again');
@@ -422,6 +422,20 @@ class Seller extends REST_Controller {
 					);
 				$update=$this->Cardnumber_model->update_otp_verification($s_id,$card_assign_number,$add);
 				if(count($update)>0){
+					
+					/*sms purpose */
+				$username=$this->config->item('smsusername');
+				$pass=$this->config->item('smspassword');
+				$msg = "Greetings from Medspace, you have successfully registered for health card with Medspace. Avail offers on booking doctor appointments, ordering medicines, health checkups by using Medspace online appointment app.";
+				$ch2 = curl_init();
+				curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+				curl_setopt($ch2, CURLOPT_POST, 1);
+				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$detail['mobile_num'].'&text='.$msg.'&priority=ndnd&stype=normal');
+				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+				//echo '<pre>';print_r($ch);exit;
+				$server_output = curl_exec ($ch2);
+				curl_close ($ch2);
+				/*sms purpose */
 					$message = array('status'=>1,'card_assign_number'=>$card_assign_number,'s_id'=>$s_id,'message'=>'Card Number details successfully updated');
 					$this->response($message, REST_Controller::HTTP_OK);
 				}else{
