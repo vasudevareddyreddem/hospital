@@ -338,7 +338,7 @@ class Users extends In_frontend {
 					
 					$post=$this->input->post();
 					
-					//echo '<pre>';print_r($post);exit;
+					//echo '<pre>';print_r($post);
 					//exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
@@ -350,10 +350,12 @@ class Users extends In_frontend {
 						$patient_id=$post['pid'];
 						$billing_id=$post['bid'];
 					}
-					$data['details']= $this->Users_model->get_prescription_details($patient_id,$billing_id);
+					$data['details']= $this->Users_model->get_manu_prescription_details($patient_id,$billing_id);
+					$data['medicine']= $this->Users_model->get_medicine_list($patient_id,$billing_id);
+					//echo '<pre>';print_r($data);exit;
 					$path = rtrim(FCPATH,"/");
 					$file_name = $patient_id.'_'.$billing_id.'.pdf';                
-					$data['page_title'] = $data['details']['information']['name'].'invoice'; // pass data to the view
+					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view
 					$pdfFilePath = $path."/assets/patient_medical_bill/".$file_name;
 					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
 					$html = $this->load->view('prescription/manualbillprescriptionpdf', $data, true); // render the view into HTML
