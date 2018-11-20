@@ -83,13 +83,14 @@ class Appointments extends In_frontend {
 											$this->email->send();
 											$username=$this->config->item('smsusername');
 											$pass=$this->config->item('smspassword');
+											$sender=$this->config->item('sender');
 											$msg = "Dear ".$details['name'].", your appointment  is rejected, for the  ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Reason  ".$post['rea_son']." .Any queries call ".$hos_conatct['hos_rep_contact'];
 
 											
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$user_details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$user_details['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);
@@ -314,12 +315,13 @@ class Appointments extends In_frontend {
 											
 											$username=$this->config->item('smsusername');
 											$pass=$this->config->item('smspassword');
+											$sender=$this->config->item('sender');
 											$msg = "Dear ".$details['name'].", your appointment  is confirmed, for the ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Use coupon code ".ucfirst($get_coupon['coupon_code'])." to avail discounts.Any queries call ".$hos_conatct['hos_rep_contact'];
 											/* seller purpose*/
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$mobile.'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$mobile.'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);

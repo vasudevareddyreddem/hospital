@@ -669,11 +669,12 @@ class Appointment extends REST_Controller {
 			/*sms purpose */
 				$username=$this->config->item('smsusername');
 				$pass=$this->config->item('smspassword');
+				$sender=$this->config->item('sender');
 				$msg = "Greetings from Medspace, you have successfully registered for health card with Medspace. Avail offers on booking doctor appointments, ordering medicines, health checkups by using Medspace online appointment app.";
 				$ch2 = curl_init();
-				curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+				curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 				curl_setopt($ch2, CURLOPT_POST, 1);
-				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$get_card_mobile['mobile_num'].'&text='.$msg.'&priority=ndnd&stype=normal');
+				curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$get_card_mobile['mobile_num'].'&text='.$msg.'&priority=ndnd&stype=normal');
 				curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 				//echo '<pre>';print_r($ch);exit;
 				$server_output = curl_exec ($ch2);

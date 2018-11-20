@@ -66,6 +66,7 @@ class Cron extends CI_Controller {
 							$diff_in_hrs =$interval->format('%h');
 							$username=$this->config->item('smsusername');
 							$pass=$this->config->item('smspassword');
+							$sender=$this->config->item('sender');
 							if($diff_in_hrs > 0 && $interval->days==0 && $diff_in_hrs <=2){
 								$get_coupon=$this->Appointments_model->get_hospital_counpon_code($list['hos_id']);
 								$hos_conatct=$this->Appointments_model->get_appoinment_hospital_details($list['hos_id']);
@@ -75,9 +76,9 @@ class Cron extends CI_Controller {
 									
 									$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 									$ch2 = curl_init();
-									curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+									curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 									curl_setopt($ch2, CURLOPT_POST, 1);
-									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 									curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 									//echo '<pre>';print_r($ch);exit;
 									$server_output = curl_exec ($ch2);
@@ -94,9 +95,9 @@ class Cron extends CI_Controller {
 									if($msg_interval->h >=1){
 											$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);
@@ -117,9 +118,9 @@ class Cron extends CI_Controller {
 								if($list['remainder_sent']=='0000-00-00 00:00:00'){
 									$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 									$ch2 = curl_init();
-									curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+									curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 									curl_setopt($ch2, CURLOPT_POST, 1);
-									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 									curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 									//echo '<pre>';print_r($ch);exit;
 									$server_output = curl_exec ($ch2);
@@ -136,9 +137,9 @@ class Cron extends CI_Controller {
 									if($msg_interval->h >=4){
 											$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);
@@ -159,9 +160,9 @@ class Cron extends CI_Controller {
 								if($list['remainder_sent']=='0000-00-00 00:00:00'){
 									$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 									$ch2 = curl_init();
-									curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+									curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 									curl_setopt($ch2, CURLOPT_POST, 1);
-									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 									curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 									//echo '<pre>';print_r($ch);exit;
 									$server_output = curl_exec ($ch2);
@@ -178,9 +179,9 @@ class Cron extends CI_Controller {
 									if($msg_interval->h >=24){
 											$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);
@@ -199,9 +200,9 @@ class Cron extends CI_Controller {
 								if($list['remainder_sent']=='0000-00-00 00:00:00'){
 									$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 									$ch2 = curl_init();
-									curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+									curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 									curl_setopt($ch2, CURLOPT_POST, 1);
-									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+									curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 									curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 									//echo '<pre>';print_r($ch);exit;
 									$server_output = curl_exec ($ch2);
@@ -218,9 +219,9 @@ class Cron extends CI_Controller {
 									if($msg_interval->h >=72){
 											$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 											$ch2 = curl_init();
-											curl_setopt($ch2, CURLOPT_URL,"http://bhashsms.com/api/sendmsg.php");
+											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 											curl_setopt($ch2, CURLOPT_POST, 1);
-											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender=Medsit&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
+											curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$list['mobile'].'&text='.$msg.'&priority=ndnd&stype=normal');
 											curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
 											//echo '<pre>';print_r($ch);exit;
 											$server_output = curl_exec ($ch2);
