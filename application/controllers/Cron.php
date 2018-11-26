@@ -134,7 +134,7 @@ class Cron extends CI_Controller {
 									$datetime1 = new DateTime($c_date);
 									$datetime2 = new DateTime($list['remainder_sent']);
 									$msg_interval = $datetime1->diff($datetime2);
-									if($msg_interval->h >=4){
+									if($msg_interval->h >=6){
 											$msg = "Remainder, dear ".$list['patinet_name'].", you have appointment at ".$hos_conatct['hos_bas_name'].", on ".$list['date'].$list['time'].".Any queries call ".$hos_conatct['hos_rep_contact'];
 											$ch2 = curl_init();
 											curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");

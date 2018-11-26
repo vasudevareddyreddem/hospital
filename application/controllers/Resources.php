@@ -985,11 +985,12 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($post);
 					$m_name=explode("_",$post['medicine_name']);
 					$qtys=$this->Resources_model->get_medicine_list_details($m_name[0]);
-						//echo '<pre>';print_r($qtys);exit;
+						//echo '<pre>';print_r($qtys);
 						
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
 							'b_id'=>isset($post['bid'])?$post['bid']:'',
+							'medicine_id'=>isset($qtys['id'])?$qtys['id']:'',
 							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
 							'medicine_name'=>isset($m_name[0])?$m_name[0]:'',
 							'medicine_type'=>isset($qtys['medicine_type'])?$qtys['medicine_type']:'',
@@ -1014,6 +1015,7 @@ class Resources extends In_frontend {
 							'date'=>date('Y-m-d'),
 							'create_by'=>$admindetails['a_id']
 						);
+						//echo '<pre>';print_r($addmedicine);exit;
 					$medicine=$this->Resources_model->saving_patient_medicine($addmedicine);
 					
 					//echo $this->db->last_query();exit;

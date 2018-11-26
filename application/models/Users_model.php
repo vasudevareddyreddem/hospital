@@ -52,7 +52,9 @@ class Users_model extends CI_Model
 	}
 	
 	public function get_medicine_list($pid,$bid){
-		$this->db->select('*')->from('patient_medicine_list');	
+		$this->db->select('patient_medicine_list.*,medicine_list.dosage')->from('patient_medicine_list');
+		$this->db->join('medicine_list ', 'medicine_list.id = patient_medicine_list.medicine_id', 'left');
+		
 		$this->db->where('patient_medicine_list.p_id', $pid);
 		$this->db->where('patient_medicine_list.b_id', $bid);
         return $this->db->get()->result_array();

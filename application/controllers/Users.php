@@ -352,7 +352,7 @@ class Users extends In_frontend {
 					}
 					$data['details']= $this->Users_model->get_manu_prescription_details($patient_id,$billing_id);
 					$data['medicine']= $this->Users_model->get_medicine_list($patient_id,$billing_id);
-					//echo '<pre>';print_r($data);exit;
+					//echo '<pre>';print_r($data['medicine']);exit;
 					$path = rtrim(FCPATH,"/");
 					$file_name = $patient_id.'_'.$billing_id.'.pdf';                
 					$data['page_title'] = $data['details']['name'].'invoice'; // pass data to the view

@@ -143,8 +143,9 @@ table, th, td {
 	   <tr>
 		<th>Medicine Name </th>
 		<th>Expiry Date</th>
-		<th>Usage </th>
+		<th>Batchno </th>
 		<th>QTY</th>
+		<th>Amount</th>
 		<th>Total Amount</th>
 	  </tr>
 	  <?php 
@@ -152,11 +153,12 @@ table, th, td {
 	  if(count($medicine)>0){
 	  foreach($medicine as $list){?>
 	  <tr>
-		<td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
-		<td><?php echo isset($list['expirydate'])?$list['expirydate']:''; ?></td>
-		<td><?php echo isset($list['usage_instructions'])?$list['usage_instructions']:''; ?></td>
+		<td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?>&nbsp;<?php echo isset($list['dosage'])?$list['dosage']:''; ?></td>
+		<td><?php echo isset($list['expiry_date'])?$list['expiry_date']:''; ?></td>
+		<td><?php echo isset($list['batchno'])?$list['batchno']:''; ?></td>
 		<td><?php echo isset($list['qty'])?$list['qty']:''; ?></td>
 		<td><?php echo isset($list['amount'])?$list['amount']:''; ?></td>
+		<td><?php echo isset($list['amount'])?$list['amount']*$list['qty']:''; ?></td>
 	  </tr>
 	  <?php } ?>
 	  <?php } ?>
@@ -164,7 +166,7 @@ table, th, td {
 		<th colspan="4"  style="background:#ddd;">Prescription Billing Mode</th>
 		
 		<?php if(isset($details['medicine_payment_mode']) && $details['medicine_payment_mode']!=''){ ?>
-				<td colspan="4">
+				<td colspan="2">
 					<?php echo $details['medicine_payment_mode']; ?>
 				</td>
 		<?php } ?>
