@@ -374,4 +374,11 @@ class Mobile_model extends CI_Model
 	}
 	/* card number  unique  purpose*/
 	
+	/* docotor  consultation_fee*/
+	public  function get_doctors_consultation_fee($a_id){
+		$this->db->select('hos_id,a_id,consultation_fee')->from('resource_list');
+		$this->db->where('a_id',$a_id) ;
+		return $this->db->get()->row_array();	
+	}
+	
 }

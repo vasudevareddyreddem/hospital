@@ -394,3 +394,8 @@ CREATE TABLE `appointment_user_prescription` (
   PRIMARY KEY (`a_p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+/* 28-11-2018  */
+
+ALTER TABLE `staging_ehealthinfra_db`.`resource_list`   
+  ADD COLUMN `consultation_fee` VARCHAR(250) NULL AFTER `resource_name`;
+

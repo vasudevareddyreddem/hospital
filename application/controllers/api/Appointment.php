@@ -337,6 +337,22 @@ class Appointment extends REST_Controller {
 				$this->response($message, REST_Controller::HTTP_OK);
 				}
 	}
+	public  function doctors_consultation_fee_post(){
+		$doctor_id=$this->post('doctor_id');
+		if($doctor_id==''){
+			$message = array('status'=>0,'message'=>'Doctor Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$consultation_fee=$this->Mobile_model->get_doctors_consultation_fee($doctor_id);
+				if(count($consultation_fee)>0){
+					$message = array('status'=>1,'consultation_fee'=>$consultation_fee['consultation_fee'],'message'=>'Doctor consultation fee');
+					$this->response($message, REST_Controller::HTTP_OK);
+			
+				}else{
+				$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
+				$this->response($message, REST_Controller::HTTP_OK);
+				}
+	}
 	public  function doctors_time_slot_post(){
 		$doctor_id=$this->post('doctor_id');
 		$hos_id=$this->post('hos_id');

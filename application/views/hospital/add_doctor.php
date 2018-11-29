@@ -162,6 +162,10 @@
 									<label> Resource Upload Any document</label>
 										<input class="form-control" id="resource_other_document" name="resource_other_document" type="file" placeholder="Resource Photo">
 									</div>
+									<div class="col-md-4">
+									<label> Consultation Fee</label>
+										<input class="form-control" id="consultation_fee" name="consultation_fee" type="text" placeholder="consultation fee">
+									</div>
                               </div>
                            </div>
                            <div class="clearfix">&nbsp;</div>
@@ -317,6 +321,17 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Name can only consist of alphanumeric, space and dot'
+					}
+				}
+            }, 
+			consultation_fee: {
+                 validators: {
+					notEmpty: {
+						message: 'Consultation fee is required'
+					},
+					regexp: {
+					regexp: /^[0-9. ]+$/,
+					message: 'Consultation fee can only consist of digits space and dot'
 					}
 				}
             },

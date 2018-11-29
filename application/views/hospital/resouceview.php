@@ -128,6 +128,16 @@
 														 </div>
 													 </div>
 													</div>
+													<div class="col-md-6">
+													<div class="row">												  
+														 <div class=" col-sm-6">
+														 <strong>Consultation Fee</strong>
+														 </div>
+														<div class=" col-sm-6">
+														  <?php echo isset($resouse_detail['consultation_fee'])?$resouse_detail['consultation_fee']:''; ?>
+														 </div>
+													 </div>
+													</div>
 														<?php } ?>
 													<div class="col-md-6">
 													<div class="row">												  

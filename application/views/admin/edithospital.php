@@ -260,22 +260,22 @@
                         <div class="form-group col-md-6">
                            <label for="email">Upload Documents</label>
                            <div class="compose-editor">
-                              <input type="file" id="hos_bas_document" name="hos_bas_document"class="default">
+                              <input type="file" id="hos_bas_document" name="hos_bas_document"class="default form-control">
 								<?php if($hospital_details['hos_bas_country']!=''){ ?>
 								<a href="<?php echo base_url('assets/hospital_basic_documents/'.$hospital_details['hos_bas_country']); ?>">Download</a>
 								<?php } ?> 
 								</div>
                         </div>
-					       <div class="col-md-4">
+					       <div class="col-md-6">
                            <label for="email">Hospital Logo</label>
                            <div class="compose-editor">
-                              <input type="file" id="hos_bas_logo" name="hos_bas_logo"class="default">
+                              <input type="file" id="hos_bas_logo" name="hos_bas_logo"class="default form-control">
 								<?php if($hospital_details['hos_bas_logo']!=''){ ?>
 								<img width="50px" height="50px" src="<?php echo base_url('assets/hospital_logos/'.$hospital_details['hos_bas_logo']); ?>">
 								<?php } ?>
                            </div>
                         </div>
-						 <div class="col-md-4">
+						 <div class="col-md-6">
                            <label for="email">Reschedule Patient Time</label>
 									<?php $days =array ('1' => '1 day', '2' => '2 days', '3' => '3 days', '4' => '4 days', '5' => '5 days', '6' => '6 days', '7' => '7 days'); ?>
 								  <select class="form-control" required="required" name="reschedule_date" id="reschedule_date">
@@ -291,10 +291,6 @@
 									<?php endforeach; ?>
 								  </select> 
 						  </div>
-						 <div class="col-md-4">
-                           <label for="email">Consultation Fee</label>
-                           <input type="text" id="appointment_fee" name="appointment_fee" value="<?php echo isset($hospital_details['appointment_fee'])?$hospital_details['appointment_fee']:''; ?>" class="form-control"  placeholder="Enter Consultation Fee" >
-						 </div>
                      </div>
                      <div class="form-actions">
                         <div class="row">
@@ -737,18 +733,6 @@ $(document).ready(function() {
 					notEmpty: {
 						message: 'Reschedule Patient Time is required'
 					}
-				}
-            },
-			appointment_fee: {
-                validators: {
-					notEmpty: {
-						message: 'Consultation Fee is required'
-					},
-					regexp: {
-					regexp:  /^[0-9]*$/,
-					message:'Consultation Fee must be in digits'
-					}
-				
 				}
             },
 			hos_bas_logo: {

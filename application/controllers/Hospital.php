@@ -841,6 +841,7 @@ class Hospital extends In_frontend {
 									'resource_bank_accno'=>$post['resource_bank_accno'],
 									'resource_ifsc_code'=>$post['resource_ifsc_code'],
 									'resource_other_document'=>$resource_other_document,
+									'consultation_fee'=>$post['consultation_fee'],
 									'r_status'=>1,
 									'r_create_by'=>$hos_ids['a_id'],
 									'r_created_at'=>date('Y-m-d H:i:s')
@@ -1106,10 +1107,11 @@ class Hospital extends In_frontend {
 									'resource_bank_holdername'=>$post['resource_bank_holdername'],
 									'resource_bank_accno'=>$post['resource_bank_accno'],
 									'resource_ifsc_code'=>$post['resource_ifsc_code'],
+									'consultation_fee'=>$post['consultation_fee'],
 									'resource_other_document'=>$resource_other_document,
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
-									//echo '<pre>';print_r($onedata);exit;
+									//echo '<pre>';print_r($resourcedata);exit;
 									$saveresource =$this->Hospital_model->update_resourse_details($post['resource_id'],$resourcedata);
 									//echo $this->db->last_query();exit;
 									if(count($saveresource)>0){
@@ -1186,6 +1188,7 @@ class Hospital extends In_frontend {
 									'resource_bank_accno'=>$post['resource_bank_accno'],
 									'resource_ifsc_code'=>$post['resource_ifsc_code'],
 									'resource_other_document'=>$resource_other_docu,
+									'consultation_fee'=>$post['consultation_fee'],
 									'r_created_at'=>date('Y-m-d H:i:s')
 									);
 									//echo '<pre>';print_r($resourcedata);exit;

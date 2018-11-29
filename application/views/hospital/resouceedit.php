@@ -147,7 +147,11 @@
 											<option value="<?php echo $list; ?>"<?php echo $selected;?> ><?php echo $list; ?></option>
 										<?php endforeach; ?>
 										</select>
-                                    </div>			
+                                    </div>
+									<div class="col-md-6">
+											<label> Consultation Fee</label>
+												<input class="form-control" id="consultation_fee" name="consultation_fee" type="text" placeholder="consultation fee" value="<?php echo isset($resouse_detail['consultation_fee'])?$resouse_detail['consultation_fee']:''; ?>">
+											</div>
 									<?php } ?>
 									<div class="col-md-6">
 									<label> Resource Email ID</label>
@@ -212,6 +216,17 @@ $(document).ready(function() {
 					regexp: {
 					regexp: /^[a-zA-Z0-9. ]+$/,
 					message: 'Name can only consist of alphanumeric, space and dot'
+					}
+				}
+            },
+			consultation_fee: {
+                 validators: {
+					notEmpty: {
+						message: 'Consultation fee is required'
+					},
+					regexp: {
+					regexp: /^[0-9. ]+$/,
+					message: 'Consultation fee can only consist of digits space and dot'
 					}
 				}
             },
