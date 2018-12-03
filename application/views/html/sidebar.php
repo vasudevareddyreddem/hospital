@@ -67,7 +67,16 @@
 	                                
 	                            </ul>
 	                        </li> 
-							<li class="nav-item start <?php if($this->uri->segment(2)=='couponcodes'){ echo "active";} ?>">
+							<li class="nav-item start <?php if($this->uri->segment(2)=='logos'){ echo "active";} ?>">
+	                            <a href="<?php echo base_url('admin/logos');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">list</i>
+	                                <span class="title">Logos</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow"></span>
+	                            </a>
+	                        </li> 
+                            
+                            <li class="nav-item start <?php if($this->uri->segment(2)=='couponcodes'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('admin/couponcodes');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">list</i>
 	                                <span class="title">Coupon Code</span>

@@ -1609,7 +1609,17 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-	
+	public function logos()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$this->load->view('admin/upload_logos');
+				$this->load->view('html/footer');
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
 	
 	
 }
