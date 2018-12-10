@@ -81,12 +81,12 @@
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
                                                    <input type="hidden" class="form-control"  id="patient_old1_card_number"  name="patient_old1_card_number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>" >
-												    <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+												    <input type="text" class="form-control" onchange="checkpatient_number(this.value);get_patient_auto(this.value);" id="patient_card_number"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
 
 												   </div>
 												    <div class="form-group col-md-6">
                                                    <label for="Name">Name</label>
-                                                   <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
+                                                   <input type="text" class="form-control" id="name1"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
                                                 </div>
 												<div class="form-group col-md-6">
                                                    <label for="email">Registration Type </label>
@@ -125,11 +125,11 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Mobile Number</label>
-                                                   <input type="text" class="form-control" id="mobile"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
+                                                   <input type="text" class="form-control" id="mobile1"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Email</label>
-                                                   <input type="text" class="form-control" id="email"  name="email" placeholder="Enter Email" value="<?php echo isset($patient_detailes['email'])?$patient_detailes['email']:''; ?>">
+                                                   <input type="text" class="form-control" id="email1"  name="email" placeholder="Enter Email" value="<?php echo isset($patient_detailes['email'])?$patient_detailes['email']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label class="">Date of Birth</label>
@@ -822,7 +822,7 @@
 												<div class="form-group col-md-6">
                                                    <label for="email">Patient Card Number</label>
                                                    <input type="hidden" class="form-control" id="patient_old_card_number"  name="patient_old_card_number"  value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
-												   <input type="text" class="form-control" onchange="checkpatient_number(this.value);" id="patient_card_number1"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
+												   <input type="text" class="form-control" onchange="checkpatient_number(this.value);get_patient_auto(this.value);" id="patient_card_number1"  name="patient_card_number" placeholder="Enter Card Number" value="<?php echo isset($patient_detailes['card_number'])?$patient_detailes['card_number']:''; ?>">
 
 												</div>
 												  <div class="form-group col-md-6">
@@ -861,15 +861,15 @@
 												   </div>
 												<div class="form-group col-md-6">
                                                    <label for="Name">Name</label>
-                                                   <input type="text" class="form-control" id="name"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
+                                                   <input type="text" class="form-control" id="name2"  name="name" placeholder="Enter Name" value="<?php echo isset($patient_detailes['name'])?$patient_detailes['name']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Mobile Number</label>
-                                                   <input type="text" class="form-control" id="mobile"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
+                                                   <input type="text" class="form-control" id="mobile2"  name="mobile" placeholder="Enter Mobile Number" value="<?php echo isset($patient_detailes['mobile'])?$patient_detailes['mobile']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="mobile">Email</label>
-                                                   <input type="text" class="form-control" id="email"  name="email" placeholder="Enter Email" value="<?php echo isset($patient_detailes['email'])?$patient_detailes['email']:''; ?>">
+                                                   <input type="text" class="form-control" id="email2"  name="email" placeholder="Enter Email" value="<?php echo isset($patient_detailes['email'])?$patient_detailes['email']:''; ?>">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label class="">Date of Birth</label>
@@ -1184,9 +1184,43 @@ function checkpatient_number(num){
 	
 	
 }
+function get_patient_auto(num){
+					jQuery.ajax({
+						url: "<?php echo base_url('resources/get_cardnumber_details');?>",
+							data: {
+								card_number: num,
+							},
+							dataType: 'json',
+							type: 'POST',
+							success: function (data) {
+								$('#sucessmsg').show();
+								if(data.msg==1){
+									 $('#name2').val(data.p_name);  
+									 $('#mobile2').val(data.p_mobile);  
+									 $('#email2').val(data.p_email);
+									 $('#name1').val(data.p_name);  
+									 $('#mobile1').val(data.p_mobile);  
+									 $('#email1').val(data.p_email);  
+								}else{
+									$('#name2').val('');  
+									$('#mobile2').val('');  
+									$('#email2').val('');
+									$('#name1').val('');  
+									$('#mobile1').val('');  
+									$('#email1').val('');  
+								}
+								
+							}
+						});
+			
+	
+	
+}
 function apply_couponcode(){
 	var amount=$('#bill_amount').val();
+	var card_no=$('#patient_card_number').val();
 	if(amount !=''){
+		if(card_no!=''){
 		
 		document.getElementById("errormsg").innerHTML="";
 				jQuery.ajax({
@@ -1218,6 +1252,9 @@ function apply_couponcode(){
    						
    					}
    				});
+		}else{
+			document.getElementById("errormsg").innerHTML="You have no card number that says coupon code not applicable";
+		}
 
 	}else{
 		 document.getElementById("errormsg").innerHTML="Please Payable Amount";
@@ -1226,12 +1263,14 @@ function apply_couponcode(){
 }
 function apply_couponcode1(){
 	var amount=$('#bill_amount1').val();
+	var card_no=$('#patient_card_number1').val();
 	if(amount !=''){
-		if($('#already_coupon_code_used').val()==1){
-		 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon Code already used. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
-			return false;
-		}
-		document.getElementById("errormsg1").innerHTML="";
+		if(card_no!=''){
+			if($('#already_coupon_code_used').val()==1){
+			 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon Code already used. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+				return false;
+			}
+			document.getElementById("errormsg1").innerHTML="";
 				jQuery.ajax({
    				url: "<?php echo base_url('admin/checking_coupon_code');?>",
    					data: {
@@ -1261,6 +1300,9 @@ function apply_couponcode1(){
    						
    					}
    				});
+		}else{
+			document.getElementById("errormsg1").innerHTML="You have no card number that says coupon code not applicable";
+		}
 
 	}else{
 		 document.getElementById("errormsg1").innerHTML="Please Payable Amount";

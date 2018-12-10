@@ -380,5 +380,11 @@ class Mobile_model extends CI_Model
 		$this->db->where('a_id',$a_id) ;
 		return $this->db->get()->row_array();	
 	}
+	/* appointment hospital details purpose*/
+	public  function get_hospital_name_details($hos_id){
+		$this->db->select('hos_id,hos_bas_name,hos_rep_contact')->from('hospital');
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();	
+	}
 	
 }

@@ -797,6 +797,29 @@ $this->db->select('hospital.hos_bas_name,appointment_bidding_list.event_status,a
   $this->db->order_by('appointment_bidding_list.b_id','desc');
   return $this->db->get()->result_array();
  }
+ 
+ /* add admin logos*/
+ public  function get_all_logos_list($admin_id){
+	 $this->db->select('*')->from('logos_list');
+	$this->db->where('created_by',$admin_id);
+	$this->db->where('status !=',2);
+	return $this->db->get()->result_array(); 
+ }
+ 
+ public  function save_logo_images($data){
+	 $this->db->insert('logos_list',$data);
+	 return $this->db->insert_id();
+}
+public  function update_logo_details($l_id,$data){
+	$this->db->where('l_id',$l_id);
+	return $this->db->update('logos_list',$data);
+	
+}
+public function get_logo_details($l_id){
+	$this->db->select('*')->from('logos_list');
+	$this->db->where('l_id',$l_id);
+	return $this->db->get()->row_array(); 
+}
 	
 	
 	

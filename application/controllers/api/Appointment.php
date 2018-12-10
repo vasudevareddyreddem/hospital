@@ -480,12 +480,35 @@ class Appointment extends REST_Controller {
 					'coming_through'=>0,
 					'create_by'=>$a_u_id,
 					);
+				//echo '<pre>';print_r($add);exit;
 				$save_app=$this->Mobile_model->save_appointment_bidding($add);
 				//echo $this->db->last_query();exit;
-			
-				
-			
 				if(count($save_app)>0){
+						$hospital_details=$this->Mobile_model->get_hospital_name_details($hos_id);
+						$username=$this->config->item('smsusername');
+						$pass=$this->config->item('smspassword');
+						$sender=$this->config->item('sender');
+						$static_number=$this->config->item('static_number');
+						$msg = "An appointment is booked for ".$hospital_details['hos_bas_name'].", on ".$date.$time." patient name" .$name. " and patient mobile ".$details['mobile'];
+						$ch2 = curl_init();
+						curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+						curl_setopt($ch2, CURLOPT_POST, 1);
+						curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$static_number.'&text='.$msg.'&priority=ndnd&stype=normal');
+						curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+						//echo '<pre>';print_r($ch);exit;
+						$server_output = curl_exec ($ch2);
+						curl_close ($ch2);
+						/* hospital reception */
+						$msg1 = "Alert! Appointment request was send to your ".$hospital_details['hos_bas_name'].", on ".$date.$time." by patient name" .$name. " and patient mobile ".$details['mobile'].".Please, accept the appointment.";
+						$ch3 = curl_init();
+						curl_setopt($ch3, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+						curl_setopt($ch3, CURLOPT_POST, 1);
+						curl_setopt($ch3, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$hospital_details['hos_rep_contact'].'&text='.$msg1.'&priority=ndnd&stype=normal');
+						curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);
+						//echo '<pre>';print_r($ch);exit;
+						$server_output = curl_exec ($ch3);
+						curl_close ($ch3);
+						/* hospital reception */
 					//echo "dfsd";exit;
 					/*push notification */
 					$url = "https://fcm.googleapis.com/fcm/send";

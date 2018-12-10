@@ -773,6 +773,27 @@ class Resources extends In_frontend {
 					echo json_encode($data);exit;
 				}
 	}
+	public function get_cardnumber_details(){
+		$post=$this->input->post();
+		$details=$this->Resources_model->get_cardnumber_details($post['card_number']);
+		//echo count($details);
+		//echo $this->db->last_query();
+		//echo '<pre>';print_r($details);exit;
+		if(count($details)>0)
+				{
+				  $data['msg']=1;
+				  $data['p_name']=$details['patient_name'];
+				  $data['p_mobile']=$details['mobile_num'];
+				  $data['p_email']=$details['email_id'];
+				 echo json_encode($data);exit;	
+				}else{
+					$data['msg']=0;
+					$data['p_name']='';
+					$data['p_mobile']='';
+					$data['p_email']='';
+					echo json_encode($data);exit;
+				}
+	}
 	public function assign_doctor(){
 		$post=$this->input->post();
 		$billing=array(

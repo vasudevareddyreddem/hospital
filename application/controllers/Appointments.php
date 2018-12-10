@@ -143,8 +143,25 @@ class Appointments extends In_frontend {
 					'create_by'=>$admindetails['a_id'],
 					'coming_through'=>1,
 					);
+					//echo '<pre>';print_r($userdetails);exit;
 					$save=$this->Appointments_model->save_appointments($add);
 					if(count($save)>0){
+							   $hospital_details=$this->Appointments_model->get_hospital_name_details($userdetails['hos_id']);
+								$username=$this->config->item('smsusername');
+								$pass=$this->config->item('smspassword');
+								$sender=$this->config->item('sender');
+								$static_number=$this->config->item('static_number');
+								$msg = "An appointment is booked for ".$hospital_details['hos_bas_name'].", on ".$post['date'].$post['time']." patient name" .$post['patinet_name']. " and patient mobile ".$post['mobile'];
+								$ch2 = curl_init();
+								curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+								curl_setopt($ch2, CURLOPT_POST, 1);
+								curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$static_number.'&text='.$msg.'&priority=ndnd&stype=normal');
+								curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+								//echo '<pre>';print_r($ch);exit;
+								$server_output = curl_exec ($ch2);
+								curl_close ($ch2);
+								//echo '<pre>';print_r($hospital_details);
+								//echo '<pre>';print_r($server_output);exit;
 							$this->session->set_flashdata('success',"Appointment successfully added");
 							redirect('appointments/index/'.base64_encode(3));
 						}else{

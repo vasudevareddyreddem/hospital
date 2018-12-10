@@ -367,5 +367,14 @@ class Resources_model extends CI_Model
     	return $this->db->update("appointments",$data);
 		}
 	 /* appointment update*/
+	 
+	 /* card number details purpose */
+	 public function get_cardnumber_details($card_num){
+		$this->db->select('*')->from('seller_card_assign_munber_list');		
+		$this->db->where('seller_card_assign_munber_list.card_number',$card_num);
+		$this->db->where('seller_card_assign_munber_list.mobile_verified',1);
+        return $this->db->get()->row_array();
+	}
+	 /* card number details purpose */
 
 }

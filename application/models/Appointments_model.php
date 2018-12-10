@@ -13,6 +13,11 @@ class Appointments_model extends CI_Model
 		$this->db->insert('appointments',$data);
 		return $this->db->insert_id();
 	}
+	public  function get_hospital_name_details($hos_id){
+		$this->db->select('hos_id,hos_bas_name')->from('hospital');
+		$this->db->where('hos_id',$hos_id);
+		return $this->db->get()->row_array();	
+	}
 	public  function get_website_appintmenr_list($hos_id){
 		$this->db->select('appointments.*,treament.t_name,specialist.specialist_name,resource_list.resource_name')->from('appointments');
 		$this->db->join('treament', 'treament.t_id = appointments.department', 'left');

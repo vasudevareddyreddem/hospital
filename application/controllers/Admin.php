@@ -1613,12 +1613,124 @@ class Admin extends CI_Controller {
 	{
 		if($this->session->userdata('userdetails'))
 		{
-				$this->load->view('admin/upload_logos');
+				$admindetails=$this->session->userdata('userdetails');
+				$data['tab']=base64_decode($this->uri->segment(3));
+				$data['logo_lists']=$this->Admin_model->get_all_logos_list($admindetails['a_id']);
+				$this->load->view('admin/upload_logos',$data);
 				$this->load->view('html/footer');
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');
 		}
+	}
+	public function logospost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				if(isset($_FILES['image']['name']) && $_FILES['image']['name']!=''){
+							$temp = explode(".", $_FILES["image"]["name"]);
+							$image = round(microtime(true)) . '.' . end($temp);
+							move_uploaded_file($_FILES['image']['tmp_name'], "assets/logo_images/" . $image);
+				}else{
+					$image='';
+				}
+				$add=array(
+				'image'=>$image,
+				'org_name'=>$_FILES["image"]["name"],
+				'created_by'=>$admindetails['a_id'],
+				);
+				$save=$this->Admin_model->save_logo_images($add);
+				if(count($save)>0){
+					$this->session->set_flashdata('success',"Logo successfully uploaded");
+					redirect('admin/logos/'.base64_encode(1));
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('admin/logos/');
+				}
+				//echo '<pre>';print_r($_FILES);exit;
+		}else{
+			$this->session->set_flashdata('error',"you don't have permission to access");
+			redirect('dashboard');
+		}
+	}
+	public function logostatus()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+			if($login_details['role_id']==1){
+					$l_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$statu=0;
+					}else{
+						$statu=1;
+					}
+						$stusdetails=array(
+							'status'=>$statu,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$statusdata=$this->Admin_model->update_logo_details($l_id,$stusdetails);
+							if(count($statusdata)>0){
+								if($status==1){
+								$this->session->set_flashdata('success',"logo successfully deactivated.");
+								}else{
+									$this->session->set_flashdata('success',"logo successfully activated.");
+								}
+								redirect('admin/logos/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('admin/logos/'.base64_encode(1));
+							}
+				
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('home');
+		}
+		
+	}
+	public function logodeletes()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+		$login_details=$this->session->userdata('userdetails');
+
+			if($login_details['role_id']==1){
+					$l_id=base64_decode($this->uri->segment(3));
+							$stusdetails=array(
+							'status'=>2,
+							'updated_at'=>date('Y-m-d H:i:s')
+							);
+							$logo_details=$this->Admin_model->get_logo_details($l_id);
+							$statusdata=$this->Admin_model->update_logo_details($l_id,$stusdetails);
+							if(count($statusdata)>0){
+									unlink('assets/logo_images/'.$logo_details['image']);
+									$this->session->set_flashdata('success',"logo successfully deleted.");
+								
+								redirect('admin/logos/'.base64_encode(1));
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('admin/logos/'.base64_encode(1));
+							}
+				
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('home');
+		}
+		
 	}
 	
 	
