@@ -290,6 +290,15 @@
 	                            </a>
 	                           
 	                        </li> 
+                            <li class="nav-item start <?php if($this->uri->segment(2)=='billing'){ echo "active";} ?> ">
+	                            <a href="<?php echo base_url('resources/billing');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">sd_storage</i>
+	                                <span class="title">Billing </span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
+	                        </li> 
 							<li class="nav-item start <?php if($this->uri->segment(1)=='chat'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('chat');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">email</i>
