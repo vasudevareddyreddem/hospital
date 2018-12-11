@@ -906,3 +906,7 @@ tr.group:hover {
 .mega-menu-dropdown .dropdown-toggle {
     line-height: 24px;
 }
+
+input[type="file"]{
+    height:auto;
+}
