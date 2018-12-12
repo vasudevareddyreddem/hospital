@@ -109,7 +109,7 @@
                             <div class="">
                                 
                                 <div class="card-body ">
-                                    <table id="example4" class="table table-striped table-bordered table-hover table-checkable order-column" >
+                                    <table id="example4" class="table table-striped table-bordered table-hover order-column" >
                                         <thead>
                                             <tr>
                                                <th>Name</th>
@@ -120,7 +120,6 @@
                                                 <th>Date & Time</th>
                                                 <th>Status</th>
 												<th>Action</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>

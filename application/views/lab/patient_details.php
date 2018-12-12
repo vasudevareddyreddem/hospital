@@ -1,3 +1,12 @@
+<style>
+    input[type="file"]{
+        height: 34px;
+        padding: 0px;
+    }
+
+</style>
+
+
 <?php //echo '<pre>';print_r($report_lists);exit; ?>
 <div class="page-content-wrapper">
    <div class="page-content" >
