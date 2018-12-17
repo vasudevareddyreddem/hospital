@@ -66,6 +66,119 @@ class Resources extends In_frontend {
 		}
 	}
 	
+	public function transforto_ip()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$patient_id=base64_decode($this->uri->segment(3));
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$last_billing_address=$this->Resources_model->get_last_billing_id($patient_id);
+					$post=$this->input->post();
+					$update=array('patient_type'=>1);
+					//echo '<pre>';print_r($last_billing_address);exit;
+					$update=$this->Resources_model->update_patient_billing_details($last_billing_address['b_id'],$update);
+					if(count($update)>0){
+						 $this->session->set_flashdata('success',"Patient converted to ip");
+						 redirect('resources/desk');
+					}else{
+						 $this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						 redirect('resources/desk');
+					}
+					
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	public function vitals()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patients_list']= $this->Resources_model->get_all_patients_database($userdetails['hos_id']);
+					//echo '<pre>';print_r($data);exit;
+					$this->load->view('resource/add_vitals_patient_list',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addvital()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$data['patient_id']=base64_decode($this->uri->segment(3));
+					$last_billing_address=$this->Resources_model->get_last_billing_id($data['patient_id']);
+					$data['bill_id']=$last_billing_address['b_id'];
+					$this->load->view('resource/vitals',$data);
+					$this->load->view('html/footer');
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function addvitalspost()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					$add=array(
+						'p_id'=>isset($post['pid'])?$post['pid']:'',
+						'b_id'=>isset($post['b_id'])?$post['b_id']:'',
+						'bp'=>isset($post['bp'])?$post['bp']:'',
+						'pulse'=>isset($post['pulse'])?$post['pulse']:'',
+						'fbs_rbs'=>isset($post['fbs_rbs'])?$post['fbs_rbs']:'',
+						'temp'=>isset($post['temp'])?$post['temp']:'',
+						'weight'=>isset($post['weight'])?$post['weight']:'',
+						'create_at'=>date('Y-m-d H:i:s'),
+						'date'=>date('Y-m-d'),
+						'created_by'=>$admindetails['a_id']
+						);
+						//echo '<pre>';print_r($updating);exit;
+						$update=$this->Resources_model->saving_patient_vital_details($add);
+						if(count($update)>0){
+							$this->session->set_flashdata('success',"Vitals details successfully updated.");
+							redirect('resources/vitals');
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/addvital/'.base64_encode($post['pid']));
+						}
+					//echo '<pre>';print_r($post);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function patient_databse()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -261,14 +374,10 @@ class Resources extends In_frontend {
 							$patient_identifier='';
 						}
 					$tab2=array(
-					'religion'=>isset($post['religion'])?$post['religion']:'',
-					'caste'=>isset($post['caste'])?$post['caste']:'',
 					'mothername'=>isset($post['mothername'])?$post['mothername']:'',
-					'language'=>isset($post['language'])?$post['language']:'',
 					'occupation'=>isset($post['occupation'])?$post['occupation']:'',
 					'education'=>isset($post['education'])?$post['education']:'',
 					'home_phone'=>isset($post['home_phone'])?$post['home_phone']:'',
-					'citizen_proof'=>isset($post['citizen_proof'])?$post['citizen_proof']:'',
 					'patient_identifier'=>$patient_identifier,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					);
@@ -316,10 +425,44 @@ class Resources extends In_frontend {
 						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab2);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Next of kin details successfully updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(4));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(3));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function payer()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=3){
+					$post=$this->input->post();
+					$admindetails=$this->session->userdata('userdetails');
+					//echo '<pre>';print_r($post);exit;
+					$tab6=array(
+					'payer_name'=>isset($post['payer_name'])?$post['payer_name']:'',
+					'payer_mobile'=>isset($post['payer_mobile'])?$post['payer_mobile']:'',
+					'payer_address'=>isset($post['payer_address'])?$post['payer_address']:'',
+					'updated_at'=>date('Y-m-d H:i:s'),
+					);
+					//echo '<pre>';print_r($tab5);exit;
+						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab6);
+						if(count($update)>0){
+							$billing=array('p_id'=>isset($post['pid'])?$post['pid']:'');
+							$billing_id	=$this->Resources_model->update_all_patient_billing_details($billing);
+							$this->session->set_flashdata('success',"Payer details successfully updated.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5).'/'.base64_encode($billing_id));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(4));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -370,81 +513,8 @@ class Resources extends In_frontend {
 			redirect('admin');
 		}
 	}
-	public function guardian()
-	{	
-		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=3){
-					$post=$this->input->post();
-					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
-					$tab5=array(
-					'relationship'=>isset($post['relationship'])?$post['relationship']:'',
-					'g_first_name'=>isset($post['g_first_name'])?$post['g_first_name']:'',
-					'g_middel_name'=>isset($post['g_middel_name'])?$post['g_middel_name']:'',
-					'g_last_name'=>isset($post['g_last_name'])?$post['g_last_name']:'',
-					'gender'=>isset($post['gender'])?$post['gender']:'',
-					'nationality'=>isset($post['nationality'])?$post['nationality']:'',
-					'g_language'=>isset($post['g_language'])?$post['g_language']:'',
-					'living'=>isset($post['living'])?$post['living']:'',
-					'g_address1'=>isset($post['g_address1'])?$post['g_address1']:'',
-					'g_address2'=>isset($post['g_address2'])?$post['g_address2']:'',
-					'g_pincode'=>isset($post['g_pincode'])?$post['g_pincode']:'',
-					'g_city'=>isset($post['g_city'])?$post['g_city']:'',
-					'g_state'=>isset($post['g_state'])?$post['g_state']:'',
-					'g_country'=>isset($post['g_country'])?$post['g_country']:'',
-					'updated_at'=>date('Y-m-d H:i:s'),
-					);
-					//echo '<pre>';print_r($tab5);exit;
-						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab5);
-						if(count($update)>0){
-							$this->session->set_flashdata('success',"Guardian details successfully updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(6));
-						}else{
-							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(5));
-						}
-				}else{
-					$this->session->set_flashdata('error',"you don't have permission to access");
-					redirect('dashboard');
-				}
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
-	public function payer()
-	{	
-		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=3){
-					$post=$this->input->post();
-					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
-					$tab6=array(
-					'payer_name'=>isset($post['payer_name'])?$post['payer_name']:'',
-					'payer_mobile'=>isset($post['payer_mobile'])?$post['payer_mobile']:'',
-					'payer_address'=>isset($post['payer_address'])?$post['payer_address']:'',
-					'updated_at'=>date('Y-m-d H:i:s'),
-					);
-					//echo '<pre>';print_r($tab5);exit;
-						$update=$this->Resources_model->update_all_patient_details($post['pid'],$tab6);
-						if(count($update)>0){
-							$this->session->set_flashdata('success',"Payer details successfully updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(7));
-						}else{
-							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(6));
-						}
-				}else{
-					$this->session->set_flashdata('error',"you don't have permission to access");
-					redirect('dashboard');
-				}
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
+	
+	
 	public function economicdetails()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -675,61 +745,7 @@ class Resources extends In_frontend {
 			redirect('admin');
 		}
 	}
-	public function vitals()
-	{	
-		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=3){
-					$post=$this->input->post();
-					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
-					if(isset($post['op']) && $post['op']==1){
-						$billing_id=isset($post['b_id'])?$post['b_id']:'';
-					}else{
-						$billing=array('p_id'=>isset($post['pid'])?$post['pid']:'');
-						$billing_id	=$this->Resources_model->update_all_patient_billing_details($billing);
-						}
-					$updating=array(
-						'p_id'=>isset($post['pid'])?$post['pid']:'',
-						'b_id'=>$billing_id,
-						'bp'=>isset($post['bp'])?$post['bp']:'',
-						'pulse'=>isset($post['pulse'])?$post['pulse']:'',
-						'fbs_rbs'=>isset($post['fbs_rbs'])?$post['fbs_rbs']:'',
-						'temp'=>isset($post['temp'])?$post['temp']:'',
-						'weight'=>isset($post['weight'])?$post['weight']:'',
-						'create_at'=>date('Y-m-d H:i:s'),
-						'date'=>date('Y-m-d')
-						);
-						//echo '<pre>';print_r($updating);exit;
-						$update=$this->Resources_model->saving_patient_vital_details($updating);
-						if(count($update)>0){
-							$this->session->set_flashdata('success',"Vitals details successfully updated.");
-							//redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(10).'/'.base64_encode($post['b_id']));
-							
-							if(isset($post['op']) && $post['op']==1){
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
-							}else{
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9).'/'.base64_encode($billing_id));
-							}
-
-						}else{
-							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							
-							if(isset($post['op']) && $post['op']==1){
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(11));
-							}else{
-								redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(9));
-							}
-						}
-				}else{
-					$this->session->set_flashdata('error',"you don't have permission to access");
-					redirect('dashboard');
-				}
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
+	
 	public function get_doctors_list(){
 		$post=$this->input->post();
 		$details=$this->Resources_model->get_doctors_list($post['dep_id']);
@@ -1003,7 +1019,7 @@ class Resources extends In_frontend {
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);
+					//echo '<pre>';print_r($post);exit;
 					$m_name=explode("_",$post['medicine_name']);
 					$qtys=$this->Resources_model->get_medicine_list_details($m_name[0]);
 						//echo '<pre>';print_r($qtys);
@@ -1401,11 +1417,11 @@ class Resources extends In_frontend {
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Bill details successfully updated.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
 							
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(13).'/'.base64_encode($post['b_id']));
+							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
 							
 						}
 				}else{

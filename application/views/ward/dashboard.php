@@ -48,12 +48,11 @@ chart.render();
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Appointments</div>
+               <div class="page-title">Dashboard</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Admit / Discharge Statistics</li>
             </ol>
          </div>
       </div>
@@ -62,7 +61,7 @@ chart.render();
             <div class="panel tab-border card-topline-green">
 						<div class=" ">
                                 <div class="card-head">
-                                     <header>Admit / Discharge Statistics</header>
+                                     <header>Dashboard</header>
                                   
                                 </div>
                                   <div class="card-body no-padding height-9">

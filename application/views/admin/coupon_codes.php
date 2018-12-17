@@ -24,6 +24,8 @@
                     </li>
                     <li class="nav-item"><a href="#walletamount" data-toggle="tab" class="<?php if(isset($tab) && $tab ==2){ echo " active"; } ?>">Wallet Amount</a>
                     </li>
+					<li class="nav-item"><a href="#walletlist" data-toggle="tab" class="<?php if(isset($tab) && $tab ==3){ echo " active"; } ?>">Wallet Amount List</a>
+                    </li>
                 </ul>
             </header>
             
@@ -212,7 +214,7 @@
                     <div class="tab-pane <?php if(isset($tab) && $tab ==2){ echo " active"; } ?>" id="walletamount">
                         <div class="container">
 
-                            <form action="" method="post" id="wallet_amounts" name="wallet_amounts" enctype="multipart/form-data">
+                            <form action="<?php echo base_url('wallet/addpost'); ?>" method="post" id="wallet_amounts" name="wallet_amounts" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mx-auto">
                                         
@@ -240,6 +242,80 @@
                                     </div>
                                 </div>
                             </form>
+
+                        </div>
+                    </div>
+					<div class="tab-pane <?php if(isset($tab) && $tab ==3){ echo " active"; } ?>" id="walletlist">
+                        <div class="container">
+
+                          <div class="container">
+                            <div class="row">
+                                <div class="card-body col-md-12 table-responsive">
+                                    <?php if(count($wallet_amt_list)>0){ ?>
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example5">
+                                        <thead>
+                                            <tr>
+                                                <th>Ip Amount</th>
+                                                <th>Op Amount</th>
+                                                <th>Lab Amount</th>
+                                                <th>Created Date & Time</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach($wallet_amt_list as $list){ ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlentities($list['ip_amount']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlentities($list['op_amount']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlentities($list['lab_amount']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlentities($list['created_at']); ?>
+                                                </td>
+                                             
+                                                <td>
+                                                    <?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?>
+                                                </td>
+                                                <td class="valigntop">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="javascript;void(0);" onclick="walletadmindeactive('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-edit"></i>
+                                                                    <?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript;void(0);" onclick="walletadmindelete('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-trash-o"></i>Delete</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                          
+                                            <?php } ?>
+
+
+                                        </tbody>
+                                    </table>
+                                    <?php }else{ ?>
+                                    <div>No data Available</div>
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+
+                        </div>
 
                         </div>
                     </div>
@@ -288,8 +364,23 @@
             ]
         });
     });
+	$(document).ready(function() {
+        $('#example5').DataTable({
+            "order": [
+                [3, "desc"]
+            ]
+        });
+    });
 
-    function admindeactive(id) {
+    function walletadmindeactive(id) {
+        $(".popid").attr("href", "<?php echo base_url('wallet/status'); ?>" + "/" + id);
+    }
+	
+	function walletadmindelete(id) {
+        $(".popid").attr("href", "<?php echo base_url('wallet/delete'); ?>" + "/" + id);
+    }
+	
+	function admindeactive(id) {
         $(".popid").attr("href", "<?php echo base_url('admin/coupon_code_status'); ?>" + "/" + id);
     }
 

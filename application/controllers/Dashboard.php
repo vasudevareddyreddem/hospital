@@ -81,6 +81,9 @@ class Dashboard extends In_frontend {
 				redirect('resources/worksheet');
 			}else if($admindetails['role_id']==8){
 				redirect('admin/chat');
+			}else if($admindetails['role_id']==9){
+				$data['']='';
+				$this->load->view('ward/dashboard',$data);
 			}
 			$this->load->view('html/footer');
 

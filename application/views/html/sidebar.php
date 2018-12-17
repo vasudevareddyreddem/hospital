@@ -142,6 +142,7 @@
 	                            </a>
 	                        </li>
 						
+						
 						<?php }else if($userdetails['role_id']==2){ ?>
 						 <li class="nav-item start <?php if($this->uri->segment(1)=='dashboard'){ echo "active";} ?>">
 	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
@@ -281,6 +282,15 @@
 	                            </a>
 	                           
 	                        </li>  
+							<li class="nav-item start <?php if($this->uri->segment(2)=='vitals'){ echo "active";} ?> ">
+	                            <a href="<?php echo base_url('resources/vitals');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">sd_storage</i>
+	                                <span class="title">Vitals</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
+	                           
+	                        </li> 
 							<li class="nav-item start <?php if($this->uri->segment(2)=='patient_databse'){ echo "active";} ?> ">
 	                            <a href="<?php echo base_url('resources/patient_databse');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">sd_storage</i>
@@ -534,7 +544,7 @@
 							<?php } else if($userdetails['role_id']==9){ ?>
 							<!--ward management-->
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('ward_management');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('dashboard');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">dashboard</i>
 	                                <span class="title">Dashboard</span>
 	                                <span class="selected"></span>
@@ -581,14 +591,7 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>
-							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('ward_management/admit_discharge_statistics');?>" class="nav-link nav-toggle">
-	                                <i class="material-icons">assignment</i>
-	                                <span class="title">Admit / Discharge Stati..</span>
-	                                <span class="selected"></span>
-                                	<span class="arrow "></span>
-	                            </a>
-	                        </li>
+						
 							<li class="nav-item start ">
 	                            <a href="<?php echo base_url('ward_management/patient_history');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
@@ -597,14 +600,14 @@
                                 	<span class="arrow "></span>
 	                            </a>
 	                        </li>	
-							<li class="nav-item start ">
+							<!--<li class="nav-item start ">
 	                            <a href="<?php echo base_url('ward_management/discharge_report');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Discharge Report</span>
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
-	                        </li>
+	                        </li>-->
 							<!--ward management-->
 							<!--nurse-->
 							<?php } else if($userdetails['role_id']==10){ ?>

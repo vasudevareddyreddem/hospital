@@ -69,7 +69,7 @@
                                   
                                 </div>
                                 <div class="card-body table-responsive">
-                                    <table id="saveStage" class="table table-bordered" style="width:100%;">
+                                    <table id="example1" class="table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
                                                 <th>Patient ID</th>
@@ -92,7 +92,7 @@
 													<td><?php echo $list['gender']; ?></td>
 													<td><?php echo $list['age']; ?></td>
 													<td><?php echo $list['resource_name']; ?></td>
-													<td><?php echo $list['problem']; ?></td>
+													<td><?php echo $list['t_name']; ?></td>
 													<td><?php echo $list['create_at']; ?></td>
 													<td class="valigntop">
 														<div class="btn-group">
@@ -333,7 +333,12 @@
 <script>
 $(document).ready(function() {
     $('#example4').DataTable( {
-        "order": [[ 1, "desc" ]]
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#example1').DataTable( {
+        "order": [[ 0, "desc" ]]
     } );
 } );
 function admindeactive(aid){

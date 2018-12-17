@@ -376,5 +376,15 @@ class Resources_model extends CI_Model
         return $this->db->get()->row_array();
 	}
 	 /* card number details purpose */
+	 
+	 /* convert op to ip patient */
+	 public  function get_last_billing_id($p_id){
+		 $this->db->select('b_id,p_id')->from('patient_billing');		
+		 $this->db->where('patient_billing.p_id',$p_id);
+		 $this->db->order_by('patient_billing.b_id',"desc");
+		 $this->db->limit(1);
+         return $this->db->get()->row_array();
+	 }
+	 /* convert op to ip patient */
 
 }

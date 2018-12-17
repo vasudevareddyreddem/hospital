@@ -9,9 +9,10 @@ class Ward_model extends CI_Model
 		$this->load->database("default");
 	}
 	public  function get_ip_patient_list($hos_id){
-		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id')->from('patient_billing');
+		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id,treament.t_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
+		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patient_billing.completed_type',0);
 		return $this->db->get()->result_array();
@@ -358,15 +359,26 @@ class Ward_model extends CI_Model
 		$this->db->where('admitted_patient_list.completed',0);
 		return $this->db->get()->result_array();
 	}
-
-	public function get_discharge_patient_history($hos_id){
-		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,patients_list_1.name,patients_list_1.mobile,resource_list.resource_name,patient_billing.create_at,admitted_patient_list.status,admitted_patient_list.discharge_date')->from('admitted_patient_list');				
+	public function get_admited_discharge_patient_list($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,admitted_patient_list.bill_id,patients_list_1.name,patients_list_1.mobile,resource_list.resource_name,patient_billing.create_at,admitted_patient_list.status')->from('admitted_patient_list');				
 		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = admitted_patient_list.d_id', 'left');
 		$this->db->join('patient_billing', 'patient_billing.p_id = admitted_patient_list.pt_id', 'left');
 		$this->db->where('admitted_patient_list.hos_id',$hos_id);
 		$this->db->where('admitted_patient_list.status !=',2);
-		$this->db->where('admitted_patient_list.completed!=',0);
+		$this->db->where('admitted_patient_list.completed',0);
+		return $this->db->get()->result_array();
+	}
+
+	public function get_discharge_patient_history($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,admitted_patient_list.bill_id,patients_list_1.card_number,patients_list_1.name,resource_list.resource_name,treament.t_name,patients_list_1.mobile,admitted_patient_list.date_of_admit,admitted_patient_list.discharge_date,admitted_patient_list.amount_status')->from('admitted_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
+		$this->db->join('patient_billing', 'patient_billing.p_id = admitted_patient_list.pt_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admitted_patient_list.d_id', 'left');
+		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
+		$this->db->group_by('admitted_patient_list.a_p_id');
+		$this->db->where('admitted_patient_list.hos_id',$hos_id);
+		$this->db->where('admitted_patient_list.completed',1);
 		return $this->db->get()->result_array();
 	}
 	

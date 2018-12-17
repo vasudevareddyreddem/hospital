@@ -105,7 +105,6 @@ public function index()
 					$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
 					$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
 					$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_details($hos_ids['hos_id']);
-					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/admit-patients',$data);
 					$this->load->view('html/footer');
@@ -276,8 +275,8 @@ public function index()
 				if($admindetails['role_id']=1){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['discharge_patient_list'] =$this->Ward_model->get_discharge_patient_list($hos_ids['hos_id']);
-					// echo '<pre>';print_r($data);exit;
+					$data['discharge_patient_list'] =$this->Ward_model->get_admited_discharge_patient_list($hos_ids['hos_id']);
+					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/discharge',$data);
 					$this->load->view('html/footer');
 				}else{
@@ -457,10 +456,11 @@ public function index()
 					if($admitted_patientid!=''){
 						$updatedata=array(
 							'completed'=>1,
-					'discharge_date'=>date('Y-m-d H:i:s')	
+							'amount_status'=>1,	
+							'discharge_date'=>date('Y-m-d H:i:s')	
 							);
 							$editdata= $this->Ward_model->update_discharge_patient_list(base64_decode($admitted_patientid),$updatedata);
-				if(count($editdata)>0){
+						if(count($editdata)>0){
 								$this->session->set_flashdata('success',"patient successfully dicharged.");
 								redirect('ward_management/patient_history/'.base64_encode(1));
 							}else{

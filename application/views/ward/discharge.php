@@ -61,8 +61,7 @@
                                                           
 														   <li>
 														  <a href="<?php echo base_url('ward_management/patient_history_post/'.base64_encode($list['a_p_id'])); ?>">
-                                                                
-                                                                    <i class="fa fa-check"></i> Discharge</a>
+                                                            <i class="fa fa-check"></i> Discharge</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -78,7 +77,7 @@
                             </div>
                             <div class="tab-pane" id="dis-requests">
                                 <div class="card-body table-responsive">
-                                    <table id="example4" class=" table table-bordered" style="width:100%;">
+                                    <table id="example5" class=" table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
                                                 <th>Patient ID</th>
@@ -135,3 +134,15 @@
             </div>
         </div>
     </div>
+<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#example5').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>

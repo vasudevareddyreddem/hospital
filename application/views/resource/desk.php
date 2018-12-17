@@ -32,6 +32,7 @@
                </header>
                <div class="panel-body">
                   <div class="tab-content">
+				  <?php //echo $tab;exit; ?>
                      <div class="tab-pane <?php if(isset($tab) && $tab!=11 && $tab!=12 && $tab!=13 && $tab!=0){ echo "active";}?>" id="home">
                         <div class="card ">
                            <div class="card-body " id="bar-parent" style="margin-top:30px">
@@ -39,39 +40,29 @@
                                  <div class="col-md-3 col-sm-3 col-xs-3">
                                     <ul class="nav nav-tabs tabs-left">
                                        <li class="nav-item">
-                                          <a href="#tab_6_1" data-toggle="tab" class="<?php if(isset($tab) && $tab==1){ echo "active";}?>"> Basic Details </a>
+                                          <a href="#tab_6_1" data-toggle="tab" class="<?php if(isset($tab) && $tab==0){ echo "active";}?>"> Basic Details </a>
                                        </li>
-                                       <li class="nav-item <?php if(isset($tab) && $tab==2){ echo "active";}?>">
-                                          <a href="#tab_6_2" data-toggle="tab" > Demographic </a>
+                                       <li class="nav-item ">
+                                          <a  class="<?php if(isset($tab) && $tab==2){ echo "active";}?>" href="#tab_6_2" data-toggle="tab" > Guardian details </a>
                                        </li>
-                                       <li class="nav-item <?php if(isset($tab) && $tab==3){ echo "active";}?>">
-                                          <a href="#tab_6_3" data-toggle="tab"> Next of kin details </a>
+                                       <li class="nav-item ">
+                                          <a class="<?php if(isset($tab) && $tab==3){ echo "active";}?>" href="#tab_6_3" data-toggle="tab"> Next of kin details </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==5){ echo "active";}?>">
-                                          <a href="#tab_6_5" data-toggle="tab"> Guardian </a>
+                                       <li class="nav-item  ">
+                                          <a class="<?php if( isset($tab) && $tab==4){ echo "active";}?>" href="#tab_6_4"  data-toggle="tab"> Payer details </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==6){ echo "active";}?>">
-                                          <a href="#tab_6_6" data-toggle="tab"> Payer details </a>
+									   <li class="nav-item">
+                                          <a class="  <?php if( isset($tab) && $tab==5){ echo "active";}?>" href="#tab_6_5" data-toggle="tab"> Assign  </a>
                                        </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==7){ echo "active";}?>">
-                                          <a href="#tab_6_7" data-toggle="tab"> Socio- economic details </a>
-                                       </li>
-									   
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==8){ echo "active";}?>">
-                                          <a href="#tab_6_9" data-toggle="tab"> Vitals </a>
-                                       </li>
-									   <li class="nav-item  <?php if( isset($tab) && $tab==9){ echo "active";}?>">
-                                          <a href="#tab_6_10" data-toggle="tab"> Assign  </a>
-                                       </li>
-                                       <li class="nav-item  <?php if( isset($tab) && $tab==10){ echo "active";}?>">
-                                          <a href="#tab_6_8" data-toggle="tab"> Billing Information </a>
+                                       <li class="nav-item">
+                                          <a class="<?php if( isset($tab) && $tab==10){ echo "active";}?>" href="#tab_6_8" data-toggle="tab"> Billing Information </a>
                                        </li>
                                        
                                     </ul>
                                  </div>
                                  <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="tab-content">
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==1){ echo "active";}?>" id="tab_6_1">
+                                       <div class="tab-pane <?php if(isset($tab) && $tab==0 || $tab==1){ echo "active";}?>" id="tab_6_1">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -168,10 +159,6 @@
                                                    </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                   <label for="text">National ID</label>
-                                                   <input type="text" name="nationali_id" id="nationali_id" class="form-control"  placeholder="Aadhaar Id" value="<?php echo isset($patient_detailes['nationali_id'])?$patient_detailes['nationali_id']:''; ?>" >
-                                                </div>
-                                                <div class="form-group col-md-6">
                                                    <label for="email"> Permanent address</label>
                                                    <textarea type="textarea" id="perment_address" name="perment_address" class="form-control"  placeholder="Enter Address" ><?php echo isset($patient_detailes['perment_address'])?$patient_detailes['perment_address']:''; ?></textarea>
                                                 </div>
@@ -256,27 +243,6 @@
                                                    <input type="text" class="form-control" id="mothername"  name="mothername"  value="<?php echo isset($patient_detailes['mothername'])?$patient_detailes['mothername']:''; ?>">
                                                 </div>
 												
-                                                
-                                                
-							
-												<div class="form-group col-md-6">
-                                                   <label for="Name">Religion</label>
-                                                   <input type="text" class="form-control" id="religion"  name="religion"  value="<?php echo isset($patient_detailes['religion'])?$patient_detailes['religion']:''; ?>">
-                                                </div>
-												
-												<div class="form-group col-md-6">
-                                                   <label for="Name">Caste</label>
-                                                   <input type="text" class="form-control" id="caste"  name="caste"  value="<?php echo isset($patient_detailes['caste'])?$patient_detailes['caste']:''; ?>">
-                                                </div>
-												<div class="form-group col-md-6">
-                                                   <label for="mobile">Language</label>
-                                                   <select id="language" name="language" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Telugu" <?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-                                                      <option value="English" <?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='English'){ echo "Selected"; } ?>>English</option>
-                                                      <option value="Hindi"<?php if(isset($patient_detailes['language']) &&  $patient_detailes['language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
-                                                   </select>
-                                                </div>
                                                <div class="form-group col-md-6">
                                                    <label for="Name">Occupation</label>
                                                    <input type="text" class="form-control" id="occupation"  name="occupation"  value="<?php echo isset($patient_detailes['occupation'])?$patient_detailes['occupation']:''; ?>">
@@ -288,14 +254,6 @@
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Mobile Number</label>
                                                    <input type="text" class="form-control" id="home_phone"  name="home_phone"  value="<?php echo isset($patient_detailes['home_phone'])?$patient_detailes['home_phone']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Senior citizen proof?</label>
-                                                   <select id="citizen_proof" name="citizen_proof" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Yes" <?php if(isset($patient_detailes['citizen_proof']) &&  $patient_detailes['citizen_proof']=='Yes'){ echo "Selected"; } ?>>Yes</option>
-                                                      <option value="No" <?php if(isset($patient_detailes['citizen_proof']) &&  $patient_detailes['citizen_proof']=='No'){ echo "Selected"; } ?>>No</option>
-                                                   </select>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="Name">Patient identifier</label>
@@ -376,103 +334,9 @@
                                              <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
-                                      <div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/referral'); ?> " method="post"  id="referral">
-                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Referred by?</label>
-                                                   <input type="text" class="form-control" id="referred"  name="referred"  value="<?php echo isset($patient_detailes['referred'])?$patient_detailes['referred']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Internal / External?</label>
-                                                   <input type="text" class="form-control" id="internal_external"  name="internal_external"  value="<?php echo isset($patient_detailes['internal_external'])?$patient_detailes['internal_external']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Search doctor</label>
-                                                   <input type="text" class="form-control" id="search_doctor"  name="search_doctor"  value="<?php echo isset($patient_detailes['search_doctor'])?$patient_detailes['search_doctor']:''; ?>">
-                                                </div>
-                                             </div>
-                                             <button class="btn btn-success  " type="submit">Next</button>
-                                          </form>
-                                       </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==5){ echo "active";}?>" id="tab_6_5">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/guardian'); ?> " method="post"  id="guardian">
-                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Relationship</label>
-                                                   <input type="text" class="form-control" id="relationship"  name="relationship"  value="<?php echo isset($patient_detailes['relationship'])?$patient_detailes['relationship']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Name</label>
-                                                   <input type="text" class="form-control" id="g_first_name"  name="g_first_name"  value="<?php echo isset($patient_detailes['g_first_name'])?$patient_detailes['g_first_name']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Gender</label>
-                                                   <select id="gender" name="gender" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Male" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Male'){ echo "Selected"; } ?>>Male</option>
-                                                      <option value="Female" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Female'){ echo "Selected"; } ?>>Female</option>
-                                                      <option value="Other" <?php if(isset($patient_detailes['gender']) &&  $patient_detailes['gender']=='Other'){ echo "Selected"; } ?>>Other</option>
-                                                   </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Nationality</label>
-                                                   <input type="text" class="form-control" id="nationality"  name="nationality"  value="<?php echo isset($patient_detailes['nationality'])?$patient_detailes['nationality']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="mobile">Language</label>
-                                                   <select id="g_language" name="g_language" class="form-control" >
-                                                      <option value="">Select</option>
-                                                      <option value="Telugu" <?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='Telugu'){ echo "Selected"; } ?>>Telugu</option>
-                                                      <option value="English" <?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='English'){ echo "Selected"; } ?>>English</option>
-                                                      <option value="Hindi"<?php if(isset($patient_detailes['g_language']) &&  $patient_detailes['g_language']=='Hindi'){ echo "Selected"; } ?>>Hindi</option>
-                                                   </select>
-                                                </div>
-                                              
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">Address1</label>
-                                                   <input type="text" id="g_address1" name="g_address1" class="form-control"  placeholder="Enter Address" value="<?php echo isset($patient_detailes['g_address1'])?$patient_detailes['g_address1']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="email">Address2</label>
-                                                   <input type="text" id="g_address2" name="g_address2" class="form-control"  placeholder="Enter Address" value="<?php echo isset($patient_detailes['g_address2'])?$patient_detailes['g_address2']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Pincode</label>
-                                                   <input type="text" class="form-control" id="g_pincode"  name="g_pincode"  value="<?php echo isset($patient_detailes['g_pincode'])?$patient_detailes['g_pincode']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">City</label>
-                                                   <input type="text" class="form-control" id="g_city"  name="g_city"  value="<?php echo isset($patient_detailes['g_city'])?$patient_detailes['g_city']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">State</label>
-                                                <?php $states = array ('Andhra Pradesh' => 'Andhra Pradesh', 'Arunachal Pradesh' => 'Arunachal Pradesh', 'Assam' => 'Assam', 'Bihar' => 'Bihar', 'Chhattisgarh' => 'Chhattisgarh', 'Goa' => 'Goa', 'Gujarat' => 'Gujarat', 'Haryana' => 'Haryana', 'Himachal Pradesh' => 'Himachal Pradesh', 'Jammu & Kashmir' => 'Jammu & Kashmir', 'Jharkhand' => 'Jharkhand', 'Karnataka' => 'Karnataka', 'Kerala' => 'Kerala', 'Madhya Pradesh' => 'Madhya Pradesh', 'Maharashtra' => 'Maharashtra', 'Manipur' => 'Manipur', 'Meghalaya' => 'Meghalaya', 'Mizoram' => 'Mizoram', 'Nagaland' => 'Nagaland', 'Odisha' => 'Odisha', 'Punjab' => 'Punjab', 'Rajasthan' => 'Rajasthan', 'Sikkim' => 'Sikkim', 'Tamil Nadu' => 'Tamil Nadu', 'Telangana' => 'Telangana', 'Tripura' => 'Tripura', 'Uttarakhand' => 'Uttarakhand','Uttar Pradesh' => 'Uttar Pradesh', 'West Bengal' => 'West Bengal', 'Andaman & Nicobar' => 'Andaman & Nicobar', 'Chandigarh' => 'Chandigarh', 'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli', 'Daman & Diu' => 'Daman & Diu', 'Delhi' => 'Delhi', 'Lakshadweep' => 'Lakshadweep', 'Puducherry' => 'Puducherry'); ?>
-														  <select class="form-control" required="required" name="g_state" id="g_state">
-														  <option value = "">Select State</option>
-															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['g_state'] == $state):
-																	$selected ='selected=selected';
-																	else : 
-																	$selected = '';
-																	endif;
-																 ?>
-																<option value = "<?php echo $state?>" <?php echo $selected;?> ><?php echo $state?></option>
-															<?php endforeach; ?>
-														  </select> 
-												</div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Country</label>
-                                                   <input type="text" class="form-control" id="g_country"  name="g_country"  value="<?php echo isset($patient_detailes['g_country'])?$patient_detailes['g_country']:''; ?>">
-                                                </div>
-                                             </div>
-                                             <button class="btn btn-success  " type="submit">Next</button>
-                                          </form>
-                                       </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==6){ echo "active";}?>" id="tab_6_6">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/payer '); ?> " method="post"  id="payer">
+                                       
+                                       <div class="tab-pane <?php if(isset($tab) && $tab==4){ echo "active";}?>" id="tab_6_4">
+                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/payer'); ?> " method="post"  id="payer">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <div class="row">
                                                 <div class="form-group col-md-6">
@@ -491,84 +355,7 @@
                                              <button class="btn btn-success  " type="submit">Next</button>
                                           </form>
                                        </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==7){ echo "active";}?>" id="tab_6_7">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/economicdetails'); ?> " method="post"  id="economicdetails">
-                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Living dependency</label>
-                                                   <input type="text" class="form-control" id="dependency"  name="dependency"  value="<?php echo isset($patient_detailes['dependency'])?$patient_detailes['dependency']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Living arrangement</label>
-                                                   <input type="text" class="form-control" id="arrangement"  name="arrangement"  value="<?php echo isset($patient_detailes['arrangement'])?$patient_detailes['arrangement']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Income group</label>
-                                                   <input type="text" class="form-control" id="incomegroup"  name="incomegroup"  value="<?php echo isset($patient_detailes['incomegroup'])?$patient_detailes['incomegroup']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Description</label>
-                                                   <input type="text" class="form-control" id="description"  name="description"  value="<?php echo isset($patient_detailes['description'])?$patient_detailes['description']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Confidential?</label>
-                                                   <input type="text" class="form-control" id="confidential"  name="confidential"  value="<?php echo isset($patient_detailes['confidential'])?$patient_detailes['confidential']:''; ?>">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                   <label for="Name">Student?</label>
-                                                   <input type="text" class="form-control" id="student"  name="student"  value="<?php echo isset($patient_detailes['student'])?$patient_detailes['student']:''; ?>">
-                                                </div>
-                                             </div>
-                                             <button class="btn btn-success  " type="submit">Next</button>
-                                          </form>
-                                       </div>
-									   <div class="tab-pane <?php if(isset($tab) && $tab==8){ echo "active";}?>" id="tab_6_9">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals">
-                                             <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <div class="row " >
-                                             <div class="table-responsive" >
-											 <table class="table table-bordered ">
-													<tr>
-														<th class="text-center">Vitals</th>
-														<th class="text-center">Actuals</th>
-														<th class="text-center">Range</th>
-													</tr>
-													<tr>
-														<th class="text-center">BP</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="bp" id="bp" class="form-control" value="<?php echo isset($vitals_detailes['bp'])?$vitals_detailes['bp']:''; ?>"></th>
-														<th class="text-center">120/80</th>
-													</tr>
-													<tr>
-														<th class="text-center">Pulse</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="pulse" id="pulse" class="form-control" value="<?php echo isset($vitals_detailes['pulse'])?$vitals_detailes['pulse']:''; ?>"></th>
-														<th class="text-center">70-80</th>
-													</tr>
-													<tr>
-														<th class="text-center">FBS/RBS</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="fbs_rbs" id="fbs_rbs" class="form-control" value="<?php echo isset($vitals_detailes['fbs_rbs'])?$vitals_detailes['fbs_rbs']:''; ?>"></th>
-														<th class="text-center">70-110	</th>
-													</tr>
-													<tr>
-														<th class="text-center">Temp</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="temp" id="temp" class="form-control" value="<?php echo isset($vitals_detailes['temp'])?$vitals_detailes['temp']:''; ?>"></th>
-														<th class="text-center">98.6 F</th>
-													</tr>
-													<tr >
-														<th class="text-center">Weight</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
-														<th class="text-center"></th>
-													</tr>
-													
-												</table>
-                                               
-                                             </div>
-                                             </div>
-                                             <button class="btn btn-priamry pull-right " type="submit">Next</button>
-                                          </form>
-                                       </div>
-									   <div class="tab-pane <?php if(isset($tab) && $tab==9){ echo "active";}?>" id="tab_6_10">
+                                      <div class="tab-pane <?php if(isset($tab) && $tab==5){ echo "active";}?>" id="tab_6_5">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/assign'); ?> " method="post"  id="assigna">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -769,6 +556,10 @@
                                                    <a href="<?php echo base_url('resources/desk/'.base64_encode($list['pid']).'/'.base64_encode(0).'/'.base64_encode('reschedule')); ?>">
                                                    <i class="icon-docs"></i> Repeated </a>
                                                 </li>
+												<li>
+                                                   <a href="<?php echo base_url('resources/transforto_ip/'.base64_encode($list['pid'])); ?>">
+                                                   <i class="icon-docs"></i> Transfer to ip </a>
+                                                </li>
                                              </ul>
                                           </div>
                                        </td>
@@ -799,11 +590,9 @@
 									    <li class="nav-item ">
                                           <a href="#tab_6_223" data-toggle="tab" class="<?php if(isset($tab) && $tab ==11){ echo "active";}?>"> Assign </a>
                                        </li>
-									   <li class="nav-item ">
-                                          <a href="#tab_6_224" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Vitals </a>
-                                       </li>
+									  
                                        <li class="nav-item ">
-                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==13){ echo "active";}?>"> Billing Information </a>
+                                          <a href="#tab_6_22" data-toggle="tab" class="<?php if(isset($tab) && $tab ==12){ echo "active";}?>"> Billing Information </a>
                                        </li>
 									  
                                       
@@ -811,7 +600,7 @@
                                  </div>
                                  <div class="col-md-9 col-sm-9 col-xs-9">
                                     <div class="tab-content">
-                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12 && $tab !=13){ echo "active";}?>" id="tab_6_11">
+                                       <div class="tab-pane <?php if(isset($tab) && $tab !=11 && $tab !=12){ echo "active";}?>" id="tab_6_11">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/basic_details'); ?> " method="post"  id="basic_details1" name="basic_details1">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
 											  <input type="hidden" id=" verifying" name="verifying" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -951,50 +740,8 @@
                                           </div>
 										</form>
                                        </div>
-									   <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_224">
-                                          <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/vitals'); ?> " method="post"  id="vitals_1">
-                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
-                                             <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
-                                             <input type="hidden" id="op" name="op" value="1">
-                                             <div class="row table-responsive" >
-												<table class="table table-bordered ">
-													<tr>
-														<th class="text-center">Vitals</th>
-														<th class="text-center">Actuals</th>
-														<th class="text-center">Range</th>
-													</tr>
-													<tr>
-														<th class="text-center">BP</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="bp" id="bp" class="form-control" value="<?php echo isset($vitals_detailes['bp'])?$vitals_detailes['bp']:''; ?>"></th>
-														<th class="text-center">120/80</th>
-													</tr>
-													<tr>
-														<th class="text-center">Pulse</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="pulse" id="pulse" class="form-control" value="<?php echo isset($vitals_detailes['pulse'])?$vitals_detailes['pulse']:''; ?>"></th>
-														<th class="text-center">70-80</th>
-													</tr>
-													<tr>
-														<th class="text-center">FBS/RBS</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="fbs_rbs" id="fbs_rbs" class="form-control" value="<?php echo isset($vitals_detailes['fbs_rbs'])?$vitals_detailes['fbs_rbs']:''; ?>"></th>
-														<th class="text-center">70-110	</th>
-													</tr>
-													<tr>
-														<th class="text-center">Temp</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="temp" id="temp" class="form-control" value="<?php echo isset($vitals_detailes['temp'])?$vitals_detailes['temp']:''; ?>"></th>
-														<th class="text-center">98.6 F</th>
-													</tr>
-													<tr >
-														<th class="text-center">Weight</th>
-														<th class="text-center form-group"><input style="border-radius:0px;" type="text" name="weight" id="weight" class="form-control " value="<?php echo isset($vitals_detailes['weight'])?$vitals_detailes['weight']:''; ?>"></th>
-														<th class="text-center"></th>
-													</tr>
-													
-												</table>
-                                             </div>
-                                             <button class="btn btn-primary pull-right" type="submit">Next</button>
-                                          </form>
-                                       </div>
-                                       <div class="tab-pane <?php if(isset($tab) && $tab==13){ echo "active";}?>" id="tab_6_22">
+									  
+                                       <div class="tab-pane <?php if(isset($tab) && $tab==12){ echo "active";}?>" id="tab_6_22">
                                           <form class=" pad30 form-horizontal" action="<?php echo base_url('resources/billcompleted'); ?> " method="post"  id="opbills" name="opbills" enctype="multipart/form-data">
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
@@ -1634,207 +1381,7 @@ function apply_couponcode1(){
         
    });
    
-   	$(document).ready(function() {
-    
-       $('#economicdetails').bootstrapValidator({
-   		fields: {
-             
-                dependency: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Living dependency is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living dependency can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },arrangement: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Living arrangement is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living arrangement can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },incomegroup: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Income group is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Income group can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },description: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Description is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Description can only consist of alphanumeric, space and dot'
-   					}
-                   }
-               },confidential: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Confidential is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Confidential can only consist of alphanumeric, space and dot'
-   					}
-                   }
-               },
-              student: {
-                   validators: {
-   					notEmpty: {
-   						message: 'student is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'student group can only consist of alphanumeric, space and dot'
-   					}
-                   }
-               }
-   			}
-   		
-   	})
-        
-   });
-   	
-   	$(document).ready(function() {
-    
-       $('#guardian').bootstrapValidator({
-   		fields: {
-             
-                relationship: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Relationship is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Relationship can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },g_first_name: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Name is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },g_address1: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Address is required'
-   					},
-                       regexp: {
-   					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-   					message:'Address wont allow <> [] = % '
-   					}
-                   }
-               },g_address2: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Address is required'
-   					},
-                       regexp: {
-   					regexp:/^[ A-Za-z0-9_@.,/!;:}{@#&`~"\\|^?$*)(_+-]*$/,
-   					message:'Address wont allow <> [] = % '
-   					}
-                   }
-               },
-              
-   			g_pincode: {
-                   validators: {
-   					notEmpty: {
-   						message: 'Pin code is required'
-   					},
-   					regexp: {
-   					regexp: /^[0-9]{5,7}$/,
-   					message: 'Pin code  must be  5 to 7 characters'
-   					}
-   				}
-               },g_city: {
-                  validators: {
-   					notEmpty: {
-   						message: 'City is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'City can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },g_state: {
-                 validators: {
-   					notEmpty: {
-   						message: 'State is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'State can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },
-   			g_country: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Country is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Country can only consist of alphanumeric, space and dot'
-   					}
-   				}
-   			},nationality: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Nationality is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Nationality can only consist of alphanumeric, space and dot'
-   					}
-   				}
-   			},living: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Living dependency is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z0-9. ]+$/,
-   					message: 'Living dependency can only consist of alphanumeric, space and dot'
-   					}
-   				}
-   			},
-   			gender: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Gender is required'
-   					}
-   				}
-   			},
-   			g_language: {
-                 validators: {
-   					notEmpty: {
-   						message: 'Language is required'
-   					}
-   				}
-   			}
-   			}
-   		
-   	})
-        
-   });
+
    
    $(document).ready(function() {
     
@@ -1967,27 +1514,7 @@ function apply_couponcode1(){
        $('#demographic').bootstrapValidator({
    		fields: {
              
-                religion: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Religion is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z ]+$/,
-   					message: 'Religion can only consist of alphabets and space'
-   					}
-   				}
-               },caste: {
-                    validators: {
-   					notEmpty: {
-   						message: 'Caste is required'
-   					},
-   					regexp: {
-   					regexp: /^[a-zA-Z ]+$/,
-   					message: 'Caste can only consist of alphabets and space'
-   					}
-   				}
-               },mothername: {
+                mothername: {
                     validators: {
    					notEmpty: {
    						message: 'Mother name is required'
@@ -1995,13 +1522,6 @@ function apply_couponcode1(){
    					regexp: {
    					regexp: /^[a-zA-Z0-9. ]+$/,
    					message: 'Mother name can only consist of alphanumeric, space and dot'
-   					}
-   				}
-               },
-               language: {
-                  validators: {
-   					notEmpty: {
-   						message: 'Language is required'
    					}
    				}
                },
@@ -2046,14 +1566,6 @@ function apply_couponcode1(){
    					regexp:  /^[0-9]{10,14}$/,
    					message:'Mobile Number must be 10 to 14 digits'
    					}
-   				}
-               },
-   			citizen_proof: {
-                    validators: {
-   					 notEmpty: {
-                           message: 'Please select Senior citizen proof'
-                       }
-   				
    				}
                },
                patient_identifier: {

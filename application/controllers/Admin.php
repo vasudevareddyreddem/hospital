@@ -176,6 +176,7 @@ class Admin extends CI_Controller {
 					//echo '<pre>';print_r($data['hospital_list']);exit;
 					
 					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
+					$data['wallet_amt_list']=$this->Admin_model->get_all_wallet_amt_list_list($admindetails['a_id']);
 					
 					$this->load->view('admin/coupon_codes',$data);
 					$this->load->view('html/footer');

@@ -44,11 +44,16 @@
 											    <td><?php echo $list['name']; ?></td>
 											    <td><?php echo $list['mobile']; ?></td>
                                                 <td><?php echo $list['resource_name']; ?></td>
-                                                <td><?php echo date('M j h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+                                                <td><?php echo date('M j h:i A',strtotime(htmlentities($list['date_of_admit'])));?></td>
 												<td><?php echo date('M j h:i A',strtotime(htmlentities($list['discharge_date'])));?></td>
 
                                                 <td>
-													<span class="label label-sm label-success"> Paid </span>
+												<?php if($list['amount_status']==1){?>
+												<span class="label label-sm label-success"> Paid </span>
+												<?php }else{ ?>
+												<span class="label label-sm label-warning">Pending </span>
+												<?php } ?>
+													
 												</td>
                                                 
                                             </tr>

@@ -399,3 +399,11 @@ CREATE TABLE `appointment_user_prescription` (
 ALTER TABLE `staging_ehealthinfra_db`.`resource_list`   
   ADD COLUMN `consultation_fee` VARCHAR(250) NULL AFTER `resource_name`;
 
+  
+  /* unwanted data removing */
+  ALTER TABLE `hospital`.`patients_list_1`   
+  DROP COLUMN `religion`, 
+  DROP COLUMN `caste`, 
+  DROP COLUMN `language`, 
+  DROP COLUMN `citizen_proof`;
+

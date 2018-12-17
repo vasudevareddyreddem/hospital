@@ -820,6 +820,14 @@ public function get_logo_details($l_id){
 	$this->db->where('l_id',$l_id);
 	return $this->db->get()->row_array(); 
 }
+/* admin wallet amout list */
+
+public  function get_all_wallet_amt_list_list(){
+	$this->db->select('*')->from('wallet_amount');
+	$this->db->where('status !=',2);
+	return $this->db->get()->result_array(); 
+	
+}
 	
 	
 	
