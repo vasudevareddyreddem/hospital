@@ -222,15 +222,27 @@
                                             <label>IP Amount </label>
                                             <input class="form-control" id="ip_amount" name="ip_amount" value="" type="text" placeholder="Enter Amount">
                                         </div>
+										<div class="form-group">
+                                            <label>Amount Percentage</label>
+                                            <input class="form-control" id="ip_amount_percentage" name="ip_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
+                                        </div>
                                         
                                         <div class="form-group">
                                             <label>OP Amount </label>
                                             <input class="form-control" id="op_amount" name="op_amount" value="" type="text" placeholder="Enter Amount">
                                         </div>
+										<div class="form-group">
+                                            <label>Amount Percentage</label>
+                                            <input class="form-control" id="op_amount_percentage" name="op_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
+                                        </div>
                                         
                                         <div class="form-group">
                                             <label>Lab Amount </label>
                                             <input class="form-control" id="lab_amount" name="lab_amount" value="" type="text" placeholder="Enter Amount">
+                                        </div>
+										<div class="form-group">
+                                            <label>Amount Percentage</label>
+                                            <input class="form-control" id="lab_amount_percentage" name="lab_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
                                         </div>
                                         
                                         <br>
@@ -256,8 +268,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Ip Amount</th>
+                                                <th>Ip Amount Percentage</th>
                                                 <th>Op Amount</th>
+                                                <th>Op Amount Percentage</th>
                                                 <th>Lab Amount</th>
+                                                <th>Lab Amount Percentage</th>
                                                 <th>Created Date & Time</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -268,12 +283,21 @@
                                             <tr>
                                                 <td>
                                                     <?php echo htmlentities($list['ip_amount']); ?>
+                                                </td> 
+												<td>
+                                                    <?php echo htmlentities($list['ip_amount_percentage']); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo htmlentities($list['op_amount']); ?>
                                                 </td>
+												<td>
+                                                    <?php echo htmlentities($list['op_amount_percentage']); ?>
+                                                </td>
                                                 <td>
                                                     <?php echo htmlentities($list['lab_amount']); ?>
+                                                </td>
+												<td>
+                                                    <?php echo htmlentities($list['lab_amount_percentage']); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo htmlentities($list['created_at']); ?>
@@ -367,7 +391,7 @@
 	$(document).ready(function() {
         $('#example5').DataTable({
             "order": [
-                [3, "desc"]
+                [6, "desc"]
             ]
         });
     });
@@ -467,6 +491,18 @@
                         }
                     }
                 },
+				ip_amount_percentage: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Ip amount percentage is required'
+                        },
+                         between: {
+							min:0,
+							max: 99,
+							message: 'The Ip amount percentage must be between 0 and 99'
+						}
+                    }
+                },
                 op_amount: {
                     validators: {
                         notEmpty: {
@@ -476,6 +512,30 @@
                             regexp: /^[0-9]*$/,
                             message: 'Amount only consist of digits'
                         }
+                    }
+                },
+				op_amount_percentage: {
+                    validators: {
+                        notEmpty: {
+                            message: 'OP amount percentage is required'
+                        },
+                         between: {
+							min:0,
+							max: 99,
+							message: 'The OP amount percentage must be between 0 and 99'
+						}
+                    }
+                },
+				lab_amount_percentage: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Lab amount percentage is required'
+                        },
+                         between: {
+							min:0,
+							max: 99,
+							message: 'The Lab amount percentage must be between 0 and 99'
+						}
                     }
                 },
                 lab_amount: {

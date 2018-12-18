@@ -25,6 +25,19 @@ class Wallet_model extends CI_Model
 			$this->db->where('status',1);
 			return $this->db->get()->row_array(); 
 	}
+	
+	public  function get_coupon_code_details($code,$patient_id,$hos_id){
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.op_amount_percentage')->from('coupon_code_list');
+		$this->db->join('appointments','appointments.b_id = coupon_code_list.appointment_id','left');
+		$this->db->where('coupon_code_list.hos_id',$hos_id);
+		$this->db->where('appointments.patient_id',$patient_id);
+		$this->db->where('coupon_code_list.couponcode_name',$code);
+		return $this->db->get()->row_array();
+	}
+	public  function save_coupon_code_history($data){
+		$this->db->insert('coupon_code_history',$data);
+		return $this->db->insert_id();
+	}
 }
 
 	

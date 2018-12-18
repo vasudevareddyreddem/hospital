@@ -20,6 +20,9 @@ class Wallet extends In_frontend {
 					'ip_amount'=>isset($post['ip_amount'])?$post['ip_amount']:'',
 					'op_amount'=>isset($post['op_amount'])?$post['op_amount']:'',
 					'lab_amount'=>isset($post['lab_amount'])?$post['lab_amount']:'',
+					'ip_amount_percentage'=>isset($post['ip_amount_percentage'])?$post['ip_amount_percentage']:'',
+					'op_amount_percentage'=>isset($post['op_amount_percentage'])?$post['op_amount_percentage']:'',
+					'lab_amount_percentage'=>isset($post['lab_amount_percentage'])?$post['lab_amount_percentage']:'',
 					'created_at'=>date('Y-m-d H:i:s'),
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$admindetails['a_id'],
@@ -119,6 +122,39 @@ class Wallet extends In_frontend {
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
+	}
+	
+	public  function checking_coupon_code(){
+		$post=$this->input->post();
+		$admindetails=$this->session->userdata('userdetails');
+		$details=$this->Wallet_model->get_coupon_code_details($post['coupon_code'],$post['patient_id'],$post['hospital_id']);
+		if(count($details)>0){
+			$percent=($post['bill_amount'])*($details['op_amount_percentage']);
+			$percen_amount=$percent/100;
+			$amount=($post['bill_amount'])-($percen_amount);
+			$code_details=array(
+			'b_id'=>$post['biling_id'],
+			'type'=>'Op',
+			'p_id'=>$post['patient_id'],
+			'coupon_code'=>$post['coupon_code'],
+			'coupon_code_amount'=>$percen_amount,
+			'purpose'=>'Op appointment Purpose',
+			'created_at'=>date('Y-m-d H:i:s'),
+			'created_by'=>$admindetails['a_id']
+			);
+			$this->Wallet_model->save_coupon_code_history($code_details);
+			
+			$data['msg']=1;
+			$data['amt']=$amount;
+			$data['cou_amt']=$details['op_amount_percentage'].'%';
+			echo json_encode($data);exit;
+		}else{
+			$data['msg']=3;
+			echo json_encode($data);exit;
+		}
+		//echo $this->db->last_query();
+		//echo '<pre>';print_r($details);exit;
+		
 	}
 	
 		

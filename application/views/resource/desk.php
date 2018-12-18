@@ -1019,7 +1019,7 @@ function apply_couponcode1(){
 			}
 			document.getElementById("errormsg1").innerHTML="";
 				jQuery.ajax({
-   				url: "<?php echo base_url('admin/checking_coupon_code');?>",
+   				url: "<?php echo base_url('wallet/checking_coupon_code');?>",
    					data: {
    						coupon_code: $('#coupon_code1').val(),
    						bill_amount: amount,

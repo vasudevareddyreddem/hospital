@@ -406,4 +406,39 @@ ALTER TABLE `staging_ehealthinfra_db`.`resource_list`
   DROP COLUMN `caste`, 
   DROP COLUMN `language`, 
   DROP COLUMN `citizen_proof`;
+  
+  
+  
+  ALTER TABLE `hospital`.`appointment_users`   
+  ADD COLUMN `ip_wallet_amount` VARCHAR(250) NULL AFTER `token`,
+  ADD COLUMN `op_wallet_amount` VARCHAR(250) NULL AFTER `ip_wallet_amount`,
+  ADD COLUMN `lab_wallet_amount` VARCHAR(250) NULL AFTER `op_wallet_amount`;
+
+  
+  ALTER TABLE `hospital`.`appointment_users`   
+  ADD COLUMN `wallet_amount_id` VARCHAR(250) NULL AFTER `lab_wallet_amount`;
+
+  
+  ALTER TABLE `hospital`.`appointment_users`   
+  ADD COLUMN `remaining_ip_wallet` VARCHAR(250) NULL AFTER `wallet_amount_id`,
+  ADD COLUMN `remaining_op_wallet_amount` VARCHAR(250) NULL AFTER `remaining_ip_wallet`,
+  ADD COLUMN `remaining_lab_wallet` VARCHAR(250) NULL AFTER `remaining_op_wallet_amount`;
+
+  
+  ALTER TABLE `hospital`.`wallet_amount`   
+  ADD COLUMN `ip_amount_percentage` VARCHAR(250) NULL AFTER `lab_amount`,
+  ADD COLUMN `op_amount_percentage` VARCHAR(250) NULL AFTER `ip_amount_percentage`,
+  ADD COLUMN `lab_amount_percentage` VARCHAR(250) NULL AFTER `op_amount_percentage`;
+
+  
+  ALTER TABLE `hospital`.`appointments`   
+  ADD COLUMN `b_id` INT(11) NULL AFTER `remainder_sent`;
+  
+  
+  ALTER TABLE `hospital`.`coupon_code_list`   
+  CHANGE `ip_percentage` `ip_amount_percentage` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL,
+  CHANGE `op_percentage` `op_amount_percentage` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL,
+  CHANGE `lab_percentage` `lab_amount_percentage` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL;
+
+
 

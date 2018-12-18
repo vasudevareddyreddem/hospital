@@ -307,6 +307,7 @@ class Appointments extends In_frontend {
 											'create_at'=>date('Y-m-d H:i:s'),
 											'create_by'=>$details['create_by'],
 											'coming_through'=>0,
+											'b_id'=>isset($details['b_id'])?$details['b_id']:'',
 											);
 										
 										$save=$this->Appointments_model->save_appointments($add_app);
