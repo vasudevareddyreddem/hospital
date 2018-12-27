@@ -473,3 +473,6 @@ ALTER TABLE `hospital`.`coupon_code_history`
   ALTER TABLE `hospital`.`billing_history`   
   ADD COLUMN `hos_id` INT(11) NULL AFTER `b_h_id`;
 
+
+  ALTER TABLE `staging_ehealthinfra_db`.`patient_vitals_list`   
+  ADD COLUMN `created_by` INT(11) NULL AFTER `date`;
