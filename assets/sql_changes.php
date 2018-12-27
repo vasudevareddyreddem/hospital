@@ -442,3 +442,34 @@ ALTER TABLE `staging_ehealthinfra_db`.`resource_list`
 
 
 
+  
+  ALTER TABLE `hospital`.`coupon_code_history`   
+  ADD COLUMN `appointment_user_id` INT(11) NULL AFTER `created_by`;
+
+  
+  
+CREATE TABLE `billing_history` (
+  `b_h_id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) DEFAULT NULL,
+  `billing_id` int(11) DEFAULT NULL,
+  `card_number` varchar(45) DEFAULT NULL,
+  `p_name` varchar(250) DEFAULT NULL,
+  `p_mobile` varchar(45) DEFAULT NULL,
+  `p_amount` varchar(250) DEFAULT NULL,
+  `coupon_code` varchar(250) DEFAULT NULL,
+  `pay_amount` varchar(250) DEFAULT NULL,
+  `category_type` int(11) DEFAULT NULL,
+  `payment_type` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`b_h_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+ALTER TABLE `hospital`.`coupon_code_history`   
+  ADD COLUMN `type_id` INT(11) NULL AFTER `appointment_user_id`;
+
+  
+  ALTER TABLE `hospital`.`billing_history`   
+  ADD COLUMN `hos_id` INT(11) NULL AFTER `b_h_id`;
+

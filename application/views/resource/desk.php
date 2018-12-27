@@ -1042,7 +1042,9 @@ function apply_couponcode1(){
 						}if(data.msg==3){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Coupon Code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Your wallet having insufficient amount. Please recharge again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+						}if(data.msg==5){
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Coupon Code is expired. Please try another one <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
    						
    					}

@@ -1434,23 +1434,7 @@ class Resources extends In_frontend {
 		}
 	}
 	
-	public function billing()
-	{	
-		if($this->session->userdata('userdetails'))
-		{
-				if($admindetails['role_id']=3){
-					$this->load->view('resource/billing');
-					$this->load->view('html/footer');
-				}else{
-					$this->session->set_flashdata('error',"you don't have permission to access");
-					redirect('dashboard');
-				}
-			
-		}else{
-			$this->session->set_flashdata('error','Please login to continue');
-			redirect('admin');
-		}
-	}
+
 	
 	
 	

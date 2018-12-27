@@ -128,26 +128,53 @@ class Wallet extends In_frontend {
 		$post=$this->input->post();
 		$admindetails=$this->session->userdata('userdetails');
 		$details=$this->Wallet_model->get_coupon_code_details($post['coupon_code'],$post['patient_id'],$post['hospital_id']);
+							
 		if(count($details)>0){
-			$percent=($post['bill_amount'])*($details['op_amount_percentage']);
-			$percen_amount=$percent/100;
-			$amount=($post['bill_amount'])-($percen_amount);
-			$code_details=array(
-			'b_id'=>$post['biling_id'],
-			'type'=>'Op',
-			'p_id'=>$post['patient_id'],
-			'coupon_code'=>$post['coupon_code'],
-			'coupon_code_amount'=>$percen_amount,
-			'purpose'=>'Op appointment Purpose',
-			'created_at'=>date('Y-m-d H:i:s'),
-			'created_by'=>$admindetails['a_id']
-			);
-			$this->Wallet_model->save_coupon_code_history($code_details);
+							$current_time=$details['created_at'];
+							$date=date('Y-m-d H:i:s');
+							$datetime1 = new DateTime($current_time);
+							$datetime2 = new DateTime($date);
+							$interval = $datetime1->diff($datetime2);
+							//echo '<pre>';print_r($interval);
+							$diff_in_hrs =$interval->format('%h');
+				if($diff_in_hrs >=0 && $diff_in_hrs <2){
+					$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
+					//echo '<pre>';print_r($wallet_detials);
+					
+					$percent=($post['bill_amount'])*($details['op_amount_percentage']);
+					$percen_amount=$percent/100;
+					$amount=($post['bill_amount'])-($percen_amount);
+					//echo $percen_amount;
+					if($wallet_detials['remaining_op_wallet_amount']>=$percen_amount){
+						$code_details=array(
+								'b_id'=>$post['biling_id'],
+								'type'=>'Op',
+								'p_id'=>$post['patient_id'],
+								'coupon_code'=>$post['coupon_code'],
+								'coupon_code_amount'=>$percen_amount,
+								'purpose'=>'Op appointment Purpose',
+								'created_at'=>date('Y-m-d H:i:s'),
+								'created_by'=>$admindetails['a_id'],
+								'appointment_user_id'=>$details['create_by'],
+								);
+							$this->Wallet_model->save_coupon_code_history($code_details);
+							$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
+							$amt_data=array('remaining_op_wallet_amount'=>(($wallet_detials['remaining_op_wallet_amount'])-($percen_amount)));
+							$amount_update=$this->Wallet_model->update_op_wallet_amt_details($details['create_by'],$amt_data);
+							
+							$data['msg']=1;
+							$data['amt']=$amount;
+							$data['cou_amt']=$details['op_amount_percentage'].'%';
+							echo json_encode($data);exit;
+					}else{
+						$data['msg']=4;
+						echo json_encode($data);exit;
+					}
 			
-			$data['msg']=1;
-			$data['amt']=$amount;
-			$data['cou_amt']=$details['op_amount_percentage'].'%';
-			echo json_encode($data);exit;
+			}else{
+				$data['msg']=5;
+				echo json_encode($data);exit;
+			}
 		}else{
 			$data['msg']=3;
 			echo json_encode($data);exit;

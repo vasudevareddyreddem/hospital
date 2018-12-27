@@ -27,7 +27,7 @@ class Wallet_model extends CI_Model
 	}
 	
 	public  function get_coupon_code_details($code,$patient_id,$hos_id){
-		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.op_amount_percentage')->from('coupon_code_list');
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.op_amount_percentage,appointments.create_by,coupon_code_list.created_at')->from('coupon_code_list');
 		$this->db->join('appointments','appointments.b_id = coupon_code_list.appointment_id','left');
 		$this->db->where('coupon_code_list.hos_id',$hos_id);
 		$this->db->where('appointments.patient_id',$patient_id);
@@ -37,6 +37,17 @@ class Wallet_model extends CI_Model
 	public  function save_coupon_code_history($data){
 		$this->db->insert('coupon_code_history',$data);
 		return $this->db->insert_id();
+	}
+	
+	/* appointment amount  details */
+	public  function update_op_wallet_amt_details($a_u_id,$data){
+		$this->db->where('a_u_id',$a_u_id);
+		return $this->db->update('appointment_users',$data);
+	}
+	public  function get_wallet_amt_details($a_u_id){
+		$this->db->select('ip_wallet_amount,op_wallet_amount,lab_wallet_amount,wallet_amount_id,remaining_ip_wallet,remaining_op_wallet_amount,remaining_lab_wallet')->from('appointment_users');
+		$this->db->where('a_u_id',$a_u_id);
+		return $this->db->get()->row_array();
 	}
 }
 
