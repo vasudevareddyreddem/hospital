@@ -476,3 +476,7 @@ ALTER TABLE `hospital`.`coupon_code_history`
 
   ALTER TABLE `staging_ehealthinfra_db`.`patient_vitals_list`   
   ADD COLUMN `created_by` INT(11) NULL AFTER `date`;
+
+  
+  ALTER TABLE `staging_ehealthinfra_db`.`coupon_code_history`   
+  ADD COLUMN `amount` VARCHAR(250) NULL AFTER `type`;

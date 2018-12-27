@@ -149,7 +149,9 @@ class Wallet extends In_frontend {
 						$code_details=array(
 								'b_id'=>$post['biling_id'],
 								'type'=>'Op',
+								'type_id'=>1,
 								'p_id'=>$post['patient_id'],
+								'amount'=>$post['bill_amount'],
 								'coupon_code'=>$post['coupon_code'],
 								'coupon_code_amount'=>$percen_amount,
 								'purpose'=>'Op appointment Purpose',
