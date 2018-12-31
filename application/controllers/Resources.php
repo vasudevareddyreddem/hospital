@@ -7,6 +7,7 @@ class Resources extends In_frontend {
 	public function __construct() 
 	{
 		parent::__construct();	
+		$this->load->model('Wallet_model');
 		
 		}
 	public function desk()
@@ -1416,6 +1417,26 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($billing);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$billing);
 						if(count($update)>0){
+							/* coupon code hostory*/
+							$code_details=array(
+								'b_id'=>$post['b_id'],
+								'type'=>'Op',
+								'type_id'=>1,
+								'p_id'=>$post['pid'],
+								'amount'=>$post['patient_payer_deposit_amount'],
+								'coupon_code'=>$post['coupon_code1'],
+								'coupon_code_amount'=>$post['patient_payer_deposit_amount']-$post['bill_amount'],
+								'purpose'=>'Op appointment Purpose',
+								'created_at'=>date('Y-m-d H:i:s'),
+								'created_by'=>$admindetails['a_id'],
+								'appointment_user_id'=>$post['appointment_user_id'],
+								);
+							$this->Wallet_model->save_coupon_code_history($code_details);
+							$wallet_detials=$this->Wallet_model->get_wallet_amt_details($post['appointment_user_id']);
+							$amt_data=array('remaining_op_wallet_amount'=>(($wallet_detials['remaining_op_wallet_amount'])-($percen_amount)));
+							$amount_update=$this->Wallet_model->update_op_wallet_amt_details($post['appointment_user_id'],$amt_data);
+							/* hiostory*/
+							
 							$this->session->set_flashdata('success',"Bill details successfully updated.");
 							redirect('resources/desk/'.base64_encode($post['pid']).'/'.base64_encode(12).'/'.base64_encode($post['b_id']));
 							

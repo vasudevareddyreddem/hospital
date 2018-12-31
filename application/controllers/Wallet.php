@@ -63,7 +63,7 @@ class Wallet extends In_frontend {
 					if($status==0){
 						$check=$this->Wallet_model->check_amount_active_ornot();
 						if(count($check)>0){
-							$this->session->set_flashdata('error',"One wallet amount already active. Before doing this deactivated.");
+							$this->session->set_flashdata('error',"Before activating  the new wallet amount, deactivate the existing one.");
 							redirect('admin/couponcodes/'.base64_encode(3));
 						}
 						
@@ -146,27 +146,11 @@ class Wallet extends In_frontend {
 					$amount=($post['bill_amount'])-($percen_amount);
 					//echo $percen_amount;
 					if($wallet_detials['remaining_op_wallet_amount']>=$percen_amount){
-						$code_details=array(
-								'b_id'=>$post['biling_id'],
-								'type'=>'Op',
-								'type_id'=>1,
-								'p_id'=>$post['patient_id'],
-								'amount'=>$post['bill_amount'],
-								'coupon_code'=>$post['coupon_code'],
-								'coupon_code_amount'=>$percen_amount,
-								'purpose'=>'Op appointment Purpose',
-								'created_at'=>date('Y-m-d H:i:s'),
-								'created_by'=>$admindetails['a_id'],
-								'appointment_user_id'=>$details['create_by'],
-								);
-							$this->Wallet_model->save_coupon_code_history($code_details);
-							$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
-							$amt_data=array('remaining_op_wallet_amount'=>(($wallet_detials['remaining_op_wallet_amount'])-($percen_amount)));
-							$amount_update=$this->Wallet_model->update_op_wallet_amt_details($details['create_by'],$amt_data);
-							
+						
 							$data['msg']=1;
 							$data['amt']=$amount;
-							$data['cou_amt']=$details['op_amount_percentage'].'%';
+							$data['appointment_user_id']=$details['create_by'];
+							$data['cou_amt']=$details['op_amount_percentage'];
 							echo json_encode($data);exit;
 					}else{
 						$data['msg']=4;

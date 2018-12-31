@@ -753,6 +753,8 @@
                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Total Amount</label>
                                                                   <input type="text" class="form-control" id="patient_payer_deposit_amount"  name="patient_payer_deposit_amount" placeholder="Enter Total Amount" value="<?php echo isset($billing_detailes['patient_payer_deposit_amount'])?$billing_detailes['patient_payer_deposit_amount']:''; ?>">
+                                                                  <input type="hidden" id="appointment_user_id"  name="appointment_user_id"  value="">
+                                                                  <input type="hidden" id="percentage"  name="percentage"  value="">
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                   <label for="mobile">Payment Mode</label>
@@ -992,7 +994,7 @@ function apply_couponcode(){
 						if(data.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid coupon code. Please try another<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Coupon Code is expired. Please try another one<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}
@@ -1035,12 +1037,14 @@ function apply_couponcode1(){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-succ">Coupon Code applied Successfully.<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 							$('#bill_amount1').val(data.amt);
 							$('#already_coupon_code_used').val(1);
-							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" decreased";
+							$('#appointment_user_id').val(data.appointment_user_id);
+							$('#percentage').val(data.cou_amt);
+							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" % decreased";
 						}
 						if(data.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==3){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid coupon code. Please try another<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==4){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Your wallet having insufficient amount. Please recharge again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(data.msg==5){

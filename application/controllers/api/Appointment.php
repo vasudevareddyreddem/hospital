@@ -101,6 +101,7 @@ class Appointment extends REST_Controller {
 					
 			
 				}else{
+					$wallet_amt_list=$this->Mobile_model->get_wallet_amount();
 					$add=array(
 					'name'=>isset($name)?$name:'',
 					'email'=>isset($email)?$email:'',
@@ -108,6 +109,13 @@ class Appointment extends REST_Controller {
 					'password'=>isset($confirmpassword)?md5($confirmpassword):'',
 					'org_password'=>isset($confirmpassword)?$confirmpassword:'',
 					'profile_pic'=>isset($img)?$img:'',
+					'ip_wallet_amount'=>isset($wallet_amt_list['ip_amount'])?$wallet_amt_list['ip_amount']:'',
+					'op_wallet_amount'=>isset($wallet_amt_list['op_amount'])?$wallet_amt_list['op_amount']:'',
+					'lab_wallet_amount'=>isset($wallet_amt_list['lab_amount'])?$wallet_amt_list['lab_amount']:'',
+					'wallet_amount_id'=>isset($wallet_amt_list['w_id'])?$wallet_amt_list['w_id']:'',
+					'remaining_ip_wallet'=>isset($wallet_amt_list['ip_amount'])?$wallet_amt_list['ip_amount']:'',
+					'remaining_op_wallet_amount'=>isset($wallet_amt_list['op_amount'])?$wallet_amt_list['op_amount']:'',
+					'remaining_lab_wallet'=>isset($wallet_amt_list['lab_amount'])?$wallet_amt_list['lab_amount']:'',
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s')
 					);
