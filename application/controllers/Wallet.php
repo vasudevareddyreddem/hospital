@@ -16,10 +16,10 @@ class Wallet extends In_frontend {
 				if($admindetails['role_id']=1){
 					$admindetails=$this->session->userdata('userdetails');
 					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
 					$add=array(
-					'ip_amount'=>isset($post['ip_amount'])?$post['ip_amount']:'',
-					'op_amount'=>isset($post['op_amount'])?$post['op_amount']:'',
-					'lab_amount'=>isset($post['lab_amount'])?$post['lab_amount']:'',
+					'hospital_id'=>isset($post['hospital_id'])?$post['hospital_id']:'',
+					'wallet_amount'=>isset($post['wallet_amount'])?$post['wallet_amount']:'',
 					'ip_amount_percentage'=>isset($post['ip_amount_percentage'])?$post['ip_amount_percentage']:'',
 					'op_amount_percentage'=>isset($post['op_amount_percentage'])?$post['op_amount_percentage']:'',
 					'lab_amount_percentage'=>isset($post['lab_amount_percentage'])?$post['lab_amount_percentage']:'',
@@ -27,14 +27,14 @@ class Wallet extends In_frontend {
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$admindetails['a_id'],
 					);
-					$save=$this->Wallet_model->add_wallet_money($add);
+					$save=$this->Wallet_model->add_wallet_money_percentage($add);
 					if(count($save)>0){
 						$this->session->set_flashdata('success',"Wallet amount successfully added");
-						redirect('admin/couponcodes/'.base64_encode(3));
+						redirect('admin/couponcodes/'.base64_encode(1));
 						
 					}else{
 						$this->session->set_flashdata('error',"Technical problem will occured. Please try again ");
-						redirect('admin/couponcodes/'.base64_encode(3));
+						redirect('admin/couponcodes/');
 						
 					}
 					//echo '<pre>';print_r($data);exit;
@@ -54,17 +54,18 @@ class Wallet extends In_frontend {
 				if($admindetails['role_id']=1){
 					$admindetails=$this->session->userdata('userdetails');
 					$w_id=base64_decode($this->uri->segment(3));
-					$status=base64_decode($this->uri->segment(4));
+					$hospital_id=base64_decode($this->uri->segment(4));
+					$status=base64_decode($this->uri->segment(5));
 					if($status==1){
 						$sta=0;
 					}else{
 						$sta=1;
 					}
 					if($status==0){
-						$check=$this->Wallet_model->check_amount_active_ornot();
+						$check=$this->Wallet_model->check_amount_active_ornot($hospital_id);
 						if(count($check)>0){
 							$this->session->set_flashdata('error',"Before activating  the new wallet amount, deactivate the existing one.");
-							redirect('admin/couponcodes/'.base64_encode(3));
+							redirect('admin/couponcodes/'.base64_encode(1));
 						}
 						
 					}
@@ -80,10 +81,10 @@ class Wallet extends In_frontend {
 							}else{
 								$this->session->set_flashdata('success',"Wallet amount successfully activated.");
 							}
-							redirect('admin/couponcodes/'.base64_encode(3));
+							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('admin/couponcodes/'.base64_encode(3));
+							redirect('admin/couponcodes/'.base64_encode(1));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -109,10 +110,10 @@ class Wallet extends In_frontend {
 						$updated=$this->Wallet_model->update_wallet_amount_details($w_id,$details);
 						if(count($updated)>0){
 							$this->session->set_flashdata('success',"Wallet amount successfully deleted.");
-							redirect('admin/couponcodes/'.base64_encode(3));
+							redirect('admin/couponcodes/'.base64_encode(1));
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('admin/couponcodes/'.base64_encode(3));
+							redirect('admin/couponcodes/'.base64_encode(1));
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -145,7 +146,7 @@ class Wallet extends In_frontend {
 					$percen_amount=$percent/100;
 					$amount=($post['bill_amount'])-($percen_amount);
 					//echo $percen_amount;
-					if($wallet_detials['remaining_op_wallet_amount']>=$percen_amount){
+					if($wallet_detials['remaining_wallet_amount']>=$percen_amount){
 						
 							$data['msg']=1;
 							$data['amt']=$amount;
@@ -168,6 +169,87 @@ class Wallet extends In_frontend {
 		//echo $this->db->last_query();
 		//echo '<pre>';print_r($details);exit;
 		
+	}
+	public function addamountpost()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$add=array(
+					'wallet_amount'=>isset($post['wallet_amount'])?$post['wallet_amount']:'',
+					'created_at'=>date('Y-m-d H:i:s'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$admindetails['a_id'],
+					);
+					$save=$this->Wallet_model->add_wallet_money($add);
+					if(count($save)>0){
+						$this->session->set_flashdata('success',"Wallet amount successfully added");
+						redirect('admin/couponcodes/'.base64_encode(3));
+						
+					}else{
+						$this->session->set_flashdata('error',"Technical problem will occured. Please try again ");
+						redirect('admin/couponcodes/'.base64_encode(2));
+						
+					}
+					//echo '<pre>';print_r($data);exit;
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+			
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public  function amt_status(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					$admindetails=$this->session->userdata('userdetails');
+					$w_id=base64_decode($this->uri->segment(3));
+					$status=base64_decode($this->uri->segment(4));
+					if($status==1){
+						$sta=0;
+					}else{
+						$sta=1;
+					}
+					if($status==0){
+						$check=$this->Wallet_model->check_wallet_amount_active_ornot();
+						if(count($check)>0){
+							$this->session->set_flashdata('error',"Before activating  the new wallet amount, deactivate the existing one.");
+							redirect('admin/couponcodes/'.base64_encode(3));
+						}
+						
+					}
+					$details=array(
+						'status'=>$sta,
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					//echo '<pre>';print_r($billing);exit;
+						$updated=$this->Wallet_model->update_wallet_am_details($w_id,$details);
+						if(count($updated)>0){
+							if($status==1){
+							$this->session->set_flashdata('success',"Wallet amount successfully deactivated.");
+							}else{
+								$this->session->set_flashdata('success',"Wallet amount successfully activated.");
+							}
+							redirect('admin/couponcodes/'.base64_encode(3));
+						}else{
+							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+							redirect('admin/couponcodes/'.base64_encode(3));
+						}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
 	}
 	
 		

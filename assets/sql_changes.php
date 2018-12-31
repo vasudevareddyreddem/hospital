@@ -480,3 +480,24 @@ ALTER TABLE `hospital`.`coupon_code_history`
   
   ALTER TABLE `staging_ehealthinfra_db`.`coupon_code_history`   
   ADD COLUMN `amount` VARCHAR(250) NULL AFTER `type`;
+
+  
+  /* wallet amount single  filed */
+  ALTER TABLE `hospital`.`wallet_amount`   
+  DROP COLUMN `op_amount`, 
+  DROP COLUMN `lab_amount`, 
+  DROP COLUMN `ip_amount_percentage`, 
+  DROP COLUMN `op_amount_percentage`, 
+  DROP COLUMN `lab_amount_percentage`, 
+  CHANGE `ip_amount` `wallet_amount` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL;
+
+  
+  
+  
+  ALTER TABLE `hospital`.`appointment_users`   
+  DROP COLUMN `op_wallet_amount`, 
+  DROP COLUMN `lab_wallet_amount`, 
+  DROP COLUMN `remaining_op_wallet_amount`, 
+  DROP COLUMN `remaining_lab_wallet`, 
+  CHANGE `ip_wallet_amount` `wallet_amount` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL,
+  CHANGE `remaining_ip_wallet` `remaining_wallet_amount` VARCHAR(250) CHARSET latin1 COLLATE latin1_swedish_ci NULL;

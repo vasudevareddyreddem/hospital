@@ -780,7 +780,7 @@
                                                                   <label for="mobile">Received from</label>
                                                                   <input type="text" class="form-control" id="received_form"  name="received_form" placeholder="Enter Received from" value="<?php echo isset($billing_detailes['received_form'])?$billing_detailes['received_form']:''; ?>">
                                                                </div>
-															   
+															  
 															   <div class="form-group col-md-12">
                                                                  <a href="javascript:void(0);" data-toggle="collapse" data-target="#demo1">  Have a Coupon Code ?</a>
 																 </div>
@@ -791,11 +791,13 @@
 																	</div>
 																	<span id="successmsg1" style="color:green;"></span>
 																	<span id="errormsg1" style="color:red;"></span>
-																	
+																	  <?php if(isset($billing_detailes['completed']) && $billing_detailes['completed']==0){ ?>
 																	<div class="form-group col-md-12">
 																	<button type="button" onclick="apply_couponcode1();" id="">Apply</button>
 																	</div>
+																	<?php } ?>
 																	</div>
+																
 																	
 															   
 															   

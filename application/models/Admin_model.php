@@ -822,11 +822,27 @@ public function get_logo_details($l_id){
 }
 /* admin wallet amout list */
 
-public  function get_all_wallet_amt_list_list(){
-	$this->db->select('*')->from('wallet_amount');
-	$this->db->where('status !=',2);
+public  function get_all_wallet_amt_per_list_list(){
+	$this->db->select('wallet_amount_percentage.*,hospital.hos_id,hospital.hos_bas_name')->from('wallet_amount_percentage');
+	 $this->db->join('hospital', 'hospital.hos_id = wallet_amount_percentage.hospital_id', 'left');
+
+	$this->db->where('wallet_amount_percentage.status !=',2);
+	$this->db->order_by('wallet_amount_percentage.w_id',"desc");
 	return $this->db->get()->result_array(); 
 	
+}
+public  function get_all_wallet_amt_list_list($created_by){
+	$this->db->select('*')->from('wallet_amount');
+	$this->db->where('wallet_amount.created_by',$created_by);
+	$this->db->where('wallet_amount.status !=',2);
+	$this->db->order_by('wallet_amount.w_a_id',"desc");
+	return $this->db->get()->result_array(); 
+}
+public  function get_current_amount_list($created_by){
+	$this->db->select('*')->from('wallet_amount');
+	$this->db->where('status',1);
+	$this->db->where('created_by',$created_by);
+	return $this->db->get()->row_array(); 
 }
 	
 	

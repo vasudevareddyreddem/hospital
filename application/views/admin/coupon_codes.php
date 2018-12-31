@@ -17,16 +17,14 @@
         <div class="panel tab-border card-topline-green">
             
             <header class="panel-heading panel-heading-gray custom-tab ">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo " active"; } ?>">Add Coupon Code </a>
+                 <ul class="nav nav-tabs">
+                    <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo " active"; } ?>">Add Wallet Percentage Amount </a>
                     </li>
-                    <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo " active"; } ?>">Coupon Code List</a>
+                    <li class="nav-item"><a href="#about" data-toggle="tab" class="<?php if(isset($tab) && $tab ==1){ echo " active"; } ?>">Wallet Percentage Amount List</a>
                     </li>
-                    <li class="nav-item"><a href="#walletamount" data-toggle="tab" class="<?php if(isset($tab) && $tab ==2){ echo " active"; } ?>">Wallet Amount</a>
-                    </li>
-					<li class="nav-item"><a href="#walletlist" data-toggle="tab" class="<?php if(isset($tab) && $tab ==3){ echo " active"; } ?>">Wallet Amount List</a>
-                    </li>
-                </ul>
+					<li class="nav-item"><a href="#walletamount" data-toggle="tab" class="<?php if(isset($tab) && $tab ==2){ echo " active"; } ?>">Wallet Amount</a></li>
+					<li class="nav-item"><a href="#walletamountlist" data-toggle="tab" class="<?php if(isset($tab) && $tab ==3){ echo " active"; } ?>">Wallet Amount List</a></li>
+                 </ul>
             </header>
             
             <div class="panel-body">
@@ -34,7 +32,7 @@
                     <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo " active"; } ?>" id="home">
                         <div class="container">
 
-                            <form action="<?php echo base_url('admin/coupon_post'); ?>" method="post" id="coupon_post" name="coupon_post" enctype="multipart/form-data">
+                            <form action="<?php echo base_url('wallet/addpost'); ?>" method="post" id="coupon_post" name="coupon_post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label> Hospital Name </label>
@@ -47,23 +45,23 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <label> Name</label>
-                                        <input class="form-control" id="coupon_code" name="coupon_code" value="" type="text" placeholder="Coupon Code">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Type</label>
-                                        <select class="form-control" name="type" id="type">
-                                            <option value="">Select</option>
-                                            <option value="Percentage">Percentage</option>
-                                            <option value="Amount">Amount</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label> Percentage / Amount </label>
-                                        <input class="form-control" id="percentage_amount" name="percentage_amount" value="" type="text" placeholder="Percentage / Amount">
-                                    </div>
+									<div class="form-group col-md-6">
+										<label>Wallet Amount</label>
+										<input class="form-control" id="wallet_amount" name="wallet_amount"  type="text" placeholder="Enter Wallet Amount" value="<?php echo isset($current_active_amt['wallet_amount'])?$current_active_amt['wallet_amount']:''; ?>">
+									</div>
+									<div class="form-group col-md-6">
+										<label>IP Amount Percentage</label>
+										<input class="form-control" id="ip_amount_percentage" name="ip_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
+									</div>
+									<div class="form-group col-md-6">
+										<label>OP Amount Percentage</label>
+										<input class="form-control" id="op_amount_percentage" name="op_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
+									</div>
+									<div class="form-group col-md-6">
+										<label>Lab Amount Percentage</label>
+										<input class="form-control" id="lab_amount_percentage" name="lab_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
+									</div>
+                                    
 
                                 </div>
                                 <br>
@@ -81,197 +79,14 @@
                         <div class="container">
                             <div class="row">
                                 <div class="card-body col-md-12 table-responsive">
-                                    <?php if(count($couponcode_list)>0){ ?>
+                                    <?php if(count($wallet_amt_percentage_list)>0){ ?>
                                     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Wallet Amount</th>
                                                 <th>Hospital Name</th>
-                                                <th>Type</th>
-                                                <th>Percentage / Amount</th>
-                                                <th>Created Date & Time</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach($couponcode_list as $list){ ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo htmlentities($list['coupon_code']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['hos_bas_name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['type']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['percentage_amount']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['create_at']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?>
-                                                </td>
-                                                <td class="valigntop">
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                            <i class="fa fa-angle-down"></i>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
-                                                                    <i class="fa fa-edit"></i>
-                                                                    <?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
-                                                            </li>
-                                                            <li data-toggle="modal" data-target="#foldersmallModalmove<?php echo $list['id']; ?>"><a href="javascript:void(0);"> <i class="fa fa-edit"></i>Edit</a></li>
-
-                                                            <li>
-                                                                <a href="javascript;void(0);" onclick="admindelete('<?php echo base64_encode(htmlentities($list['id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
-                                                                    <i class="fa fa-trash-o"></i>Delete</a>
-                                                            </li>
-
-
-                                                        </ul>
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                            <div class="modal fade" id="foldersmallModalmove<?php echo $list['id']; ?>" tabindex="-1" role="dialog">
-                                                <div class="modal-dialog modal-sm" role="document">
-                                                    <div class="modal-content">
-                                                        <form id="foldermoving" name="foldermoving" action="<?php echo base_url('admin/update_coupon_code'); ?>" method="post">
-                                                            <?php $csrf = array(
-													   'name' => $this->security->get_csrf_token_name(),
-													   'hash' => $this->security->get_csrf_hash()
-													   ); ?>
-                                                            <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-                                                            <input type="hidden" name="coupon_code_id" id="coupon_code_id" value="<?php echo $list['id']; ?>">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title" id="smallModalLabel">Coupon Code Rename</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <div class="form-line">
-                                                                        <input type="text" id="coupon_code" name="coupon_code" class="form-control" value="<?php echo htmlentities($list['coupon_code']);?>" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label>Percentage / Amount</label>
-                                                                <input class="form-control" id="percentage_amount" name="percentage_amount" value="<?php echo htmlentities($list['percentage_amount']);?>" type="text" placeholder="Percentage / Amount" required>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label>Type</label>
-                                                                <select class="form-control" name="type" id="type" required>
-                                                                    <option value="">Select</option>
-                                                                    <option value="Percentage" <?php if($list['type']=='Percentage' ){ echo "selected" ;} ?>>Percentage</option>
-                                                                    <option value="Amount" <?php if($list['type']=='Amount' ){ echo "selected" ;} ?>>Amount</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label> Hospital Name </label>
-                                                                <select class="form-control" id="hospital_id" name="hospital_id" required>
-                                                                    <option value="">Select</option>
-                                                                    <?php foreach($hospital_list as $lists){ ?>
-                                                                    <?php if($list['hospital_id']==$lists['hos_id']){ ?>
-                                                                    <option selected value="<?php echo $lists['hos_id']; ?>">
-                                                                        <?php echo $lists['hos_bas_name']; ?>
-                                                                    </option>
-                                                                    <?php }else{ ?>
-                                                                    <option value="<?php echo $lists['hos_id']; ?>">
-                                                                        <?php echo $lists['hos_bas_name']; ?>
-                                                                    </option>
-
-                                                                    <?php } ?>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-link waves-effect">Update </button>
-                                                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php } ?>
-
-
-                                        </tbody>
-                                    </table>
-                                    <?php }else{ ?>
-                                    <div>No data Available</div>
-                                    <?php } ?>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="tab-pane <?php if(isset($tab) && $tab ==2){ echo " active"; } ?>" id="walletamount">
-                        <div class="container">
-
-                            <form action="<?php echo base_url('wallet/addpost'); ?>" method="post" id="wallet_amounts" name="wallet_amounts" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-md-6 mx-auto">
-                                        
-                                        <div class="form-group">
-                                            <label>IP Amount </label>
-                                            <input class="form-control" id="ip_amount" name="ip_amount" value="" type="text" placeholder="Enter Amount">
-                                        </div>
-										<div class="form-group">
-                                            <label>Amount Percentage</label>
-                                            <input class="form-control" id="ip_amount_percentage" name="ip_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label>OP Amount </label>
-                                            <input class="form-control" id="op_amount" name="op_amount" value="" type="text" placeholder="Enter Amount">
-                                        </div>
-										<div class="form-group">
-                                            <label>Amount Percentage</label>
-                                            <input class="form-control" id="op_amount_percentage" name="op_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label>Lab Amount </label>
-                                            <input class="form-control" id="lab_amount" name="lab_amount" value="" type="text" placeholder="Enter Amount">
-                                        </div>
-										<div class="form-group">
-                                            <label>Amount Percentage</label>
-                                            <input class="form-control" id="lab_amount_percentage" name="lab_amount_percentage" value="" type="text" placeholder="Enter Amount Percentage">
-                                        </div>
-                                        
-                                        <br>
-                                        <div class="">
-                                            <label>&nbsp;</label>
-                                            <button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add</button>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-					<div class="tab-pane <?php if(isset($tab) && $tab ==3){ echo " active"; } ?>" id="walletlist">
-                        <div class="container">
-
-                          <div class="container">
-                            <div class="row">
-                                <div class="card-body col-md-12 table-responsive">
-                                    <?php if(count($wallet_amt_list)>0){ ?>
-                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example5">
-                                        <thead>
-                                            <tr>
-                                                <th>Ip Amount</th>
-                                                <th>Ip Amount Percentage</th>
-                                                <th>Op Amount</th>
-                                                <th>Op Amount Percentage</th>
-                                                <th>Lab Amount</th>
+                                                <th>OP Amount Percentage</th>
+                                                <th>IP Amount Percentage</th>
                                                 <th>Lab Amount Percentage</th>
                                                 <th>Created Date & Time</th>
                                                 <th>Status</th>
@@ -279,23 +94,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($wallet_amt_list as $list){ ?>
+                                              <?php foreach($wallet_amt_percentage_list as $list){ ?>
                                             <tr>
                                                 <td>
-                                                    <?php echo htmlentities($list['ip_amount']); ?>
+                                                    <?php echo htmlentities($list['wallet_amount']); ?>
                                                 </td> 
+												<td>
+                                                    <?php echo htmlentities($list['hos_bas_name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlentities($list['op_amount_percentage']); ?>
+                                                </td>
 												<td>
                                                     <?php echo htmlentities($list['ip_amount_percentage']); ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['op_amount']); ?>
-                                                </td>
-												<td>
-                                                    <?php echo htmlentities($list['op_amount_percentage']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlentities($list['lab_amount']); ?>
-                                                </td>
+                                             
 												<td>
                                                     <?php echo htmlentities($list['lab_amount_percentage']); ?>
                                                 </td>
@@ -313,7 +126,7 @@
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li>
-                                                                <a href="javascript;void(0);" onclick="walletadmindeactive('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                <a href="javascript;void(0);" onclick="walletadmindeactive('<?php echo base64_encode(htmlentities($list['w_id'])).'/'.base64_encode($list['hospital_id']).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
                                                                     <i class="fa fa-edit"></i>
                                                                     <?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
                                                             </li>
@@ -340,9 +153,96 @@
                             </div>
 
                         </div>
+                    </div>
+					<div class="tab-pane <?php if(isset($tab) && $tab ==2){ echo " active"; } ?>" id="walletamount">
+                        <div class="container">
+                            <div class="row">
+                                <div class="card-body col-md-12 table-responsive">
+                                     <form action="<?php echo base_url('wallet/addamountpost'); ?>" method="post" id="add_wallet_amt" name="add_wallet_amt" enctype="multipart/form-data">
+										<div class="row">
+											<div class="form-group col-md-6">
+												<label>Wallet Amount</label>
+												<input class="form-control" id="wallet_amount" name="wallet_amount" value="" type="text" placeholder="Enter Wallet Amount">
+											</div>
+										</div>
+										<br>
+										<div class="">
+											<label>&nbsp;</label>
+											<button type="submit" class="btn btn-sm btn-success pull-right" type="button">Add</button>
+										</div>
+
+									</form>
+
+                                </div>
+                            </div>
 
                         </div>
                     </div>
+					<div class="tab-pane <?php if(isset($tab) && $tab ==3){ echo " active"; } ?>" id="walletamountlist">
+                        <div class="container">
+                            <div class="row">
+                                <div class="card-body col-md-12 table-responsive">
+                                    <?php if(count($wallet_amt_list)>0){ ?>
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example5">
+                                        <thead>
+                                            <tr>
+                                                <th>Wallet Amount</th>
+                                                <th>Created Date & Time</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                              <?php foreach($wallet_amt_list as $list){ ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo htmlentities($list['wallet_amount']); ?>
+                                                </td> 
+												
+                                                <td>
+                                                    <?php echo htmlentities($list['created_at']); ?>
+                                                </td>
+                                             
+                                                <td>
+                                                    <?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?>
+                                                </td>
+                                                <td class="valigntop">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>
+                                                                <a href="javascript;void(0);" onclick="wallet_amt_admindeactive('<?php echo base64_encode(htmlentities($list['w_a_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-edit"></i>
+                                                                    <?php if($list['status']==0){ echo "Active";}else{ echo "Deactive"; } ?> </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript;void(0);" onclick="walletamt_admindelete('<?php echo base64_encode(htmlentities($list['w_a_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus2('<?php echo $list['status'];?>')" href="javascript:void(0)" data-toggle="modal" data-target="#myModal">
+                                                                    <i class="fa fa-trash-o"></i>Delete</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                          
+                                            <?php } ?>
+
+
+                                        </tbody>
+                                    </table>
+                                    <?php }else{ ?>
+                                    <div>No data Available</div>
+                                    <?php } ?>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                   
+					
                 </div>
             </div>
             
@@ -384,29 +284,33 @@
     $(document).ready(function() {
         $('#example4').DataTable({
             "order": [
-                [3, "desc"]
+                [5, "desc"]
             ]
         });
-    });
+    }); 
 	$(document).ready(function() {
         $('#example5').DataTable({
             "order": [
-                [6, "desc"]
+                [1, "desc"]
             ]
         });
     });
+	
 
     function walletadmindeactive(id) {
         $(".popid").attr("href", "<?php echo base_url('wallet/status'); ?>" + "/" + id);
     }
-	
 	function walletadmindelete(id) {
         $(".popid").attr("href", "<?php echo base_url('wallet/delete'); ?>" + "/" + id);
     }
-	
-	function admindeactive(id) {
-        $(".popid").attr("href", "<?php echo base_url('admin/coupon_code_status'); ?>" + "/" + id);
+	function walletamt_admindelete(id) {
+        $(".popid").attr("href", "<?php echo base_url('wallet/amt_delete'); ?>" + "/" + id);
+    }	
+	function wallet_amt_admindeactive(id){
+        $(".popid").attr("href", "<?php echo base_url('wallet/amt_status'); ?>" + "/" + id);
     }
+	
+	
 
     function adminstatus(id) {
         if (id == 1) {
@@ -418,9 +322,6 @@
         }
     }
 
-    function admindelete(id) {
-        $(".popid").attr("href", "<?php echo base_url('admin/delete_couponcode'); ?>" + "/" + id);
-    }
 
     function adminstatus2(id) {
 
@@ -433,65 +334,18 @@
 
             fields: {
 
-                coupon_code: {
+                wallet_amount: {
                     validators: {
                         notEmpty: {
-                            message: 'Coupon Code is required'
+                            message: 'Wallet Amount is required'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9. ]+$/,
-                            message: 'Coupon Code can only consist of alphanumeric, space and dot'
+                            regexp: /^[0-9. ]+$/,
+                            message: 'Wallet Amount can only consist of digits'
                         }
                     }
                 },
-                percentage_amount: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Percentage / Amount  is required'
-                        },
-                        regexp: {
-                            regexp: /^[0-9]*$/,
-                            message: ' Percentage / Amount  only consist of digits'
-                        }
-                    }
-                },
-                hospital_id: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Hospital Name is required'
-                        }
-                    }
-                },
-                type: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Type is required'
-                        }
-                    }
-                }
-            }
-        })
-
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#wallet_amounts').bootstrapValidator({
-
-            fields: {
-                ip_amount: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Amount  is required'
-                        },
-                        regexp: {
-                            regexp: /^[0-9]*$/,
-                            message: 'Amount only consist of digits'
-                        }
-                    }
-                },
-				ip_amount_percentage: {
+               ip_amount_percentage: {
                     validators: {
                         notEmpty: {
                             message: 'Ip amount percentage is required'
@@ -501,17 +355,6 @@
 							max: 99,
 							message: 'The Ip amount percentage must be between 0 and 99'
 						}
-                    }
-                },
-                op_amount: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Amount  is required'
-                        },
-                        regexp: {
-                            regexp: /^[0-9]*$/,
-                            message: 'Amount only consist of digits'
-                        }
                     }
                 },
 				op_amount_percentage: {
@@ -538,14 +381,35 @@
 						}
                     }
                 },
-                lab_amount: {
+                hospital_id: {
                     validators: {
                         notEmpty: {
-                            message: 'Amount  is required'
+                            message: 'Hospital Name is required'
+                        }
+                    }
+                },
+                type: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Type is required'
+                        }
+                    }
+                }
+            }
+        })
+
+    });
+	$(document).ready(function() {
+        $('#add_wallet_amt').bootstrapValidator({
+			fields: {
+				wallet_amount: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Wallet Amount is required'
                         },
                         regexp: {
-                            regexp: /^[0-9]*$/,
-                            message: 'Amount only consist of digits'
+                            regexp: /^[0-9. ]+$/,
+                            message: 'Wallet Amount can only consist of digits'
                         }
                     }
                 }
@@ -554,3 +418,4 @@
 
     });
 </script>
+

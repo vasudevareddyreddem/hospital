@@ -1405,11 +1405,14 @@ class Resources extends In_frontend {
 				if($admindetails['role_id']=3){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
+					//echo '<pre>';print_r($post);
 					$billing=array(
 					'patient_payer_deposit_amount'=>isset($post['patient_payer_deposit_amount'])?$post['patient_payer_deposit_amount']:'',
 					'payment_mode'=>isset($post['payment_mode'])?$post['payment_mode']:'',
 					'bill_amount'=>isset($post['bill_amount'])?$post['bill_amount']:'',
+					'coupon_code'=>isset($post['coupon_code1'])?$post['coupon_code1']:'',
+					'coupon_code_amount'=>$post['patient_payer_deposit_amount']-$post['bill_amount'],
+					'with_out_coupon_code'=>isset($post['bill_amount'])?$post['bill_amount']:'',
 					'received_form'=>isset($post['received_form'])?$post['received_form']:'',
 					'completed'=>1,
 					'updated_at'=>date('Y-m-d H:i:s')
@@ -1433,8 +1436,9 @@ class Resources extends In_frontend {
 								);
 							$this->Wallet_model->save_coupon_code_history($code_details);
 							$wallet_detials=$this->Wallet_model->get_wallet_amt_details($post['appointment_user_id']);
-							$amt_data=array('remaining_op_wallet_amount'=>(($wallet_detials['remaining_op_wallet_amount'])-($percen_amount)));
+							$amt_data=array('remaining_wallet_amount'=>(($wallet_detials['remaining_wallet_amount'])-(($post['patient_payer_deposit_amount'])-($post['bill_amount']))));
 							$amount_update=$this->Wallet_model->update_op_wallet_amt_details($post['appointment_user_id'],$amt_data);
+							//echo $this->db->last_query();exit;
 							/* hiostory*/
 							
 							$this->session->set_flashdata('success',"Bill details successfully updated.");

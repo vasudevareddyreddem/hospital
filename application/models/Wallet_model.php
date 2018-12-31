@@ -8,20 +8,21 @@ class Wallet_model extends CI_Model
 		parent::__construct();
 		$this->load->database("default");
 	}
-	public  function add_wallet_money($data){
-		$this->db->insert('wallet_amount',$data);
+	public  function add_wallet_money_percentage($data){
+		$this->db->insert('wallet_amount_percentage',$data);
 		return $this->db->insert_id();
 	}
 	public  function update_wallet_amount_details($w_id,$data){
 		$this->db->where('w_id',$w_id);
-		return $this->db->update('wallet_amount',$data);
+		return $this->db->update('wallet_amount_percentage',$data);
 	}
 	public  function delete_wallet_amount($w_id){
 		$this->db->where('w_id',$w_id);
-		return $this->db->delete('wallet_amount');
+		return $this->db->delete('wallet_amount_percentage');
 	}
-	public  function check_amount_active_ornot(){
-			$this->db->select('*')->from('wallet_amount');
+	public  function check_amount_active_ornot($hos_id){
+			$this->db->select('*')->from('wallet_amount_percentage');
+			$this->db->where('hospital_id',$hos_id);
 			$this->db->where('status',1);
 			return $this->db->get()->row_array(); 
 	}
@@ -45,9 +46,24 @@ class Wallet_model extends CI_Model
 		return $this->db->update('appointment_users',$data);
 	}
 	public  function get_wallet_amt_details($a_u_id){
-		$this->db->select('ip_wallet_amount,op_wallet_amount,lab_wallet_amount,wallet_amount_id,remaining_ip_wallet,remaining_op_wallet_amount,remaining_lab_wallet')->from('appointment_users');
+		$this->db->select('wallet_amount,wallet_amount_id,remaining_wallet_amount')->from('appointment_users');
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->get()->row_array();
+	}
+	
+	/* add  wallet amount */
+	public  function add_wallet_money($data){
+		$this->db->insert('wallet_amount',$data);
+		return $this->db->insert_id();
+	}
+	public function check_wallet_amount_active_ornot(){
+		$this->db->select('*')->from('wallet_amount');
+		$this->db->where('status',1);
+		return $this->db->get()->row_array();
+	}
+	public  function update_wallet_am_details($w_a_id,$data){
+		$this->db->where('w_a_id',$w_a_id);
+		return $this->db->update('wallet_amount',$data);
 	}
 }
 

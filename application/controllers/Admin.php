@@ -171,12 +171,10 @@ class Admin extends CI_Controller {
 					
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
-					
 					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
-					//echo '<pre>';print_r($data['hospital_list']);exit;
-					
-					$data['couponcode_list']=$this->Admin_model->get_all_coupon_code_list($admindetails['a_id']);
+					$data['wallet_amt_percentage_list']=$this->Admin_model->get_all_wallet_amt_per_list_list($admindetails['a_id']);
 					$data['wallet_amt_list']=$this->Admin_model->get_all_wallet_amt_list_list($admindetails['a_id']);
+					$data['current_active_amt']=$this->Admin_model->get_current_amount_list($admindetails['a_id']);
 					
 					$this->load->view('admin/coupon_codes',$data);
 					$this->load->view('html/footer');
