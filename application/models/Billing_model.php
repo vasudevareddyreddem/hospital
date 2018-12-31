@@ -29,7 +29,7 @@ class Billing_model extends CI_Model
 		return $this->db->update('appointment_users',$data);
 	}
 	public  function get_wallet_amt_details($a_u_id){
-		$this->db->select('ip_wallet_amount,op_wallet_amount,lab_wallet_amount,wallet_amount_id,remaining_ip_wallet,remaining_op_wallet_amount,remaining_lab_wallet')->from('appointment_users');
+		$this->db->select('wallet_amount,wallet_amount_id,remaining_wallet_amount')->from('appointment_users');
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->get()->row_array();
 	}

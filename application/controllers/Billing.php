@@ -57,7 +57,7 @@ class Billing extends In_frontend {
 					$percen_amount=$percent/100;
 					$amount=($post['bill_amount'])-($percen_amount);
 					//echo $percen_amount;
-					if($wallet_detials['remaining_ip_wallet']>=$percen_amount){
+					if($wallet_detials['remaining_wallet_amount']>=$percen_amount){
 							$data['msg']=1;
 							$data['amt']=$amount;
 							$data['billing_id']=$billing_id['b_id'];
@@ -106,7 +106,7 @@ class Billing extends In_frontend {
 					$percen_amount=$percent/100;
 					$amount=($post['bill_amount'])-($percen_amount);
 					//echo $percen_amount;
-					if($wallet_detials['remaining_lab_wallet']>=$percen_amount){
+					if($wallet_detials['remaining_wallet_amount']>=$percen_amount){
 							$data['msg']=1;
 							$data['amt']=$amount;
 							$data['billing_id']=$billing_id['b_id'];
@@ -137,7 +137,7 @@ class Billing extends In_frontend {
 			$admindetails=$this->session->userdata('userdetails');
 			$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 			$post=$this->input->post();
-			//echo '<pre>';print_r($post);
+			//echo '<pre>';print_r($post);exit;
 			$add=array(
 				'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
 				'patient_id'=>isset($post['patient_id'])?$post['patient_id']:'',
@@ -176,10 +176,10 @@ class Billing extends In_frontend {
 								$this->Billing_model->save_coupon_code_history($code_details);
 								$wallet_detials=$this->Billing_model->get_wallet_amt_details($post['appointment_user_id']);
 								if($post['category_type']==3){
-									$amt_data=array('remaining_lab_wallet'=>(($wallet_detials['remaining_lab_wallet'])-(($post['p_amount'])-($post['coupon_discount_amount']))));
+									$amt_data=array('remaining_wallet_amount'=>(($wallet_detials['remaining_wallet_amount'])-(($post['p_amount'])-($post['coupon_discount_amount']))));
 
 								}else{
-									$amt_data=array('remaining_ip_wallet'=>(($wallet_detials['remaining_ip_wallet'])-(($post['p_amount'])-($post['coupon_discount_amount']))));
+									$amt_data=array('remaining_wallet_amount'=>(($wallet_detials['remaining_wallet_amount'])-(($post['p_amount'])-($post['coupon_discount_amount']))));
 
 								}
 								$amount_update=$this->Billing_model->update_op_wallet_amt_details($post['appointment_user_id'],$amt_data);
