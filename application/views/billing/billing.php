@@ -40,8 +40,9 @@
                                     <div class="card-body ">
                                         <div class="card-body " id="bar-parent" style="margin-top:30px">
 
-                                            <form name="bill_details" id="bill_details" action="<?php echo  base_url('billing/addpost'); ?>" method="post" class="pad30 form-horizontal">
-
+                                            <form name="bill_details" onsubmit="rerurn check_validation();" id="bill_details" action="<?php echo  base_url('billing/addpost'); ?>" method="post" class="pad30 form-horizontal">
+												<input type="hidden" id="appointment_user_id"  name="appointment_user_id"  value="">
+												<input type="hidden" id="percentage"  name="percentage"  value="">
                                                 <div class="row">
                                                     
                                                     <div class="form-group col-md-6">
@@ -84,11 +85,15 @@
                                                     <div class="form-group col-md-6">
                                                         <label for="bd_amount">Amount</label>
                                                         <input type="text" name="p_amount" id="p_amount" class="form-control" placeholder="Enter Amount">
+                                                    </div> 
+													<div class="form-group col-md-6">
+                                                        <label for="bd_amount">Coupon code Id</label>
+                                                        <input type="text" name="coupon_id" id="coupon_id" class="form-control" placeholder="Enter Coupon code Id">
                                                     </div>
                                                     
                                                     <div class="form-group col-md-6">
                                                         <label for="bd_ccode">Coupon Code</label>
-                                                        <input type="text" name="coupon_code" id="coupon_code" class="form-control" placeholder="Enter Coupon Code">
+                                                        <input type="text" name="coupon_code" onkeyup="removeErrormsg(this.value);" id="coupon_code" class="form-control" placeholder="Enter Coupon Code">
 														<span id="ipmodule">
 														<a href="javascript:void(0);" onclick="check_coupon_code();">Apply</a>
 														</span>
@@ -166,6 +171,20 @@
 </div>
 <div id="sucessmsg" style="display:none;"></div>
 <script>
+function check_validation(){
+	
+}
+function removeErrormsg(val){
+	if(val==''){
+		$("#successmsg1").hide();
+		var totalamount=$('#p_amount').val();
+		var amount=$('#coupon_discount_amount').val(totalamount);
+		$('#already_coupon_code_used').val(0);
+	}else{
+		$("#successmsg1").empty();
+		$("#successmsg1").show();
+	}
+}
 function get_payment_option(val){
 	if(val==2){
 		$('#ipmodule').show();
@@ -180,8 +199,9 @@ function check_coupon_code(){
 	var type=$('#category_type').val();
 	var patient_id=$('#patient_id').val();
 	var p_amount=$('#p_amount').val();
+	var coupon_id=$('#coupon_id').val();
 	
-	if( coupon_code!='' && type!='' && patient_id!='' && p_amount!=''){
+	if( coupon_code!='' && type!='' && patient_id!='' && p_amount!='' && coupon_id!=''){
 		
 		if($('#already_coupon_code_used').val()==1){
 			 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon Code already used. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
@@ -194,6 +214,7 @@ function check_coupon_code(){
 				type:type,
 				patient_id:patient_id,
 				bill_amount:p_amount,
+				coupon_id:coupon_id,
 			},
 			datatype:'JSON',
 			method:'POST',
@@ -209,12 +230,14 @@ function check_coupon_code(){
 							$('#coupon_discount_amount').val(pdata.amt);
 							$('#b_id').val(pdata.billing_id);
 							$('#already_coupon_code_used').val(1);
-							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+pdata.cou_amt+" decreased";
+							$('#appointment_user_id').val(pdata.appointment_user_id);
+							$('#percentage').val(pdata.cou_amt);
+							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+pdata.cou_amt+" % decreased";
 						}
 						if(pdata.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(pdata.msg==3){
-   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Technical problem will occurred. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
+   							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon code was not correct. Please try again once <i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(pdata.msg==4){
    							$('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn">Your wallet having insufficient amount. Please recharge again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
 						}if(pdata.msg==5){
@@ -234,8 +257,9 @@ function check_coupon_code1(){
 	var type=$('#category_type').val();
 	var patient_id=$('#patient_id').val();
 	var p_amount=$('#p_amount').val();
+	var coupon_id=$('#coupon_id').val();
 	
-	if( coupon_code!='' && type!='' && patient_id!='' && p_amount!=''){
+	if( coupon_code!='' && type!='' && patient_id!='' && p_amount!='' && coupon_id!=''){
 		
 		if($('#already_coupon_code_used').val()==1){
 			 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Coupon Code already used. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
@@ -248,6 +272,7 @@ function check_coupon_code1(){
 				type:type,
 				patient_id:patient_id,
 				bill_amount:p_amount,
+				coupon_id:coupon_id,
 			},
 			datatype:'JSON',
 			method:'POST',
@@ -263,7 +288,9 @@ function check_coupon_code1(){
 							$('#coupon_discount_amount').val(pdata.amt);
 							$('#b_id').val(pdata.billing_id);
 							$('#already_coupon_code_used').val(1);
-							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+pdata.cou_amt+" decreased";
+							$('#appointment_user_id').val(pdata.appointment_user_id);
+							$('#percentage').val(pdata.cou_amt);
+							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+pdata.cou_amt+" % decreased";
 						}
 						if(pdata.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
@@ -347,7 +374,18 @@ function check_coupon_code1(){
                         }
                     }
                 },
-                p_amount: {
+                coupon_id: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Coupon Code id is required'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]*$/,
+                            message: 'Coupon Code id must be in digits'
+                        }
+                    }
+                },
+				p_amount: {
                     validators: {
                         notEmpty: {
                             message: 'Amount is required'

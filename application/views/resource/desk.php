@@ -787,7 +787,7 @@
 																 <div id="demo1" class="">
 																	<div class="form-group col-md-12">
 																		<label for="mobile">Coupon Code</label>
-																		<input type="text" class="form-control" id="coupon_code1" autocomplete="off"  name="coupon_code1" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
+																		<input type="text" class="form-control" id="coupon_code1" onkeyup="removeErrormsg(this.value);" autocomplete="off"  name="coupon_code1" placeholder="Enter Coupon Code" value="<?php echo isset($billing_detailes['coupon_code'])?$billing_detailes['coupon_code']:''; ?>">
 																	</div>
 																	<span id="successmsg1" style="color:green;"></span>
 																	<span id="errormsg1" style="color:red;"></span>
@@ -1010,6 +1010,17 @@ function apply_couponcode(){
 	}
 	
 }
+function removeErrormsg(val){
+	if(val==''){
+		$("#successmsg1").hide();
+		var totalamount=$('#patient_payer_deposit_amount').val();
+		var amount=$('#bill_amount1').val(totalamount);
+		$('#already_coupon_code_used').val(0);
+	}else{
+		$("#successmsg1").empty();
+		$("#successmsg1").show();
+	}
+}
 function apply_couponcode1(){
 	var amount=$('#bill_amount1').val();
 	var card_no=$('#patient_card_number1').val();
@@ -1040,6 +1051,7 @@ function apply_couponcode1(){
 							$('#appointment_user_id').val(data.appointment_user_id);
 							$('#percentage').val(data.cou_amt);
 							document.getElementById("successmsg1").innerHTML="Coupon Code applied Successfully. Payable Amount is "+data.cou_amt+" % decreased";
+							$( "successmsg1" ).fadeOut( "slow" );
 						}
 						if(data.msg==2){
 							 $('#sucessmsg').html('<div class="alt_cus"><div class="alert_msg1 animated slideInUp bg-warn"> Invalid Coupon Code. Please try again<i class="fa fa-check  text-success ico_bac" aria-hidden="true"></i></div></div>');  
