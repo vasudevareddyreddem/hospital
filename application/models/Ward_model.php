@@ -13,8 +13,11 @@ class Ward_model extends CI_Model
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
 		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
+		$this->db->join('admitted_patient_list', 'admitted_patient_list.pt_id = patient_billing.p_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
+		$this->db->where('patients_list_1.hos_id',$hos_id);	
 		$this->db->where('patient_billing.completed_type',0);
+		//$this->db->where('admitted_patient_list.pt_id','NULL');
 		return $this->db->get()->result_array();
 	}
 		
@@ -311,9 +314,12 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_w_r_n_id_wise_bedcount($w_r_n_id){
-		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.bed')->from('ward_room_beds');		
-		$this->db->where('w_r_n_id',$w_r_n_id);
-		$this->db->where('status',1);
+		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.bed,admitted_patient_list.a_p_id,admitted_patient_list.completed')->from('ward_room_beds');	
+		$this->db->join('admitted_patient_list','admitted_patient_list.bed_no=ward_room_beds.r_b_id','left');				
+		
+		$this->db->where('ward_room_beds.w_r_n_id',$w_r_n_id);
+		$this->db->where('ward_room_beds.status',1);
+		//$this->db->where('admitted_patient_list.completed',0);
 		return $this->db->get()->result_array();
 	}
 	
@@ -391,6 +397,39 @@ class Ward_model extends CI_Model
 		$this->db->where('a_p_id',$a_p_id);
 		return $this->db->update("admitted_patient_list",$data);
 	}
+	
+	
+	/* bed  chart  purpose */
+	public  function get_bed_empty_list_count($hos_id){
+		$this->db->select('ward_room_beds.w_r_n_id,ward_room_number.room_num,ward_room_number.bed_count,ward_floors.ward_floor,ward_room_type.room_type,ward_type.ward_type,ward_name.ward_name')->from('ward_room_beds');
+		$this->db->join('ward_room_number','ward_room_number.w_r_n_id=ward_room_beds.w_r_n_id','left');				
+		$this->db->join('ward_floors','ward_floors.w_f_id=ward_room_number.f_id','left');				
+		$this->db->join('ward_room_type','ward_room_type.w_r_t_id=ward_floors.w_r_type_id','left');				
+		$this->db->join('ward_type','ward_type.ward_id=ward_room_type.w_r_t_id','left');				
+		$this->db->join('ward_name','ward_name.w_id=ward_type.wid','left');				
+		
+		$this->db->where('ward_room_beds.hos_id',$hos_id);
+		$this->db->where('ward_room_beds.status',1);
+		$this->db->group_by('ward_room_beds.w_r_n_id');
+		$return=$this->db->get()->result_array();
+		foreach($return as $list){
+			$beds_nums=$this->get_bed_numbers_list($list['w_r_n_id']);
+			$data[$list['w_r_n_id']]=$list;
+			$data[$list['w_r_n_id']]['bed_num']=isset($beds_nums)?$beds_nums:'';
+			
+		}
+		if(!empty($data)){
+			return $data;
+		}
+	}
+	public  function get_bed_numbers_list($w_r_n_id){
+		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.w_r_n_id,ward_room_beds.bed,admitted_patient_list.pt_id,admitted_patient_list.completed')->from('ward_room_beds');
+		$this->db->join('admitted_patient_list','admitted_patient_list.bed_no=ward_room_beds.r_b_id','left');				
+		$this->db->where('ward_room_beds.w_r_n_id',$w_r_n_id);
+		$this->db->where('ward_room_beds.status',1);
+		return $this->db->get()->result_array();
+	}
+	
 }
 
 	

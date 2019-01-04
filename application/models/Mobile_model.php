@@ -426,13 +426,13 @@ class Mobile_model extends CI_Model
 	}
 	
 	public  function get_wallet_amount_details($a_u_id){
-		$this->db->select('op_wallet_amount,ip_wallet_amount,lab_wallet_amount,wallet_amount_id,remaining_ip_wallet,remaining_op_wallet_amount,remaining_lab_wallet')->from('appointment_users');
+		$this->db->select('wallet_amount,wallet_amount_id,remaining_wallet_amount')->from('appointment_users');
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->get()->row_array();
 	}
 	
 	public  function get_ip_coupon_code_list($a_u_id){
-		$this->db->select('coupon_code_list.couponcode_name,hospital.hos_bas_name,hospital.hos_bas_city')->from('coupon_code_list');
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.couponcode_name,hospital.hos_bas_name,hospital.hos_bas_city,coupon_code_list.created_at')->from('coupon_code_list');
 		$this->db->join('hospital', 'hospital.hos_id = coupon_code_list.hos_id', 'left');
 		$this->db->where('coupon_code_list.created_by',$a_u_id);
 		$this->db->where('coupon_code_list.type',2);
@@ -455,7 +455,7 @@ class Mobile_model extends CI_Model
 	/* ip coupon code list */
 	/* lab coupon code list */
 	public  function get_lab_coupon_code_list($a_u_id){
-		$this->db->select('coupon_code_list.couponcode_name,hospital.hos_bas_name,hospital.hos_bas_city')->from('coupon_code_list');
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.couponcode_name,hospital.hos_bas_name,hospital.hos_bas_city,coupon_code_list.created_at')->from('coupon_code_list');
 		$this->db->join('hospital', 'hospital.hos_id = coupon_code_list.hos_id', 'left');
 		$this->db->where('coupon_code_list.created_by',$a_u_id);
 		$this->db->where('coupon_code_list.type',3);
@@ -481,4 +481,11 @@ class Mobile_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	/* history*/
+	public  function get_wallet_amount_percentages($hos_id){
+		$this->db->select('*')->from('wallet_amount_percentage');
+		$this->db->where('hospital_id',$hos_id);
+		//$this->db->where('hos_id',$hos_id);
+		$this->db->where('status',1);
+		return $this->db->get()->row_array();
+	}
 }

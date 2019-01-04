@@ -43,14 +43,15 @@ class Wallet extends REST_Controller {
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
 			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
+			//echo '<pre>';print_r($wallet_detail);exit;
 			$appoinment_list=$this->Mobile_model->get_user_appointment_list($a_u_id);
 				if(count($appoinment_list)>0){
-					if($wallet_detail['remaining_op_wallet_amount']!=''){
-						$usedamt=(($wallet_detail['op_wallet_amount'])-($wallet_detail['remaining_op_wallet_amount']));
+					if($wallet_detail['remaining_wallet_amount']!=''){
+						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
 					}else{
 						$usedamt='';
 					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['op_wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_op_wallet_amount'],'usedbalanceamount'=>$usedamt,'list'=>$appoinment_list,'message'=>'Appointment list are found');
+				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>$usedamt,'list'=>$appoinment_list,'message'=>'Appointment list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Appointment list not found');
@@ -73,7 +74,8 @@ class Wallet extends REST_Controller {
 				$hos_id=$appoinment_details['hos_id'];
 				$op='op';
 				$coupon_code=$hos_name.$hos_id.$op.$b_id;
-				$wallet_amt_list=$this->Mobile_model->get_wallet_amount();
+				$wallet_amt_list=$this->Mobile_model->get_wallet_amount_percentages($appoinment_details['hos_id']);
+				//echo '<pre>';print_r($wallet_amt_list);exit;
 					$add=array(
 						'hos_id'=>isset($appoinment_details['hos_id'])?$appoinment_details['hos_id']:'',
 						'appointment_id'=>isset($b_id)?$b_id:'',
@@ -109,7 +111,7 @@ class Wallet extends REST_Controller {
 			}
 			$details=$this->Mobile_model->get_coupon_code_details($b_id);
 			if(count($details)>0){
-				$message = array('status'=>1,'b_id'=>$b_id,'message'=>$details['couponcode_name']." Copy the code and use it at the checkout to get the discount. It's valid for two hours only ( created Time : ".$details['created_at']."). ");
+				$message = array('status'=>1,'b_id'=>$b_id,'couponcode_name'=>$details['couponcode_name'],'message'=>" Copy the code and use it at the checkout to get the discount. It's valid for two hours only ( created Time : ".$details['created_at']."). ");
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0, 'b_id'=>$b_id,'message'=>'Having no coupon code');
@@ -125,12 +127,12 @@ class Wallet extends REST_Controller {
 			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
 			$coupon_code_list=$this->Mobile_model->get_ip_coupon_code_list($a_u_id);
 				if(count($coupon_code_list)>0){
-					if($wallet_detail['remaining_ip_wallet']!=''){
-						$usedamt=(($wallet_detail['ip_wallet_amount'])-($wallet_detail['remaining_ip_wallet']));
+					if($wallet_detail['remaining_wallet_amount']!=''){
+						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
 					}else{
 						$usedamt='';
 					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['ip_wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_ip_wallet'],'usedbalanceamount'=>$usedamt,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
+				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>$usedamt,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Coupon code list not found');
@@ -154,7 +156,8 @@ class Wallet extends REST_Controller {
 				$hos_id=$hospital_details['hos_id'];
 				$ip='Ip';
 				$coupon_code=$hos_name.$hos_id.$ip.$time;
-				$wallet_amt_list=$this->Mobile_model->get_wallet_amount();
+				$wallet_amt_list=$this->Mobile_model->get_wallet_amount_percentages($hospital_details['hos_id']);
+
 					$add=array(
 						'hos_id'=>isset($hos_id)?$hos_id:'',
 						'appointment_id'=>isset($b_id)?$b_id:'',
@@ -169,12 +172,12 @@ class Wallet extends REST_Controller {
 					);
 				$check=$this->Mobile_model->check_ip_couponcode_exists_ornot($hos_id,$coupon_code);
 				if(count($check)>0){
-					$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>"Your are already created coupon code. Use below code ".$check['couponcode_name']);
+					$message = array('status'=>0,'a_u_id'=>$a_u_id, 'couponcode_name'=>$check['couponcode_name'],'message'=>"Your are already created coupon code. Use below code ");
 					$this->response($message, REST_Controller::HTTP_OK);
 				}else{
 					$save=$this->Mobile_model->save_couponcode($add);
 					if(count($save)>0){
-						$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>"Coupon code successfully created. Use below code ".$coupon_code);
+						$message = array('status'=>1,'a_u_id'=>$a_u_id,'couponcode_name'=>$coupon_code,'message'=>"Coupon code successfully created. Use below code ");
 						$this->response($message, REST_Controller::HTTP_OK);
 					}else{
 						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>"Technical problem will occurred. Please try again");
@@ -192,12 +195,12 @@ class Wallet extends REST_Controller {
 			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
 			$coupon_code_list=$this->Mobile_model->get_lab_coupon_code_list($a_u_id);
 				if(count($coupon_code_list)>0){
-					if($wallet_detail['remaining_lab_wallet']!=''){
-						$usedamt=(($wallet_detail['lab_wallet_amount'])-($wallet_detail['remaining_lab_wallet']));
+					if($wallet_detail['remaining_wallet_amount']!=''){
+						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
 					}else{
 						$usedamt='';
 					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['lab_wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_lab_wallet'],'usedbalanceamount'=>$usedamt,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
+				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>$usedamt,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Coupon code list not found');
@@ -221,7 +224,7 @@ class Wallet extends REST_Controller {
 				$hos_id=$hospital_details['hos_id'];
 				$ip='Lab';
 				$coupon_code=$hos_name.$hos_id.$ip.$time;
-				$wallet_amt_list=$this->Mobile_model->get_wallet_amount();
+				$wallet_amt_list=$this->Mobile_model->get_wallet_amount_percentages($hospital_details['hos_id']);
 					$add=array(
 						'hos_id'=>isset($hos_id)?$hos_id:'',
 						'appointment_id'=>isset($b_id)?$b_id:'',
@@ -236,12 +239,12 @@ class Wallet extends REST_Controller {
 					);
 				$check=$this->Mobile_model->check_lab_couponcode_exists_ornot($hos_id,$coupon_code);
 				if(count($check)>0){
-					$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>"Your are already created coupon code. Use below code ".$check['couponcode_name']);
+					$message = array('status'=>0,'a_u_id'=>$a_u_id,'couponcode_name'=>$check['couponcode_name'],'message'=>"Your are already created coupon code. Use below code ");
 					$this->response($message, REST_Controller::HTTP_OK);
 				}else{
 					$save=$this->Mobile_model->save_couponcode($add);
 					if(count($save)>0){
-						$message = array('status'=>1,'a_u_id'=>$a_u_id,'message'=>"Coupon code successfully created. Use below code ".$coupon_code);
+						$message = array('status'=>1,'a_u_id'=>$a_u_id, 'couponcode_name'=>$coupon_code,'message'=>"Coupon code successfully created. Use below code ");
 						$this->response($message, REST_Controller::HTTP_OK);
 					}else{
 						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>"Technical problem will occurred. Please try again");

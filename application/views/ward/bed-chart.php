@@ -4,7 +4,7 @@
       <div class="page-bar">
          <div class="page-title-breadcrumb">
             <div class=" pull-left">
-               <div class="page-title">Appointments</div>
+               <div class="page-title">Beds count</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
@@ -26,39 +26,53 @@
                                         <thead>
                                             <tr>
                                                
+                                                <th>Ward Name </th>
                                                 <th>Ward Type </th>
-                                                <th>Ward No </th>
+                                               
                                                 <th>Room Type</th>
+												 <th>Floor No </th>
                                                 <th>Room No</th>
-                                                <th>Bed No</th>
-                                                <th>Status</th>
+                                                <th>Beds Count</th>
+                                                <th>Available Bed Numbers</th>
+                                                <th>Blocked Bed Numbers</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+										<?php if(isset($red_chart_list) && count($red_chart_list)>0){ ?>
+										<?php foreach($red_chart_list as $list){ ?>
                                             <tr>
                                             
-												<td>type 1</td>
-												<td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
+												<td><?php echo isset($list['ward_name'])?$list['ward_name']:''; ?></td>
+												<td><?php echo isset($list['ward_type'])?$list['ward_type']:''; ?></td>
+												<td><?php echo isset($list['room_type'])?$list['room_type']:''; ?></td>
+												<td><?php echo isset($list['ward_floor'])?$list['ward_floor']:''; ?></td>
+												<td><?php echo isset($list['room_num'])?$list['room_num']:''; ?></td>
+												<td><?php echo isset($list['bed_count'])?$list['bed_count']:''; ?></td>
+												
                                                 <td>
-													<span class="label label-sm label-success"> Available </span>
+													<?php if(isset($list['bed_num']) && count($list['bed_num'])>0){ ?>
+													<?php foreach($list['bed_num'] as $lis){
+														if($lis['completed']==1 || $lis['pt_id']==''){														
+														echo isset($lis['r_b_id'])?$lis['r_b_id'].',':''; 
+														}
+													 } 
+													 } ?>
 													
 												</td>
-                                            </tr>  
-											<tr>
-                                            
-												<td>type 2</td>
-												<td>261</td>
-                                                <td>multi</td>
-                                                <td>106</td>
-                                                <td>5</td>
-                                                <td>
-													<span class="label label-sm label-danger"> Un Available </span>
+												<td>
+													<?php if(isset($list['bed_num']) && count($list['bed_num'])>0){ ?>
+													<?php foreach($list['bed_num'] as $lis){
+														if($lis['completed']==0 && $lis['pt_id']!=''){														
+														echo isset($lis['r_b_id'])?$lis['r_b_id'].',':''; 
+														}
+													 } 
+													 } ?>
 													
 												</td>
                                             </tr>
+										<?php } ?>											
+										<?php } ?>											
+										
 											
                                         </tbody>
                                     </table>

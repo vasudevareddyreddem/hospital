@@ -96,7 +96,7 @@ public function index()
 					$data['d_id']=base64_decode($this->uri->segment(6));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>';print_r($hos_ids);exit;
-					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($userdetails['hos_id']);
+					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($hos_ids['hos_id']);
 					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
 					//echo $this->db->last_query();exit;
 				    //echo '<pre>';print_r($data);exit;
@@ -392,9 +392,13 @@ public function index()
 	{			
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+			$login_details=$this->session->userdata('userdetails');
+				if($login_details['role_id']==9){
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($login_details['a_id'],$login_details['a_email_id']);
+					
+					$data['red_chart_list']=$this->Ward_model->get_bed_empty_list_count($hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('ward/bed-chart');
+					$this->load->view('ward/bed-chart',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -410,6 +414,7 @@ public function index()
 	{			
 		if($this->session->userdata('userdetails'))
 		{
+				$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']=1){					
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/observation');

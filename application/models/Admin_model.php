@@ -844,6 +844,15 @@ public  function get_current_amount_list($created_by){
 	$this->db->where('created_by',$created_by);
 	return $this->db->get()->row_array(); 
 }
+
+/* ward  dash*/
+
+public  function get_total_admit_patients_list($hos_id){
+	$this->db->select('*')->from('admitted_patient_list');
+	$this->db->where('status',1);
+	$this->db->where('created_by',$created_by);
+	return $this->db->get()->row_array(); 
+}
 	
 	
 	

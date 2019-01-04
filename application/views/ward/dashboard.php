@@ -1,48 +1,174 @@
+<?php
+ 
+$dec1=$jan1=$feb1=$mar1=$apr1=$may1=$jun1=$jul1=$aug1=$sep1=$oct1=$nov1=0;
+if(isset($graph_total_plants) && count($graph_total_plants)>0){
+foreach ($graph_total_plants as $cri){
+$dat = explode("-", $cri['create_at']);
+	if($dat[1] == 12)
+	{
+	$dec1++;
+	}
+	if($dat[1] == 11)
+	{
+		$nov1++;
+	}
+	if($dat[1] == 10)
+	{
+		$oct1++;
+	}
+	if($dat[1] == '09')
+	{
+		$sep1++;
+	}if($dat[1] == '08')
+	{
+		$aug1++;
+	}if($dat[1] == '07')
+	{
+		$jul1++;
+	}if($dat[1] == '06')
+	{
+		$jun1++;
+	}if($dat[1] == '05')
+	{
+		$may1++;
+	}if($dat[1] == 04)
+	{
+		$apr1++;
+	}if($dat[1] == 03)
+	{
+		$mar1++;
+	}if($dat[1] == 02)
+	{
+		$feb1++;
+	}if($dat[1] == 01)
+	{
+		$jan1++;
+	}
+}	
+} 
+$dec2=$jan2=$feb2=$mar2=$apr2=$may2=$jun2=$jul2=$aug2=$sep2=$oct2=$nov2=0;
+if(isset($graph_total_truck) && count($graph_total_truck)>0){
+foreach ($graph_total_truck as $cri){
+$dat = explode("-", $cri['create_at']);
+	if($dat[1] == 12)
+	{
+	$dec2++;
+	}
+	if($dat[1] == 11)
+	{
+		$nov2++;
+	}
+	if($dat[1] == 10)
+	{
+		$oct2++;
+	}
+	if($dat[1] == '09')
+	{
+		$sep2++;
+	}if($dat[1] == '08')
+	{
+		$aug2++;
+	}if($dat[1] == '07')
+	{
+		$jul2++;
+	}if($dat[1] == '06')
+	{
+		$jun2++;
+	}if($dat[1] == '05')
+	{
+		$may2++;
+	}if($dat[1] == 04)
+	{
+		$apr2++;
+	}if($dat[1] == 03)
+	{
+		$mar2++;
+	}if($dat[1] == 02)
+	{
+		$feb2++;
+	}if($dat[1] == 01)
+	{
+		$jan2++;
+	}
+}	
+} 
+ 
+    
+	  $total_plants_list = array(
+    	array("y" => isset($jan1)?$jan1:'', "label" => "January"),
+    	array("y" => isset($feb1)?$feb1:'', "label" => "February"),
+    	array("y" => isset($mar1)?$mar1:'', "label" => "March"),
+    	array("y" => isset($apr1)?$apr1:'', "label" => "April "),
+    	array("y" => isset($may1)?$may1:'', "label" => "May"),
+    	array("y" => isset($jun1)?$jun1:'', "label" => "June"),
+    	array("y" => isset($jul1)?$jul1:'', "label" => "July"),
+    	array("y" => isset($aug1)?$aug1:'', "label" => "August"),
+    	array("y" => isset($sep1)?$sep1:'', "label" => "September"),
+    	array("y" => isset($oct1)?$oct1:'', "label" => "October"),
+    	array("y" => isset($nov1)?$nov1:'', "label" => "November"),
+    	array("y" => isset($dec1)?$dec1:'', "label" => "December"),
+    );
+	$total_truck_list= array(
+    	array("y" => isset($jan2)?$jan2:'', "label" => "January"),
+    	array("y" => isset($feb2)?$feb2:'', "label" => "February"),
+    	array("y" => isset($mar2)?$mar2:'', "label" => "March"),
+    	array("y" => isset($apr2)?$apr2:'', "label" => "April "),
+    	array("y" => isset($may2)?$may2:'', "label" => "May"),
+    	array("y" => isset($jun2)?$jun2:'', "label" => "June"),
+    	array("y" => isset($jul2)?$jul2:'', "label" => "July"),
+    	array("y" => isset($aug2)?$aug2:'', "label" => "August"),
+    	array("y" => isset($sep2)?$sep2:'', "label" => "September"),
+    	array("y" => isset($oct2)?$oct2:'', "label" => "October"),
+    	array("y" => isset($nov2)?$nov2:'', "label" => "November"),
+    	array("y" => isset($dec2)?$dec2:'', "label" => "December"),
+    );
+	 
+     
+    ?>
 <script>
-window.onload = function () {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,  
-	title:{
-		text: "ADMIT / DISCHARGE STATISTICS"
-	},
-	axisY: {
-		title: "Percentage",
-		valueFormatString: "#0,,.",
-		suffix: "%",
-		stripLines: [{
-			value: 3366500,
-			label: "Average"
-		}]
-	},
-	data: [{
-		yValueFormatString: "#,### Units",
-		xValueFormatString: "YYYY",
-		type: "spline",
-		dataPoints: [
-			{x: new Date(2002, 0), y: 2506000},
-			{x: new Date(2003, 0), y: 2798000},
-			{x: new Date(2004, 0), y: 3386000},
-			{x: new Date(2005, 0), y: 6944000},
-			{x: new Date(2006, 0), y: 6026000},
-			{x: new Date(2007, 0), y: 2394000},
-			{x: new Date(2008, 0), y: 1872000},
-			{x: new Date(2009, 0), y: 2140000},
-			{x: new Date(2010, 0), y: 7289000},
-			{x: new Date(2011, 0), y: 4830000},
-			{x: new Date(2012, 0), y: 2009000},
-			{x: new Date(2013, 0), y: 2840000},
-			{x: new Date(2014, 0), y: 2396000},
-			{x: new Date(2015, 0), y: 1613000},
-			{x: new Date(2016, 0), y: 2821000},
-			{x: new Date(2017, 0), y: 2000000}
+    window.onload = function () {
+     
+    var chart = new CanvasJS.Chart("chartContainer", {
+    	title: {
+    		text: "Month wise List"
+    	},
+    	axisY: {
+    		title: " count range"
+    	},
+		legend:{
+		cursor:"pointer",
+		dockInsidePlotArea: true,
+		itemclick: toogleDataSeries
+		},
+    	data: [{
+    		type: "spline",
+			showInLegend: true,
+			name: "BMW vehicle List",
+			lineDashType: "solid",
+			color: "#8BC34A",			
+    		dataPoints: <?php echo json_encode($total_truck_list, JSON_NUMERIC_CHECK); ?>
+    	},
+		{
+    		type: "spline",
+			showInLegend: true,
+			name: "Total CBWTF",
+			lineDashType: "solid",
+			color: "#FF9800",			
+    		dataPoints: <?php echo json_encode($total_plants_list, JSON_NUMERIC_CHECK); ?>
+    	}
 		]
-	}]
-});
-chart.render();
-
+    });
+    chart.render();
+     function toogleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
 }
-</script>
+    }
+    </script>
 <div class="page-content-wrapper">
    <div class="page-content" >
       <div class="page-bar">
