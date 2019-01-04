@@ -82,10 +82,14 @@ class Dashboard extends In_frontend {
 			}else if($admindetails['role_id']==8){
 				redirect('admin/chat');
 			}else if($admindetails['role_id']==9){
-				$hos_details=$this->Admin_model->get_hospital_details($admindetails['a_id']);
+				$login_details=$this->session->userdata('userdetails');
+				$hos_details=$this->Resources_model->get_all_resouce_details($login_details['a_id']);
 				$data['total_admit_patients']=$this->Admin_model->get_total_admit_patients_list($hos_details['hos_id']);
-				echo '<pre>';print_r($data);exit;
+				$data['total_discharge_patients']=$this->Admin_model->get_total_discharge_patients_list($hos_details['hos_id']);
+				//echo '<pre>';print_r($data);exit;
 				$this->load->view('ward/dashboard',$data);
+			}else if($admindetails['role_id']==10){
+				redirect('nurse/patient_follow_ups');
 			}
 			$this->load->view('html/footer');
 

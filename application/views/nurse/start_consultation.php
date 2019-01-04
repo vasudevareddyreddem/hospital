@@ -46,66 +46,50 @@
             </div>
 			<hr>
             <div class="row clearfix ">
-			<div class="col-md-4 py-4 col-md-offset-4">
-					<h3>Vitals (2018-08-01 )</h3><table class="table table-bordered ">
-					
-						<tbody><tr>
+			<?php if(isset($encounters_list) && count($encounters_list)>0){ ?>
+               <?php $cnt=0;foreach($encounters_list as $list){
+				?>
+               <?php if($cnt<=2){ ?>
+				<div class="col-md-4 py-4">
+					<table class="table table-bordered ">
+					<h3><?php echo isset($list['vitaltype'])?$list['vitaltype']:'Vitals'; ?> (<?php echo $list['date']; ?> )</h3>
+						<tr>
 							<th class="text-center">Vitals</th>
 							<th class="text-center">Actuals</th>
 							<th class="text-center">Range</th>
 						</tr>
 						<tr>
 							<th class="text-center">BP</th>
-							<th class="text-center">123</th>
+							<th class="text-center"><?php echo isset($list['bp'])?$list['bp']:''; ?></th>
 							<th class="text-center">120/80</th>
 						</tr>
 						<tr>
 							<th class="text-center">Pulse</th>
-							<th class="text-center">3</th>
+							<th class="text-center"><?php echo isset($list['pulse'])?$list['pulse']:''; ?></th>
 							<th class="text-center">70-80</th>
 						</tr>
 						<tr>
 							<th class="text-center">FBS/RBS</th>
-							<th class="text-center">33</th>
+							<th class="text-center"><?php echo isset($list['fbs_rbs'])?$list['fbs_rbs']:''; ?></th>
 							<th class="text-center">70-110	</th>
 						</tr>
 						<tr>
 							<th class="text-center">Temp</th>
-							<th class="text-center">33</th>
+							<th class="text-center"><?php echo isset($list['temp'])?$list['temp']:''; ?></th>
 							<th class="text-center">98.6 F</th>
 						</tr>
 						<tr>
 							<th class="text-center">Weight</th>
-							<th class="text-center">33</th>
+							<th class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></th>
 							<th class="text-center"></th>
 						</tr>
 						
-					</tbody></table>
+					</table>
 				</div>
+				<?php } ?>
+               <?php $cnt++;} ?>
+               <?php } ?>
 			
-               <div class="container">
-                  <div class="control-group" id="fields">
-                     <label class="control-label" for="field1"><strong>Comments</strong></label>
-                     <div class="controls">
-                        <form id="vitalscomment" name="vitalscomment" role="form" action="<?php echo base_url('resources/vitalscomment'); ?>" method="post" autocomplete="off">
-                           <input type="hidden" name="bid" id="bid" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
-                          
-						  <input type="hidden" name="pid" id="pid" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
-                           <div class="entry input-group ">
-                              <textarea type="textarea" class="form-control" name="comments[]" id="comments[]"  placeholder="Enter Comments" required></textarea>
-                              <span class="input-group-btn">
-                              <button class="btn btn-success btn-add" type="button">
-                              <span class="glyphicon glyphicon-plus">+</span>
-                              </button>
-                              </span>
-                           </div>
-						<div class="clearfix">&nbsp;</div>
-                           <button class="btn btn-primary " type="submit" >Send</button>
-                        </form>
-                        <br>
-                     </div>
-                  </div>
-               </div>
             </div>
          </div>
          <div id="step-2" class="">
@@ -504,7 +488,9 @@
                         <div class="row">
                            
 						   <div class="col-md-12 ">
-
+							<form action="<?php echo base_url('nurse/addvitals'); ?>" method="post" >
+							<input  type="hidden" name="p_id" id="p_id" value="<?php echo isset($patient_id)?$patient_id:''; ?>">
+							<input  type="hidden" name="b_id" id="b_id" value="<?php echo isset($billing_id)?$billing_id:''; ?>">
                               <div class="table-scrollable">
                                  <table class="table table-bordered">
                                     <thead>
@@ -519,28 +505,28 @@
                                     <tbody >
                                        <tr>
                                           <td>BP</td>
-                                          <td> <input type="text" class="form-control"/></td>
+                                          <td> <input type="text" name="bp" id="bp" class="form-control"/></td>
                                           <td> 120/80</td>
                                        
                                        </tr>
 									   <tr>
                                           <td>BPPulse</td>
-                                          <td> <input type="text" class="form-control"/></td>
+                                          <td> <input type="text" name="pulse" id="pulse" class="form-control"/></td>
                                           <td>70-80</td>
                                        </tr>
 									   <tr>
                                           <td>FBS/RBS</td>
-                                          <td> <input type="text" class="form-control"/></td>
+                                          <td> <input type="text" name="fbs_rbs" id="fbs_rbs" class="form-control"/></td>
                                           <td>70-110</td>
                                        </tr>
 									   <tr>
                                           <td>Temp</td>
-                                          <td> <input type="text" class="form-control"/></td>
+                                          <td> <input type="text" name="temp" id="temp" class="form-control"/></td>
                                           <td>98.6 F</td>
                                        </tr>
 									   <tr>
                                           <td>Weight</td>
-                                          <td> <input type="text" class="form-control"/></td>
+                                          <td> <input type="text" name="weight" id="weight" class="form-control"/></td>
                                           <td>&nbsp;</td>
                                        </tr>
                                     </tbody>
@@ -548,9 +534,10 @@
                               </div>
                               <div class="clearfix">&nbsp;</div>
 							  <div class="pull-right">
-								 <button type="button" class="btn btn-primary"  role="button">Add Vitals</button>
+								 <button type="submit" class="btn btn-primary"  role="button">Add Vitals</button>
 								 <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
 								 </div>
+								 </form>
 								</div>
 							  
                         </div>

@@ -848,9 +848,51 @@ public  function get_current_amount_list($created_by){
 /* ward  dash*/
 
 public  function get_total_admit_patients_list($hos_id){
-	$this->db->select('*')->from('admitted_patient_list');
-	$this->db->where('status',1);
-	$this->db->where('created_by',$created_by);
+	$this->db->select('DATE_FORMAT(admitted_patient_list.date_of_admit,"%Y") as years')->from('admitted_patient_list');
+	$this->db->group_by("DATE_FORMAT(admitted_patient_list.date_of_admit,'%Y')");
+	//$this->db->group_by('');
+	$this->db->where('hos_id',$hos_id);
+	$return=$this->db->get()->result_array(); 
+	foreach($return as $list){
+		$count=$this->get_admitted_patient_count($list['years'],$hos_id);
+		$data[$list['years']]=$list;
+		$data[$list['years']]['count']=isset($count['cnt'])?$count['cnt']:'';
+		
+	}
+	if(!empty($data)){
+		return $data;
+	}
+}
+public  function get_admitted_patient_count($year,$hos_id){
+	$this->db->select('COUNT(admitted_patient_list.a_p_id) as cnt')->from('admitted_patient_list');
+	$this->db->where("DATE_FORMAT(admitted_patient_list.date_of_admit,'%Y')", $year);
+	//$this->db->group_by('');
+	$this->db->where('admitted_patient_list.hos_id',$hos_id);
+	return $this->db->get()->row_array(); 
+}
+public  function get_total_discharge_patients_list($hos_id){
+	$this->db->select('DATE_FORMAT(admitted_patient_list.date_of_admit,"%Y") as years')->from('admitted_patient_list');
+	$this->db->group_by("DATE_FORMAT(admitted_patient_list.date_of_admit,'%Y')");
+	//$this->db->group_by('');
+	$this->db->where('hos_id',$hos_id);
+	$this->db->where('admitted_patient_list.completed',1);
+	$return=$this->db->get()->result_array(); 
+	foreach($return as $list){
+		$count=$this->get_discharge_patient_count($list['years'],$hos_id);
+		$data[$list['years']]=$list;
+		$data[$list['years']]['count']=isset($count['cnt'])?$count['cnt']:'';
+		
+	}
+	if(!empty($data)){
+		return $data;
+	}
+}
+public  function get_discharge_patient_count($year,$hos_id){
+	$this->db->select('COUNT(admitted_patient_list.a_p_id) as cnt')->from('admitted_patient_list');
+	$this->db->where("DATE_FORMAT(admitted_patient_list.date_of_admit,'%Y')", $year);
+	//$this->db->group_by('');
+	$this->db->where('admitted_patient_list.hos_id',$hos_id);
+	$this->db->where('admitted_patient_list.completed',1);
 	return $this->db->get()->row_array(); 
 }
 	

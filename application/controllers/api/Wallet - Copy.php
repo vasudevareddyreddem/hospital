@@ -36,22 +36,35 @@ class Wallet extends REST_Controller {
 		$this->load->model('Mobile_model');
     }
 
-	  public function op_post(){
+	  public function wallet_post(){
 			$a_u_id=$this->post('a_u_id');
 			if($a_u_id==''){
 				$message = array('status'=>0,'message'=>'User Id is required');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
 			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
-			//echo '<pre>';print_r($wallet_detail);exit;
-			$appoinment_list=$this->Mobile_model->get_user_appointment_list($a_u_id);
-				if(count($appoinment_list)>0){
+				if(count($wallet_detail)>0){
 					if($wallet_detail['remaining_wallet_amount']!=''){
 						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
 					}else{
 						$usedamt='';
 					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>"$usedamt",'list'=>$appoinment_list,'message'=>'Appointment list are found');
+				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>"$usedamt",'message'=>'Wallet Details are found');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}else{
+				$message = array('status'=>0,'message'=>'Appointment list not found');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+	  } 
+	  public function op_post(){
+			$a_u_id=$this->post('a_u_id');
+			if($a_u_id==''){
+				$message = array('status'=>0,'message'=>'User Id is required');
+				$this->response($message, REST_Controller::HTTP_OK);
+			}
+			$appoinment_list=$this->Mobile_model->get_user_appointment_list($a_u_id);
+				if(count($appoinment_list)>0){
+				$message = array('status'=>1,'list'=>$appoinment_list,'message'=>'Appointment list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Appointment list not found');
@@ -124,15 +137,10 @@ class Wallet extends REST_Controller {
 				$message = array('status'=>0,'message'=>'User Id is required');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
-			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
 			$coupon_code_list=$this->Mobile_model->get_ip_coupon_code_list($a_u_id);
 				if(count($coupon_code_list)>0){
-					if($wallet_detail['remaining_wallet_amount']!=''){
-						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
-					}else{
-						$usedamt='';
-					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>"$usedamt",'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
+					
+				$message = array('status'=>1,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Coupon code list not found');
@@ -192,15 +200,10 @@ class Wallet extends REST_Controller {
 				$message = array('status'=>0,'message'=>'User Id is required');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}
-			$wallet_detail=$this->Mobile_model->get_wallet_amount_details($a_u_id);
 			$coupon_code_list=$this->Mobile_model->get_lab_coupon_code_list($a_u_id);
 				if(count($coupon_code_list)>0){
-					if($wallet_detail['remaining_wallet_amount']!=''){
-						$usedamt=(($wallet_detail['wallet_amount'])-($wallet_detail['remaining_wallet_amount']));
-					}else{
-						$usedamt='';
-					}
-				$message = array('status'=>1,'totalbalance'=>$wallet_detail['wallet_amount'],'remainingwalletamount'=>$wallet_detail['remaining_wallet_amount'],'usedbalanceamount'=>"$usedamt",'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
+					
+				$message = array('status'=>1,'list'=>$coupon_code_list,'message'=>'Coupon Code list are found');
 				$this->response($message, REST_Controller::HTTP_OK);
 			}else{
 				$message = array('status'=>0,'message'=>'Coupon code list not found');

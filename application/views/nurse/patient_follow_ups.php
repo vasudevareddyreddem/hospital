@@ -15,26 +15,12 @@
       <div class="row">
          <div class="col-md-12">
             <div class="panel tab-border card-topline-green">
-               <header class="panel-heading panel-heading-gray custom-tab ">
-                Search Patient Details
-               </header>
+              
                <div class="panel-body">
-                <form class=" pad30 form-horizontal" action=" " method="post"  id="contact_form">
-					<div class="row d-flex justify-content-center">
-						 <div class="form-group col-md-6">
-						  <label><strong>Enter Patient ID:</strong></label>
-						  <input style="border-radius:0px;height:40px;" type="text" class="form-control"  name="first_name" id="first_name" placeholder="Enter patient ID " >
-						</div> 
-						<div class="form-group col-md-2">
-					<label style="visibility: hidden;"><strong>Ward Name</strong></label>
-						   <a class="btn btn-primary " type="submit">Search</a>
-						</div> 
-					
-					</div>
-				</form>
+                
 				<div class="clearfix">&nbsp;</div>
 				<div class="table-responsive">
-						 <table id="" class="table table-bordered" style="width:100%;">
+						 <table id="example4" class="table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
                                                
@@ -49,24 +35,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+										<?php if(isset($admit_patient_list) && count($admit_patient_list)>0){ ?>
+										<?php foreach($admit_patient_list as $list){ ?>
                                             <tr>
                                                
-                                                <td>xxxxxx500</td>
-												<td>patient 1</td>
-												<td>Male</td>
-												<td>26</td>
-                                                <td>Design Doctor1</td>
-                                                <td>xxxxxx</td>
-												<td>25/06/2018 </td>
+                                                <td><?php echo isset($list['pt_id'])?$list['pt_id']:''; ?></td>
+                                                <td><?php echo isset($list['name'])?$list['name']:''; ?></td>
+                                                <td><?php echo isset($list['gender'])?$list['gender']:''; ?></td>
+                                                <td><?php echo isset($list['age'])?$list['age']:''; ?></td>
+                                                <td><?php echo isset($list['resource_name'])?$list['resource_name']:''; ?></td>
+                                                <td><?php echo isset($list['t_name'])?$list['t_name']:''; ?></td>
+                                                <td><?php echo isset($list['date_of_admit'])?$list['date_of_admit']:''; ?></td>
+											
                                                 <td class="valigntop">
                                                     <div class="btn-group">
-                                                        <a href="<?php echo base_url('nurse/start_consultation');?>" class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > Start Consultation
+                                                        <a href="<?php echo base_url('nurse/consultation/'.base64_encode($list['pt_id']).'/'.base64_encode($list['bill_id']));?>" class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > Start Consultation
                                                            
                                                         </a>
                                                       
                                                     </div>
                                                 </td>
                                             </tr>
+										<?php } ?>
+										<?php } ?>
 											
                                         </tbody>
                                     </table>
@@ -77,4 +68,10 @@
    </div>
 </div>
 <div id="sucessmsg" style="display:none;"></div>
-
+ <script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+</script>
