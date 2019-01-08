@@ -7,6 +7,7 @@ class Resources extends In_frontend {
 	public function __construct() 
 	{
 		parent::__construct();	
+		$this->load->library('user_agent');
 		$this->load->model('Wallet_model');
 		
 		}
@@ -1020,10 +1021,11 @@ class Resources extends In_frontend {
 				if($admindetails['role_id']=4){
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
-					//echo '<pre>';print_r($post);exit;
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//echo '<pre>';print_r($admindetails);exit;
 					$m_name=explode("_",$post['medicine_name']);
-					$qtys=$this->Resources_model->get_medicine_list_details($m_name[0]);
-						//echo '<pre>';print_r($qtys);
+					$qtys=$this->Resources_model->get_medicine_details_list_details($m_name[0],$userdetails['hos_id']);
+					//echo '<pre>';print_r($qtys);
 						
 						$addmedicine=array(
 							'p_id'=>isset($post['pid'])?$post['pid']:'',
@@ -1063,10 +1065,12 @@ class Resources extends In_frontend {
 							$this->Resources_model->update_medicine_details($qtys['id'],$data);
 						//echo $this->db->last_query();exit;
 							$this->session->set_flashdata('success',"Medicine successfully added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
+							redirect($this->agent->referrer());
+							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
+							redirect($this->agent->referrer());
+							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -1103,10 +1107,12 @@ class Resources extends In_frontend {
 					$investigation=$this->Resources_model->saving_patient_investigation($addmedicine);
 					if(count($investigation)>0){
 							$this->session->set_flashdata('success',"Investigation successfully added.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
+							redirect($this->agent->referrer());
+							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
-							redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
+							redirect($this->agent->referrer());
+							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -1171,13 +1177,13 @@ class Resources extends In_frontend {
 	}
 	public function investigationsearch(){
 		if($this->session->userdata('userdetails'))
-		{
+		{ 
 				if($admindetails['role_id']=6){
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$details=$this->Resources_model->get_investigation_list($userdetails['hos_id'],$post['searchdata']);
+					$details=$this->Resources_model->get_investigation_basedon_testtypes_list($userdetails['hos_id'],$post['searchdata']);
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($details);exit;
 
@@ -1204,8 +1210,8 @@ class Resources extends In_frontend {
 					//echo '<pre>';print_r($post);exit;
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$name=$this->Resources_model->get_test_name($post['test_type_id']);
-					$details=$this->Resources_model->get_test_list($name['type'],$post['test_type_id']);
+					$name=$this->Resources_model->get_test_name_details($post['test_type_id']);
+					$details=$this->Resources_model->get_test_list_hospital_wise($name['type'],$post['test_type_id'],$userdetails['hos_id']);
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($details);exit;
 					if(count($details) > 0)

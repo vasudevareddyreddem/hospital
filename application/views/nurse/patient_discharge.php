@@ -13,116 +13,121 @@
             </ol>
          </div>
       </div>
-   
-         <div class="panel tab-border card-topline-green">
-            <header class="panel-heading panel-heading-gray custom-tab ">
-               <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Add Doctor</a>
-                  </li>
-                  <li class="nav-item"><a href="#about" data-toggle="tab" class="">Doctors List</a>
-                  </li>
-               </ul>
-            </header>
-            <div class="panel-body">
-               <div class="tab-content">
-                  <div class="tab-pane active" id="home">
-				  <div class="container">
+      <div class="panel tab-border card-topline-green">
+         <header class="panel-heading panel-heading-gray custom-tab ">
+            <ul class="nav nav-tabs">
+               <li class="nav-item"><a href="#home" data-toggle="tab" class="active">Patients List</a>
+               </li>
+               <li class="nav-item"><a href="#about" data-toggle="tab" class="">Discharged Patients List</a>
+               </li>
+            </ul>
+         </header>
+         <div class="panel-body">
+            <div class="tab-content">
+               <div class="tab-pane active" id="home">
+                  <div class="container">
                      <div class="row">
-							<div class="col-md-12">
-								<div class="table-responsive">
-                            <table id="" class="table table-bordered" style="width:100%;">
-                                <thead>
+                        <div class="col-md-12">
+                           <div class="table-responsive">
+                              <table id="example4" class="table table-bordered" style="width:100%;">
+                                 <thead>
                                     <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Gender </th>
-                                        <th>Age</th>
-                                        <th>Doctor</th>
-                                        <th>Diagnosis</th>
-                                        <th>Billed</th>
-                                        <th>Action</th>
+                                       <th>Patient ID</th>
+                                       <th>Patient Name</th>
+                                       <th>Gender </th>
+                                       <th>Age</th>
+                                       <th>Doctor Name</th>
+                                       <th>Diagnosis</th>
+                                       <th>Date of Admit</th>
+                                       <th>Action</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                 </thead>
+                                 <tbody>
+                                    <?php if(isset($ip_admitted_patient_list)  && count($ip_admitted_patient_list)>0){ ?>
+                                    <?php foreach($ip_admitted_patient_list as $list){ ?>
                                     <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>patient 1</td>
-                                        <td>Male</td>
-                                        <td>26</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxx</td>
-                                        <td>Paid</td>
-                                        <td class="valigntop">
-                                            <div class="btn-group">
-                                                <a href="" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
-                                                </a>
-                                            </div>
-                                        </td>
+                                       <td><?php echo $list['pid']; ?></td>
+                                       <td><?php echo $list['name']; ?></td>
+                                       <td><?php echo $list['gender']; ?></td>
+                                       <td><?php echo $list['age']; ?></td>
+                                       <td><?php echo $list['resource_name']; ?></td>
+                                       <td><?php echo $list['t_name']; ?></td>
+                                       <td><?php echo $list['create_at']; ?></td>
+                                       <td class="valigntop">
+                                          <a href="<?php echo base_url('nurse/discharge/'.base64_encode($list['a_p_id'])); ?>">
+                                          <i class="fa fa-edit"></i>Discharge </a>
+                                       </td>
                                     </tr>
-                                    <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>patient 1</td>
-                                        <td>Male</td>
-                                        <td>26</td>
-                                        <td>xxx </td>
-                                        <td>xxxx</td>
-                                        <td>Unpaid </td>
-                                        <td class="valigntop">
-                                            <div class="btn-group">
-                                                <a href="" class="btn btn-xs deepPink-bgcolor" type="button" >Discharge
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <?php } ?>
+                                    <?php } ?>
+                                 </tbody>
+                              </table>
                            </div>
-						   <div class="clearfix">&nbsp;</div>
                         </div>
-                        </div>
-						
+                        <div class="clearfix">&nbsp;</div>
                      </div>
-                 
-                  <div class="tab-pane " id="about">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-12">
-                <div class="">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table id="" class="table table-bordered" style="width:100%;">
-                                <thead>
+                  </div>
+               </div>
+               <div class="tab-pane " id="about">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="">
+                              <div class="panel-body">
+                                 <div class="table-responsive">
+                                     <table id="example5" class="table table-bordered" style="width:100%;">
+                                 <thead>
                                     <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Doctor</th>
-                                        <th>Diagnosis</th>
-                                        <th>Status</th>
+                                       <th>Patient ID</th>
+                                       <th>Patient Name</th>
+                                       <th>Gender </th>
+                                       <th>Age</th>
+                                       <th>Doctor Name</th>
+                                       <th>Diagnosis</th>
+                                       <th>Date of Admit</th>
+                                       <th>Date of Discharge</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                 </thead>
+                                 <tbody>
+                                    <?php if(isset($ip_discharge_patient_list)  && count($ip_discharge_patient_list)>0){ ?>
+                                    <?php foreach($ip_discharge_patient_list as $list){ ?>
                                     <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>patient 1</td>
-                                        <td>xxxx</td>
-                                        <td>xxxxx</td>
-                                        <td>Complete / inComplete</td>
+                                       <td><?php echo $list['pid']; ?></td>
+                                       <td><?php echo $list['name']; ?></td>
+                                       <td><?php echo $list['gender']; ?></td>
+                                       <td><?php echo $list['age']; ?></td>
+                                       <td><?php echo $list['resource_name']; ?></td>
+                                       <td><?php echo $list['t_name']; ?></td>
+                                       <td><?php echo $list['create_at']; ?></td>
+                                       <td><?php echo $list['discharge_date']; ?></td>
+                                     
                                     </tr>
-                                </tbody>
-                            </table>
+                                    <?php } ?>
+                                    <?php } ?>
+                                 </tbody>
+                              </table>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-                        </div>
-                       
                      </div>
                   </div>
                </div>
             </div>
-            <div class="clearfix">&nbsp;</div>
-       
+         </div>
+         <div class="clearfix">&nbsp;</div>
       </div>
    </div>
 </div>
+<script>
+   $(document).ready(function() {
+       $('#example4').DataTable( {
+           "order": [[ 0, "desc" ]]
+       } );
+   } ); 
+   $(document).ready(function() {
+       $('#example5').DataTable( {
+           "order": [[ 0, "desc" ]]
+       } );
+   } );
+</script>

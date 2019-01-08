@@ -35,9 +35,10 @@ class Nurse extends In_frontend {
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==10){
 					
-					$admindetails=$this->session->userdata('userdetails');
+					
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['admit_patient_list']=$this->Nurse_model->get_admited_patient_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit;
@@ -93,22 +94,94 @@ class Nurse extends In_frontend {
 	}
 	public function bed_transfer()
 	{	
-		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==10){
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['ip_admitted_patient_list'] =$this->Nurse_model->get_admitted_patient_list($hos_ids['hos_id']);
+					$data['tranfor_bed_patient_list'] =$this->Nurse_model->get_transfor_patient_list($hos_ids['hos_id']);
 					
-					
-					//echo '<pre>';print_r($data);exit;
-					$this->load->view('nurse/bed_transfer');
+					/* transfor patient */
+							$roomno = base64_decode($this->uri->segment(3));
+							$data['bed_details_list']= $this->Ward_model->get_admitted_patients_details($roomno);
+							$a=$this->Ward_model->get_admitted_patients_details($roomno);
+							$admindetails=$this->session->userdata('userdetails');
+							$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+							$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);	
+							$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
+							$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
+							$data['roomtype_list'] =$this->Ward_model->get_roomtype_list_details($hos_ids['hos_id']);
+							$data['roomnum_list'] =$this->Ward_model->get_roomnumber_list_detailss($a['floor_no'],$hos_ids['hos_id']);	
+							$data['bed_list'] =$this->Ward_model->get_bed_list_details($a['room_no'],$hos_ids['hos_id']);	
+					/* transfor patient */
+					//echo '<pre>';print_r($data['tranfor_bed_patient_list']);exit;
+					$this->load->view('nurse/bed_transfer',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
-			
 		}else{
-			//$this->session->set_flashdata('error','Please login to continue');
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	public function transferpatientseditpost()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']=2){
+				$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;			
+					//echo '<pre>';print_r($data);exit;	
+					$admitted_patients_details=array(
+					'previous_bed_id'=>isset($post['previous_bed_id'])?$post['previous_bed_id']:'',
+					'hos_id'=>isset($hos_ids['hos_id'])?$hos_ids['hos_id']:'',
+					'pt_id'=>isset($post['pid'])?$post['pid']:'',
+					'bill_id'=>isset($post['bid'])?$post['bid']:'',
+					'w_name'=>isset($post['ward_name'])?$post['ward_name']:'',
+					'w_type'=>$post['ward_type'],
+					'room_type'=>$post['room_type'],
+					'floor_no'=>$post['floor_number'],
+					'room_no'=>$post['room_num'],
+					'bed_no'=>$post['bed_number'],
+					'status'=>0,
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$admindetails['a_id']
+				);
+				//echo '<pre>';print_r($admitted_patients_details);exit;
+				$check=$this->Nurse_model->check_trsfor_patient_exist_ornot($post['previous_bed_id'],$hos_ids['hos_id']);
+				if(count($check)>0){
+					$transfor_patient= $this->Nurse_model->update_transfor_patinet($post['previous_bed_id'],$hos_ids['hos_id'],$admitted_patients_details);
+					if(count($transfor_patient)>0){
+						$this->session->set_flashdata('success',"admitted patient details updated successfully");
+						redirect('nurse/bed_transfer/'.base64_encode($post['previous_bed_id']).'#step-3');
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('nurse/bed_transfer/'.base64_encode($post['previous_bed_id']));
+					}
+				}else{
+					$transfor_patient= $this->Nurse_model->save_transfor_patinet($admitted_patients_details);
+					if(count($transfor_patient)>0){
+						$this->session->set_flashdata('success',"admitted patient details updated successfully");
+						redirect('nurse/bed_transfer/'.base64_encode($post['previous_bed_id']).'#step-3');
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('nurse/bed_transfer/'.base64_encode($post['previous_bed_id']));
+					}
+				}				
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
@@ -117,11 +190,13 @@ class Nurse extends In_frontend {
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
-					
-					
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==10){
+					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
+					$data['ip_admitted_patient_list'] =$this->Nurse_model->get_admitted_patient_list($hos_ids['hos_id']);
+					$data['ip_discharge_patient_list'] =$this->Nurse_model->get_discharged_patient_list($hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('nurse/patient_discharge');
+					$this->load->view('nurse/patient_discharge',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -138,11 +213,13 @@ class Nurse extends In_frontend {
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==10){
 					
-					
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['admit_patient_list']=$this->Nurse_model->get_admited_patient_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('nurse/reports');
+					$this->load->view('nurse/reports',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -159,11 +236,15 @@ class Nurse extends In_frontend {
 		
 		if($this->session->userdata('userdetails'))
 		{
-				if($admindetails['role_id']=1){
+				$admindetails=$this->session->userdata('userdetails');
+				if($admindetails['role_id']==10){
 					
-					
+					$p_id=base64_decode($this->uri->segment(3));
+					$b_id=base64_decode($this->uri->segment(4));
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['medicine_list']=$this->Nurse_model->get_patient_list_details($p_id,$b_id);
 					//echo '<pre>';print_r($data);exit;
-					$this->load->view('nurse/reports_view');
+					$this->load->view('nurse/reports_view',$data);
 					$this->load->view('html/footer');
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -175,6 +256,7 @@ class Nurse extends In_frontend {
 			redirect('admin');
 		}
 	}
+	
 	
 	public  function addvitals(){
 		if($this->session->userdata('userdetails'))
@@ -210,6 +292,39 @@ class Nurse extends In_frontend {
 			
 		}else{
 			//$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function discharge()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			if($admindetails['role_id']=2){
+					$a_p_id=$this->uri->segment(3);
+					
+					if($a_p_id!=''){
+							$stusdetails=array(
+							'nurse_charge_status'=>1,
+							);
+							$statusdata= $this->Nurse_model->update_admitted_patient_details(base64_decode($a_p_id),$stusdetails);
+							if(count($statusdata)>0){
+								$this->session->set_flashdata('success',"admitted patient details successfully updated.");
+								redirect('nurse/patient_discharge');
+							}else{
+								 $this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+								redirect('nurse/patient_discharge');
+							}
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('nurse/patient_discharge');
+					}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}

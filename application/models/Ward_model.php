@@ -375,6 +375,16 @@ class Ward_model extends CI_Model
 		$this->db->where('admitted_patient_list.completed',0);
 		return $this->db->get()->result_array();
 	}
+	public function get_nurse_discharge_patient_list($hos_id){
+		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,admitted_patient_list.bill_id,patients_list_1.name,patients_list_1.mobile,resource_list.resource_name,admitted_patient_list.status,admitted_patient_list.date_of_admit')->from('admitted_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = admitted_patient_list.pt_id', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = admitted_patient_list.d_id', 'left');
+		//$this->db->join('patient_billing', 'patient_billing.p_id = admitted_patient_list.pt_id', 'left');
+		$this->db->where('admitted_patient_list.hos_id',$hos_id);
+		$this->db->where('admitted_patient_list.completed',0);
+		$this->db->where('admitted_patient_list.nurse_charge_status',1);
+		return $this->db->get()->result_array();
+	}
 
 	public function get_discharge_patient_history($hos_id){
 		$this->db->select('admitted_patient_list.a_p_id,admitted_patient_list.pt_id,admitted_patient_list.bill_id,patients_list_1.card_number,patients_list_1.name,resource_list.resource_name,treament.t_name,patients_list_1.mobile,admitted_patient_list.date_of_admit,admitted_patient_list.discharge_date,admitted_patient_list.amount_status')->from('admitted_patient_list');				
@@ -393,10 +403,7 @@ class Ward_model extends CI_Model
 		return $this->db->update("admitted_patient_list",$data);
 	}
 	
-	public function update_admitted_patient_details($a_p_id,$data){
-		$this->db->where('a_p_id',$a_p_id);
-		return $this->db->update("admitted_patient_list",$data);
-	}
+	
 	
 	
 	/* bed  chart  purpose */
@@ -428,6 +435,34 @@ class Ward_model extends CI_Model
 		$this->db->where('ward_room_beds.w_r_n_id',$w_r_n_id);
 		$this->db->where('ward_room_beds.status',1);
 		return $this->db->get()->result_array();
+	}
+	
+	/* transfor  patient  List purpose */
+	public function get_transfor_patient_list($hos_id){
+		$this->db->select('transfor_patient_list.t_p_id,transfor_patient_list.previous_bed_id,transfor_patient_list.pt_id,patients_list_1.name,ward_name.ward_name,ward_type.ward_type,ward_room_type.room_type,ward_floors.ward_floor,ward_room_number.room_num,ward_room_beds.bed,transfor_patient_list.status')->from('transfor_patient_list');				
+		$this->db->join('patients_list_1', 'patients_list_1.pid = transfor_patient_list.pt_id', 'left');
+		$this->db->join('ward_name', 'ward_name.w_id = transfor_patient_list.w_name', 'left');
+		$this->db->join('ward_type', 'ward_type.ward_id = transfor_patient_list.w_type', 'left');
+		$this->db->join('ward_room_type', 'ward_room_type.w_r_t_id = transfor_patient_list.room_type', 'left');
+		$this->db->join('ward_floors', 'ward_floors.w_f_id = transfor_patient_list.floor_no', 'left');
+		$this->db->join('ward_room_number', 'ward_room_number.w_r_n_id = transfor_patient_list.room_no', 'left');
+		$this->db->join('ward_room_beds', 'ward_room_beds.r_b_id = transfor_patient_list.bed_no', 'left');
+		$this->db->where('transfor_patient_list.hos_id',$hos_id);
+		return $this->db->get()->result_array();
+	}
+	public  function update_trasfor_patient_details($t_p_id,$data){
+		$this->db->where('t_p_id',$t_p_id);
+		$this->db->where('status',0);
+		return $this->db->update('transfor_patient_list',$data);
+	}
+	public  function update_patient_transfor_details($t_p_id,$data){
+		$this->db->where('a_p_id',$t_p_id);
+		return $this->db->update('admitted_patient_list',$data);
+	}
+	public  function get_admited_patient_details($t_p_id){
+		$this->db->select('*')->from('transfor_patient_list');		
+		$this->db->where('t_p_id',$t_p_id);
+		return $this->db->get()->row_array();
 	}
 	
 }

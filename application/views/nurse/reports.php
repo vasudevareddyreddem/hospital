@@ -20,36 +20,40 @@
                     </header>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="" class="table table-bordered" style="width:100%;">
-                                <thead>
-                                    <tr>
-                                        <th>Patient ID</th>
-                                        <th>Patient Name</th>
-                                        <th>Gender </th>
-                                        <th>Age</th>
-                                        <th>Doctor</th>
-                                        <th>Diagnosis</th>
-                                        <th>Date of Admit</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>patient 1</td>
-                                        <td>Male</td>
-                                        <td>26</td>
-                                        <td>Design Doctor1</td>
-                                        <td>xxxxxx</td>
-                                        <td>25/06/2018 </td>
-                                        <td class="valigntop">
-                                            <div class="btn-group">
-                                                <a href="<?php echo base_url('nurse/reports_view');?>" class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > View </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <table id="example1" class="table table-bordered" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Patient ID</th>
+												<th>Patient Name</th>
+                                                <th>Gender </th>
+                                                <th>Age</th>
+                                                <th>Doctor Name</th>
+                                                <th>Diagnosis</th>
+                                                <th>Date of Admit</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+										
+                                        <tbody>										
+										<?php if(isset($admit_patient_list)  && count($admit_patient_list)>0){ ?>
+											<?php foreach($admit_patient_list as $list){ ?>
+												<tr>
+													<td><?php echo $list['pt_id']; ?></td>
+													<td><?php echo $list['name']; ?></td>
+													<td><?php echo $list['gender']; ?></td>
+													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['resource_name']; ?></td>
+													<td><?php echo $list['t_name']; ?></td>
+													<td><?php echo $list['date_of_admit']; ?></td>
+													 <td class="valigntop">
+															<a href="<?php echo base_url('nurse/reports_view/'.base64_encode($list['pt_id']).'/'.base64_encode($list['bill_id']));?>" class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > View </a>
+														
+													</td>
+												</tr>
+											<?php } ?>
+										<?php } ?>
+                                        </tbody>
+                                    </table>
                         </div>
                     </div>
                 </div>

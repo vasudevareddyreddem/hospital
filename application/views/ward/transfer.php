@@ -34,11 +34,12 @@
                                                 <th>Room No</th>
                                                 <th>Bed No</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-										<?php if(isset($ip_admitted_patient_list)  && count($ip_admitted_patient_list)>0){ ?>
-											<?php foreach($ip_admitted_patient_list as $list){ ?>
+										<?php if(isset($ip_transfor_patient_list)  && count($ip_transfor_patient_list)>0){ ?>
+											<?php foreach($ip_transfor_patient_list as $list){ ?>
                                             <tr>
 													
 													<td><?php echo $list['pt_id']; ?></td>
@@ -49,10 +50,14 @@
 													<td><?php echo $list['ward_floor']; ?></td>
 													<td><?php echo $list['room_num']; ?></td>
 													<td><?php echo $list['bed']; ?></td>
+													  <td><?php if($list['status']==1){ echo "Success";}else if($list['status']==2){ echo "Rejected"; }else{ echo "Pending"; } ?></td>
+
 													
                                                 <td>
-													<a class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Accept</a>
-													<a class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > Reject</a>
+												<?php if($list['status']==0){ ?>
+													<a href="<?php echo base_url('ward_management/transfor_status/'.base64_encode($list['t_p_id']).'/'.base64_encode(1)); ?>" class="btn btn-xs btn-success dropdown-toggle no-margin" type="button" > Accept</a>
+													<a href="<?php echo base_url('ward_management/transfor_status/'.base64_encode($list['t_p_id']).'/'.base64_encode(2)); ?>" class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" > Reject</a>
+												<?php } ?>
 												</td>
                                             </tr>
 											<?php } ?>

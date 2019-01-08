@@ -244,13 +244,30 @@ class Resources_model extends CI_Model
 		$this->db->select('lab_test_type.type_name,lab_test_type.id')->from('lab_test_type');
 		$this->db->where('lab_test_type.status',1);
 		$this->db->where('lab_test_type.type',$val);
+		//$this->db->where('lab_test_type.hos_id',$hos_id);
 		$this->db->group_by('lab_test_type.type_name');
+        return $this->db->get()->result_array();
+	}
+	public function get_investigation_basedon_testtypes_list($hos_id,$val){
+		$this->db->select('lab_test_list.test_type,lab_test_list.t_id')->from('lab_test_list');
+		$this->db->where('lab_test_list.status',1);
+		$this->db->where('lab_test_list.type',$val);
+		$this->db->where('lab_test_list.hos_id',$hos_id);
+		//$this->db->group_by('lab_test_list.test_type');
         return $this->db->get()->result_array();
 	}
 	public function get_test_list($type,$test_type_id){
 		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.modality,lab_test_list.type,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
 		$this->db->where('lab_test_list.type',$type);
 		$this->db->where('lab_test_list.test_type',$test_type_id);
+		$this->db->where('lab_test_list.status',1);
+        return $this->db->get()->result_array();
+	}
+	public function get_test_list_hospital_wise($type,$test_type_id,$hos_id){
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.modality,lab_test_list.type,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
+		$this->db->where('lab_test_list.type',$type);
+		$this->db->where('lab_test_list.hos_id',$hos_id);
+		$this->db->where('lab_test_list.t_id',$test_type_id);
 		$this->db->where('lab_test_list.status',1);
         return $this->db->get()->result_array();
 	}
@@ -334,9 +351,20 @@ class Resources_model extends CI_Model
 		$this->db->where('lab_test_type.id',$tid);
         return $this->db->get()->row_array();
 	}
+	public function get_test_name_details($t_id){
+		$this->db->select('lab_test_list.type')->from('lab_test_list');
+		$this->db->where('lab_test_list.t_id',$t_id);
+        return $this->db->get()->row_array();
+	}
 	public function get_medicine_list_details($name){
 		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.batchno,medicine_list.expiry_date,medicine_list.qty,medicine_list.medicine_type,medicine_list.cgst,medicine_list.amount,medicine_list.dosage')->from('medicine_list');		
 		$this->db->where('medicine_list.medicine_name',$name);
+        return $this->db->get()->row_array();	
+	}
+	public function get_medicine_details_list_details($name,$hos_id){
+		$this->db->select('medicine_list.id,medicine_list.total_amount,medicine_list.batchno,medicine_list.expiry_date,medicine_list.qty,medicine_list.medicine_type,medicine_list.cgst,medicine_list.amount,medicine_list.dosage')->from('medicine_list');		
+		$this->db->where('medicine_list.medicine_name',$name);
+		$this->db->where('medicine_list.hos_id',$hos_id);
         return $this->db->get()->row_array();	
 	}
 	public function update_medicine_details($med_id,$data){

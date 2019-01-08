@@ -33,7 +33,7 @@
                 <div class="">
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="" class="table table-bordered" style="width:100%;">
+                            <table id="example4" class="table table-bordered" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>Name of the Medicine</th>
@@ -42,16 +42,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+								<?php if(isset($medicine_list) && count($medicine_list)>0){ ?>
+								<?php foreach($medicine_list as $list){ ?>
                                     <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>xxxxx</td>
-                                        <td>xxxx</td>
+                                        <td><?php echo isset($list['medicine_name'])?$list['medicine_name']:''; ?></td>
+                                        <td><?php echo isset($list['qty'])?$list['qty']:''; ?></td>
+                                        <td><?php echo isset($list['date'])?$list['date']:''; ?></td>
+                                       
                                     </tr>
-                                    <tr>
-                                        <td>xxxxxx500</td>
-                                        <td>xxx </td>
-                                        <td>xxxx</td>
-                                    </tr>
+								<?php } ?>
+								<?php } ?>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -163,3 +164,11 @@
     </div>
 </div>
 <!-- //Lab Report Modal -->
+<script>
+$(document).ready(function() {
+    $('#example4').DataTable( {
+        "order": [[ 2, "desc" ]]
+    } );
+} );
+} );
+</script>

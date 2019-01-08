@@ -276,6 +276,7 @@ public function index()
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$data['discharge_patient_list'] =$this->Ward_model->get_admited_discharge_patient_list($hos_ids['hos_id']);
+					$data['nurse_discharge_patient_list'] =$this->Ward_model->get_nurse_discharge_patient_list($hos_ids['hos_id']);
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/discharge',$data);
 					$this->load->view('html/footer');
@@ -298,8 +299,8 @@ public function index()
 				if($admindetails['role_id']=1){
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
-					//echo $this->db->last_query();exit;
+					$data['ip_transfor_patient_list'] =$this->Ward_model->get_transfor_patient_list($hos_ids['hos_id']);
+					///echo $this->db->last_query();exit;
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('ward/transfer',$data);
 					$this->load->view('html/footer');
@@ -1624,4 +1625,61 @@ public function index()
 			echo json_encode($data);exit;
 		}
 	}
+	
+	public function transfor_status()
+	{
+		if($this->session->userdata('userdetails'))
+		{
+			$admindetails=$this->session->userdata('userdetails');
+			if($admindetails['role_id']==9){
+				$t_p_id=$this->uri->segment(3);
+				$status=base64_decode($this->uri->segment(4));
+				if($t_p_id!=''){
+					$stusdetails=array(
+						'status'=>$status,
+						'updated_at'=>date('Y-m-d H:i:s')
+						);
+					$statusdata= $this->Ward_model->update_trasfor_patient_details(base64_decode($t_p_id),$stusdetails);
+					//echo $this->db->last_query();exit;
+					if(count($statusdata)>0){
+						$details=$this->Ward_model->get_admited_patient_details(base64_decode($t_p_id));
+						//echo $this->db->last_query();exit;
+								$add=array(
+										'w_name'=>isset($details['w_name'])?$details['w_name']:'',
+										'w_type'=>isset($details['w_type'])?$details['w_type']:'',
+										'room_type'=>isset($details['room_type'])?$details['room_type']:'',
+										'floor_no'=>isset($details['floor_no'])?$details['floor_no']:'',
+										'room_no'=>isset($details['room_no'])?$details['room_no']:'',
+										'bed_no'=>isset($details['bed_no'])?$details['bed_no']:'',
+										);
+										//echo '<pre>';print_r($add);exit;
+										$this->Ward_model->update_patient_transfor_details($details['previous_bed_id'],$add);
+												
+							if($status==1){
+									$this->session->set_flashdata('success',"Patient details successfully Rejected.");
+								}else{
+									$this->session->set_flashdata('success',"Patient details successfully activated.");
+								}
+						redirect('ward_management/transfer/'.base64_encode(1));;
+					}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('ward_management/transfer/'.base64_encode(1));
+					}
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('ward_management/transfer');
+				}
+					
+			}else{
+					$this->session->set_flashdata('error',"You have no permission to access");
+					redirect('dashboard');
+			}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	
+	
+	
 }

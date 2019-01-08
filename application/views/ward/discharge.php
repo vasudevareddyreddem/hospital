@@ -80,48 +80,41 @@
                                     <table id="example5" class=" table table-bordered" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>Patient ID</th>
-                                                <th>Patient Name</th>
-                                                <th>Ward Type </th>
-                                                <th>Ward No </th>
-                                                <th>Room Type</th>
-                                                <th>Room No</th>
-                                                <th>Bed No</th>
-                                                <th>Bill Status</th>
-                                                <th>Discharge Status</th>
+                                                 <th>Patient ID</th>
+												<th>Patient Name</th>
+                                                <th>Mobile No </th>
+                                                <th>Doctor Name</th>
+                                                <th>Admit Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php if(isset($nurse_discharge_patient_list)  && count($nurse_discharge_patient_list)>0){ ?>
+											<?php foreach($nurse_discharge_patient_list as $list){ ?>
                                             <tr>
-                                                <td>101</td>
-                                                <td>patient 1</td>
-                                                <td>type 1</td>
-                                                <td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <span class="label label-sm label-success"> Paid </span>
-                                                <td>
-                                                    <a class="btn btn-xs btn-success dropdown-toggle no-margin" type="button"> Accept</a>
-                                                    <a class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button"> Reject</a>
+											    <td><?php echo $list['pt_id']; ?></td>
+											    <td><?php echo $list['name']; ?></td>
+											    <td><?php echo $list['mobile']; ?></td>
+                                                <td><?php echo $list['resource_name']; ?></td>
+                                                <td><?php echo date('M j h:i A',strtotime(htmlentities($list['date_of_admit'])));?></td>
+                                             
+                                                <td class="valigntop">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                          
+														   <li>
+														  <a href="<?php echo base_url('ward_management/patient_history_post/'.base64_encode($list['a_p_id'])); ?>">
+                                                            <i class="fa fa-check"></i> Discharge</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>101</td>
-                                                <td>patient 1</td>
-                                                <td>type 1</td>
-                                                <td>260</td>
-                                                <td>multi</td>
-                                                <td>105</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <span class="label label-sm label-danger"> Pending </span>
-                                                <td>
-                                                    <a class="btn btn-xs btn-success dropdown-toggle no-margin" type="button"> Accept</a>
-                                                    <a class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button"> Reject</a>
-                                                </td>
-                                            </tr>
+											<?php } ?>
+										<?php } ?>
 
                                         </tbody>
                                     </table>
