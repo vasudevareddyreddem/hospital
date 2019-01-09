@@ -368,10 +368,10 @@ function get_bed_count(id){
    						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) {
 							if(data.list[i].completed==0 && data.list[i].a_p_id!=''){						
-								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="radio" name="bed" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 
 							}else{
-								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="radio" name="bed"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 
 							}
 						}							
