@@ -11,14 +11,14 @@ class Ward_model extends CI_Model
 	public  function get_ip_patient_list($hos_id){
 		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id,treament.t_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
+		$this->db->join('admitted_patient_list', 'admitted_patient_list.pt_id = patients_list_1.pid', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');
 		$this->db->join('treament', 'treament.t_id = patient_billing.treatment_id', 'left');
-		$this->db->join('admitted_patient_list', 'admitted_patient_list.pt_id = patient_billing.p_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patients_list_1.hos_id',$hos_id);	
 		$this->db->where('patient_billing.completed_type',2);
-		$this->db->where('patient_billing.patient_type',1);
-		//$this->db->where('admitted_patient_list.pt_id','NULL');
+		//$this->db->where('patient_billing.completed',0);
+		$this->db->where('admitted_patient_list.a_p_id is null');
 		return $this->db->get()->result_array();
 	}
 		

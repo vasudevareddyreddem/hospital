@@ -100,7 +100,7 @@ public function index()
 					//echo $this->db->last_query();exit;
 					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
 					//echo $this->db->last_query();exit;
-				    //echo '<pre>';print_r($data);exit;
+				    //echo '<pre>';print_r($data['ip_patient_list']);exit;
 					$data['ward_list'] =$this->Ward_model->get_ward_list_details($hos_ids['hos_id']);					
 					$data['wardtype_list'] =$this->Ward_model->get_wardtype_list_details($hos_ids['hos_id']);
 					$data['floor_list'] =$this->Ward_model->get_floor_list_details($hos_ids['hos_id']);
@@ -239,7 +239,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$post=$this->input->post();
-					echo '<pre>';print_r($post);exit;					
+					//echo '<pre>';print_r($post);exit;					
 					//echo '<pre>';print_r($data);exit;	
 					$admitted_patients_details=array(
 					'w_name'=>$post['ward_name'],
