@@ -257,7 +257,7 @@ class Lab extends In_frontend {
 					
 					$data['userdetails']=$userdetails;
 					$datalabtest_list=$this->Lab_model->get_all_patients_lists($userdetails['hos_id']);
-					
+					//echo '<pre>';print_r($datalabtest_list);exit;
 					if(isset($datalabtest_list) && count($datalabtest_list)>0){
 						foreach($datalabtest_list as $list){
 							//echo $list['pid'];
@@ -559,10 +559,13 @@ class Lab extends In_frontend {
 								$c++;}
 								
 								
+								//echo '<pre>';print_r($labdetails_list);
 								//echo '<pre>';print_r($li);exit;
 								
 								foreach($li as $imglist){
+									$l_ids=$this->Lab_model->get_lab_test_details_id($post['pid'],$post['b_id'],$imglist['test_id']);
 									$addreports=array(
+										'l_t_id'=>isset($l_ids['id'])?$l_ids['id']:'',
 										'p_id'=>$post['pid'],
 										'b_id'=>$post['b_id'],
 										'hos_id'=>$userdetails['hos_id'],
@@ -574,6 +577,7 @@ class Lab extends In_frontend {
 										'status'=>1,				
 										'create_by'=>$admindetails['a_id']
 										);
+										//echo '<pre>';print_r($addreports);exit;
 										$test_deatils=$this->Lab_model->get_previous_report_details($post['pid'],$post['b_id'],$imglist['test_id']);
 										//echo '<pre>';print_r($test_deatils);
 										if(count($test_deatils)>0){

@@ -91,10 +91,19 @@ class Nurse_model extends CI_Model
 	}
 	
 	/* get patient  Midical list */
-	public  function get_patient_list_details($p_id,$b_id){
+	public  function get_patient_medicine_list_details($p_id,$b_id){
 		$this->db->select('medicine_name,medicine_type,no_of_days,qty,create_at,date')->from('patient_medicine_list');
 		$this->db->where('patient_medicine_list.p_id',$p_id);
 		$this->db->where('patient_medicine_list.b_id',$b_id);
+		return $this->db->get()->result_array();
+	}
+	public  function get_patient_lab_test_list_details($p_id,$b_id){
+		$this->db->select('patient_lab_reports.image,patient_lab_test_list.create_at,patient_lab_reports.problem,patient_lab_reports.symptoms,patients_list_1.name,patients_list_1.mobile,patients_list_1.email,patient_lab_test_list.id,patient_lab_test_list.p_id,patient_lab_test_list.b_id,lab_test_list.t_name,lab_test_list.test_type')->from('patient_lab_test_list');
+		$this->db->join('patient_lab_reports', 'patient_lab_reports.l_t_id = patient_lab_test_list.id', 'left');
+		$this->db->join('lab_test_list', 'lab_test_list.t_id = patient_lab_test_list.test_id', 'left');
+		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_lab_test_list.p_id', 'left');
+		$this->db->where('patient_lab_test_list.p_id',$p_id);
+		$this->db->where('patient_lab_test_list.b_id',$b_id);
 		return $this->db->get()->result_array();
 	}
 	

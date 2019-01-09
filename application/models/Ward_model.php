@@ -283,11 +283,15 @@ class Ward_model extends CI_Model
 	}
 	
 	public function get_bed_list_details($w_r_n_id,$hos_id){
-		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.w_r_n_id,ward_room_beds.bed,ward_room_beds.status,ward_room_beds.create_at')->from('ward_room_beds');			
+		$this->db->select('ward_room_beds.r_b_id,ward_room_beds.w_r_n_id,ward_room_beds.bed,ward_room_beds.status,ward_room_beds.create_at,admitted_patient_list.a_p_id,admitted_patient_list.completed')->from('ward_room_beds');			
+		$this->db->join('admitted_patient_list','admitted_patient_list.bed_no=ward_room_beds.r_b_id','left');				
 		$this->db->where('ward_room_beds.w_r_n_id',$w_r_n_id);
 		$this->db->where('ward_room_beds.hos_id',$hos_id);
-		$this->db->where('ward_room_beds.status !=',2);
+		$this->db->where('ward_room_beds.status',1);
+		//$this->db->where('ward_room_beds.status',1);
 		return $this->db->get()->result_array();
+		
+		
 	}	
 	
 	public function update_bednumber_details($w_r_n_id,$data){

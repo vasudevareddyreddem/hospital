@@ -202,11 +202,10 @@
                                                          </div>
                                                       </div>
                                                    </div>
-                                                   <div class="panel-body" id="edit_display_tab" style="display: none;">
                                                       <div class="d-flex justify-content-center">
-                                                         <li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>"></li>
+                                                         <li class="row" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>"></li>
                                                       </div>
-                                                   </div>
+                                                  
                                                 </div>
                                              </div>
                                           </div>
@@ -337,7 +336,7 @@
       						$('#beds').empty();
    						$('#bedcount_id').empty();  																		
       						for(i=0; i<data.list.length; i++) { 																																			
-   							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+   							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
    						}							
       						//console.log(data);return false;
       					}   				

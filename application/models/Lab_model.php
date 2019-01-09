@@ -53,6 +53,7 @@ class Lab_model extends CI_Model
 		$this->db->join('resource_list ', 'resource_list.a_id = patient_billing.create_by', 'left');
 		$this->db->where('patients_list_1.hos_id', $hos_id);
 		$this->db->where('patient_billing.completed_type',2);
+		//$this->db->or_where('patient_billing.patient_type',1);
 		$this->db->where('patient_billing.report_completed',0);
         return $this->db->get()->result_array();	
 	}
@@ -402,6 +403,14 @@ class Lab_model extends CI_Model
 		$this->db->select('t_name,type')->from('lab_test_list');
 		$this->db->where('lab_test_list.t_name',$t_name);
 		$this->db->where('lab_test_list.type',$type);
+		return $this->db->get()->row_array();
+	}
+	
+	public  function get_lab_test_details_id($pid,$b_id,$test_id){
+		$this->db->select('*')->from('patient_lab_test_list');
+		$this->db->where('patient_lab_test_list.p_id',$pid);
+		$this->db->where('patient_lab_test_list.b_id',$b_id);
+		$this->db->where('patient_lab_test_list.test_id',$test_id);
 		return $this->db->get()->row_array();
 	}
 	

@@ -4,31 +4,23 @@
    <div class="page-content" >
       <div class="page-bar">
          <div class="page-title-breadcrumb">
-		 <?php if($userdetails['role_id']==2){ ?>
             <div class=" pull-left">
-               <div class="page-title">Admitted Patient Edit</div>
+               <div class="page-title">Edit Patient Ward details</div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
-               </li><li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('Ward_management/admit-patients/'.base64_encode(1)); ?>">Admitted Patient List</a>&nbsp;<i class="fa fa-angle-right"></i>
                </li>
-               <li class="active">Edit</li>
+               <li class="active">Edit Patient Ward details</li>
             </ol>
-			<?php } ?>
+			
          </div>
       </div>
    
          <div class="panel tab-border card-topline-green">
-            <header class="panel-heading panel-heading-gray custom-tab ">
-               <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Edit Ward details </a>
-                  </li>
-                  
-               </ul>
-            </header>
+           
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
+                  <div class="tab-pane active" id="home">
 				  <div class="container">
                      
 					  <form action="<?php echo base_url('Ward_management/admitpatientseditpost'); ?>" method="post" id="room_num" name="room_num" enctype="multipart/form-data">
@@ -38,9 +30,7 @@
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />													
 													<input type="hidden" name="wardname" id="wardname" value="<?php echo $list['a_p_id']; ?>" >
-													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Ward details rename</h4>
-													</div>
+													
 													<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
@@ -142,12 +132,18 @@
 													<div class="panel-body"> 
 													<ol class="seats" type="A">
 													<li class="seat">
-													<?php if($List['r_b_id']==$list['bed_no']){ ?>
-														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" checked />
-														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
-													<?php }else{ ?>
-														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" />
-														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+													<?php if($List['completed']==1 &&  $List['a_p_id']!='' || $List['completed']==''){ ?>
+														<?php if($List['r_b_id']==$list['bed_no']){ ?>
+														
+															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+														<?php }else{ ?>
+															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>"  value="<?php echo $List['r_b_id'] ?>"/>
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+														<?php } ?>	
+													<?php }else if($List['r_b_id']==$list['bed_no']){ ?>	
+															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
 													<?php } ?>	
 													</li>
 													</ol>
@@ -160,7 +156,7 @@
 													  </div>
 													 <div class="panel-body">
 													  <div class="d-flex justify-content-center">
-													<li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>"></li>
+													<li class="row row--1" id="bedcount_id"></li>
 													</div>
 													  </div>
 													</div>													
@@ -183,7 +179,24 @@
       </div>
    </div>
 </div>
-
+<script src="<?php echo base_url('assets/vendor/jquery.min.js'); ?>"></script>
+<script>
+   $("input:checkbox").on('click', function() {
+    // in the handler, 'this' refers to the box clicked on
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      // the name of the box is retrieved using the .attr() method
+      // as it is assumed and expected to be immutable
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      // the checked state of the group/box on the other hand will change
+      // and the current value is retrieved using .prop() method
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+   });
+</script>
 <script>
 function get_bed_count(id){	
 		
@@ -199,9 +212,16 @@ function get_bed_count(id){
 						//console.log(data);return false;
    						$('#beds').empty();
 						$('#bedcount_id').empty();  																		
-   						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
-						}							
+   						
+						for(i=0; i<data.list.length; i++) {
+							if(data.list[i].completed==0 && data.list[i].a_p_id!=''){						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+
+							}else{
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+
+							}
+						}						
    						//console.log(data);return false;
    					}   				
    			}); 				

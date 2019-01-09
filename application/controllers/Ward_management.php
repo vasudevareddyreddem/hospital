@@ -238,7 +238,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$post=$this->input->post();
-					//echo '<pre>';print_r($hos_ids);exit;					
+					echo '<pre>';print_r($post);exit;					
 					//echo '<pre>';print_r($data);exit;	
 					$admitted_patients_details=array(
 					'w_name'=>$post['ward_name'],
@@ -246,11 +246,11 @@ public function index()
 					'room_type'=>$post['room_type'],
 					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
-					'bed_no'=>$post['bed'],
+					'bed_no'=>$post['bed_number'],
 					'updated_at'=>date('Y-m-d H:i:s')
 				);
 					//echo '<pre>';print_r($admitted_patients_details);exit;
-				$ward = $this->Ward_model->update_admitted_patient_details($post['wardname'],$admitted_patients_details);
+				$ward = $this->Ward_model->update_patient_transfor_details($post['wardname'],$admitted_patients_details);
 				if(count($ward)>0){
 					$this->session->set_flashdata('success',"admitted patient details updated successfully");
 					redirect('ward_management/admit/'.base64_encode(3));
@@ -359,7 +359,7 @@ public function index()
 					$data['tab']=base64_decode($this->uri->segment(3));
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					$post=$this->input->post();
-					//echo '<pre>';print_r($hos_ids);exit;					
+					//echo '<pre>';print_r($post);exit;					
 					//echo '<pre>';print_r($data);exit;	
 					$admitted_patients_details=array(
 					'w_name'=>$post['ward_name'],
@@ -367,11 +367,11 @@ public function index()
 					'room_type'=>$post['room_type'],
 					'floor_no'=>$post['floor_number'],
 					'room_no'=>$post['room_num'],
-					'bed_no'=>$post['bed'],
+					'bed_no'=>$post['bed_number'],
 					'updated_at'=>date('Y-m-d H:i:s')
 				);
-					//echo '<pre>';print_r($admitted_patients_details);exit;
-				$ward = $this->Ward_model->update_admitted_patient_details($post['wardname'],$admitted_patients_details);
+				//echo '<pre>';print_r($admitted_patients_details);exit;
+				$ward = $this->Ward_model->update_patient_transfor_details($post['wardname'],$admitted_patients_details);
 				if(count($ward)>0){
 					$this->session->set_flashdata('success',"admitted patient details updated successfully");
 					redirect('ward_management/transfer/'.base64_encode(3));

@@ -3,21 +3,19 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Reports</div>
+                    <div class="page-title">Patients Report</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Nurse</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
-                    <li class="active">Reports</li>
+                    <li class="active">Patients Report</li>
                 </ol>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel tab-border card-topline-green">
-                    <header class="panel-heading panel-heading-gray custom-tab ">
-                        Patients Report
-                    </header>
+                  
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="example1" class="table table-bordered" style="width:100%;">

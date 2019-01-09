@@ -584,7 +584,7 @@
 	                            </a>
 	                        </li>	
 							<li class="nav-item start ">
-	                            <a href="<?php echo base_url('ward_management/observation');?>" class="nav-link nav-toggle">
+	                            <a href="<?php echo base_url('nurse/reports');?>" class="nav-link nav-toggle">
 	                                <i class="material-icons">assignment</i>
 	                                <span class="title">Observation/ Nursing </span>
 	                                <span class="selected"></span>

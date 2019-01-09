@@ -19,18 +19,15 @@
       </div>
    
          <div class="panel tab-border card-topline-green">
-            <header class="panel-heading panel-heading-gray custom-tab ">
-               <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="#home" data-toggle="tab" class="<?php if(isset($tab) && $tab ==''){ echo "active"; } ?>">Edit Ward details </a>
-                  </li>
-                  
-               </ul>
-            </header>
+           
             <div class="panel-body">
                <div class="tab-content">
-                  <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo "active"; } ?>" id="home">
+                  <div class="tab-pane active" id="home">
 				  <div class="container">
-                     
+					<div class="modal-header">
+						<h4 class="modal-title" id="smallModalLabel">Edit Patient Ward details</h4>
+						<a href="<?php echo base_url('ward_management/admit'); ?>">Back</a>
+					</div>
 					  <form action="<?php echo base_url('Ward_management/transferpatientseditpost'); ?>" method="post" id="room_num" name="room_num" enctype="multipart/form-data">
 							<?php $csrf = array(
 													   'name' => $this->security->get_csrf_token_name(),
@@ -38,9 +35,7 @@
 													   ); ?>
 													<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />													
 													<input type="hidden" name="wardname" id="wardname" value="<?php echo $list['a_p_id']; ?>" >
-													<div class="modal-header">
-														<h4 class="modal-title" id="smallModalLabel">Ward details rename</h4>
-													</div>
+													
 													<div class="row d-flex justify-content-center">
 											 <div class="form-group col-md-6">
 											  <label ><strong>Ward Name</strong></label>
@@ -142,12 +137,15 @@
 													<div class="panel-body"> 
 													<ol class="seats" type="A">
 													<li class="seat">
-													<?php if($List['r_b_id']==$list['bed_no']){ ?>
-														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" checked />
-														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
-													<?php }else{ ?>
-														<input type="checkbox" id="1A<?php echo $List['r_b_id'] ?>" />
-														<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+													<?php if($List['completed']==1 &&  $List['a_p_id']!='' || $List['completed']==''){ ?>
+														<?php if($List['r_b_id']==$list['bed_no']){ ?>
+														
+															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />sdsad
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+														<?php }else{ ?>
+															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>"  value="<?php echo $List['r_b_id'] ?>"/>
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+														<?php } ?>	
 													<?php } ?>	
 													</li>
 													</ol>
@@ -183,7 +181,24 @@
       </div>
    </div>
 </div>
-
+<script src="<?php echo base_url('assets/vendor/jquery.min.js'); ?>"></script>
+<script>
+   $("input:checkbox").on('click', function() {
+    // in the handler, 'this' refers to the box clicked on
+    var $box = $(this);
+    if ($box.is(":checked")) {
+      // the name of the box is retrieved using the .attr() method
+      // as it is assumed and expected to be immutable
+      var group = "input:checkbox[name='" + $box.attr("name") + "']";
+      // the checked state of the group/box on the other hand will change
+      // and the current value is retrieved using .prop() method
+      $(group).prop("checked", false);
+      $box.prop("checked", true);
+    } else {
+      $box.prop("checked", false);
+    }
+   });
+</script>
 <script>
 function get_bed_count(id){	
 		

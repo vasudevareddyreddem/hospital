@@ -214,7 +214,7 @@ class Nurse extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
-				if($admindetails['role_id']==10){
+				if($admindetails['role_id']==10 || $admindetails['role_id']==9){
 					
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					$data['admit_patient_list']=$this->Nurse_model->get_admited_patient_list($userdetails['hos_id']);
@@ -237,12 +237,14 @@ class Nurse extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				$admindetails=$this->session->userdata('userdetails');
-				if($admindetails['role_id']==10){
+				if($admindetails['role_id']==10 || $admindetails['role_id']==9){
 					
 					$p_id=base64_decode($this->uri->segment(3));
 					$b_id=base64_decode($this->uri->segment(4));
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					$data['medicine_list']=$this->Nurse_model->get_patient_list_details($p_id,$b_id);
+					$data['medicine_list']=$this->Nurse_model->get_patient_medicine_list_details($p_id,$b_id);
+					$data['lab_test_list']=$this->Nurse_model->get_patient_lab_test_list_details($p_id,$b_id);
+					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('nurse/reports_view',$data);
 					$this->load->view('html/footer');

@@ -943,7 +943,7 @@ function addtestlist(){
 						$('#internal_code').append("<option value=''>select </option>");                      
 
 						for(i=0; i<data.text.length; i++) {
-						$('#internal_code').append("<option value="+data.text[i].id+">"+data.text[i].type_name+"</option>");                      
+						$('#internal_code').append("<option value="+data.text[i].t_id+">"+data.text[i].test_type+"</option>");                      
 						}
 						}
 				 }
