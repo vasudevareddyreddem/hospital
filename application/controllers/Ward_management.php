@@ -97,6 +97,7 @@ public function index()
 					$hos_ids =$this->Ward_model->get_resources_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					//echo '<pre>';print_r($hos_ids);exit;
 					$data['ip_patient_list']=$this->Ward_model->get_ip_patient_list($hos_ids['hos_id']);
+					//echo $this->db->last_query();exit;
 					$data['ip_admitted_patient_list'] =$this->Ward_model->get_admitted_patient_list($hos_ids['hos_id']);
 					//echo $this->db->last_query();exit;
 				    //echo '<pre>';print_r($data);exit;

@@ -16,7 +16,8 @@ class Ward_model extends CI_Model
 		$this->db->join('admitted_patient_list', 'admitted_patient_list.pt_id = patient_billing.p_id', 'left');
 		$this->db->where('patient_billing.patient_type',1);
 		$this->db->where('patients_list_1.hos_id',$hos_id);	
-		$this->db->where('patient_billing.completed_type',0);
+		$this->db->where('patient_billing.completed_type',2);
+		$this->db->where('patient_billing.patient_type',1);
 		//$this->db->where('admitted_patient_list.pt_id','NULL');
 		return $this->db->get()->result_array();
 	}

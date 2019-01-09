@@ -158,7 +158,7 @@
 													  </div>
 													 <div class="panel-body">
 													  <div class="d-flex justify-content-center">
-													<li class="row row--1" id="bedcount_id" name="bed"  value="<?php echo $List['r_b_id'];?>"></li>
+													<li class="row row--1" id="bedcount_id" ></li>
 													</div>
 													  </div>
 													</div>													
@@ -214,8 +214,14 @@ function get_bed_count(id){
 						//console.log(data);return false;
    						$('#beds').empty();
 						$('#bedcount_id').empty();  																		
-   						for(i=0; i<data.list.length; i++) { 																																			
-							$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed"  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+   						for(i=0; i<data.list.length; i++) {
+							if(data.list[i].completed==0 && data.list[i].a_p_id!=''){						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+
+							}else{
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+
+							}
 						}							
    						//console.log(data);return false;
    					}   				
