@@ -140,13 +140,16 @@
 													<?php if($List['completed']==1 &&  $List['a_p_id']!='' || $List['completed']==''){ ?>
 														<?php if($List['r_b_id']==$list['bed_no']){ ?>
 														
-															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />sdsad
+															<input type="radio" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />sdsad
 															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
 														<?php }else{ ?>
-															<input type="checkbox" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>"  value="<?php echo $List['r_b_id'] ?>"/>
+															<input type="radio" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>"  value="<?php echo $List['r_b_id'] ?>"/>
 															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
 														<?php } ?>	
-													<?php } ?>	
+													<?php  } else if($List['r_b_id']==$list['bed_no']){ ?>	
+															<input type="radio" name="bed_number" id="1A<?php echo $List['r_b_id'] ?>" checked value="<?php echo $List['r_b_id'] ?>" />
+															<label for="1A<?php echo $List['r_b_id'] ?>">bed <?php echo $List['bed'];?></label>
+													<?php } ?>														
 													</li>
 													</ol>
 													</div>
@@ -216,10 +219,10 @@ function get_bed_count(id){
 						$('#bedcount_id').empty();  																		
    						for(i=0; i<data.list.length; i++) {
 							if(data.list[i].completed==0 && data.list[i].a_p_id!=''){						
-								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="radio" name="bed_number" disabled  value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 
 							}else{
-								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="checkbox" name="bed_number"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
+								$('#bedcount_id').append('<div class="panel-body"> <ol class="seats" type="A"><li class="seat" > <input type="radio" name="bed_number"   value="'+data.list[i].r_b_id+'" id="1A'+i+'" /> <label for="1A'+i+'">Bed '+data.list[i].bed+'</label></ol></li></div>'); 							 						
 
 							}
 						}							
