@@ -188,6 +188,33 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	
+	public function healthcamps()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$admindetails=$this->session->userdata('userdetails');
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
+			
+			$data['wallet_amt_percentage_list']=$this->Admin_model->get_all_wallet_amt_per_list_list($admindetails['a_id']);
+					$data['wallet_amt_list']=$this->Admin_model->get_all_wallet_amt_list_list($admindetails['a_id']);
+					$data['current_active_amt']=$this->Admin_model->get_current_amount_list($admindetails['a_id']);
+					
+					$this->load->view('admin/healthcamps',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function coupon_post()
 	{	
 		if($this->session->userdata('userdetails'))

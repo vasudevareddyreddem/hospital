@@ -29,7 +29,13 @@
 					 </div>
 					  <?php } ?>
                      </li>
-                     <li class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
+                     <li style="border-right:2px solid #fff;position:relative" class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
+                     </li>
+					 <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#camp" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==4){ echo "active";}?>">Health Camps Request</a>
+					  <?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo count($app_appointment_list_count);?>
+					 </div>
+					  <?php } ?>
                      </li>
                    
                   </ul>
@@ -347,6 +353,49 @@
                            </div>
                         </div>
                      </div>
+					 
+					 <div class="tab-pane <?php if(isset($tab)&& $tab==4){ echo "active";}?>" id="camp">
+                        <div class="card">
+                           <div class="card-head">
+                              <header>Patients List</header>
+                             
+                           </div>
+                           <div class="card-body table-responsive ">
+								<table class="table table-striped table-bordered " id="example-camp">
+							 <thead>
+								<tr>
+								
+								   <th> Patient Name </th>
+								   <th> Age</th>
+								   <th> Mobile </th>
+								   <th> Department </th>
+								   <th > Booking Date & Time </th>
+								   <th> Action </th>
+								</tr>
+							 </thead>
+							 <tbody>
+							
+								<tr class="">
+								  
+								   <td>Patient 1</td>
+								   <td>21</td>
+								   <td>8500xxxxx</td>
+								   <td>Genaral</td>
+								   <td>2018-12-31 16:05:37</td>
+								  
+								   <td>
+									  <a href="" class="btn btn-sm btn-success">Accept</a>
+									  <a href="" class="btn btn-sm btn-warning">Reject</a>
+								   </td>
+								   
+								</tr>
+							
+							 </tbody>
+							</table>
+                           </div>
+                        </div>
+                     </div>
+					 
                     
 					
                   </div>
@@ -402,6 +451,11 @@ $(document).ready(function() {
 } );
 $(document).ready(function() {
     $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#example-camp').DataTable( {
         "order": [[ 0, "desc" ]]
     } );
 } );
