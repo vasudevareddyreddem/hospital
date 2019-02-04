@@ -197,6 +197,8 @@ class Admin extends CI_Controller {
 					
 					$admindetails=$this->session->userdata('userdetails');
 					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['city_list']=$this->Hospital_model->get_city_list_details($admindetails['a_id']);
+					$data['camp_list']=$this->Admin_model->health_camp_list();
 					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
 			
 			$data['wallet_amt_percentage_list']=$this->Admin_model->get_all_wallet_amt_per_list_list($admindetails['a_id']);
@@ -1755,6 +1757,53 @@ class Admin extends CI_Controller {
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('home');
+		}
+		
+	}
+	public function get_hospitals(){
+		$city=$this->uri->segment(3);
+		$data['hos_list']=$this->Admin_model->get_hospitals_by_city($city);
+		if(count($data['hos_list'])>0){
+			$data['status']=1;
+					echo json_encode($data);exit;
+		}
+		$data['status']=0;
+					echo json_encode($data);exit;
+		
+		
+	}
+	public function add_healthcamp(){
+		if($this->session->userdata('userdetails'))
+		{
+			$login_details=$this->session->userdata('userdetails');
+			
+			
+			$city=$this->input->post('city');
+			$hos=$this->input->post('hospital_id');
+			$dept=$this->input->post('dept');
+			$sdate=$this->input->post('date');
+			$ftime=$this->input->post('ftime');
+			$ttime=$this->input->post('ttime');
+			$data=array('city_name'=>$city,
+			'hos_id'=>$hos,
+			'dept_name'=>$dept,
+			'from_time'=>$ftime,
+			'to_time'=>$ttime,
+			'booking_date'=>$sdate,
+			'created_date'=>date('Y-m-d H:i:s'),
+			'created_by'=>$login_details['a_id']
+			);
+			$flag=$this->Admin_model->save_health_camp($data);
+			if($flag==1){
+				$this->session->set_flashdata('success',"Health Camp Added Successfully");
+				redirect('admin/healthcamps');
+			}
+			$this->session->set_flashdata('error','Health Camp Not Added');
+			redirect('admin/healthcamps');
+		}
+		else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
 		}
 		
 	}

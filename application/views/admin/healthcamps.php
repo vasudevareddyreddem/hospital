@@ -31,19 +31,31 @@
                     <div class="tab-pane <?php if(isset($tab) && $tab ==''){ echo " active"; } ?>" id="home">
                         <div class="container">
 
-                            <form action="<?php echo base_url('wallet/addpost'); ?>" method="post" id="coupon_post" name="coupon_post" enctype="multipart/form-data">
+                            <form action="<?php echo base_url('admin/add_healthcamp'); ?>" method="post" id="coupon_post" name="coupon_post" enctype="multipart/form-data">
                                 <div class="row">
                                 <div class="col-md-6">
-                                    <div class="col-md-12">
-                                        <label> Hospital Name </label>
-                                        <select class="form-control" id="hospital_id" name="hospital_id">
+								<div class="col-md-12">
+                                        <label>City Name </label>
+                                        <select class="form-control" id="city" name="city" onchange="get_hospitals(this.value)">
                                             <option value="">Select</option>
-                                            <?php foreach($hospital_list as $list){ ?>
-                                            <option value="<?php echo $list['hos_id']; ?>">
-                                                <?php echo $list['hos_bas_name']; ?>
+                                            <?php foreach($city_list as $city){ ?>
+                                            <option value="<?php echo $city['hos_bas_city']; ?>">
+                                                <?php echo $city['hos_bas_city']; ?>
                                             </option>
                                             <?php } ?>
                                         </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label> Hospital Name </label>
+                                        <select class="form-control" id="hospital_id" name="hospital_id">
+                                           
+                                        </select>
+                                    </div>
+									<div class="col-md-12">
+                                        <label> Department Name </label>
+                                        <input type="text"  class="form-control" id="dept" name="dept">
+                                           
+                                      
                                     </div>
 									<div class="form-group col-md-12 ">
                                                    <label class="">Booking Date </label>
@@ -55,7 +67,7 @@
 												
 <div class="form-group col-md-12 has-success">
 <label class="">From Time </label>
-<select class="form-control" id="time" name="time" data-bv-field="time">
+<select class="form-control" id="time" name="ftime" data-bv-field="time">
 <option value="">Select</option>
 			<option value="12:00 am">12:00 am</option>
 			<option value="12:30 am">12:30 am</option>
@@ -110,7 +122,7 @@
 </div>
 <div class="form-group col-md-12 has-success">
 <label class="">To Time </label>
-<select class="form-control" id="time" name="time" data-bv-field="time">
+<select class="form-control" id="time" name="ttime" data-bv-field="time">
 <option value="">Select</option>
 			<option value="12:00 am">12:00 am</option>
 			<option value="12:30 am">12:30 am</option>
@@ -197,13 +209,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+										<?php foreach($camp_list as $camp){?>
                                             <tr> 
-												<td> hospital 1</td>
-												<td> 29-01-2019</td>
-												<td>1pm</td>
-												<td>6pm</td>
-												<td>2018-12-31 16:05:37</td>
+												<td> <?php echo $camp['hos_bas_name'];?></td>
+												<td> <?php echo $camp['booking_date'];?></td>
+												<td><?php echo $camp['from_time'];?></td>
+												<td><?php echo $camp['to_time'];?></td>
+												<td><?php 
+                                                 $myDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $camp['created_date']);
+                                            $newDateString = $myDateTime->format('d-m-Y H:i:s');
+                                            echo $newDateString ;
+                                               ?></td>
 											</tr> 
+										<?php }?>
 											</tbody>
                                     </table>
                                   
@@ -306,51 +324,36 @@
 
             fields: {
 
-                wallet_amount: {
+                city: {
                     validators: {
                         notEmpty: {
-                            message: 'Wallet Amount is required'
+                            message: 'City is required'
                         },
-                        regexp: {
-                            regexp: /^[0-9. ]+$/,
-                            message: 'Wallet Amount can only consist of digits'
-                        }
+                        
                     }
                 },
-               ip_amount_percentage: {
+               dept: {
                     validators: {
                         notEmpty: {
-                            message: 'Ip amount percentage is required'
+                            message: 'Department Name is Required'
                         },
-                         between: {
-							min:0,
-							max: 99,
-							message: 'The Ip amount percentage must be between 0 and 99'
-						}
+                        
                     }
                 },
-				op_amount_percentage: {
+				date: {
                     validators: {
                         notEmpty: {
-                            message: 'OP amount percentage is required'
+                            message: 'Booking Date is Required'
                         },
-                         between: {
-							min:0,
-							max: 99,
-							message: 'The OP amount percentage must be between 0 and 99'
-						}
+                       
                     }
                 },
-				lab_amount_percentage: {
+				ftime: {
                     validators: {
                         notEmpty: {
-                            message: 'Lab amount percentage is required'
+                            message: 'From Time is Required'
                         },
-                         between: {
-							min:0,
-							max: 99,
-							message: 'The Lab amount percentage must be between 0 and 99'
-						}
+                       
                     }
                 },
                 hospital_id: {
@@ -360,10 +363,10 @@
                         }
                     }
                 },
-                type: {
+                ttime: {
                     validators: {
                         notEmpty: {
-                            message: 'Type is required'
+                            message: 'To Time is Required'
                         }
                     }
                 }
@@ -379,15 +382,69 @@
                         notEmpty: {
                             message: 'Wallet Amount is required'
                         },
-                        regexp: {
-                            regexp: /^[0-9. ]+$/,
-                            message: 'Wallet Amount can only consist of digits'
-                        }
+                       
                     }
                 }
             }
         })
 
     });
+</script>
+<script>
+ function get_hospitals(value){
+	 
+	
+	 cat_id=$('#c_name').val();
+	 if(value==''){
+		  $('#hospital_id').empty();
+		   temp1='<option value="" disabled>No Data Available</option>';
+		 $('#hospital_id').append(temp1); 
+		  
+		 return false;
+	 }
+	
+	 $.ajax({
+                    type: "GET",    
+                    url: '<?php echo base_url('admin/get_hospitals/'); ?>'+value,    
+                    data: '',    
+                    dataType: "json",   
+                    
+                    success: function (result) {
+						
+						
+						if(result.status==1){
+							//alert('ok');
+							
+					//console.log(result);
+							 $('#hospital_id').empty();
+							 temp1='<option value="" disabled>select</option>';
+							 $('#hospital_id').append(temp1); 
+						$.each(result.hos_list, function(i, hos) {
+							
+							
+							
+							$('#hospital_id').append('<option value="'+hos.hos_id+'">'+hos.hos_bas_name+'</option>').trigger("chosen:updated");
+							
+							
+						});
+						
+						
+						
+						}
+						else{
+							$('#hospital_id').empty();
+							   temp1='<option value="" disabled>No Data Available</option>';
+		 $('#hospital_id').append(temp1); 
+						}
+       
+                                           }
+                    ,
+                    error: function() { 
+                    alert('error from server side');
+
+                    } 
+                });
+ }
+
 </script>
 
