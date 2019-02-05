@@ -384,8 +384,8 @@
 								   <td><?php echo  $user['created_date']?></td>
 								  
 								   <td>
-							<a href="<?php echo base_url('appointments/accept_user_hcamp').base64_encode($user['id']) ;?>" class="btn btn-sm btn-success">Accept</a>
-									  <a href="<?php echo base_url('appointments/reject_user_hcamp').base64_encode($user['id']) ;?>" class="btn btn-sm btn-warning">Reject</a>
+							<a href="<?php echo base_url('appointments/accept_user_hcamp/').base64_encode($user['id']) ;?>" class="btn btn-sm btn-success">Accept</a>
+									  <a href="<?php echo base_url('appointments/reject_user_hcamp/').base64_encode($user['id']) ;?>" class="btn btn-sm btn-warning">Reject</a>
 								   </td>
 								   
 								</tr>
