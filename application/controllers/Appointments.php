@@ -8,6 +8,7 @@ class Appointments extends In_frontend {
 	{
 		parent::__construct();	
 		$this->load->model('Appointments_model');
+		$this->load->model('User_health_camps_model');
 		}
 		public function index(){
 			if($this->session->userdata('userdetails'))
@@ -30,6 +31,7 @@ class Appointments extends In_frontend {
 					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
+					$data['camp_users']=$this->User_health_camps_model->get_camp_users();
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');
 				}else{

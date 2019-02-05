@@ -32,4 +32,10 @@ return $this->db->get()->result_array();
 
 
 	}
+	public function get_camp_users(){
+		$this->db->select('ca.*')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',2);
+       	return $this->db->get()->result_array();
+
+	}
 }
