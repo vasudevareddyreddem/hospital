@@ -1791,7 +1791,8 @@ class Admin extends CI_Controller {
 			'to_time'=>$ttime,
 			'booking_date'=>$sdate,
 			'created_date'=>date('Y-m-d H:i:s'),
-			'created_by'=>$login_details['a_id']
+			'created_by'=>$login_details['a_id'],
+			'status'=>1
 			);
 			$flag=$this->Admin_model->save_health_camp($data);
 			if($flag==1){

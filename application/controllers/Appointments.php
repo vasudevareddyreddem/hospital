@@ -32,6 +32,8 @@ class Appointments extends In_frontend {
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$data['camp_users']=$this->User_health_camps_model->get_camp_users();
+					$data['camp_count']=count($data['camp_users']);
+					//echo $this->db->last_query();exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');
 				}else{
@@ -272,6 +274,7 @@ class Appointments extends In_frontend {
 	
 		
 		public function change_time(){
+		
 			
 						$post=$this->input->post();
 						 $bid=explode("/",$post['b_id']);
@@ -311,6 +314,7 @@ class Appointments extends In_frontend {
 											'coming_through'=>0,
 											'b_id'=>isset($details['b_id'])?$details['b_id']:'',
 											);
+										
 										
 										$save=$this->Appointments_model->save_appointments($add_app);
 										
@@ -387,13 +391,67 @@ class Appointments extends In_frontend {
 										$this->session->set_flashdata('success',"Appointment successfully accepted.");
 										
 										redirect('appointments/index/'.base64_encode(2));
-									}else{
+									}
+									else{
 											$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 											redirect('appointments/index/'.base64_encode(2));
 									}
-			//echo '<pre>';print_r($post);exit;
+			
 		}
+
 	
+	public  function accept_user_hcamp(){
+		if($this->session->userdata('userdetails'))
+			{
+				$id=base64_decode($this->uri->segment(3));
+				$data=array('updated_date'=>date('Y-m-d H:i:s'),
+					'camp_status'=>1
+			);
+				$flag=$this->User_health_camps_model->change_user_hcamp_status($data,$id);
+				if($flag==1){
+						$this->session->set_flashdata('success','User Health Camp Request Accepted');
+						redirect('appointments');
+
+				}
+				$this->session->set_flashdata('error','User Health Camp Request Not Executed ,Try again');
+						redirect('appointments');
+
+                
+
+			}
+			else{
+				$this->session->set_flashdata('error','Please login to continue');
+				redirect('admin');
+			}
+
+
+	}
+	public  function reject_user_hcamp(){
+		if($this->session->userdata('userdetails'))
+			{
+				$id=base64_decode($this->uri->segment(3));
+				$data=array('updated_date'=>date('Y-m-d H:i:s'),
+					'camp_status'=>0
+			);
+				$flag=$this->User_health_camps_model->change_user_hcamp_status($data,$id);
+				if($flag==1){
+						$this->session->set_flashdata('success','User Health Camp Request Rejected');
+						redirect('appointments');
+
+				}
+				$this->session->set_flashdata('error','User Health Camp Request Not Executed ,Try again');
+						redirect('appointments');
+
+                
+
+			}
+			else{
+				$this->session->set_flashdata('error','Please login to continue');
+				redirect('admin');
+			}
+
+
+	}
 	
 	
 	

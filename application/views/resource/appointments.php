@@ -32,8 +32,8 @@
                      <li style="border-right:2px solid #fff;position:relative" class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
                      </li>
 					 <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#camp" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==4){ echo "active";}?>">Health Camps Request</a>
-					  <?php if(isset($app_appointment_list_count) && count($app_appointment_list_count)>0){ ?>
-					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo count($app_appointment_list_count);?>
+					  <?php if($camp_count>0){ ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo $camp_count;?>
 					 </div>
 					  <?php } ?>
                      </li>
@@ -374,21 +374,22 @@
 								</tr>
 							 </thead>
 							 <tbody>
-							
+							<?php  foreach($camp_users as $user){ ; ?>
 								<tr class="">
 								  
-								   <td>Patient 1</td>
+								   <td><?php echo  $user['name']?></td>
 								   <td>21</td>
-								   <td>8500xxxxx</td>
-								   <td>Genaral</td>
-								   <td>2018-12-31 16:05:37</td>
+								   <td><?php echo  $user['mobile']?></td>
+								   <td><?php echo  $user['dept_name']?></td>
+								   <td><?php echo  $user['created_date']?></td>
 								  
 								   <td>
-									  <a href="" class="btn btn-sm btn-success">Accept</a>
-									  <a href="" class="btn btn-sm btn-warning">Reject</a>
+							<a href="<?php echo base_url('appointments/accept_user_hcamp').base64_encode($user['id']) ;?>" class="btn btn-sm btn-success">Accept</a>
+									  <a href="<?php echo base_url('appointments/reject_user_hcamp').base64_encode($user['id']) ;?>" class="btn btn-sm btn-warning">Reject</a>
 								   </td>
 								   
 								</tr>
+							<?php }?>
 							
 							 </tbody>
 							</table>
