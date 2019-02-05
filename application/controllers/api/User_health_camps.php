@@ -156,6 +156,7 @@ public function get_departments_post(){
      $hos_id=$this->post('hos_id');
 
      $res=$this->User_health_camps_model->get_depts($hos_id);
+    //echo  $this->db->last_query();exit;
            if(count($res)>0){
          $message = array('status'=>1,'dept_list'=>$res);
                      $this->response($message, REST_Controller::HTTP_OK);
@@ -179,9 +180,11 @@ public function get_camp_date_post(){
                      $this->response($message, REST_Controller::HTTP_OK);
 
      }
-     $camp_id=$this->post('camp_id');
+     $hos_id=$this->post('hos_id');
+     $dept_name=$this->post('dept_name');
+     //$camp_id=$this->post('camp_id');
 
-     $res=$this->User_health_camps_model->get_camp_date($camp_id);
+     $res=$this->User_health_camps_model->get_camp_dates($hos_id,$dept_name);
            if(count($res)>0){
          $message = array('status'=>1,'camp_date_det'=>$res);
                      $this->response($message, REST_Controller::HTTP_OK);
@@ -190,6 +193,35 @@ public function get_camp_date_post(){
     }
          $message = array('status'=>0,'camp_date_det'=>$res);
                      $this->response($message, REST_Controller::HTTP_OK);
+
+}
+public function get_camp_times_post(){
+  $user_id=$this->post('user_id');
+   $ures=$this->User_health_camps_model->user_checking($user_id);
+     if(count($ures)>0){
+
+     }
+     else{
+         $message = array('status'=>0,'message'=>'user not existed');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+     }
+
+     $hos_id=$this->post('hos_id');
+     $dept_name=$this->post('dept_name');
+     $date=$this->post('cdate');
+
+     $res=$this->User_health_camps_model->get_camp_times($hos_id,$dept_name,$date);
+    // echo $this->db->last_query();exit;
+           if(count($res)>0){
+         $message = array('status'=>1,'camp_time_det'=>$res);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+
+    }
+         $message = array('status'=>0,'camp_time_det'=>$res);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
 
 }
 public function user_select_health_camp_post(){

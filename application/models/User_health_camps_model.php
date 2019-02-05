@@ -46,7 +46,7 @@ return $this->db->affected_rows()?1:0;
 
 	}
 	public function get_hos_cities(){
-		$this->db->select('hos_bas_city')->from('hospital')->where('hos_status',1)->group_by('hos_bas_city')->order_by('hos_bas_city','asc');
+		$this->db->select('hos_bas_city')->from('hospital')->where('hos_status',1)->where('hos_bas_city is not null',NULL,FALSE)->group_by('hos_bas_city')->order_by('hos_bas_city','asc');
 		return $this->db->get()->result_array();
 
 	}
@@ -65,10 +65,11 @@ return $this->db->affected_rows()?1:0;
 		return $this->db->get()->result_array();
 
 	}
-	public function get_camp_date($camp_id){
+	public function get_camp_dates($hos_id,$dept_name){
 
-$this->db->select('booking_date,from_time,to_time')->from('health_camp_tab')->where('camp_id');
-return $this->db->get()->reslut_array();
+$this->db->select('hos_id,dept_name,booking_date')->from('health_camp_tab')->where('hos_id',$hos_id)
+->where('dept_name',$dept_name)->where('status',1);
+return $this->db->get()->result_array();
 
 	}
 	public function save_user_select_camp($data){
@@ -79,6 +80,12 @@ return $this->db->get()->reslut_array();
 	}
 	public function check_camp_exists($user_id,$camp_id){
 		$this->db->select('*')->from('user_health_camps')->where('camp_id',$camp_id)->where('user_id',$user_id);
-return $this->db->get()->reslut_array();
+return $this->db->get()->result_array();
+	}
+	public function get_camp_times($hos_id,$dept_name,$date){
+		$this->db->select('camp_id,hos_id,dept_name,from_time,to_time')->from('health_camp_tab')->where('hos_id',$hos_id)
+->where('dept_name',$dept_name)->where('booking_date',$date)->where('status',1);
+return $this->db->get()->result_array();
+
 	}
 }
