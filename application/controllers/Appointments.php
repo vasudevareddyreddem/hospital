@@ -24,6 +24,7 @@ class Appointments extends In_frontend {
 					$data['appointment_list']=$this->Appointments_model->get_website_appintmenr_list($userdetails['hos_id']);
 					//echo '<pre>';print_r($data['appointment_list']);exit; 
 					$data['app_appointment_list']=$this->Appointments_model->get_app_appointment_list($userdetails['hos_id']);
+					
 					//echo '<pre>';print_r($data['app_appointment_list']);exit; 
 					$data['app_appointment_list_count']=$this->Appointments_model->get_app_appointment_list_count(
 					$userdetails['hos_id']);
@@ -32,7 +33,12 @@ class Appointments extends In_frontend {
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$data['camp_users']=$this->User_health_camps_model->get_camp_users();
+					$data['camp_ausers']=$this->User_health_camps_model->get_camp_ausers();
+					$data['camp_rusers']=$this->User_health_camps_model->get_camp_rusers();
 					$data['camp_count']=count($data['camp_users']);
+					$data['camp_acount']=count($data['camp_ausers']);
+					$data['camp_rcount']=count($data['camp_rusers']);
+
 					//echo $this->db->last_query();exit;
 					$this->load->view('resource/appointments',$data);
 					$this->load->view('html/footer');

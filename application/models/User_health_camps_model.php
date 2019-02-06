@@ -39,6 +39,18 @@ return $this->db->get()->result_array();
        	return $this->db->get()->result_array();
 
 	}
+	public function get_camp_ausers(){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',1)->where('hc.status',1);
+       	return $this->db->get()->result_array();
+
+	}
+	public function get_camp_rusers(){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',0)->where('hc.status',1);
+       	return $this->db->get()->result_array();
+
+	}
 	public function change_user_hcamp_status($data,$id){
 		$this->db->where('id',$id);
 		$this->db->update('user_health_camps',$data);
