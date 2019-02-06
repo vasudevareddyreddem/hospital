@@ -375,6 +375,7 @@ class Hospital_model extends CI_Model
 	public function get_city_list_details($id){
 		$this->db->select('hospital.hos_bas_city')->from('hospital');		
         $this->db->where('hos_undo',0);
+         $this->db->where('hos_bas_city is not null',null,false);
 		 $this->db->group_by('hos_bas_city');
 		return $this->db->get()->result_array();
 	}

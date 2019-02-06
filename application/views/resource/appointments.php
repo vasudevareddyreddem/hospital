@@ -378,7 +378,7 @@
 								<tr class="">
 								  
 								   <td><?php echo  $user['name']?></td>
-								   <td>21</td>
+								   <td><?php echo  $user['age']?></td>
 								   <td><?php echo  $user['mobile']?></td>
 								   <td><?php echo  $user['dept_name']?></td>
 								   <td><?php echo  $user['created_date']?></td>
