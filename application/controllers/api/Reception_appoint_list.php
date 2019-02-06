@@ -122,6 +122,9 @@ public function appointment_status_change_post(){
       $user_id=$this->post('user_id');
       $bid=$this->post('bid');
       $status=$this->post('status');
+      $time=$this->post('time');
+      $bdate=$this->post('bdate');
+     
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
          if(count($res)>0){
 
@@ -133,7 +136,14 @@ public function appointment_status_change_post(){
          }
          $data=array('status'=>$status,
                     'updated_by'=>$user_id,
-                    'updated_date'=>date('Y-m-d H:i:s'));
+                    'updated_date'=>date('Y-m-d H:i:s'),
+);
+         if(!$time==null){
+            $data['time']=$time;
+         }
+         if(!$bdate==null){
+            $data['date']=$bdate;
+         }
          $flag=$this->Api_recep_user_list_model->change_appoint_status($data,$bid);
        
          if($flag==1){
