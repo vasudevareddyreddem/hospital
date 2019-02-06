@@ -66,9 +66,10 @@ return $this->db->affected_rows()?1:0;
 
 	}
 	public function get_camp_dates($hos_id,$dept_name){
+		$date=date('Y-m-d');
 
 $this->db->select('hos_id,dept_name,booking_date')->from('health_camp_tab')->where('hos_id',$hos_id)
-->where('dept_name',$dept_name)->where('status',1);
+->where('dept_name',$dept_name)->where('status',1)->where('booking_date >=',$date);
 return $this->db->get()->result_array();
 
 	}

@@ -185,6 +185,7 @@ public function get_camp_date_post(){
      //$camp_id=$this->post('camp_id');
 
      $res=$this->User_health_camps_model->get_camp_dates($hos_id,$dept_name);
+     //echo $this->db->last_query();exit;
            if(count($res)>0){
          $message = array('status'=>1,'camp_date_det'=>$res);
                      $this->response($message, REST_Controller::HTTP_OK);
