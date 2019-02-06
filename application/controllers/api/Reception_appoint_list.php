@@ -54,4 +54,104 @@ class Reception_appoint_list extends REST_Controller
 
 
     }
+    public function appointment_list_post(){
+        $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+         $userdetails=$this->Api_recep_user_list_model-> get_all_resouce_details($user_id);
+         $appoint_list=$this->Api_recep_user_list_model->get_app_appointment_list($userdetails['hos_id']);
+         if(count($appoint_list)>0){
+          $message = array('status'=>1,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+                 }
+                 $message = array('status'=>0,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+    }
+    public function appointment_accepted_list_post(){
+        $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+         $userdetails=$this->Api_recep_user_list_model-> get_all_resouce_details($user_id);
+         $appoint_list=$this->Api_recep_user_list_model->get_accepted_appointment_list($userdetails['hos_id']);
+         if(count($appoint_list)>0){
+          $message = array('status'=>1,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+                 }
+                 $message = array('status'=>0,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+    }
+     public function appointment_rejected_list_post(){
+        $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+         $userdetails=$this->Api_recep_user_list_model-> get_all_resouce_details($user_id);
+         $appoint_list=$this->Api_recep_user_list_model->get_rejected_appointment_list($userdetails['hos_id']);
+         if(count($appoint_list)>0){
+          $message = array('status'=>1,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+                 }
+                 $message = array('status'=>0,'appointment_list'=>$appoint_list);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+    }
+
+public function appointment_status_change_post(){
+      $user_id=$this->post('user_id');
+      $bid=$this->post('bid');
+      $status=$this->post('status');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+         $data=array('status'=>$status,
+                    'updated_by'=>$user_id,
+                    'updated_date'=>date('Y-m-d H:i:s'));
+         $flag=$this->Api_recep_user_list_model->change_appoint_status($data,$bid);
+       
+         if($flag==1){
+            if($status=1){
+          $message = array('status'=>1,'message'=>'Patient Appointment Accepted ');
+                     $this->response($message, REST_Controller::HTTP_OK);
+                 }
+                  $message = array('status'=>1,'message'=>'Patient Appointment Rejected ');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+                 }
+
+                 $message = array('status'=>0,'message'=>'Patient Appointment not updated, try again');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+}
+
+
+
+
 }
