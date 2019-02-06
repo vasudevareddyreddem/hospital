@@ -1784,6 +1784,21 @@ class Admin extends CI_Controller {
 			$sdate=$this->input->post('date');
 			$ftime=$this->input->post('ftime');
 			$ttime=$this->input->post('ttime');
+			$d=date('Y-m-d');
+			if($sdate>=$d){
+
+			}
+			else{
+				$this->session->set_flashdata('error',"Date should be present day or future date");
+				redirect('admin/healthcamps');
+			}
+			$ft=date("H:i", strtotime($ftime));
+			$tt=date("H:i", strtotime($ttime));
+			if($ft>=$tt){
+				$this->session->set_flashdata('error',"From Time should be less than To time");
+				redirect('admin/healthcamps');
+
+			}
 			$data=array('city_name'=>$city,
 			'hos_id'=>$hos,
 			'dept_name'=>$dept,
