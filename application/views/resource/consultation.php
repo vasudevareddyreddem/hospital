@@ -841,6 +841,7 @@
          
       </div>
    </div>
+   </div>
 
 <!-- patient_lab_test_list_model-->
     <script type="text/javascript">

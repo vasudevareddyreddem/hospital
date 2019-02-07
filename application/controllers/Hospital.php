@@ -1487,7 +1487,7 @@ class Hospital extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
 					
-					$check=$this->Hospital_model->treatment_exist($post['treatment_name'],$post['specialist_doctor_id'],$post['assign_doctor']);
+					$check=$this->Hospital_model->op_treatment_exist($post['treatment_name'],$post['assign_doctor']);
 					if(count($check)>0){
 						$this->session->set_flashdata('error',"Treatment already exists. Please try again");
 						redirect('hospital/treatment');
