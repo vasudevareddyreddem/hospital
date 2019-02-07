@@ -139,7 +139,7 @@
 																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
-																				if($patient_detailes['bloodgroup'] == $state):
+																				if(isset($patient_detailes['bloodgroup']) && $patient_detailes['bloodgroup'] == $state):
 																				$selected ='selected=selected';
 																				else : 
 																				$selected = '';
@@ -173,7 +173,7 @@
 														  <select class="form-control" required="required" name="p_s_name" id="p_s_name">
 														  <option value = "">Select State</option>
 															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['p_s_name'] == $state):
+																	if(isset($patient_detailes['p_s_name']) && $patient_detailes['p_s_name'] == $state):
 																	$selected ='selected=selected';
 																	else : 
 																	$selected = '';
@@ -209,7 +209,7 @@
 														  <select class="form-control" required="required" name="t_s_name" id="t_s_name">
 														  <option value = "">Select State</option>
 															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['t_s_name'] == $state):
+																	if(isset($patient_detailes['t_s_name']) && $patient_detailes['t_s_name'] == $state):
 																	$selected ='selected=selected';
 																	else : 
 																	$selected = '';
@@ -304,7 +304,7 @@
 														  <select class="form-control" required="required" name="next_state" id="next_state">
 														  <option value = "">Select State</option>
 															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['next_state'] == $state):
+																	if(isset($patient_detailes['next_state']) && $patient_detailes['next_state'] == $state):
 																	$selected ='selected=selected';
 																	else : 
 																	$selected = '';
@@ -441,7 +441,7 @@
 																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
-																				if($billing_detailes['payment_mode'] == $state):
+																				if(isset($billing_detailes['payment_mode']) && $billing_detailes['payment_mode'] == $state):
 																				$selected ='selected=selected';
 																				else : 
 																				$selected = '';
@@ -677,7 +677,7 @@
 																	  <select class="form-control" required="required" name="bloodgroup" name="bloodgroup">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
-																				if($patient_detailes['bloodgroup'] == $state):
+																				if(isset($patient_detailes['bloodgroup']) && $patient_detailes['bloodgroup'] == $state):
 																				$selected ='selected=selected';
 																				else : 
 																				$selected = '';
@@ -714,7 +714,7 @@
                                                       <select class="form-control" required="required" name="p_s_name" id="p_s_name">
 														  <option value = "">Select State</option>
 															<?php foreach($states as $key=>$state):
-																	if($patient_detailes['p_s_name'] == $state):
+																	if(isset($patient_detailes['p_s_name']) && $patient_detailes['p_s_name'] == $state):
 																	$selected ='selected=selected';
 																	else : 
 																	$selected = '';
@@ -762,7 +762,7 @@
 																	  <select class="form-control" required="required" name="payment_mode" name="payment_mode">
 																	  <option value = "">Select</option>
 																		<?php foreach($modes as $key=>$state):
-																				if($billing_detailes['payment_mode'] == $state):
+																				if(isset($billing_detailes['payment_mode']) && $billing_detailes['payment_mode'] == $state):
 																				$selected ='selected=selected';
 																				else : 
 																				$selected = '';
