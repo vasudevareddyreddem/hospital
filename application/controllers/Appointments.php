@@ -32,9 +32,9 @@ class Appointments extends In_frontend {
 					//echo '<pre>';print_r($data['app_appointment_list_count']);exit; 
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
-					$data['camp_users']=$this->User_health_camps_model->get_camp_users();
-					$data['camp_ausers']=$this->User_health_camps_model->get_camp_ausers();
-					$data['camp_rusers']=$this->User_health_camps_model->get_camp_rusers();
+					$data['camp_users']=$this->User_health_camps_model->get_camp_users($userdetails['hos_id']);
+					$data['camp_ausers']=$this->User_health_camps_model->get_camp_ausers($userdetails['hos_id']);
+					$data['camp_rusers']=$this->User_health_camps_model->get_camp_rusers($userdetails['hos_id']);
 					$data['camp_count']=count($data['camp_users']);
 					$data['camp_acount']=count($data['camp_ausers']);
 					$data['camp_rcount']=count($data['camp_rusers']);
