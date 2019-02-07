@@ -37,6 +37,7 @@ class Reception_appoint_list extends REST_Controller
         $this->load->model('Mobile_model');
         $this->load->model('User_health_camps_model');
         $this->load->model('Api_recep_user_list_model');
+        $this->load->model('Wallet_model');
     
     }
     public function recep_login_post(){
@@ -343,7 +344,7 @@ public  function couponcode_apply_post(){
 										$data['billing_id']=$billing_id['b_id'];
 										$data['cou_amt']=$details['ip_amount_percentage'];
 										$data['appointment_user_id']=$details['created_by'];
-										$message = array('status'=>1,'pay_amount'=>$amount,'billing_id'=>$billing_id['b_id'],'message'=>"Coupon Code applied Successfully. Payable Amount is ".$details['ip_amount_percentage']." % decreased");
+										$message = array('status'=>1,'appointment_user_id'=>$details['created_by'],'pay_amount'=>$amount,'billing_id'=>$billing_id['b_id'],'message'=>"Coupon Code applied Successfully. Payable Amount is ".$details['ip_amount_percentage']." % decreased");
 										$this->response($message, REST_Controller::HTTP_OK);
 					}else{
 						$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');
@@ -416,6 +417,127 @@ public  function billing_list_post(){
 		 $this->response($message, REST_Controller::HTTP_OK);
 	}
 
+}
+public  function billappoitment_user_post(){
+	$appointment_id=$this->post('appointment_id');
+	if($appointment_id==''){
+		$message = array('status'=>0,'message'=>'Appoinment id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	$user_details=$this->Api_recep_user_list_model->get_appointment_user_details($appointment_id);
+	if(count($user_details)>0){
+		$add=array(
+		'hos_id'=>isset($user_details['hos_id'])?$user_details['hos_id']:'',
+		'p_c_name'=>isset($user_details['city'])?$user_details['city']:'',
+		'name'=>isset($user_details['patinet_name'])?$user_details['patinet_name']:'',
+		'age'=>isset($user_details['age'])?$user_details['age']:'',
+		'mobile'=>isset($user_details['mobile'])?$user_details['mobile']:'',
+		);
+		$save_bill=$this->Api_recep_user_list_model->save_billing_for_patient($add);
+		if(count($save_bill)>0){
+			$billing=array(
+			'p_id'=>isset($save_bill)?$save_bill:'',
+			'treatment_id'=>isset($user_details['department'])?$user_details['department']:'',
+			'doct_id'=>isset($user_details['doctor_id'])?$user_details['doctor_id']:'',
+			'specialist_id'=>isset($user_details['specialist'])?$user_details['specialist']:'',
+			);
+			$bill_id=$this->Api_recep_user_list_model->save_billing_data_for_patient($billing);
+			$message = array('status'=>1,'billing_id'=>$bill_id,'patient_id'=>$save_bill,'message'=>'successfully data updated');
+			$this->response($message, REST_Controller::HTTP_OK);
+			
+		}else{
+			$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		
+	}else{
+		$message = array('status'=>0,'message'=>'Appointment user details are not getting');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+}
+public  function apply_coupon_code_post(){
+	$patient_id=$this->post('patient_id');
+	$billing_id=$this->post('billing_id');
+	$total_amt=$this->post('total_amt');
+	$payment_mode=$this->post('total_amt');
+	$payable_amt=$this->post('payable_amt');
+	$receivied_from=$this->post('receivied_from');
+	$coupon_code=$this->post('coupon_code');
+	$user_id=$this->post('user_id');
+	$appointment_user_id=$this->post('appointment_user_id');
+	if($user_id==''){
+		$message = array('status'=>0,'message'=>'User Id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($appointment_user_id==''){
+		$message = array('status'=>0,'message'=>'Appoinment User Id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($patient_id==''){
+		$message = array('status'=>0,'message'=>'Patient id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($billing_id==''){
+		$message = array('status'=>0,'message'=>'Billing id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($total_amt==''){
+		$message = array('status'=>0,'message'=>'Billing id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($payment_mode==''){
+		$message = array('status'=>0,'message'=>'Payment mode is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($payable_amt==''){
+		$message = array('status'=>0,'message'=>'Payable Amount is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($receivied_from==''){
+		$message = array('status'=>0,'message'=>'Receivied From is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($coupon_code==''){
+		$message = array('status'=>0,'message'=>'Coupon code is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	
+	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
+	$billing=array(
+		'patient_payer_deposit_amount'=>isset($total_amt)?$total_amt:'',
+		'payment_mode'=>isset($payment_mode)?$payment_mode:'',
+		'bill_amount'=>isset($payable_amt)?$payable_amt:'',
+		'coupon_code'=>isset($coupon_code)?$coupon_code:'',
+		'coupon_code_amount'=>$total_amt-$payable_amt,
+		'with_out_coupon_code'=>isset($total_amt)?$total_amt:'',
+		'received_form'=>isset($receivied_from)?$receivied_from:'',
+		'completed'=>1,
+		'updated_at'=>date('Y-m-d H:i:s')
+		);
+		$update=$this->Api_recep_user_list_model->update_patient_billing_details($billing_id,$billing);
+		if(count($update)>0){
+			$details=$this->Api_recep_user_list_model->get_coupon_code_deatils($coupon_code,$userdetails['hos_id']);
+			/* coupon code hostory*/
+						$code_details=array(
+							'b_id'=>$post['b_id'],
+							'type'=>'Op',
+							'type_id'=>1,
+							'p_id'=>$post['pid'],
+							'amount'=>isset($total_amt)?$total_amt:'',
+							'coupon_code'=>$coupon_code,
+							'coupon_code_amount'=>$total_amt-$payable_amt,
+							'purpose'=>'Op appointment Purpose',
+							'created_at'=>date('Y-m-d H:i:s'),
+							'created_by'=>$user_id,
+							'appointment_user_id'=>$appointment_user_id,
+							);
+					$this->Wallet_model->save_coupon_code_history($code_details);
+					$wallet_detials=$this->Wallet_model->get_wallet_amt_details($appointment_user_id);
+					$amt_data=array('remaining_wallet_amount'=>(($wallet_detials['remaining_wallet_amount'])-(($total_amt)-($payable_amt))));
+					$amount_update=$this->Wallet_model->update_op_wallet_amt_details($appointment_user_id,$amt_data);
+
+			$message = array('status'=>1,'message'=>'Bill details successfully updated');
+			$this->response($message, REST_Controller::HTTP_OK);				
+			
+		}else{
+			$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
 }
 
 

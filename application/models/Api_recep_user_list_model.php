@@ -120,4 +120,29 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->result_array();
 	}
 	
+	/* appoinment  direct billing purpose*/
+	public  function get_appointment_user_details($appoinment_id){
+		$this->db->select('*')->from('appointments');
+		$this->db->where('id',$appoinment_id);
+		return $this->db->get()->row_array();
 	}
+	public  function save_billing_for_patient($data){
+		$this->db->insert('patients_list_1',$data);
+		return $this->db->insert_id();
+	}
+	public  function save_billing_data_for_patient($data){
+		$this->db->insert('patient_billing',$data);
+		return $this->db->insert_id();
+	}
+	public function update_patient_billing_details($bid,$data){
+		$this->db->where('b_id',$bid);
+    	return $this->db->update("patient_billing",$data);
+	}
+	public function get_coupon_code_deatils($coupon_code,$hos_id){
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.ip_amount_percentage,coupon_code_list.created_by,coupon_code_list.created_at,coupon_code_list.lab_amount_percentage,')->from('coupon_code_list');
+		$this->db->where('coupon_code_list.hos_id',$hos_id);
+		$this->db->where('coupon_code_list.couponcode_name',$coupon_code);
+		return $this->db->get()->row_array();
+	}
+	
+}
