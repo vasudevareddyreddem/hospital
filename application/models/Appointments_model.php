@@ -39,6 +39,7 @@ public  function get_app_appointment_list($hos_id){
   $this->db->order_by('appointment_bidding_list.b_id','desc');
   return $this->db->get()->result_array();
  }
+
  public  function get_app_appointment_list_count($hos_id){
   $this->db->select('appointment_bidding_list.*,treament.t_name,specialist.specialist_name')->from('appointment_bidding_list');
   $this->db->join('treament', 'treament.t_id = appointment_bidding_list.department', 'left');

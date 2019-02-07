@@ -188,6 +188,35 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	
+	public function healthcamps()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=1){
+					
+					$admindetails=$this->session->userdata('userdetails');
+					$data['tab']=base64_decode($this->uri->segment(3));
+					$data['city_list']=$this->Hospital_model->get_city_list_details($admindetails['a_id']);
+					$data['camp_list']=$this->Admin_model->health_camp_list();
+					$data['hospital_list']=$this->Hospital_model->get_hospital_list_details($admindetails['a_id']);
+			
+			$data['wallet_amt_percentage_list']=$this->Admin_model->get_all_wallet_amt_per_list_list($admindetails['a_id']);
+					$data['wallet_amt_list']=$this->Admin_model->get_all_wallet_amt_list_list($admindetails['a_id']);
+					$data['current_active_amt']=$this->Admin_model->get_current_amount_list($admindetails['a_id']);
+					
+					$this->load->view('admin/healthcamps',$data);
+					$this->load->view('html/footer');
+					//echo '<pre>';print_r($data);exit;
+					}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	public function coupon_post()
 	{	
 		if($this->session->userdata('userdetails'))
@@ -1728,6 +1757,69 @@ class Admin extends CI_Controller {
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('home');
+		}
+		
+	}
+	public function get_hospitals(){
+		$city=$this->uri->segment(3);
+		$data['hos_list']=$this->Admin_model->get_hospitals_by_city($city);
+		if(count($data['hos_list'])>0){
+			$data['status']=1;
+					echo json_encode($data);exit;
+		}
+		$data['status']=0;
+					echo json_encode($data);exit;
+		
+		
+	}
+	public function add_healthcamp(){
+		if($this->session->userdata('userdetails'))
+		{
+			$login_details=$this->session->userdata('userdetails');
+			
+			
+			$city=$this->input->post('city');
+			$hos=$this->input->post('hospital_id');
+			$dept=$this->input->post('dept');
+			$sdate=$this->input->post('date');
+			$ftime=$this->input->post('ftime');
+			$ttime=$this->input->post('ttime');
+			$d=date('Y-m-d');
+			if($sdate>=$d){
+
+			}
+			else{
+				$this->session->set_flashdata('error',"Date should be present day or future date");
+				redirect('admin/healthcamps');
+			}
+			$ft=date("H:i", strtotime($ftime));
+			$tt=date("H:i", strtotime($ttime));
+			if($ft>=$tt){
+				$this->session->set_flashdata('error',"From Time should be less than To time");
+				redirect('admin/healthcamps');
+
+			}
+			$data=array('city_name'=>$city,
+			'hos_id'=>$hos,
+			'dept_name'=>$dept,
+			'from_time'=>$ftime,
+			'to_time'=>$ttime,
+			'booking_date'=>$sdate,
+			'created_date'=>date('Y-m-d H:i:s'),
+			'created_by'=>$login_details['a_id'],
+			'status'=>1
+			);
+			$flag=$this->Admin_model->save_health_camp($data);
+			if($flag==1){
+				$this->session->set_flashdata('success',"Health Camp Added Successfully");
+				redirect('admin/healthcamps');
+			}
+			$this->session->set_flashdata('error','Health Camp Not Added');
+			redirect('admin/healthcamps');
+		}
+		else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
 		}
 		
 	}

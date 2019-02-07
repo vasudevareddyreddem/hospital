@@ -895,9 +895,22 @@ public  function get_discharge_patient_count($year,$hos_id){
 	$this->db->where('admitted_patient_list.completed',1);
 	return $this->db->get()->row_array(); 
 }
+	public function get_hospitals_by_city($city){
+		$this->db->select('hos_id,hos_bas_name')->from('hospital')->where('hos_undo',0)->where('hos_bas_city',$city);
+		return $this->db->get()->result_array();
+		
+	}
 	
-	
-	
+	public function save_health_camp($data){
+		$this->db->insert('health_camp_tab',$data);
+		return $this->db->affected_rows()?1:0;
+		
+	}
+	public function health_camp_list(){
+		$this->db->select('camp.*,hos.hos_bas_name')->from('health_camp_tab camp')->
+		join('hospital hos','hos.hos_id=camp.hos_id');
+		return $this->db->get()->result_array();
+	}
 	
 	
   }

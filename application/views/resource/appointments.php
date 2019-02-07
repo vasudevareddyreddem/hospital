@@ -29,7 +29,25 @@
 					 </div>
 					  <?php } ?>
                      </li>
-                     <li class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
+                     <li style="border-right:2px solid #fff;position:relative" class="nav-item "><a href="#about" data-toggle="tab" class="<?php if(isset($tab)&& $tab==3){ echo "active";}?>">Appointments List</a>
+                     </li>
+					 <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#camp" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==4){ echo "active";}?>">Health Camps Request</a>
+					  <?php if($camp_count>0){ ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo $camp_count;?>
+					 </div>
+					  <?php } ?>
+                     </li>
+                     <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#accept" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==5){ echo "active";}?>">Health Camps Accepted Requests</a>
+					  <?php if($camp_acount>0){ ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo $camp_acount;?>
+					 </div>
+					  <?php } ?>
+                     </li>
+                      <li style="border-right:2px solid #fff;position:relative" class="nav-item"><a href="#reject" data-toggle="tab" class=" <?php if(isset($tab)&& $tab==6){ echo "active";}?>">Health Camps Rejected Requests</a>
+					  <?php if($camp_rcount>0){ ?>
+					 <div style="position:absolute;top:-8px;right:5px; background:#003f7f;color:#fff; border-radius:5px;padding:2px 6px;font-size:10px;"><?php  echo $camp_rcount;?>
+					 </div>
+					  <?php } ?>
                      </li>
                    
                   </ul>
@@ -347,6 +365,136 @@
                            </div>
                         </div>
                      </div>
+					 
+					 <div class="tab-pane <?php if(isset($tab)&& $tab==4){ echo "active";}?>" id="camp">
+                        <div class="card">
+                           <div class="card-head">
+                              <header>Patients List</header>
+                             
+                           </div>
+                           <div class="card-body table-responsive ">
+								<table class="table table-striped table-bordered " id="example-camp">
+							 <thead>
+								<tr>
+								
+								   <th> Patient Name </th>
+								   <th> Age</th>
+								   <th> Mobile </th>
+								   <th> Department </th>
+								   <th > Booking Date & Time </th>
+								   <th> Action </th>
+								</tr>
+							 </thead>
+							 <tbody>
+							<?php  foreach($camp_users as $user){ ; ?>
+								<tr class="">
+								  
+								   <td><?php echo  $user['name']?></td>
+								   <td><?php echo  $user['age']?></td>
+								   <td><?php echo  $user['mobile']?></td>
+								   <td><?php echo  $user['dept_name']?></td>
+								   <td><?php echo  $user['created_date']?></td>
+								  
+								   <td>
+							<a href="<?php echo base_url('appointments/accept_user_hcamp/').base64_encode($user['id']) ;?>" class="btn btn-sm btn-success">Accept</a>
+									  <a href="<?php echo base_url('appointments/reject_user_hcamp/').base64_encode($user['id']) ;?>" class="btn btn-sm btn-warning">Reject</a>
+								   </td>
+								   
+								</tr>
+							<?php }?>
+							
+							 </tbody>
+							</table>
+                           </div>
+                        </div>
+                     </div>
+
+                      <div class="tab-pane <?php if(isset($tab)&& $tab==5){ echo "active";}?>" id="accept">
+                        <div class="card">
+                           <div class="card-head">
+                              <header>Patients List</header>
+                             
+                           </div>
+                           <div class="card-body table-responsive ">
+								<table class="table table-striped table-bordered " id="camp-accept">
+							 <thead>
+								<tr>
+								
+								   <th> Patient Name </th>
+								   <th> Age</th>
+								   <th> Mobile </th>
+								   <th> Department </th>
+								   <th > Booking Date & Time </th>
+								   <th> Action </th>
+								</tr>
+							 </thead>
+							 <tbody>
+							<?php  foreach($camp_ausers as $auser){ ; ?>
+								<tr class="">
+								  
+								   <td><?php echo  $auser['name']?></td>
+								   <td><?php echo  $auser['age']?></td>
+								   <td><?php echo  $auser['mobile']?></td>
+								   <td><?php echo  $auser['dept_name']?></td>
+								   <td><?php echo  $auser['created_date']?></td>
+								  
+								   <td>
+						           Accepted
+								   </td>
+								   
+								</tr>
+							<?php }?>
+							
+							 </tbody>
+							</table>
+                           </div>
+                        </div>
+                     </div>
+                               <div class="tab-pane <?php if(isset($tab)&& $tab==6){ echo "active";}?>" id="reject">
+                        <div class="card">
+                           <div class="card-head">
+                              <header>Patients List</header>
+                             
+                           </div>
+
+                           <div class="card-body table-responsive ">
+								<table class="table table-striped table-bordered " id="camp-reject">
+							 <thead>
+								<tr>
+								
+								   <th> Patient Name </th>
+								   <th> Age</th>
+								   <th> Mobile </th>
+								   <th> Department </th>
+								   <th > Booking Date & Time </th>
+								   <th> Action </th>
+								</tr>
+							 </thead>
+							 <tbody>
+							<?php  foreach($camp_rusers as $ruser){ ; ?>
+								<tr class="">
+								  
+								   <td><?php echo  $ruser['name']?></td>
+								   <td><?php echo  $ruser['age']?></td>
+								   <td><?php echo  $ruser['mobile']?></td>
+								   <td><?php echo  $ruser['dept_name']?></td>
+								   <td><?php echo  $ruser['created_date']?></td>
+								  
+								   <td>
+						           Rejected
+								   </td>
+								   
+								</tr>
+							<?php }?>
+							
+							 </tbody>
+							</table>
+                           </div>
+                        </div>
+                     </div>
+
+
+					 
                     
 					
                   </div>
@@ -402,6 +550,21 @@ $(document).ready(function() {
 } );
 $(document).ready(function() {
     $('#example4').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#example-camp').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#camp-accept').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );
+$(document).ready(function() {
+    $('#camp-reject').DataTable( {
         "order": [[ 0, "desc" ]]
     } );
 } );

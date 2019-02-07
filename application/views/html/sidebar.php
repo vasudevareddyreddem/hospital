@@ -83,6 +83,14 @@
 	                                <span class="selected"></span>
                                 	<span class="arrow "></span>
 	                            </a>
+	                        </li>  
+							<li class="nav-item start">
+	                            <a href="<?php echo base_url('admin/healthcamps');?>" class="nav-link nav-toggle">
+	                                <i class="material-icons">list</i>
+	                                <span class="title">Health Camps</span>
+	                                <span class="selected"></span>
+                                	<span class="arrow "></span>
+	                            </a>
 	                        </li> 
 							
 							
