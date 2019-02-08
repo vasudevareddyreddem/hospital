@@ -186,7 +186,7 @@ public function appointment_status_change_post(){
             if($status=1){
             	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
             	$bid_det=$this->Api_recep_user_list_model->get_bidding_det($bid);
-            	
+
 
 				
 					$post=$this->input->post();
@@ -707,6 +707,118 @@ public  function opcouponcodeapply_post(){
 		}
 }
 
+
+public function get_health_camp_users_post(){
+	$user_id=$this->post('user_id');
+	  $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+          if($res['role_id']==3){
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$camp_users=$this->Api_recep_user_list_model->get_camp_users($userdetails['hos_id']);
+          	if(count($camp_users)>0){
+
+                   $message = array('status'=>1,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+          	else{
+          		 $message = array('status'=>0,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+          }
+          	else{
+          		$message = array('status'=>0,'message'=>'You are not authanticated user');
+			$this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+}
+public function get_health_camp_ausers_post(){
+	$user_id=$this->post('user_id');
+	  $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+          if($res['role_id']==3){
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$camp_users=$this->Api_recep_user_list_model->get_acamp_users($userdetails['hos_id']);
+          	if(count($camp_users)>0){
+
+                   $message = array('status'=>1,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+          	else{
+          		 $message = array('status'=>0,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+          }
+          	else{
+          		$message = array('status'=>0,'message'=>'You are not authanticated user');
+			$this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+}
+public function get_health_camp_rusers_post(){
+	$user_id=$this->post('user_id');
+	  $user_id=$this->post('user_id');
+         $res=$this->Api_recep_user_list_model->user_checking($user_id);
+         if(count($res)>0){
+
+         }
+         else{
+             $message = array('status'=>0,'message'=>'user does not exist');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+         }
+          if($res['role_id']==3){
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$camp_users=$this->Api_recep_user_list_model->get_rcamp_users($userdetails['hos_id']);
+          	if(count($camp_users)>0){
+
+                   $message = array('status'=>1,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+          	else{
+          		 $message = array('status'=>0,'camp_list'=>$camp_users);
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+          }
+          	else{
+          		$message = array('status'=>0,'message'=>'You are not authanticated user');
+			$this->response($message, REST_Controller::HTTP_OK);
+
+          	}
+
+
+}
 
 
 

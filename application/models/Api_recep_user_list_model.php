@@ -176,8 +176,7 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 
 	}
-	
-	public  function get_op_patient_coupon_code_details($code,$patient_id,$hos_id){
+public  function get_op_patient_coupon_code_details($code,$patient_id,$hos_id){
 		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.op_amount_percentage,coupon_code_list.created_by as create_by,coupon_code_list.created_at,appointments.create_by as ap_create_by')->from('coupon_code_list');
 		$this->db->join('appointments','appointments.b_id = coupon_code_list.appointment_id','left');
 		$this->db->where('coupon_code_list.hos_id',$hos_id);
@@ -186,11 +185,30 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	
+	public function get_camp_users($hos_id){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',2)->where('hc.status',1)->where('hc.hos_id',$hos_id);
+       	return $this->db->get()->result_array();
+
+	}
+	public function get_camp_ausers($hos_id){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',1)->where('hc.status',1)->where('hc.hos_id',$hos_id);
+       	return $this->db->get()->result_array();
+
+	}
+	public function get_camp_rusers($hos_id){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',0)->where('hc.status',1)->where('hc.hos_id',$hos_id);
+       	return $this->db->get()->result_array();
+
+	}
 	/* forgot  password */
 	
 	public  function check_user_details_ortheir($a_email_id){
 		$this->db->select('a_email_id,a_org_password')->from('admin');
 		$this->db->where('a_email_id',$a_email_id);
-		return $this->db->get()->row_array();		
+		return $this->db->get()->row_array();
+		
 	}
 }
