@@ -161,7 +161,7 @@ public function appointment_status_change_post(){
             if($status=1){
             	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
             	$bid_det=$this->Api_recep_user_list_model->get_bidding_det($bid);
-            	
+
 
 				
 					$post=$this->input->post();
@@ -680,6 +680,10 @@ public  function opcouponcodeapply_post(){
 }
 
 
+public function get_health_camps_post(){
+	$user_id=$this->post('user_id');
+
+}
 
 
 }
