@@ -637,6 +637,7 @@ public  function opcouponcodeapply_post(){
 	
 	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
 	$details=$this->Wallet_model->get_coupon_code_details($coupon_code,$patient_id,$userdetails['hos_id']);
+	echo $this->db->last_query();exit;
 	if(count($details)>0){
 							$current_time=$details['created_at'];
 							$date=date('Y-m-d H:i:s');
