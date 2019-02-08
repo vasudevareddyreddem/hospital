@@ -55,6 +55,31 @@ class Reception_appoint_list extends REST_Controller
 
 
     }
+	
+	public function forgotpassword_post(){
+        $email=$this->post('email');
+		if($email==''){
+			$message = array('status'=>0,'message'=>'Email Id is required');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+		$check=$this->Api_recep_user_list_model->check_user_details_ortheir($email);
+		if(count($check)>0){
+				$this->load->library('email');
+				$this->email->set_newline("\r\n");
+				$this->email->set_mailtype("html");
+				$this->email->to($check['a_email_id']);
+				$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
+				$this->email->subject('Forgot Password'); 
+				$body = "<b> Your Account login Password is </b> : ".$check['a_org_password'];
+				$this->email->message($body);
+				$this->email->send();
+				$message = array('status'=>1,'message'=>'Password sent to your registered email address. Please Check your registered email address');
+                $this->response($message, REST_Controller::HTTP_OK);
+		}else{
+			$message = array('status'=>0,'message'=>'Entered Email id not registered.Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+	}
     public function appointment_list_post(){
         $user_id=$this->post('user_id');
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
@@ -525,7 +550,7 @@ public  function apply_coupon_code_post(){
 	$patient_id=$this->post('patient_id');
 	$billing_id=$this->post('billing_id');
 	$total_amt=$this->post('total_amt');
-	$payment_mode=$this->post('total_amt');
+	$payment_mode=$this->post('payment_mode');
 	$payable_amt=$this->post('payable_amt');
 	$receivied_from=$this->post('receivied_from');
 	$coupon_code=$this->post('coupon_code');
@@ -639,8 +664,9 @@ public  function opcouponcodeapply_post(){
 	}
 	
 	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
-	$details=$this->Wallet_model->get_coupon_code_details($coupon_code,$patient_id,$userdetails['hos_id']);
-	echo $this->db->last_query();exit;
+	$details=$this->Api_recep_user_list_model->get_op_patient_coupon_code_details($coupon_code,$patient_id,$userdetails['hos_id']);
+	//echo $this->db->last_query();
+	//echo '<pre>';print_r($details);exit;
 	if(count($details)>0){
 							$current_time=$details['created_at'];
 							$date=date('Y-m-d H:i:s');
@@ -651,7 +677,8 @@ public  function opcouponcodeapply_post(){
 							$diff_in_hrs =$interval->format('%h');
 				if($diff_in_hrs >=0 && $diff_in_hrs <2){
 					$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
-					//echo '<pre>';print_r($wallet_detials);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($wallet_detials);exit;
 					
 					$percent=($total_amt)*($details['op_amount_percentage']);
 					$percen_amount=$percent/100;
@@ -661,9 +688,9 @@ public  function opcouponcodeapply_post(){
 						
 							$data['msg']=1;
 							$data['amt']=$amount;
-							$data['appointment_user_id']=$details['create_by'];
+							$data['appointment_user_id']=$details['ap_create_by'];
 							$data['cou_amt']=$details['op_amount_percentage'];
-							$message = array('status'=>1,'pay_amount'=>$amount,'billing_id'=>$billing_id,'appointment_user_id'=>$details['create_by'],'message'=>"Coupon Code applied Successfully. Payable Amount is ".$details['op_amount_percentage']." % decreased");
+							$message = array('status'=>1,'pay_amount'=>"$amount",'billing_id'=>$billing_id,'appointment_user_id'=>$details['ap_create_by'],'message'=>"Coupon Code applied Successfully. Payable Amount is ".$details['op_amount_percentage']." % decreased");
 							$this->response($message, REST_Controller::HTTP_OK);
 					}else{
 						$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');

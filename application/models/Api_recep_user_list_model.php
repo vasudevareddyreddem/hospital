@@ -176,4 +176,21 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 
 	}
+	
+	public  function get_op_patient_coupon_code_details($code,$patient_id,$hos_id){
+		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.op_amount_percentage,coupon_code_list.created_by as create_by,coupon_code_list.created_at,appointments.create_by as ap_create_by')->from('coupon_code_list');
+		$this->db->join('appointments','appointments.b_id = coupon_code_list.appointment_id','left');
+		$this->db->where('coupon_code_list.hos_id',$hos_id);
+		$this->db->where('appointments.patient_id',$patient_id);
+		$this->db->where('coupon_code_list.couponcode_name',$code);
+		return $this->db->get()->row_array();
+	}
+	
+	/* forgot  password */
+	
+	public  function check_user_details_ortheir($a_email_id){
+		$this->db->select('a_email_id,a_org_password')->from('admin');
+		$this->db->where('a_email_id',$a_email_id);
+		return $this->db->get()->row_array();		
+	}
 }
