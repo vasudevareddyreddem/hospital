@@ -20,7 +20,7 @@ class Api_recep_user_list_model extends CI_Model
  }
  public function user_checking($user_id){
  	$this->db->select('*')->from('admin')->where('a_id',$user_id)->where('a_status',1);
- 	return $this->db->get()->result_array();
+ 	return $this->db->get()->row_array();
  }
  public function get_all_resouce_details($admin_id){
 		$this->db->select('resource_list.r_id,resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');		
@@ -156,4 +156,19 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	
+	    public function save_appointments($data){
+		$this->db->insert('appointments',$data);
+		return $this->db->insert_id();
+	}
+	public  function get_website_appiontment_list($hos_id){
+		$this->db->select('appointments.*,treament.t_name,specialist.specialist_name,resource_list.resource_name')->from('appointments');
+		$this->db->join('treament', 'treament.t_id = appointments.department', 'left');
+		$this->db->join('specialist', 'specialist.s_id = appointments.specialist', 'left');
+		$this->db->join('resource_list', 'resource_list.a_id = appointments.doctor_id', 'left');
+		$this->db->where('appointments.hos_id',$hos_id);
+		$this->db->where('appointments.status !=',2);
+		$this->db->where('appointments.patient_id =',0);
+		$this->db->order_by('appointments.id','desc');
+		return $this->db->get()->result_array();
+	}
 }

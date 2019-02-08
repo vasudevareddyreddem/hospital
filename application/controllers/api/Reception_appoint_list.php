@@ -79,6 +79,7 @@ class Reception_appoint_list extends REST_Controller
     public function appointment_accepted_list_post(){
         $user_id=$this->post('user_id');
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
+
          if(count($res)>0){
 
          }
@@ -87,8 +88,11 @@ class Reception_appoint_list extends REST_Controller
                      $this->response($message, REST_Controller::HTTP_OK);
 
          }
+
          $userdetails=$this->Api_recep_user_list_model-> get_all_resouce_details($user_id);
-         $appoint_list=$this->Api_recep_user_list_model->get_accepted_appointment_list($userdetails['hos_id']);
+         //$appoint_list=$this->Api_recep_user_list_model->get_accepted_appointment_list($userdetails['hos_id']);
+        $appoint_list=$this->Api_recep_user_list_model->get_website_appiontment_list($userdetails['hos_id']);
+       // echo $this->db->last_query();exit;
          if(count($appoint_list)>0){
           $message = array('status'=>1,'appointment_list'=>$appoint_list);
                      $this->response($message, REST_Controller::HTTP_OK);
@@ -121,12 +125,15 @@ class Reception_appoint_list extends REST_Controller
 
 public function appointment_status_change_post(){
       $user_id=$this->post('user_id');
+
       $bid=$this->post('bid');
       $status=$this->post('status');
       $time=$this->post('time');
       $bdate=$this->post('bdate');
+
      
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
+       
          if(count($res)>0){
 
          }
@@ -135,6 +142,8 @@ public function appointment_status_change_post(){
                      $this->response($message, REST_Controller::HTTP_OK);
 
          }
+        
+          if($res['role_id']==3){
          $data=array('status'=>$status,
                     'updated_by'=>$user_id,
                     'updated_date'=>date('Y-m-d H:i:s'),
@@ -146,9 +155,31 @@ public function appointment_status_change_post(){
             $data['date']=$bdate;
          }
          $flag=$this->Api_recep_user_list_model->change_appoint_status($data,$bid);
+
        
          if($flag==1){
             if($status=1){
+            	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
+
+				
+					$post=$this->input->post();
+					$add=array(
+					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
+					'patinet_name'=>isset($post['patinet_name'])?strtoupper($post['patinet_name']):'',
+					'age'=>isset($post['age'])?$post['age']:'',
+					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
+					'department'=>isset($post['department'])?$post['department']:'',
+					'specialist'=>isset($post['specialist'])?$post['specialist']:'',
+					'doctor_id'=>isset($post['doctor_id'])?$post['doctor_id']:'',
+					'date'=>isset($post['date'])?$post['date']:'',
+					'time'=>isset($post['time'])?$post['time']:'',
+					'status'=>1,
+					'create_at'=>date('Y-m-d H:i:s'),
+					'create_by'=>$user_id,
+					'coming_through'=>1,
+					);
+					//echo '<pre>';print_r($userdetails);exit;
+					$save=$this->Api_recep_user_list_model->save_appointments($add);
 				
 				/* accept message */
 							$details=$this->Api_recep_user_list_model->get_appointment_bid_user_details($bid);
@@ -161,7 +192,7 @@ public function appointment_status_change_post(){
 							$pass=$this->config->item('smspassword');
 							$sender=$this->config->item('sender');
 							$msg = "Dear ".$details['patinet_name'].", your appointment  is confirmed, for the ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Use coupon code ".ucfirst($get_coupon['coupon_code'])." to avail discounts.Any queries call ".$hos_conatct['hos_rep_contact'];
-							echo $msg;exit; /* seller purpose*/
+							 /* seller purpose*/
 							$ch2 = curl_init();
 							curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
 							curl_setopt($ch2, CURLOPT_POST, 1);
@@ -171,6 +202,7 @@ public function appointment_status_change_post(){
 							$server_output = curl_exec ($ch2);
 							curl_close ($ch2);
 				/* accept message */
+
 				
 					$message = array('status'=>1,'message'=>'Patient Appointment Accepted ');
                      $this->response($message, REST_Controller::HTTP_OK);
@@ -182,6 +214,12 @@ public function appointment_status_change_post(){
 
                  $message = array('status'=>0,'message'=>'Patient Appointment not updated, try again');
                      $this->response($message, REST_Controller::HTTP_OK);
+                 }
+                 else{
+                 	  $message = array('status'=>0,'message'=>'You dont have permissions');
+                     $this->response($message, REST_Controller::HTTP_OK);
+
+                 }
 
 }
 
