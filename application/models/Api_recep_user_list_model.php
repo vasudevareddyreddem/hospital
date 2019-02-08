@@ -171,4 +171,9 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->order_by('appointments.id','desc');
 		return $this->db->get()->result_array();
 	}
+	public function get_bidding_det($bid){
+		$this->db->select('*')->from('appointment_bidding_list')->where('b_id',$bid);
+		return $this->db->get()->row_array();
+
+	}
 }

@@ -160,23 +160,26 @@ public function appointment_status_change_post(){
          if($flag==1){
             if($status=1){
             	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
+            	$bid_det=$this->Api_recep_user_list_model->get_bidding_det($bid);
+            	
 
 				
 					$post=$this->input->post();
 					$add=array(
-					'hos_id'=>isset($userdetails['hos_id'])?$userdetails['hos_id']:'',
-					'patinet_name'=>isset($post['patinet_name'])?strtoupper($post['patinet_name']):'',
-					'age'=>isset($post['age'])?$post['age']:'',
-					'mobile'=>isset($post['mobile'])?$post['mobile']:'',
-					'department'=>isset($post['department'])?$post['department']:'',
-					'specialist'=>isset($post['specialist'])?$post['specialist']:'',
-					'doctor_id'=>isset($post['doctor_id'])?$post['doctor_id']:'',
-					'date'=>isset($post['date'])?$post['date']:'',
-					'time'=>isset($post['time'])?$post['time']:'',
+					'hos_id'=>$bid_det['hos_id'],
+					'patinet_name'=>$bid_det['patinet_name'],
+					'age'=>$bid_det['patinet_name'],
+					'mobile'=>$bid_det['mobile'],
+					'department'=>$bid_det['department'],
+					'specialist'=>$bid_det['specialist'],
+					'doctor_id'=>$bid_det['doctor_id'],
+					'date'=>$bid_det['date'],
+					'time'=>$bid_det['time'],
 					'status'=>1,
 					'create_at'=>date('Y-m-d H:i:s'),
 					'create_by'=>$user_id,
 					'coming_through'=>1,
+					'b_id'=>$bid
 					);
 					//echo '<pre>';print_r($userdetails);exit;
 					$save=$this->Api_recep_user_list_model->save_appointments($add);
