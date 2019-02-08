@@ -149,7 +149,30 @@ public function appointment_status_change_post(){
        
          if($flag==1){
             if($status=1){
-          $message = array('status'=>1,'message'=>'Patient Appointment Accepted ');
+				
+				/* accept message */
+							$details=$this->Api_recep_user_list_model->get_appointment_bid_user_details($bid);
+							$this->load->model('Appointments_model');
+							$get_coupon=$this->Appointments_model->get_hospital_counpon_code($details['hos_id']);
+							$hos_conatct=$this->Appointments_model->get_appoinment_hospital_details($details['hos_id']);
+							//echo '<pre>';print_r($details);exit;
+							$mobile=$details['mobile'];
+							$username=$this->config->item('smsusername');
+							$pass=$this->config->item('smspassword');
+							$sender=$this->config->item('sender');
+							$msg = "Dear ".$details['patinet_name'].", your appointment  is confirmed, for the ".$details['hos_bas_name'].", on ".$details['date'].$details['time'].".Use coupon code ".ucfirst($get_coupon['coupon_code'])." to avail discounts.Any queries call ".$hos_conatct['hos_rep_contact'];
+							echo $msg;exit; /* seller purpose*/
+							$ch2 = curl_init();
+							curl_setopt($ch2, CURLOPT_URL,"http://trans.smsfresh.co/api/sendmsg.php");
+							curl_setopt($ch2, CURLOPT_POST, 1);
+							curl_setopt($ch2, CURLOPT_POSTFIELDS,'user='.$username.'&pass='.$pass.'&sender='.$sender.'&phone='.$mobile.'&text='.$msg.'&priority=ndnd&stype=normal');
+							curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+							//echo '<pre>';print_r($ch);exit;
+							$server_output = curl_exec ($ch2);
+							curl_close ($ch2);
+				/* accept message */
+				
+					$message = array('status'=>1,'message'=>'Patient Appointment Accepted ');
                      $this->response($message, REST_Controller::HTTP_OK);
                  }
                   $message = array('status'=>1,'message'=>'Patient Appointment Rejected ');
@@ -435,6 +458,8 @@ public  function billappoitment_user_post(){
 		);
 		$save_bill=$this->Api_recep_user_list_model->save_billing_for_patient($add);
 		if(count($save_bill)>0){
+			$a_u_p=array('patient_id'=>$save_bill);
+			$this->Api_recep_user_list_model->update_appointments_user_id($appointment_id,$a_u_p);
 			$billing=array(
 			'p_id'=>isset($save_bill)?$save_bill:'',
 			'treatment_id'=>isset($user_details['department'])?$user_details['department']:'',
@@ -442,7 +467,7 @@ public  function billappoitment_user_post(){
 			'specialist_id'=>isset($user_details['specialist'])?$user_details['specialist']:'',
 			);
 			$bill_id=$this->Api_recep_user_list_model->save_billing_data_for_patient($billing);
-			$message = array('status'=>1,'billing_id'=>$bill_id,'patient_id'=>$save_bill,'message'=>'successfully data updated');
+			$message = array('status'=>1,'appointment_id'=>$appointment_id,'billing_id'=>$bill_id,'patient_id'=>$save_bill,'message'=>'successfully data updated');
 			$this->response($message, REST_Controller::HTTP_OK);
 			
 		}else{
@@ -536,6 +561,79 @@ public  function apply_coupon_code_post(){
 			
 		}else{
 			$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
+			$this->response($message, REST_Controller::HTTP_OK);
+		}
+}
+
+public  function opcouponcodeapply_post(){
+	
+	$user_id=$this->post('user_id');
+	$appointment_id=$this->post('appointment_id');
+	$patient_id=$this->post('patient_id');
+	$billing_id=$this->post('billing_id');
+	$total_amt=$this->post('total_amt');
+	$coupon_code=$this->post('coupon_code');
+	if($user_id==''){
+		$message = array('status'=>0,'message'=>'User Id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($appointment_id==''){
+		$message = array('status'=>0,'message'=>'Appoinment id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($patient_id==''){
+		$message = array('status'=>0,'message'=>'Patient id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($billing_id==''){
+		$message = array('status'=>0,'message'=>'Billing id is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	if($total_amt==''){
+		$message = array('status'=>0,'message'=>'Total Amount is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}if($coupon_code==''){
+		$message = array('status'=>0,'message'=>'Coupon Code is required');
+		$this->response($message, REST_Controller::HTTP_OK);
+	}
+	
+	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
+	$details=$this->Wallet_model->get_coupon_code_details($coupon_code,$patient_id,$userdetails['hos_id']);
+	if(count($details)>0){
+							$current_time=$details['created_at'];
+							$date=date('Y-m-d H:i:s');
+							$datetime1 = new DateTime($current_time);
+							$datetime2 = new DateTime($date);
+							$interval = $datetime1->diff($datetime2);
+							//echo '<pre>';print_r($interval);
+							$diff_in_hrs =$interval->format('%h');
+				if($diff_in_hrs >=0 && $diff_in_hrs <2){
+					$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
+					//echo '<pre>';print_r($wallet_detials);
+					
+					$percent=($total_amt)*($details['op_amount_percentage']);
+					$percen_amount=$percent/100;
+					$amount=($total_amt)-($percen_amount);
+					//echo $percen_amount;
+					if($wallet_detials['remaining_wallet_amount']>=$percen_amount){
+						
+							$data['msg']=1;
+							$data['amt']=$amount;
+							$data['appointment_user_id']=$details['create_by'];
+							$data['cou_amt']=$details['op_amount_percentage'];
+							$message = array('status'=>1,'pay_amount'=>$amount,'billing_id'=>$billing_id,'appointment_user_id'=>$details['create_by'],'message'=>"Coupon Code applied Successfully. Payable Amount is ".$details['op_amount_percentage']." % decreased");
+							$this->response($message, REST_Controller::HTTP_OK);
+					}else{
+						$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');
+						$this->response($message, REST_Controller::HTTP_OK);
+					}
+			
+			}else{
+				 $message = array('status'=>0,'message'=>'Coupon Code is expired. Please try another one');
+				 $this->response($message, REST_Controller::HTTP_OK);
+			}
+		}else{
+			$message = array('status'=>0,'message'=>'Coupon code was not correct. Please try again once');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
 }
