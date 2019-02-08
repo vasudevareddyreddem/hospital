@@ -176,4 +176,10 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 
 	}
+	public function get_camp_users($hos_id){
+		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
+       	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',2)->where('hc.status',1)->where('hc.hos_id',$hos_id);
+       	return $this->db->get()->result_array();
+
+	}
 }
