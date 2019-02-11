@@ -1,17 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Api_recep_user_list_model extends CI_Model 
+class Api_recep_user_list_model extends CI_Model
 
 {
-	function __construct() 
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->database("default");
 	}
-	
+
  public function recep_login_checking($email,$password){
  	$password=md5($password);
- 	
+
  			$this->db->select('*')->from('admin')->group_start()->where('a_email_id',$email)->where('a_password',$password)
  			->where('a_status',1)->where('role_id',3)->group_end()->or_group_start()->where('a_username',$email)->where('a_password',$password)
  			->where('a_status',1)->where('role_id',3)->group_end();
@@ -23,12 +23,12 @@ class Api_recep_user_list_model extends CI_Model
  	return $this->db->get()->row_array();
  }
  public function get_all_resouce_details($admin_id){
-		$this->db->select('resource_list.r_id,resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');		
+		$this->db->select('resource_list.r_id,resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');
 		$this->db->join('roles', 'roles.r_id = admin.role_id', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 		$this->db->where('admin.a_id', $admin_id);
 		$this->db->where('admin.a_status', 1);
-        return $this->db->get()->row_array();	
+        return $this->db->get()->row_array();
 	}
 	public  function get_app_appointment_list($hos_id){
   $this->db->select('appointment_bidding_list.*,appointment_bidding_list.b_id,appointment_bidding_list.status,treament.t_name,specialist.specialist_name,resource_list.resource_name')->from('appointment_bidding_list');
@@ -71,12 +71,12 @@ class Api_recep_user_list_model extends CI_Model
 	 }
 	 /* for billing details */
 	 public function get_login_resouce_details($admin_id){
-			$this->db->select('resource_list.r_id,resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');		
+			$this->db->select('resource_list.r_id,resource_list.hos_id,admin.a_id,admin.role_id,admin.a_email_id,admin.a_name,roles.r_name,admin.a_profile_pic')->from('admin');
 			$this->db->join('roles', 'roles.r_id = admin.role_id', 'left');
 			$this->db->join('resource_list', 'resource_list.a_id = admin.a_id', 'left');
 			$this->db->where('admin.a_id', $admin_id);
 			$this->db->where('admin.a_status', 1);
-			return $this->db->get()->row_array();	
+			return $this->db->get()->row_array();
 		}
 	public  function save_coupon_code_history($data){
 		$this->db->insert('coupon_code_history',$data);
@@ -95,7 +95,7 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->where('a_u_id',$a_u_id);
 		return $this->db->update('appointment_users',$data);
 	}
-	
+
 	public  function get_patient_billing_id($patient_id){
 		$this->db->select('b_id')->from('patient_billing');
 		$this->db->where('p_id',$patient_id);
@@ -103,7 +103,7 @@ class Api_recep_user_list_model extends CI_Model
 		return $this->db->get()->row_array();
 	}
 	 /* for billing details */
-	 
+
 	 /* apply coupon code */
 	 public  function get_coupon_code_details($code,$code_id,$hos_id,$category){
 		$this->db->select('coupon_code_list.c_c_l_id,coupon_code_list.op_amount_percentage,coupon_code_list.ip_amount_percentage,coupon_code_list.created_by,coupon_code_list.created_at,coupon_code_list.lab_amount_percentage,')->from('coupon_code_list');
@@ -119,7 +119,7 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->order_by('b_h_id','desc');
 		return $this->db->get()->result_array();
 	}
-	
+
 	/* appoinment  direct billing purpose*/
 	public  function get_appointment_user_details($appoinment_id){
 		$this->db->select('*')->from('appointments');
@@ -143,10 +143,10 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->where('coupon_code_list.hos_id',$hos_id);
 		$this->db->where('coupon_code_list.couponcode_name',$coupon_code);
 		return $this->db->get()->row_array();
-	}	
+	}
 	public  function update_appointments_user_id($id,$data){
 		$this->db->where('appointments.id',$id);
-		return $this->db->update('appointments',$data);		
+		return $this->db->update('appointments',$data);
 	}
 	public  function get_appointment_bid_user_details($b_id){
 		$this->db->select('appointment_bidding_list.*,appointment_users.name,appointment_users.token,hospital.hos_bas_name')->from('appointment_bidding_list');
@@ -155,7 +155,7 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->where('appointment_bidding_list.b_id',$b_id);
 		return $this->db->get()->row_array();
 	}
-	
+
 	    public function save_appointments($data){
 		$this->db->insert('appointments',$data);
 		return $this->db->insert_id();
@@ -192,6 +192,12 @@ class Api_recep_user_list_model extends CI_Model
 		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
        	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',0)->where('hc.status',1)->where('hc.hos_id',$hos_id);
        	return $this->db->get()->result_array();
+
+	}
+	public function change_user_hcamp_status($data,$id){
+		$this->db->where('id',$id);
+		$this->db->update('user_health_camps',$data);
+return $this->db->affected_rows()?1:0;
 
 	}
 }

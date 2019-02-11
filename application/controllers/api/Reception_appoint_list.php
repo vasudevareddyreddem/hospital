@@ -17,7 +17,7 @@ require APPPATH . 'libraries/REST_Controller.php';
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Reception_appoint_list extends REST_Controller 
+class Reception_appoint_list extends REST_Controller
 {
 
     function __construct()
@@ -38,7 +38,7 @@ class Reception_appoint_list extends REST_Controller
         $this->load->model('User_health_camps_model');
         $this->load->model('Api_recep_user_list_model');
         $this->load->model('Wallet_model');
-    
+
     }
     public function recep_login_post(){
         $email=$this->post('email');
@@ -51,7 +51,7 @@ class Reception_appoint_list extends REST_Controller
           }
             $message = array('status'=>0,'user'=>$res);
                      $this->response($message, REST_Controller::HTTP_OK);
-      
+
 
 
     }
@@ -131,9 +131,9 @@ public function appointment_status_change_post(){
       $time=$this->post('time');
       $bdate=$this->post('bdate');
 
-     
+
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
-       
+
          if(count($res)>0){
 
          }
@@ -142,7 +142,7 @@ public function appointment_status_change_post(){
                      $this->response($message, REST_Controller::HTTP_OK);
 
          }
-        
+
           if($res['role_id']==3){
          $data=array('status'=>$status,
                     'updated_by'=>$user_id,
@@ -156,14 +156,14 @@ public function appointment_status_change_post(){
          }
          $flag=$this->Api_recep_user_list_model->change_appoint_status($data,$bid);
 
-       
+
          if($flag==1){
             if($status=1){
             	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
             	$bid_det=$this->Api_recep_user_list_model->get_bidding_det($bid);
 
 
-				
+
 					$post=$this->input->post();
 					$add=array(
 					'hos_id'=>$bid_det['hos_id'],
@@ -183,7 +183,7 @@ public function appointment_status_change_post(){
 					);
 					//echo '<pre>';print_r($userdetails);exit;
 					$save=$this->Api_recep_user_list_model->save_appointments($add);
-				
+
 				/* accept message */
 							$details=$this->Api_recep_user_list_model->get_appointment_bid_user_details($bid);
 							$this->load->model('Appointments_model');
@@ -206,7 +206,7 @@ public function appointment_status_change_post(){
 							curl_close ($ch2);
 				/* accept message */
 
-				
+
 					$message = array('status'=>1,'message'=>'Patient Appointment Accepted ');
                      $this->response($message, REST_Controller::HTTP_OK);
                  }
@@ -337,13 +337,13 @@ public function  receptionist_bill_post(){
 
 								}
 								$amount_update=$this->Api_recep_user_list_model->update_op_wallet_amt_details($appointment_user_id,$amt_data);
-						
-				
+
+
 				}
-				
+
 				$message = array('status'=>1,'billing_id'=>$save_billing,'message'=>'Billing data successfully added.');
 				$this->response($message, REST_Controller::HTTP_OK);
-				
+
 			}else{
 				$message = array('status'=>0,'message'=>'Technical problem will occurred. Please try again.');
 				$this->response($message, REST_Controller::HTTP_OK);
@@ -381,9 +381,9 @@ public  function couponcode_apply_post(){
 			$message = array('status'=>0,'message'=>'Category is required');
 			$this->response($message, REST_Controller::HTTP_OK);
 	}
-	
+
 		$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
-		
+
 		$details=$this->Api_recep_user_list_model->get_coupon_code_details($couponcode,$coupon_code_id,$userdetails['hos_id'],$category);
 		if(count($details)>0){
 			if($category==2){
@@ -414,12 +414,12 @@ public  function couponcode_apply_post(){
 						$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');
 			           $this->response($message, REST_Controller::HTTP_OK);
 							}
-					
+
 					}else{
 						 $message = array('status'=>0,'message'=>'Coupon Code is expired. Please try another one');
 						 $this->response($message, REST_Controller::HTTP_OK);
 					}
-				
+
 			}else{
 							$current_time=$details['created_at'];
 							$date=date('Y-m-d H:i:s');
@@ -447,23 +447,23 @@ public  function couponcode_apply_post(){
 									$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');
 									$this->response($message, REST_Controller::HTTP_OK);
 								}
-						
+
 						}else{
 							 $message = array('status'=>0,'message'=>'Coupon Code is expired. Please try another one');
 							 $this->response($message, REST_Controller::HTTP_OK);
 						}
-					
-					
-					
+
+
+
 			}
-							
+
 		}else{
 			$message = array('status'=>0,'message'=>'Coupon code was not correct. Please try again once');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-	
-	
-	
+
+
+
 }
 public  function billing_list_post(){
 	$user_id=$this->post('user_id');
@@ -510,12 +510,12 @@ public  function billappoitment_user_post(){
 			$bill_id=$this->Api_recep_user_list_model->save_billing_data_for_patient($billing);
 			$message = array('status'=>1,'appointment_id'=>$appointment_id,'billing_id'=>$bill_id,'patient_id'=>$save_bill,'message'=>'successfully data updated');
 			$this->response($message, REST_Controller::HTTP_OK);
-			
+
 		}else{
 			$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
 			$this->response($message, REST_Controller::HTTP_OK);
 		}
-		
+
 	}else{
 		$message = array('status'=>0,'message'=>'Appointment user details are not getting');
 		$this->response($message, REST_Controller::HTTP_OK);
@@ -562,7 +562,7 @@ public  function apply_coupon_code_post(){
 		$message = array('status'=>0,'message'=>'Coupon code is required');
 		$this->response($message, REST_Controller::HTTP_OK);
 	}
-	
+
 	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
 	$billing=array(
 		'patient_payer_deposit_amount'=>isset($total_amt)?$total_amt:'',
@@ -598,8 +598,8 @@ public  function apply_coupon_code_post(){
 					$amount_update=$this->Wallet_model->update_op_wallet_amt_details($appointment_user_id,$amt_data);
 
 			$message = array('status'=>1,'message'=>'Bill details successfully updated');
-			$this->response($message, REST_Controller::HTTP_OK);				
-			
+			$this->response($message, REST_Controller::HTTP_OK);
+
 		}else{
 			$message = array('status'=>0,'message'=>'Technical problem will occured. Please try again');
 			$this->response($message, REST_Controller::HTTP_OK);
@@ -607,7 +607,7 @@ public  function apply_coupon_code_post(){
 }
 
 public  function opcouponcodeapply_post(){
-	
+
 	$user_id=$this->post('user_id');
 	$appointment_id=$this->post('appointment_id');
 	$patient_id=$this->post('patient_id');
@@ -637,7 +637,7 @@ public  function opcouponcodeapply_post(){
 		$message = array('status'=>0,'message'=>'Coupon Code is required');
 		$this->response($message, REST_Controller::HTTP_OK);
 	}
-	
+
 	$userdetails=$this->Api_recep_user_list_model->get_login_resouce_details($user_id);
 	$details=$this->Wallet_model->get_coupon_code_details($coupon_code,$patient_id,$userdetails['hos_id']);
 	if(count($details)>0){
@@ -651,13 +651,13 @@ public  function opcouponcodeapply_post(){
 				if($diff_in_hrs >=0 && $diff_in_hrs <2){
 					$wallet_detials=$this->Wallet_model->get_wallet_amt_details($details['create_by']);
 					//echo '<pre>';print_r($wallet_detials);
-					
+
 					$percent=($total_amt)*($details['op_amount_percentage']);
 					$percen_amount=$percent/100;
 					$amount=($total_amt)-($percen_amount);
 					//echo $percen_amount;
 					if($wallet_detials['remaining_wallet_amount']>=$percen_amount){
-						
+
 							$data['msg']=1;
 							$data['amt']=$amount;
 							$data['appointment_user_id']=$details['create_by'];
@@ -668,7 +668,7 @@ public  function opcouponcodeapply_post(){
 						$message = array('status'=>0,'message'=>'Your wallet having insufficient amount. Please recharge again');
 						$this->response($message, REST_Controller::HTTP_OK);
 					}
-			
+
 			}else{
 				 $message = array('status'=>0,'message'=>'Coupon Code is expired. Please try another one');
 				 $this->response($message, REST_Controller::HTTP_OK);
@@ -681,7 +681,7 @@ public  function opcouponcodeapply_post(){
 
 
 public function get_health_camp_users_post(){
-	$user_id=$this->post('user_id');
+
 	  $user_id=$this->post('user_id');
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
          if(count($res)>0){
@@ -718,7 +718,7 @@ public function get_health_camp_users_post(){
 
 }
 public function get_health_camp_ausers_post(){
-	$user_id=$this->post('user_id');
+
 	  $user_id=$this->post('user_id');
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
          if(count($res)>0){
@@ -755,7 +755,7 @@ public function get_health_camp_ausers_post(){
 
 }
 public function get_health_camp_rusers_post(){
-	$user_id=$this->post('user_id');
+
 	  $user_id=$this->post('user_id');
          $res=$this->Api_recep_user_list_model->user_checking($user_id);
          if(count($res)>0){
@@ -788,6 +788,41 @@ public function get_health_camp_rusers_post(){
 			$this->response($message, REST_Controller::HTTP_OK);
 
           	}
+
+
+}
+public  function change_status_uhcamp_post(){
+
+      $user_id=$this->post('user_id');
+      $id==$this->post('camp_id');
+      $status=$this->post('status');
+           $res=$this->Api_recep_user_list_model->user_checking($user_id);
+           if(count($res)>0){
+
+           }
+           else{
+               $message = array('status'=>0,'message'=>'user does not exist');
+                       $this->response($message, REST_Controller::HTTP_OK);
+
+           }
+      $data=array('updated_date'=>date('Y-m-d H:i:s'),
+        'camp_status'=>$status
+    );
+      $flag=$this->User_health_camps_model->change_user_hcamp_status($data,$id);
+      if($flag==1){
+        if($status==1){
+        $message = array('status'=>1,'message'=>'User Health Camp Request Accepted');
+                $this->response($message, REST_Controller::HTTP_OK);
+              }
+              $message = array('status'=>1,'message'=>'User Health Camp Request Rejected');
+                      $this->response($message, REST_Controller::HTTP_OK);
+
+      }
+      $message = array('status'=>0,'message'=>'User Health Camp Request Not Successfull');
+              $this->response($message, REST_Controller::HTTP_OK);
+
+
+
 
 
 }
