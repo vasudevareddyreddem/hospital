@@ -184,7 +184,7 @@ public  function get_op_patient_coupon_code_details($code,$patient_id,$hos_id){
 		$this->db->where('coupon_code_list.couponcode_name',$code);
 		return $this->db->get()->row_array();
 	}
-	
+
 	public function get_camp_users($hos_id){
 		$this->db->select('ca.id,user.name,user.mobile,hc.dept_name,ca.created_date,ca.age')->from('user_health_camps ca')->join('appointment_users user','user.a_u_id=ca.user_id')
        	->join('health_camp_tab hc','hc.camp_id=ca.camp_id')->where('ca.camp_status',2)->where('hc.status',1)->where('hc.hos_id',$hos_id);
@@ -210,15 +210,12 @@ public  function get_op_patient_coupon_code_details($code,$patient_id,$hos_id){
 return $this->db->affected_rows()?1:0;
 
 	}
-}
-
-	/* forgot  password */
-	
 	public  function check_user_details_ortheir($a_email_id){
 		$this->db->select('a_email_id,a_org_password')->from('admin');
 		$this->db->where('a_email_id',$a_email_id);
 		return $this->db->get()->row_array();
-		
+
 	}
 }
 
+	/* forgot  password */
