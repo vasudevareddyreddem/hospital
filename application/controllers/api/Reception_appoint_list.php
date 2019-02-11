@@ -55,7 +55,7 @@ class Reception_appoint_list extends REST_Controller
 
 
     }
-	
+
 	public function forgotpassword_post(){
         $email=$this->post('email');
 		if($email==''){
@@ -68,8 +68,8 @@ class Reception_appoint_list extends REST_Controller
 				$this->email->set_newline("\r\n");
 				$this->email->set_mailtype("html");
 				$this->email->to($check['a_email_id']);
-				$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra'); 
-				$this->email->subject('Forgot Password'); 
+				$this->email->from('customerservice@ealthinfra.com', 'Ehealthinfra');
+				$this->email->subject('Forgot Password');
 				$body = "<b> Your Account login Password is </b> : ".$check['a_org_password'];
 				$this->email->message($body);
 				$this->email->send();
@@ -683,7 +683,7 @@ public  function opcouponcodeapply_post(){
 
 					//echo $this->db->last_query();
 					//echo '<pre>';print_r($wallet_detials);exit;
-					
+
 					$percent=($total_amt)*($details['op_amount_percentage']);
 					$percen_amount=$percent/100;
 					$amount=($total_amt)-($percen_amount);
@@ -725,8 +725,9 @@ public function get_health_camp_users_post(){
 
          }
           if($res['role_id']==3){
-          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
           	$camp_users=$this->Api_recep_user_list_model->get_camp_users($userdetails['hos_id']);
+            //echo $this->db->last_query();exit;
           	if(count($camp_users)>0){
 
                    $message = array('status'=>1,'camp_list'=>$camp_users);
@@ -762,7 +763,7 @@ public function get_health_camp_ausers_post(){
 
          }
           if($res['role_id']==3){
-          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
           	$camp_users=$this->Api_recep_user_list_model->get_acamp_users($userdetails['hos_id']);
           	if(count($camp_users)>0){
 
@@ -799,7 +800,7 @@ public function get_health_camp_rusers_post(){
 
          }
           if($res['role_id']==3){
-          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($admindetails['a_id']);
+          	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
           	$camp_users=$this->Api_recep_user_list_model->get_rcamp_users($userdetails['hos_id']);
           	if(count($camp_users)>0){
 
