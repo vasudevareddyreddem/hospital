@@ -827,7 +827,7 @@ public function get_health_camp_rusers_post(){
 public  function change_status_uhcamp_post(){
 
       $user_id=$this->post('user_id');
-      $id==$this->post('camp_id');
+      $id=$this->post('camp_id');
       $status=$this->post('status');
            $res=$this->Api_recep_user_list_model->user_checking($user_id);
            if(count($res)>0){
@@ -842,6 +842,7 @@ public  function change_status_uhcamp_post(){
         'camp_status'=>$status
     );
       $flag=$this->User_health_camps_model->change_user_hcamp_status($data,$id);
+    //  echo $this->db->last_query();exit;
       if($flag==1){
         if($status==1){
         $message = array('status'=>1,'message'=>'User Health Camp Request Accepted');
