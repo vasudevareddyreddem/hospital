@@ -183,7 +183,7 @@ public function appointment_status_change_post(){
 
 
          if($flag==1){
-            if($status=1){
+            if($status==1){
             	$userdetails=$this->Api_recep_user_list_model->get_all_resouce_details($user_id);
             	$bid_det=$this->Api_recep_user_list_model->get_bidding_det($bid);
 

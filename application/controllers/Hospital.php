@@ -4,15 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Hospital extends In_frontend {
 
-	public function __construct() 
+	public function __construct()
 	{
-		parent::__construct();	
+		parent::__construct();
 				$this->load->model('Hospital_model');
 
 		}
 	public function index()
-	{	
-		
+	{
+
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
@@ -34,7 +34,7 @@ class Hospital extends In_frontend {
 					}else{
 						$data['hospital_list']=array();
 					}
-					
+
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('admin/hospital_list',$data);
 					$this->load->view('html/footer');
@@ -42,7 +42,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			//$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -62,7 +62,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('admin/addhospital',$data);
 				$this->load->view('html/footer');
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -73,7 +73,7 @@ class Hospital extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
+
 					$post=$this->input->post();
 
 					//echo '<pre>';print_r($post);exit;
@@ -100,7 +100,7 @@ class Hospital extends In_frontend {
 									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
 								}
 						}else{
-							
+
 								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
 								if(count($emailcheck)>0){
 									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
@@ -127,10 +127,10 @@ class Hospital extends In_frontend {
 									redirect('hospital/add/'.base64_encode(1).'/'.$post['hospital_id']);
 									}
 								}
-							
+
 						}
 
-						
+
 					}else{
 							if(md5($post['hos_password'])==md5($post['hos_confirmpassword'])){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['hos_email_id']);
@@ -138,8 +138,8 @@ class Hospital extends In_frontend {
 									$this->session->set_flashdata('error','Email Id already exists. Please use another Email Id');
 									redirect('hospital/add/'.base64_encode(1));
 								}else{
-									
-									
+
+
 									$admindetails=array(
 									'role_id'=>2,
 									'a_name'=>'Hospital Admin',
@@ -158,8 +158,8 @@ class Hospital extends In_frontend {
 										$store_image1 = imagepng($file, $this->config->item('documentroot')."assets/hospital_barcodes/{$code}.png");
 
 										/* barcode*/
-									
-									
+
+
 									$onedata=array(
 									'a_id'=>$addhospitaladmin,
 									'hos_con_number'=>$post['hos_con_number'],
@@ -179,7 +179,7 @@ class Hospital extends In_frontend {
 										redirect('hospital/add/'.base64_encode(1));
 									}
 								}
-								
+
 							}else{
 								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
 								redirect('hospital/add/'.base64_encode(1));
@@ -189,7 +189,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 		 $this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -200,7 +200,7 @@ class Hospital extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
+
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
 					$twodata=array(
@@ -230,7 +230,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -241,7 +241,7 @@ class Hospital extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
+
 					$post=$this->input->post();
 						if(isset($_FILES['hos_bas_document']['name']) && $_FILES['hos_bas_document']['name']!=''){
 							$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
@@ -278,7 +278,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -289,7 +289,7 @@ class Hospital extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
+
 					$post=$this->input->post();
 					//echo '<pre>';print_r($_FILES);exit;
 						if(isset($_FILES['bank_documents']['name']) && $_FILES['bank_documents']['name']!=''){
@@ -321,7 +321,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -331,7 +331,7 @@ class Hospital extends In_frontend {
 		if($this->session->userdata('userdetails'))
 		{
 				if($admindetails['role_id']=1){
-					
+
 					$post=$this->input->post();
 					//echo '<pre>';print_r($_FILES);exit;
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
@@ -381,7 +381,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -438,7 +438,7 @@ class Hospital extends In_frontend {
 		{		$admindetails=$this->session->userdata('userdetails');
 				if($admindetails['role_id']==1 || $admindetails['role_id']==2){
 					$post=$this->input->post();
-					
+
 					//echo '<pre>';print_r($post);
 						$hospital_details= $this->Hospital_model->get_hospital_details(base64_decode($post['hospital_id']));
 						if($hospital_details['hos_email_id']!= $post['hos_email_id']){
@@ -506,8 +506,8 @@ class Hospital extends In_frontend {
 						}else{
 							$file3=$hospital_details['kyc_file3'];
 						}
-						
-						
+
+
 						//echo '<pre>';print_r($post);
 						$onedata1=array(
 							'a_name'=>isset($post['hos_bas_name'])?$post['hos_bas_name']:$hospital_details['hos_bas_name'],
@@ -578,7 +578,7 @@ class Hospital extends In_frontend {
 										redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
 									}else if($post['tab_id']==5){
 										$this->session->set_flashdata('success'," Hospital Financial Details  are successfully updated");
-											redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));	
+											redirect('hospital/edit/'.$post['hospital_id'].'/'.base64_encode($post['tab_id']));
 									}else if($post['tab_id']==6){
 										$this->session->set_flashdata('success'," Hospital Other Details are successfully updated");
 											if($admindetails['role_id']==2){
@@ -587,8 +587,8 @@ class Hospital extends In_frontend {
 												redirect('hospital');
 											}
 									}
-							
-								
+
+
 							}else{
 								$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 								redirect('hospital/add/'.base64_encode($post['backtab_id']).'/'.$post['hospital_id']);
@@ -597,7 +597,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -610,7 +610,7 @@ class Hospital extends In_frontend {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=1){
 					$hospital_id=$this->uri->segment(3);
-					
+
 					if($hospital_id!=''){
 						$deletdata=array(
 							'hos_undo'=>1,
@@ -633,7 +633,7 @@ class Hospital extends In_frontend {
 										$this->Hospital_model->resouces_login_status_update($lis['a_id'],$a_da);
 									}
 								}
-								
+
 								$this->session->set_flashdata('success',"Hospital successfully removed.");
 								redirect('hospital');
 							}else{
@@ -644,7 +644,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -681,8 +681,8 @@ class Hospital extends In_frontend {
 								'a_updated_at'=>date('Y-m-d H:i:s')
 								);
 								$this->Hospital_model->update_admin_detais($hos_details['a_id'],$admin_stusdetails);
-								
-								
+
+
 								/* resouces list*/
 								$resources_list=$this->Hospital_model->get_hos_resources_list(base64_decode($hospital_id));
 								//echo $this->db->last_query();exit;
@@ -712,7 +712,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital');
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -722,7 +722,7 @@ class Hospital extends In_frontend {
 			redirect('admin');
 		}
 	}
-	
+
 	public function resource()
 	{
 		if($this->session->userdata('userdetails'))
@@ -784,7 +784,7 @@ class Hospital extends In_frontend {
 									}else{
 										redirect('hospital/resource');
 									}
-									
+
 								}else{
 									if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 									$temp = explode(".", $_FILES["resource_photo"]["name"]);
@@ -855,7 +855,7 @@ class Hospital extends In_frontend {
 										}else{
 											redirect('hospital/resource/'.base64_encode(1));
 										}
-										
+
 									}else{
 										$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 										if($post['designation']==6){
@@ -863,15 +863,15 @@ class Hospital extends In_frontend {
 										}else{
 											redirect('hospital/resource');
 										}
-										
+
 									}
 								}
-								
+
 							}else{
 								$this->session->set_flashdata('error',"password and  Confirmpassword are not matched");
 								redirect('hospital/resource');
 							}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -907,7 +907,7 @@ class Hospital extends In_frontend {
 							);
 							$statusdata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$stusdetails);
 							$this->Admin_model->update_resourse_details(base64_decode($a_id),$admin_stusdetails);
-							
+
 							//echo $this->db->last_query();exit;
 							if(count($statusdata)>0){
 								if($status==1){
@@ -920,7 +920,7 @@ class Hospital extends In_frontend {
 								}else{
 									redirect('hospital/resource/'.base64_encode(1));
 								}
-								
+
 							}else{
 									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 									if($resouse_detail['role_id']==6){
@@ -933,7 +933,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/resource/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -958,13 +958,13 @@ class Hospital extends In_frontend {
 							);
 							$deletedata= $this->Hospital_model->update_resourse_details(base64_decode($resourse_id),$deletdata);
 							if(count($deletedata)>0){
-								
+
 								$admin_stusdetails=array(
 									'a_status'=>2,
 									'a_updated_at'=>date('Y-m-d H:i:s')
 									);
 								$this->Admin_model->update_resourse_details($resouse_detail['a_id'],$admin_stusdetails);
-							
+
 								$this->session->set_flashdata('success',"Resource successfully removed.");
 									if($resouse_detail['role_id']==6){
 										redirect('hospital/adddoctor/'.base64_encode(1));
@@ -983,7 +983,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/resource/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -993,7 +993,7 @@ class Hospital extends In_frontend {
 			redirect('admin');
 		}
 	}
-	
+
 	public function treatment()
 	{
 		if($this->session->userdata('userdetails'))
@@ -1029,7 +1029,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('hospital/resouceedit',$data);
 				$this->load->view('html/footer');
-				
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1046,7 +1046,7 @@ class Hospital extends In_frontend {
 					$post=$this->input->post();
 					//echo '<pre>';print_r($post);exit;
 					$resouse_detail= $this->Hospital_model->get_resourse_details($post['resource_id']);
-					
+
 					$resouse_email= $this->Hospital_model->get_resourse_details($post['resource_id']);
 					if($resouse_email['resource_email'] !=$post['resource_email']){
 								$emailcheck= $this->Hospital_model->check_email_exits($post['resource_email']);
@@ -1089,7 +1089,7 @@ class Hospital extends In_frontend {
 									'a_updated_at'=>date('Y-m-d H:i:s')
 									);
 									$addresourcedmin = $this->Admin_model->update_admin_details($post['admin_id'],$admin_details);
-									
+
 									$resourcedata=array(
 									'role_id'=>$post['designation'],
 									'resource_name'=>$post['resource_name'],
@@ -1117,7 +1117,7 @@ class Hospital extends In_frontend {
 									if(count($saveresource)>0){
 										$this->session->set_flashdata('success',"Resource details are successfully updated");
 										if($admindetails['role_id']=2){
-											
+
 												redirect('hospital/resourceview/'.base64_encode($post['resource_id']));
 
 										}else{
@@ -1128,7 +1128,7 @@ class Hospital extends In_frontend {
 										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 									}
 								}
-								
+
 					}else{
 						if(isset($_FILES['resource_photo']['name']) && $_FILES['resource_photo']['name']!=''){
 								if($resouse_detail['resource_photo']!=''){
@@ -1206,7 +1206,7 @@ class Hospital extends In_frontend {
 										redirect('hospital/resourceedit/'.base64_encode($post['resource_id']));
 									}
 					}
-						
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -1222,7 +1222,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('hospital/resouceview',$data);
 				$this->load->view('html/footer');
-				
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1244,7 +1244,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('hospital/addtreament',$data);
 				$this->load->view('html/footer');
-				
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1267,7 +1267,7 @@ class Hospital extends In_frontend {
 				//echo '<pre>';print_r($data);exit;
 				$this->load->view('hospital/addspecialist',$data);
 				$this->load->view('html/footer');
-				
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1308,8 +1308,8 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/addspecialist');
 				}
-									
-				
+
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1351,8 +1351,8 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/addtreatment');
 				}
-									
-				
+
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1391,8 +1391,8 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/addtreatment');
 				}
-									
-				
+
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1425,7 +1425,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/addtreatment/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1468,7 +1468,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/addtreatment/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1486,8 +1486,8 @@ class Hospital extends In_frontend {
 				$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
-					
-					$check=$this->Hospital_model->op_treatment_exist($post['treatment_name'],$post['assign_doctor']);
+					$check=$this->Hospital_model->treatment_exist($post['treatment_name'],$post['specialist_doctor_id'],$post['assign_doctor']);
+					//$check=$this->Hospital_model->op_treatment_exist($post['treatment_name'],$post['assign_doctor']);
 					if(count($check)>0){
 						$this->session->set_flashdata('error',"Treatment already exists. Please try again");
 						redirect('hospital/treatment');
@@ -1506,7 +1506,7 @@ class Hospital extends In_frontend {
 							);
 							//echo '<pre>';print_r($addtreatment_details);exit;
 						$treatment = $this->Hospital_model->save_addtreatment($addtreatment_details);
-						
+
 						if(count($treatment)>0){
 							$this->session->set_flashdata('success',"Department assigned to consultant successfully");
 							redirect('hospital/treatment/'.base64_encode(1));
@@ -1514,7 +1514,7 @@ class Hospital extends In_frontend {
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect('hospital/treatment');
 						}
-			
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1558,7 +1558,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/treatment/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1591,7 +1591,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/addtreatment/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1601,7 +1601,7 @@ class Hospital extends In_frontend {
 			redirect('admin');
 		}
 	}
-	
+
 	/*specialist*/
 	public function specialistdelete()
 	{
@@ -1622,7 +1622,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/addspecialist/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1666,7 +1666,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/addspecialist/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1683,7 +1683,7 @@ class Hospital extends In_frontend {
 			$admindetails=$this->session->userdata('userdetails');
 			if($admindetails['role_id']=2){
 				$post=$this->input->post();
-				
+
 				//echo '<pre>';print_r($post);exit;
 				$editdata_check= $this->Hospital_model->get_specialist_details($post['specialistid']);
 				$hos_ids =$this->Hospital_model->get_hospital_id($admindetails['a_id'],$admindetails['a_email_id']);
@@ -1709,8 +1709,8 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/addspecialist');
 				}
-									
-				
+
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1720,7 +1720,7 @@ class Hospital extends In_frontend {
 			redirect('admin');
 		}
 	}
-	
+
 	/*specialist*/
 	public function labdetails()
 	{
@@ -1761,9 +1761,9 @@ class Hospital extends In_frontend {
 							$li[$c]['name']=$list;
 							$li[$c]['lab_assistent']=$post['lab_assistent'][$c];
 							$li[$c]['investigation']=$post['investigation'][$c];
-							
+
 						$c++;}
-						
+
 						foreach($li as $l){
 							if($l['code']!='' && $l['name']!='' && $l['lab_assistent']!=''){
 								$addlab_details=array(
@@ -1781,7 +1781,7 @@ class Hospital extends In_frontend {
 								$labdetails = $this->Hospital_model->save_addlabdetails($addlab_details);
 							}
 						}
-						
+
 						if(count($labdetails)>0){
 							$this->session->set_flashdata('success',"Lab Details are successfully added");
 							redirect('hospital/labdetails/'.base64_encode(1));
@@ -1793,8 +1793,8 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/labdetails');
 				}
-									
-				
+
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1837,7 +1837,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/labdetails/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1870,7 +1870,7 @@ class Hospital extends In_frontend {
 						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 						redirect('hospital/labdetails/'.base64_encode(1));
 					}
-					
+
 			}else{
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
@@ -1901,7 +1901,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -1927,7 +1927,7 @@ class Hospital extends In_frontend {
 					//echo $this->db->last_query();exit;
 					}
 				}
-				
+
 				if(count($saveNotification)>0){
 					$this->session->set_flashdata('success',"Notification successfully send.");
 					redirect('hospital/announcement');
@@ -1935,18 +1935,18 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/announcement');
 				}
-				
+
 				}else{
 					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 					redirect('hospital/announcement');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error',"you don't have permission to access");
 			redirect('dashboard');
 		}
 	}
-	
+
 	public  function modified_prescription(){
 		if($this->session->userdata('userdetails'))
 		{
@@ -1961,7 +1961,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -1983,7 +1983,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -2004,7 +2004,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -2025,7 +2025,7 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
@@ -2046,14 +2046,14 @@ class Hospital extends In_frontend {
 					$this->session->set_flashdata('error',"You have no permission to access");
 					redirect('dashboard');
 				}
-			
+
 		}else{
 			$this->session->set_flashdata('error','Please login to continue');
 			redirect('admin');
 		}
 	}
-	
-	
+
+
 	public  function get_specialists_list(){
 		$post=$this->input->post();
 		$details=$this->Hospital_model->get_d_id_wise_specialist_list($post['dep_id']);
@@ -2062,14 +2062,14 @@ class Hospital extends In_frontend {
 				{
 				$data['msg']=1;
 				$data['list']=$details;
-				echo json_encode($data);exit;	
+				echo json_encode($data);exit;
 				}else{
 					$data['msg']=2;
 					echo json_encode($data);exit;
 				}
 	}
-	
-	
-	
-	
+
+
+
+
 }
