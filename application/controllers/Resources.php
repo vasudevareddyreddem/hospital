@@ -1022,55 +1022,66 @@ class Resources extends In_frontend {
 					$post=$this->input->post();
 					$admindetails=$this->session->userdata('userdetails');
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
-					//echo '<pre>';print_r($admindetails);exit;
-					$m_name=explode("_",$post['medicine_name']);
-					$qtys=$this->Resources_model->get_medicine_details_list_details($m_name[0],$userdetails['hos_id']);
-					//echo '<pre>';print_r($qtys);
-						
-						$addmedicine=array(
-							'p_id'=>isset($post['pid'])?$post['pid']:'',
-							'b_id'=>isset($post['bid'])?$post['bid']:'',
-							'medicine_id'=>isset($qtys['id'])?$qtys['id']:'',
-							'type_of_medicine'=>isset($post['type_of_medicine'])?$post['type_of_medicine']:'',
-							'medicine_name'=>isset($m_name[0])?$m_name[0]:'',
-							'medicine_type'=>isset($qtys['medicine_type'])?$qtys['medicine_type']:'',
-							'batchno'=>isset($qtys['batchno'])?$qtys['batchno']:'',
-							'substitute_name'=>isset($post['substitute_name'])?$post['substitute_name']:'',
-							'condition'=>isset($post['condition'])?$post['condition']:'',
-							'dosage'=>isset($qtys['dosage'])?$qtys['dosage']:'',
-							'expiry_date'=>isset($qtys['expiry_date'])?$qtys['expiry_date']:'',
-							'route'=>isset($post['route'])?$post['route']:'',
-							'frequency'=>isset($post['frequency'])?$post['frequency']:'',
-							'food'=>isset($post['food'])?$post['food']:'',
-							'no_of_days'=>isset($post['days'])?$post['days']:'',
-							'directions'=>isset($post['directions'])?$post['directions']:'',
-							'formdate'=>isset($post['formdate'])?$post['formdate']:'',
-							'todate'=>isset($post['todate'])?$post['todate']:'',
-							'qty'=>isset($post['qty'])?$post['qty']:'',
-							'org_amount'=>(($qtys['total_amount'])*($post['qty'])),
-							'amount'=>$qtys['total_amount'],
-							'units'=>isset($post['units'])?$post['units']:'',
-							'comments'=>isset($post['comments'])?$post['comments']:'',
-							'create_at'=>date('Y-m-d H:i:s'),
-							'date'=>date('Y-m-d'),
-							'create_by'=>$admindetails['a_id']
-						);
-						//echo '<pre>';print_r($addmedicine);exit;
-					$medicine=$this->Resources_model->saving_patient_medicine($addmedicine);
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					if(isset($post['cheking_value']) && $post['cheking_value']==0){
+						$this->session->set_flashdata('error',"Some medicine having available quantity is less than given quantity");
+						redirect($this->agent->referrer());
+					}
+					$cnt=0;foreach($post['medicine_name'] as $list){
+							if($list!=''){
+										$m_name=explode("_",$post['medicine_name'][$cnt]);
+										$qtys=$this->Resources_model->get_medicine_details_list_details($m_name[0],$userdetails['hos_id']);
+											//echo '<pre>';print_r($list);exit;
+											$freq=array();
+											if(isset($post['Frequency'][$cnt]) && count($post['Frequency'][$cnt])>0){
+											foreach($post['Frequency'][$cnt] as $li){
+												$freq[]=$li;
+												
+											}
+											$fr=implode(" ,", $freq);
+											}
+										$add=array(
+											'p_id'=>isset($post['pid'])?$post['pid']:'',
+											'b_id'=>isset($post['bid'])?$post['bid']:'',
+											'medicine_id'=>isset($qtys['id'])?$qtys['id']:'',
+											'medicine_type'=>isset($qtys['medicine_type'])?$qtys['medicine_type']:'',
+											'batchno'=>isset($qtys['batchno'])?$qtys['batchno']:'',
+											'dosage'=>isset($qtys['dosage'])?$qtys['dosage']:'',
+											'expiry_date'=>isset($qtys['expiry_date'])?$qtys['expiry_date']:'',
+											'org_amount'=>(($qtys['total_amount'])*($post['qty'][$cnt])),
+											'amount'=>$qtys['total_amount'],
+											'medicine_name'=>$m_name[0],
+											'frequency'=>isset($fr)?$fr:'',
+											'qty'=>$post['qty'][$cnt],
+											'food'=>$post['food'][$cnt],
+											'directions'=>$post['directions'],
+											'no_of_days'=>$post['days'][$cnt],
+											'create_at'=>date('Y-m-d H:i:s'),
+											'date'=>date('Y-m-d'),
+											'create_by'=>$admindetails['a_id']
+										);
+										//echo '<pre>';print_r($add);
+										$medicine=$this->Resources_model->saving_patient_medicine($add);
+										if(isset($medicine) && count($medicine)>0){
+												$qty=(($qtys['qty'])-($post['qty'][$cnt]));
+												$data=array('qty'=>$qty);
+												$this->Resources_model->update_medicine_details($qtys['id'],$data);
+										}
+							}
+							
+					$cnt++;}
 					
-					//echo $this->db->last_query();exit;
-					if(count($medicine)>0){
-						$qty=(($qtys['qty'])-($post['qty']));
-						$data=array('qty'=>$qty);
-							$this->Resources_model->update_medicine_details($qtys['id'],$data);
-						//echo $this->db->last_query();exit;
-							$this->session->set_flashdata('success',"Medicine successfully added.");
+					//exit;
+					
+						if(count($medicine)>0){
+							$update=array('completed_type'=>1,'doctor_status'=>1);
+							$this->Resources_model->update_patient_medicine_details($post['pid'],$post['bid'],$update);
+							$this->session->set_flashdata('success',"Medicines successfully added.");
 							redirect($this->agent->referrer());
-							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}else{
 							$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
 							redirect($this->agent->referrer());
-							//redirect('resources/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-2');
 						}
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
@@ -1193,6 +1204,151 @@ class Resources extends In_frontend {
 					$data['text']=$details;
 					echo json_encode($data);exit;	
 					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function inside_investigationsearch(){
+		if($this->session->userdata('userdetails'))
+		{ 
+				if($admindetails['role_id']=10){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);exit;
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$details=$this->Resources_model->get_investigation_basedon_testtypes_list($userdetails['hos_id'],$post['searchdata']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($details);exit;
+
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['text']=$details;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public function test_name_testsearch(){
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=6){
+					$post=$this->input->post();
+					//echo '<pre>';print_r($post);
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					//$name=$this->Resources_model->get_test_name_details($post['test_type_id']);
+					$details=$this->Resources_model->get_test_list_hospital_wise_with_name($post['type'],$post['test_type_id'],$userdetails['hos_id']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($details);exit;
+					if(count($details) > 0)
+					{
+					$data['msg']=1;
+					$data['text']=$details;
+					echo json_encode($data);exit;	
+					}
+				}else{
+					$this->session->set_flashdata('error',"you don't have permission to access");
+					redirect('dashboard');
+				}
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
+	public  function save_op_patient_lab_test_names(){
+		if($this->session->userdata('userdetails'))
+		{
+				$admindetails=$this->session->userdata('userdetails');
+				$post=$this->input->post();
+				$cnt=0;foreach($post['investdation_serach'] as $list){
+					if($list!=''){
+						$test_details=$this->Resources_model->get_test_details($post['lab_test_name'][$cnt]);
+						$add=array(
+						'p_id'=>isset($post['pid'])?$post['pid']:'',
+						'b_id'=>isset($post['bid'])?$post['bid']:'',
+						'test_id'=>$post['lab_test_name'][$cnt],
+						'create_at'=>date('Y-m-d H:i:s'),
+						'date'=>date('Y-m-d'),
+						'create_by'=>$admindetails['a_id'],
+						'out_source'=>$test_details['out_source'],
+						'status'=>1
+						);
+						$check=$this->Resources_model->check_test_already_exist($post['lab_test_name'][$cnt],$post['pid'],$post['bid'],date('Y-m-d'));
+						if(count($check)>0){
+							$addtest=array(1);
+						}else{
+							$addtest=$this->Resources_model->add_addpatient_test($add);
+						}
+						//echo '<pre>';print_r($add);
+						
+					}
+					
+				$cnt++;}
+				if(count($addtest)>0){
+						$update=array('completed_type'=>2,'doctor_status'=>1);
+						$this->Resources_model->update_patient_medicine_details($post['pid'],$post['bid'],$update);
+					$this->session->set_flashdata('success',"Tests successfully added.");
+					redirect('nurse/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
+					
+				}else{
+					$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+					redirect('nurse/consultation/'.base64_encode($post['pid']).'/'.base64_encode($post['bid']).'#step-3');
+					
+				}
+				echo '<pre>';print_r($post);exit;
+		}else{
+				$this->session->set_flashdata('error','Please login to continue');
+			    redirect('admin');
+		}
+	}
+	public function patient_details_print()
+	{	
+		if($this->session->userdata('userdetails'))
+		{
+				if($admindetails['role_id']=4){
+					$patient_id=base64_decode($this->uri->segment(3));
+					if($patient_id==''){
+						$this->session->set_flashdata('error',"you don't have permission to access");
+						redirect('dashboard');
+					}
+					$data['patient_id']=isset($patient_id)?$patient_id:'';
+					$data['billing_id']=base64_decode($this->uri->segment(4));
+					$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$data['patient_details']=$this->Resources_model->get_patient_details($patient_id);
+					$data['patient_medicine_list']=$this->Resources_model->get_patient_medicine_details_list($patient_id,$data['billing_id']);
+					$data['patient_investigation_list']=$this->Resources_model->get_patient_lab_test_list($patient_id,$data['billing_id']);
+					$data['patient_vitals_list']=$this->Resources_model->get_patient_vitals_list($patient_id,$data['billing_id']);
+					//echo $this->db->last_query();
+					//echo '<pre>';print_r($data);exit;
+					$path = rtrim(FCPATH,"/");
+					$file_name = $data['patient_id'].'_'.$data['billing_id'].time().'.pdf';                
+					$data['page_title'] = $data['patient_details']['name'].'invoice'; // pass data to the view
+					$pdfFilePath = $path."/assets/complete_patient_details/".$file_name;
+					ini_set('memory_limit','320M'); // boost the memory limit if it's low <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$html = $this->load->view('resource/complete_patient_details', $data, true); // render the view into HTML
+					//echo '<pre>';print_r($html);exit;
+					$this->load->library('pdf');
+					$pdf = $this->pdf->load();
+					$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date('M-d-Y')); // Add a footer for good measure <img src="https://s.w.org/images/core/emoji/72x72/1f609.png" alt="??" draggable="false" class="emoji">
+					$pdf->SetDisplayMode('fullpage');
+					$pdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+					$pdf->WriteHTML($html); // write the HTML into the PDF
+					$pdf->Output($pdfFilePath, 'F');
+					redirect("/assets/complete_patient_details/".$file_name);
+					
 				}else{
 					$this->session->set_flashdata('error',"you don't have permission to access");
 					redirect('dashboard');

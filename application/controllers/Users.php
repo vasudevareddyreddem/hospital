@@ -457,6 +457,40 @@ class Users extends In_frontend {
 			redirect('admin');
 		}
 	}
+	public function get_medicine_avaiable_qty_with_name(){
+		if($this->session->userdata('userdetails'))
+		{
+				 	$admindetails=$this->session->userdata('userdetails');
+					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
+					$post=$this->input->post();
+					$var=explode('_',$post['m_id']);
+					//echo '<pre>';print_r($post);exit;
+					$details=$this->Users_model->get_medicine_avaiable_qty_with_name($var[0],$userdetails['hos_id']);
+					//echo $this->db->last_query();exit;
+					if(count($details) > 0)
+					{
+						
+								if($post['p_qty']<=$details['qty']){
+									 $data['msg']=1;
+									 $data['a_qty']=$details['qty'];
+									 echo json_encode($data);exit;
+								}else{
+									$data['msg']=0;
+									 $data['a_qty']=$details['qty'];
+									 echo json_encode($data);exit;
+								}
+					 	
+					}else{
+						$data['msg']=0;
+						$data['a_qty']='';
+						echo json_encode($data);exit;
+					}
+				
+		}else{
+			$this->session->set_flashdata('error','Please login to continue');
+			redirect('admin');
+		}
+	}
 	
 	
 }

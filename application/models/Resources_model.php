@@ -256,6 +256,14 @@ class Resources_model extends CI_Model
 		//$this->db->group_by('lab_test_list.test_type');
         return $this->db->get()->result_array();
 	}
+	public function get_test_list_hospital_wise_with_name($type,$test_type_id,$hos_id){
+		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.modality,lab_test_list.type,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
+		$this->db->where('lab_test_list.type',$type);
+		//$this->db->where('lab_test_list.hos_id',$hos_id);
+		$this->db->where('lab_test_list.test_type',$test_type_id);
+		$this->db->where('lab_test_list.status',1);
+        return $this->db->get()->result_array();
+	}
 	public function get_test_list($type,$test_type_id){
 		$this->db->select('lab_test_list.t_id,lab_test_list.t_name,lab_test_list.modality,lab_test_list.type,lab_test_list.t_department,lab_test_list.t_description,lab_test_list.t_short_form,lab_test_list.out_source')->from('lab_test_list');
 		$this->db->where('lab_test_list.type',$type);
@@ -291,6 +299,12 @@ class Resources_model extends CI_Model
 	public function add_addpatient_test($data){
 		$this->db->insert('patient_lab_test_list', $data);
 		return $insert_id = $this->db->insert_id();
+	}
+	public  function update_patient_medicine_details($pid,$bid,$data){
+		$this->db->where('p_id',$pid);
+		$this->db->where('b_id',$bid);
+		return $this->db->update('patient_billing',$data);
+		
 	}
 	
 	public  function check_test_already_exist($test_id,$p_id,$b_id,$date){
@@ -414,5 +428,12 @@ class Resources_model extends CI_Model
          return $this->db->get()->row_array();
 	 }
 	 /* convert op to ip patient */
+	  public  function get_patient_vitals_list($p_id,$b_id){
+		$this->db->select('*')->from('patient_vitals_list');
+		$this->db->where('patient_vitals_list.p_id',$p_id);
+		$this->db->where('patient_vitals_list.b_id',$b_id);
+		$this->db->order_by('patient_vitals_list.id','desc');
+        return $this->db->get()->row_array(); 
+	 }
 
 }
