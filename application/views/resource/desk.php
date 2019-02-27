@@ -360,6 +360,10 @@
                                              <input type="hidden" id="pid" name="pid" value="<?php echo isset($pid)?$pid:''; ?>">
                                              <input type="hidden" id="b_id" name="b_id" value="<?php echo isset($bill_id)?$bill_id:''; ?>">
                                              <div class="row">
+											   <div class="form-group col-md-6">
+                                                   <label for="Name">Treatment Name </label>
+                                                   <input type="text" class="form-control" id="treatment_name"  name="treatment_name"  value="<?php echo isset($billing_detailes['treatment_name'])?$billing_detailes['treatment_name']:''; ?>" placeholder="Treatment Name">
+                                                </div>
                                                 <div class="form-group col-md-6">
                                                    <label for="email">Consultant  Department</label>
                                                    <select id="department_name1" name="department_name" onchange="get_department_list(this.value);" class="form-control" >
@@ -383,10 +387,7 @@
                                                       <option value="">Select Consultant</option>
                                                    </select>
                                                 </div>
-												 <div class="form-group col-md-6">
-                                                   <label for="Name">Treatment Name </label>
-                                                   <input type="text" class="form-control" id="treatment_name "  name="treatment_name"  value="<?php echo isset($patient_detailes['treatment_name'])?$patient_detailes['treatment_name']:''; ?>">
-                                                </div>
+												
 												</div>
                                              <button class="btn btn-success " type="submit">Next</button>
                                           </form>

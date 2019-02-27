@@ -485,11 +485,12 @@ class Resources extends In_frontend {
 					$admindetails=$this->session->userdata('userdetails');
 					//echo '<pre>';print_r($post);exit;
 					$tab11=array(
+						'treatment_name'=>isset($post['treatment_name'])?$post['treatment_name']:'',
 						'treatment_id'=>$post['department_name'],
 						'doct_id'=>$post['department_doctors'],
 						'specialist_id'=>$post['specialist_doctor_id'],
 						);
-						
+						//echo '<pre>';print_r($tab11);exit;
 						$update=$this->Resources_model->update_patient_billing_details($post['b_id'],$tab11);
 						if(count($update)>0){
 							$this->session->set_flashdata('success',"Assign details successfully updated.");
