@@ -841,6 +841,7 @@ class Resources extends In_frontend {
 					$userdetails=$this->Resources_model->get_all_resouce_details($admindetails['a_id']);
 					
 					$data['worksheet']=$this->Resources_model->get_doctor_worksheet_list($userdetails['hos_id'],$userdetails['a_id']);
+					//echo $this->db->last_query();
 					//echo '<pre>';print_r($data);exit;
 					$this->load->view('resource/worksheet',$data);
 					$this->load->view('html/footer');
@@ -1500,6 +1501,7 @@ class Resources extends In_frontend {
 			'assign_doctor_to'=>isset($post['assign_another_doctor'])?$post['assign_another_doctor']:'',
 			'create_by'=>$admindetails['a_id']
 			);
+			//echo '<pre>';print_r($complete);exit;
 			$completed=$this->Resources_model->update_all_billing_compelted_details($post['pid'],$post['billing_id'],$complete);
 			if(count($completed)>0){
 						$this->session->set_flashdata('success',"Patient successfully completed.");
@@ -1578,6 +1580,7 @@ class Resources extends In_frontend {
 					'with_out_coupon_code'=>isset($post['bill_amount'])?$post['bill_amount']:'',
 					'received_form'=>isset($post['received_form'])?$post['received_form']:'',
 					'completed'=>1,
+					'completed_type'=>0,
 					'updated_at'=>date('Y-m-d H:i:s')
 					);
 					//echo '<pre>';print_r($billing);exit;
