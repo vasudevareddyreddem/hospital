@@ -9,7 +9,7 @@ class Ward_model extends CI_Model
 		$this->load->database("default");
 	}
 	public  function get_ip_patient_list($hos_id){
-		$this->db->select('patients_list_1.pid,patient_billing.b_id,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id,treament.t_name')->from('patient_billing');
+		$this->db->select('patients_list_1.pid,patient_billing.b_id,patient_billing.treatment_name,patients_list_1.card_number,patients_list_1.gender,patients_list_1.problem,patients_list_1.name,patients_list_1.registrationtype,patients_list_1.age,patients_list_1.mobile,patient_billing.create_at,resource_list.resource_name,resource_list.a_id,treament.t_name')->from('patient_billing');
 		$this->db->join('patients_list_1', 'patients_list_1.pid = patient_billing.p_id', 'left');
 		$this->db->join('admitted_patient_list', 'admitted_patient_list.pt_id = patients_list_1.pid', 'left');
 		$this->db->join('resource_list', 'resource_list.a_id = patient_billing.doct_id', 'left');

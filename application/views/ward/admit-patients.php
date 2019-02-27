@@ -76,6 +76,7 @@
 												<th>Patient Name</th>
                                                 <th>Gender </th>
                                                 <th>Age</th>
+                                                <th>Treatment Name</th>
                                                 <th>Doctor Name</th>
                                                 <th>Diagnosis</th>
                                                 <th>Date of Admit</th>
@@ -91,6 +92,7 @@
 													<td><?php echo $list['name']; ?></td>
 													<td><?php echo $list['gender']; ?></td>
 													<td><?php echo $list['age']; ?></td>
+													<td><?php echo $list['treatment_name']; ?></td>
 													<td><?php echo $list['resource_name']; ?></td>
 													<td><?php echo $list['t_name']; ?></td>
 													<td><?php echo $list['create_at']; ?></td>

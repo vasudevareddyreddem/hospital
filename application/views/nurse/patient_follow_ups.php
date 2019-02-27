@@ -28,6 +28,7 @@
 												<th>Patient Name</th>
                                                 <th>Gender </th>
                                                 <th>Age</th>
+                                                <th>Treatment Name</th>
                                                 <th>Doctor</th>
                                                 <th>Diagnosis</th>
                                                 <th>Date of Admit</th>
@@ -43,6 +44,7 @@
                                                 <td><?php echo isset($list['name'])?$list['name']:''; ?></td>
                                                 <td><?php echo isset($list['gender'])?$list['gender']:''; ?></td>
                                                 <td><?php echo isset($list['age'])?$list['age']:''; ?></td>
+                                                <td><?php echo isset($list['treatment_name'])?$list['treatment_name']:''; ?></td>
                                                 <td><?php echo isset($list['resource_name'])?$list['resource_name']:''; ?></td>
                                                 <td><?php echo isset($list['t_name'])?$list['t_name']:''; ?></td>
                                                 <td><?php echo isset($list['date_of_admit'])?$list['date_of_admit']:''; ?></td>
