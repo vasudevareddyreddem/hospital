@@ -383,6 +383,10 @@
                                                       <option value="">Select Consultant</option>
                                                    </select>
                                                 </div>
+												 <div class="form-group col-md-6">
+                                                   <label for="Name">Treatment Name </label>
+                                                   <input type="text" class="form-control" id="treatment_name "  name="treatment_name"  value="<?php echo isset($patient_detailes['treatment_name'])?$patient_detailes['treatment_name']:''; ?>">
+                                                </div>
 												</div>
                                              <button class="btn btn-success " type="submit">Next</button>
                                           </form>
@@ -2099,7 +2103,13 @@ function apply_couponcode1(){
     
        $('#assigna').bootstrapValidator({
    		fields: {
-   			department_name: {
+			treatment_name: {
+                    validators: {
+   					notEmpty: {
+   						message: 'Treatment name is required'
+   					}
+   				}
+               },department_name: {
                     validators: {
    					notEmpty: {
    						message: 'Consultant Department is required'
