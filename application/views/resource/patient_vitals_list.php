@@ -4,12 +4,12 @@
         <div class="page-bar">
             <div class="page-title-breadcrumb">
                 <div class=" pull-left">
-                    <div class="page-title">Add Vitals</div>
+                    <div class="page-title"> Vitals List</div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>&nbsp;<i class="fa fa-angle-right"></i>
                     </li>
-                    <li class="active">Add Vitals</li>
+                    <li class="active">Vitals List</li>
                 </ol>
             </div>
         </div>
@@ -17,40 +17,28 @@
             <div class="col-md-12">
 				<div class="panel tab-border card-topline-yellow">
 						 <div class="card-body table-responsive ">
-                              <?php if(isset($patients_list) && count($patients_list)>0){ ?>
+                              <?php if(isset($vital_list) && count($vital_list)>0){ ?>
                               <table class="table table-striped table-bordered table-hover table-checkable order-column" id="example4">
                                  <thead>
                                     <tr>
-                                       <th> Patient Id </th>
-                                       <th> Patient card Number</th>
-                                       <th> Name </th>
-                                       <th> Type </th>
-                                       <th> Category </th>
-                                       <th> Age </th>
-                                       <th> Mobile </th>
-                                       <th> Action </th>
+                                       <th>Vitals Date </th>
+                                       <th> BP</th>
+                                       <th> Pulse </th>
+                                       <th> FBS/RBS </th>
+                                       <th> Temp </th>
+                                       <th> Weight </th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <?php foreach($patients_list as $list){ ?>
-                                    <tr class="odd gradeX">
-                                       <td> <?php echo $list['pid']; ?> </td>
-                                       <td> <?php echo $list['card_number']; ?> </td>
-                                       <td>
-                                          <?php echo $list['name']; ?>
-                                       </td>
-                                       <td>
-                                          <?php echo $list['registrationtype']; ?>
-                                       </td>
-                                       <td><?php echo $list['patient_category']; ?> </td>
-                                       <td><?php echo $list['age']; ?> </td>
-                                       <td><?php echo $list['mobile']; ?> </td>
-                                       <td >
-									   <a href="<?php echo base_url('resources/addvital/'.base64_encode($list['pid'])); ?>">Add Vitals</a>&nbsp; | &nbsp;
-									   <a href="<?php echo base_url('resources/vitalslist/'.base64_encode($list['pid'])); ?>">Vitals List</a>
-                                          
-                                       </td>
-                                    </tr>
+                                    <?php foreach($vital_list as $list){ ?>
+                                    <tr>
+									<td class="text-center"><?php echo isset($list['date'])?$list['date']:''; ?></td>
+									<td class="text-center"><?php echo isset($list['bp'])?$list['bp']:''; ?> (120/80)</td>
+									<td class="text-center"><?php echo isset($list['pulse'])?$list['pulse']:''; ?> (70-80)</td>
+									<td class="text-center"><?php echo isset($list['fbs_rbs'])?$list['fbs_rbs']:''; ?>(70-110)</td>
+									<td class="text-center"><?php echo isset($list['temp'])?$list['temp']:''; ?> (98.6 F)</td>
+									<td class="text-center"><?php echo isset($list['weight'])?$list['weight']:''; ?></td>
+								</tr>
                                     <?php } ?>
                                  </tbody>
                               </table>

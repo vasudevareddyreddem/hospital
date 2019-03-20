@@ -35,7 +35,7 @@
 					<th> Category </th>
 					<th> Age </th>
 					<th> Mobile </th>
-					<th> Created on </th>
+					<th> Created Date & Time</th>
 					<th> Action </th>
 				</tr>
 			</thead>
@@ -54,7 +54,7 @@
 					<td><?php echo $list['patient_category']; ?> </td>
 					<td><?php echo $list['age']; ?> </td>
 					<td><?php echo $list['mobile']; ?> </td>
-					<td><?php echo date('M j h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+					<td><?php echo $list['create_at']; ?> </td>
 					<td class="valigntop">
 						<div class="btn-group">
 							<button class="btn btn-xs deepPink-bgcolor dropdown-toggle no-margin" type="button" data-toggle="dropdown" aria-expanded="false"> Actions

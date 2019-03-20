@@ -125,7 +125,7 @@ class Resources_model extends CI_Model
 		$this->db->select('resource_list.resource_name,resource_list.current_status,treatmentwise_doctors.t_d_doc_id,treatmentwise_doctors.t_d_name')->from('treatmentwise_doctors');		
 		$this->db->join('resource_list', 'resource_list.a_id = treatmentwise_doctors.t_d_doc_id', 'left');
 		$this->db->where('treatmentwise_doctors.s_id',$spe_id);
-		$this->db->where('resource_list.r_status',1);
+		$this->db->where('treatmentwise_doctors.t_d_status',1);
         return $this->db->get()->result_array();
 	}
 	public function get_card_number_list($card_num){
@@ -435,5 +435,15 @@ class Resources_model extends CI_Model
 		$this->db->order_by('patient_vitals_list.id','desc');
         return $this->db->get()->row_array(); 
 	 }
+	 
+	 //doctor timing 
+	 
+	 public  function get_doctors_times_list($a_id){
+		$this->db->select('in_time,out_time')->from('resource_list');		
+		$this->db->where('a_id',$a_id);
+        return $this->db->get()->row_array();
+	
+	 }
+	 
 
 }

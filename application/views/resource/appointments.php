@@ -97,7 +97,7 @@
 												</div>
 												<div class="form-group col-md-6">
 												   <label for="email"> Doctor </label>
-													<select class="form-control" id="doctor_id" name="doctor_id">
+													<select class="form-control" id="doctor_id" name="doctor_id" onchange="get_timeing_list(this.value);">
 													
 													</select>
 												</div>
@@ -120,7 +120,7 @@
 													</select>
                                                 </div>
 											</div>
-											<button type="submit" class="btn btn-primary"   >Book Appointment</button>
+											<button type="submit" class="btn btn-primary" name="form_submit" >Book Appointment</button>
 											</form>
                            </div>
                            </div>
@@ -616,6 +616,24 @@ function get_department_list(id){
    				});
    	
    }
+   function get_timeing_list(id){
+   				jQuery.ajax({
+   					url: "<?php echo base_url('resources/get_doctors_times_list');?>",
+   					data: {
+   						doctor_id: id,
+   					},
+   					dataType: 'json',
+   					type: 'POST',
+   					success: function (data) {
+						//console.log(data);return false;
+   						$('#time').empty();
+   						$('#time').append("<option>select</option>");
+   						for(i=0; i<data.list.length; i++) {
+   							$('#time').append("<option value='"+data.list[i]+"'>"+data.list[i]+"</option>");                      
+                         }
+   					}
+   				});
+   	}
 
 $(document).ready(function() {
     

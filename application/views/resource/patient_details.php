@@ -101,7 +101,7 @@ table, th, td {
 		<?php echo isset($details['hos_bas_city'])?$details['hos_bas_city']:''; ?>,
 		<?php echo isset($details['hos_bas_state'])?$details['hos_bas_state']:''; ?>,
 		<?php echo isset($details['hos_bas_country'])?$details['hos_bas_country']:''; ?>,
-		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>
+		<?php echo isset($details['hos_bas_zipcode'])?$details['hos_bas_zipcode']:''; ?>.
 		</div>
         <div><?php echo isset($details['hos_con_number'])?$details['hos_con_number']:''; ?></div>
         <div><a href="mailto:company@example.com"><?php echo isset($details['hos_bas_email'])?$details['hos_bas_email']:''; ?></a></div>
@@ -130,7 +130,7 @@ table, th, td {
 		<?php echo isset($details['p_c_name'])?$details['p_c_name'].',':''; ?>
 		<?php echo isset($details['p_s_name'])?$details['p_s_name'].',':''; ?>
 		<?php echo isset($details['p_country_name'])?$details['p_country_name'].',':''; ?>
-		<?php echo isset($details['p_zipcode'])?$details['p_zipcode'].',':''; ?>
+		<?php echo isset($details['p_zipcode'])?$details['p_zipcode'].'.':''; ?>
 		</span></td>
 	
 		

@@ -201,7 +201,7 @@
                                                 <td><?php echo htmlentities($list['r_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_name']); ?></td>
                                                 <td><?php echo htmlentities($list['resource_email']); ?></td>
-                                                <td><?php echo htmlentities($list['resource_contatnumber']); ?></td>
+                                                <td><?php echo htmlentities($list['resource_mobile']); ?></td>
                                                 <td><?php echo htmlentities($list['r_created_at']); ?></td>
 												<td><?php if($list['r_status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
                                                 <td class="valigntop">
