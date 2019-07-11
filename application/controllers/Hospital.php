@@ -152,6 +152,7 @@ class Hospital extends In_frontend {
 									);
 									$addhospitaladmin= $this->Admin_model->save_admin($admindetails);
 										/* barcode*/
+										$this->load->library('zend');
 										$this->zend->load('Zend/Barcode');
 										$file = Zend_Barcode::draw('code128', 'image', array('text' => $addhospitaladmin), array());
 										$code = time().$addhospitaladmin;

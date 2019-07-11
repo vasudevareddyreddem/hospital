@@ -251,6 +251,8 @@
    					success:function(data){
 					$('#notification_count1').empty();
    					$('#notification_count').empty();
+   					$('#notification_msg').empty();
+   					$('#notification_time').empty();
    					var parsedData = JSON.parse(data);
    					$('#notification_msg').append(parsedData.names_list);
    					$('#notification_time').append(parsedData.time);

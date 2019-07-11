@@ -30,7 +30,7 @@
 												<th>Patient Card Number</th>
 												<th>Name</th>
                                                 <th>Referred By</th>
-                                                <th>Date</th>
+                                                <th>Date & Time</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -41,7 +41,7 @@
                                                 <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><?php echo htmlentities($list['name']); ?></td>
                                                 <td><?php echo htmlentities($list['created_by']); ?></td>
-                                                <td><?php echo date('M j Y h:i A',strtotime(htmlentities($list['create_at'])));?></td>
+                                                <td><?php echo htmlentities($list['create_at']); ?></td>
                                                 <td><a href="<?php echo base_url('users/prescriptionview/'.base64_encode($list['pid']).'/'.base64_encode($list['b_id'])); ?>">view</a></td>
                                                
                                             </tr>

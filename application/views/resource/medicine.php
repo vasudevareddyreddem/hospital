@@ -25,7 +25,7 @@
 			<header>Add Medicine</header>
 			</div>
 			
-		<form method="post" action="<?php echo base_url('medicine/exelupload'); ?>" enctype="multipart/form-data">
+		<form method="post" id="add_medicine" action="<?php echo base_url('medicine/exelupload'); ?>" enctype="multipart/form-data">
 		<div class="row" style="padding:20px;">
 			<div class="col-md-5">
 			<label>Upload excel file</label>
@@ -183,8 +183,8 @@
 
 			</div>
 		
-			<button class="add_field_button btn btn-primary">Add More Medicine</button>
-			<button id="remobing" class="remove_field btn btn-warning">Remove</button>
+			<a class="add_field_button btn btn-primary">Add More Medicine</a>
+			<a id="remobing" class="remove_field btn btn-warning">Remove</a>
 			<button class="btn btn-success"  type="submit">Submit</button>
 			</form>
 			
@@ -261,11 +261,11 @@ function  amount_count(id,val){
     var add_button      = $(".add_field_button"); //Add button ID
     
     var x = 1; //initlal text box count
-    var availableAttributes = [<?php echo $medicine_lists; ?>];
+    var availableAttributes = [<?php echo count($medicine_lists); ?>];
     
     
     
-    $(add_button).click(function(e){ //on add input button click
+    $(".add_field_button").click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
@@ -401,6 +401,27 @@ $(document).ready(function() {
 					message: 'Others can only consist of alphanumeric, space and dot'
 					}
                 }
+            }
+			}
+		
+	})
+     
+});
+$(document).ready(function() {
+ 
+    $('#add_medicine').bootstrapValidator({
+		fields: {
+          
+             uploadfile: {
+                 validators: {
+					notEmpty: {
+						message: 'File is required'
+					},
+					regexp: {
+					regexp: "(.*?)\.(xlsx|xls)$",
+					message: 'Uploaded file is not a valid. Only xlsx,xls files are allowed'
+					}
+				}
             }
 			}
 		

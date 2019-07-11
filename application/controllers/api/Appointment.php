@@ -573,10 +573,10 @@ class Appointment extends REST_Controller {
 		}
 		//echo '<pre>';print_r($aapointment_list);exit;
 		if(count($a_list)>0){
-						$message = array('status'=>1,'list'=>$a_list,'a_u_id'=>$a_u_id,'message'=>'Appointment list are found');
+						$message = array('status'=>1,'list'=>$a_list,'a_u_id'=>$a_u_id,'message'=>'List are found');
 						$this->response($message, REST_Controller::HTTP_OK);
 				}else{
-						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'Appointment list are not found');
+						$message = array('status'=>0,'a_u_id'=>$a_u_id,'message'=>'List are not found');
 						$this->response($message, REST_Controller::HTTP_OK);
 			}
 	}

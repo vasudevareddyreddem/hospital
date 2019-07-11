@@ -33,7 +33,7 @@
                            <div class="control-group" id="fields">
                               <label class="control-label" for="field1"><strong>Prescription  Details</strong></label>
                               <div class="controls">
-                                 <form action="<?php echo base_url('Users/addpostprescription'); ?>" method="POST" id="addpostprescription" name="addpostprescription">
+                                 <form action="<?php echo base_url('Users/addpostprescription'); ?>" onsubmit="return validateForm()" method="POST" id="addpostprescription" name="addpostprescription">
                                     <div class="entry input-group ">
 									<div class="row">
                                        <div class="form-group col-md-4">
@@ -49,7 +49,7 @@
                                                    <input type="text" class="form-control" id="mobile"  name="mobile"  value="">
                                                 </div>
                                                 </div>
-												<div class="row">
+									<div class="row">
 									   <div id="education_fields">
           
 										</div>
@@ -57,7 +57,7 @@
 										<div class="col-sm-4 nopadding">
 										  <div class="form-group">
 										  
-										  <select style="width:100%;height:40px;" onchange="get_medicin_amount_list(this.value,'0')" class="form-control select2" id="medicinename" name="addmedicn[0][medicine]">
+										  <select style="width:100%;height:40px;" onchange="get_medicin_amount_list(this.value,'0')" class="form-control select2" id="medicinename0" name="addmedicn[0][medicine]">
 											<option value="">Select</option>
                                              <?php foreach($medicine_list as $list){ ?>
                                              <option value="<?php echo $list['id']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option>
@@ -69,7 +69,7 @@
 										
 										<div class="col-sm-1 nopadding">
 										  <div class="form-group">
-											<input type="text" class="form-control" id="qty"  name="addmedicn[0][qty]" value="" placeholder="Qty">
+											<input type="text" class="form-control" id="qty"  name="addmedicn[0][qty]" onchange="check_avaiable_qty(this.value,'0');" value="" placeholder="Qty">
 										  </div>
 										</div>
 										
@@ -93,21 +93,21 @@
 										
 										<div class="col-sm-1 nopadding">
 										  <div class="input-group-btn">
-											<button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+											<a class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
 										  </div>
 										</div>
 										</div>
-										  
-
+										<input type="hidden" name="cheking_value" id="cheking_value" value="0">
                                       
                                     </div>
                                  
                                  <br>
 								 									
-                              </div>
-							  <button type="submit" onclick="form_submittion();" class="btn btn-sm btn-success">Add  Prescription </button>
+                             
+							  <button type="submit" name="f_submit"  class="btn btn-sm btn-success">Add  Prescription </button>
 
 								 </form>
+								  </div>
                            </div>
                         </div>                                         
                         <div class="clearfix">&nbsp;</div>
@@ -121,7 +121,7 @@
                                         <thead>
                                             <tr>
 												<th>Patient Id</th>
-												<th>Patient Card Number </th>
+												
 												<th>Name</th>
 												<th>Mobile</th>
                                                 <th>Action</th>
@@ -131,10 +131,9 @@
 										<?php foreach($prescriptions_list as $list){ ?>
                                             <tr>
                                                 <td><?php echo htmlentities($list['pid']); ?></td>
-                                                <td><?php echo htmlentities($list['card_number']); ?></td>
                                                 <td><?php echo htmlentities($list['name']); ?></td>
                                                 <td><?php echo htmlentities($list['mobile_number']); ?></td>
-                                                <td><a href="<?php echo base_url('users/view_manualprescription/'.base64_encode($list['id']).'/'.base64_encode($list['b_id'])); ?>">View</a>
+                                                <td class="text-center"><a class="btn btn-primary btn-sm text-center" href="<?php echo base_url('users/view_manualprescription/'.base64_encode($list['id']).'/'.base64_encode($list['b_id'])); ?>">View</a>
                                                  </td>
 												
                                             </tr>
@@ -181,6 +180,33 @@
    </div>
 </div>
 <script>
+
+function check_avaiable_qty(qty,ids){
+	var medicine_name=$('#medicinename'+ids).val();
+	if(medicine_name!=''){
+		    jQuery.ajax({
+   			url: "<?php echo base_url('Users/get_medicine_avaiable_qty');?>",
+   			data: {
+				m_id: medicine_name,				
+				p_qty:qty,
+			},
+   			type: "POST",
+   			format:"Json",
+   					success:function(data){
+						var datas = JSON.parse(data);
+						if(datas.msg==1){
+							$('#cheking_value').val(1);					
+						}else{
+							console.log('sdmnasbdhb');
+							$('#cheking_value').val(0);
+							alert('available quantity is less than given quantity');
+						}
+						
+   					}
+           });
+	   }
+	
+}
 function get_medicin_amount_list(val,ids){
 	
 	if(val!=''){
@@ -208,7 +234,7 @@ function get_medicin_amount_list(val,ids){
 
 
 
- function form_submittion(){
+ function validateForm(){
 	 
 	 if($('#medicinename').val()!=''){
 	  document.getElementById("addpostprescription").submit(); 
@@ -222,7 +248,7 @@ function education_fields() {
     var divtest = document.createElement("div");
 	divtest.setAttribute("class", "form-group removeclass"+room);
 	var rdiv = 'removeclass'+room;
-    divtest.innerHTML = '<div class="col-sm-4 nopadding"><div class="form-group"><select style="width:100%;height:40px;" class="form-control" id="medicinename" onchange="get_medicin_amount_list(this.value,'+room+')" name="addmedicn['+room+'][medicine]"><option value="">Select</option><?php foreach($medicine_list as $list){ ?> <option value="<?php echo $list['id']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option><?php } ?></select></div></div>	<div class="col-sm-1 nopadding"><div class="form-group"><input type="text" class="form-control" id="qty"  name="addmedicn['+room+'][qty]" value="" placeholder="Qty"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="expirydate'+room+'"  name="addmedicn['+room+'][expirydate]" value="" placeholder="Expiry Date"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="usage_instructions"  name="addmedicn['+room+'][usage_instructions]" value="" placeholder="Usage Instructions"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="amount'+room+'"  name="addmedicn['+room+'][amount]"  value="" placeholder="Total Amount"></div></div><div class="col-sm-1 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>  </div></div><div class="clearfix">&nbsp;</div>';
+    divtest.innerHTML = '<div class="col-sm-4 nopadding"><div class="form-group"><select style="width:100%;height:40px;" class="form-control" id="medicinename'+room+'" onchange="get_medicin_amount_list(this.value,'+room+')" name="addmedicn['+room+'][medicine]"><option value="">Select</option><?php foreach($medicine_list as $list){ ?> <option value="<?php echo $list['id']; ?>"><?php echo $list['medicine_name']; ?>-<?php echo "dosage ".$list['dosage']; ?> - <?php echo "Avl qty :".$list['qty']; ?> - <?php echo "Type :".$list['medicine_type']; ?></option><?php } ?></select></div></div>	<div class="col-sm-1 nopadding"><div class="form-group"><input type="text" class="form-control" id="qty'+room+'"  onchange="check_avaiable_qty(this.value,'+room+');" name="addmedicn['+room+'][qty]" value="" placeholder="Qty"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="expirydate'+room+'"  name="addmedicn['+room+'][expirydate]" value="" placeholder="Expiry Date"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="usage_instructions"  name="addmedicn['+room+'][usage_instructions]" value="" placeholder="Usage Instructions"></div></div>	<div class="col-sm-2 nopadding"><div class="form-group"><input type="text" class="form-control" id="amount'+room+'"  name="addmedicn['+room+'][amount]"  value="" placeholder="Total Amount"></div></div><div class="col-sm-1 nopadding"><div class="input-group-btn"><button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>  </div></div><div class="clearfix">&nbsp;</div>';
     
     objTo.appendChild(divtest)
 }
@@ -300,7 +326,7 @@ $(document).ready(function() {
 						message: 'Amount is required'
 					},
 					regexp: {
-					regexp: /^[0-9]*$/,
+					regexp: /^[0-9.]*$/,
 					message: 'Amount can only consist digits'
 					}
 				}

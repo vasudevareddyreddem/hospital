@@ -881,7 +881,7 @@ function check_qty(){
 	//document.write(Number.isInteger(qty));
 	if(qty!=''){
 		 
-		if(Number(av_qty)> Number(qty)){
+		if(Number(av_qty)>= Number(qty)){
 			
 			//alert('done');return false;
 		}else{
